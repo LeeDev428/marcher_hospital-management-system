@@ -1,0 +1,20 @@
+model Log {
+    id        String   @id @default(uuid()) @db.Uuid
+    // publicId  String   @unique
+    profileId String   @db.Uuid
+    action    String
+    entity    String
+    entityId  String
+    ipAddress String
+    timestamp DateTime @default(now())
+
+    @@index([profileId])
+    @@index([profileId, action])
+    @@index([profileId, entity])
+    @@index([profileId, entity, action])
+    @@index([action])
+    @@index([entity])
+    @@index([entity, action])
+    @@index([ipAddress])
+    @@index([timestamp])
+}

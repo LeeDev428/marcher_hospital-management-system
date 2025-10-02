@@ -1,0 +1,1 @@
+export { default as LayoutBreadcrumbs } from "./PageBreadcrumbs.vue"

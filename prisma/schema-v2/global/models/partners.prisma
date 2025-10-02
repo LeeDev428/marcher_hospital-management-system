@@ -1,0 +1,110 @@
+enum PartnerType {
+    INSURANCE_COMPANY
+    HOSPITAL
+    CLINIC
+}
+
+model Partner {
+    id                  String                    @id @default(uuid()) @db.Uuid
+    // publicId            String                    @unique
+    type                PartnerType
+    organizationName    String
+    organizationAddress String
+    representativeName  String
+    representativeEmail String
+    representativePhone String
+    claimRequests       PartnerClaimRequest[]
+    dataRequests        PartnerDataRequest[]
+    agents              PartnerAgent[]
+    patientAccessLogs   PatientPartnerAccessLog[]
+    createdAt           DateTime                  @default(now())
+    updatedAt           DateTime                  @updatedAt
+}
+
+model PartnerClaimRequest {
+    id        String                    @id @default(uuid()) @db.Uuid
+    // publicId  String                    @unique
+    partnerId String                    @db.Uuid
+    partner   Partner                   @relation(fields: [partnerId], references: [id], onDelete: Cascade)
+    status    String
+    message   String?
+    amount    Int
+    items     PartnerClaimRequestItem[]
+    createdAt DateTime                  @default(now())
+    updatedAt DateTime                  @updatedAt
+}
+
+model PartnerClaimRequestItem {
+    id             String              @id @default(uuid()) @db.Uuid
+    // publicId       String              @unique
+    claimRequestId String              @db.Uuid
+    claimRequest   PartnerClaimRequest @relation(fields: [claimRequestId], references: [id], onDelete: Cascade)
+    name           String
+    description    String?
+    amount         Int
+    createdAt      DateTime            @default(now())
+    updatedAt      DateTime            @updatedAt
+}
+
+model PartnerDataRequest {
+    id          String   @id @default(uuid()) @db.Uuid
+    // publicId    String   @unique
+    partnerId   String   @db.Uuid
+    partner     Partner  @relation(fields: [partnerId], references: [id], onDelete: Cascade)
+    branchId    String
+    encounterId String
+    status      String
+    message     String?
+    createdAt   DateTime @default(now())
+    updatedAt   DateTime @updatedAt
+}
+
+model PartnerAgent {
+    id          String                   @id @default(uuid()) @db.Uuid
+    // publicId    String                   @unique
+    partnerId   String                   @db.Uuid
+    partner     Partner                  @relation(fields: [partnerId], references: [id], onDelete: Cascade)
+    name        String
+    credentials PartnerAgentCredentials?
+    sessions    PartnerAgentSession[]
+    invites     PartnerAgentInvite[]
+    createdAt   DateTime                 @default(now())
+    updatedAt   DateTime                 @updatedAt
+}
+
+model PartnerAgentCredentials {
+    id              String       @id @default(uuid()) @db.Uuid
+    // publicId        String       @unique
+    agentId         String       @unique @db.Uuid
+    agent           PartnerAgent @relation(fields: [agentId], references: [id], onDelete: Cascade)
+    email           String
+    emailHash       String       @unique
+    passwordHash    String
+    twoFactorSecret String?
+    twoFactorBackup String[]
+    lastLoginAt     DateTime?
+    expiresAt       DateTime
+    createdAt       DateTime     @default(now())
+}
+
+model PartnerAgentSession {
+    id         String       @id @default(uuid()) @db.Uuid
+    // publicId   String       @unique
+    agentId    String       @db.Uuid
+    agent      PartnerAgent @relation(fields: [agentId], references: [id], onDelete: Cascade)
+    ipAddress  String
+    userAgent  String
+    lastUsedAt DateTime     @default(now())
+    createdAt  DateTime     @default(now())
+}
+
+model PartnerAgentInvite {
+    id        String       @id @default(uuid()) @db.Uuid
+    // publicId  String       @unique
+    agentId   String       @db.Uuid
+    agent     PartnerAgent @relation(fields: [agentId], references: [id], onDelete: Cascade)
+    email     String
+    tokenHash String
+    expiresAt DateTime
+    createdAt DateTime     @default(now())
+}

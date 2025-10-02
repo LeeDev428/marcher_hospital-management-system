@@ -1,0 +1,166 @@
+model StaffProfile {
+    id                  String                    @id @default(uuid()) @db.Uuid
+    // publicId            String                    @unique
+    firstName           String
+    lastName            String
+    middleName          String?
+    suffix              String?
+    sex                 String
+    maritalStatus       String
+    birthdate           String
+    birthplace          String?
+    nationality         String?
+    religion            String?
+    bloodType           String?
+    active              Boolean                   @default(true)
+    profession          StaffProfession?
+    addresses           StaffAddress[]
+    contacts            StaffContact[]
+    emergencyContacts   StaffEmergencyContact[]
+    credentials         StaffCredentials?
+    sessions            StaffSession[]
+    invites             StaffInvite[]
+    passwordResetTokens StaffPasswordResetToken[]
+    patientAccessLogs   PatientStaffAccessLog[]
+    owner               Owner?
+    createdAt           DateTime                  @default(now())
+    updatedAt           DateTime                  @updatedAt
+}
+
+model StaffProfession {
+    id        String                   @id @default(uuid()) @db.Uuid
+    // publicId  String                   @unique
+    staffId   String?                  @unique @db.Uuid
+    staff     StaffProfile?            @relation(fields: [staffId], references: [id], onDelete: Cascade)
+    name      String
+    licenses  StaffProfessionLicense[]
+    createdAt DateTime                 @default(now())
+    updatedAt DateTime                 @updatedAt
+}
+
+model StaffProfessionLicense {
+    id                String          @id @default(uuid()) @db.Uuid
+    // publicId          String          @unique
+    staffProfessionId String          @db.Uuid
+    staffProfession   StaffProfession @relation(fields: [staffProfessionId], references: [id], onDelete: Cascade)
+    licenseNumber     String
+    licenseType       String
+    issuedBy          String
+    issuedAt          String
+    expiresAt         String?
+    createdAt         DateTime        @default(now())
+    updatedAt         DateTime        @updatedAt
+}
+
+model StaffAddress {
+    id        String       @id @default(uuid()) @db.Uuid
+    // publicId  String       @unique
+    staffId   String       @db.Uuid
+    staff     StaffProfile @relation(fields: [staffId], references: [id], onDelete: Cascade)
+    label     String
+    country   String
+    state     String
+    zipCode   String
+    city      String
+    address   String
+    createdAt DateTime     @default(now())
+    updatedAt DateTime     @updatedAt
+}
+
+model StaffContact {
+    id        String       @id @default(uuid()) @db.Uuid
+    // publicId  String       @unique
+    staffId   String       @db.Uuid
+    staff     StaffProfile @relation(fields: [staffId], references: [id], onDelete: Cascade)
+    label     String
+    value     String
+    createdAt DateTime     @default(now())
+    updatedAt DateTime     @updatedAt
+}
+
+model StaffEmergencyContact {
+    id           String       @id @default(uuid()) @db.Uuid
+    // publicId     String       @unique
+    staffId      String       @db.Uuid
+    staff        StaffProfile @relation(fields: [staffId], references: [id], onDelete: Cascade)
+    lastName     String       @db.VarChar(50)
+    firstName    String       @db.VarChar(50)
+    middleName   String?      @db.VarChar(50)
+    suffix       String?      @db.VarChar(5)
+    relationship String       @db.VarChar(20) // MOTHER, FATHER, SPOUSE, CHILD, SIBLING, OTHER
+    phone        String?      @db.VarChar(15)
+    email        String?      @db.VarChar(255)
+    createdAt    DateTime     @default(now())
+    updatedAt    DateTime     @updatedAt
+}
+
+model StaffCredentials {
+    id              String        @id @default(uuid()) @db.Uuid
+    // publicId        String        @unique
+    staffId         String        @unique @db.Uuid
+    staff           StaffProfile  @relation(fields: [staffId], references: [id], onDelete: Cascade)
+    email           String
+    emailHash       String        @unique
+    // emailVerified   Boolean       @default(false)
+    passwordHash    String
+    twoFactorSecret String?
+    twoFactorBackup String[]
+    access          StaffAccess[]
+    lastLoginAt     DateTime?
+    createdAt       DateTime      @default(now())
+    updatedAt       DateTime      @updatedAt
+}
+
+model StaffSession {
+    id         String       @id @default(uuid()) @db.Uuid
+    // publicId   String       @unique
+    staffId    String       @db.Uuid
+    staff      StaffProfile @relation(fields: [staffId], references: [id], onDelete: Cascade)
+    ipAddress  String       @db.VarChar(45)
+    userAgent  String       @db.VarChar(255)
+    lastUsedAt DateTime     @default(now())
+    createdAt  DateTime     @default(now())
+}
+
+model StaffInvite {
+    id        String       @id @default(uuid()) @db.Uuid
+    // publicId  String       @unique
+    staffId   String       @db.Uuid
+    staff     StaffProfile @relation(fields: [staffId], references: [id], onDelete: Cascade)
+    email     String
+    tokenHash String
+    expiresAt DateTime
+    createdAt DateTime     @default(now())
+}
+
+model StaffPasswordResetToken {
+    id        String       @id @default(uuid()) @db.Uuid
+    // publicId  String       @unique
+    staffId   String       @db.Uuid
+    staff     StaffProfile @relation(fields: [staffId], references: [id], onDelete: Cascade)
+    tokenHash String
+    expiresAt DateTime
+    createdAt DateTime     @default(now())
+}
+
+model StaffAccess {
+    id                 String             @id @default(uuid()) @db.Uuid
+    // publicId           String             @unique
+    staffCredentialsId String             @db.Uuid
+    staffCredentials   StaffCredentials   @relation(fields: [staffCredentialsId], references: [id], onDelete: Cascade)
+    branchId           String             @db.VarChar(100)
+    groups             StaffAccessGroup[]
+    createdAt          DateTime           @default(now())
+    updatedAt          DateTime           @updatedAt
+}
+
+model StaffAccessGroup {
+    id            String              @id @default(uuid()) @db.Uuid
+    // publicId      String              @unique
+    staffAccessId String              @db.Uuid
+    staffAccess   StaffAccess         @relation(fields: [staffAccessId], references: [id], onDelete: Cascade)
+    accessGroupId String              @db.Uuid
+    accessGroup   InstanceAccessGroup @relation(fields: [accessGroupId], references: [id], onDelete: Restrict)
+    createdAt     DateTime            @default(now())
+    updatedAt     DateTime            @updatedAt
+}

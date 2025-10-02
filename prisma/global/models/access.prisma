@@ -1,0 +1,8 @@
+model Access {
+    id          String    @id @default(uuid()) @db.Uuid
+
+    createdAt   DateTime  @default(now())
+    updatedAt   DateTime  @updatedAt
+
+    @@index([id])
+}

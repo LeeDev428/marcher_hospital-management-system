@@ -1,0 +1,167 @@
+enum Sex {
+    MALE
+    FEMALE
+}
+
+enum MaritalStatus {
+    SINGLE
+    MARRIED
+    WIDOWED
+    DIVORCED
+    SEPARATED
+}
+
+enum BloodType {
+    A_POSITIVE
+    A_NEGATIVE
+    B_POSITIVE
+    B_NEGATIVE
+    AB_POSITIVE
+    AB_NEGATIVE
+    O_POSITIVE
+    O_NEGATIVE
+}
+
+model PatientProfile {
+    id                    String                 @id @default(uuid()) @db.Uuid
+    lastName              String
+    firstName             String
+    middleName            String?
+    suffix                String?
+    birthdate             String?
+    birthplace            String?
+    sex                   Sex?
+    maritalStatus         MaritalStatus?
+    nationality           String?
+    religion              String?
+    bloodType             BloodType?
+    patientEncounters     PatientEncounter[]
+    inpatientEncounters   InpatientEncounter[]
+    outpatientEncounters  OutpatientEncounter[]
+    appointments          Appointment[]
+    patientAppointments   PatientAppointment[]
+    addresses             Address[]
+    contacts              Contact[]
+    employments           Employment[]
+    emergencyContacts     EmergencyContact[]
+    medicalRecordRequests MedicalRecordRequest[]
+    consent               Consent?
+    archived              Boolean                @default(false)
+    createdAt             DateTime               @default(now())
+    updatedAt             DateTime               @updatedAt
+
+    @@index([id])
+}
+
+model Address {
+    id               String         @id @default(uuid()) @db.Uuid
+    patientProfileId String         @db.Uuid
+    patientProfile   PatientProfile @relation(fields: [patientProfileId], references: [id], onDelete: Cascade)
+    label            String
+    country          String
+    state            String
+    zipCode          String
+    city             String
+    address          String
+    createdAt        DateTime       @default(now())
+    updatedAt        DateTime       @updatedAt
+
+    @@index([id, patientProfileId])
+}
+
+enum ContactType {
+    HOME
+    WORK
+    MOBILE
+    EMAIL
+    FAX
+    OTHER
+}
+
+model Contact {
+    id               String         @id @default(uuid()) @db.Uuid
+    patientProfileId String         @db.Uuid
+    patientProfile   PatientProfile @relation(fields: [patientProfileId], references: [id], onDelete: Cascade)
+    type             ContactType
+    value            String
+    createdAt        DateTime       @default(now())
+    updatedAt        DateTime       @updatedAt
+
+    @@index([id, patientProfileId])
+}
+
+model Employment {
+    id               String         @id @default(uuid()) @db.Uuid
+    patientProfileId String         @db.Uuid
+    patientProfile   PatientProfile @relation(fields: [patientProfileId], references: [id], onDelete: Cascade)
+    employer         String
+    contactPerson    String?
+    address          String?
+    phone            String?
+    email            String?
+    website          String?
+    createdAt        DateTime       @default(now())
+    updatedAt        DateTime       @updatedAt
+
+    @@index([id, patientProfileId])
+}
+
+enum Relationship {
+    FATHER
+    MOTHER
+    SPOUSE
+    SON
+    DAUGHTER
+    SIBLING
+    GRANDMOTHER
+    GRANDFATHER
+    GRANDCHILD
+    COUSIN
+    UNCLE
+    GUARDIAN
+    AUXILIARY
+    OTHER
+}
+
+model EmergencyContact {
+    id               String         @id @default(uuid()) @db.Uuid
+    patientProfileId String         @db.Uuid
+    patientProfile   PatientProfile @relation(fields: [patientProfileId], references: [id], onDelete: Cascade)
+    lastName         String
+    firstName        String
+    middleName       String?
+    suffix           String?
+    relationship     Relationship
+    phone            String?
+    email            String?
+    address          String?
+    createdAt        DateTime       @default(now())
+    updatedAt        DateTime       @updatedAt
+
+    @@index([id, patientProfileId])
+}
+
+model Consent {
+    id               String         @id @default(uuid()) @db.Uuid
+    patientProfileId String         @unique @db.Uuid
+    patientProfile   PatientProfile @relation(fields: [patientProfileId], references: [id], onDelete: Cascade)
+    documentUrl      String
+    signature        String
+    createdAt        DateTime       @default(now())
+    updatedAt        DateTime       @updatedAt
+
+    @@index([id, patientProfileId])
+}
+
+model MedicalRecordRequest {
+    id                   String             @id @default(uuid()) @db.Uuid
+    patientProfileId     String             @db.Uuid
+    patientProfile       PatientProfile     @relation(fields: [patientProfileId], references: [id], onDelete: Cascade)
+    inpatientEncounterId String             @db.Uuid
+    inpatientEncounter   InpatientEncounter @relation(fields: [inpatientEncounterId], references: [id], onDelete: Cascade)
+    type                 String
+    status               String
+    fileUrl              String
+    createdAt            DateTime           @default(now())
+    updatedAt            DateTime           @updatedAt
+}

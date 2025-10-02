@@ -1,0 +1,162 @@
+model PatientProfile {
+    id                      String                          @id @default(uuid()) @db.Uuid
+    // publicId                String                          @unique
+    firstName               String
+    lastName                String
+    middleName              String?
+    suffix                  String?
+    sex                     String
+    maritalStatus           String
+    birthdate               String
+    birthplace              String?
+    nationality             String?
+    religion                String?
+    bloodType               String?
+    consent                 Boolean                         @default(false)
+    consentDate             String?
+    consentUrl              String?
+    archived                Boolean                         @default(false)
+    addresses               PatientAddress[]
+    contacts                PatientContact[]
+    employments             PatientEmployment[]
+    emergencyContacts       PatientEmergencyContact[]
+    credentials             PatientCredentials?
+    sessions                PatientSession[]
+    passwordResetTokens     PatientPasswordResetToken[]
+    emailVerificationTokens PatientEmailVerificationToken[]
+    staffAccessLogs         PatientStaffAccessLog[]
+    partnerAccessLogs       PatientPartnerAccessLog[]
+    createdAt               DateTime                        @default(now())
+    updatedAt               DateTime                        @updatedAt
+}
+
+model PatientAddress {
+    id        String         @id @default(uuid()) @db.Uuid
+    // publicId  String         @unique
+    patientId String         @db.Uuid
+    patient   PatientProfile @relation(fields: [patientId], references: [id], onDelete: Cascade)
+    label     String
+    country   String
+    state     String
+    zipCode   String
+    city      String
+    address   String
+    createdAt DateTime       @default(now())
+    updatedAt DateTime       @updatedAt
+}
+
+model PatientContact {
+    id        String         @id @default(uuid()) @db.Uuid
+    // publicId  String         @unique
+    patientId String         @db.Uuid
+    patient   PatientProfile @relation(fields: [patientId], references: [id], onDelete: Cascade)
+    label     String
+    value     String
+    createdAt DateTime       @default(now())
+    updatedAt DateTime       @updatedAt
+}
+
+model PatientEmployment {
+    id        String         @id @default(uuid()) @db.Uuid
+    // publicId  String         @unique
+    patientId String         @db.Uuid
+    patient   PatientProfile @relation(fields: [patientId], references: [id], onDelete: Cascade)
+    employer  String
+    jobTitle  String
+    address   String
+    phone     String?
+    email     String?
+    website   String?
+    startDate String
+    endDate   String?
+    createdAt DateTime       @default(now())
+    updatedAt DateTime       @updatedAt
+}
+
+model PatientEmergencyContact {
+    id           String         @id @default(uuid()) @db.Uuid
+    // publicId     String         @unique
+    patientId    String         @db.Uuid
+    patient      PatientProfile @relation(fields: [patientId], references: [id], onDelete: Cascade)
+    firstName    String
+    lastName     String
+    middleName   String?
+    suffix       String?
+    relationship String
+    phone        String?
+    email        String?
+    createdAt    DateTime       @default(now())
+    updatedAt    DateTime       @updatedAt
+}
+
+model PatientStaffAccessLog {
+    id        String         @id @default(uuid()) @db.Uuid
+    // publicId  String         @unique
+    patientId String         @db.Uuid
+    patient   PatientProfile @relation(fields: [patientId], references: [id], onDelete: Cascade)
+    staffId   String         @db.Uuid
+    staff     StaffProfile   @relation(fields: [staffId], references: [id], onDelete: Cascade)
+    action    String
+    ipAddress String
+    userAgent String
+    timestamp DateTime       @default(now())
+}
+
+model PatientPartnerAccessLog {
+    id        String         @id @default(uuid()) @db.Uuid
+    // publicId  String         @unique
+    patientId String         @db.Uuid
+    patient   PatientProfile @relation(fields: [patientId], references: [id], onDelete: Cascade)
+    partnerId String         @db.Uuid
+    partner   Partner        @relation(fields: [partnerId], references: [id], onDelete: Cascade)
+    ipAddress String
+    userAgent String
+    timestamp DateTime       @default(now())
+}
+
+model PatientCredentials {
+    id              String         @id @default(uuid()) @db.Uuid
+    // publicId        String         @unique
+    patientId       String         @unique @db.Uuid
+    patient         PatientProfile @relation(fields: [patientId], references: [id], onDelete: Cascade)
+    email           String
+    emailHash       String         @unique
+    emailVerified   Boolean        @default(false)
+    passwordHash    String
+    twoFactorSecret String?
+    twoFactorBackup String[]
+    lastLoginAt     DateTime?
+    createdAt       DateTime       @default(now())
+    updatedAt       DateTime       @updatedAt
+}
+
+model PatientSession {
+    id         String         @id @default(uuid()) @db.Uuid
+    // publicId   String         @unique
+    patientId  String         @db.Uuid
+    patient    PatientProfile @relation(fields: [patientId], references: [id], onDelete: Cascade)
+    ipAddress  String
+    userAgent  String
+    lastUsedAt DateTime       @default(now())
+    createdAt  DateTime       @default(now())
+}
+
+model PatientPasswordResetToken {
+    id        String         @id @default(uuid()) @db.Uuid
+    // publicId  String         @unique
+    patientId String         @db.Uuid
+    patient   PatientProfile @relation(fields: [patientId], references: [id], onDelete: Cascade)
+    tokenHash String
+    expiresAt DateTime
+    createdAt DateTime       @default(now())
+}
+
+model PatientEmailVerificationToken {
+    id        String         @id @default(uuid()) @db.Uuid
+    // publicId  String         @unique
+    patientId String         @db.Uuid
+    patient   PatientProfile @relation(fields: [patientId], references: [id], onDelete: Cascade)
+    tokenHash String
+    expiresAt DateTime
+    createdAt DateTime       @default(now())
+}

@@ -1,0 +1,179 @@
+model PatientEncounter {
+    id             String                      @id @default(uuid()) @db.Uuid
+    // publicId       String                      @unique
+    patientId      String                      @db.Uuid
+    admission      PatientEncounterAdmission?
+    discharge      PatientEncounterDischarge?
+    allergies      PatientAllergy[]
+    medications    PatientMedication[]
+    medicalHistory PatientMedicalHistory[]
+    charts         PatientEncounterChart[]
+    consent        PatientEncounterConsent?
+    insurance      PatientEncounterInsurance[]
+    transaction    Transaction?
+    createdAt      DateTime                    @default(now())
+    updatedAt      DateTime                    @updatedAt
+}
+
+model PatientEncounterAdmission {
+    id              String           @id @default(uuid()) @db.Uuid
+    // publicId        String           @unique
+    encounterId     String           @unique @db.Uuid
+    encounter       PatientEncounter @relation(fields: [encounterId], references: [id], onDelete: Cascade)
+    facilityId      String           @db.Uuid
+    facility        Facility         @relation(fields: [facilityId], references: [id], onDelete: Cascade)
+    type            String
+    purpose         String
+    triage          String
+    date            String
+    time            String
+    chiefComplaint  String
+    doctorDiagnosis String
+    createdAt       DateTime         @default(now())
+    updatedAt       DateTime         @updatedAt
+}
+
+model PatientAllergy {
+    id          String           @id @default(uuid()) @db.Uuid
+    // publicId    String           @unique
+    encounterId String           @unique @db.Uuid
+    encounter   PatientEncounter @relation(fields: [encounterId], references: [id], onDelete: Cascade)
+    name        String
+    createdAt   DateTime         @default(now())
+    updatedAt   DateTime         @updatedAt
+}
+
+model PatientMedication {
+    id          String           @id @default(uuid()) @db.Uuid
+    // publicId    String           @unique
+    encounterId String           @unique @db.Uuid
+    encounter   PatientEncounter @relation(fields: [encounterId], references: [id], onDelete: Cascade)
+    name        String           @db.VarChar(100)
+    createdAt   DateTime         @default(now())
+    updatedAt   DateTime         @updatedAt
+}
+
+model PatientMedicalHistory {
+    id          String           @id @default(uuid()) @db.Uuid
+    // publicId    String           @unique
+    encounterId String           @unique @db.Uuid
+    encounter   PatientEncounter @relation(fields: [encounterId], references: [id], onDelete: Cascade)
+    type        String
+    description String
+    date        String
+    createdAt   DateTime         @default(now())
+    updatedAt   DateTime         @updatedAt
+}
+
+model PatientEncounterInsurance {
+    id           String           @id @default(uuid()) @db.Uuid
+    // publicId     String           @unique
+    encounterId  String           @unique @db.Uuid
+    encounter    PatientEncounter @relation(fields: [encounterId], references: [id], onDelete: Cascade)
+    providerId   String
+    type         String
+    policyNumber String
+    groupNumber  String?
+    createdAt    DateTime         @default(now())
+    updatedAt    DateTime         @updatedAt
+}
+
+model PatientEncounterDischarge {
+    id          String                                @id @default(uuid()) @db.Uuid
+    // publicId    String                                @unique
+    encounterId String                                @unique @db.Uuid
+    encounter   PatientEncounter                      @relation(fields: [encounterId], references: [id], onDelete: Cascade)
+    date        String                                @db.VarChar(10)
+    time        String                                @db.VarChar(5)
+    disposition PatientEncounterDischargeDisposition?
+    createdAt   DateTime                              @default(now())
+    updatedAt   DateTime                              @updatedAt
+}
+
+model PatientEncounterDischargeDisposition {
+    id          String                    @id @default(uuid()) @db.Uuid
+    // publicId    String                    @unique
+    dischargeId String                    @unique @db.Uuid
+    discharge   PatientEncounterDischarge @relation(fields: [dischargeId], references: [id], onDelete: Cascade)
+    disposition String
+    date        String
+    time        String
+    note        String?
+    createdAt   DateTime                  @default(now())
+    updatedAt   DateTime                  @updatedAt
+}
+
+model PatientEncounterChart {
+    id          String                         @id @default(uuid()) @db.Uuid
+    // publicId    String                         @unique
+    encounterId String                         @unique @db.Uuid
+    encounter   PatientEncounter               @relation(fields: [encounterId], references: [id], onDelete: Cascade)
+    description String?
+    order       PatientEncounterChartOrder?
+    comments    PatientEncounterChartComment[]
+    createdAt   DateTime                       @default(now())
+    updatedAt   DateTime                       @updatedAt
+}
+
+model PatientEncounterChartOrder {
+    id           String                             @id @default(uuid()) @db.Uuid
+    // publicId     String                             @unique
+    chartId      String                             @unique @db.Uuid
+    chart        PatientEncounterChart              @relation(fields: [chartId], references: [id], onDelete: Cascade)
+    orderedBy    String                             @db.Uuid
+    fullfilledBy String?                            @db.Uuid
+    type         String
+    status       String
+    description  String?
+    results      PatientEncounterChartOrderResult[]
+    createdAt    DateTime                           @default(now())
+    updatedAt    DateTime                           @updatedAt
+}
+
+model PatientEncounterChartOrderResult {
+    id        String                     @id @default(uuid()) @db.Uuid
+    orderId   String                     @unique @db.Uuid
+    order     PatientEncounterChartOrder @relation(fields: [orderId], references: [id], onDelete: Cascade)
+    date      String
+    time      String
+    note      String?
+    fileName  String
+    createdAt DateTime                   @default(now())
+    updatedAt DateTime                   @updatedAt
+}
+
+model PatientEncounterChartComment {
+    id        String                              @id @default(uuid()) @db.Uuid
+    // publicId  String                              @unique
+    chartId   String                              @unique @db.Uuid
+    chart     PatientEncounterChart               @relation(fields: [chartId], references: [id], onDelete: Cascade)
+    authorId  String                              @db.Uuid
+    comment   String
+    edited    Boolean                             @default(false)
+    resolved  Boolean                             @default(false)
+    replies   PatientEncounterChartCommentReply[]
+    createdAt DateTime                            @default(now())
+    updatedAt DateTime                            @updatedAt
+}
+
+model PatientEncounterChartCommentReply {
+    id        String                       @id @default(uuid()) @db.Uuid
+    // publicId  String                       @unique
+    commentId String                       @unique @db.Uuid
+    comment   PatientEncounterChartComment @relation(fields: [commentId], references: [id], onDelete: Cascade)
+    authorId  String                       @db.Uuid
+    reply     String
+    edited    Boolean                      @default(false)
+    createdAt DateTime                     @default(now())
+    updatedAt DateTime                     @updatedAt
+}
+
+model PatientEncounterConsent {
+    id          String           @id @default(uuid()) @db.Uuid
+    // publicId    String           @unique
+    encounterId String           @unique @db.Uuid
+    encounter   PatientEncounter @relation(fields: [encounterId], references: [id], onDelete: Cascade)
+    fileName    String
+    createdAt   DateTime         @default(now())
+    updatedAt   DateTime         @updatedAt
+}

@@ -1,0 +1,41 @@
+model InsuranceProvider {
+    id          String           @id @default(uuid()) @db.Uuid
+    // publicId    String   @unique
+    name        String           @unique
+    description String?
+    email       String?
+    phone       String?
+    address     String?
+    city        String?
+    state       String?
+    zip         String?
+    country     String?
+    claims      InsuranceClaim[]
+    createdAt   DateTime         @default(now())
+    updatedAt   DateTime         @updatedAt
+}
+
+model InsuranceClaim {
+    id         String               @id @default(uuid()) @db.Uuid
+    // publicId    String   @unique
+    providerId String               @db.Uuid
+    provider   InsuranceProvider    @relation(fields: [providerId], references: [id], onDelete: Cascade)
+    status     String
+    message    String?
+    amount     Int
+    items      InsuranceClaimItem[]
+    createdAt  DateTime             @default(now())
+    updatedAt  DateTime             @updatedAt
+}
+
+model InsuranceClaimItem {
+    id          String         @id @default(uuid()) @db.Uuid
+    // publicId    String   @unique
+    claimId     String         @db.Uuid
+    claim       InsuranceClaim @relation(fields: [claimId], references: [id], onDelete: Cascade)
+    name        String
+    description String?
+    amount      Int
+    createdAt   DateTime       @default(now())
+    updatedAt   DateTime       @updatedAt
+}

@@ -1,0 +1,1 @@
+export { default as OCRDialog } from "./OCRDialog.vue"

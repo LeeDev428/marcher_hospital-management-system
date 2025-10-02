@@ -1,0 +1,20 @@
+model StaffRegistry {
+    id           String  @id @default(uuid()) @db.Uuid
+    staffId      String  @db.Uuid
+    localStaffId String  @db.Uuid
+    isActive     Boolean @default(true)
+}
+
+model PatientRegistry {
+    id             String  @id @default(uuid()) @db.Uuid
+    patientId      String  @db.Uuid
+    localPatientId String  @db.Uuid
+    isActive       Boolean @default(true)
+}
+
+model PartnerRegistry {
+    id             String  @id @default(uuid()) @db.Uuid
+    partnerId      String  @db.Uuid
+    localPartnerId String  @db.Uuid
+    isActive       Boolean @default(true)
+}

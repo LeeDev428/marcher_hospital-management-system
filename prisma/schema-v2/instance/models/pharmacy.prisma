@@ -1,0 +1,85 @@
+model PharmacySupplier {
+    id        String   @id @default(uuid()) @db.Uuid
+    // publicId  String   @unique
+    name      String
+    email     String?
+    contact   String?
+    address   String?
+    notes     String?
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    @@index([name])
+    @@index([email])
+    @@index([contact])
+}
+
+model PharmacyBrand {
+    id        String         @id @default(uuid()) @db.Uuid
+    // publicId  String         @unique
+    name      String
+    items     PharmacyItem[]
+    createdAt DateTime       @default(now())
+    updatedAt DateTime       @updatedAt
+
+    @@index([name])
+}
+
+model PharmacyItemCategory {
+    id        String         @id @default(uuid()) @db.Uuid
+    // publicId  String         @unique
+    name      String
+    items     PharmacyItem[]
+    createdAt DateTime       @default(now())
+    updatedAt DateTime       @updatedAt
+
+    @@index([name])
+}
+
+enum PharmacyItemForm {
+    TABLET
+    CAPSULE
+    SYRUP
+    OINTMENT
+    CREAM
+    INJECTION
+    DROPS
+    INHALER
+    MEDICAL_DEVICE
+    SUPPLEMENTS
+    COSMETICS
+    MISCELLANEOUS
+}
+
+enum PharmacyItemRoute {
+    INJECTION
+    TOPICAL
+    TRANSDERMAL
+    OCULAR
+    OTIC
+    NASAL
+    ORAL
+    INHALATIONAL
+    RECTAL
+    VAGINAL
+}
+
+model PharmacyItem {
+    id         String               @id @default(uuid()) @db.Uuid
+    // publicId   String               @unique
+    brandId    String               @db.Uuid
+    brand      PharmacyBrand        @relation(fields: [brandId], references: [id], onDelete: Restrict)
+    categoryId String               @db.Uuid
+    category   PharmacyItemCategory @relation(fields: [categoryId], references: [id], onDelete: Restrict)
+    name       String
+    form       PharmacyItemForm
+    route      PharmacyItemRoute
+    strength   String
+    stock      Int
+    unit       String
+    sku        String?
+    createdAt  DateTime             @default(now())
+    updatedAt  DateTime             @updatedAt
+
+    @@index([name])
+}

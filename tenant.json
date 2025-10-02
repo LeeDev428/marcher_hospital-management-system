@@ -1,0 +1,14 @@
+{
+	"id": "stlukes",
+	"name": "St. Luke's Medical Center",
+	"instances": [
+		{
+			"id": "stlukes-qc",
+			"name": "Quezon City"
+		},
+		{
+			"id": "stlukes-bgc",
+			"name": "Bonifacio Global City"
+		}
+	]
+}

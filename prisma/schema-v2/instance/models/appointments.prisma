@@ -1,0 +1,18 @@
+enum AppointmentStatus {
+    PENDING
+    SCHEDULED
+    CANCELLED
+    COMPLETED
+}
+
+model Appointment {
+    id        String            @id @default(uuid()) @db.Uuid
+    // publicId  String            @unique
+    patientId String            @db.Uuid
+    doctorId  String            @db.Uuid
+    date      String
+    time      String
+    status    AppointmentStatus
+    createdAt DateTime          @default(now())
+    updatedAt DateTime          @updatedAt
+}

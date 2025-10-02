@@ -1,0 +1,19 @@
+model Log {
+    id        String   @id @default(uuid()) @db.Uuid
+    user      String
+    action    String
+    entity    String
+    data      Json
+    ipAddress String
+    timestamp DateTime @default(now())
+
+    @@index([user])
+    @@index([user, action])
+    @@index([user, entity])
+    @@index([user, entity, action])
+    @@index([action])
+    @@index([entity])
+    @@index([entity, action])
+    @@index([ipAddress])
+    @@index([timestamp])
+}
