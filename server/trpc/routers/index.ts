@@ -1,35 +1,34 @@
-import { createTRPCRouter } from "../init"
-import { authRouter } from "./auth"
-import { patientsRouter } from "./patients"
-import { facilitiesRouter } from "./facilities"
-import { appointmentsRouter } from "./appointments"
-import { staffRouter } from "./staff"
-import { pharmacyRouter } from "./pharmacy"
-import { encountersRouter } from "./encounters"
-import { filesRouter } from "./files"
-import { insuranceRouter } from "./insurance"
-import { billingRouter } from "./billing"
-import { dashboardRouter } from "./dashboard"
-import { facilityLogRouter } from "./facilities/facilityLogRouter"
-import { logsRouter } from "./logs"
-import { medicalRecordsRouter } from "./medical-records"
+import { z } from "zod"
+import { createTRPCRouter, publicProcedure } from "../init"
 
+// Health check router
+const healthRouter = createTRPCRouter({
+  check: publicProcedure.query(() => {
+    return {
+      status: "ok",
+      timestamp: new Date().toISOString(),
+      message: "Marcher HIS tRPC API is running"
+    }
+  })
+})
 
+// Basic auth router for testing
+const authRouter = createTRPCRouter({
+  test: publicProcedure
+    .input(z.object({ message: z.string().optional() }))
+    .query(({ input }) => {
+      return {
+        success: true,
+        message: `Auth endpoint working! Input: ${input.message || "none"}`,
+        timestamp: new Date().toISOString()
+      }
+    })
+})
+
+// Main application router - simplified to prevent circular dependencies
 export const appRouter = createTRPCRouter({
-	auth: authRouter,
-	patients: patientsRouter,
-	facilities: facilitiesRouter,
-	appointments: appointmentsRouter,
-	staff: staffRouter,
-	pharmacy: pharmacyRouter,
-	encounters: encountersRouter,
-	files: filesRouter,
-	insurance: insuranceRouter,
-	billing: billingRouter,
-	dashboard: dashboardRouter,
-	facilityLogs: facilityLogRouter, // Add facility log router here
-	logs: logsRouter,
-	medicalRecords: medicalRecordsRouter, // Add medical records router here
+  health: healthRouter,
+  auth: authRouter
 })
 
 export type AppRouter = typeof appRouter

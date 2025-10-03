@@ -6,12 +6,6 @@ declare module "nitropack/types" {
     '/api/trpc/:trpc': {
       'default': Simplify<Serialize<Awaited<ReturnType<typeof import('../../server/api/trpc/[trpc]').default>>>>
     }
-    '/api/upload/:fileName': {
-      'get': Simplify<Serialize<Awaited<ReturnType<typeof import('../../server/api/upload/[fileName].get').default>>>>
-    }
-    '/api/upload': {
-      'post': Simplify<Serialize<Awaited<ReturnType<typeof import('../../server/api/upload/index.post').default>>>>
-    }
     '/__nuxt_error': {
       'default': Simplify<Serialize<Awaited<ReturnType<typeof import('../../node_modules/nuxt/dist/core/runtime/nitro/handlers/renderer').default>>>>
     }
