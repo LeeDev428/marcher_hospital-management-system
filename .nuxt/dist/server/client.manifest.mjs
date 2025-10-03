@@ -1,0 +1,1 @@
+export { default } from "file:///D:/Programming/Systems/Web-Systems/Nuxtjs-Nodejs-Expressjs/marcher_hospital-management-system/node_modules/@nuxt/vite-builder/dist/runtime/client.manifest.mjs"
