@@ -14,14 +14,14 @@ const navigationItems = [
 		active: true
 	},
 	{
-		name: "Users", 
+		name: "User Management", 
 		icon: "lucide:users",
 		to: "/admin/users"
 	},
 	{
-		name: "Staff Management",
-		icon: "lucide:user-check", 
-		to: "/admin/staff"
+		name: "Doctor Management",
+		icon: "lucide:user-md", 
+		to: "/admin/doctors"
 	},
 	{
 		name: "System Settings",
@@ -49,6 +49,11 @@ const navigationItems = [
 		to: "/admin/database"
 	}
 ]
+
+const logout = async () => {
+	await authStore.logout()
+	await navigateTo('/auth/login')
+}
 </script>
 
 <template>
@@ -123,6 +128,10 @@ const navigationItems = [
 								<Icon name="lucide:user" class="w-4 h-4 text-white" />
 							</div>
 							<span class="text-sm font-medium text-gray-700">{{ authStore.fullName || 'Administrator' }}</span>
+							<Button variant="ghost" size="sm" @click="logout" class="text-red-600 hover:text-red-700">
+								<Icon name="lucide:log-out" class="w-4 h-4 mr-1" />
+								Logout
+							</Button>
 						</div>
 					</div>
 				</div>
