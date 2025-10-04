@@ -1345,7 +1345,22 @@ const plugins = [
 _p6Hosv_flnIt5Egld0GJTDGGnPWf7XM23l9u_rWUiQQ
 ];
 
-const assets = {};
+const assets = {
+  "/index.mjs": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"3778b-M5LZfitVmv9i8qEtCPrUSmF+dz8\"",
+    "mtime": "2025-10-04T21:18:48.696Z",
+    "size": 227211,
+    "path": "index.mjs"
+  },
+  "/index.mjs.map": {
+    "type": "application/json",
+    "etag": "\"800fe-6rdpgc5lphVIWdLQKsBcp8V6WcE\"",
+    "mtime": "2025-10-04T21:18:48.698Z",
+    "size": 524542,
+    "path": "index.mjs.map"
+  }
+};
 
 function readAsset (id) {
   const serverDir = dirname$1(fileURLToPath(globalThis._importMeta_.url));
@@ -2862,9 +2877,173 @@ const appointmentsRouter = createTRPCRouter({
   getAppointments: publicProcedure.query(() => ({ success: true, data: [] }))
 });
 
+const staffRoleSchema = z.enum(["ADMIN", "DOCTOR", "NURSE", "SECRETARY", "STAFF"]);
+staffRoleSchema.options.map((role) => ({
+  label: role.charAt(0) + role.slice(1).toLowerCase(),
+  value: role
+}));
+const staffProfileSchema = z.object({
+  lastName: z.string().min(1, "Last name is required.").max(255, "Last name must be less than 255 characters."),
+  firstName: z.string().min(1, "First name is required.").max(255, "First name must be less than 255 characters."),
+  middleName: z.string().max(255, "Middle name must be less than 255 characters.").optional().nullable(),
+  suffix: z.string().max(255, "Suffix must be less than 255 characters.").optional().nullable(),
+  role: staffRoleSchema,
+  profession: z.string().max(255, "Profession must be less than 255 characters.").optional().nullable()
+});
+const getStaffProfileSchema = z.object({
+  id: z.string().uuid("Invalid staff profile ID.")
+});
+staffProfileSchema.extend({
+  id: z.string().uuid("Invalid staff profile ID."),
+  createdAt: z.string().datetime(),
+  updatedAt: z.string().datetime()
+});
+const createStaffProfileSchema = staffProfileSchema;
+const updateStaffProfileSchema = staffProfileSchema.extend({
+  id: z.string().uuid("Invalid staff profile ID.")
+});
+const deleteStaffProfileSchema = z.object({
+  id: z.string().uuid("Invalid staff profile ID.")
+});
+
+const getStaffProfiles = protectedProcedure.input(staffRoleSchema.optional()).query(async ({ ctx, input }) => {
+  const { globalPrisma } = ctx;
+  const role = input != null ? input : void 0;
+  try {
+    const staff = await globalPrisma.staffProfile.findMany({
+      where: {
+        role
+      }
+    });
+    return {
+      success: true,
+      message: "Staff fetched successfully.",
+      data: staff
+    };
+  } catch (error) {
+    console.log(error);
+    return {
+      success: false,
+      message: "Failed to fetch staff.",
+      data: null
+    };
+  }
+});
+const getStaffProfile = protectedProcedure.input(getStaffProfileSchema).query(async ({ ctx, input }) => {
+  const { globalPrisma } = ctx;
+  const { id } = input;
+  try {
+    const staff = await globalPrisma.staffProfile.findUnique({
+      where: {
+        id
+      }
+    });
+    return {
+      success: true,
+      message: "Staff fetched successfully.",
+      data: staff
+    };
+  } catch (error) {
+    console.log(error);
+    return {
+      success: false,
+      message: "Failed to fetch staff.",
+      data: null
+    };
+  }
+});
+const createStaffProfile = protectedProcedure.input(createStaffProfileSchema).mutation(async ({ ctx, input }) => {
+  const { globalPrisma } = ctx;
+  const { lastName, firstName, middleName, suffix, role, profession } = input;
+  try {
+    const staff = await globalPrisma.staffProfile.create({
+      data: {
+        lastName,
+        firstName,
+        middleName,
+        suffix,
+        role,
+        profession
+      }
+    });
+    return {
+      success: true,
+      message: "Staff created successfully.",
+      data: staff
+    };
+  } catch (error) {
+    console.log(error);
+    return {
+      success: false,
+      message: "Failed to create staff.",
+      data: null
+    };
+  }
+});
+const updateStaffProfile = protectedProcedure.input(updateStaffProfileSchema).mutation(async ({ ctx, input }) => {
+  const { globalPrisma } = ctx;
+  const { id, lastName, firstName, middleName, suffix, role, profession } = input;
+  try {
+    const staff = await globalPrisma.staffProfile.update({
+      where: {
+        id
+      },
+      data: {
+        lastName,
+        firstName,
+        middleName,
+        suffix,
+        role,
+        profession
+      }
+    });
+    return {
+      success: true,
+      message: "Staff updated successfully.",
+      data: staff
+    };
+  } catch (error) {
+    console.log(error);
+    return {
+      success: false,
+      message: "Failed to update staff.",
+      data: null
+    };
+  }
+});
+const deleteStaffProfile = protectedProcedure.input(deleteStaffProfileSchema).mutation(async ({ ctx, input }) => {
+  const { globalPrisma } = ctx;
+  const { id } = input;
+  try {
+    const staff = await globalPrisma.staffProfile.delete({
+      where: {
+        id
+      }
+    });
+    return {
+      success: true,
+      message: "Staff deleted successfully.",
+      data: staff
+    };
+  } catch (error) {
+    console.log(error);
+    return {
+      success: false,
+      message: "Failed to delete staff.",
+      data: null
+    };
+  }
+});
+const staffProfilesRouter = createTRPCRouter({
+  getStaffProfiles,
+  getStaffProfile,
+  createStaffProfile,
+  updateStaffProfile,
+  deleteStaffProfile
+});
+
 const staffRouter = createTRPCRouter({
-  // Stub - will implement later to call Express backend
-  getStaff: publicProcedure.query(() => ({ success: true, data: [] }))
+  profiles: staffProfilesRouter
 });
 
 const logsRouter = createTRPCRouter({
@@ -2887,6 +3066,175 @@ const healthRouter = createTRPCRouter({
   })
 });
 
+const getDashboardStats = protectedProcedure.input(z.object({
+  doctorId: z.string().uuid().optional(),
+  facilityId: z.string().uuid().optional(),
+  dateFrom: z.string().date().optional(),
+  dateTo: z.string().date().optional()
+})).query(async ({ ctx, input }) => {
+  const { instancePrisma, globalPrisma } = ctx;
+  const { doctorId, facilityId, dateFrom, dateTo } = input;
+  try {
+    const today = (/* @__PURE__ */ new Date()).toISOString().split("T")[0];
+    const thisMonth = new Date((/* @__PURE__ */ new Date()).getFullYear(), (/* @__PURE__ */ new Date()).getMonth(), 1).toISOString().split("T")[0];
+    const whereClause = {};
+    if (doctorId) whereClause.doctorId = doctorId;
+    if (facilityId) whereClause.facilityId = facilityId;
+    if (dateFrom && dateTo) {
+      whereClause.date = {
+        gte: dateFrom,
+        lte: dateTo
+      };
+    }
+    const todayAppointments = await instancePrisma.appointment.count({
+      where: {
+        ...whereClause,
+        date: today
+      }
+    });
+    const todayPendingAppointments = await instancePrisma.appointment.count({
+      where: {
+        ...whereClause,
+        date: today,
+        status: "PENDING"
+      }
+    });
+    const todayByStatus = await instancePrisma.appointment.groupBy({
+      by: ["status"],
+      where: {
+        ...whereClause,
+        date: today
+      },
+      _count: {
+        status: true
+      }
+    });
+    const thisMonthAppointments = await instancePrisma.appointment.count({
+      where: {
+        ...whereClause,
+        date: {
+          gte: thisMonth
+        }
+      }
+    });
+    const totalPatients = await instancePrisma.patientProfile.count({
+      where: {}
+    });
+    return {
+      success: true,
+      message: "Dashboard statistics fetched successfully.",
+      data: {
+        summary: {
+          todayAppointments,
+          todayPendingAppointments,
+          // Fixed: Added this field
+          thisMonthAppointments,
+          totalPatients,
+          todayByStatus: todayByStatus.reduce((acc, curr) => {
+            acc[curr.status] = curr._count.status;
+            return acc;
+          }, {})
+        }
+      }
+    };
+  } catch (error) {
+    console.error("Dashboard stats error:", error);
+    return {
+      success: false,
+      message: "Failed to fetch dashboard statistics.",
+      data: null
+    };
+  }
+});
+const getAppointmentsList = protectedProcedure.input(z.object({
+  doctorId: z.string().uuid().optional(),
+  facilityId: z.string().uuid().optional(),
+  dateFrom: z.string().date().optional(),
+  dateTo: z.string().date().optional(),
+  status: z.enum(["PENDING", "SCHEDULED", "COMPLETED", "CANCELLED"]).optional()
+})).query(async ({ ctx, input }) => {
+  const { instancePrisma, globalPrisma } = ctx;
+  const { doctorId, facilityId, dateFrom, dateTo, status } = input;
+  try {
+    const whereClause = {};
+    if (doctorId) whereClause.doctorId = doctorId;
+    if (facilityId) whereClause.facilityId = facilityId;
+    if (status) whereClause.status = status;
+    if (dateFrom && dateTo) {
+      whereClause.date = {
+        gte: dateFrom,
+        lte: dateTo
+      };
+    } else if (dateFrom) {
+      whereClause.date = {
+        gte: dateFrom
+      };
+    } else if (dateTo) {
+      whereClause.date = {
+        lte: dateTo
+      };
+    }
+    const appointments = await instancePrisma.appointment.findMany({
+      where: whereClause,
+      include: {
+        patient: true,
+        facility: {
+          include: {
+            building: true
+          }
+        }
+      },
+      orderBy: [
+        { date: "asc" },
+        { time: "asc" }
+      ]
+    });
+    const doctorIds = [...new Set(appointments.map((apt) => apt.doctorId))];
+    const doctors = await globalPrisma.staffProfile.findMany({
+      where: {
+        id: { in: doctorIds },
+        role: "DOCTOR"
+      },
+      select: {
+        id: true,
+        firstName: true,
+        lastName: true,
+        middleName: true,
+        suffix: true
+      }
+    });
+    const appointmentsWithDoctors = appointments.map((appointment) => {
+      const doctor = doctors.find((d) => d.id === appointment.doctorId);
+      return {
+        ...appointment,
+        doctor: {
+          firstName: (doctor == null ? void 0 : doctor.firstName) || "",
+          lastName: (doctor == null ? void 0 : doctor.lastName) || "",
+          middleName: (doctor == null ? void 0 : doctor.middleName) || "",
+          suffix: (doctor == null ? void 0 : doctor.suffix) || ""
+        }
+      };
+    });
+    return {
+      success: true,
+      message: "Appointments list fetched successfully.",
+      data: appointmentsWithDoctors
+    };
+  } catch (error) {
+    console.error("Appointments list error:", error);
+    return {
+      success: false,
+      message: "Failed to fetch appointments list.",
+      data: null
+    };
+  }
+});
+const dashboardRouter = createTRPCRouter({
+  getDashboardStats,
+  getAppointmentsList
+  // Fixed: Added the new appointments list endpoint
+});
+
 const appRouter = createTRPCRouter({
   health: healthRouter,
   auth: authRouter,
@@ -2895,7 +3243,8 @@ const appRouter = createTRPCRouter({
   appointments: appointmentsRouter,
   staff: staffRouter,
   logs: logsRouter,
-  billing: billingRouter
+  billing: billingRouter,
+  dashboard: dashboardRouter
 });
 
 const _trpc_ = createTRPCNuxtHandler({
