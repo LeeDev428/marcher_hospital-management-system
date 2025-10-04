@@ -13,6 +13,7 @@ import { fileURLToPath } from 'node:url';
 import * as runtime from 'file://D:/Programming/Systems/Web-Systems/Nuxtjs-Nodejs-Expressjs/marcher_hospital-management-system/node_modules/@prisma/client/runtime/library.mjs';
 import jwt from 'file://D:/Programming/Systems/Web-Systems/Nuxtjs-Nodejs-Expressjs/marcher_hospital-management-system/node_modules/jsonwebtoken/index.js';
 import { z } from 'file://D:/Programming/Systems/Web-Systems/Nuxtjs-Nodejs-Expressjs/marcher_hospital-management-system/node_modules/zod/index.js';
+import bcrypt from 'file://D:/Programming/Systems/Web-Systems/Nuxtjs-Nodejs-Expressjs/marcher_hospital-management-system/node_modules/bcrypt/bcrypt.js';
 import { createRenderer, getRequestDependencies, getPreloadLinks, getPrefetchLinks } from 'file://D:/Programming/Systems/Web-Systems/Nuxtjs-Nodejs-Expressjs/marcher_hospital-management-system/node_modules/vue-bundle-renderer/dist/runtime.mjs';
 import { parseURL, withoutBase, joinURL, getQuery, withQuery, withTrailingSlash, decodePath, withLeadingSlash, withoutTrailingSlash, joinRelativeURL } from 'file://D:/Programming/Systems/Web-Systems/Nuxtjs-Nodejs-Expressjs/marcher_hospital-management-system/node_modules/ufo/dist/index.mjs';
 import { renderToString } from 'file://D:/Programming/Systems/Web-Systems/Nuxtjs-Nodejs-Expressjs/marcher_hospital-management-system/node_modules/vue/server-renderer/index.mjs';
@@ -1348,16 +1349,16 @@ _p6Hosv_flnIt5Egld0GJTDGGnPWf7XM23l9u_rWUiQQ
 const assets = {
   "/index.mjs": {
     "type": "text/javascript; charset=utf-8",
-    "etag": "\"3778b-M5LZfitVmv9i8qEtCPrUSmF+dz8\"",
-    "mtime": "2025-10-04T21:18:48.696Z",
-    "size": 227211,
+    "etag": "\"3ade3-9uNV/XxNciaQ0ZMteXury/gSaPM\"",
+    "mtime": "2025-10-04T21:52:59.384Z",
+    "size": 241123,
     "path": "index.mjs"
   },
   "/index.mjs.map": {
     "type": "application/json",
-    "etag": "\"800fe-6rdpgc5lphVIWdLQKsBcp8V6WcE\"",
-    "mtime": "2025-10-04T21:18:48.698Z",
-    "size": 524542,
+    "etag": "\"8e671-aDwk2umUOQId//Wr7RZ+Irt0dPM\"",
+    "mtime": "2025-10-04T21:52:59.420Z",
+    "size": 583281,
     "path": "index.mjs.map"
   }
 };
@@ -3235,6 +3236,494 @@ const dashboardRouter = createTRPCRouter({
   // Fixed: Added the new appointments list endpoint
 });
 
+const createDoctorSchema = z.object({
+  // User data
+  firstName: z.string().min(1),
+  lastName: z.string().min(1),
+  email: z.string().email(),
+  phone: z.string().optional(),
+  // Staff data
+  department: z.string().optional(),
+  position: z.string().optional(),
+  // Doctor-specific data
+  medicalLicense: z.string().min(1),
+  specialization: z.string().min(1),
+  subSpecialization: z.string().optional(),
+  boardCertification: z.string().optional(),
+  yearsOfExperience: z.number().optional(),
+  education: z.string().optional(),
+  hospitalAffiliation: z.string().optional(),
+  consultationFee: z.number().optional(),
+  isAvailable: z.boolean().default(true),
+  workingHours: z.string().optional()
+});
+const getDoctorSchema = z.object({
+  id: z.string()
+});
+const updateDoctorSchema = z.object({
+  id: z.string(),
+  medicalLicense: z.string().optional(),
+  specialization: z.string().optional(),
+  subSpecialization: z.string().optional(),
+  boardCertification: z.string().optional(),
+  yearsOfExperience: z.number().optional(),
+  education: z.string().optional(),
+  hospitalAffiliation: z.string().optional(),
+  consultationFee: z.number().optional(),
+  isAvailable: z.boolean().optional(),
+  workingHours: z.string().optional()
+});
+const doctorsRouter = createTRPCRouter({
+  // Get all doctors
+  list: publicProcedure.query(async ({ ctx }) => {
+    try {
+      const doctors = await ctx.instancePrisma.doctor.findMany({
+        include: {
+          user: {
+            select: {
+              id: true,
+              firstName: true,
+              lastName: true,
+              email: true,
+              phone: true,
+              status: true
+            }
+          },
+          staff: {
+            select: {
+              id: true,
+              staffNumber: true,
+              department: true,
+              position: true
+            }
+          }
+        },
+        orderBy: {
+          createdAt: "desc"
+        }
+      });
+      return {
+        success: true,
+        message: "Doctors fetched successfully.",
+        data: doctors
+      };
+    } catch (error) {
+      console.error("Error fetching doctors:", error);
+      return {
+        success: false,
+        message: "Failed to fetch doctors.",
+        data: []
+      };
+    }
+  }),
+  // Get doctor by ID
+  getById: protectedProcedure.input(getDoctorSchema).query(async ({ ctx, input }) => {
+    try {
+      const doctor = await ctx.instancePrisma.doctor.findUnique({
+        where: { id: input.id },
+        include: {
+          user: true,
+          staff: true
+        }
+      });
+      if (!doctor) {
+        return {
+          success: false,
+          message: "Doctor not found.",
+          data: null
+        };
+      }
+      return {
+        success: true,
+        message: "Doctor fetched successfully.",
+        data: doctor
+      };
+    } catch (error) {
+      console.error("Error fetching doctor:", error);
+      return {
+        success: false,
+        message: "Failed to fetch doctor.",
+        data: null
+      };
+    }
+  }),
+  // Create new doctor
+  create: protectedProcedure.input(createDoctorSchema).mutation(async ({ ctx, input }) => {
+    const {
+      firstName,
+      lastName,
+      email,
+      phone,
+      department,
+      position,
+      medicalLicense,
+      specialization,
+      subSpecialization,
+      boardCertification,
+      yearsOfExperience,
+      education,
+      hospitalAffiliation,
+      consultationFee,
+      isAvailable,
+      workingHours
+    } = input;
+    try {
+      const existingUser = await ctx.instancePrisma.user.findUnique({
+        where: { email }
+      });
+      if (existingUser) {
+        return {
+          success: false,
+          message: "User with this email already exists.",
+          data: null
+        };
+      }
+      const userCount = await ctx.instancePrisma.user.count();
+      const staffCount = await ctx.instancePrisma.staff.count();
+      const doctorCount = await ctx.instancePrisma.doctor.count();
+      const staffNumber = `STF${String(staffCount + 1).padStart(6, "0")}`;
+      const doctorNumber = `DOC${String(doctorCount + 1).padStart(6, "0")}`;
+      const result = await ctx.instancePrisma.$transaction(async (prisma) => {
+        const user = await prisma.user.create({
+          data: {
+            email,
+            password: "temporary123",
+            // TODO: Generate temporary password
+            firstName,
+            lastName,
+            phone,
+            role: "STAFF",
+            status: "ACTIVE"
+          }
+        });
+        const staff = await prisma.staff.create({
+          data: {
+            userId: user.id,
+            staffNumber,
+            department,
+            position: position || "Doctor"
+          }
+        });
+        const doctor = await prisma.doctor.create({
+          data: {
+            userId: user.id,
+            staffId: staff.id,
+            doctorNumber,
+            medicalLicense,
+            specialization,
+            subSpecialization,
+            boardCertification,
+            yearsOfExperience,
+            education,
+            hospitalAffiliation,
+            consultationFee,
+            isAvailable,
+            workingHours
+          }
+        });
+        return { user, staff, doctor };
+      });
+      return {
+        success: true,
+        message: "Doctor created successfully.",
+        data: result.doctor
+      };
+    } catch (error) {
+      console.error("Error creating doctor:", error);
+      return {
+        success: false,
+        message: "Failed to create doctor.",
+        data: null
+      };
+    }
+  }),
+  // Update doctor
+  update: protectedProcedure.input(updateDoctorSchema).mutation(async ({ ctx, input }) => {
+    const { id, ...updateData } = input;
+    try {
+      const doctor = await ctx.instancePrisma.doctor.update({
+        where: { id },
+        data: updateData,
+        include: {
+          user: true,
+          staff: true
+        }
+      });
+      return {
+        success: true,
+        message: "Doctor updated successfully.",
+        data: doctor
+      };
+    } catch (error) {
+      console.error("Error updating doctor:", error);
+      return {
+        success: false,
+        message: "Failed to update doctor.",
+        data: null
+      };
+    }
+  }),
+  // Delete doctor
+  delete: protectedProcedure.input(getDoctorSchema).mutation(async ({ ctx, input }) => {
+    try {
+      await ctx.instancePrisma.$transaction(async (prisma) => {
+        await prisma.doctor.delete({
+          where: { id: input.id }
+        });
+      });
+      return {
+        success: true,
+        message: "Doctor deleted successfully.",
+        data: null
+      };
+    } catch (error) {
+      console.error("Error deleting doctor:", error);
+      return {
+        success: false,
+        message: "Failed to delete doctor.",
+        data: null
+      };
+    }
+  })
+});
+
+const createUserSchema = z.object({
+  firstName: z.string().min(1),
+  lastName: z.string().min(1),
+  email: z.string().email(),
+  password: z.string().min(6),
+  phone: z.string().optional(),
+  role: z.enum(["ADMIN", "STAFF", "PATIENT", "PARTNER"]),
+  // Staff-specific fields (when role is STAFF)
+  staffType: z.enum(["new", "existing"]).optional(),
+  selectedDoctorId: z.string().optional(),
+  position: z.string().optional(),
+  department: z.string().optional(),
+  specialization: z.string().optional(),
+  licenseNumber: z.string().optional(),
+  // Partner-specific fields (when role is PARTNER)
+  institutionName: z.string().optional(),
+  institutionType: z.enum(["HOSPITAL", "CLINIC", "LABORATORY", "PHARMACY", "DIAGNOSTIC_CENTER"]).optional(),
+  contactPerson: z.string().optional(),
+  // Patient-specific fields (when role is PATIENT)
+  dateOfBirth: z.string().optional(),
+  gender: z.enum(["MALE", "FEMALE", "OTHER", "PREFER_NOT_TO_SAY"]).optional(),
+  address: z.string().optional(),
+  emergencyContact: z.string().optional(),
+  bloodType: z.enum(["A_POSITIVE", "A_NEGATIVE", "B_POSITIVE", "B_NEGATIVE", "AB_POSITIVE", "AB_NEGATIVE", "O_POSITIVE", "O_NEGATIVE"]).optional()
+});
+const getUserSchema = z.object({
+  id: z.string()
+});
+const usersRouter = createTRPCRouter({
+  // Get all users with their profiles
+  list: protectedProcedure.query(async ({ ctx }) => {
+    try {
+      const users = await ctx.instancePrisma.user.findMany({
+        include: {
+          staffProfile: {
+            include: {
+              doctorProfile: true
+            }
+          },
+          partnerProfile: true,
+          patientProfile: true
+        },
+        orderBy: {
+          createdAt: "desc"
+        }
+      });
+      return {
+        success: true,
+        message: "Users fetched successfully.",
+        data: users
+      };
+    } catch (error) {
+      console.error("Error fetching users:", error);
+      return {
+        success: false,
+        message: "Failed to fetch users.",
+        data: []
+      };
+    }
+  }),
+  // Get user by ID
+  getById: protectedProcedure.input(getUserSchema).query(async ({ ctx, input }) => {
+    try {
+      const user = await ctx.instancePrisma.user.findUnique({
+        where: { id: input.id },
+        include: {
+          staffProfile: {
+            include: {
+              doctorProfile: true
+            }
+          },
+          partnerProfile: true,
+          patientProfile: true
+        }
+      });
+      if (!user) {
+        return {
+          success: false,
+          message: "User not found.",
+          data: null
+        };
+      }
+      return {
+        success: true,
+        message: "User fetched successfully.",
+        data: user
+      };
+    } catch (error) {
+      console.error("Error fetching user:", error);
+      return {
+        success: false,
+        message: "Failed to fetch user.",
+        data: null
+      };
+    }
+  }),
+  // Create new user with role-specific profile
+  create: protectedProcedure.input(createUserSchema).mutation(async ({ ctx, input }) => {
+    const {
+      firstName,
+      lastName,
+      email,
+      password,
+      phone,
+      role,
+      staffType,
+      selectedDoctorId,
+      position,
+      department,
+      specialization,
+      licenseNumber,
+      institutionName,
+      institutionType,
+      contactPerson,
+      dateOfBirth,
+      gender,
+      address,
+      emergencyContact,
+      bloodType
+    } = input;
+    try {
+      const existingUser = await ctx.instancePrisma.user.findUnique({
+        where: { email }
+      });
+      if (existingUser) {
+        return {
+          success: false,
+          message: "User with this email already exists.",
+          data: null
+        };
+      }
+      const hashedPassword = await bcrypt.hash(password, 10);
+      const userCount = await ctx.instancePrisma.user.count();
+      const result = await ctx.instancePrisma.$transaction(async (prisma) => {
+        const user = await prisma.user.create({
+          data: {
+            email,
+            password: hashedPassword,
+            firstName,
+            lastName,
+            phone,
+            role,
+            status: "ACTIVE",
+            dateOfBirth: dateOfBirth ? new Date(dateOfBirth) : null,
+            gender,
+            address
+          }
+        });
+        let profile = null;
+        if (role === "STAFF") {
+          const staffCount = await prisma.staff.count();
+          const staffNumber = `STF${String(staffCount + 1).padStart(6, "0")}`;
+          if (staffType === "existing" && selectedDoctorId) {
+            const existingDoctor = await prisma.doctor.findUnique({
+              where: { id: selectedDoctorId },
+              include: { staff: true }
+            });
+            if (existingDoctor) {
+              profile = await prisma.staff.update({
+                where: { id: existingDoctor.staffId },
+                data: {
+                  userId: user.id
+                }
+              });
+            }
+          } else {
+            profile = await prisma.staff.create({
+              data: {
+                userId: user.id,
+                staffNumber,
+                position,
+                department,
+                specialization,
+                licenseNumber
+              }
+            });
+          }
+        } else if (role === "PARTNER") {
+          profile = await prisma.partner.create({
+            data: {
+              userId: user.id,
+              institutionName: institutionName || "",
+              institutionType: institutionType || "CLINIC",
+              contactPerson,
+              licenseNumber
+            }
+          });
+        } else if (role === "PATIENT") {
+          const patientCount = await prisma.patient.count();
+          const patientNumber = `PAT${String(patientCount + 1).padStart(6, "0")}`;
+          profile = await prisma.patient.create({
+            data: {
+              userId: user.id,
+              patientNumber,
+              emergencyContact,
+              bloodType
+            }
+          });
+        }
+        return { user, profile };
+      });
+      return {
+        success: true,
+        message: "User created successfully.",
+        data: result.user
+      };
+    } catch (error) {
+      console.error("Error creating user:", error);
+      return {
+        success: false,
+        message: "Failed to create user.",
+        data: null
+      };
+    }
+  }),
+  // Delete user
+  delete: protectedProcedure.input(getUserSchema).mutation(async ({ ctx, input }) => {
+    try {
+      await ctx.instancePrisma.user.delete({
+        where: { id: input.id }
+      });
+      return {
+        success: true,
+        message: "User deleted successfully.",
+        data: null
+      };
+    } catch (error) {
+      console.error("Error deleting user:", error);
+      return {
+        success: false,
+        message: "Failed to delete user.",
+        data: null
+      };
+    }
+  })
+});
+
 const appRouter = createTRPCRouter({
   health: healthRouter,
   auth: authRouter,
@@ -3244,7 +3733,9 @@ const appRouter = createTRPCRouter({
   staff: staffRouter,
   logs: logsRouter,
   billing: billingRouter,
-  dashboard: dashboardRouter
+  dashboard: dashboardRouter,
+  doctors: doctorsRouter,
+  users: usersRouter
 });
 
 const _trpc_ = createTRPCNuxtHandler({
