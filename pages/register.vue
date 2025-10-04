@@ -284,11 +284,11 @@ const handleRegister = async () => {
       lastName: form.lastName,
       email: form.email,
       phone: form.phone,
-      role: form.role,
+      role: form.role as 'admin' | 'partner' | 'patient' | 'staff',
       password: form.password
-    })
+    }) as any
 
-    if (response.success) {
+    if (response?.success) {
       useToast('success', 'Account Created!', `Welcome to Marcher! Your ${form.role} account has been created.`)
       
       // Redirect to login or appropriate dashboard
