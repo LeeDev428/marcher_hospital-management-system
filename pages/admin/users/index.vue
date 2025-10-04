@@ -58,13 +58,13 @@ const availableDoctors = ref([])
 const loadDoctors = async () => {
   try {
     const { $trpc } = useNuxtApp()
-    const response = await $trpc.staff.profiles.getStaffProfiles.query('DOCTOR')
+    const response = await $trpc.doctors.list.query()
     
     if (response.success && response.data) {
       availableDoctors.value = response.data.map(doctor => ({
         id: doctor.id,
-        label: `Dr. ${doctor.firstName} ${doctor.lastName}${doctor.middleName ? ` ${doctor.middleName}` : ""}${doctor.suffix ? ` ${doctor.suffix}` : ""}`,
-        specialization: doctor.profession || 'General Practice'
+        label: `Dr. ${doctor.user.firstName} ${doctor.user.lastName}`,
+        specialization: doctor.specialization || 'General Practice'
       }))
     }
   } catch (error) {
@@ -92,42 +92,8 @@ const departments = [
   'Administration'
 ]
 
-// Mock users data - replace with actual API call
-const mockUsers = ref([
-  {
-    id: 'usr_001',
-    firstName: 'John',
-    lastName: 'Smith',
-    email: 'john.smith@hospital.com',
-    role: 'STAFF',
-    status: 'ACTIVE',
-    department: 'Cardiology',
-    position: 'Doctor',
-    createdAt: '2024-01-15'
-  },
-  {
-    id: 'usr_002',
-    firstName: 'Sarah',
-    lastName: 'Johnson',
-    email: 'sarah.j@partnerclinic.com',
-    role: 'PARTNER',
-    status: 'ACTIVE',
-    institutionName: 'City Medical Clinic',
-    institutionType: 'CLINIC',
-    createdAt: '2024-02-20'
-  },
-  {
-    id: 'usr_003',
-    firstName: 'Michael',
-    lastName: 'Brown',
-    email: 'michael.brown@hospital.com',
-    role: 'STAFF',
-    status: 'ACTIVE',
-    department: 'Emergency',
-    position: 'Nurse',
-    createdAt: '2024-03-10'
-  }
-])
+// Real users data (loaded from API)
+const users = ref([])
 
 // Validation functions
 const validateForm = () => {
@@ -156,34 +122,28 @@ const createUser = async () => {
   loading.value = true
   
   try {
-    // Prepare data based on role
+    // Prepare data for new users router
     const userData = {
       firstName: createForm.value.firstName,
       lastName: createForm.value.lastName,
       email: createForm.value.email,
       password: createForm.value.password,
       phone: createForm.value.phone,
-      role: createForm.value.role.toLowerCase()
+      role: createForm.value.role,
+      staffType: createForm.value.staffType,
+      selectedDoctorId: createForm.value.selectedDoctorId,
+      position: createForm.value.position,
+      department: createForm.value.department,
+      specialization: createForm.value.specialization,
+      licenseNumber: createForm.value.licenseNumber,
+      institutionName: createForm.value.institutionName,
+      institutionType: createForm.value.institutionType,
+      contactPerson: createForm.value.contactPerson
     }
     
-    // Add role-specific fields
-    if (createForm.value.role === 'STAFF') {
-      Object.assign(userData, {
-        position: createForm.value.position,
-        department: createForm.value.department,
-        specialization: createForm.value.specialization,
-        licenseNumber: createForm.value.licenseNumber
-      })
-    } else if (createForm.value.role === 'PARTNER') {
-      Object.assign(userData, {
-        companyName: createForm.value.institutionName,
-        contactPerson: createForm.value.contactPerson
-      })
-    }
-    
-    // Call the registration API (using existing auth router)
+    // Call the new users creation API
     const { $trpc } = useNuxtApp()
-    const response = await $trpc.auth.register.mutate(userData)
+    const response = await $trpc.users.create.mutate(userData)
     
     if (response.success) {
       useToast('success', 'User Created', 'User account created successfully')
@@ -203,9 +163,19 @@ const createUser = async () => {
 
 // Load users
 const loadUsers = async () => {
-  // For now, use mock data
-  // In production, replace with actual API call
-  users.value = mockUsers.value
+  try {
+    const { $trpc } = useNuxtApp()
+    const response = await $trpc.users.list.query()
+    
+    if (response.success && response.data) {
+      users.value = response.data
+    } else {
+      useToast('error', 'Load Failed', 'Failed to load users')
+    }
+  } catch (error) {
+    console.error('Error loading users:', error)
+    useToast('error', 'Load Failed', 'Failed to load users')
+  }
 }
 
 // Reset form
@@ -547,12 +517,17 @@ onMounted(() => {
                 </td>
                 <td class="p-3">
                   <div v-if="user.role === 'STAFF'">
-                    <p class="font-medium">{{ user.department }}</p>
-                    <p class="text-sm text-muted-foreground">{{ user.position }}</p>
+                    <p class="font-medium">{{ user.staffProfile?.department || 'N/A' }}</p>
+                    <p class="text-sm text-muted-foreground">{{ user.staffProfile?.position || 'Staff Member' }}</p>
+                    <p v-if="user.staffProfile?.doctorProfile" class="text-xs text-blue-600 font-medium">Doctor Profile Available</p>
                   </div>
                   <div v-else-if="user.role === 'PARTNER'">
-                    <p class="font-medium">{{ user.institutionName }}</p>
-                    <p class="text-sm text-muted-foreground">{{ user.institutionType }}</p>
+                    <p class="font-medium">{{ user.partnerProfile?.institutionName || 'N/A' }}</p>
+                    <p class="text-sm text-muted-foreground">{{ user.partnerProfile?.institutionType || 'N/A' }}</p>
+                  </div>
+                  <div v-else-if="user.role === 'PATIENT'">
+                    <p class="font-medium">Patient</p>
+                    <p class="text-sm text-muted-foreground">{{ user.patientProfile?.patientNumber || 'N/A' }}</p>
                   </div>
                 </td>
                 <td class="p-3">
