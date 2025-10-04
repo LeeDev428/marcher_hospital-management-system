@@ -1,5 +1,5 @@
 import express from 'express';
-import { authenticateToken } from './auth.js';
+import { authMiddleware } from '../middleware/auth.js';
 
 const router = express.Router();
 
@@ -40,7 +40,7 @@ let patients = [
 ];
 
 // Get all patients
-router.get('/', authenticateToken, (req, res) => {
+router.get('/', authMiddleware, (req, res) => {
   try {
     const { page = 1, limit = 10, search = '' } = req.query;
     
@@ -74,7 +74,7 @@ router.get('/', authenticateToken, (req, res) => {
 });
 
 // Get single patient
-router.get('/:id', authenticateToken, (req, res) => {
+router.get('/:id', authMiddleware, (req, res) => {
   try {
     const patient = patients.find(p => p.id === req.params.id);
     if (!patient) {
@@ -87,7 +87,7 @@ router.get('/:id', authenticateToken, (req, res) => {
 });
 
 // Create new patient
-router.post('/', authenticateToken, (req, res) => {
+router.post('/', authMiddleware, (req, res) => {
   try {
     const {
       firstName,
@@ -124,7 +124,7 @@ router.post('/', authenticateToken, (req, res) => {
 });
 
 // Update patient
-router.put('/:id', authenticateToken, (req, res) => {
+router.put('/:id', authMiddleware, (req, res) => {
   try {
     const patientIndex = patients.findIndex(p => p.id === req.params.id);
     if (patientIndex === -1) {
@@ -147,7 +147,7 @@ router.put('/:id', authenticateToken, (req, res) => {
 });
 
 // Delete patient
-router.delete('/:id', authenticateToken, (req, res) => {
+router.delete('/:id', authMiddleware, (req, res) => {
   try {
     const patientIndex = patients.findIndex(p => p.id === req.params.id);
     if (patientIndex === -1) {
