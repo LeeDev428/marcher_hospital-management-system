@@ -1,5 +1,5 @@
 import express from 'express';
-import { authenticateToken } from './auth.js';
+import { authMiddleware } from '../middleware/auth.js';
 
 const router = express.Router();
 
@@ -68,7 +68,7 @@ let staff = [
 ];
 
 // Get all staff
-router.get('/', authenticateToken, (req, res) => {
+router.get('/', authMiddleware, (req, res) => {
   try {
     const { page = 1, limit = 10, role, department, status = 'active' } = req.query;
     
@@ -109,7 +109,7 @@ router.get('/', authenticateToken, (req, res) => {
 });
 
 // Get single staff member
-router.get('/:id', authenticateToken, (req, res) => {
+router.get('/:id', authMiddleware, (req, res) => {
   try {
     const staffMember = staff.find(s => s.id === req.params.id);
     if (!staffMember) {
@@ -122,7 +122,7 @@ router.get('/:id', authenticateToken, (req, res) => {
 });
 
 // Get doctors only
-router.get('/doctors/list', authenticateToken, (req, res) => {
+router.get('/doctors/list', authMiddleware, (req, res) => {
   try {
     const doctors = staff.filter(s => s.role === 'doctor' && s.status === 'active');
     res.json(doctors);
@@ -132,7 +132,7 @@ router.get('/doctors/list', authenticateToken, (req, res) => {
 });
 
 // Create new staff member
-router.post('/', authenticateToken, (req, res) => {
+router.post('/', authMiddleware, (req, res) => {
   try {
     const {
       firstName,
@@ -172,7 +172,7 @@ router.post('/', authenticateToken, (req, res) => {
 });
 
 // Update staff member
-router.put('/:id', authenticateToken, (req, res) => {
+router.put('/:id', authMiddleware, (req, res) => {
   try {
     const staffIndex = staff.findIndex(s => s.id === req.params.id);
     if (staffIndex === -1) {
