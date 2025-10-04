@@ -99,7 +99,7 @@ const getActivityTypeColor = (type: string) => {
     <div class="bg-gradient-to-r from-slate-800 via-purple-800 to-slate-900 rounded-xl p-6 text-white">
       <div class="flex justify-between items-start">
         <div>
-          <h1 class="text-2xl font-bold mb-2">System Administration, {{ user?.name || 'Administrator' }}! 🚀</h1>
+          <h1 class="text-2xl font-bold mb-2">System Administration, {{ authStore.fullName || 'Administrator' }}! 🚀</h1>
           <p class="text-purple-200 mb-4">Complete system oversight and administrative control center</p>
           <div class="flex items-center text-purple-200">
             <Icon name="lucide:calendar" class="w-4 h-4 mr-2" />
