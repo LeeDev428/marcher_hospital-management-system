@@ -32,7 +32,9 @@ const createForm = ref({
   confirmPassword: '',
   phone: '',
   role: 'STAFF',
+  staffType: 'new', // 'existing' or 'new'
   // Staff-specific fields
+  selectedDoctorId: '', // Link to existing doctor profile
   position: '',
   department: '',
   specialization: '',
@@ -45,9 +47,30 @@ const createForm = ref({
 
 // User roles and their options
 const userRoles = [
-  { value: 'STAFF', label: 'Staff Member' },
+  { value: 'STAFF', label: 'Staff Member (includes Doctors)' },
   { value: 'PARTNER', label: 'Partner Institution' }
 ]
+
+// Available doctors from doctor management
+const availableDoctors = ref([])
+
+// Load available doctors for staff role
+const loadDoctors = async () => {
+  try {
+    const { $trpc } = useNuxtApp()
+    const response = await $trpc.staff.profiles.getStaffProfiles.query('DOCTOR')
+    
+    if (response.success && response.data) {
+      availableDoctors.value = response.data.map(doctor => ({
+        id: doctor.id,
+        label: `Dr. ${doctor.firstName} ${doctor.lastName}${doctor.middleName ? ` ${doctor.middleName}` : ""}${doctor.suffix ? ` ${doctor.suffix}` : ""}`,
+        specialization: doctor.profession || 'General Practice'
+      }))
+    }
+  } catch (error) {
+    console.error('Error loading doctors:', error)
+  }
+}
 
 const institutionTypes = [
   { value: 'CLINIC', label: 'Clinic' },
@@ -195,6 +218,8 @@ const resetForm = () => {
     confirmPassword: '',
     phone: '',
     role: 'STAFF',
+    staffType: 'new',
+    selectedDoctorId: '',
     position: '',
     department: '',
     specialization: '',
@@ -226,6 +251,7 @@ const toggleUserStatus = async (userId: string, currentStatus: string) => {
 // Initialize data
 onMounted(() => {
   loadUsers()
+  loadDoctors()
 })
 </script>
 
@@ -307,34 +333,85 @@ onMounted(() => {
             <div v-if="createForm.role === 'STAFF'" class="space-y-4 p-4 bg-blue-50 rounded-lg">
               <h3 class="font-medium text-blue-900">Staff Information</h3>
               
-              <div class="grid grid-cols-2 gap-4">
-                <div class="space-y-2">
-                  <Label for="position">Position</Label>
-                  <Input v-model="createForm.position" id="position" placeholder="e.g., Doctor, Nurse, Technician" />
-                </div>
-                <div class="space-y-2">
-                  <Label for="department">Department</Label>
-                  <Select v-model="createForm.department">
-                    <SelectTrigger>
-                      <SelectValue placeholder="Select department" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem v-for="dept in departments" :key="dept" :value="dept">
-                        {{ dept }}
-                      </SelectItem>
-                    </SelectContent>
-                  </Select>
+              <!-- Choose existing doctor or create new staff -->
+              <div class="space-y-2">
+                <Label>Staff Type</Label>
+                <div class="space-y-3">
+                  <div class="flex items-center space-x-2">
+                    <input 
+                      type="radio" 
+                      id="existing-doctor" 
+                      name="staffType" 
+                      value="existing"
+                      v-model="createForm.staffType"
+                    />
+                    <Label for="existing-doctor">Link to Existing Doctor</Label>
+                  </div>
+                  <div class="flex items-center space-x-2">
+                    <input 
+                      type="radio" 
+                      id="new-staff" 
+                      name="staffType" 
+                      value="new"
+                      v-model="createForm.staffType"
+                    />
+                    <Label for="new-staff">Create New Staff Member</Label>
+                  </div>
                 </div>
               </div>
               
-              <div class="grid grid-cols-2 gap-4">
-                <div class="space-y-2">
-                  <Label for="specialization">Specialization</Label>
-                  <Input v-model="createForm.specialization" id="specialization" placeholder="Medical specialization" />
+              <!-- Existing doctor selection -->
+              <div v-if="createForm.staffType === 'existing'" class="space-y-2">
+                <Label for="selectedDoctor">Select Doctor</Label>
+                <Select v-model="createForm.selectedDoctorId">
+                  <SelectTrigger>
+                    <SelectValue placeholder="Choose a doctor" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem v-for="doctor in availableDoctors" :key="doctor.id" :value="doctor.id">
+                      <div>
+                        <div class="font-medium">{{ doctor.label }}</div>
+                        <div class="text-sm text-muted-foreground">{{ doctor.specialization }}</div>
+                      </div>
+                    </SelectItem>
+                  </SelectContent>
+                </Select>
+                <p class="text-sm text-muted-foreground">
+                  This will create a user account for an existing doctor from Doctor Management
+                </p>
+              </div>
+              
+              <!-- New staff fields -->
+              <div v-if="createForm.staffType === 'new'" class="space-y-4">
+                <div class="grid grid-cols-2 gap-4">
+                  <div class="space-y-2">
+                    <Label for="position">Position</Label>
+                    <Input v-model="createForm.position" id="position" placeholder="e.g., Nurse, Technician, Admin" />
+                  </div>
+                  <div class="space-y-2">
+                    <Label for="department">Department</Label>
+                    <Select v-model="createForm.department">
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select department" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem v-for="dept in departments" :key="dept" :value="dept">
+                          {{ dept }}
+                        </SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
                 </div>
-                <div class="space-y-2">
-                  <Label for="licenseNumber">License Number</Label>
-                  <Input v-model="createForm.licenseNumber" id="licenseNumber" placeholder="Professional license number" />
+                
+                <div class="grid grid-cols-2 gap-4">
+                  <div class="space-y-2">
+                    <Label for="specialization">Specialization</Label>
+                    <Input v-model="createForm.specialization" id="specialization" placeholder="Area of expertise" />
+                  </div>
+                  <div class="space-y-2">
+                    <Label for="licenseNumber">License Number</Label>
+                    <Input v-model="createForm.licenseNumber" id="licenseNumber" placeholder="Professional license number" />
+                  </div>
                 </div>
               </div>
             </div>
