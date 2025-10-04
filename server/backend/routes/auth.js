@@ -1,5 +1,5 @@
 import express from 'express';
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient } from '../../../prisma/generated/instance/index.js';
 import authService from '../services/authService.js';
 import { authMiddleware } from '../middleware/auth.js';
 
@@ -55,17 +55,19 @@ router.post('/register', async (req, res) => {
 
     // Create user with transaction
     const result = await prisma.$transaction(async (tx) => {
-      // Create user
+      // Create user with personal information
       const user = await tx.user.create({
         data: {
           email,
           password: hashedPassword,
           firstName,
           lastName,
-          middleName,
-          phoneNumber,
+          phone: phoneNumber,
           role: role.toUpperCase(),
-          status: role === 'admin' ? 'ACTIVE' : 'PENDING_APPROVAL'
+          status: (role === 'admin' || role === 'patient') ? 'ACTIVE' : 'PENDING_APPROVAL',
+          dateOfBirth: dateOfBirth ? new Date(dateOfBirth) : null,
+          gender,
+          address
         }
       });
 
@@ -76,9 +78,6 @@ router.post('/register', async (req, res) => {
           data: {
             userId: user.id,
             patientNumber,
-            dateOfBirth: dateOfBirth ? new Date(dateOfBirth) : null,
-            gender,
-            address,
             emergencyContact,
             bloodType
           }
@@ -92,19 +91,16 @@ router.post('/register', async (req, res) => {
             position,
             department,
             licenseNumber,
-            specialization,
-            dateOfBirth: dateOfBirth ? new Date(dateOfBirth) : null,
-            gender,
-            address
+            specialization
           }
         });
       } else if (role === 'partner') {
         await tx.partner.create({
           data: {
             userId: user.id,
-            companyName,
-            contactPerson,
-            address
+            institutionName: companyName,
+            institutionType: 'CLINIC', // Default type, should be passed from frontend
+            contactPerson
           }
         });
       }
@@ -160,9 +156,9 @@ router.post('/login', async (req, res) => {
     const user = await prisma.user.findUnique({
       where: { email },
       include: {
-        patient: true,
-        staff: true,
-        partner: true
+        patientProfile: true,
+        staffProfile: true,
+        partnerProfile: true
       }
     });
 
@@ -237,7 +233,7 @@ router.post('/login', async (req, res) => {
 });
 
 // Logout endpoint
-router.post('/logout', authMiddleware, async (req, res) => {
+router.post('/logout', async (req, res) => {
   try {
     const { refreshToken } = req.body;
 
@@ -316,9 +312,9 @@ router.get('/me', authMiddleware, async (req, res) => {
     const user = await prisma.user.findUnique({
       where: { id: req.user.userId },
       include: {
-        patient: true,
-        staff: true,
-        partner: true
+        patientProfile: true,
+        staffProfile: true,
+        partnerProfile: true
       }
     });
 
