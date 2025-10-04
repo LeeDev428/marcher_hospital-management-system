@@ -1,5 +1,5 @@
 import express from 'express';
-import { authenticateToken } from './auth.js';
+import { authMiddleware } from '../middleware/auth.js';
 
 const router = express.Router();
 
@@ -46,7 +46,7 @@ let facilities = [
 ];
 
 // Get all facilities
-router.get('/', authenticateToken, (req, res) => {
+router.get('/', authMiddleware, (req, res) => {
   try {
     const { page = 1, limit = 10, type, department, status = 'active' } = req.query;
     
@@ -87,7 +87,7 @@ router.get('/', authenticateToken, (req, res) => {
 });
 
 // Get single facility
-router.get('/:id', authenticateToken, (req, res) => {
+router.get('/:id', authMiddleware, (req, res) => {
   try {
     const facility = facilities.find(f => f.id === req.params.id);
     if (!facility) {
@@ -100,7 +100,7 @@ router.get('/:id', authenticateToken, (req, res) => {
 });
 
 // Create new facility
-router.post('/', authenticateToken, (req, res) => {
+router.post('/', authMiddleware, (req, res) => {
   try {
     const {
       name,
