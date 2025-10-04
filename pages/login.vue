@@ -154,7 +154,8 @@
 import { useAuthStore } from '~/stores/app/useAuthStore'
 
 definePageMeta({
-  layout: 'auth'
+  layout: 'auth',
+  middleware: []  // Disable auth middleware on login page
 })
 
 useHead({
@@ -179,24 +180,12 @@ const handleLogin = async () => {
   loading.value = true
   
   try {
-    const response = await $trpc.auth.login.mutate({
+    // Use the auth store's login method which handles everything
+    const authStore = useAuthStore()
+    await authStore.login({
       email: form.email,
       password: form.password
     })
-
-    if (response.success) {
-      // Store user data and token
-      const authStore = useAuthStore()
-      authStore.setUser(response.user)
-      
-      // Redirect based on user role
-      const redirectPath = getRedirectPath(response.user.role)
-      await navigateTo(redirectPath)
-      
-      useToast('success', 'Welcome back!', `Successfully signed in as ${response.user.role}`)
-    } else {
-      useToast('error', 'Login Failed', response.message)
-    }
   } catch (error) {
     console.error('Login error:', error)
     useToast('error', 'Login Failed', 'An error occurred during login. Please try again.')
@@ -205,18 +194,5 @@ const handleLogin = async () => {
   }
 }
 
-const getRedirectPath = (role: string) => {
-  const normalizedRole = role.toLowerCase()
-  switch (normalizedRole) {
-    case 'admin':
-      return '/admin/dashboard'
-    case 'staff':
-      return '/staff/dashboard'
-    case 'partner':
-      return '/partner/dashboard'
-    case 'patient':
-    default:
-      return '/patient'
-  }
-}
+
 </script>
