@@ -1,74 +1,52 @@
 <script setup lang="ts">
-import { useTitle } from "@vueuse/core"
-import { useSidebarStore, useBreadcrumbsStore } from "~/stores/app"
+import { useAuthStore } from "~/stores/app"
 
-import { SidebarBase, SidebarItem } from "@/components/layout/sidebar"
-import { Button } from "@/components/ui/button"
+const authStore = useAuthStore()
+const user = computed(() => authStore.user)
 
-import { LayoutBreadcrumbs } from "@/components/layout/breadcrumbs"
-import { QRCodeScanner } from "@/components/app/qrcode"
+const sidebarCollapsed = ref(false)
 
-const sidebarStore = useSidebarStore()
-const breadcrumbsStore = useBreadcrumbsStore()
-const { title } = defineProps<{
-	title: string
-}>()
-
-const links = [
+const navigationItems = [
 	{
-		label: "Dashboard",
-		links: [
-			{
-				label: "Overview",
-				icon: "mdi:view-dashboard",
-				link: "/admin/dashboard",
-			},
-		]
+		name: "Overview",
+		icon: "lucide:layout-dashboard",
+		to: "/admin/dashboard",
+		active: true
 	},
 	{
-		label: "User Management", 
-		links: [
-			{
-				label: "Users",
-				icon: "mdi:account-group",
-				link: "/admin/users",
-			},
-			{
-				label: "Staff",
-				icon: "mdi:doctor",
-				link: "/admin/staff",
-			},
-		]
+		name: "Users", 
+		icon: "lucide:users",
+		to: "/admin/users"
 	},
 	{
-		label: "System Administration",
-		links: [
-			{
-				label: "Settings",
-				icon: "mdi:cog",
-				link: "/admin/settings",
-			},
-			{
-				label: "Logs",
-				icon: "mdi:file-document",
-				link: "/admin/logs",
-			},
-		]
+		name: "Staff Management",
+		icon: "lucide:user-check", 
+		to: "/admin/staff"
 	},
 	{
-		label: "Analytics & Reports",
-		links: [
-			{
-				label: "Analytics",
-				icon: "mdi:chart-line",
-				link: "/admin/analytics",
-			},
-			{
-				label: "Reports",
-				icon: "mdi:file-chart",
-				link: "/admin/reports",
-			},
-		]
+		name: "System Settings",
+		icon: "lucide:settings",
+		to: "/admin/settings"
+	},
+	{
+		name: "Security Logs",
+		icon: "lucide:shield-check",
+		to: "/admin/logs"
+	},
+	{
+		name: "Analytics",
+		icon: "lucide:bar-chart-3",
+		to: "/admin/analytics"
+	},
+	{
+		name: "Reports",
+		icon: "lucide:file-text",
+		to: "/admin/reports"
+	},
+	{
+		name: "Database",
+		icon: "lucide:database",
+		to: "/admin/database"
 	}
 ]
 
