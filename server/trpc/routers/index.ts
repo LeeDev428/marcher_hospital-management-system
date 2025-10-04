@@ -1,34 +1,23 @@
-import { z } from "zod"
-import { createTRPCRouter, publicProcedure } from "../init"
+import { createTRPCRouter } from "../init"
+import { authRouter } from "./auth"
+import { facilitiesRouter } from "./facilities"
+import { patientsRouter } from "./patients"
+import { appointmentsRouter } from "./appointments"
+import { staffRouter } from "./staff"
+import { logsRouter } from "./logs"
+import { billingRouter } from "./billing"
+import { healthRouter } from "./health"
 
-// Health check router
-const healthRouter = createTRPCRouter({
-  check: publicProcedure.query(() => {
-    return {
-      status: "ok",
-      timestamp: new Date().toISOString(),
-      message: "Marcher HIS tRPC API is running"
-    }
-  })
-})
-
-// Basic auth router for testing
-const authRouter = createTRPCRouter({
-  test: publicProcedure
-    .input(z.object({ message: z.string().optional() }))
-    .query(({ input }) => {
-      return {
-        success: true,
-        message: `Auth endpoint working! Input: ${input.message || "none"}`,
-        timestamp: new Date().toISOString()
-      }
-    })
-})
-
-// Main application router - simplified to prevent circular dependencies
+// Main application router that combines all feature routers
 export const appRouter = createTRPCRouter({
-  health: healthRouter,
-  auth: authRouter
+	health: healthRouter,
+	auth: authRouter,
+	facilities: facilitiesRouter,
+	patients: patientsRouter,
+	appointments: appointmentsRouter,
+	staff: staffRouter,
+	logs: logsRouter,
+	billing: billingRouter,
 })
 
 export type AppRouter = typeof appRouter

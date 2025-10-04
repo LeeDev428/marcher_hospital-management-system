@@ -268,6 +268,13 @@ export const NuxtRouteAnnouncer: typeof import("../node_modules/nuxt/dist/app/co
 export const NuxtImg: typeof import("../node_modules/@nuxt/image/dist/runtime/components/NuxtImg.vue")['default']
 export const NuxtPicture: typeof import("../node_modules/@nuxt/image/dist/runtime/components/NuxtPicture.vue")['default']
 export const Icon: typeof import("../node_modules/@nuxt/icon/dist/runtime/components/index")['default']
+export const UiBreadcrumb: typeof import("../components/ui/breadcrumb/index")['Breadcrumb']
+export const UiBreadcrumbEllipsis: typeof import("../components/ui/breadcrumb/index")['BreadcrumbEllipsis']
+export const UiBreadcrumbItem: typeof import("../components/ui/breadcrumb/index")['BreadcrumbItem']
+export const UiBreadcrumbLink: typeof import("../components/ui/breadcrumb/index")['BreadcrumbLink']
+export const UiBreadcrumbList: typeof import("../components/ui/breadcrumb/index")['BreadcrumbList']
+export const UiBreadcrumbPage: typeof import("../components/ui/breadcrumb/index")['BreadcrumbPage']
+export const UiBreadcrumbSeparator: typeof import("../components/ui/breadcrumb/index")['BreadcrumbSeparator']
 export const UiButton: typeof import("../components/ui/button/index")['Button']
 export const UiCalendar: typeof import("../components/ui/calendar/index")['Calendar']
 export const UiCalendarCell: typeof import("../components/ui/calendar/index")['CalendarCell']
@@ -281,13 +288,6 @@ export const UiCalendarHeader: typeof import("../components/ui/calendar/index")[
 export const UiCalendarHeading: typeof import("../components/ui/calendar/index")['CalendarHeading']
 export const UiCalendarNextButton: typeof import("../components/ui/calendar/index")['CalendarNextButton']
 export const UiCalendarPrevButton: typeof import("../components/ui/calendar/index")['CalendarPrevButton']
-export const UiBreadcrumb: typeof import("../components/ui/breadcrumb/index")['Breadcrumb']
-export const UiBreadcrumbEllipsis: typeof import("../components/ui/breadcrumb/index")['BreadcrumbEllipsis']
-export const UiBreadcrumbItem: typeof import("../components/ui/breadcrumb/index")['BreadcrumbItem']
-export const UiBreadcrumbLink: typeof import("../components/ui/breadcrumb/index")['BreadcrumbLink']
-export const UiBreadcrumbList: typeof import("../components/ui/breadcrumb/index")['BreadcrumbList']
-export const UiBreadcrumbPage: typeof import("../components/ui/breadcrumb/index")['BreadcrumbPage']
-export const UiBreadcrumbSeparator: typeof import("../components/ui/breadcrumb/index")['BreadcrumbSeparator']
 export const UiCard: typeof import("../components/ui/card/index")['Card']
 export const UiCardAction: typeof import("../components/ui/card/index")['CardAction']
 export const UiCardContent: typeof import("../components/ui/card/index")['CardContent']
@@ -295,6 +295,7 @@ export const UiCardDescription: typeof import("../components/ui/card/index")['Ca
 export const UiCardFooter: typeof import("../components/ui/card/index")['CardFooter']
 export const UiCardHeader: typeof import("../components/ui/card/index")['CardHeader']
 export const UiCardTitle: typeof import("../components/ui/card/index")['CardTitle']
+export const UiCheckbox: typeof import("../components/ui/checkbox/index")['Checkbox']
 export const UiCombobox: typeof import("../components/ui/combobox/index")['Combobox']
 export const UiComboboxAnchor: typeof import("../components/ui/combobox/index")['ComboboxAnchor']
 export const UiComboboxEmpty: typeof import("../components/ui/combobox/index")['ComboboxEmpty']
@@ -307,7 +308,6 @@ export const UiComboboxSeparator: typeof import("../components/ui/combobox/index
 export const UiComboboxViewport: typeof import("../components/ui/combobox/index")['ComboboxViewport']
 export const UiComboboxCancel: typeof import("../components/ui/combobox/index")['ComboboxCancel']
 export const UiComboboxTrigger: typeof import("../components/ui/combobox/index")['ComboboxTrigger']
-export const UiCheckbox: typeof import("../components/ui/checkbox/index")['Checkbox']
 export const UiCommand: typeof import("../components/ui/command/index")['Command']
 export const UiCommandDialog: typeof import("../components/ui/command/index")['CommandDialog']
 export const UiCommandEmpty: typeof import("../components/ui/command/index")['CommandEmpty']
@@ -655,6 +655,13 @@ export const LazyNuxtRouteAnnouncer: LazyComponent<typeof import("../node_module
 export const LazyNuxtImg: LazyComponent<typeof import("../node_modules/@nuxt/image/dist/runtime/components/NuxtImg.vue")['default']>
 export const LazyNuxtPicture: LazyComponent<typeof import("../node_modules/@nuxt/image/dist/runtime/components/NuxtPicture.vue")['default']>
 export const LazyIcon: LazyComponent<typeof import("../node_modules/@nuxt/icon/dist/runtime/components/index")['default']>
+export const LazyUiBreadcrumb: LazyComponent<typeof import("../components/ui/breadcrumb/index")['Breadcrumb']>
+export const LazyUiBreadcrumbEllipsis: LazyComponent<typeof import("../components/ui/breadcrumb/index")['BreadcrumbEllipsis']>
+export const LazyUiBreadcrumbItem: LazyComponent<typeof import("../components/ui/breadcrumb/index")['BreadcrumbItem']>
+export const LazyUiBreadcrumbLink: LazyComponent<typeof import("../components/ui/breadcrumb/index")['BreadcrumbLink']>
+export const LazyUiBreadcrumbList: LazyComponent<typeof import("../components/ui/breadcrumb/index")['BreadcrumbList']>
+export const LazyUiBreadcrumbPage: LazyComponent<typeof import("../components/ui/breadcrumb/index")['BreadcrumbPage']>
+export const LazyUiBreadcrumbSeparator: LazyComponent<typeof import("../components/ui/breadcrumb/index")['BreadcrumbSeparator']>
 export const LazyUiButton: LazyComponent<typeof import("../components/ui/button/index")['Button']>
 export const LazyUiCalendar: LazyComponent<typeof import("../components/ui/calendar/index")['Calendar']>
 export const LazyUiCalendarCell: LazyComponent<typeof import("../components/ui/calendar/index")['CalendarCell']>
@@ -668,13 +675,6 @@ export const LazyUiCalendarHeader: LazyComponent<typeof import("../components/ui
 export const LazyUiCalendarHeading: LazyComponent<typeof import("../components/ui/calendar/index")['CalendarHeading']>
 export const LazyUiCalendarNextButton: LazyComponent<typeof import("../components/ui/calendar/index")['CalendarNextButton']>
 export const LazyUiCalendarPrevButton: LazyComponent<typeof import("../components/ui/calendar/index")['CalendarPrevButton']>
-export const LazyUiBreadcrumb: LazyComponent<typeof import("../components/ui/breadcrumb/index")['Breadcrumb']>
-export const LazyUiBreadcrumbEllipsis: LazyComponent<typeof import("../components/ui/breadcrumb/index")['BreadcrumbEllipsis']>
-export const LazyUiBreadcrumbItem: LazyComponent<typeof import("../components/ui/breadcrumb/index")['BreadcrumbItem']>
-export const LazyUiBreadcrumbLink: LazyComponent<typeof import("../components/ui/breadcrumb/index")['BreadcrumbLink']>
-export const LazyUiBreadcrumbList: LazyComponent<typeof import("../components/ui/breadcrumb/index")['BreadcrumbList']>
-export const LazyUiBreadcrumbPage: LazyComponent<typeof import("../components/ui/breadcrumb/index")['BreadcrumbPage']>
-export const LazyUiBreadcrumbSeparator: LazyComponent<typeof import("../components/ui/breadcrumb/index")['BreadcrumbSeparator']>
 export const LazyUiCard: LazyComponent<typeof import("../components/ui/card/index")['Card']>
 export const LazyUiCardAction: LazyComponent<typeof import("../components/ui/card/index")['CardAction']>
 export const LazyUiCardContent: LazyComponent<typeof import("../components/ui/card/index")['CardContent']>
@@ -682,6 +682,7 @@ export const LazyUiCardDescription: LazyComponent<typeof import("../components/u
 export const LazyUiCardFooter: LazyComponent<typeof import("../components/ui/card/index")['CardFooter']>
 export const LazyUiCardHeader: LazyComponent<typeof import("../components/ui/card/index")['CardHeader']>
 export const LazyUiCardTitle: LazyComponent<typeof import("../components/ui/card/index")['CardTitle']>
+export const LazyUiCheckbox: LazyComponent<typeof import("../components/ui/checkbox/index")['Checkbox']>
 export const LazyUiCombobox: LazyComponent<typeof import("../components/ui/combobox/index")['Combobox']>
 export const LazyUiComboboxAnchor: LazyComponent<typeof import("../components/ui/combobox/index")['ComboboxAnchor']>
 export const LazyUiComboboxEmpty: LazyComponent<typeof import("../components/ui/combobox/index")['ComboboxEmpty']>
@@ -694,7 +695,6 @@ export const LazyUiComboboxSeparator: LazyComponent<typeof import("../components
 export const LazyUiComboboxViewport: LazyComponent<typeof import("../components/ui/combobox/index")['ComboboxViewport']>
 export const LazyUiComboboxCancel: LazyComponent<typeof import("../components/ui/combobox/index")['ComboboxCancel']>
 export const LazyUiComboboxTrigger: LazyComponent<typeof import("../components/ui/combobox/index")['ComboboxTrigger']>
-export const LazyUiCheckbox: LazyComponent<typeof import("../components/ui/checkbox/index")['Checkbox']>
 export const LazyUiCommand: LazyComponent<typeof import("../components/ui/command/index")['Command']>
 export const LazyUiCommandDialog: LazyComponent<typeof import("../components/ui/command/index")['CommandDialog']>
 export const LazyUiCommandEmpty: LazyComponent<typeof import("../components/ui/command/index")['CommandEmpty']>
