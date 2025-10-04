@@ -206,7 +206,8 @@ const handleLogin = async () => {
 }
 
 const getRedirectPath = (role: string) => {
-  switch (role) {
+  const normalizedRole = role.toLowerCase()
+  switch (normalizedRole) {
     case 'admin':
       return '/admin/dashboard'
     case 'staff':
