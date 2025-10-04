@@ -50,7 +50,6 @@ const navigationItems = [
 	}
 ]
 </script>
-</script>
 
 <template>
 	<div class="flex h-screen bg-gray-100">
@@ -121,7 +120,7 @@ const navigationItems = [
 						</Button>
 						<div class="flex items-center space-x-2">
 							<div class="w-8 h-8 bg-gray-300 rounded-full"></div>
-							<span class="text-sm font-medium text-gray-700">{{ user?.name || 'Staff' }}</span>
+							<span class="text-sm font-medium text-gray-700">{{ authStore.fullName || 'Staff' }}</span>
 						</div>
 					</div>
 				</div>
