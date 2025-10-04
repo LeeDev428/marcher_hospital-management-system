@@ -88,7 +88,7 @@ const getMaxValue = computed(() => {
     <div class="bg-gradient-to-r from-cyan-400 to-blue-600 rounded-xl p-6 text-white">
       <div class="flex justify-between items-start">
         <div>
-          <h1 class="text-2xl font-bold mb-2">Hello, {{ user?.name || 'Lee' }}! 👋</h1>
+          <h1 class="text-2xl font-bold mb-2">Hello, {{ authStore.fullName || 'Lee' }}! 👋</h1>
           <p class="text-cyan-100 mb-4">Ready to make a difference in healthcare today?</p>
           <div class="flex items-center text-cyan-100">
             <Icon name="lucide:calendar" class="w-4 h-4 mr-2" />
