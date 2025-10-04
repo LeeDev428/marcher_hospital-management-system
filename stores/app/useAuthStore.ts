@@ -7,20 +7,24 @@ export const useAuthStore = defineStore("auth", {
 		user: null as { id: string; role: string; email: string; firstName: string; lastName: string } | null,
 	}),
 	actions: {
+		setUser(user: { id: string; role: string; email: string; firstName: string; lastName: string } | null) {
+			this.user = user
+		},
+
 		async login(credentials: LoginSchema) {
 			const { $trpc } = useNuxtApp()
 
 			try {
-				const { success, message, user } = await $trpc.auth.login.mutate(credentials)
+				const response = await $trpc.auth.login.mutate(credentials) as any
 
-				if (success) {
-					this.user = user
+				if (response.success) {
+					this.user = response.user
 					useToast("success", "Login", "Login successful")
 					await navigateTo("/")
 					return
 				}
 
-				useToast("error", "Login", message)
+				useToast("error", "Login", response.message)
 			} catch (error) {
 				useToast("error", "Login")
 			}
@@ -40,17 +44,21 @@ export const useAuthStore = defineStore("auth", {
 			const { $trpc } = useNuxtApp()
 
 			try {
-				const { success, message } = await $trpc.auth.logout.mutate()
+				const response = await $trpc.auth.logout.mutate({}) as any
 
-				if (success) {
+				if (response.success) {
+					this.user = null // Clear user state
 					useToast("success", "Logout", "Logout successful")
 					await navigateTo("/login")
 					return
 				}
 
-				useToast("error", "Logout", message)
+				useToast("error", "Logout", response.message)
 			} catch (error) {
 				useToast("error", "Logout")
+				// Clear user state even if logout fails (for UX)
+				this.user = null
+				await navigateTo("/login")
 			}
 		},
 	},
