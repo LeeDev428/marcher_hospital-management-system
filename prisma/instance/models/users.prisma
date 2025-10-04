@@ -124,8 +124,43 @@ model Staff {
   
   // Relationships
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  doctorProfile Doctor?
   
   @@map("staff")
+}
+
+// Doctor Profile (extends Staff)
+model Doctor {
+  id                String     @id @default(cuid())
+  userId            String     @unique
+  staffId           String     @unique
+  doctorNumber      String     @unique
+  
+  // Medical credentials
+  medicalLicense    String
+  specialization    String
+  subSpecialization String?
+  boardCertification String?
+  
+  // Professional details
+  yearsOfExperience Int?
+  education         String?
+  hospitalAffiliation String?
+  consultationFee   Decimal?
+  
+  // Availability
+  isAvailable       Boolean    @default(true)
+  workingHours      String?    // JSON string for schedule
+  
+  // System fields
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  // Relationships
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  staff Staff @relation(fields: [staffId], references: [id], onDelete: Cascade)
+  
+  @@map("doctors")
 }
 
 // Partner Profile (Hospital/Clinic)
