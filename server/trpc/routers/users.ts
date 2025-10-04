@@ -38,7 +38,7 @@ const getUserSchema = z.object({
 
 export const usersRouter = createTRPCRouter({
   // Get all users with their profiles
-  list: protectedProcedure.query(async ({ ctx }) => {
+  list: publicProcedure.query(async ({ ctx }) => {
     try {
       const users = await ctx.instancePrisma.user.findMany({
         include: {
@@ -71,7 +71,7 @@ export const usersRouter = createTRPCRouter({
   }),
 
   // Get user by ID
-  getById: protectedProcedure
+  getById: publicProcedure
     .input(getUserSchema)
     .query(async ({ ctx, input }) => {
       try {
@@ -112,7 +112,7 @@ export const usersRouter = createTRPCRouter({
     }),
 
   // Create new user with role-specific profile
-  create: protectedProcedure
+  create: publicProcedure
     .input(createUserSchema)
     .mutation(async ({ ctx, input }) => {
       const {
@@ -255,7 +255,7 @@ export const usersRouter = createTRPCRouter({
     }),
 
   // Delete user
-  delete: protectedProcedure
+  delete: publicProcedure
     .input(getUserSchema)
     .mutation(async ({ ctx, input }) => {
       try {
