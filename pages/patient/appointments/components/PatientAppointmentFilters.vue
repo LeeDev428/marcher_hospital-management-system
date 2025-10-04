@@ -5,6 +5,7 @@ import type { PatientAppointmentFilters } from "@/types/appointments"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { Combobox, ComboboxContent, ComboboxItem, ComboboxTrigger, ComboboxValue } from "@/components/ui/combobox"
 
 const appointmentStore = useAppointmentStore()
 const staffStore = useStaffStore()
@@ -16,12 +17,42 @@ const localFilters = ref<PatientAppointmentFilters>({
   status: appointmentStore.patientFilters.status,
 })
 
+// Doctor search functionality
+const doctorSearch = ref('')
+const isOpen = ref(false)
+
 const doctorOptions = computed(() => {
   return staffStore.staffProfiles.map((staff) => ({
     label: `Dr. ${staff.firstName} ${staff.lastName}${staff.middleName ? ` ${staff.middleName}` : ""} ${staff.suffix ? ` ${staff.suffix}` : ""}`,
     value: staff.id,
+    searchText: `${staff.firstName} ${staff.lastName} ${staff.middleName || ''} ${staff.profession || ''} ${staff.specialization || ''}`.toLowerCase()
   }))
 })
+
+const filteredDoctors = computed(() => {
+  if (!doctorSearch.value) return doctorOptions.value
+  
+  const search = doctorSearch.value.toLowerCase()
+  return doctorOptions.value.filter(doctor => 
+    doctor.searchText.includes(search) || 
+    doctor.label.toLowerCase().includes(search)
+  )
+})
+
+const selectedDoctor = computed(() => {
+  return doctorOptions.value.find(d => d.value === localFilters.value.doctorId)
+})
+
+const selectDoctor = (doctorId: string) => {
+  localFilters.value.doctorId = doctorId
+  isOpen.value = false
+  doctorSearch.value = ''
+}
+
+const clearDoctorSelection = () => {
+  localFilters.value.doctorId = undefined
+  doctorSearch.value = ''
+}
 
 const applyFilters = async () => {
   await appointmentStore.filterPatientAppointments(localFilters.value)
@@ -33,6 +64,7 @@ const clearFilters = async () => {
     date: undefined,
     status: undefined,
   }
+  doctorSearch.value = ''
   appointmentStore.clearPatientFilters()
   await appointmentStore.getPatientAppointments()
 }
@@ -61,23 +93,55 @@ onMounted(async () => {
       />
     </div>
 
-    <!-- Doctor Filter -->
+    <!-- Doctor Filter with Search -->
     <div class="space-y-2">
       <label class="text-sm font-medium text-gray-700">Doctor</label>
-      <Select v-model="localFilters.doctorId">
-        <SelectTrigger class="w-full">
-          <SelectValue placeholder="Select Doctor" />
-        </SelectTrigger>
-        <SelectContent>
-          <SelectItem 
-            v-for="doctor in doctorOptions" 
-            :key="doctor.value" 
-            :value="doctor.value"
-          >
-            {{ doctor.label }}
-          </SelectItem>
-        </SelectContent>
-      </Select>
+      <div class="relative">
+        <div class="border rounded-md p-2 bg-white cursor-pointer" @click="isOpen = !isOpen">
+          <div v-if="selectedDoctor" class="flex items-center justify-between">
+            <span class="text-sm">{{ selectedDoctor.label }}</span>
+            <Button variant="ghost" size="sm" @click.stop="clearDoctorSelection">
+              <Icon name="lucide:x" class="w-4 h-4" />
+            </Button>
+          </div>
+          <div v-else class="flex items-center justify-between">
+            <span class="text-sm text-muted-foreground">Search for a doctor...</span>
+            <Icon name="lucide:chevron-down" class="w-4 h-4" />
+          </div>
+        </div>
+        
+        <!-- Dropdown -->
+        <div v-if="isOpen" class="absolute top-full left-0 right-0 z-50 mt-1 bg-white border rounded-md shadow-lg max-h-60 overflow-hidden">
+          <!-- Search Input -->
+          <div class="p-2 border-b">
+            <Input 
+              v-model="doctorSearch" 
+              placeholder="Search doctors..." 
+              class="w-full"
+              @click.stop
+            />
+          </div>
+          
+          <!-- Doctor List -->
+          <div class="max-h-40 overflow-y-auto">
+            <div v-if="filteredDoctors.length === 0" class="p-3 text-sm text-muted-foreground text-center">
+              No doctors found
+            </div>
+            <div 
+              v-for="doctor in filteredDoctors" 
+              :key="doctor.value"
+              class="p-2 hover:bg-muted cursor-pointer border-b last:border-b-0"
+              @click="selectDoctor(doctor.value)"
+            >
+              <div class="font-medium text-sm">{{ doctor.label }}</div>
+              <div v-if="staffStore.staffProfiles.find(s => s.id === doctor.value)?.profession" 
+                   class="text-xs text-muted-foreground">
+                {{ staffStore.staffProfiles.find(s => s.id === doctor.value)?.profession }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- Filter Actions -->
