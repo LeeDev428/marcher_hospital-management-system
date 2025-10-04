@@ -30,6 +30,7 @@ model User {
   patientProfile Patient?
   staffProfile   Staff?
   partnerProfile Partner?
+  doctorProfile  Doctor?
   
   // Audit fields
   createdBy String?
