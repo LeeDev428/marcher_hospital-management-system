@@ -122,7 +122,7 @@ const navigationItems = [
 							<div class="w-8 h-8 bg-purple-600 rounded-full flex items-center justify-center">
 								<Icon name="lucide:user" class="w-4 h-4 text-white" />
 							</div>
-							<span class="text-sm font-medium text-gray-700">{{ user?.name || 'Administrator' }}</span>
+							<span class="text-sm font-medium text-gray-700">{{ authStore.fullName || 'Administrator' }}</span>
 						</div>
 					</div>
 				</div>
