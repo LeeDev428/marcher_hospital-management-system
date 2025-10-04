@@ -315,9 +315,9 @@ export const UiComboboxItem: typeof import("../components/ui/combobox/index")['C
 export const UiComboboxItemIndicator: typeof import("../components/ui/combobox/index")['ComboboxItemIndicator']
 export const UiComboboxList: typeof import("../components/ui/combobox/index")['ComboboxList']
 export const UiComboboxSeparator: typeof import("../components/ui/combobox/index")['ComboboxSeparator']
+export const UiComboboxTrigger: typeof import("../components/ui/combobox/index")['ComboboxTrigger']
 export const UiComboboxViewport: typeof import("../components/ui/combobox/index")['ComboboxViewport']
 export const UiComboboxCancel: typeof import("../components/ui/combobox/index")['ComboboxCancel']
-export const UiComboboxTrigger: typeof import("../components/ui/combobox/index")['ComboboxTrigger']
 export const UiCommand: typeof import("../components/ui/command/index")['Command']
 export const UiCommandDialog: typeof import("../components/ui/command/index")['CommandDialog']
 export const UiCommandEmpty: typeof import("../components/ui/command/index")['CommandEmpty']
@@ -712,9 +712,9 @@ export const LazyUiComboboxItem: LazyComponent<typeof import("../components/ui/c
 export const LazyUiComboboxItemIndicator: LazyComponent<typeof import("../components/ui/combobox/index")['ComboboxItemIndicator']>
 export const LazyUiComboboxList: LazyComponent<typeof import("../components/ui/combobox/index")['ComboboxList']>
 export const LazyUiComboboxSeparator: LazyComponent<typeof import("../components/ui/combobox/index")['ComboboxSeparator']>
+export const LazyUiComboboxTrigger: LazyComponent<typeof import("../components/ui/combobox/index")['ComboboxTrigger']>
 export const LazyUiComboboxViewport: LazyComponent<typeof import("../components/ui/combobox/index")['ComboboxViewport']>
 export const LazyUiComboboxCancel: LazyComponent<typeof import("../components/ui/combobox/index")['ComboboxCancel']>
-export const LazyUiComboboxTrigger: LazyComponent<typeof import("../components/ui/combobox/index")['ComboboxTrigger']>
 export const LazyUiCommand: LazyComponent<typeof import("../components/ui/command/index")['Command']>
 export const LazyUiCommandDialog: LazyComponent<typeof import("../components/ui/command/index")['CommandDialog']>
 export const LazyUiCommandEmpty: LazyComponent<typeof import("../components/ui/command/index")['CommandEmpty']>
