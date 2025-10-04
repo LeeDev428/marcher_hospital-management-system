@@ -92,9 +92,6 @@ const departments = [
   'Administration'
 ]
 
-// Real users data (loaded from API)
-const users = ref([])
-
 // Validation functions
 const validateForm = () => {
   if (!createForm.value.firstName || !createForm.value.lastName || !createForm.value.email) {
