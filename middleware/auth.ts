@@ -1,8 +1,42 @@
-export default defineNuxtRouteMiddleware((to, from) => {
+export default defineNuxtRouteMiddleware(async (to, from) => {
   // Only run on client side to avoid SSR issues
   if (process.client) {
-    // Try to access localStorage to check if user is logged in
     try {
+      // Try using auth store first
+      const { useAuthStore } = await import('~/stores/app/useAuthStore')
+      const authStore = useAuthStore()
+      
+      // If store has user data, use it
+      if (authStore.user && authStore.user.role) {
+        const userRole = authStore.user.role.toLowerCase()
+        const currentPath = to.path
+        
+        // Role-based route protection
+        if (currentPath.startsWith('/admin') && userRole !== 'admin') {
+          throw createError({
+            statusCode: 403,
+            statusMessage: 'Access denied. Admin privileges required.'
+          })
+        }
+        
+        if (currentPath.startsWith('/staff') && !['staff', 'admin'].includes(userRole)) {
+          throw createError({
+            statusCode: 403,
+            statusMessage: 'Access denied. Staff privileges required.'
+          })
+        }
+        
+        if (currentPath.startsWith('/patient') && !['patient', 'admin'].includes(userRole)) {
+          throw createError({
+            statusCode: 403,
+            statusMessage: 'Access denied. Patient privileges required.'
+          })
+        }
+        
+        return // User is authenticated and has correct role
+      }
+      
+      // Fallback to localStorage if store is empty
       const authData = localStorage.getItem('auth')
       
       if (!authData) {
@@ -10,9 +44,11 @@ export default defineNuxtRouteMiddleware((to, from) => {
       }
       
       const parsedAuth = JSON.parse(authData)
-      const user = parsedAuth?.user
       
-      if (!user) {
+      // Handle both direct user object and nested structure
+      const user = parsedAuth?.user || parsedAuth
+      
+      if (!user || !user.role) {
         return navigateTo('/login')
       }
       
