@@ -18,11 +18,11 @@ const navigationItems = [
 		icon: "lucide:users",
 		to: "/admin/users"
 	},
-	{
-		name: "Doctor Management",
-		icon: "lucide:user-md", 
-		to: "/admin/doctors"
-	},
+    {
+        name: "Doctor Management",
+        icon: "lucide:stethoscope", 
+        to: "/admin/doctors"
+    },
 	{
 		name: "System Settings",
 		icon: "lucide:settings",
