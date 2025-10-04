@@ -1,176 +1,147 @@
-import {
-	publicProcedure,
-	protectedProcedure,
-	createTRPCRouter,
-} from "../init"
-import { loginSchema } from "@/types/app"
-import {
-	signAccessToken,
-	signRefreshToken,
-	signVerificationToken,
-	verifyRefreshToken,
-	verifyVerificationToken,
-} from "@/util/token"
-import type { CookieOptions } from "nuxt/app"
-import { set } from "zod"
+import { z } from 'zod';
+import { publicProcedure, createTRPCRouter } from '../init';
 
-const users = [
-	{
-		id: "1",
-		role: "admin",
-		email: "dev@marcher.com",
-		password: "Marcher2025!",
-		firstName: "Dev",
-		lastName: "User"
-	},
-	{
-		id: "2",
-		role: "doctor",
-		email: "doctor@marcher.com",
-		password: "Marcher2025!",
-		firstName: "Doctor",
-		lastName: "User"
-	},
-	{
-		id: "3",
-		role: "secretary",
-		email: "secretary@marcher.com",
-		password: "Marcher2025!",
-		firstName: "Secretary",
-		lastName: "User"
-	},
-	{
-		id: "4",
-		role: "patient",
-		email: "patient@marcher.com",
-		password: "Marcher2025!",
-		firstName: "Nicole Ashley",
-		lastName: "Jimenez"
-	},
-]
+const BACKEND_URL = process.env.BACKEND_URL || 'http://localhost:5000';
 
-const refreshTokenCookieOptions = {
-	secure: process.env.NODE_ENV === "production",
-	httpOnly: true,
-	sameSite: "strict",
-} as CookieOptions
+// Input validation schemas
+const registerSchema = z.object({
+  email: z.string().email(),
+  password: z.string().min(6),
+  firstName: z.string().min(1),
+  lastName: z.string().min(1),
+  middleName: z.string().optional(),
+  phoneNumber: z.string().optional(),
+  role: z.enum(['admin', 'patient', 'staff', 'partner']).default('patient'),
+  // Patient-specific fields
+  dateOfBirth: z.string().optional(),
+  gender: z.enum(['MALE', 'FEMALE', 'OTHER']).optional(),
+  address: z.string().optional(),
+  emergencyContact: z.string().optional(),
+  bloodType: z.enum(['A_POSITIVE', 'A_NEGATIVE', 'B_POSITIVE', 'B_NEGATIVE', 'AB_POSITIVE', 'AB_NEGATIVE', 'O_POSITIVE', 'O_NEGATIVE']).optional(),
+  // Staff-specific fields
+  position: z.string().optional(),
+  department: z.string().optional(),
+  licenseNumber: z.string().optional(),
+  specialization: z.string().optional(),
+  // Partner-specific fields
+  companyName: z.string().optional(),
+  contactPerson: z.string().optional()
+});
 
-const accessTokencookieOptions = {
-	secure: process.env.NODE_ENV === "production",
-	httpOnly: true,
-	sameSite: "strict",
-} as CookieOptions
+const loginSchema = z.object({
+  email: z.string().email(),
+  password: z.string().min(1)
+});
 
-const login = publicProcedure
-	.input(loginSchema)
-	.mutation(async ({ ctx, input }) => {
-		try {
-			const user = users.find(u => u.email === input.email)
-
-			if (user) {
-				if (input.password !== user.password) {
-					return {
-						success: false,
-						message: "Invalid credentials",
-						user: null
-					}
-				}
-
-				setCookie(ctx.event, "refreshToken", signRefreshToken(user, user.email), {
-					...refreshTokenCookieOptions,
-					expires: input.remember ? new Date(Date.now() + 1000 * 60 * 60 * 24 * 30) : new Date(Date.now() + 1000 * 60 * 60 * 24 * 7)
-				})
-
-				setCookie(ctx.event, "accessToken", signAccessToken(user, user.email), {
-					...accessTokencookieOptions,
-					expires: new Date(Date.now() + 1000 * 60 * 15),
-				})
-
-				return {
-					success: true,
-					message: "Login successful",
-					user: {
-						id: user.id,
-						role: user.role,
-						email: user.email,
-						firstName: user.firstName,
-						lastName: user.lastName
-					}
-				}
-			}
-			
-			return {
-				success: false,
-				message: "User not found",
-				user: null
-			}
-		} catch (error) {
-			console.error("Login error:", error)
-			return {
-				success: false,
-				message: "Invalid credentials",
-				user: null
-			}
-		}
-	})
-
-// const refresh = protectedProcedure
-// 	.mutation(async ({ ctx }) => {
-// 		try {
-// 			const refreshToken = getCookie(ctx.event, "refreshToken")
-
-// 			if (!refreshToken) {
-// 				return {
-// 					success: false,
-// 					message: "Refresh token not found"
-// 				}
-// 			}
-
-// 			const decoded = verifyRefreshToken(refreshToken)
-
-// 			if (!decoded) {
-// 				return {
-// 					success: false,
-// 					message: "Invalid refresh token"
-// 				}
-// 			}
-
-// 			const accessToken = signAccessToken(user, user.email)
-
-// 			setCookie(ctx.event, "accessToken", accessToken, accessTokencookieOptions)
-
-// 			return {
-// 				success: true,
-// 				message: "Refresh token successful"
-// 			}
-// 		} catch (error) {
-// 			return {
-// 				success: false,
-// 				message: "Refresh token failed"
-// 			}
-// 		}
-// 	})
-
-const logout = protectedProcedure
-	.mutation(async ({ ctx }) => {
-		try {
-			deleteCookie(ctx.event, "refreshToken", refreshTokenCookieOptions)
-			deleteCookie(ctx.event, "accessToken", accessTokencookieOptions)
-
-			return {
-				success: true,
-				message: "Logout successful"
-			}
-		} catch (error) {
-			return {
-				success: false,
-				message: "Logout failed"
-			}
-		}
-	})
+const refreshTokenSchema = z.object({
+  refreshToken: z.string()
+});
 
 export const authRouter = createTRPCRouter({
-	login,
-	// refresh,
-	logout,
-})
+  register: publicProcedure
+    .input(registerSchema)
+    .mutation(async ({ input }) => {
+      try {
+        const response = await $fetch(`${BACKEND_URL}/api/auth/register`, {
+          method: 'POST',
+          body: input
+        });
+        return response;
+      } catch (error: any) {
+        if (error.data) {
+          throw new Error(error.data.message || 'Registration failed');
+        }
+        throw new Error('Network error occurred');
+      }
+    }),
+
+  login: publicProcedure
+    .input(loginSchema)
+    .mutation(async ({ input }) => {
+      try {
+        const response = await $fetch(`${BACKEND_URL}/api/auth/login`, {
+          method: 'POST',
+          body: input
+        });
+        return response;
+      } catch (error: any) {
+        if (error.data) {
+          throw new Error(error.data.message || 'Login failed');
+        }
+        throw new Error('Network error occurred');
+      }
+    }),
+
+  logout: publicProcedure
+    .input(z.object({ refreshToken: z.string().optional() }))
+    .mutation(async ({ input, ctx }) => {
+      try {
+        const authHeader = ctx.event?.node?.req?.headers?.authorization;
+        const response = await $fetch(`${BACKEND_URL}/api/auth/logout`, {
+          method: 'POST',
+          body: input,
+          headers: {
+            'Authorization': authHeader || ''
+          }
+        });
+        return response;
+      } catch (error: any) {
+        if (error.data) {
+          throw new Error(error.data.message || 'Logout failed');
+        }
+        throw new Error('Network error occurred');
+      }
+    }),
+
+  refreshToken: publicProcedure
+    .input(refreshTokenSchema)
+    .mutation(async ({ input }) => {
+      try {
+        const response = await $fetch(`${BACKEND_URL}/api/auth/refresh-token`, {
+          method: 'POST',
+          body: input
+        });
+        return response;
+      } catch (error: any) {
+        if (error.data) {
+          throw new Error(error.data.message || 'Token refresh failed');
+        }
+        throw new Error('Network error occurred');
+      }
+    }),
+
+  me: publicProcedure
+    .query(async ({ ctx }) => {
+      try {
+        const authHeader = ctx.event?.node?.req?.headers?.authorization;
+        if (!authHeader) {
+          throw new Error('Authorization header required');
+        }
+
+        const response = await $fetch(`${BACKEND_URL}/api/auth/me`, {
+          headers: {
+            'Authorization': authHeader
+          }
+        });
+        return response;
+      } catch (error: any) {
+        if (error.data) {
+          throw new Error(error.data.message || 'Failed to fetch user data');
+        }
+        throw new Error('Network error occurred');
+      }
+    }),
+
+  getDemoAccounts: publicProcedure
+    .query(async () => {
+      try {
+        const response = await $fetch(`${BACKEND_URL}/api/auth/demo-accounts`);
+        return response;
+      } catch (error: any) {
+        if (error.data) {
+          throw new Error(error.data.message || 'Failed to fetch demo accounts');
+        }
+        throw new Error('Network error occurred');
+      }
+    })
+});
