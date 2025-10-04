@@ -1,139 +1,136 @@
 <script setup lang="ts">
-import { useTitle } from "@vueuse/core"
-import { useSidebarStore, useBreadcrumbsStore } from "~/stores/app"
+import { useAuthStore } from "~/stores/app"
 
-import { SidebarBase, SidebarItem } from "@/components/layout/sidebar"
-import { Button } from "@/components/ui/button"
+const authStore = useAuthStore()
+const user = computed(() => authStore.user)
 
-import { LayoutBreadcrumbs } from "@/components/layout/breadcrumbs"
-import { QRCodeScanner } from "@/components/app/qrcode"
-// import { CommandPalette } from "@/components/layout/command"
-// import { NotificationsPopover } from "@/components/layout/notifications"
+const sidebarCollapsed = ref(false)
 
-const sidebarStore = useSidebarStore()
-const breadcrumbsStore = useBreadcrumbsStore()
-const { title } = defineProps<{
-	title: string
-}>()
-
-
-
-const links = [
+const navigationItems = [
 	{
-		label: "Dashboard",
-		links: [
-			{
-				label: "Overview",
-				icon: "mdi:view-dashboard",
-				link: "/staff/dashboard",
-			},
-		]
+		name: "Overview",
+		icon: "lucide:layout-dashboard",
+		to: "/staff/dashboard",
+		active: true
 	},
 	{
-		label: "Patient Management", 
-		links: [
-			{
-				label: "Patients",
-				icon: "mdi:account-group",
-				link: "/staff/patients",
-			},
-			{
-				label: "Appointments",
-				icon: "mdi:calendar",
-				link: "/staff/appointments",
-			},
-		]
+		name: "Patients", 
+		icon: "lucide:users",
+		to: "/staff/patients"
 	},
 	{
-		label: "Medical Services",
-		links: [
-			{
-				label: "Staff",
-				icon: "mdi:doctor",
-				link: "/staff/staff",
-			},
-			{
-				label: "Pharmacy",
-				icon: "mdi:pill",
-				link: "/staff/pharmacy",
-			},
-			{
-				label: "Facilities",
-				icon: "mdi:building",
-				link: "/staff/facilities",
-			},
-		]
+		name: "Appointments",
+		icon: "lucide:calendar", 
+		to: "/staff/appointments"
 	},
 	{
-		label: "Financial",
-		links: [
-			{
-				label: "Billing",
-				icon: "mdi:cash",
-				link: "/staff/billing",
-			},
-			{
-				label: "Insurance",
-				icon: "mdi:shield-account",
-				link: "/staff/insurance",
-			},
-		]
+		name: "Staff",
+		icon: "lucide:user-check",
+		to: "/staff/staff"
 	},
 	{
-		label: "Reports & Analytics",
-		links: [
-			{
-				label: "Reports",
-				icon: "mdi:chart-line",
-				link: "/staff/reports",
-			},
-		]
+		name: "Pharmacy",
+		icon: "lucide:pill",
+		to: "/staff/pharmacy"
+	},
+	{
+		name: "Facilities",
+		icon: "lucide:building",
+		to: "/staff/facilities"
+	},
+	{
+		name: "Billing",
+		icon: "lucide:credit-card",
+		to: "/staff/billing"
+	},
+	{
+		name: "Insurance",
+		icon: "lucide:shield",
+		to: "/staff/insurance"
 	}
 ]
-
-onMounted(() => {
-	useTitle(title)
-})
+</script>
 </script>
 
 <template>
-	<div class="flex h-full w-full">
-		<!-- Make Sidebar Component -->
-		<SidebarBase>
-			<template v-for="link in links" :key="link.label">
-				<p class="text-xs text-gray-500 uppercase font-medium">{{ link.label }}</p>
-				<ul class="h-fit flex flex-col gap-1.5">
-					<SidebarItem
-						v-for="item in link.links"
-						:key="item.label"
-						:label="item.label"
-						:icon="item.icon"
-						:link="item.link"
-						:active="breadcrumbsStore.breadcrumbs[0]?.link === item.link"
-					/>
-				</ul>
-			</template>
-		</SidebarBase>
-		<!-- Make Header Component -->
-		<div class="h-full w-full flex flex-col">
-			<div class="flex-none p-6 bg-white shadow-sm">
-				<div class="flex justify-between">
-					<div class="flex items-center gap-4">
-						<Button variant="outline" size="icon" @click="sidebarStore.toggleSidebar">
-							<Icon name="mdi:menu" />
-						</Button>
-						<LayoutBreadcrumbs :items="breadcrumbsStore.breadcrumbs" />
+	<div class="flex h-screen bg-gray-100">
+		<!-- Sidebar -->
+		<div :class="[sidebarCollapsed ? 'w-16' : 'w-64', 'bg-white shadow-lg transition-all duration-300 flex flex-col']">
+			<!-- Hospital Header -->
+			<div class="p-4 border-b border-gray-200">
+				<div v-if="!sidebarCollapsed" class="flex items-center space-x-3">
+					<div class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
+						<Icon name="lucide:cross" class="w-5 h-5 text-white" />
 					</div>
-					<div class="flex items-center gap-2">
-						<QRCodeScanner />
-						<!-- <CommandPalette />
-						<NotificationsPopover /> -->
+					<div>
+						<h1 class="text-lg font-bold text-gray-900">St. Luke's Medical Center</h1>
+						<p class="text-sm text-gray-500">Quezon City</p>
+					</div>
+				</div>
+				<div v-else class="flex justify-center">
+					<div class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
+						<Icon name="lucide:cross" class="w-5 h-5 text-white" />
 					</div>
 				</div>
 			</div>
-			<div class="h-full w-full flex flex-col gap-4 p-4 overflow-y-auto">
+
+			<!-- Navigation -->
+			<nav class="flex-1 p-4">
+				<div class="space-y-2">
+					<div v-if="!sidebarCollapsed" class="text-xs font-medium text-gray-500 uppercase tracking-wider mb-3">
+						Dashboard
+					</div>
+					<NuxtLink
+						v-for="item in navigationItems"
+						:key="item.name"
+						:to="item.to"
+						class="flex items-center px-3 py-2 text-sm font-medium rounded-lg transition-colors hover:bg-gray-100"
+						:class="$route.path === item.to ? 'bg-blue-50 text-blue-700 border-r-2 border-blue-700' : 'text-gray-700'"
+					>
+						<Icon :name="item.icon" class="w-5 h-5" :class="!sidebarCollapsed ? 'mr-3' : ''" />
+						<span v-if="!sidebarCollapsed">{{ item.name }}</span>
+					</NuxtLink>
+				</div>
+			</nav>
+		</div>
+
+		<!-- Main Content -->
+		<div class="flex-1 flex flex-col overflow-hidden">
+			<!-- Top Header -->
+			<header class="bg-white shadow-sm border-b border-gray-200 px-6 py-4">
+				<div class="flex items-center justify-between">
+					<div class="flex items-center space-x-4">
+						<Button 
+							variant="ghost" 
+							size="sm" 
+							@click="sidebarCollapsed = !sidebarCollapsed"
+						>
+							<Icon name="lucide:menu" class="w-5 h-5" />
+						</Button>
+						<div>
+							<h2 class="text-xl font-semibold text-gray-900">St. Luke's Medical Center</h2>
+							<p class="text-sm text-gray-500">Quezon City</p>
+						</div>
+					</div>
+					<div class="flex items-center space-x-4">
+						<Button variant="ghost" size="sm">
+							<Icon name="lucide:bell" class="w-5 h-5" />
+						</Button>
+						<Button variant="ghost" size="sm">
+							<Icon name="lucide:settings" class="w-5 h-5" />
+						</Button>
+						<div class="flex items-center space-x-2">
+							<div class="w-8 h-8 bg-gray-300 rounded-full"></div>
+							<span class="text-sm font-medium text-gray-700">{{ user?.name || 'Staff' }}</span>
+						</div>
+					</div>
+				</div>
+			</header>
+
+			<!-- Main Content Area -->
+			<main class="flex-1 overflow-y-auto bg-gray-50 p-6">
 				<slot />
-			</div>
+			</main>
 		</div>
 	</div>
 </template>
