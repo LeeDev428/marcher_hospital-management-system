@@ -132,7 +132,11 @@ export const Tooltip: typeof import("../components/ui/tooltip/Tooltip.vue")['def
 export const TooltipContent: typeof import("../components/ui/tooltip/TooltipContent.vue")['default']
 export const TooltipProvider: typeof import("../components/ui/tooltip/TooltipProvider.vue")['default']
 export const TooltipTrigger: typeof import("../components/ui/tooltip/TooltipTrigger.vue")['default']
+export const AdminDashboardAdminStatsCards: typeof import("../components/admin/dashboard/AdminStatsCards.vue")['default']
 export const AdminDashboardAdminWelcomeHeader: typeof import("../components/admin/dashboard/AdminWelcomeHeader.vue")['default']
+export const AdminDashboardAnalyticsChart: typeof import("../components/admin/dashboard/AnalyticsChart.vue")['default']
+export const AdminDashboardSystemMetrics: typeof import("../components/admin/dashboard/SystemMetrics.vue")['default']
+export const AdminDashboardUserManagement: typeof import("../components/admin/dashboard/UserManagement.vue")['default']
 export const AppFormTypedCheckbox: typeof import("../components/app/form/TypedCheckbox.vue")['default']
 export const AppFormTypedCombobox: typeof import("../components/app/form/TypedCombobox.vue")['default']
 export const AppFormTypedDate: typeof import("../components/app/form/TypedDate.vue")['default']
@@ -176,9 +180,6 @@ export const StaffDashboardRecentActivities: typeof import("../components/staff/
 export const StaffDashboardStatsCards: typeof import("../components/staff/dashboard/StatsCards.vue")['default']
 export const StaffDashboardTodaysAppointments: typeof import("../components/staff/dashboard/TodaysAppointments.vue")['default']
 export const StaffDashboardWelcomeHeader: typeof import("../components/staff/dashboard/WelcomeHeader.vue")['default']
-export const LogEntityCell: typeof import("../pages/(admin)/logs/components/LogEntityCell.vue")['default']
-export const LogsTable: typeof import("../pages/(admin)/logs/components/LogsTable.vue")['default']
-export const UserProfileForm: typeof import("../pages/(admin)/users/components/UserProfileForm.vue")['default']
 export const AboutUsForm: typeof import("../pages/(public)/platform/components/AboutUsForm.vue")['default']
 export const EnterpriseForm: typeof import("../pages/(public)/platform/components/EnterpriseForm.vue")['default']
 export const LoginForm: typeof import("../pages/(public)/platform/components/LoginForm.vue")['default']
@@ -189,6 +190,9 @@ export const SignUpForm: typeof import("../pages/(public)/platform/components/Si
 export const StartUpForm: typeof import("../pages/(public)/platform/components/StartUpForm.vue")['default']
 export const SupportForm: typeof import("../pages/(public)/platform/components/SupportForm.vue")['default']
 export const TermsOfUseForm: typeof import("../pages/(public)/platform/components/TermsOfUseForm.vue")['default']
+export const LogEntityCell: typeof import("../pages/admin/logs/components/LogEntityCell.vue")['default']
+export const LogsTable: typeof import("../pages/admin/logs/components/LogsTable.vue")['default']
+export const UserProfileForm: typeof import("../pages/admin/users/components/UserProfileForm.vue")['default']
 export const IndexDashboard: typeof import("../pages/index/components/IndexDashboard.vue")['default']
 export const ClaimRequestForm: typeof import("../pages/partner/components/ClaimRequestForm.vue")['default']
 export const ClaimRequestsTable: typeof import("../pages/partner/components/ClaimRequestsTable.vue")['default']
@@ -525,7 +529,11 @@ export const LazyTooltip: LazyComponent<typeof import("../components/ui/tooltip/
 export const LazyTooltipContent: LazyComponent<typeof import("../components/ui/tooltip/TooltipContent.vue")['default']>
 export const LazyTooltipProvider: LazyComponent<typeof import("../components/ui/tooltip/TooltipProvider.vue")['default']>
 export const LazyTooltipTrigger: LazyComponent<typeof import("../components/ui/tooltip/TooltipTrigger.vue")['default']>
+export const LazyAdminDashboardAdminStatsCards: LazyComponent<typeof import("../components/admin/dashboard/AdminStatsCards.vue")['default']>
 export const LazyAdminDashboardAdminWelcomeHeader: LazyComponent<typeof import("../components/admin/dashboard/AdminWelcomeHeader.vue")['default']>
+export const LazyAdminDashboardAnalyticsChart: LazyComponent<typeof import("../components/admin/dashboard/AnalyticsChart.vue")['default']>
+export const LazyAdminDashboardSystemMetrics: LazyComponent<typeof import("../components/admin/dashboard/SystemMetrics.vue")['default']>
+export const LazyAdminDashboardUserManagement: LazyComponent<typeof import("../components/admin/dashboard/UserManagement.vue")['default']>
 export const LazyAppFormTypedCheckbox: LazyComponent<typeof import("../components/app/form/TypedCheckbox.vue")['default']>
 export const LazyAppFormTypedCombobox: LazyComponent<typeof import("../components/app/form/TypedCombobox.vue")['default']>
 export const LazyAppFormTypedDate: LazyComponent<typeof import("../components/app/form/TypedDate.vue")['default']>
@@ -569,9 +577,6 @@ export const LazyStaffDashboardRecentActivities: LazyComponent<typeof import("..
 export const LazyStaffDashboardStatsCards: LazyComponent<typeof import("../components/staff/dashboard/StatsCards.vue")['default']>
 export const LazyStaffDashboardTodaysAppointments: LazyComponent<typeof import("../components/staff/dashboard/TodaysAppointments.vue")['default']>
 export const LazyStaffDashboardWelcomeHeader: LazyComponent<typeof import("../components/staff/dashboard/WelcomeHeader.vue")['default']>
-export const LazyLogEntityCell: LazyComponent<typeof import("../pages/(admin)/logs/components/LogEntityCell.vue")['default']>
-export const LazyLogsTable: LazyComponent<typeof import("../pages/(admin)/logs/components/LogsTable.vue")['default']>
-export const LazyUserProfileForm: LazyComponent<typeof import("../pages/(admin)/users/components/UserProfileForm.vue")['default']>
 export const LazyAboutUsForm: LazyComponent<typeof import("../pages/(public)/platform/components/AboutUsForm.vue")['default']>
 export const LazyEnterpriseForm: LazyComponent<typeof import("../pages/(public)/platform/components/EnterpriseForm.vue")['default']>
 export const LazyLoginForm: LazyComponent<typeof import("../pages/(public)/platform/components/LoginForm.vue")['default']>
@@ -582,6 +587,9 @@ export const LazySignUpForm: LazyComponent<typeof import("../pages/(public)/plat
 export const LazyStartUpForm: LazyComponent<typeof import("../pages/(public)/platform/components/StartUpForm.vue")['default']>
 export const LazySupportForm: LazyComponent<typeof import("../pages/(public)/platform/components/SupportForm.vue")['default']>
 export const LazyTermsOfUseForm: LazyComponent<typeof import("../pages/(public)/platform/components/TermsOfUseForm.vue")['default']>
+export const LazyLogEntityCell: LazyComponent<typeof import("../pages/admin/logs/components/LogEntityCell.vue")['default']>
+export const LazyLogsTable: LazyComponent<typeof import("../pages/admin/logs/components/LogsTable.vue")['default']>
+export const LazyUserProfileForm: LazyComponent<typeof import("../pages/admin/users/components/UserProfileForm.vue")['default']>
 export const LazyIndexDashboard: LazyComponent<typeof import("../pages/index/components/IndexDashboard.vue")['default']>
 export const LazyClaimRequestForm: LazyComponent<typeof import("../pages/partner/components/ClaimRequestForm.vue")['default']>
 export const LazyClaimRequestsTable: LazyComponent<typeof import("../pages/partner/components/ClaimRequestsTable.vue")['default']>
