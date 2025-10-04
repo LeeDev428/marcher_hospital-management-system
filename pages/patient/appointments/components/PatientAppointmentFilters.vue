@@ -5,7 +5,7 @@ import type { PatientAppointmentFilters } from "@/types/appointments"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Combobox, ComboboxItem, ComboboxTrigger, ComboboxValue } from "@/components/ui/combobox"
+import { Combobox, ComboboxItem, ComboboxTrigger } from "@/components/ui/combobox"
 
 const appointmentStore = useAppointmentStore()
 const staffStore = useStaffStore()
