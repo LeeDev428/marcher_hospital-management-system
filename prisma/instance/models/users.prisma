@@ -185,18 +185,6 @@ model Partner {
   @@map("partners")
 }
 
-// Blood Type Enum
-enum BloodType {
-  A_POSITIVE
-  A_NEGATIVE
-  B_POSITIVE
-  B_NEGATIVE
-  AB_POSITIVE
-  AB_NEGATIVE
-  O_POSITIVE
-  O_NEGATIVE
-}
-
 // Partner Type Enum
 enum PartnerType {
   HOSPITAL
