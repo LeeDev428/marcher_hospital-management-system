@@ -86,50 +86,6 @@ const availabilityOptions = [
   { value: 'CONSULTANT', label: 'Consultant' }
 ]
 
-// Real doctors data (loaded from API)
-const doctors = ref([])
-    status: 'ACTIVE',
-    createdAt: '2024-01-15',
-    role: 'DOCTOR'
-  },
-  {
-    id: 'doc_002',
-    firstName: 'Michael',
-    lastName: 'Chen',
-    middleName: '',
-    suffix: 'MD',
-    specialization: 'Pediatrics',
-    department: 'Pediatrics',
-    licenseNumber: 'MD-67890-2024',
-    email: 'michael.chen@hospital.com',
-    phone: '+63 912 345 6790',
-    experience: '8 years',
-    education: 'University of the Philippines College of Medicine',
-    availability: 'FULL_TIME',
-    status: 'ACTIVE',
-    createdAt: '2024-02-20',
-    role: 'DOCTOR'
-  },
-  {
-    id: 'doc_003',
-    firstName: 'Lisa',
-    lastName: 'Wong',
-    middleName: 'A',
-    suffix: 'MD',
-    specialization: 'Dermatology',
-    department: 'General Medicine',
-    licenseNumber: 'MD-11111-2024',
-    email: 'lisa.wong@hospital.com',
-    phone: '+63 912 345 6791',
-    experience: '12 years',
-    education: 'Ateneo School of Medicine',
-    availability: 'PART_TIME',
-    status: 'ACTIVE',
-    createdAt: '2024-03-10',
-    role: 'DOCTOR'
-  }
-])
-
 // Validation functions
 const validateForm = () => {
   if (!createForm.value.firstName || !createForm.value.lastName) {
@@ -165,7 +121,7 @@ const createDoctor = async () => {
       phone: createForm.value.phone,
       department: createForm.value.department,
       position: createForm.value.position,
-      medicalLicense: createForm.value.medicalLicense,
+      medicalLicense: createForm.value.licenseNumber,
       specialization: createForm.value.specialization,
       subSpecialization: createForm.value.subSpecialization,
       boardCertification: createForm.value.boardCertification,
@@ -355,7 +311,7 @@ onMounted(() => {
               <div class="grid grid-cols-2 gap-4">
                 <div class="space-y-2">
                   <Label for="licenseNumber">License Number *</Label>
-                  <Input v-model="createForm.licenseNumber" id="licenseNumber" placeholder="Medical license number" />
+                  <Input v-model="createForm.medicalLicense" id="medicalLicense" placeholder="Medical license number" />
                 </div>
                 <div class="space-y-2">
                   <Label for="availability">Availability</Label>
