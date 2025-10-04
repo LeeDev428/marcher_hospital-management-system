@@ -1,5 +1,5 @@
 import express from 'express';
-import { authenticateToken } from './auth.js';
+import { authMiddleware } from '../middleware/auth.js';
 
 const router = express.Router();
 
@@ -36,7 +36,7 @@ let appointments = [
 ];
 
 // Get all appointments
-router.get('/', authenticateToken, (req, res) => {
+router.get('/', authMiddleware, (req, res) => {
   try {
     const { page = 1, limit = 10, status, date } = req.query;
     
@@ -72,7 +72,7 @@ router.get('/', authenticateToken, (req, res) => {
 });
 
 // Get single appointment
-router.get('/:id', authenticateToken, (req, res) => {
+router.get('/:id', authMiddleware, (req, res) => {
   try {
     const appointment = appointments.find(apt => apt.id === req.params.id);
     if (!appointment) {
@@ -85,7 +85,7 @@ router.get('/:id', authenticateToken, (req, res) => {
 });
 
 // Create new appointment
-router.post('/', authenticateToken, (req, res) => {
+router.post('/', authMiddleware, (req, res) => {
   try {
     const {
       patientId,
@@ -125,7 +125,7 @@ router.post('/', authenticateToken, (req, res) => {
 });
 
 // Update appointment
-router.put('/:id', authenticateToken, (req, res) => {
+router.put('/:id', authMiddleware, (req, res) => {
   try {
     const appointmentIndex = appointments.findIndex(apt => apt.id === req.params.id);
     if (appointmentIndex === -1) {
@@ -148,7 +148,7 @@ router.put('/:id', authenticateToken, (req, res) => {
 });
 
 // Cancel appointment
-router.patch('/:id/cancel', authenticateToken, (req, res) => {
+router.patch('/:id/cancel', authMiddleware, (req, res) => {
   try {
     const appointmentIndex = appointments.findIndex(apt => apt.id === req.params.id);
     if (appointmentIndex === -1) {
