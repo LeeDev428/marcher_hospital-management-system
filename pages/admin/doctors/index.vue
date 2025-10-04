@@ -27,6 +27,8 @@ const doctors = ref([])
 const createForm = ref({
   firstName: '',
   lastName: '',
+  middleName: '',
+  suffix: '',
   email: '',
   phone: '',
   department: '',
@@ -40,6 +42,7 @@ const createForm = ref({
   hospitalAffiliation: '',
   consultationFee: 0,
   isAvailable: true,
+  availability: 'FULL_TIME',
   workingHours: ''
 })
 
@@ -121,7 +124,7 @@ const createDoctor = async () => {
       phone: createForm.value.phone,
       department: createForm.value.department,
       position: createForm.value.position,
-      medicalLicense: createForm.value.licenseNumber,
+      medicalLicense: createForm.value.medicalLicense,
       specialization: createForm.value.specialization,
       subSpecialization: createForm.value.subSpecialization,
       boardCertification: createForm.value.boardCertification,
@@ -175,6 +178,8 @@ const resetForm = () => {
   createForm.value = {
     firstName: '',
     lastName: '',
+    middleName: '',
+    suffix: '',
     email: '',
     phone: '',
     department: '',
@@ -188,6 +193,7 @@ const resetForm = () => {
     hospitalAffiliation: '',
     consultationFee: 0,
     isAvailable: true,
+    availability: 'FULL_TIME',
     workingHours: ''
   }
 }
@@ -352,7 +358,7 @@ onMounted(() => {
               <div class="grid grid-cols-2 gap-4">
                 <div class="space-y-2">
                   <Label for="experience">Years of Experience</Label>
-                  <Input v-model="createForm.experience" id="experience" placeholder="e.g., 10 years" />
+                  <Input v-model="createForm.yearsOfExperience" id="experience" type="number" placeholder="e.g., 10" />
                 </div>
                 <div class="space-y-2">
                   <Label for="education">Education</Label>
