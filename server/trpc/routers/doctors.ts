@@ -90,7 +90,7 @@ export const doctorsRouter = createTRPCRouter({
   }),
 
   // Get doctor by ID
-  getById: protectedProcedure
+  getById: publicProcedure
     .input(getDoctorSchema)
     .query(async ({ ctx, input }) => {
       try {
@@ -126,7 +126,7 @@ export const doctorsRouter = createTRPCRouter({
     }),
 
   // Create new doctor
-  create: protectedProcedure
+  create: publicProcedure
     .input(createDoctorSchema)
     .mutation(async ({ ctx, input }) => {
       const {
@@ -233,7 +233,7 @@ export const doctorsRouter = createTRPCRouter({
     }),
 
   // Update doctor
-  update: protectedProcedure
+  update: publicProcedure
     .input(updateDoctorSchema)
     .mutation(async ({ ctx, input }) => {
       const { id, ...updateData } = input
@@ -264,7 +264,7 @@ export const doctorsRouter = createTRPCRouter({
     }),
 
   // Delete doctor
-  delete: protectedProcedure
+  delete: publicProcedure
     .input(getDoctorSchema)
     .mutation(async ({ ctx, input }) => {
       try {
