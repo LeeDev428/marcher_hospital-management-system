@@ -27,10 +27,8 @@ const handleLogout = async () => {
       <!-- Logo -->
       <div class="flex items-center px-6 py-4 border-b border-gray-200">
         <div class="flex items-center">
-          <div class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
-            <Icon name="lucide:activity" class="w-5 h-5 text-white" />
-          </div>
-          <span class="ml-3 text-xl font-semibold text-gray-800">MediFlow</span>
+            <img src="/img/logo/marcher-logo.png" alt="Marcher Logo" class="w-6 h-6" />
+          <span class="ml-3 text-xl font-semibold text-gray-800">Marcher</span>
         </div>
       </div>
 
