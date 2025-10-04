@@ -1,13 +1,18 @@
 import process from 'node:process';globalThis._importMeta_={url:import.meta.url,env:process.env};import { tmpdir } from 'node:os';
 import { Server } from 'node:http';
+import * as path from 'node:path';
 import { resolve, dirname, join } from 'node:path';
 import nodeCrypto from 'node:crypto';
 import { parentPort, threadId } from 'node:worker_threads';
-import { defineEventHandler, handleCacheHeaders, splitCookiesString, createEvent, fetchWithEvent, isEvent, eventHandler, setHeaders, sendRedirect, proxyRequest, getRequestHeader, setResponseHeaders, setResponseStatus, send, getRequestHeaders, setResponseHeader, appendResponseHeader, getRequestURL, getResponseHeader, removeResponseHeader, createError, getResponseStatus, getQuery as getQuery$1, readBody, lazyEventHandler, useBase, createApp, createRouter as createRouter$1, toNodeListener, getRouterParam, getRequestWebStream, getResponseStatusText } from 'file://D:/Programming/Systems/Web-Systems/Nuxtjs-Nodejs-Expressjs/marcher_hospital-management-system/node_modules/h3/dist/index.mjs';
+import { defineEventHandler, handleCacheHeaders, splitCookiesString, createEvent, fetchWithEvent, isEvent, eventHandler, setHeaders, sendRedirect, proxyRequest, getRequestHeader, setResponseHeaders, setResponseStatus, send, getRequestHeaders, setResponseHeader, appendResponseHeader, getRequestURL, getResponseHeader, removeResponseHeader, createError, getResponseStatus, getQuery as getQuery$1, readBody, lazyEventHandler, useBase, createApp, createRouter as createRouter$1, toNodeListener, getRouterParam, getRequestWebStream, getCookie, getResponseStatusText } from 'file://D:/Programming/Systems/Web-Systems/Nuxtjs-Nodejs-Expressjs/marcher_hospital-management-system/node_modules/h3/dist/index.mjs';
 import { escapeHtml } from 'file://D:/Programming/Systems/Web-Systems/Nuxtjs-Nodejs-Expressjs/marcher_hospital-management-system/node_modules/@vue/shared/dist/shared.cjs.js';
 import { fetchRequestHandler } from 'file://D:/Programming/Systems/Web-Systems/Nuxtjs-Nodejs-Expressjs/marcher_hospital-management-system/node_modules/@trpc/server/dist/adapters/fetch/index.mjs';
+import { initTRPC, TRPCError } from 'file://D:/Programming/Systems/Web-Systems/Nuxtjs-Nodejs-Expressjs/marcher_hospital-management-system/node_modules/@trpc/server/dist/index.mjs';
+import * as process$1 from 'node:process';
+import { fileURLToPath } from 'node:url';
+import * as runtime from 'file://D:/Programming/Systems/Web-Systems/Nuxtjs-Nodejs-Expressjs/marcher_hospital-management-system/node_modules/@prisma/client/runtime/library.mjs';
+import jwt from 'file://D:/Programming/Systems/Web-Systems/Nuxtjs-Nodejs-Expressjs/marcher_hospital-management-system/node_modules/jsonwebtoken/index.js';
 import { z } from 'file://D:/Programming/Systems/Web-Systems/Nuxtjs-Nodejs-Expressjs/marcher_hospital-management-system/node_modules/zod/index.js';
-import { initTRPC } from 'file://D:/Programming/Systems/Web-Systems/Nuxtjs-Nodejs-Expressjs/marcher_hospital-management-system/node_modules/@trpc/server/dist/index.mjs';
 import { createRenderer, getRequestDependencies, getPreloadLinks, getPrefetchLinks } from 'file://D:/Programming/Systems/Web-Systems/Nuxtjs-Nodejs-Expressjs/marcher_hospital-management-system/node_modules/vue-bundle-renderer/dist/runtime.mjs';
 import { parseURL, withoutBase, joinURL, getQuery, withQuery, withTrailingSlash, decodePath, withLeadingSlash, withoutTrailingSlash, joinRelativeURL } from 'file://D:/Programming/Systems/Web-Systems/Nuxtjs-Nodejs-Expressjs/marcher_hospital-management-system/node_modules/ufo/dist/index.mjs';
 import { renderToString } from 'file://D:/Programming/Systems/Web-Systems/Nuxtjs-Nodejs-Expressjs/marcher_hospital-management-system/node_modules/vue/server-renderer/index.mjs';
@@ -35,7 +40,6 @@ import { AsyncLocalStorage } from 'node:async_hooks';
 import { getContext } from 'file://D:/Programming/Systems/Web-Systems/Nuxtjs-Nodejs-Expressjs/marcher_hospital-management-system/node_modules/unctx/dist/index.mjs';
 import { captureRawStackTrace, parseRawStackTrace } from 'file://D:/Programming/Systems/Web-Systems/Nuxtjs-Nodejs-Expressjs/marcher_hospital-management-system/node_modules/errx/dist/index.js';
 import { promises } from 'node:fs';
-import { fileURLToPath } from 'node:url';
 import { dirname as dirname$1, resolve as resolve$1, basename, isAbsolute } from 'file://D:/Programming/Systems/Web-Systems/Nuxtjs-Nodejs-Expressjs/marcher_hospital-management-system/node_modules/pathe/dist/index.mjs';
 import { getIcons } from 'file://D:/Programming/Systems/Web-Systems/Nuxtjs-Nodejs-Expressjs/marcher_hospital-management-system/node_modules/@iconify/utils/lib/index.mjs';
 import { collections } from 'file://D:/Programming/Systems/Web-Systems/Nuxtjs-Nodejs-Expressjs/marcher_hospital-management-system/.nuxt/nuxt-icon-server-bundle.mjs';
@@ -923,9 +927,9 @@ new Proxy(/* @__PURE__ */ Object.create(null), {
   }
 });
 
-const config = useRuntimeConfig();
+const config$2 = useRuntimeConfig();
 const _routeRulesMatcher = toRouteMatcher(
-  createRouter({ routes: config.nitro.routeRules })
+  createRouter({ routes: config$2.nitro.routeRules })
 );
 function createRouteRulesHandler(ctx) {
   return eventHandler((event) => {
@@ -2204,19 +2208,700 @@ function createTRPCNuxtHandler(opts) {
 	});
 }
 
-const t = initTRPC.create();
-const simpleRouter = t.router({
-  health: t.procedure.query(() => {
-    return { status: "ok", timestamp: (/* @__PURE__ */ new Date()).toISOString() };
+const config$1 = {
+  "generator": {
+    "name": "client",
+    "provider": {
+      "fromEnvVar": null,
+      "value": "prisma-client"
+    },
+    "output": {
+      "value": "D:\\Programming\\Systems\\Web-Systems\\Nuxtjs-Nodejs-Expressjs\\marcher_hospital-management-system\\prisma\\generated\\global",
+      "fromEnvVar": null
+    },
+    "config": {
+      "engineType": "library"
+    },
+    "binaryTargets": [
+      {
+        "fromEnvVar": null,
+        "value": "windows",
+        "native": true
+      }
+    ],
+    "previewFeatures": [],
+    "sourceFilePath": "D:\\Programming\\Systems\\Web-Systems\\Nuxtjs-Nodejs-Expressjs\\marcher_hospital-management-system\\prisma\\global\\schema.prisma",
+    "isCustomOutput": true
+  },
+  "relativePath": "../../global",
+  "clientVersion": "6.16.3",
+  "engineVersion": "bb420e667c1820a8c05a38023385f6cc7ef8e83a",
+  "datasourceNames": [
+    "db"
+  ],
+  "activeProvider": "postgresql",
+  "inlineDatasources": {
+    "db": {
+      "url": {
+        "fromEnvVar": "GLOBAL_DATABASE_URL",
+        "value": null
+      }
+    }
+  },
+  "inlineSchema": 'model Access {\n  id String @id @default(uuid()) @db.Uuid\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  @@index([id])\n}\n\nmodel Profile {\n  id        String   @id @default(uuid()) @db.Uuid\n  user      User?\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n}\n\nenum StaffRole {\n  ADMIN\n  DOCTOR\n  NURSE\n  SECRETARY\n  STAFF\n}\n\nmodel StaffProfile {\n  id         String    @id @default(uuid()) @db.Uuid\n  lastName   String\n  firstName  String\n  middleName String?\n  suffix     String?\n  role       StaffRole\n  profession String?\n  createdAt  DateTime  @default(now())\n  updatedAt  DateTime  @updatedAt\n\n  @@index([id])\n}\n\nenum UserStatus {\n  ENABLED\n  DISABLED\n}\n\nmodel User {\n  id              String     @id @default(uuid()) @db.Uuid\n  profileId       String     @unique @db.Uuid\n  profile         Profile    @relation(fields: [profileId], references: [id], onDelete: Cascade)\n  email           String\n  emailHash       String     @unique\n  emailVerified   Boolean    @default(false)\n  passwordHash    String\n  twoFactorSecret String?\n  twoFactorBackup String[]\n  status          UserStatus @default(ENABLED)\n  createdAt       DateTime   @default(now())\n  updatedAt       DateTime   @updatedAt\n\n  @@index([id, emailHash, status])\n}\n\ngenerator client {\n  provider = "prisma-client"\n  output   = "../generated/global"\n}\n\ndatasource db {\n  provider = "postgresql"\n  url      = env("GLOBAL_DATABASE_URL")\n}\n',
+  "inlineSchemaHash": "1dc7170e8d8c46873125db3d0bb8b41c741f2c7f218f68ef324bb5ca9d70af9c",
+  "copyEngine": true,
+  "runtimeDataModel": {
+    "models": {},
+    "enums": {},
+    "types": {}
+  },
+  "dirname": ""
+};
+config$1.runtimeDataModel = JSON.parse('{"models":{"Access":{"dbName":null,"schema":null,"fields":[{"name":"id","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":true,"isReadOnly":false,"hasDefaultValue":true,"type":"String","nativeType":["Uuid",[]],"default":{"name":"uuid","args":[4]},"isGenerated":false,"isUpdatedAt":false},{"name":"createdAt","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"DateTime","nativeType":null,"default":{"name":"now","args":[]},"isGenerated":false,"isUpdatedAt":false},{"name":"updatedAt","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"DateTime","nativeType":null,"isGenerated":false,"isUpdatedAt":true}],"primaryKey":null,"uniqueFields":[],"uniqueIndexes":[],"isGenerated":false},"Profile":{"dbName":null,"schema":null,"fields":[{"name":"id","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":true,"isReadOnly":false,"hasDefaultValue":true,"type":"String","nativeType":["Uuid",[]],"default":{"name":"uuid","args":[4]},"isGenerated":false,"isUpdatedAt":false},{"name":"user","kind":"object","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"User","nativeType":null,"relationName":"ProfileToUser","relationFromFields":[],"relationToFields":[],"isGenerated":false,"isUpdatedAt":false},{"name":"createdAt","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"DateTime","nativeType":null,"default":{"name":"now","args":[]},"isGenerated":false,"isUpdatedAt":false},{"name":"updatedAt","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"DateTime","nativeType":null,"isGenerated":false,"isUpdatedAt":true}],"primaryKey":null,"uniqueFields":[],"uniqueIndexes":[],"isGenerated":false},"StaffProfile":{"dbName":null,"schema":null,"fields":[{"name":"id","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":true,"isReadOnly":false,"hasDefaultValue":true,"type":"String","nativeType":["Uuid",[]],"default":{"name":"uuid","args":[4]},"isGenerated":false,"isUpdatedAt":false},{"name":"lastName","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"firstName","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"middleName","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"suffix","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"role","kind":"enum","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"StaffRole","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"profession","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"createdAt","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"DateTime","nativeType":null,"default":{"name":"now","args":[]},"isGenerated":false,"isUpdatedAt":false},{"name":"updatedAt","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"DateTime","nativeType":null,"isGenerated":false,"isUpdatedAt":true}],"primaryKey":null,"uniqueFields":[],"uniqueIndexes":[],"isGenerated":false},"User":{"dbName":null,"schema":null,"fields":[{"name":"id","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":true,"isReadOnly":false,"hasDefaultValue":true,"type":"String","nativeType":["Uuid",[]],"default":{"name":"uuid","args":[4]},"isGenerated":false,"isUpdatedAt":false},{"name":"profileId","kind":"scalar","isList":false,"isRequired":true,"isUnique":true,"isId":false,"isReadOnly":true,"hasDefaultValue":false,"type":"String","nativeType":["Uuid",[]],"isGenerated":false,"isUpdatedAt":false},{"name":"profile","kind":"object","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"Profile","nativeType":null,"relationName":"ProfileToUser","relationFromFields":["profileId"],"relationToFields":["id"],"relationOnDelete":"Cascade","isGenerated":false,"isUpdatedAt":false},{"name":"email","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"emailHash","kind":"scalar","isList":false,"isRequired":true,"isUnique":true,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"emailVerified","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"Boolean","nativeType":null,"default":false,"isGenerated":false,"isUpdatedAt":false},{"name":"passwordHash","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"twoFactorSecret","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"twoFactorBackup","kind":"scalar","isList":true,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"status","kind":"enum","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"UserStatus","nativeType":null,"default":"ENABLED","isGenerated":false,"isUpdatedAt":false},{"name":"createdAt","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"DateTime","nativeType":null,"default":{"name":"now","args":[]},"isGenerated":false,"isUpdatedAt":false},{"name":"updatedAt","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"DateTime","nativeType":null,"isGenerated":false,"isUpdatedAt":true}],"primaryKey":null,"uniqueFields":[],"uniqueIndexes":[],"isGenerated":false}},"enums":{"StaffRole":{"values":[{"name":"ADMIN","dbName":null},{"name":"DOCTOR","dbName":null},{"name":"NURSE","dbName":null},{"name":"SECRETARY","dbName":null},{"name":"STAFF","dbName":null}],"dbName":null},"UserStatus":{"values":[{"name":"ENABLED","dbName":null},{"name":"DISABLED","dbName":null}],"dbName":null}},"types":{}}');
+config$1.engineWasm = void 0;
+config$1.compilerWasm = void 0;
+function getPrismaClientClass$1(dirname) {
+  config$1.dirname = dirname;
+  return runtime.getPrismaClient(config$1);
+}
+
+globalThis["__dirname"] = path.dirname(fileURLToPath(globalThis._importMeta_.url));
+const PrismaClient$1 = getPrismaClientClass$1(__dirname);
+path.join(__dirname, "query_engine-windows.dll.node");
+path.join(process$1.cwd(), "prisma/generated/global/query_engine-windows.dll.node");
+
+const config = {
+  "generator": {
+    "name": "client",
+    "provider": {
+      "fromEnvVar": null,
+      "value": "prisma-client"
+    },
+    "output": {
+      "value": "D:\\Programming\\Systems\\Web-Systems\\Nuxtjs-Nodejs-Expressjs\\marcher_hospital-management-system\\prisma\\generated\\instance",
+      "fromEnvVar": null
+    },
+    "config": {
+      "engineType": "library"
+    },
+    "binaryTargets": [
+      {
+        "fromEnvVar": null,
+        "value": "windows",
+        "native": true
+      }
+    ],
+    "previewFeatures": [],
+    "sourceFilePath": "D:\\Programming\\Systems\\Web-Systems\\Nuxtjs-Nodejs-Expressjs\\marcher_hospital-management-system\\prisma\\instance\\schema.prisma",
+    "isCustomOutput": true
+  },
+  "relativePath": "../../instance",
+  "clientVersion": "6.16.3",
+  "engineVersion": "bb420e667c1820a8c05a38023385f6cc7ef8e83a",
+  "datasourceNames": [
+    "db"
+  ],
+  "activeProvider": "postgresql",
+  "inlineDatasources": {
+    "db": {
+      "url": {
+        "fromEnvVar": "INSTANCE_DATABASE_URL",
+        "value": null
+      }
+    }
+  },
+  "inlineSchema": 'enum AppointmentStatus {\n  PENDING\n  SCHEDULED\n  CANCELLED\n  COMPLETED\n}\n\nmodel Appointment {\n  id        String         @id @default(uuid()) @db.Uuid\n  patientId String         @db.Uuid\n  patient   PatientProfile @relation(fields: [patientId], references: [id])\n\n  doctorId String @db.Uuid\n\n  // patient can book without a room; staff may assign later\n  facilityId String? @db.Uuid\n  facility   Room?   @relation(fields: [facilityId], references: [id])\n\n  date   String\n  time   String\n  status AppointmentStatus\n\n  // Opposite side of PatientAppointment.appointment (1:0..1)\n  patientAppointment PatientAppointment? @relation("AppointmentToPatientAppointment")\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n}\n\nmodel PatientAppointment {\n  id String @id @default(uuid()) @db.Uuid\n\n  patientId String         @db.Uuid\n  patient   PatientProfile @relation(fields: [patientId], references: [id])\n\n  doctorId String\n  date     String\n  time     String\n  status   AppointmentStatus @default(PENDING)\n  name     String? // optional patient-entered display name\n\n  // Link to the staff-facing Appointment row (only for patient-created bookings)\n  appointmentId String?      @unique @db.Uuid\n  appointment   Appointment? @relation("AppointmentToPatientAppointment", fields: [appointmentId], references: [id])\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n}\n\nmodel Transaction {\n  id          String            @id @default(uuid()) @db.Uuid\n  // publicId    String            @unique\n  encounterId String            @unique @db.Uuid\n  encounter   PatientEncounter  @relation(fields: [encounterId], references: [id])\n  status      String\n  items       TransactionItem[]\n  payments    Payment[]\n  createdAt   DateTime          @default(now())\n  updatedAt   DateTime          @updatedAt\n\n  @@index([id])\n}\n\nmodel TransactionItem {\n  id            String      @id @default(uuid()) @db.Uuid\n  // publicId      String      @unique\n  transactionId String      @db.Uuid\n  transaction   Transaction @relation(fields: [transactionId], references: [id], onDelete: Cascade)\n  name          String\n  description   String?\n  amount        Int\n  createdAt     DateTime    @default(now())\n  updatedAt     DateTime    @updatedAt\n\n  @@index([transactionId])\n}\n\nmodel PaymentPlan {\n  id               String              @id @default(uuid()) @db.Uuid\n  // publicId         String              @unique\n  name             String\n  description      String?\n  cycle            String\n  numberOfPayments Int\n  instalments      PaymentInstalment[]\n  createdAt        DateTime            @default(now())\n  updatedAt        DateTime            @updatedAt\n}\n\nmodel Payment {\n  id            String              @id @default(uuid()) @db.Uuid\n  // publicId      String              @unique\n  transactionId String              @db.Uuid\n  transaction   Transaction         @relation(fields: [transactionId], references: [id], onDelete: Cascade)\n  amount        Int\n  instalments   PaymentInstalment[]\n  createdAt     DateTime            @default(now())\n  updatedAt     DateTime            @updatedAt\n}\n\nmodel PaymentInstalment {\n  id               String      @id @default(uuid()) @db.Uuid\n  // publicId         String      @unique\n  paymentId        String      @db.Uuid\n  payment          Payment     @relation(fields: [paymentId], references: [id], onDelete: Cascade)\n  planId           String      @db.Uuid\n  plan             PaymentPlan @relation(fields: [planId], references: [id], onDelete: Cascade)\n  instalmentNumber Int\n  amountDue        Int\n  amountPaid       Int\n  createdAt        DateTime    @default(now())\n  updatedAt        DateTime    @updatedAt\n}\n\nmodel Clinic {\n  id        String           @id @default(uuid()) @db.Uuid\n  roomId    String           @db.Uuid\n  schedules ClinicSchedule[]\n  createdAt DateTime         @default(now())\n  updatedAt DateTime         @updatedAt\n}\n\nmodel ClinicSchedule {\n  id        String   @id @default(uuid()) @db.Uuid\n  clinicId  String   @db.Uuid\n  clinic    Clinic   @relation(fields: [clinicId], references: [id], onDelete: Cascade)\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n}\n\nmodel PatientEncounter {\n  id               String         @id @default(uuid()) @db.Uuid\n  encounterId      String         @unique @db.Uuid\n  patientProfileId String         @db.Uuid\n  patientProfile   PatientProfile @relation(fields: [patientProfileId], references: [id], onDelete: Cascade)\n  transaction      Transaction?\n  createdAt        DateTime       @default(now())\n  updatedAt        DateTime       @updatedAt\n\n  @@index([patientProfileId])\n}\n\nenum OutpatientEncounterType {\n  CONSULTATION\n  FOLLOW_UP\n  LABORATORY\n  RADIOLOGY\n  OTHER\n}\n\nmodel OutpatientEncounter {\n  id               String                  @id @default(uuid()) @db.Uuid\n  patientProfileId String                  @db.Uuid\n  patientProfile   PatientProfile          @relation(fields: [patientProfileId], references: [id], onDelete: Cascade)\n  date             String\n  time             String\n  chiefComplaint   String\n  doctorDiagnosis  String\n  type             OutpatientEncounterType\n  createdAt        DateTime                @default(now())\n  updatedAt        DateTime                @updatedAt\n\n  @@index([id])\n}\n\nenum InpatientTriage {\n  HIGH_PRIORITY\n  MEDIUM_PRIORITY\n  LOW_PRIORITY\n  NON_URGENT\n}\n\nenum InpatientDisposition {\n  ADMITTED\n  DISCHARGED\n  DISCONTINUED\n  TRANSFERRED\n  DECEASED\n  OTHER\n}\n\nmodel InpatientEncounter {\n  id                   String                    @id @default(uuid()) @db.Uuid\n  patientProfileId     String                    @db.Uuid\n  patientProfile       PatientProfile            @relation(fields: [patientProfileId], references: [id], onDelete: Cascade)\n  date                 String\n  time                 String\n  chiefComplaint       String\n  doctorDiagnosis      String\n  triage               InpatientTriage\n  disposition          InpatientDisposition      @default(ADMITTED)\n  dispositionDate      String?\n  dispositionTime      String?\n  dispositionNote      String?\n  charts               InpatientEncounterChart[]\n  orders               InpatientEncounterOrder[]\n  medicalRecordRequest MedicalRecordRequest[]\n  createdAt            DateTime                  @default(now())\n  updatedAt            DateTime                  @updatedAt\n\n  @@index([id])\n}\n\nmodel InpatientEncounterChart {\n  id          String             @id @default(uuid()) @db.Uuid\n  encounterId String             @db.Uuid\n  encounter   InpatientEncounter @relation(fields: [encounterId], references: [id], onDelete: Cascade)\n  staffId     String             @db.Uuid\n  chart       String\n  createdAt   DateTime           @default(now())\n  updatedAt   DateTime           @updatedAt\n\n  @@index([id, encounterId])\n}\n\nenum InpatientEncounterOrderType {\n  PRESCRIPTION\n  LABORATORY\n  RADIOLOGY\n  OPERATION\n  OTHER\n}\n\nenum InpatientEncounterOrderStatus {\n  PENDING\n  COMPLETED\n  CANCELLED\n}\n\nmodel InpatientEncounterOrder {\n  id          String                        @id @default(uuid()) @db.Uuid\n  encounterId String                        @db.Uuid\n  encounter   InpatientEncounter            @relation(fields: [encounterId], references: [id], onDelete: Cascade)\n  type        InpatientEncounterOrderType\n  order       String\n  status      InpatientEncounterOrderStatus\n  createdAt   DateTime                      @default(now())\n  updatedAt   DateTime                      @updatedAt\n\n  @@index([id, encounterId])\n}\n\nmodel Building {\n  id        String   @id @default(uuid()) @db.Uuid\n  name      String\n  rooms     Room[]\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n}\n\nenum RoomType {\n  WARD\n  CLINIC\n  LABORATORY\n  PHARMACY\n  OFFICE\n}\n\nenum RoomStatus {\n  AVAILABLE\n  OCCUPIED\n  PREPARING\n}\n\nmodel Room {\n  id           String        @id @default(uuid()) @db.Uuid\n  buildingId   String        @db.Uuid\n  building     Building      @relation(fields: [buildingId], references: [id], onDelete: Cascade)\n  type         RoomType\n  identifier   String        @unique\n  description  String?\n  capacity     Int?\n  status       RoomStatus\n  appointments Appointment[]\n  createdAt    DateTime      @default(now())\n  updatedAt    DateTime      @updatedAt\n}\n\nmodel FacilityLog {\n  id             Int      @id @default(autoincrement())\n  timestamp      DateTime @default(now())\n  user           String\n  role           String\n  action         String\n  roomIdentifier String\n  type           String\n  oldStatus      String?\n  newStatus      String?\n}\n\nmodel InsuranceProvider {\n  id          String           @id @default(uuid()) @db.Uuid\n  // publicId    String   @unique\n  name        String           @unique\n  description String?\n  email       String?\n  phone       String?\n  address     String?\n  city        String?\n  state       String?\n  zip         String?\n  country     String?\n  claims      InsuranceClaim[]\n  createdAt   DateTime         @default(now())\n  updatedAt   DateTime         @updatedAt\n}\n\nmodel InsuranceClaim {\n  id         String               @id @default(uuid()) @db.Uuid\n  // publicId    String   @unique\n  providerId String               @db.Uuid\n  provider   InsuranceProvider    @relation(fields: [providerId], references: [id], onDelete: Cascade)\n  status     String\n  message    String?\n  amount     Int\n  items      InsuranceClaimItem[]\n  createdAt  DateTime             @default(now())\n  updatedAt  DateTime             @updatedAt\n}\n\nmodel InsuranceClaimItem {\n  id          String         @id @default(uuid()) @db.Uuid\n  // publicId    String   @unique\n  claimId     String         @db.Uuid\n  claim       InsuranceClaim @relation(fields: [claimId], references: [id], onDelete: Cascade)\n  name        String\n  description String?\n  amount      Int\n  createdAt   DateTime       @default(now())\n  updatedAt   DateTime       @updatedAt\n}\n\nmodel Log {\n  id        String   @id @default(uuid()) @db.Uuid\n  user      String\n  action    String\n  entity    String\n  data      Json\n  ipAddress String\n  timestamp DateTime @default(now())\n\n  @@index([user])\n  @@index([user, action])\n  @@index([user, entity])\n  @@index([user, entity, action])\n  @@index([action])\n  @@index([entity])\n  @@index([entity, action])\n  @@index([ipAddress])\n  @@index([timestamp])\n}\n\nenum Sex {\n  MALE\n  FEMALE\n}\n\nenum MaritalStatus {\n  SINGLE\n  MARRIED\n  WIDOWED\n  DIVORCED\n  SEPARATED\n}\n\nenum BloodType {\n  A_POSITIVE\n  A_NEGATIVE\n  B_POSITIVE\n  B_NEGATIVE\n  AB_POSITIVE\n  AB_NEGATIVE\n  O_POSITIVE\n  O_NEGATIVE\n}\n\nmodel PatientProfile {\n  id                    String                 @id @default(uuid()) @db.Uuid\n  lastName              String\n  firstName             String\n  middleName            String?\n  suffix                String?\n  birthdate             String?\n  birthplace            String?\n  sex                   Sex?\n  maritalStatus         MaritalStatus?\n  nationality           String?\n  religion              String?\n  bloodType             BloodType?\n  patientEncounters     PatientEncounter[]\n  inpatientEncounters   InpatientEncounter[]\n  outpatientEncounters  OutpatientEncounter[]\n  appointments          Appointment[]\n  patientAppointments   PatientAppointment[]\n  addresses             Address[]\n  contacts              Contact[]\n  employments           Employment[]\n  emergencyContacts     EmergencyContact[]\n  medicalRecordRequests MedicalRecordRequest[]\n  consent               Consent?\n  archived              Boolean                @default(false)\n  createdAt             DateTime               @default(now())\n  updatedAt             DateTime               @updatedAt\n\n  @@index([id])\n}\n\nmodel Address {\n  id               String         @id @default(uuid()) @db.Uuid\n  patientProfileId String         @db.Uuid\n  patientProfile   PatientProfile @relation(fields: [patientProfileId], references: [id], onDelete: Cascade)\n  label            String\n  country          String\n  state            String\n  zipCode          String\n  city             String\n  address          String\n  createdAt        DateTime       @default(now())\n  updatedAt        DateTime       @updatedAt\n\n  @@index([id, patientProfileId])\n}\n\nenum ContactType {\n  HOME\n  WORK\n  MOBILE\n  EMAIL\n  FAX\n  OTHER\n}\n\nmodel Contact {\n  id               String         @id @default(uuid()) @db.Uuid\n  patientProfileId String         @db.Uuid\n  patientProfile   PatientProfile @relation(fields: [patientProfileId], references: [id], onDelete: Cascade)\n  type             ContactType\n  value            String\n  createdAt        DateTime       @default(now())\n  updatedAt        DateTime       @updatedAt\n\n  @@index([id, patientProfileId])\n}\n\nmodel Employment {\n  id               String         @id @default(uuid()) @db.Uuid\n  patientProfileId String         @db.Uuid\n  patientProfile   PatientProfile @relation(fields: [patientProfileId], references: [id], onDelete: Cascade)\n  employer         String\n  contactPerson    String?\n  address          String?\n  phone            String?\n  email            String?\n  website          String?\n  createdAt        DateTime       @default(now())\n  updatedAt        DateTime       @updatedAt\n\n  @@index([id, patientProfileId])\n}\n\nenum Relationship {\n  FATHER\n  MOTHER\n  SPOUSE\n  SON\n  DAUGHTER\n  SIBLING\n  GRANDMOTHER\n  GRANDFATHER\n  GRANDCHILD\n  COUSIN\n  UNCLE\n  GUARDIAN\n  AUXILIARY\n  OTHER\n}\n\nmodel EmergencyContact {\n  id               String         @id @default(uuid()) @db.Uuid\n  patientProfileId String         @db.Uuid\n  patientProfile   PatientProfile @relation(fields: [patientProfileId], references: [id], onDelete: Cascade)\n  lastName         String\n  firstName        String\n  middleName       String?\n  suffix           String?\n  relationship     Relationship\n  phone            String?\n  email            String?\n  address          String?\n  createdAt        DateTime       @default(now())\n  updatedAt        DateTime       @updatedAt\n\n  @@index([id, patientProfileId])\n}\n\nmodel Consent {\n  id               String         @id @default(uuid()) @db.Uuid\n  patientProfileId String         @unique @db.Uuid\n  patientProfile   PatientProfile @relation(fields: [patientProfileId], references: [id], onDelete: Cascade)\n  documentUrl      String\n  signature        String\n  createdAt        DateTime       @default(now())\n  updatedAt        DateTime       @updatedAt\n\n  @@index([id, patientProfileId])\n}\n\nmodel MedicalRecordRequest {\n  id                   String             @id @default(uuid()) @db.Uuid\n  patientProfileId     String             @db.Uuid\n  patientProfile       PatientProfile     @relation(fields: [patientProfileId], references: [id], onDelete: Cascade)\n  inpatientEncounterId String             @db.Uuid\n  inpatientEncounter   InpatientEncounter @relation(fields: [inpatientEncounterId], references: [id], onDelete: Cascade)\n  type                 String\n  status               String\n  fileUrl              String\n  createdAt            DateTime           @default(now())\n  updatedAt            DateTime           @updatedAt\n}\n\nmodel PharmacySupplier {\n  id        String   @id @default(uuid()) @db.Uuid\n  name      String\n  email     String?\n  contact   String?\n  address   String?\n  notes     String?\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  @@index([id, name, email, contact])\n}\n\nmodel PharmacyBrand {\n  id        String         @id @default(uuid()) @db.Uuid\n  name      String\n  items     PharmacyItem[]\n  createdAt DateTime       @default(now())\n  updatedAt DateTime       @updatedAt\n\n  @@index([id, name])\n}\n\nmodel PharmacyItemCategory {\n  id        String         @id @default(uuid()) @db.Uuid\n  name      String\n  items     PharmacyItem[]\n  createdAt DateTime       @default(now())\n  updatedAt DateTime       @updatedAt\n\n  @@index([id, name])\n}\n\nenum PharmacyItemForm {\n  TABLET\n  CAPSULE\n  SYRUP\n  OINTMENT\n  CREAM\n  INJECTION\n  DROPS\n  INHALER\n  MEDICAL_DEVICE\n  SUPPLEMENTS\n  COSMETICS\n  MISCELLANEOUS\n}\n\nenum PharmacyItemRoute {\n  INJECTION\n  TOPICAL\n  TRANSDERMAL\n  OCULAR\n  OTIC\n  NASAL\n  ORAL\n  INHALATIONAL\n  RECTAL\n  VAGINAL\n}\n\nmodel PharmacyItem {\n  id         String               @id @default(uuid()) @db.Uuid\n  brandId    String               @db.Uuid\n  brand      PharmacyBrand        @relation(fields: [brandId], references: [id], onDelete: Restrict)\n  categoryId String               @db.Uuid\n  category   PharmacyItemCategory @relation(fields: [categoryId], references: [id], onDelete: Restrict)\n  name       String\n  form       PharmacyItemForm\n  route      PharmacyItemRoute\n  strength   String\n  stock      Int\n  unit       String\n  sku        String?\n  createdAt  DateTime             @default(now())\n  updatedAt  DateTime             @updatedAt\n\n  @@index([id, brandId, categoryId, name, form, strength, stock, unit, sku])\n}\n\ngenerator client {\n  provider = "prisma-client"\n  output   = "../generated/instance"\n}\n\ndatasource db {\n  provider = "postgresql"\n  url      = env("INSTANCE_DATABASE_URL")\n}\n',
+  "inlineSchemaHash": "683e26227da5f8cecb50ade439debe583b744368845701c5b8c6985c2b49b58c",
+  "copyEngine": true,
+  "runtimeDataModel": {
+    "models": {},
+    "enums": {},
+    "types": {}
+  },
+  "dirname": ""
+};
+config.runtimeDataModel = JSON.parse('{"models":{"Appointment":{"dbName":null,"schema":null,"fields":[{"name":"id","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":true,"isReadOnly":false,"hasDefaultValue":true,"type":"String","nativeType":["Uuid",[]],"default":{"name":"uuid","args":[4]},"isGenerated":false,"isUpdatedAt":false},{"name":"patientId","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":true,"hasDefaultValue":false,"type":"String","nativeType":["Uuid",[]],"isGenerated":false,"isUpdatedAt":false},{"name":"patient","kind":"object","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"PatientProfile","nativeType":null,"relationName":"AppointmentToPatientProfile","relationFromFields":["patientId"],"relationToFields":["id"],"isGenerated":false,"isUpdatedAt":false},{"name":"doctorId","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":["Uuid",[]],"isGenerated":false,"isUpdatedAt":false},{"name":"facilityId","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":true,"hasDefaultValue":false,"type":"String","nativeType":["Uuid",[]],"isGenerated":false,"isUpdatedAt":false},{"name":"facility","kind":"object","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"Room","nativeType":null,"relationName":"AppointmentToRoom","relationFromFields":["facilityId"],"relationToFields":["id"],"isGenerated":false,"isUpdatedAt":false},{"name":"date","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"time","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"status","kind":"enum","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"AppointmentStatus","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"patientAppointment","kind":"object","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"PatientAppointment","nativeType":null,"relationName":"AppointmentToPatientAppointment","relationFromFields":[],"relationToFields":[],"isGenerated":false,"isUpdatedAt":false},{"name":"createdAt","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"DateTime","nativeType":null,"default":{"name":"now","args":[]},"isGenerated":false,"isUpdatedAt":false},{"name":"updatedAt","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"DateTime","nativeType":null,"isGenerated":false,"isUpdatedAt":true}],"primaryKey":null,"uniqueFields":[],"uniqueIndexes":[],"isGenerated":false},"PatientAppointment":{"dbName":null,"schema":null,"fields":[{"name":"id","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":true,"isReadOnly":false,"hasDefaultValue":true,"type":"String","nativeType":["Uuid",[]],"default":{"name":"uuid","args":[4]},"isGenerated":false,"isUpdatedAt":false},{"name":"patientId","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":true,"hasDefaultValue":false,"type":"String","nativeType":["Uuid",[]],"isGenerated":false,"isUpdatedAt":false},{"name":"patient","kind":"object","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"PatientProfile","nativeType":null,"relationName":"PatientAppointmentToPatientProfile","relationFromFields":["patientId"],"relationToFields":["id"],"isGenerated":false,"isUpdatedAt":false},{"name":"doctorId","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"date","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"time","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"status","kind":"enum","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"AppointmentStatus","nativeType":null,"default":"PENDING","isGenerated":false,"isUpdatedAt":false},{"name":"name","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"appointmentId","kind":"scalar","isList":false,"isRequired":false,"isUnique":true,"isId":false,"isReadOnly":true,"hasDefaultValue":false,"type":"String","nativeType":["Uuid",[]],"isGenerated":false,"isUpdatedAt":false},{"name":"appointment","kind":"object","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"Appointment","nativeType":null,"relationName":"AppointmentToPatientAppointment","relationFromFields":["appointmentId"],"relationToFields":["id"],"isGenerated":false,"isUpdatedAt":false},{"name":"createdAt","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"DateTime","nativeType":null,"default":{"name":"now","args":[]},"isGenerated":false,"isUpdatedAt":false},{"name":"updatedAt","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"DateTime","nativeType":null,"isGenerated":false,"isUpdatedAt":true}],"primaryKey":null,"uniqueFields":[],"uniqueIndexes":[],"isGenerated":false},"Transaction":{"dbName":null,"schema":null,"fields":[{"name":"id","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":true,"isReadOnly":false,"hasDefaultValue":true,"type":"String","nativeType":["Uuid",[]],"default":{"name":"uuid","args":[4]},"isGenerated":false,"isUpdatedAt":false},{"name":"encounterId","kind":"scalar","isList":false,"isRequired":true,"isUnique":true,"isId":false,"isReadOnly":true,"hasDefaultValue":false,"type":"String","nativeType":["Uuid",[]],"isGenerated":false,"isUpdatedAt":false},{"name":"encounter","kind":"object","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"PatientEncounter","nativeType":null,"relationName":"PatientEncounterToTransaction","relationFromFields":["encounterId"],"relationToFields":["id"],"isGenerated":false,"isUpdatedAt":false},{"name":"status","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"items","kind":"object","isList":true,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"TransactionItem","nativeType":null,"relationName":"TransactionToTransactionItem","relationFromFields":[],"relationToFields":[],"isGenerated":false,"isUpdatedAt":false},{"name":"payments","kind":"object","isList":true,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"Payment","nativeType":null,"relationName":"PaymentToTransaction","relationFromFields":[],"relationToFields":[],"isGenerated":false,"isUpdatedAt":false},{"name":"createdAt","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"DateTime","nativeType":null,"default":{"name":"now","args":[]},"isGenerated":false,"isUpdatedAt":false},{"name":"updatedAt","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"DateTime","nativeType":null,"isGenerated":false,"isUpdatedAt":true}],"primaryKey":null,"uniqueFields":[],"uniqueIndexes":[],"isGenerated":false},"TransactionItem":{"dbName":null,"schema":null,"fields":[{"name":"id","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":true,"isReadOnly":false,"hasDefaultValue":true,"type":"String","nativeType":["Uuid",[]],"default":{"name":"uuid","args":[4]},"isGenerated":false,"isUpdatedAt":false},{"name":"transactionId","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":true,"hasDefaultValue":false,"type":"String","nativeType":["Uuid",[]],"isGenerated":false,"isUpdatedAt":false},{"name":"transaction","kind":"object","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"Transaction","nativeType":null,"relationName":"TransactionToTransactionItem","relationFromFields":["transactionId"],"relationToFields":["id"],"relationOnDelete":"Cascade","isGenerated":false,"isUpdatedAt":false},{"name":"name","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"description","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"amount","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"Int","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"createdAt","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"DateTime","nativeType":null,"default":{"name":"now","args":[]},"isGenerated":false,"isUpdatedAt":false},{"name":"updatedAt","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"DateTime","nativeType":null,"isGenerated":false,"isUpdatedAt":true}],"primaryKey":null,"uniqueFields":[],"uniqueIndexes":[],"isGenerated":false},"PaymentPlan":{"dbName":null,"schema":null,"fields":[{"name":"id","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":true,"isReadOnly":false,"hasDefaultValue":true,"type":"String","nativeType":["Uuid",[]],"default":{"name":"uuid","args":[4]},"isGenerated":false,"isUpdatedAt":false},{"name":"name","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"description","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"cycle","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"numberOfPayments","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"Int","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"instalments","kind":"object","isList":true,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"PaymentInstalment","nativeType":null,"relationName":"PaymentInstalmentToPaymentPlan","relationFromFields":[],"relationToFields":[],"isGenerated":false,"isUpdatedAt":false},{"name":"createdAt","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"DateTime","nativeType":null,"default":{"name":"now","args":[]},"isGenerated":false,"isUpdatedAt":false},{"name":"updatedAt","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"DateTime","nativeType":null,"isGenerated":false,"isUpdatedAt":true}],"primaryKey":null,"uniqueFields":[],"uniqueIndexes":[],"isGenerated":false},"Payment":{"dbName":null,"schema":null,"fields":[{"name":"id","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":true,"isReadOnly":false,"hasDefaultValue":true,"type":"String","nativeType":["Uuid",[]],"default":{"name":"uuid","args":[4]},"isGenerated":false,"isUpdatedAt":false},{"name":"transactionId","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":true,"hasDefaultValue":false,"type":"String","nativeType":["Uuid",[]],"isGenerated":false,"isUpdatedAt":false},{"name":"transaction","kind":"object","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"Transaction","nativeType":null,"relationName":"PaymentToTransaction","relationFromFields":["transactionId"],"relationToFields":["id"],"relationOnDelete":"Cascade","isGenerated":false,"isUpdatedAt":false},{"name":"amount","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"Int","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"instalments","kind":"object","isList":true,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"PaymentInstalment","nativeType":null,"relationName":"PaymentToPaymentInstalment","relationFromFields":[],"relationToFields":[],"isGenerated":false,"isUpdatedAt":false},{"name":"createdAt","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"DateTime","nativeType":null,"default":{"name":"now","args":[]},"isGenerated":false,"isUpdatedAt":false},{"name":"updatedAt","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"DateTime","nativeType":null,"isGenerated":false,"isUpdatedAt":true}],"primaryKey":null,"uniqueFields":[],"uniqueIndexes":[],"isGenerated":false},"PaymentInstalment":{"dbName":null,"schema":null,"fields":[{"name":"id","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":true,"isReadOnly":false,"hasDefaultValue":true,"type":"String","nativeType":["Uuid",[]],"default":{"name":"uuid","args":[4]},"isGenerated":false,"isUpdatedAt":false},{"name":"paymentId","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":true,"hasDefaultValue":false,"type":"String","nativeType":["Uuid",[]],"isGenerated":false,"isUpdatedAt":false},{"name":"payment","kind":"object","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"Payment","nativeType":null,"relationName":"PaymentToPaymentInstalment","relationFromFields":["paymentId"],"relationToFields":["id"],"relationOnDelete":"Cascade","isGenerated":false,"isUpdatedAt":false},{"name":"planId","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":true,"hasDefaultValue":false,"type":"String","nativeType":["Uuid",[]],"isGenerated":false,"isUpdatedAt":false},{"name":"plan","kind":"object","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"PaymentPlan","nativeType":null,"relationName":"PaymentInstalmentToPaymentPlan","relationFromFields":["planId"],"relationToFields":["id"],"relationOnDelete":"Cascade","isGenerated":false,"isUpdatedAt":false},{"name":"instalmentNumber","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"Int","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"amountDue","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"Int","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"amountPaid","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"Int","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"createdAt","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"DateTime","nativeType":null,"default":{"name":"now","args":[]},"isGenerated":false,"isUpdatedAt":false},{"name":"updatedAt","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"DateTime","nativeType":null,"isGenerated":false,"isUpdatedAt":true}],"primaryKey":null,"uniqueFields":[],"uniqueIndexes":[],"isGenerated":false},"Clinic":{"dbName":null,"schema":null,"fields":[{"name":"id","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":true,"isReadOnly":false,"hasDefaultValue":true,"type":"String","nativeType":["Uuid",[]],"default":{"name":"uuid","args":[4]},"isGenerated":false,"isUpdatedAt":false},{"name":"roomId","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":["Uuid",[]],"isGenerated":false,"isUpdatedAt":false},{"name":"schedules","kind":"object","isList":true,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"ClinicSchedule","nativeType":null,"relationName":"ClinicToClinicSchedule","relationFromFields":[],"relationToFields":[],"isGenerated":false,"isUpdatedAt":false},{"name":"createdAt","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"DateTime","nativeType":null,"default":{"name":"now","args":[]},"isGenerated":false,"isUpdatedAt":false},{"name":"updatedAt","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"DateTime","nativeType":null,"isGenerated":false,"isUpdatedAt":true}],"primaryKey":null,"uniqueFields":[],"uniqueIndexes":[],"isGenerated":false},"ClinicSchedule":{"dbName":null,"schema":null,"fields":[{"name":"id","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":true,"isReadOnly":false,"hasDefaultValue":true,"type":"String","nativeType":["Uuid",[]],"default":{"name":"uuid","args":[4]},"isGenerated":false,"isUpdatedAt":false},{"name":"clinicId","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":true,"hasDefaultValue":false,"type":"String","nativeType":["Uuid",[]],"isGenerated":false,"isUpdatedAt":false},{"name":"clinic","kind":"object","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"Clinic","nativeType":null,"relationName":"ClinicToClinicSchedule","relationFromFields":["clinicId"],"relationToFields":["id"],"relationOnDelete":"Cascade","isGenerated":false,"isUpdatedAt":false},{"name":"createdAt","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"DateTime","nativeType":null,"default":{"name":"now","args":[]},"isGenerated":false,"isUpdatedAt":false},{"name":"updatedAt","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"DateTime","nativeType":null,"isGenerated":false,"isUpdatedAt":true}],"primaryKey":null,"uniqueFields":[],"uniqueIndexes":[],"isGenerated":false},"PatientEncounter":{"dbName":null,"schema":null,"fields":[{"name":"id","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":true,"isReadOnly":false,"hasDefaultValue":true,"type":"String","nativeType":["Uuid",[]],"default":{"name":"uuid","args":[4]},"isGenerated":false,"isUpdatedAt":false},{"name":"encounterId","kind":"scalar","isList":false,"isRequired":true,"isUnique":true,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":["Uuid",[]],"isGenerated":false,"isUpdatedAt":false},{"name":"patientProfileId","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":true,"hasDefaultValue":false,"type":"String","nativeType":["Uuid",[]],"isGenerated":false,"isUpdatedAt":false},{"name":"patientProfile","kind":"object","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"PatientProfile","nativeType":null,"relationName":"PatientEncounterToPatientProfile","relationFromFields":["patientProfileId"],"relationToFields":["id"],"relationOnDelete":"Cascade","isGenerated":false,"isUpdatedAt":false},{"name":"transaction","kind":"object","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"Transaction","nativeType":null,"relationName":"PatientEncounterToTransaction","relationFromFields":[],"relationToFields":[],"isGenerated":false,"isUpdatedAt":false},{"name":"createdAt","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"DateTime","nativeType":null,"default":{"name":"now","args":[]},"isGenerated":false,"isUpdatedAt":false},{"name":"updatedAt","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"DateTime","nativeType":null,"isGenerated":false,"isUpdatedAt":true}],"primaryKey":null,"uniqueFields":[],"uniqueIndexes":[],"isGenerated":false},"OutpatientEncounter":{"dbName":null,"schema":null,"fields":[{"name":"id","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":true,"isReadOnly":false,"hasDefaultValue":true,"type":"String","nativeType":["Uuid",[]],"default":{"name":"uuid","args":[4]},"isGenerated":false,"isUpdatedAt":false},{"name":"patientProfileId","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":true,"hasDefaultValue":false,"type":"String","nativeType":["Uuid",[]],"isGenerated":false,"isUpdatedAt":false},{"name":"patientProfile","kind":"object","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"PatientProfile","nativeType":null,"relationName":"OutpatientEncounterToPatientProfile","relationFromFields":["patientProfileId"],"relationToFields":["id"],"relationOnDelete":"Cascade","isGenerated":false,"isUpdatedAt":false},{"name":"date","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"time","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"chiefComplaint","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"doctorDiagnosis","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"type","kind":"enum","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"OutpatientEncounterType","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"createdAt","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"DateTime","nativeType":null,"default":{"name":"now","args":[]},"isGenerated":false,"isUpdatedAt":false},{"name":"updatedAt","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"DateTime","nativeType":null,"isGenerated":false,"isUpdatedAt":true}],"primaryKey":null,"uniqueFields":[],"uniqueIndexes":[],"isGenerated":false},"InpatientEncounter":{"dbName":null,"schema":null,"fields":[{"name":"id","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":true,"isReadOnly":false,"hasDefaultValue":true,"type":"String","nativeType":["Uuid",[]],"default":{"name":"uuid","args":[4]},"isGenerated":false,"isUpdatedAt":false},{"name":"patientProfileId","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":true,"hasDefaultValue":false,"type":"String","nativeType":["Uuid",[]],"isGenerated":false,"isUpdatedAt":false},{"name":"patientProfile","kind":"object","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"PatientProfile","nativeType":null,"relationName":"InpatientEncounterToPatientProfile","relationFromFields":["patientProfileId"],"relationToFields":["id"],"relationOnDelete":"Cascade","isGenerated":false,"isUpdatedAt":false},{"name":"date","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"time","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"chiefComplaint","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"doctorDiagnosis","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"triage","kind":"enum","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"InpatientTriage","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"disposition","kind":"enum","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"InpatientDisposition","nativeType":null,"default":"ADMITTED","isGenerated":false,"isUpdatedAt":false},{"name":"dispositionDate","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"dispositionTime","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"dispositionNote","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"charts","kind":"object","isList":true,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"InpatientEncounterChart","nativeType":null,"relationName":"InpatientEncounterToInpatientEncounterChart","relationFromFields":[],"relationToFields":[],"isGenerated":false,"isUpdatedAt":false},{"name":"orders","kind":"object","isList":true,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"InpatientEncounterOrder","nativeType":null,"relationName":"InpatientEncounterToInpatientEncounterOrder","relationFromFields":[],"relationToFields":[],"isGenerated":false,"isUpdatedAt":false},{"name":"medicalRecordRequest","kind":"object","isList":true,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"MedicalRecordRequest","nativeType":null,"relationName":"InpatientEncounterToMedicalRecordRequest","relationFromFields":[],"relationToFields":[],"isGenerated":false,"isUpdatedAt":false},{"name":"createdAt","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"DateTime","nativeType":null,"default":{"name":"now","args":[]},"isGenerated":false,"isUpdatedAt":false},{"name":"updatedAt","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"DateTime","nativeType":null,"isGenerated":false,"isUpdatedAt":true}],"primaryKey":null,"uniqueFields":[],"uniqueIndexes":[],"isGenerated":false},"InpatientEncounterChart":{"dbName":null,"schema":null,"fields":[{"name":"id","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":true,"isReadOnly":false,"hasDefaultValue":true,"type":"String","nativeType":["Uuid",[]],"default":{"name":"uuid","args":[4]},"isGenerated":false,"isUpdatedAt":false},{"name":"encounterId","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":true,"hasDefaultValue":false,"type":"String","nativeType":["Uuid",[]],"isGenerated":false,"isUpdatedAt":false},{"name":"encounter","kind":"object","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"InpatientEncounter","nativeType":null,"relationName":"InpatientEncounterToInpatientEncounterChart","relationFromFields":["encounterId"],"relationToFields":["id"],"relationOnDelete":"Cascade","isGenerated":false,"isUpdatedAt":false},{"name":"staffId","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":["Uuid",[]],"isGenerated":false,"isUpdatedAt":false},{"name":"chart","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"createdAt","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"DateTime","nativeType":null,"default":{"name":"now","args":[]},"isGenerated":false,"isUpdatedAt":false},{"name":"updatedAt","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"DateTime","nativeType":null,"isGenerated":false,"isUpdatedAt":true}],"primaryKey":null,"uniqueFields":[],"uniqueIndexes":[],"isGenerated":false},"InpatientEncounterOrder":{"dbName":null,"schema":null,"fields":[{"name":"id","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":true,"isReadOnly":false,"hasDefaultValue":true,"type":"String","nativeType":["Uuid",[]],"default":{"name":"uuid","args":[4]},"isGenerated":false,"isUpdatedAt":false},{"name":"encounterId","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":true,"hasDefaultValue":false,"type":"String","nativeType":["Uuid",[]],"isGenerated":false,"isUpdatedAt":false},{"name":"encounter","kind":"object","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"InpatientEncounter","nativeType":null,"relationName":"InpatientEncounterToInpatientEncounterOrder","relationFromFields":["encounterId"],"relationToFields":["id"],"relationOnDelete":"Cascade","isGenerated":false,"isUpdatedAt":false},{"name":"type","kind":"enum","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"InpatientEncounterOrderType","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"order","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"status","kind":"enum","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"InpatientEncounterOrderStatus","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"createdAt","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"DateTime","nativeType":null,"default":{"name":"now","args":[]},"isGenerated":false,"isUpdatedAt":false},{"name":"updatedAt","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"DateTime","nativeType":null,"isGenerated":false,"isUpdatedAt":true}],"primaryKey":null,"uniqueFields":[],"uniqueIndexes":[],"isGenerated":false},"Building":{"dbName":null,"schema":null,"fields":[{"name":"id","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":true,"isReadOnly":false,"hasDefaultValue":true,"type":"String","nativeType":["Uuid",[]],"default":{"name":"uuid","args":[4]},"isGenerated":false,"isUpdatedAt":false},{"name":"name","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"rooms","kind":"object","isList":true,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"Room","nativeType":null,"relationName":"BuildingToRoom","relationFromFields":[],"relationToFields":[],"isGenerated":false,"isUpdatedAt":false},{"name":"createdAt","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"DateTime","nativeType":null,"default":{"name":"now","args":[]},"isGenerated":false,"isUpdatedAt":false},{"name":"updatedAt","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"DateTime","nativeType":null,"isGenerated":false,"isUpdatedAt":true}],"primaryKey":null,"uniqueFields":[],"uniqueIndexes":[],"isGenerated":false},"Room":{"dbName":null,"schema":null,"fields":[{"name":"id","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":true,"isReadOnly":false,"hasDefaultValue":true,"type":"String","nativeType":["Uuid",[]],"default":{"name":"uuid","args":[4]},"isGenerated":false,"isUpdatedAt":false},{"name":"buildingId","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":true,"hasDefaultValue":false,"type":"String","nativeType":["Uuid",[]],"isGenerated":false,"isUpdatedAt":false},{"name":"building","kind":"object","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"Building","nativeType":null,"relationName":"BuildingToRoom","relationFromFields":["buildingId"],"relationToFields":["id"],"relationOnDelete":"Cascade","isGenerated":false,"isUpdatedAt":false},{"name":"type","kind":"enum","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"RoomType","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"identifier","kind":"scalar","isList":false,"isRequired":true,"isUnique":true,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"description","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"capacity","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"Int","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"status","kind":"enum","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"RoomStatus","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"appointments","kind":"object","isList":true,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"Appointment","nativeType":null,"relationName":"AppointmentToRoom","relationFromFields":[],"relationToFields":[],"isGenerated":false,"isUpdatedAt":false},{"name":"createdAt","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"DateTime","nativeType":null,"default":{"name":"now","args":[]},"isGenerated":false,"isUpdatedAt":false},{"name":"updatedAt","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"DateTime","nativeType":null,"isGenerated":false,"isUpdatedAt":true}],"primaryKey":null,"uniqueFields":[],"uniqueIndexes":[],"isGenerated":false},"FacilityLog":{"dbName":null,"schema":null,"fields":[{"name":"id","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":true,"isReadOnly":false,"hasDefaultValue":true,"type":"Int","nativeType":null,"default":{"name":"autoincrement","args":[]},"isGenerated":false,"isUpdatedAt":false},{"name":"timestamp","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"DateTime","nativeType":null,"default":{"name":"now","args":[]},"isGenerated":false,"isUpdatedAt":false},{"name":"user","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"role","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"action","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"roomIdentifier","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"type","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"oldStatus","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"newStatus","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":null,"isGenerated":false,"isUpdatedAt":false}],"primaryKey":null,"uniqueFields":[],"uniqueIndexes":[],"isGenerated":false},"InsuranceProvider":{"dbName":null,"schema":null,"fields":[{"name":"id","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":true,"isReadOnly":false,"hasDefaultValue":true,"type":"String","nativeType":["Uuid",[]],"default":{"name":"uuid","args":[4]},"isGenerated":false,"isUpdatedAt":false},{"name":"name","kind":"scalar","isList":false,"isRequired":true,"isUnique":true,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"description","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"email","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"phone","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"address","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"city","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"state","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"zip","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"country","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"claims","kind":"object","isList":true,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"InsuranceClaim","nativeType":null,"relationName":"InsuranceClaimToInsuranceProvider","relationFromFields":[],"relationToFields":[],"isGenerated":false,"isUpdatedAt":false},{"name":"createdAt","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"DateTime","nativeType":null,"default":{"name":"now","args":[]},"isGenerated":false,"isUpdatedAt":false},{"name":"updatedAt","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"DateTime","nativeType":null,"isGenerated":false,"isUpdatedAt":true}],"primaryKey":null,"uniqueFields":[],"uniqueIndexes":[],"isGenerated":false},"InsuranceClaim":{"dbName":null,"schema":null,"fields":[{"name":"id","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":true,"isReadOnly":false,"hasDefaultValue":true,"type":"String","nativeType":["Uuid",[]],"default":{"name":"uuid","args":[4]},"isGenerated":false,"isUpdatedAt":false},{"name":"providerId","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":true,"hasDefaultValue":false,"type":"String","nativeType":["Uuid",[]],"isGenerated":false,"isUpdatedAt":false},{"name":"provider","kind":"object","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"InsuranceProvider","nativeType":null,"relationName":"InsuranceClaimToInsuranceProvider","relationFromFields":["providerId"],"relationToFields":["id"],"relationOnDelete":"Cascade","isGenerated":false,"isUpdatedAt":false},{"name":"status","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"message","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"amount","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"Int","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"items","kind":"object","isList":true,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"InsuranceClaimItem","nativeType":null,"relationName":"InsuranceClaimToInsuranceClaimItem","relationFromFields":[],"relationToFields":[],"isGenerated":false,"isUpdatedAt":false},{"name":"createdAt","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"DateTime","nativeType":null,"default":{"name":"now","args":[]},"isGenerated":false,"isUpdatedAt":false},{"name":"updatedAt","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"DateTime","nativeType":null,"isGenerated":false,"isUpdatedAt":true}],"primaryKey":null,"uniqueFields":[],"uniqueIndexes":[],"isGenerated":false},"InsuranceClaimItem":{"dbName":null,"schema":null,"fields":[{"name":"id","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":true,"isReadOnly":false,"hasDefaultValue":true,"type":"String","nativeType":["Uuid",[]],"default":{"name":"uuid","args":[4]},"isGenerated":false,"isUpdatedAt":false},{"name":"claimId","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":true,"hasDefaultValue":false,"type":"String","nativeType":["Uuid",[]],"isGenerated":false,"isUpdatedAt":false},{"name":"claim","kind":"object","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"InsuranceClaim","nativeType":null,"relationName":"InsuranceClaimToInsuranceClaimItem","relationFromFields":["claimId"],"relationToFields":["id"],"relationOnDelete":"Cascade","isGenerated":false,"isUpdatedAt":false},{"name":"name","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"description","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"amount","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"Int","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"createdAt","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"DateTime","nativeType":null,"default":{"name":"now","args":[]},"isGenerated":false,"isUpdatedAt":false},{"name":"updatedAt","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"DateTime","nativeType":null,"isGenerated":false,"isUpdatedAt":true}],"primaryKey":null,"uniqueFields":[],"uniqueIndexes":[],"isGenerated":false},"Log":{"dbName":null,"schema":null,"fields":[{"name":"id","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":true,"isReadOnly":false,"hasDefaultValue":true,"type":"String","nativeType":["Uuid",[]],"default":{"name":"uuid","args":[4]},"isGenerated":false,"isUpdatedAt":false},{"name":"user","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"action","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"entity","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"data","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"Json","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"ipAddress","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"timestamp","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"DateTime","nativeType":null,"default":{"name":"now","args":[]},"isGenerated":false,"isUpdatedAt":false}],"primaryKey":null,"uniqueFields":[],"uniqueIndexes":[],"isGenerated":false},"PatientProfile":{"dbName":null,"schema":null,"fields":[{"name":"id","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":true,"isReadOnly":false,"hasDefaultValue":true,"type":"String","nativeType":["Uuid",[]],"default":{"name":"uuid","args":[4]},"isGenerated":false,"isUpdatedAt":false},{"name":"lastName","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"firstName","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"middleName","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"suffix","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"birthdate","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"birthplace","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"sex","kind":"enum","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"Sex","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"maritalStatus","kind":"enum","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"MaritalStatus","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"nationality","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"religion","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"bloodType","kind":"enum","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"BloodType","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"patientEncounters","kind":"object","isList":true,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"PatientEncounter","nativeType":null,"relationName":"PatientEncounterToPatientProfile","relationFromFields":[],"relationToFields":[],"isGenerated":false,"isUpdatedAt":false},{"name":"inpatientEncounters","kind":"object","isList":true,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"InpatientEncounter","nativeType":null,"relationName":"InpatientEncounterToPatientProfile","relationFromFields":[],"relationToFields":[],"isGenerated":false,"isUpdatedAt":false},{"name":"outpatientEncounters","kind":"object","isList":true,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"OutpatientEncounter","nativeType":null,"relationName":"OutpatientEncounterToPatientProfile","relationFromFields":[],"relationToFields":[],"isGenerated":false,"isUpdatedAt":false},{"name":"appointments","kind":"object","isList":true,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"Appointment","nativeType":null,"relationName":"AppointmentToPatientProfile","relationFromFields":[],"relationToFields":[],"isGenerated":false,"isUpdatedAt":false},{"name":"patientAppointments","kind":"object","isList":true,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"PatientAppointment","nativeType":null,"relationName":"PatientAppointmentToPatientProfile","relationFromFields":[],"relationToFields":[],"isGenerated":false,"isUpdatedAt":false},{"name":"addresses","kind":"object","isList":true,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"Address","nativeType":null,"relationName":"AddressToPatientProfile","relationFromFields":[],"relationToFields":[],"isGenerated":false,"isUpdatedAt":false},{"name":"contacts","kind":"object","isList":true,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"Contact","nativeType":null,"relationName":"ContactToPatientProfile","relationFromFields":[],"relationToFields":[],"isGenerated":false,"isUpdatedAt":false},{"name":"employments","kind":"object","isList":true,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"Employment","nativeType":null,"relationName":"EmploymentToPatientProfile","relationFromFields":[],"relationToFields":[],"isGenerated":false,"isUpdatedAt":false},{"name":"emergencyContacts","kind":"object","isList":true,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"EmergencyContact","nativeType":null,"relationName":"EmergencyContactToPatientProfile","relationFromFields":[],"relationToFields":[],"isGenerated":false,"isUpdatedAt":false},{"name":"medicalRecordRequests","kind":"object","isList":true,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"MedicalRecordRequest","nativeType":null,"relationName":"MedicalRecordRequestToPatientProfile","relationFromFields":[],"relationToFields":[],"isGenerated":false,"isUpdatedAt":false},{"name":"consent","kind":"object","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"Consent","nativeType":null,"relationName":"ConsentToPatientProfile","relationFromFields":[],"relationToFields":[],"isGenerated":false,"isUpdatedAt":false},{"name":"archived","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"Boolean","nativeType":null,"default":false,"isGenerated":false,"isUpdatedAt":false},{"name":"createdAt","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"DateTime","nativeType":null,"default":{"name":"now","args":[]},"isGenerated":false,"isUpdatedAt":false},{"name":"updatedAt","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"DateTime","nativeType":null,"isGenerated":false,"isUpdatedAt":true}],"primaryKey":null,"uniqueFields":[],"uniqueIndexes":[],"isGenerated":false},"Address":{"dbName":null,"schema":null,"fields":[{"name":"id","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":true,"isReadOnly":false,"hasDefaultValue":true,"type":"String","nativeType":["Uuid",[]],"default":{"name":"uuid","args":[4]},"isGenerated":false,"isUpdatedAt":false},{"name":"patientProfileId","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":true,"hasDefaultValue":false,"type":"String","nativeType":["Uuid",[]],"isGenerated":false,"isUpdatedAt":false},{"name":"patientProfile","kind":"object","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"PatientProfile","nativeType":null,"relationName":"AddressToPatientProfile","relationFromFields":["patientProfileId"],"relationToFields":["id"],"relationOnDelete":"Cascade","isGenerated":false,"isUpdatedAt":false},{"name":"label","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"country","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"state","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"zipCode","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"city","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"address","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"createdAt","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"DateTime","nativeType":null,"default":{"name":"now","args":[]},"isGenerated":false,"isUpdatedAt":false},{"name":"updatedAt","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"DateTime","nativeType":null,"isGenerated":false,"isUpdatedAt":true}],"primaryKey":null,"uniqueFields":[],"uniqueIndexes":[],"isGenerated":false},"Contact":{"dbName":null,"schema":null,"fields":[{"name":"id","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":true,"isReadOnly":false,"hasDefaultValue":true,"type":"String","nativeType":["Uuid",[]],"default":{"name":"uuid","args":[4]},"isGenerated":false,"isUpdatedAt":false},{"name":"patientProfileId","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":true,"hasDefaultValue":false,"type":"String","nativeType":["Uuid",[]],"isGenerated":false,"isUpdatedAt":false},{"name":"patientProfile","kind":"object","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"PatientProfile","nativeType":null,"relationName":"ContactToPatientProfile","relationFromFields":["patientProfileId"],"relationToFields":["id"],"relationOnDelete":"Cascade","isGenerated":false,"isUpdatedAt":false},{"name":"type","kind":"enum","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"ContactType","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"value","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"createdAt","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"DateTime","nativeType":null,"default":{"name":"now","args":[]},"isGenerated":false,"isUpdatedAt":false},{"name":"updatedAt","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"DateTime","nativeType":null,"isGenerated":false,"isUpdatedAt":true}],"primaryKey":null,"uniqueFields":[],"uniqueIndexes":[],"isGenerated":false},"Employment":{"dbName":null,"schema":null,"fields":[{"name":"id","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":true,"isReadOnly":false,"hasDefaultValue":true,"type":"String","nativeType":["Uuid",[]],"default":{"name":"uuid","args":[4]},"isGenerated":false,"isUpdatedAt":false},{"name":"patientProfileId","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":true,"hasDefaultValue":false,"type":"String","nativeType":["Uuid",[]],"isGenerated":false,"isUpdatedAt":false},{"name":"patientProfile","kind":"object","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"PatientProfile","nativeType":null,"relationName":"EmploymentToPatientProfile","relationFromFields":["patientProfileId"],"relationToFields":["id"],"relationOnDelete":"Cascade","isGenerated":false,"isUpdatedAt":false},{"name":"employer","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"contactPerson","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"address","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"phone","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"email","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"website","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"createdAt","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"DateTime","nativeType":null,"default":{"name":"now","args":[]},"isGenerated":false,"isUpdatedAt":false},{"name":"updatedAt","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"DateTime","nativeType":null,"isGenerated":false,"isUpdatedAt":true}],"primaryKey":null,"uniqueFields":[],"uniqueIndexes":[],"isGenerated":false},"EmergencyContact":{"dbName":null,"schema":null,"fields":[{"name":"id","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":true,"isReadOnly":false,"hasDefaultValue":true,"type":"String","nativeType":["Uuid",[]],"default":{"name":"uuid","args":[4]},"isGenerated":false,"isUpdatedAt":false},{"name":"patientProfileId","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":true,"hasDefaultValue":false,"type":"String","nativeType":["Uuid",[]],"isGenerated":false,"isUpdatedAt":false},{"name":"patientProfile","kind":"object","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"PatientProfile","nativeType":null,"relationName":"EmergencyContactToPatientProfile","relationFromFields":["patientProfileId"],"relationToFields":["id"],"relationOnDelete":"Cascade","isGenerated":false,"isUpdatedAt":false},{"name":"lastName","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"firstName","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"middleName","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"suffix","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"relationship","kind":"enum","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"Relationship","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"phone","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"email","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"address","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"createdAt","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"DateTime","nativeType":null,"default":{"name":"now","args":[]},"isGenerated":false,"isUpdatedAt":false},{"name":"updatedAt","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"DateTime","nativeType":null,"isGenerated":false,"isUpdatedAt":true}],"primaryKey":null,"uniqueFields":[],"uniqueIndexes":[],"isGenerated":false},"Consent":{"dbName":null,"schema":null,"fields":[{"name":"id","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":true,"isReadOnly":false,"hasDefaultValue":true,"type":"String","nativeType":["Uuid",[]],"default":{"name":"uuid","args":[4]},"isGenerated":false,"isUpdatedAt":false},{"name":"patientProfileId","kind":"scalar","isList":false,"isRequired":true,"isUnique":true,"isId":false,"isReadOnly":true,"hasDefaultValue":false,"type":"String","nativeType":["Uuid",[]],"isGenerated":false,"isUpdatedAt":false},{"name":"patientProfile","kind":"object","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"PatientProfile","nativeType":null,"relationName":"ConsentToPatientProfile","relationFromFields":["patientProfileId"],"relationToFields":["id"],"relationOnDelete":"Cascade","isGenerated":false,"isUpdatedAt":false},{"name":"documentUrl","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"signature","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"createdAt","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"DateTime","nativeType":null,"default":{"name":"now","args":[]},"isGenerated":false,"isUpdatedAt":false},{"name":"updatedAt","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"DateTime","nativeType":null,"isGenerated":false,"isUpdatedAt":true}],"primaryKey":null,"uniqueFields":[],"uniqueIndexes":[],"isGenerated":false},"MedicalRecordRequest":{"dbName":null,"schema":null,"fields":[{"name":"id","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":true,"isReadOnly":false,"hasDefaultValue":true,"type":"String","nativeType":["Uuid",[]],"default":{"name":"uuid","args":[4]},"isGenerated":false,"isUpdatedAt":false},{"name":"patientProfileId","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":true,"hasDefaultValue":false,"type":"String","nativeType":["Uuid",[]],"isGenerated":false,"isUpdatedAt":false},{"name":"patientProfile","kind":"object","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"PatientProfile","nativeType":null,"relationName":"MedicalRecordRequestToPatientProfile","relationFromFields":["patientProfileId"],"relationToFields":["id"],"relationOnDelete":"Cascade","isGenerated":false,"isUpdatedAt":false},{"name":"inpatientEncounterId","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":true,"hasDefaultValue":false,"type":"String","nativeType":["Uuid",[]],"isGenerated":false,"isUpdatedAt":false},{"name":"inpatientEncounter","kind":"object","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"InpatientEncounter","nativeType":null,"relationName":"InpatientEncounterToMedicalRecordRequest","relationFromFields":["inpatientEncounterId"],"relationToFields":["id"],"relationOnDelete":"Cascade","isGenerated":false,"isUpdatedAt":false},{"name":"type","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"status","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"fileUrl","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"createdAt","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"DateTime","nativeType":null,"default":{"name":"now","args":[]},"isGenerated":false,"isUpdatedAt":false},{"name":"updatedAt","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"DateTime","nativeType":null,"isGenerated":false,"isUpdatedAt":true}],"primaryKey":null,"uniqueFields":[],"uniqueIndexes":[],"isGenerated":false},"PharmacySupplier":{"dbName":null,"schema":null,"fields":[{"name":"id","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":true,"isReadOnly":false,"hasDefaultValue":true,"type":"String","nativeType":["Uuid",[]],"default":{"name":"uuid","args":[4]},"isGenerated":false,"isUpdatedAt":false},{"name":"name","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"email","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"contact","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"address","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"notes","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"createdAt","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"DateTime","nativeType":null,"default":{"name":"now","args":[]},"isGenerated":false,"isUpdatedAt":false},{"name":"updatedAt","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"DateTime","nativeType":null,"isGenerated":false,"isUpdatedAt":true}],"primaryKey":null,"uniqueFields":[],"uniqueIndexes":[],"isGenerated":false},"PharmacyBrand":{"dbName":null,"schema":null,"fields":[{"name":"id","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":true,"isReadOnly":false,"hasDefaultValue":true,"type":"String","nativeType":["Uuid",[]],"default":{"name":"uuid","args":[4]},"isGenerated":false,"isUpdatedAt":false},{"name":"name","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"items","kind":"object","isList":true,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"PharmacyItem","nativeType":null,"relationName":"PharmacyBrandToPharmacyItem","relationFromFields":[],"relationToFields":[],"isGenerated":false,"isUpdatedAt":false},{"name":"createdAt","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"DateTime","nativeType":null,"default":{"name":"now","args":[]},"isGenerated":false,"isUpdatedAt":false},{"name":"updatedAt","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"DateTime","nativeType":null,"isGenerated":false,"isUpdatedAt":true}],"primaryKey":null,"uniqueFields":[],"uniqueIndexes":[],"isGenerated":false},"PharmacyItemCategory":{"dbName":null,"schema":null,"fields":[{"name":"id","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":true,"isReadOnly":false,"hasDefaultValue":true,"type":"String","nativeType":["Uuid",[]],"default":{"name":"uuid","args":[4]},"isGenerated":false,"isUpdatedAt":false},{"name":"name","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"items","kind":"object","isList":true,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"PharmacyItem","nativeType":null,"relationName":"PharmacyItemToPharmacyItemCategory","relationFromFields":[],"relationToFields":[],"isGenerated":false,"isUpdatedAt":false},{"name":"createdAt","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"DateTime","nativeType":null,"default":{"name":"now","args":[]},"isGenerated":false,"isUpdatedAt":false},{"name":"updatedAt","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"DateTime","nativeType":null,"isGenerated":false,"isUpdatedAt":true}],"primaryKey":null,"uniqueFields":[],"uniqueIndexes":[],"isGenerated":false},"PharmacyItem":{"dbName":null,"schema":null,"fields":[{"name":"id","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":true,"isReadOnly":false,"hasDefaultValue":true,"type":"String","nativeType":["Uuid",[]],"default":{"name":"uuid","args":[4]},"isGenerated":false,"isUpdatedAt":false},{"name":"brandId","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":true,"hasDefaultValue":false,"type":"String","nativeType":["Uuid",[]],"isGenerated":false,"isUpdatedAt":false},{"name":"brand","kind":"object","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"PharmacyBrand","nativeType":null,"relationName":"PharmacyBrandToPharmacyItem","relationFromFields":["brandId"],"relationToFields":["id"],"relationOnDelete":"Restrict","isGenerated":false,"isUpdatedAt":false},{"name":"categoryId","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":true,"hasDefaultValue":false,"type":"String","nativeType":["Uuid",[]],"isGenerated":false,"isUpdatedAt":false},{"name":"category","kind":"object","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"PharmacyItemCategory","nativeType":null,"relationName":"PharmacyItemToPharmacyItemCategory","relationFromFields":["categoryId"],"relationToFields":["id"],"relationOnDelete":"Restrict","isGenerated":false,"isUpdatedAt":false},{"name":"name","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"form","kind":"enum","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"PharmacyItemForm","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"route","kind":"enum","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"PharmacyItemRoute","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"strength","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"stock","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"Int","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"unit","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"sku","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"createdAt","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"DateTime","nativeType":null,"default":{"name":"now","args":[]},"isGenerated":false,"isUpdatedAt":false},{"name":"updatedAt","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"DateTime","nativeType":null,"isGenerated":false,"isUpdatedAt":true}],"primaryKey":null,"uniqueFields":[],"uniqueIndexes":[],"isGenerated":false}},"enums":{"AppointmentStatus":{"values":[{"name":"PENDING","dbName":null},{"name":"SCHEDULED","dbName":null},{"name":"CANCELLED","dbName":null},{"name":"COMPLETED","dbName":null}],"dbName":null},"OutpatientEncounterType":{"values":[{"name":"CONSULTATION","dbName":null},{"name":"FOLLOW_UP","dbName":null},{"name":"LABORATORY","dbName":null},{"name":"RADIOLOGY","dbName":null},{"name":"OTHER","dbName":null}],"dbName":null},"InpatientTriage":{"values":[{"name":"HIGH_PRIORITY","dbName":null},{"name":"MEDIUM_PRIORITY","dbName":null},{"name":"LOW_PRIORITY","dbName":null},{"name":"NON_URGENT","dbName":null}],"dbName":null},"InpatientDisposition":{"values":[{"name":"ADMITTED","dbName":null},{"name":"DISCHARGED","dbName":null},{"name":"DISCONTINUED","dbName":null},{"name":"TRANSFERRED","dbName":null},{"name":"DECEASED","dbName":null},{"name":"OTHER","dbName":null}],"dbName":null},"InpatientEncounterOrderType":{"values":[{"name":"PRESCRIPTION","dbName":null},{"name":"LABORATORY","dbName":null},{"name":"RADIOLOGY","dbName":null},{"name":"OPERATION","dbName":null},{"name":"OTHER","dbName":null}],"dbName":null},"InpatientEncounterOrderStatus":{"values":[{"name":"PENDING","dbName":null},{"name":"COMPLETED","dbName":null},{"name":"CANCELLED","dbName":null}],"dbName":null},"RoomType":{"values":[{"name":"WARD","dbName":null},{"name":"CLINIC","dbName":null},{"name":"LABORATORY","dbName":null},{"name":"PHARMACY","dbName":null},{"name":"OFFICE","dbName":null}],"dbName":null},"RoomStatus":{"values":[{"name":"AVAILABLE","dbName":null},{"name":"OCCUPIED","dbName":null},{"name":"PREPARING","dbName":null}],"dbName":null},"Sex":{"values":[{"name":"MALE","dbName":null},{"name":"FEMALE","dbName":null}],"dbName":null},"MaritalStatus":{"values":[{"name":"SINGLE","dbName":null},{"name":"MARRIED","dbName":null},{"name":"WIDOWED","dbName":null},{"name":"DIVORCED","dbName":null},{"name":"SEPARATED","dbName":null}],"dbName":null},"BloodType":{"values":[{"name":"A_POSITIVE","dbName":null},{"name":"A_NEGATIVE","dbName":null},{"name":"B_POSITIVE","dbName":null},{"name":"B_NEGATIVE","dbName":null},{"name":"AB_POSITIVE","dbName":null},{"name":"AB_NEGATIVE","dbName":null},{"name":"O_POSITIVE","dbName":null},{"name":"O_NEGATIVE","dbName":null}],"dbName":null},"ContactType":{"values":[{"name":"HOME","dbName":null},{"name":"WORK","dbName":null},{"name":"MOBILE","dbName":null},{"name":"EMAIL","dbName":null},{"name":"FAX","dbName":null},{"name":"OTHER","dbName":null}],"dbName":null},"Relationship":{"values":[{"name":"FATHER","dbName":null},{"name":"MOTHER","dbName":null},{"name":"SPOUSE","dbName":null},{"name":"SON","dbName":null},{"name":"DAUGHTER","dbName":null},{"name":"SIBLING","dbName":null},{"name":"GRANDMOTHER","dbName":null},{"name":"GRANDFATHER","dbName":null},{"name":"GRANDCHILD","dbName":null},{"name":"COUSIN","dbName":null},{"name":"UNCLE","dbName":null},{"name":"GUARDIAN","dbName":null},{"name":"AUXILIARY","dbName":null},{"name":"OTHER","dbName":null}],"dbName":null},"PharmacyItemForm":{"values":[{"name":"TABLET","dbName":null},{"name":"CAPSULE","dbName":null},{"name":"SYRUP","dbName":null},{"name":"OINTMENT","dbName":null},{"name":"CREAM","dbName":null},{"name":"INJECTION","dbName":null},{"name":"DROPS","dbName":null},{"name":"INHALER","dbName":null},{"name":"MEDICAL_DEVICE","dbName":null},{"name":"SUPPLEMENTS","dbName":null},{"name":"COSMETICS","dbName":null},{"name":"MISCELLANEOUS","dbName":null}],"dbName":null},"PharmacyItemRoute":{"values":[{"name":"INJECTION","dbName":null},{"name":"TOPICAL","dbName":null},{"name":"TRANSDERMAL","dbName":null},{"name":"OCULAR","dbName":null},{"name":"OTIC","dbName":null},{"name":"NASAL","dbName":null},{"name":"ORAL","dbName":null},{"name":"INHALATIONAL","dbName":null},{"name":"RECTAL","dbName":null},{"name":"VAGINAL","dbName":null}],"dbName":null}},"types":{}}');
+config.engineWasm = void 0;
+config.compilerWasm = void 0;
+function getPrismaClientClass(dirname) {
+  config.dirname = dirname;
+  return runtime.getPrismaClient(config);
+}
+
+globalThis["__dirname"] = path.dirname(fileURLToPath(globalThis._importMeta_.url));
+const PrismaClient = getPrismaClientClass(__dirname);
+path.join(__dirname, "query_engine-windows.dll.node");
+path.join(process$1.cwd(), "prisma/generated/instance/query_engine-windows.dll.node");
+
+const JWT_REFRESH_KEY = process.env.ACCESS_TOKEN_SECRET;
+const jwtRefreshTokenVerifyOptions = {
+  issuer: "marcher.com",
+  audience: "marcher.com",
+  clockTolerance: 5
+};
+const verifyRefreshToken = (token) => {
+  if (!JWT_REFRESH_KEY) throw new Error("JWT_REFRESH_KEY is not defined");
+  try {
+    return jwt.verify(token, JWT_REFRESH_KEY, jwtRefreshTokenVerifyOptions);
+  } catch (error) {
+    if (error instanceof jwt.JsonWebTokenError) {
+      return false;
+    }
+  }
+};
+
+const globalPrisma = new PrismaClient$1();
+const instancePrisma = new PrismaClient();
+const createTRPCContext = async (event) => {
+  return {
+    event,
+    globalPrisma,
+    instancePrisma
+  };
+};
+const tRPC = initTRPC.context().create({});
+const createTRPCRouter = tRPC.router;
+tRPC.createCallerFactory;
+const publicProcedure = tRPC.procedure;
+const protectedProcedure = tRPC.procedure.use(
+  async (opts) => {
+    const { ctx, next } = opts;
+    const refreshToken = getCookie(ctx.event, "refreshToken");
+    const accessToken = getCookie(ctx.event, "accessToken");
+    if (!refreshToken) {
+      throw new TRPCError({ code: "UNAUTHORIZED", message: "You are not logged in." });
+    }
+    const decodedRefreshToken = verifyRefreshToken(refreshToken);
+    if (!decodedRefreshToken) {
+      throw new TRPCError({ code: "UNAUTHORIZED", message: "Invalid session. Please login again." });
+    }
+    return next({
+      ctx: {
+        ...ctx,
+        refreshToken,
+        accessToken,
+        user: decodedRefreshToken
+      }
+    });
+  }
+);
+
+const BACKEND_URL = process.env.BACKEND_URL || "http://localhost:5000";
+const registerSchema = z.object({
+  email: z.string().email(),
+  password: z.string().min(6),
+  firstName: z.string().min(1),
+  lastName: z.string().min(1),
+  middleName: z.string().optional(),
+  phoneNumber: z.string().optional(),
+  role: z.enum(["admin", "patient", "staff", "partner"]).default("patient"),
+  // Patient-specific fields
+  dateOfBirth: z.string().optional(),
+  gender: z.enum(["MALE", "FEMALE", "OTHER"]).optional(),
+  address: z.string().optional(),
+  emergencyContact: z.string().optional(),
+  bloodType: z.enum(["A_POSITIVE", "A_NEGATIVE", "B_POSITIVE", "B_NEGATIVE", "AB_POSITIVE", "AB_NEGATIVE", "O_POSITIVE", "O_NEGATIVE"]).optional(),
+  // Staff-specific fields
+  position: z.string().optional(),
+  department: z.string().optional(),
+  licenseNumber: z.string().optional(),
+  specialization: z.string().optional(),
+  // Partner-specific fields
+  companyName: z.string().optional(),
+  contactPerson: z.string().optional()
+});
+const loginSchema = z.object({
+  email: z.string().email(),
+  password: z.string().min(1)
+});
+const refreshTokenSchema = z.object({
+  refreshToken: z.string()
+});
+const authRouter = createTRPCRouter({
+  register: publicProcedure.input(registerSchema).mutation(async ({ input }) => {
+    try {
+      const response = await $fetch(`${BACKEND_URL}/api/auth/register`, {
+        method: "POST",
+        body: input
+      });
+      return response;
+    } catch (error) {
+      if (error.data) {
+        throw new Error(error.data.message || "Registration failed");
+      }
+      throw new Error("Network error occurred");
+    }
   }),
-  echo: t.procedure.input(z.object({ message: z.string() })).query(({ input }) => {
-    return { echo: input.message };
+  login: publicProcedure.input(loginSchema).mutation(async ({ input }) => {
+    try {
+      const response = await $fetch(`${BACKEND_URL}/api/auth/login`, {
+        method: "POST",
+        body: input
+      });
+      return response;
+    } catch (error) {
+      if (error.data) {
+        throw new Error(error.data.message || "Login failed");
+      }
+      throw new Error("Network error occurred");
+    }
+  }),
+  logout: publicProcedure.input(z.object({ refreshToken: z.string().optional() })).mutation(async ({ input, ctx }) => {
+    var _a, _b, _c, _d;
+    try {
+      const authHeader = (_d = (_c = (_b = (_a = ctx.event) == null ? void 0 : _a.node) == null ? void 0 : _b.req) == null ? void 0 : _c.headers) == null ? void 0 : _d.authorization;
+      const response = await $fetch(`${BACKEND_URL}/api/auth/logout`, {
+        method: "POST",
+        body: input,
+        headers: {
+          "Authorization": authHeader || ""
+        }
+      });
+      return response;
+    } catch (error) {
+      if (error.data) {
+        throw new Error(error.data.message || "Logout failed");
+      }
+      throw new Error("Network error occurred");
+    }
+  }),
+  refreshToken: publicProcedure.input(refreshTokenSchema).mutation(async ({ input }) => {
+    try {
+      const response = await $fetch(`${BACKEND_URL}/api/auth/refresh-token`, {
+        method: "POST",
+        body: input
+      });
+      return response;
+    } catch (error) {
+      if (error.data) {
+        throw new Error(error.data.message || "Token refresh failed");
+      }
+      throw new Error("Network error occurred");
+    }
+  }),
+  me: publicProcedure.query(async ({ ctx }) => {
+    var _a, _b, _c, _d;
+    try {
+      const authHeader = (_d = (_c = (_b = (_a = ctx.event) == null ? void 0 : _a.node) == null ? void 0 : _b.req) == null ? void 0 : _c.headers) == null ? void 0 : _d.authorization;
+      if (!authHeader) {
+        throw new Error("Authorization header required");
+      }
+      const response = await $fetch(`${BACKEND_URL}/api/auth/me`, {
+        headers: {
+          "Authorization": authHeader
+        }
+      });
+      return response;
+    } catch (error) {
+      if (error.data) {
+        throw new Error(error.data.message || "Failed to fetch user data");
+      }
+      throw new Error("Network error occurred");
+    }
+  }),
+  getDemoAccounts: publicProcedure.query(async () => {
+    try {
+      const response = await $fetch(`${BACKEND_URL}/api/auth/demo-accounts`);
+      return response;
+    } catch (error) {
+      if (error.data) {
+        throw new Error(error.data.message || "Failed to fetch demo accounts");
+      }
+      throw new Error("Network error occurred");
+    }
   })
 });
+
+const buildingSchema = z.object({
+  name: z.string().min(1, "Building name is required.").max(255, "Building name must be less than 255 characters.")
+});
+const getBuildingSchema = z.object({
+  id: z.string().uuid("Invalid building ID.")
+});
+const tableBuildingSchema = buildingSchema.extend({
+  id: z.string().uuid("Invalid building ID."),
+  createdAt: z.string().datetime(),
+  updatedAt: z.string().datetime()
+});
+const createBuildingSchema = buildingSchema;
+const updateBuildingSchema = buildingSchema.extend({
+  id: z.string().uuid("Invalid building ID.")
+});
+const deleteBuildingSchema = z.object({
+  id: z.string().uuid("Invalid building ID.")
+});
+
+const roomTypeSchema = z.enum([
+  "WARD",
+  "CLINIC",
+  "LABORATORY",
+  "PHARMACY",
+  "OFFICE"
+]);
+roomTypeSchema.options.map((option) => ({
+  label: option.charAt(0) + option.slice(1).toLowerCase(),
+  value: option
+}));
+const roomStatusSchema = z.enum([
+  "AVAILABLE",
+  "OCCUPIED",
+  "PREPARING"
+]);
+roomStatusSchema.options.map((option) => ({
+  label: option.charAt(0) + option.slice(1).toLowerCase(),
+  value: option
+}));
+const roomSchema = z.object({
+  buildingId: z.string().uuid("Invalid building ID."),
+  type: roomTypeSchema,
+  identifier: z.string().min(1, "Identifier is required.").max(255, "Identifier must be less than 255 characters."),
+  description: z.string().optional().nullable(),
+  capacity: z.number().min(1, "Capacity must be greater than 0.").max(100, "Capacity must be less than 100.").optional().nullable(),
+  status: roomStatusSchema
+});
+const getRoomSchema = z.object({
+  id: z.string().uuid("Invalid room ID.")
+});
+roomSchema.extend({
+  id: z.string().uuid("Invalid room ID."),
+  building: tableBuildingSchema,
+  createdAt: z.string().datetime(),
+  updatedAt: z.string().datetime()
+});
+const createRoomSchema = roomSchema;
+const updateRoomSchema = roomSchema.extend({
+  id: z.string().uuid("Invalid room ID.")
+});
+const deleteRoomSchema = z.object({
+  id: z.string().uuid("Invalid room ID.")
+});
+
+async function logFacilityAction(instancePrisma, {
+  action,
+  roomIdentifier,
+  type,
+  oldStatus,
+  newStatus
+}) {
+  await instancePrisma.facilityLog.create({
+    data: {
+      user: "System",
+      // Replace with session.user.name if available
+      role: "Admin",
+      // Replace with session.user.role if available
+      action,
+      roomIdentifier,
+      type,
+      oldStatus,
+      newStatus,
+      timestamp: /* @__PURE__ */ new Date()
+    }
+  });
+}
+const getRooms = protectedProcedure.query(async ({ ctx }) => {
+  const { instancePrisma } = ctx;
+  try {
+    const rooms = await instancePrisma.room.findMany({
+      include: { building: true }
+    });
+    return { success: true, message: "Rooms fetched successfully.", data: rooms };
+  } catch (error) {
+    console.log(error);
+    return { success: false, message: "Failed to fetch rooms.", data: null };
+  }
+});
+const getRoom = protectedProcedure.input(getRoomSchema).query(async ({ ctx, input }) => {
+  const { instancePrisma } = ctx;
+  const { id } = input;
+  try {
+    const room = await instancePrisma.room.findUnique({ where: { id } });
+    if (!room) {
+      return { success: false, message: "Room not found.", data: null };
+    }
+    return { success: true, message: "Room fetched successfully.", data: room };
+  } catch (error) {
+    console.log(error);
+    return { success: false, message: "Failed to fetch room.", data: null };
+  }
+});
+const createRoom = protectedProcedure.input(createRoomSchema).mutation(async ({ ctx, input }) => {
+  const { instancePrisma } = ctx;
+  const { buildingId, type, identifier, description, capacity, status } = input;
+  try {
+    const room = await instancePrisma.room.create({
+      data: { buildingId, type, identifier, description, capacity, status }
+    });
+    await logFacilityAction(instancePrisma, {
+      action: "Created Room",
+      roomIdentifier: identifier,
+      type,
+      newStatus: status
+    });
+    return { success: true, message: "Room created successfully.", data: room };
+  } catch (error) {
+    console.log(error);
+    return { success: false, message: "Failed to create room.", data: null };
+  }
+});
+const updateRoom = protectedProcedure.input(updateRoomSchema).mutation(async ({ ctx, input }) => {
+  var _a;
+  const { instancePrisma } = ctx;
+  const { id, type, identifier, description, capacity, status } = input;
+  try {
+    const oldRoom = await instancePrisma.room.findUnique({ where: { id } });
+    const room = await instancePrisma.room.update({
+      where: { id },
+      data: { type, identifier, description, capacity, status }
+    });
+    await logFacilityAction(instancePrisma, {
+      action: "Updated Room",
+      roomIdentifier: identifier,
+      type,
+      oldStatus: (_a = oldRoom == null ? void 0 : oldRoom.status) != null ? _a : null,
+      newStatus: status
+    });
+    return { success: true, message: "Room updated successfully.", data: room };
+  } catch (error) {
+    console.log(error);
+    return { success: false, message: "Failed to update room.", data: null };
+  }
+});
+const deleteRoom = protectedProcedure.input(deleteRoomSchema).mutation(async ({ ctx, input }) => {
+  var _a, _b, _c;
+  const { instancePrisma } = ctx;
+  const { id } = input;
+  try {
+    const oldRoom = await instancePrisma.room.findUnique({ where: { id } });
+    const room = await instancePrisma.room.delete({ where: { id } });
+    await logFacilityAction(instancePrisma, {
+      action: "Deleted Room",
+      roomIdentifier: (_a = oldRoom == null ? void 0 : oldRoom.identifier) != null ? _a : "",
+      type: (_b = oldRoom == null ? void 0 : oldRoom.type) != null ? _b : "",
+      oldStatus: (_c = oldRoom == null ? void 0 : oldRoom.status) != null ? _c : null
+    });
+    return { success: true, message: "Room deleted successfully.", data: room };
+  } catch (error) {
+    console.log(error);
+    return { success: false, message: "Failed to delete room.", data: null };
+  }
+});
+const roomsRouter = createTRPCRouter({
+  getRooms,
+  getRoom,
+  createRoom,
+  updateRoom,
+  deleteRoom
+});
+
+const createLog = async (log) => {
+  try {
+    const instancePrisma = new PrismaClient();
+    await instancePrisma.log.create({
+      data: {
+        user: log.user,
+        action: log.action,
+        entity: log.entity,
+        data: {},
+        ipAddress: log.ipAddress
+      }
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const getBuildings = protectedProcedure.query(async ({ ctx }) => {
+  const { instancePrisma } = ctx;
+  try {
+    const buildings = await instancePrisma.building.findMany();
+    return {
+      success: true,
+      message: "Buildings fetched successfully.",
+      data: buildings
+    };
+  } catch (error) {
+    console.log(error);
+    return {
+      success: false,
+      message: "Failed to fetch buildings.",
+      data: null
+    };
+  }
+});
+const getBuilding = protectedProcedure.input(getBuildingSchema).query(async ({ ctx, input }) => {
+  const { instancePrisma } = ctx;
+  const { id } = input;
+  try {
+    const building = await instancePrisma.building.findUnique({
+      where: { id }
+    });
+    if (!building) {
+      return {
+        success: false,
+        message: "Building not found.",
+        data: null
+      };
+    }
+    return {
+      success: true,
+      message: "Building fetched successfully.",
+      data: building
+    };
+  } catch (error) {
+    console.log(error);
+    return {
+      success: false,
+      message: "Failed to fetch building.",
+      data: null
+    };
+  }
+});
+const createBuilding = protectedProcedure.input(createBuildingSchema).mutation(async ({ ctx, input }) => {
+  var _a;
+  const { instancePrisma, event } = ctx;
+  const { name } = input;
+  try {
+    const building = await instancePrisma.building.create({
+      data: { name }
+    });
+    await createLog({
+      user: `${ctx.user.firstName} ${ctx.user.lastName}`,
+      action: "Created",
+      entity: "building",
+      ipAddress: (_a = event.headers.get("x-forwarded-for")) != null ? _a : "Unknown"
+    });
+    return {
+      success: true,
+      message: "Building created successfully.",
+      data: building
+    };
+  } catch (error) {
+    console.log(error);
+    throw new TRPCError({
+      code: "INTERNAL_SERVER_ERROR",
+      message: "Failed to create building."
+    });
+  }
+});
+const updateBuilding = protectedProcedure.input(updateBuildingSchema).mutation(async ({ ctx, input }) => {
+  var _a;
+  const { instancePrisma, event } = ctx;
+  const { id, name } = input;
+  try {
+    const building = await instancePrisma.building.update({
+      where: { id },
+      data: { name }
+    });
+    await createLog({
+      user: `${ctx.user.firstName} ${ctx.user.lastName}`,
+      action: "Updated",
+      entity: "building",
+      ipAddress: (_a = event.headers.get("x-forwarded-for")) != null ? _a : "Unknown"
+    });
+    return {
+      success: true,
+      message: "Building updated successfully.",
+      data: building
+    };
+  } catch (error) {
+    console.log(error);
+    throw new TRPCError({
+      code: "INTERNAL_SERVER_ERROR",
+      message: "Failed to update building."
+    });
+  }
+});
+const deleteBuilding = protectedProcedure.input(deleteBuildingSchema).mutation(async ({ ctx, input }) => {
+  var _a;
+  const { instancePrisma, event } = ctx;
+  const { id } = input;
+  try {
+    const building = await instancePrisma.building.delete({
+      where: { id }
+    });
+    await createLog({
+      user: `${ctx.user.firstName} ${ctx.user.lastName}`,
+      action: "Deleted",
+      entity: "building",
+      ipAddress: (_a = event.headers.get("x-forwarded-for")) != null ? _a : "Unknown"
+    });
+    return {
+      success: true,
+      message: "Building deleted successfully.",
+      data: building
+    };
+  } catch (error) {
+    console.log(error);
+    throw new TRPCError({
+      code: "INTERNAL_SERVER_ERROR",
+      message: "Failed to delete building."
+    });
+  }
+});
+const buildingsRouter = createTRPCRouter({
+  getBuildings,
+  getBuilding,
+  createBuilding,
+  updateBuilding,
+  deleteBuilding
+});
+
+const facilitiesRouter = createTRPCRouter({
+  rooms: roomsRouter,
+  buildings: buildingsRouter
+});
+
+const patientsRouter = createTRPCRouter({
+  // Stub - will implement later to call Express backend
+  getPatients: publicProcedure.query(() => ({ success: true, data: [] }))
+});
+
+const appointmentsRouter = createTRPCRouter({
+  // Stub - will implement later to call Express backend
+  getAppointments: publicProcedure.query(() => ({ success: true, data: [] }))
+});
+
+const staffRouter = createTRPCRouter({
+  // Stub - will implement later to call Express backend
+  getStaff: publicProcedure.query(() => ({ success: true, data: [] }))
+});
+
+const logsRouter = createTRPCRouter({
+  // Stub - will implement later to call Express backend
+  getLogs: publicProcedure.query(() => ({ success: true, data: [] }))
+});
+
+const billingRouter = createTRPCRouter({
+  // Stub - will implement later to call Express backend
+  getBilling: publicProcedure.query(() => ({ success: true, data: [] }))
+});
+
+const healthRouter = createTRPCRouter({
+  check: publicProcedure.query(() => {
+    return {
+      status: "ok",
+      timestamp: (/* @__PURE__ */ new Date()).toISOString(),
+      message: "Marcher HIS tRPC API is running"
+    };
+  })
+});
+
+const appRouter = createTRPCRouter({
+  health: healthRouter,
+  auth: authRouter,
+  facilities: facilitiesRouter,
+  patients: patientsRouter,
+  appointments: appointmentsRouter,
+  staff: staffRouter,
+  logs: logsRouter,
+  billing: billingRouter
+});
+
 const _trpc_ = createTRPCNuxtHandler({
   endpoint: "/api/trpc",
-  router: simpleRouter,
-  createContext: () => ({})
+  router: appRouter,
+  createContext: createTRPCContext
 });
 
 const _trpc_$1 = /*#__PURE__*/Object.freeze(/*#__PURE__*/Object.defineProperty({

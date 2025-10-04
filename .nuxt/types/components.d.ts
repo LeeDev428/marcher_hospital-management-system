@@ -170,6 +170,11 @@ interface _GlobalComponents {
     'LayoutSidebarHeader': typeof import("../../components/layout/sidebar/SidebarHeader.vue")['default']
     'LayoutSidebarItem': typeof import("../../components/layout/sidebar/SidebarItem.vue")['default']
     'LayoutSidebar': typeof import("../../components/layout/sidebar/index")['default']
+    'StaffDashboardAnalyticsChart': typeof import("../../components/staff/dashboard/AnalyticsChart.vue")['default']
+    'StaffDashboardRecentActivities': typeof import("../../components/staff/dashboard/RecentActivities.vue")['default']
+    'StaffDashboardStatsCards': typeof import("../../components/staff/dashboard/StatsCards.vue")['default']
+    'StaffDashboardTodaysAppointments': typeof import("../../components/staff/dashboard/TodaysAppointments.vue")['default']
+    'StaffDashboardWelcomeHeader': typeof import("../../components/staff/dashboard/WelcomeHeader.vue")['default']
     'LogEntityCell': typeof import("../../pages/(admin)/logs/components/LogEntityCell.vue")['default']
     'LogsTable': typeof import("../../pages/(admin)/logs/components/LogsTable.vue")['default']
     'UserProfileForm': typeof import("../../pages/(admin)/users/components/UserProfileForm.vue")['default']
@@ -183,63 +188,6 @@ interface _GlobalComponents {
     'StartUpForm': typeof import("../../pages/(public)/platform/components/StartUpForm.vue")['default']
     'SupportForm': typeof import("../../pages/(public)/platform/components/SupportForm.vue")['default']
     'TermsOfUseForm': typeof import("../../pages/(public)/platform/components/TermsOfUseForm.vue")['default']
-    'AppointmentFilters': typeof import("../../pages/(staff)/appointments/components/AppointmentFilters.vue")['default']
-    'AppointmentForm': typeof import("../../pages/(staff)/appointments/components/AppointmentForm.vue")['default']
-    'AppointmentsAvailability': typeof import("../../pages/(staff)/appointments/components/AppointmentsAvailability.vue")['default']
-    'AppointmentsTable': typeof import("../../pages/(staff)/appointments/components/AppointmentsTable.vue")['default']
-    'BillingPaymentForm': typeof import("../../pages/(staff)/billing/components/BillingPaymentForm.vue")['default']
-    'BillingPaymentInstalmentForm': typeof import("../../pages/(staff)/billing/components/BillingPaymentInstalmentForm.vue")['default']
-    'BillingPaymentInstalmentTable': typeof import("../../pages/(staff)/billing/components/BillingPaymentInstalmentTable.vue")['default']
-    'BillingPaymentPlanForm': typeof import("../../pages/(staff)/billing/components/BillingPaymentPlanForm.vue")['default']
-    'BillingPaymentPlansTable': typeof import("../../pages/(staff)/billing/components/BillingPaymentPlansTable.vue")['default']
-    'BillingPaymentsTable': typeof import("../../pages/(staff)/billing/components/BillingPaymentsTable.vue")['default']
-    'BillingTransactionForm': typeof import("../../pages/(staff)/billing/components/BillingTransactionForm.vue")['default']
-    'BillingTransactionItemForm': typeof import("../../pages/(staff)/billing/components/BillingTransactionItemForm.vue")['default']
-    'BillingTransactionItemsTable': typeof import("../../pages/(staff)/billing/components/BillingTransactionItemsTable.vue")['default']
-    'BillingTransactionsTable': typeof import("../../pages/(staff)/billing/components/BillingTransactionsTable.vue")['default']
-    'AppointmentsList': typeof import("../../pages/(staff)/dashboard/components/AppointmentsList.vue")['default']
-    'DashboardFilters': typeof import("../../pages/(staff)/dashboard/components/DashboardFilters.vue")['default']
-    'DashboardSummaryCards': typeof import("../../pages/(staff)/dashboard/components/DashboardSummaryCards.vue")['default']
-    'DoctorDashboard': typeof import("../../pages/(staff)/dashboard/components/DoctorDashboard.vue")['default']
-    'SecretaryDashboard': typeof import("../../pages/(staff)/dashboard/components/SecretaryDashboard.vue")['default']
-    'BuildingForm': typeof import("../../pages/(staff)/facilities/components/BuildingForm.vue")['default']
-    'BuildingsTable': typeof import("../../pages/(staff)/facilities/components/BuildingsTable.vue")['default']
-    'FacilitiesTable': typeof import("../../pages/(staff)/facilities/components/FacilitiesTable.vue")['default']
-    'FacilityForm': typeof import("../../pages/(staff)/facilities/components/FacilityForm.vue")['default']
-    'FacilityLogsTable': typeof import("../../pages/(staff)/facilities/components/FacilityLogsTable.vue")['default']
-    'InsuranceClaimForm': typeof import("../../pages/(staff)/insurance/components/InsuranceClaimForm.vue")['default']
-    'InsuranceClaimItemForm': typeof import("../../pages/(staff)/insurance/components/InsuranceClaimItemForm.vue")['default']
-    'InsuranceClaimItemsTable': typeof import("../../pages/(staff)/insurance/components/InsuranceClaimItemsTable.vue")['default']
-    'InsuranceClaimsTable': typeof import("../../pages/(staff)/insurance/components/InsuranceClaimsTable.vue")['default']
-    'InsuranceProviderForm': typeof import("../../pages/(staff)/insurance/components/InsuranceProviderForm.vue")['default']
-    'InsuranceProviderTable': typeof import("../../pages/(staff)/insurance/components/InsuranceProviderTable.vue")['default']
-    'EncountersModule': typeof import("../../pages/(staff)/patients/[patientProfileId]/encounters/components/EncountersModule.vue")['default']
-    'InpatientForm': typeof import("../../pages/(staff)/patients/[patientProfileId]/encounters/components/InpatientForm.vue")['default']
-    'OutpatientForm': typeof import("../../pages/(staff)/patients/[patientProfileId]/encounters/components/OutpatientForm.vue")['default']
-    'EncountersTable': typeof import("../../pages/(staff)/patients/[patientProfileId]/encounters/components/components/EncountersTable.vue")['default']
-    'InpatientTable': typeof import("../../pages/(staff)/patients/[patientProfileId]/encounters/components/components/InpatientTable.vue")['default']
-    'OutpatientTable': typeof import("../../pages/(staff)/patients/[patientProfileId]/encounters/components/components/OutpatientTable.vue")['default']
-    '[inpatientEncounterId]': typeof import("../../pages/(staff)/patients/[patientProfileId]/encounters/components/inpatient/[inpatientEncounterId].vue")['default']
-    '[outpatientEncounterId]': typeof import("../../pages/(staff)/patients/[patientProfileId]/encounters/components/outpatient/[outpatientEncounterId].vue")['default']
-    'New': typeof import("../../pages/(staff)/patients/[patientProfileId]/encounters/components/outpatient/new.vue")['default']
-    'AddressFields': typeof import("../../pages/(staff)/patients/components/AddressFields.vue")['default']
-    'ConsentFields': typeof import("../../pages/(staff)/patients/components/ConsentFields.vue")['default']
-    'ContactFields': typeof import("../../pages/(staff)/patients/components/ContactFields.vue")['default']
-    'EmergencyContactFields': typeof import("../../pages/(staff)/patients/components/EmergencyContactFields.vue")['default']
-    'EmploymentFields': typeof import("../../pages/(staff)/patients/components/EmploymentFields.vue")['default']
-    'PatientProfileForm': typeof import("../../pages/(staff)/patients/components/PatientProfileForm.vue")['default']
-    'PatientProfileTable': typeof import("../../pages/(staff)/patients/components/PatientProfileTable.vue")['default']
-    'ProfileFields': typeof import("../../pages/(staff)/patients/components/ProfileFields.vue")['default']
-    'PharmacyBrandForm': typeof import("../../pages/(staff)/pharmacy/components/PharmacyBrandForm.vue")['default']
-    'PharmacyBrandsTable': typeof import("../../pages/(staff)/pharmacy/components/PharmacyBrandsTable.vue")['default']
-    'PharmacyCategoriesTable': typeof import("../../pages/(staff)/pharmacy/components/PharmacyCategoriesTable.vue")['default']
-    'PharmacyCategoryForm': typeof import("../../pages/(staff)/pharmacy/components/PharmacyCategoryForm.vue")['default']
-    'PharmacyItemForm': typeof import("../../pages/(staff)/pharmacy/components/PharmacyItemForm.vue")['default']
-    'PharmacyItemsTable': typeof import("../../pages/(staff)/pharmacy/components/PharmacyItemsTable.vue")['default']
-    'PharmacySupplierForm': typeof import("../../pages/(staff)/pharmacy/components/PharmacySupplierForm.vue")['default']
-    'PharmacySuppliersTable': typeof import("../../pages/(staff)/pharmacy/components/PharmacySuppliersTable.vue")['default']
-    'StaffForm': typeof import("../../pages/(staff)/staff/components/StaffForm.vue")['default']
-    'StaffTable': typeof import("../../pages/(staff)/staff/components/StaffTable.vue")['default']
     'IndexDashboard': typeof import("../../pages/index/components/IndexDashboard.vue")['default']
     'ClaimRequestForm': typeof import("../../pages/partner/components/ClaimRequestForm.vue")['default']
     'ClaimRequestsTable': typeof import("../../pages/partner/components/ClaimRequestsTable.vue")['default']
@@ -255,6 +203,63 @@ interface _GlobalComponents {
     'DoctorTable': typeof import("../../pages/patient/doctor/components/DoctorTable.vue")['default']
     'MedicalRecordForm': typeof import("../../pages/patient/medical-records/components/MedicalRecordForm.vue")['default']
     'MedicalRecordsTable': typeof import("../../pages/patient/medical-records/components/MedicalRecordsTable.vue")['default']
+    'AppointmentFilters': typeof import("../../pages/staff/appointments/components/AppointmentFilters.vue")['default']
+    'AppointmentForm': typeof import("../../pages/staff/appointments/components/AppointmentForm.vue")['default']
+    'AppointmentsAvailability': typeof import("../../pages/staff/appointments/components/AppointmentsAvailability.vue")['default']
+    'AppointmentsTable': typeof import("../../pages/staff/appointments/components/AppointmentsTable.vue")['default']
+    'BillingPaymentForm': typeof import("../../pages/staff/billing/components/BillingPaymentForm.vue")['default']
+    'BillingPaymentInstalmentForm': typeof import("../../pages/staff/billing/components/BillingPaymentInstalmentForm.vue")['default']
+    'BillingPaymentInstalmentTable': typeof import("../../pages/staff/billing/components/BillingPaymentInstalmentTable.vue")['default']
+    'BillingPaymentPlanForm': typeof import("../../pages/staff/billing/components/BillingPaymentPlanForm.vue")['default']
+    'BillingPaymentPlansTable': typeof import("../../pages/staff/billing/components/BillingPaymentPlansTable.vue")['default']
+    'BillingPaymentsTable': typeof import("../../pages/staff/billing/components/BillingPaymentsTable.vue")['default']
+    'BillingTransactionForm': typeof import("../../pages/staff/billing/components/BillingTransactionForm.vue")['default']
+    'BillingTransactionItemForm': typeof import("../../pages/staff/billing/components/BillingTransactionItemForm.vue")['default']
+    'BillingTransactionItemsTable': typeof import("../../pages/staff/billing/components/BillingTransactionItemsTable.vue")['default']
+    'BillingTransactionsTable': typeof import("../../pages/staff/billing/components/BillingTransactionsTable.vue")['default']
+    'AppointmentsList': typeof import("../../pages/staff/dashboard/components/AppointmentsList.vue")['default']
+    'DashboardFilters': typeof import("../../pages/staff/dashboard/components/DashboardFilters.vue")['default']
+    'DashboardSummaryCards': typeof import("../../pages/staff/dashboard/components/DashboardSummaryCards.vue")['default']
+    'DoctorDashboard': typeof import("../../pages/staff/dashboard/components/DoctorDashboard.vue")['default']
+    'SecretaryDashboard': typeof import("../../pages/staff/dashboard/components/SecretaryDashboard.vue")['default']
+    'BuildingForm': typeof import("../../pages/staff/facilities/components/BuildingForm.vue")['default']
+    'BuildingsTable': typeof import("../../pages/staff/facilities/components/BuildingsTable.vue")['default']
+    'FacilitiesTable': typeof import("../../pages/staff/facilities/components/FacilitiesTable.vue")['default']
+    'FacilityForm': typeof import("../../pages/staff/facilities/components/FacilityForm.vue")['default']
+    'FacilityLogsTable': typeof import("../../pages/staff/facilities/components/FacilityLogsTable.vue")['default']
+    'InsuranceClaimForm': typeof import("../../pages/staff/insurance/components/InsuranceClaimForm.vue")['default']
+    'InsuranceClaimItemForm': typeof import("../../pages/staff/insurance/components/InsuranceClaimItemForm.vue")['default']
+    'InsuranceClaimItemsTable': typeof import("../../pages/staff/insurance/components/InsuranceClaimItemsTable.vue")['default']
+    'InsuranceClaimsTable': typeof import("../../pages/staff/insurance/components/InsuranceClaimsTable.vue")['default']
+    'InsuranceProviderForm': typeof import("../../pages/staff/insurance/components/InsuranceProviderForm.vue")['default']
+    'InsuranceProviderTable': typeof import("../../pages/staff/insurance/components/InsuranceProviderTable.vue")['default']
+    'EncountersModule': typeof import("../../pages/staff/patients/[patientProfileId]/encounters/components/EncountersModule.vue")['default']
+    'InpatientForm': typeof import("../../pages/staff/patients/[patientProfileId]/encounters/components/InpatientForm.vue")['default']
+    'OutpatientForm': typeof import("../../pages/staff/patients/[patientProfileId]/encounters/components/OutpatientForm.vue")['default']
+    'EncountersTable': typeof import("../../pages/staff/patients/[patientProfileId]/encounters/components/components/EncountersTable.vue")['default']
+    'InpatientTable': typeof import("../../pages/staff/patients/[patientProfileId]/encounters/components/components/InpatientTable.vue")['default']
+    'OutpatientTable': typeof import("../../pages/staff/patients/[patientProfileId]/encounters/components/components/OutpatientTable.vue")['default']
+    '[inpatientEncounterId]': typeof import("../../pages/staff/patients/[patientProfileId]/encounters/components/inpatient/[inpatientEncounterId].vue")['default']
+    '[outpatientEncounterId]': typeof import("../../pages/staff/patients/[patientProfileId]/encounters/components/outpatient/[outpatientEncounterId].vue")['default']
+    'New': typeof import("../../pages/staff/patients/[patientProfileId]/encounters/components/outpatient/new.vue")['default']
+    'AddressFields': typeof import("../../pages/staff/patients/components/AddressFields.vue")['default']
+    'ConsentFields': typeof import("../../pages/staff/patients/components/ConsentFields.vue")['default']
+    'ContactFields': typeof import("../../pages/staff/patients/components/ContactFields.vue")['default']
+    'EmergencyContactFields': typeof import("../../pages/staff/patients/components/EmergencyContactFields.vue")['default']
+    'EmploymentFields': typeof import("../../pages/staff/patients/components/EmploymentFields.vue")['default']
+    'PatientProfileForm': typeof import("../../pages/staff/patients/components/PatientProfileForm.vue")['default']
+    'PatientProfileTable': typeof import("../../pages/staff/patients/components/PatientProfileTable.vue")['default']
+    'ProfileFields': typeof import("../../pages/staff/patients/components/ProfileFields.vue")['default']
+    'PharmacyBrandForm': typeof import("../../pages/staff/pharmacy/components/PharmacyBrandForm.vue")['default']
+    'PharmacyBrandsTable': typeof import("../../pages/staff/pharmacy/components/PharmacyBrandsTable.vue")['default']
+    'PharmacyCategoriesTable': typeof import("../../pages/staff/pharmacy/components/PharmacyCategoriesTable.vue")['default']
+    'PharmacyCategoryForm': typeof import("../../pages/staff/pharmacy/components/PharmacyCategoryForm.vue")['default']
+    'PharmacyItemForm': typeof import("../../pages/staff/pharmacy/components/PharmacyItemForm.vue")['default']
+    'PharmacyItemsTable': typeof import("../../pages/staff/pharmacy/components/PharmacyItemsTable.vue")['default']
+    'PharmacySupplierForm': typeof import("../../pages/staff/pharmacy/components/PharmacySupplierForm.vue")['default']
+    'PharmacySuppliersTable': typeof import("../../pages/staff/pharmacy/components/PharmacySuppliersTable.vue")['default']
+    'StaffForm': typeof import("../../pages/staff/staff/components/StaffForm.vue")['default']
+    'StaffTable': typeof import("../../pages/staff/staff/components/StaffTable.vue")['default']
     'NuxtWelcome': typeof import("../../node_modules/nuxt/dist/app/components/welcome.vue")['default']
     'NuxtLayout': typeof import("../../node_modules/nuxt/dist/app/components/nuxt-layout")['default']
     'NuxtErrorBoundary': typeof import("../../node_modules/nuxt/dist/app/components/nuxt-error-boundary.vue")['default']
@@ -342,6 +347,7 @@ interface _GlobalComponents {
     'UiDropdownMenuSubTrigger': typeof import("../../components/ui/dropdown-menu/index")['DropdownMenuSubTrigger']
     'UiDropdownMenuTrigger': typeof import("../../components/ui/dropdown-menu/index")['DropdownMenuTrigger']
     'UiDropdownMenuPortal': typeof import("../../components/ui/dropdown-menu/index")['DropdownMenuPortal']
+    'UiInput': typeof import("../../components/ui/input/index")['Input']
     'UiFormControl': typeof import("../../components/ui/form/index")['FormControl']
     'UiFormDescription': typeof import("../../components/ui/form/index")['FormDescription']
     'UiFormItem': typeof import("../../components/ui/form/index")['FormItem']
@@ -351,7 +357,6 @@ interface _GlobalComponents {
     'UiForm': typeof import("../../components/ui/form/index")['Form']
     'UiFormField': typeof import("../../components/ui/form/index")['FormField']
     'UiFormFieldArray': typeof import("../../components/ui/form/index")['FormFieldArray']
-    'UiInput': typeof import("../../components/ui/input/index")['Input']
     'UiLabel': typeof import("../../components/ui/label/index")['Label']
     'UiPopover': typeof import("../../components/ui/popover/index")['Popover']
     'UiPopoverAnchor': typeof import("../../components/ui/popover/index")['PopoverAnchor']
@@ -368,8 +373,8 @@ interface _GlobalComponents {
     'UiSelectSeparator': typeof import("../../components/ui/select/index")['SelectSeparator']
     'UiSelectTrigger': typeof import("../../components/ui/select/index")['SelectTrigger']
     'UiSelectValue': typeof import("../../components/ui/select/index")['SelectValue']
-    'UiSkeleton': typeof import("../../components/ui/skeleton/index")['Skeleton']
     'UiToaster': typeof import("../../components/ui/sonner/index")['Toaster']
+    'UiSkeleton': typeof import("../../components/ui/skeleton/index")['Skeleton']
     'UiTable': typeof import("../../components/ui/table/index")['Table']
     'UiTableBody': typeof import("../../components/ui/table/index")['TableBody']
     'UiTableCaption': typeof import("../../components/ui/table/index")['TableCaption']
@@ -557,6 +562,11 @@ interface _GlobalComponents {
     'LazyLayoutSidebarHeader': LazyComponent<typeof import("../../components/layout/sidebar/SidebarHeader.vue")['default']>
     'LazyLayoutSidebarItem': LazyComponent<typeof import("../../components/layout/sidebar/SidebarItem.vue")['default']>
     'LazyLayoutSidebar': LazyComponent<typeof import("../../components/layout/sidebar/index")['default']>
+    'LazyStaffDashboardAnalyticsChart': LazyComponent<typeof import("../../components/staff/dashboard/AnalyticsChart.vue")['default']>
+    'LazyStaffDashboardRecentActivities': LazyComponent<typeof import("../../components/staff/dashboard/RecentActivities.vue")['default']>
+    'LazyStaffDashboardStatsCards': LazyComponent<typeof import("../../components/staff/dashboard/StatsCards.vue")['default']>
+    'LazyStaffDashboardTodaysAppointments': LazyComponent<typeof import("../../components/staff/dashboard/TodaysAppointments.vue")['default']>
+    'LazyStaffDashboardWelcomeHeader': LazyComponent<typeof import("../../components/staff/dashboard/WelcomeHeader.vue")['default']>
     'LazyLogEntityCell': LazyComponent<typeof import("../../pages/(admin)/logs/components/LogEntityCell.vue")['default']>
     'LazyLogsTable': LazyComponent<typeof import("../../pages/(admin)/logs/components/LogsTable.vue")['default']>
     'LazyUserProfileForm': LazyComponent<typeof import("../../pages/(admin)/users/components/UserProfileForm.vue")['default']>
@@ -570,63 +580,6 @@ interface _GlobalComponents {
     'LazyStartUpForm': LazyComponent<typeof import("../../pages/(public)/platform/components/StartUpForm.vue")['default']>
     'LazySupportForm': LazyComponent<typeof import("../../pages/(public)/platform/components/SupportForm.vue")['default']>
     'LazyTermsOfUseForm': LazyComponent<typeof import("../../pages/(public)/platform/components/TermsOfUseForm.vue")['default']>
-    'LazyAppointmentFilters': LazyComponent<typeof import("../../pages/(staff)/appointments/components/AppointmentFilters.vue")['default']>
-    'LazyAppointmentForm': LazyComponent<typeof import("../../pages/(staff)/appointments/components/AppointmentForm.vue")['default']>
-    'LazyAppointmentsAvailability': LazyComponent<typeof import("../../pages/(staff)/appointments/components/AppointmentsAvailability.vue")['default']>
-    'LazyAppointmentsTable': LazyComponent<typeof import("../../pages/(staff)/appointments/components/AppointmentsTable.vue")['default']>
-    'LazyBillingPaymentForm': LazyComponent<typeof import("../../pages/(staff)/billing/components/BillingPaymentForm.vue")['default']>
-    'LazyBillingPaymentInstalmentForm': LazyComponent<typeof import("../../pages/(staff)/billing/components/BillingPaymentInstalmentForm.vue")['default']>
-    'LazyBillingPaymentInstalmentTable': LazyComponent<typeof import("../../pages/(staff)/billing/components/BillingPaymentInstalmentTable.vue")['default']>
-    'LazyBillingPaymentPlanForm': LazyComponent<typeof import("../../pages/(staff)/billing/components/BillingPaymentPlanForm.vue")['default']>
-    'LazyBillingPaymentPlansTable': LazyComponent<typeof import("../../pages/(staff)/billing/components/BillingPaymentPlansTable.vue")['default']>
-    'LazyBillingPaymentsTable': LazyComponent<typeof import("../../pages/(staff)/billing/components/BillingPaymentsTable.vue")['default']>
-    'LazyBillingTransactionForm': LazyComponent<typeof import("../../pages/(staff)/billing/components/BillingTransactionForm.vue")['default']>
-    'LazyBillingTransactionItemForm': LazyComponent<typeof import("../../pages/(staff)/billing/components/BillingTransactionItemForm.vue")['default']>
-    'LazyBillingTransactionItemsTable': LazyComponent<typeof import("../../pages/(staff)/billing/components/BillingTransactionItemsTable.vue")['default']>
-    'LazyBillingTransactionsTable': LazyComponent<typeof import("../../pages/(staff)/billing/components/BillingTransactionsTable.vue")['default']>
-    'LazyAppointmentsList': LazyComponent<typeof import("../../pages/(staff)/dashboard/components/AppointmentsList.vue")['default']>
-    'LazyDashboardFilters': LazyComponent<typeof import("../../pages/(staff)/dashboard/components/DashboardFilters.vue")['default']>
-    'LazyDashboardSummaryCards': LazyComponent<typeof import("../../pages/(staff)/dashboard/components/DashboardSummaryCards.vue")['default']>
-    'LazyDoctorDashboard': LazyComponent<typeof import("../../pages/(staff)/dashboard/components/DoctorDashboard.vue")['default']>
-    'LazySecretaryDashboard': LazyComponent<typeof import("../../pages/(staff)/dashboard/components/SecretaryDashboard.vue")['default']>
-    'LazyBuildingForm': LazyComponent<typeof import("../../pages/(staff)/facilities/components/BuildingForm.vue")['default']>
-    'LazyBuildingsTable': LazyComponent<typeof import("../../pages/(staff)/facilities/components/BuildingsTable.vue")['default']>
-    'LazyFacilitiesTable': LazyComponent<typeof import("../../pages/(staff)/facilities/components/FacilitiesTable.vue")['default']>
-    'LazyFacilityForm': LazyComponent<typeof import("../../pages/(staff)/facilities/components/FacilityForm.vue")['default']>
-    'LazyFacilityLogsTable': LazyComponent<typeof import("../../pages/(staff)/facilities/components/FacilityLogsTable.vue")['default']>
-    'LazyInsuranceClaimForm': LazyComponent<typeof import("../../pages/(staff)/insurance/components/InsuranceClaimForm.vue")['default']>
-    'LazyInsuranceClaimItemForm': LazyComponent<typeof import("../../pages/(staff)/insurance/components/InsuranceClaimItemForm.vue")['default']>
-    'LazyInsuranceClaimItemsTable': LazyComponent<typeof import("../../pages/(staff)/insurance/components/InsuranceClaimItemsTable.vue")['default']>
-    'LazyInsuranceClaimsTable': LazyComponent<typeof import("../../pages/(staff)/insurance/components/InsuranceClaimsTable.vue")['default']>
-    'LazyInsuranceProviderForm': LazyComponent<typeof import("../../pages/(staff)/insurance/components/InsuranceProviderForm.vue")['default']>
-    'LazyInsuranceProviderTable': LazyComponent<typeof import("../../pages/(staff)/insurance/components/InsuranceProviderTable.vue")['default']>
-    'LazyEncountersModule': LazyComponent<typeof import("../../pages/(staff)/patients/[patientProfileId]/encounters/components/EncountersModule.vue")['default']>
-    'LazyInpatientForm': LazyComponent<typeof import("../../pages/(staff)/patients/[patientProfileId]/encounters/components/InpatientForm.vue")['default']>
-    'LazyOutpatientForm': LazyComponent<typeof import("../../pages/(staff)/patients/[patientProfileId]/encounters/components/OutpatientForm.vue")['default']>
-    'LazyEncountersTable': LazyComponent<typeof import("../../pages/(staff)/patients/[patientProfileId]/encounters/components/components/EncountersTable.vue")['default']>
-    'LazyInpatientTable': LazyComponent<typeof import("../../pages/(staff)/patients/[patientProfileId]/encounters/components/components/InpatientTable.vue")['default']>
-    'LazyOutpatientTable': LazyComponent<typeof import("../../pages/(staff)/patients/[patientProfileId]/encounters/components/components/OutpatientTable.vue")['default']>
-    'Lazy[inpatientEncounterId]': LazyComponent<typeof import("../../pages/(staff)/patients/[patientProfileId]/encounters/components/inpatient/[inpatientEncounterId].vue")['default']>
-    'Lazy[outpatientEncounterId]': LazyComponent<typeof import("../../pages/(staff)/patients/[patientProfileId]/encounters/components/outpatient/[outpatientEncounterId].vue")['default']>
-    'LazyNew': LazyComponent<typeof import("../../pages/(staff)/patients/[patientProfileId]/encounters/components/outpatient/new.vue")['default']>
-    'LazyAddressFields': LazyComponent<typeof import("../../pages/(staff)/patients/components/AddressFields.vue")['default']>
-    'LazyConsentFields': LazyComponent<typeof import("../../pages/(staff)/patients/components/ConsentFields.vue")['default']>
-    'LazyContactFields': LazyComponent<typeof import("../../pages/(staff)/patients/components/ContactFields.vue")['default']>
-    'LazyEmergencyContactFields': LazyComponent<typeof import("../../pages/(staff)/patients/components/EmergencyContactFields.vue")['default']>
-    'LazyEmploymentFields': LazyComponent<typeof import("../../pages/(staff)/patients/components/EmploymentFields.vue")['default']>
-    'LazyPatientProfileForm': LazyComponent<typeof import("../../pages/(staff)/patients/components/PatientProfileForm.vue")['default']>
-    'LazyPatientProfileTable': LazyComponent<typeof import("../../pages/(staff)/patients/components/PatientProfileTable.vue")['default']>
-    'LazyProfileFields': LazyComponent<typeof import("../../pages/(staff)/patients/components/ProfileFields.vue")['default']>
-    'LazyPharmacyBrandForm': LazyComponent<typeof import("../../pages/(staff)/pharmacy/components/PharmacyBrandForm.vue")['default']>
-    'LazyPharmacyBrandsTable': LazyComponent<typeof import("../../pages/(staff)/pharmacy/components/PharmacyBrandsTable.vue")['default']>
-    'LazyPharmacyCategoriesTable': LazyComponent<typeof import("../../pages/(staff)/pharmacy/components/PharmacyCategoriesTable.vue")['default']>
-    'LazyPharmacyCategoryForm': LazyComponent<typeof import("../../pages/(staff)/pharmacy/components/PharmacyCategoryForm.vue")['default']>
-    'LazyPharmacyItemForm': LazyComponent<typeof import("../../pages/(staff)/pharmacy/components/PharmacyItemForm.vue")['default']>
-    'LazyPharmacyItemsTable': LazyComponent<typeof import("../../pages/(staff)/pharmacy/components/PharmacyItemsTable.vue")['default']>
-    'LazyPharmacySupplierForm': LazyComponent<typeof import("../../pages/(staff)/pharmacy/components/PharmacySupplierForm.vue")['default']>
-    'LazyPharmacySuppliersTable': LazyComponent<typeof import("../../pages/(staff)/pharmacy/components/PharmacySuppliersTable.vue")['default']>
-    'LazyStaffForm': LazyComponent<typeof import("../../pages/(staff)/staff/components/StaffForm.vue")['default']>
-    'LazyStaffTable': LazyComponent<typeof import("../../pages/(staff)/staff/components/StaffTable.vue")['default']>
     'LazyIndexDashboard': LazyComponent<typeof import("../../pages/index/components/IndexDashboard.vue")['default']>
     'LazyClaimRequestForm': LazyComponent<typeof import("../../pages/partner/components/ClaimRequestForm.vue")['default']>
     'LazyClaimRequestsTable': LazyComponent<typeof import("../../pages/partner/components/ClaimRequestsTable.vue")['default']>
@@ -642,6 +595,63 @@ interface _GlobalComponents {
     'LazyDoctorTable': LazyComponent<typeof import("../../pages/patient/doctor/components/DoctorTable.vue")['default']>
     'LazyMedicalRecordForm': LazyComponent<typeof import("../../pages/patient/medical-records/components/MedicalRecordForm.vue")['default']>
     'LazyMedicalRecordsTable': LazyComponent<typeof import("../../pages/patient/medical-records/components/MedicalRecordsTable.vue")['default']>
+    'LazyAppointmentFilters': LazyComponent<typeof import("../../pages/staff/appointments/components/AppointmentFilters.vue")['default']>
+    'LazyAppointmentForm': LazyComponent<typeof import("../../pages/staff/appointments/components/AppointmentForm.vue")['default']>
+    'LazyAppointmentsAvailability': LazyComponent<typeof import("../../pages/staff/appointments/components/AppointmentsAvailability.vue")['default']>
+    'LazyAppointmentsTable': LazyComponent<typeof import("../../pages/staff/appointments/components/AppointmentsTable.vue")['default']>
+    'LazyBillingPaymentForm': LazyComponent<typeof import("../../pages/staff/billing/components/BillingPaymentForm.vue")['default']>
+    'LazyBillingPaymentInstalmentForm': LazyComponent<typeof import("../../pages/staff/billing/components/BillingPaymentInstalmentForm.vue")['default']>
+    'LazyBillingPaymentInstalmentTable': LazyComponent<typeof import("../../pages/staff/billing/components/BillingPaymentInstalmentTable.vue")['default']>
+    'LazyBillingPaymentPlanForm': LazyComponent<typeof import("../../pages/staff/billing/components/BillingPaymentPlanForm.vue")['default']>
+    'LazyBillingPaymentPlansTable': LazyComponent<typeof import("../../pages/staff/billing/components/BillingPaymentPlansTable.vue")['default']>
+    'LazyBillingPaymentsTable': LazyComponent<typeof import("../../pages/staff/billing/components/BillingPaymentsTable.vue")['default']>
+    'LazyBillingTransactionForm': LazyComponent<typeof import("../../pages/staff/billing/components/BillingTransactionForm.vue")['default']>
+    'LazyBillingTransactionItemForm': LazyComponent<typeof import("../../pages/staff/billing/components/BillingTransactionItemForm.vue")['default']>
+    'LazyBillingTransactionItemsTable': LazyComponent<typeof import("../../pages/staff/billing/components/BillingTransactionItemsTable.vue")['default']>
+    'LazyBillingTransactionsTable': LazyComponent<typeof import("../../pages/staff/billing/components/BillingTransactionsTable.vue")['default']>
+    'LazyAppointmentsList': LazyComponent<typeof import("../../pages/staff/dashboard/components/AppointmentsList.vue")['default']>
+    'LazyDashboardFilters': LazyComponent<typeof import("../../pages/staff/dashboard/components/DashboardFilters.vue")['default']>
+    'LazyDashboardSummaryCards': LazyComponent<typeof import("../../pages/staff/dashboard/components/DashboardSummaryCards.vue")['default']>
+    'LazyDoctorDashboard': LazyComponent<typeof import("../../pages/staff/dashboard/components/DoctorDashboard.vue")['default']>
+    'LazySecretaryDashboard': LazyComponent<typeof import("../../pages/staff/dashboard/components/SecretaryDashboard.vue")['default']>
+    'LazyBuildingForm': LazyComponent<typeof import("../../pages/staff/facilities/components/BuildingForm.vue")['default']>
+    'LazyBuildingsTable': LazyComponent<typeof import("../../pages/staff/facilities/components/BuildingsTable.vue")['default']>
+    'LazyFacilitiesTable': LazyComponent<typeof import("../../pages/staff/facilities/components/FacilitiesTable.vue")['default']>
+    'LazyFacilityForm': LazyComponent<typeof import("../../pages/staff/facilities/components/FacilityForm.vue")['default']>
+    'LazyFacilityLogsTable': LazyComponent<typeof import("../../pages/staff/facilities/components/FacilityLogsTable.vue")['default']>
+    'LazyInsuranceClaimForm': LazyComponent<typeof import("../../pages/staff/insurance/components/InsuranceClaimForm.vue")['default']>
+    'LazyInsuranceClaimItemForm': LazyComponent<typeof import("../../pages/staff/insurance/components/InsuranceClaimItemForm.vue")['default']>
+    'LazyInsuranceClaimItemsTable': LazyComponent<typeof import("../../pages/staff/insurance/components/InsuranceClaimItemsTable.vue")['default']>
+    'LazyInsuranceClaimsTable': LazyComponent<typeof import("../../pages/staff/insurance/components/InsuranceClaimsTable.vue")['default']>
+    'LazyInsuranceProviderForm': LazyComponent<typeof import("../../pages/staff/insurance/components/InsuranceProviderForm.vue")['default']>
+    'LazyInsuranceProviderTable': LazyComponent<typeof import("../../pages/staff/insurance/components/InsuranceProviderTable.vue")['default']>
+    'LazyEncountersModule': LazyComponent<typeof import("../../pages/staff/patients/[patientProfileId]/encounters/components/EncountersModule.vue")['default']>
+    'LazyInpatientForm': LazyComponent<typeof import("../../pages/staff/patients/[patientProfileId]/encounters/components/InpatientForm.vue")['default']>
+    'LazyOutpatientForm': LazyComponent<typeof import("../../pages/staff/patients/[patientProfileId]/encounters/components/OutpatientForm.vue")['default']>
+    'LazyEncountersTable': LazyComponent<typeof import("../../pages/staff/patients/[patientProfileId]/encounters/components/components/EncountersTable.vue")['default']>
+    'LazyInpatientTable': LazyComponent<typeof import("../../pages/staff/patients/[patientProfileId]/encounters/components/components/InpatientTable.vue")['default']>
+    'LazyOutpatientTable': LazyComponent<typeof import("../../pages/staff/patients/[patientProfileId]/encounters/components/components/OutpatientTable.vue")['default']>
+    'Lazy[inpatientEncounterId]': LazyComponent<typeof import("../../pages/staff/patients/[patientProfileId]/encounters/components/inpatient/[inpatientEncounterId].vue")['default']>
+    'Lazy[outpatientEncounterId]': LazyComponent<typeof import("../../pages/staff/patients/[patientProfileId]/encounters/components/outpatient/[outpatientEncounterId].vue")['default']>
+    'LazyNew': LazyComponent<typeof import("../../pages/staff/patients/[patientProfileId]/encounters/components/outpatient/new.vue")['default']>
+    'LazyAddressFields': LazyComponent<typeof import("../../pages/staff/patients/components/AddressFields.vue")['default']>
+    'LazyConsentFields': LazyComponent<typeof import("../../pages/staff/patients/components/ConsentFields.vue")['default']>
+    'LazyContactFields': LazyComponent<typeof import("../../pages/staff/patients/components/ContactFields.vue")['default']>
+    'LazyEmergencyContactFields': LazyComponent<typeof import("../../pages/staff/patients/components/EmergencyContactFields.vue")['default']>
+    'LazyEmploymentFields': LazyComponent<typeof import("../../pages/staff/patients/components/EmploymentFields.vue")['default']>
+    'LazyPatientProfileForm': LazyComponent<typeof import("../../pages/staff/patients/components/PatientProfileForm.vue")['default']>
+    'LazyPatientProfileTable': LazyComponent<typeof import("../../pages/staff/patients/components/PatientProfileTable.vue")['default']>
+    'LazyProfileFields': LazyComponent<typeof import("../../pages/staff/patients/components/ProfileFields.vue")['default']>
+    'LazyPharmacyBrandForm': LazyComponent<typeof import("../../pages/staff/pharmacy/components/PharmacyBrandForm.vue")['default']>
+    'LazyPharmacyBrandsTable': LazyComponent<typeof import("../../pages/staff/pharmacy/components/PharmacyBrandsTable.vue")['default']>
+    'LazyPharmacyCategoriesTable': LazyComponent<typeof import("../../pages/staff/pharmacy/components/PharmacyCategoriesTable.vue")['default']>
+    'LazyPharmacyCategoryForm': LazyComponent<typeof import("../../pages/staff/pharmacy/components/PharmacyCategoryForm.vue")['default']>
+    'LazyPharmacyItemForm': LazyComponent<typeof import("../../pages/staff/pharmacy/components/PharmacyItemForm.vue")['default']>
+    'LazyPharmacyItemsTable': LazyComponent<typeof import("../../pages/staff/pharmacy/components/PharmacyItemsTable.vue")['default']>
+    'LazyPharmacySupplierForm': LazyComponent<typeof import("../../pages/staff/pharmacy/components/PharmacySupplierForm.vue")['default']>
+    'LazyPharmacySuppliersTable': LazyComponent<typeof import("../../pages/staff/pharmacy/components/PharmacySuppliersTable.vue")['default']>
+    'LazyStaffForm': LazyComponent<typeof import("../../pages/staff/staff/components/StaffForm.vue")['default']>
+    'LazyStaffTable': LazyComponent<typeof import("../../pages/staff/staff/components/StaffTable.vue")['default']>
     'LazyNuxtWelcome': LazyComponent<typeof import("../../node_modules/nuxt/dist/app/components/welcome.vue")['default']>
     'LazyNuxtLayout': LazyComponent<typeof import("../../node_modules/nuxt/dist/app/components/nuxt-layout")['default']>
     'LazyNuxtErrorBoundary': LazyComponent<typeof import("../../node_modules/nuxt/dist/app/components/nuxt-error-boundary.vue")['default']>
@@ -729,6 +739,7 @@ interface _GlobalComponents {
     'LazyUiDropdownMenuSubTrigger': LazyComponent<typeof import("../../components/ui/dropdown-menu/index")['DropdownMenuSubTrigger']>
     'LazyUiDropdownMenuTrigger': LazyComponent<typeof import("../../components/ui/dropdown-menu/index")['DropdownMenuTrigger']>
     'LazyUiDropdownMenuPortal': LazyComponent<typeof import("../../components/ui/dropdown-menu/index")['DropdownMenuPortal']>
+    'LazyUiInput': LazyComponent<typeof import("../../components/ui/input/index")['Input']>
     'LazyUiFormControl': LazyComponent<typeof import("../../components/ui/form/index")['FormControl']>
     'LazyUiFormDescription': LazyComponent<typeof import("../../components/ui/form/index")['FormDescription']>
     'LazyUiFormItem': LazyComponent<typeof import("../../components/ui/form/index")['FormItem']>
@@ -738,7 +749,6 @@ interface _GlobalComponents {
     'LazyUiForm': LazyComponent<typeof import("../../components/ui/form/index")['Form']>
     'LazyUiFormField': LazyComponent<typeof import("../../components/ui/form/index")['FormField']>
     'LazyUiFormFieldArray': LazyComponent<typeof import("../../components/ui/form/index")['FormFieldArray']>
-    'LazyUiInput': LazyComponent<typeof import("../../components/ui/input/index")['Input']>
     'LazyUiLabel': LazyComponent<typeof import("../../components/ui/label/index")['Label']>
     'LazyUiPopover': LazyComponent<typeof import("../../components/ui/popover/index")['Popover']>
     'LazyUiPopoverAnchor': LazyComponent<typeof import("../../components/ui/popover/index")['PopoverAnchor']>
@@ -755,8 +765,8 @@ interface _GlobalComponents {
     'LazyUiSelectSeparator': LazyComponent<typeof import("../../components/ui/select/index")['SelectSeparator']>
     'LazyUiSelectTrigger': LazyComponent<typeof import("../../components/ui/select/index")['SelectTrigger']>
     'LazyUiSelectValue': LazyComponent<typeof import("../../components/ui/select/index")['SelectValue']>
-    'LazyUiSkeleton': LazyComponent<typeof import("../../components/ui/skeleton/index")['Skeleton']>
     'LazyUiToaster': LazyComponent<typeof import("../../components/ui/sonner/index")['Toaster']>
+    'LazyUiSkeleton': LazyComponent<typeof import("../../components/ui/skeleton/index")['Skeleton']>
     'LazyUiTable': LazyComponent<typeof import("../../components/ui/table/index")['Table']>
     'LazyUiTableBody': LazyComponent<typeof import("../../components/ui/table/index")['TableBody']>
     'LazyUiTableCaption': LazyComponent<typeof import("../../components/ui/table/index")['TableCaption']>
