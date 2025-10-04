@@ -352,7 +352,6 @@ interface _GlobalComponents {
     'UiDropdownMenuSubTrigger': typeof import("../../components/ui/dropdown-menu/index")['DropdownMenuSubTrigger']
     'UiDropdownMenuTrigger': typeof import("../../components/ui/dropdown-menu/index")['DropdownMenuTrigger']
     'UiDropdownMenuPortal': typeof import("../../components/ui/dropdown-menu/index")['DropdownMenuPortal']
-    'UiInput': typeof import("../../components/ui/input/index")['Input']
     'UiFormControl': typeof import("../../components/ui/form/index")['FormControl']
     'UiFormDescription': typeof import("../../components/ui/form/index")['FormDescription']
     'UiFormItem': typeof import("../../components/ui/form/index")['FormItem']
@@ -362,6 +361,7 @@ interface _GlobalComponents {
     'UiForm': typeof import("../../components/ui/form/index")['Form']
     'UiFormField': typeof import("../../components/ui/form/index")['FormField']
     'UiFormFieldArray': typeof import("../../components/ui/form/index")['FormFieldArray']
+    'UiInput': typeof import("../../components/ui/input/index")['Input']
     'UiLabel': typeof import("../../components/ui/label/index")['Label']
     'UiPopover': typeof import("../../components/ui/popover/index")['Popover']
     'UiPopoverAnchor': typeof import("../../components/ui/popover/index")['PopoverAnchor']
@@ -378,8 +378,8 @@ interface _GlobalComponents {
     'UiSelectSeparator': typeof import("../../components/ui/select/index")['SelectSeparator']
     'UiSelectTrigger': typeof import("../../components/ui/select/index")['SelectTrigger']
     'UiSelectValue': typeof import("../../components/ui/select/index")['SelectValue']
-    'UiToaster': typeof import("../../components/ui/sonner/index")['Toaster']
     'UiSkeleton': typeof import("../../components/ui/skeleton/index")['Skeleton']
+    'UiToaster': typeof import("../../components/ui/sonner/index")['Toaster']
     'UiTable': typeof import("../../components/ui/table/index")['Table']
     'UiTableBody': typeof import("../../components/ui/table/index")['TableBody']
     'UiTableCaption': typeof import("../../components/ui/table/index")['TableCaption']
@@ -749,7 +749,6 @@ interface _GlobalComponents {
     'LazyUiDropdownMenuSubTrigger': LazyComponent<typeof import("../../components/ui/dropdown-menu/index")['DropdownMenuSubTrigger']>
     'LazyUiDropdownMenuTrigger': LazyComponent<typeof import("../../components/ui/dropdown-menu/index")['DropdownMenuTrigger']>
     'LazyUiDropdownMenuPortal': LazyComponent<typeof import("../../components/ui/dropdown-menu/index")['DropdownMenuPortal']>
-    'LazyUiInput': LazyComponent<typeof import("../../components/ui/input/index")['Input']>
     'LazyUiFormControl': LazyComponent<typeof import("../../components/ui/form/index")['FormControl']>
     'LazyUiFormDescription': LazyComponent<typeof import("../../components/ui/form/index")['FormDescription']>
     'LazyUiFormItem': LazyComponent<typeof import("../../components/ui/form/index")['FormItem']>
@@ -759,6 +758,7 @@ interface _GlobalComponents {
     'LazyUiForm': LazyComponent<typeof import("../../components/ui/form/index")['Form']>
     'LazyUiFormField': LazyComponent<typeof import("../../components/ui/form/index")['FormField']>
     'LazyUiFormFieldArray': LazyComponent<typeof import("../../components/ui/form/index")['FormFieldArray']>
+    'LazyUiInput': LazyComponent<typeof import("../../components/ui/input/index")['Input']>
     'LazyUiLabel': LazyComponent<typeof import("../../components/ui/label/index")['Label']>
     'LazyUiPopover': LazyComponent<typeof import("../../components/ui/popover/index")['Popover']>
     'LazyUiPopoverAnchor': LazyComponent<typeof import("../../components/ui/popover/index")['PopoverAnchor']>
@@ -775,8 +775,8 @@ interface _GlobalComponents {
     'LazyUiSelectSeparator': LazyComponent<typeof import("../../components/ui/select/index")['SelectSeparator']>
     'LazyUiSelectTrigger': LazyComponent<typeof import("../../components/ui/select/index")['SelectTrigger']>
     'LazyUiSelectValue': LazyComponent<typeof import("../../components/ui/select/index")['SelectValue']>
-    'LazyUiToaster': LazyComponent<typeof import("../../components/ui/sonner/index")['Toaster']>
     'LazyUiSkeleton': LazyComponent<typeof import("../../components/ui/skeleton/index")['Skeleton']>
+    'LazyUiToaster': LazyComponent<typeof import("../../components/ui/sonner/index")['Toaster']>
     'LazyUiTable': LazyComponent<typeof import("../../components/ui/table/index")['Table']>
     'LazyUiTableBody': LazyComponent<typeof import("../../components/ui/table/index")['TableBody']>
     'LazyUiTableCaption': LazyComponent<typeof import("../../components/ui/table/index")['TableCaption']>
