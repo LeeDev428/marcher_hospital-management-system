@@ -92,9 +92,191 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
   Serializable: 'Serializable'
 });
 
+exports.Prisma.UserScalarFieldEnum = {
+  id: 'id',
+  email: 'email',
+  password: 'password',
+  firstName: 'firstName',
+  lastName: 'lastName',
+  phone: 'phone',
+  role: 'role',
+  status: 'status',
+  isEmailVerified: 'isEmailVerified',
+  emailVerifiedAt: 'emailVerifiedAt',
+  avatar: 'avatar',
+  dateOfBirth: 'dateOfBirth',
+  gender: 'gender',
+  address: 'address',
+  city: 'city',
+  province: 'province',
+  zipCode: 'zipCode',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  lastLoginAt: 'lastLoginAt',
+  createdBy: 'createdBy',
+  updatedBy: 'updatedBy'
+};
+
+exports.Prisma.RefreshTokenScalarFieldEnum = {
+  id: 'id',
+  token: 'token',
+  userId: 'userId',
+  expiresAt: 'expiresAt',
+  createdAt: 'createdAt',
+  isRevoked: 'isRevoked'
+};
+
+exports.Prisma.PatientScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  patientNumber: 'patientNumber',
+  bloodType: 'bloodType',
+  allergies: 'allergies',
+  medicalHistory: 'medicalHistory',
+  emergencyContact: 'emergencyContact',
+  emergencyPhone: 'emergencyPhone',
+  insuranceProvider: 'insuranceProvider',
+  insuranceNumber: 'insuranceNumber',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.StaffScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  staffNumber: 'staffNumber',
+  department: 'department',
+  position: 'position',
+  hireDate: 'hireDate',
+  salary: 'salary',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.DoctorScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  staffId: 'staffId',
+  doctorNumber: 'doctorNumber',
+  medicalLicense: 'medicalLicense',
+  specialization: 'specialization',
+  subSpecialization: 'subSpecialization',
+  boardCertification: 'boardCertification',
+  yearsOfExperience: 'yearsOfExperience',
+  education: 'education',
+  hospitalAffiliation: 'hospitalAffiliation',
+  consultationFee: 'consultationFee',
+  isAvailable: 'isAvailable',
+  workingHours: 'workingHours',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.PartnerScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  institutionName: 'institutionName',
+  institutionType: 'institutionType',
+  licenseNumber: 'licenseNumber',
+  website: 'website',
+  contactPerson: 'contactPerson',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.AppointmentScalarFieldEnum = {
+  id: 'id',
+  patientId: 'patientId',
+  doctorId: 'doctorId',
+  scheduledAt: 'scheduledAt',
+  duration: 'duration',
+  type: 'type',
+  status: 'status',
+  reason: 'reason',
+  notes: 'notes',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.SortOrder = {
+  asc: 'asc',
+  desc: 'desc'
+};
+
+exports.Prisma.QueryMode = {
+  default: 'default',
+  insensitive: 'insensitive'
+};
+
+exports.Prisma.NullsOrder = {
+  first: 'first',
+  last: 'last'
+};
+exports.UserRole = exports.$Enums.UserRole = {
+  ADMIN: 'ADMIN',
+  STAFF: 'STAFF',
+  PATIENT: 'PATIENT',
+  PARTNER: 'PARTNER'
+};
+
+exports.UserStatus = exports.$Enums.UserStatus = {
+  ACTIVE: 'ACTIVE',
+  INACTIVE: 'INACTIVE',
+  SUSPENDED: 'SUSPENDED',
+  PENDING_APPROVAL: 'PENDING_APPROVAL'
+};
+
+exports.Gender = exports.$Enums.Gender = {
+  MALE: 'MALE',
+  FEMALE: 'FEMALE',
+  OTHER: 'OTHER',
+  PREFER_NOT_TO_SAY: 'PREFER_NOT_TO_SAY'
+};
+
+exports.PartnerType = exports.$Enums.PartnerType = {
+  HOSPITAL: 'HOSPITAL',
+  CLINIC: 'CLINIC',
+  LABORATORY: 'LABORATORY',
+  PHARMACY: 'PHARMACY',
+  DIAGNOSTIC_CENTER: 'DIAGNOSTIC_CENTER'
+};
+
+exports.BloodType = exports.$Enums.BloodType = {
+  A_POSITIVE: 'A_POSITIVE',
+  A_NEGATIVE: 'A_NEGATIVE',
+  B_POSITIVE: 'B_POSITIVE',
+  B_NEGATIVE: 'B_NEGATIVE',
+  AB_POSITIVE: 'AB_POSITIVE',
+  AB_NEGATIVE: 'AB_NEGATIVE',
+  O_POSITIVE: 'O_POSITIVE',
+  O_NEGATIVE: 'O_NEGATIVE'
+};
+
+exports.AppointmentType = exports.$Enums.AppointmentType = {
+  CONSULTATION: 'CONSULTATION',
+  FOLLOW_UP: 'FOLLOW_UP',
+  EMERGENCY: 'EMERGENCY',
+  PROCEDURE: 'PROCEDURE',
+  CHECKUP: 'CHECKUP'
+};
+
+exports.AppointmentStatus = exports.$Enums.AppointmentStatus = {
+  SCHEDULED: 'SCHEDULED',
+  CONFIRMED: 'CONFIRMED',
+  IN_PROGRESS: 'IN_PROGRESS',
+  COMPLETED: 'COMPLETED',
+  CANCELLED: 'CANCELLED',
+  NO_SHOW: 'NO_SHOW'
+};
 
 exports.Prisma.ModelName = {
-
+  User: 'User',
+  RefreshToken: 'RefreshToken',
+  Patient: 'Patient',
+  Staff: 'Staff',
+  Doctor: 'Doctor',
+  Partner: 'Partner',
+  Appointment: 'Appointment'
 };
 /**
  * Create the Client
@@ -135,7 +317,6 @@ const config = {
     "db"
   ],
   "activeProvider": "postgresql",
-  "postinstall": false,
   "inlineDatasources": {
     "db": {
       "url": {
@@ -144,13 +325,13 @@ const config = {
       }
     }
   },
-  "inlineSchema": "generator client {\n  provider = \"prisma-client-js\"\n  output   = \"../generated/instance\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"INSTANCE_DATABASE_URL\")\n}\n",
-  "inlineSchemaHash": "3ea5f2f0f2eeb71539473ef7c905e4aecb86c3f5b08de7e15a7df3586127e82e",
+  "inlineSchema": "generator client {\n  provider = \"prisma-client-js\"\n  output   = \"../generated/instance\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"INSTANCE_DATABASE_URL\")\n}\n\n// User Authentication Model\nmodel User {\n  id              String     @id @default(cuid())\n  email           String     @unique\n  password        String // Hashed password\n  firstName       String\n  lastName        String\n  phone           String?\n  role            UserRole   @default(PATIENT)\n  status          UserStatus @default(ACTIVE)\n  isEmailVerified Boolean    @default(false)\n  emailVerifiedAt DateTime?\n\n  // Profile information\n  avatar      String?\n  dateOfBirth DateTime?\n  gender      Gender?\n  address     String?\n  city        String?\n  province    String?\n  zipCode     String?\n\n  // System fields\n  createdAt   DateTime  @default(now())\n  updatedAt   DateTime  @updatedAt\n  lastLoginAt DateTime?\n\n  // Relationships\n  refreshTokens  RefreshToken[]\n  patientProfile Patient?\n  staffProfile   Staff?\n  partnerProfile Partner?\n  doctorProfile  Doctor?\n\n  // Audit fields\n  createdBy String?\n  updatedBy String?\n\n  @@map(\"users\")\n}\n\n// Refresh Tokens for JWT\nmodel RefreshToken {\n  id        String   @id @default(cuid())\n  token     String   @unique\n  userId    String\n  expiresAt DateTime\n  createdAt DateTime @default(now())\n  isRevoked Boolean  @default(false)\n\n  user User @relation(fields: [userId], references: [id], onDelete: Cascade)\n\n  @@map(\"refresh_tokens\")\n}\n\n// Extended Patient Profile\nmodel Patient {\n  id            String @id @default(cuid())\n  userId        String @unique\n  patientNumber String @unique\n\n  // Medical Information\n  bloodType        BloodType?\n  allergies        String?\n  medicalHistory   String?\n  emergencyContact String?\n  emergencyPhone   String?\n\n  // Insurance Information\n  insuranceProvider String?\n  insuranceNumber   String?\n\n  // System fields\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  // Relationships\n  user User @relation(fields: [userId], references: [id], onDelete: Cascade)\n\n  @@map(\"patients\")\n}\n\n// Staff Profile\nmodel Staff {\n  id          String  @id @default(cuid())\n  userId      String  @unique\n  staffNumber String  @unique\n  department  String?\n  position    String?\n\n  // Employment details\n  hireDate DateTime?\n  salary   Decimal?\n\n  // System fields\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  // Relationships\n  user          User    @relation(fields: [userId], references: [id], onDelete: Cascade)\n  doctorProfile Doctor?\n\n  @@map(\"staff\")\n}\n\n// Doctor Profile (extends Staff)\nmodel Doctor {\n  id           String @id @default(cuid())\n  userId       String @unique\n  staffId      String @unique\n  doctorNumber String @unique\n\n  // Medical credentials\n  medicalLicense     String\n  specialization     String\n  subSpecialization  String?\n  boardCertification String?\n\n  // Professional details\n  yearsOfExperience   Int?\n  education           String?\n  hospitalAffiliation String?\n  consultationFee     Decimal?\n\n  // Availability\n  isAvailable  Boolean @default(true)\n  workingHours String? // JSON string for schedule\n\n  // System fields\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  // Relationships\n  user  User  @relation(fields: [userId], references: [id], onDelete: Cascade)\n  staff Staff @relation(fields: [staffId], references: [id], onDelete: Cascade)\n\n  @@map(\"doctors\")\n}\n\n// Partner Profile (Hospital/Clinic)\nmodel Partner {\n  id              String      @id @default(cuid())\n  userId          String      @unique\n  institutionName String\n  institutionType PartnerType\n  licenseNumber   String?\n\n  // Contact Information\n  website       String?\n  contactPerson String?\n\n  // System fields\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  // Relationships\n  user User @relation(fields: [userId], references: [id], onDelete: Cascade)\n\n  @@map(\"partners\")\n}\n\n// Appointments Model\nmodel Appointment {\n  id        String @id @default(cuid())\n  patientId String\n  doctorId  String\n\n  // Appointment details\n  scheduledAt DateTime\n  duration    Int // Duration in minutes\n  type        AppointmentType\n  status      AppointmentStatus @default(SCHEDULED)\n  reason      String?\n  notes       String?\n\n  // System fields\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  @@map(\"appointments\")\n}\n\n// User Roles\nenum UserRole {\n  ADMIN\n  STAFF\n  PATIENT\n  PARTNER\n}\n\n// User Status\nenum UserStatus {\n  ACTIVE\n  INACTIVE\n  SUSPENDED\n  PENDING_APPROVAL\n}\n\n// Gender Enum\nenum Gender {\n  MALE\n  FEMALE\n  OTHER\n  PREFER_NOT_TO_SAY\n}\n\n// Partner Type Enum\nenum PartnerType {\n  HOSPITAL\n  CLINIC\n  LABORATORY\n  PHARMACY\n  DIAGNOSTIC_CENTER\n}\n\n// Blood Type Enum\nenum BloodType {\n  A_POSITIVE\n  A_NEGATIVE\n  B_POSITIVE\n  B_NEGATIVE\n  AB_POSITIVE\n  AB_NEGATIVE\n  O_POSITIVE\n  O_NEGATIVE\n}\n\n// Appointment Types\nenum AppointmentType {\n  CONSULTATION\n  FOLLOW_UP\n  EMERGENCY\n  PROCEDURE\n  CHECKUP\n}\n\n// Appointment Status\nenum AppointmentStatus {\n  SCHEDULED\n  CONFIRMED\n  IN_PROGRESS\n  COMPLETED\n  CANCELLED\n  NO_SHOW\n}\n",
+  "inlineSchemaHash": "2b566fac73d8c3cb5208689f85f031853521f58b664f1d10e3b219f7b14cbfbf",
   "copyEngine": true
 }
 config.dirname = '/'
 
-config.runtimeDataModel = JSON.parse("{\"models\":{},\"enums\":{},\"types\":{}}")
+config.runtimeDataModel = JSON.parse("{\"models\":{\"User\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"password\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"firstName\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"lastName\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"phone\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"role\",\"kind\":\"enum\",\"type\":\"UserRole\"},{\"name\":\"status\",\"kind\":\"enum\",\"type\":\"UserStatus\"},{\"name\":\"isEmailVerified\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"emailVerifiedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"avatar\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"dateOfBirth\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"gender\",\"kind\":\"enum\",\"type\":\"Gender\"},{\"name\":\"address\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"city\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"province\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"zipCode\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"lastLoginAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"refreshTokens\",\"kind\":\"object\",\"type\":\"RefreshToken\",\"relationName\":\"RefreshTokenToUser\"},{\"name\":\"patientProfile\",\"kind\":\"object\",\"type\":\"Patient\",\"relationName\":\"PatientToUser\"},{\"name\":\"staffProfile\",\"kind\":\"object\",\"type\":\"Staff\",\"relationName\":\"StaffToUser\"},{\"name\":\"partnerProfile\",\"kind\":\"object\",\"type\":\"Partner\",\"relationName\":\"PartnerToUser\"},{\"name\":\"doctorProfile\",\"kind\":\"object\",\"type\":\"Doctor\",\"relationName\":\"DoctorToUser\"},{\"name\":\"createdBy\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"updatedBy\",\"kind\":\"scalar\",\"type\":\"String\"}],\"dbName\":\"users\"},\"RefreshToken\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"token\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"userId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"expiresAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"isRevoked\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"user\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"RefreshTokenToUser\"}],\"dbName\":\"refresh_tokens\"},\"Patient\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"userId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"patientNumber\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"bloodType\",\"kind\":\"enum\",\"type\":\"BloodType\"},{\"name\":\"allergies\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"medicalHistory\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"emergencyContact\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"emergencyPhone\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"insuranceProvider\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"insuranceNumber\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"user\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"PatientToUser\"}],\"dbName\":\"patients\"},\"Staff\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"userId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"staffNumber\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"department\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"position\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"hireDate\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"salary\",\"kind\":\"scalar\",\"type\":\"Decimal\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"user\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"StaffToUser\"},{\"name\":\"doctorProfile\",\"kind\":\"object\",\"type\":\"Doctor\",\"relationName\":\"DoctorToStaff\"}],\"dbName\":\"staff\"},\"Doctor\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"userId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"staffId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"doctorNumber\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"medicalLicense\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"specialization\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"subSpecialization\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"boardCertification\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"yearsOfExperience\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"education\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"hospitalAffiliation\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"consultationFee\",\"kind\":\"scalar\",\"type\":\"Decimal\"},{\"name\":\"isAvailable\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"workingHours\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"user\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"DoctorToUser\"},{\"name\":\"staff\",\"kind\":\"object\",\"type\":\"Staff\",\"relationName\":\"DoctorToStaff\"}],\"dbName\":\"doctors\"},\"Partner\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"userId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"institutionName\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"institutionType\",\"kind\":\"enum\",\"type\":\"PartnerType\"},{\"name\":\"licenseNumber\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"website\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"contactPerson\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"user\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"PartnerToUser\"}],\"dbName\":\"partners\"},\"Appointment\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"patientId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"doctorId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"scheduledAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"duration\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"type\",\"kind\":\"enum\",\"type\":\"AppointmentType\"},{\"name\":\"status\",\"kind\":\"enum\",\"type\":\"AppointmentStatus\"},{\"name\":\"reason\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"notes\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":\"appointments\"}},\"enums\":{},\"types\":{}}")
 defineDmmfProperty(exports.Prisma, config.runtimeDataModel)
 config.engineWasm = {
   getRuntime: async () => require('./query_engine_bg.js'),

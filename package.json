@@ -14,9 +14,15 @@
 		"prisma:generate:instance": "prisma generate --schema=./prisma/instance",
 		"prisma:push:instance": "prisma db push --schema=./prisma/instance",
 		"prisma:migrate:instance": "prisma migrate dev --schema=./prisma/instance",
+		"prisma:reset:instance": "prisma migrate reset --schema=./prisma/instance --force",
+		"prisma:studio:instance": "prisma studio --schema=./prisma/instance",
 		"prisma:generate:global": "prisma generate --schema=./prisma/global",
 		"prisma:push:global": "prisma db push --schema=./prisma/global",
-		"prisma:migrate:global": "prisma migrate dev --schema=./prisma/global"
+		"prisma:migrate:global": "prisma migrate dev --schema=./prisma/global",
+		"prisma:reset:global": "prisma migrate reset --schema=./prisma/global --force",
+		"prisma:studio:global": "prisma studio --schema=./prisma/global",
+		"db:setup": "npm run prisma:generate:global && npm run prisma:generate:instance && npm run prisma:push:global && npm run prisma:push:instance",
+		"db:reset": "npm run prisma:reset:global && npm run prisma:reset:instance && npm run db:setup"
 	},
 	"dependencies": {
 		"@dotenvx/dotenvx": "^1.44.2",

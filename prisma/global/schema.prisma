@@ -1,9 +1,40 @@
 generator client {
-    provider = "prisma-client"
+    provider = "prisma-client-js"
     output   = "../generated/global"
 }
 
 datasource db {
     provider = "postgresql"
     url      = env("GLOBAL_DATABASE_URL")
+}
+
+// Global models for multi-tenant management
+
+enum UserStatus {
+    ENABLED
+    DISABLED
+}
+
+model Profile {
+    id String @id @default(uuid()) @db.Uuid
+    user User?
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+}
+
+model User {
+    id              String        @id @default(uuid()) @db.Uuid
+    profileId       String        @unique @db.Uuid
+    profile         Profile  @relation(fields: [profileId], references: [id], onDelete: Cascade)
+    email           String
+    emailHash       String        @unique
+    emailVerified   Boolean       @default(false)
+    passwordHash    String
+    twoFactorSecret String?
+    twoFactorBackup String[]
+    status          UserStatus    @default(ENABLED)
+    createdAt       DateTime      @default(now())
+    updatedAt       DateTime      @updatedAt
+
+    @@index([id, emailHash, status])
 }

@@ -367,6 +367,7 @@ interface _GlobalComponents {
     'UiPopoverAnchor': typeof import("../../components/ui/popover/index")['PopoverAnchor']
     'UiPopoverContent': typeof import("../../components/ui/popover/index")['PopoverContent']
     'UiPopoverTrigger': typeof import("../../components/ui/popover/index")['PopoverTrigger']
+    'UiSkeleton': typeof import("../../components/ui/skeleton/index")['Skeleton']
     'UiSelect': typeof import("../../components/ui/select/index")['Select']
     'UiSelectContent': typeof import("../../components/ui/select/index")['SelectContent']
     'UiSelectGroup': typeof import("../../components/ui/select/index")['SelectGroup']
@@ -378,7 +379,6 @@ interface _GlobalComponents {
     'UiSelectSeparator': typeof import("../../components/ui/select/index")['SelectSeparator']
     'UiSelectTrigger': typeof import("../../components/ui/select/index")['SelectTrigger']
     'UiSelectValue': typeof import("../../components/ui/select/index")['SelectValue']
-    'UiSkeleton': typeof import("../../components/ui/skeleton/index")['Skeleton']
     'UiToaster': typeof import("../../components/ui/sonner/index")['Toaster']
     'UiTable': typeof import("../../components/ui/table/index")['Table']
     'UiTableBody': typeof import("../../components/ui/table/index")['TableBody']
@@ -389,15 +389,15 @@ interface _GlobalComponents {
     'UiTableHead': typeof import("../../components/ui/table/index")['TableHead']
     'UiTableHeader': typeof import("../../components/ui/table/index")['TableHeader']
     'UiTableRow': typeof import("../../components/ui/table/index")['TableRow']
-    'UiTabs': typeof import("../../components/ui/tabs/index")['Tabs']
-    'UiTabsContent': typeof import("../../components/ui/tabs/index")['TabsContent']
-    'UiTabsList': typeof import("../../components/ui/tabs/index")['TabsList']
-    'UiTabsTrigger': typeof import("../../components/ui/tabs/index")['TabsTrigger']
-    'UiTextarea': typeof import("../../components/ui/textarea/index")['Textarea']
     'UiTooltip': typeof import("../../components/ui/tooltip/index")['Tooltip']
     'UiTooltipContent': typeof import("../../components/ui/tooltip/index")['TooltipContent']
     'UiTooltipProvider': typeof import("../../components/ui/tooltip/index")['TooltipProvider']
     'UiTooltipTrigger': typeof import("../../components/ui/tooltip/index")['TooltipTrigger']
+    'UiTextarea': typeof import("../../components/ui/textarea/index")['Textarea']
+    'UiTabs': typeof import("../../components/ui/tabs/index")['Tabs']
+    'UiTabsContent': typeof import("../../components/ui/tabs/index")['TabsContent']
+    'UiTabsList': typeof import("../../components/ui/tabs/index")['TabsList']
+    'UiTabsTrigger': typeof import("../../components/ui/tabs/index")['TabsTrigger']
     'NuxtPage': typeof import("../../node_modules/nuxt/dist/pages/runtime/page")['default']
     'NoScript': typeof import("../../node_modules/nuxt/dist/head/runtime/components")['NoScript']
     'Link': typeof import("../../node_modules/nuxt/dist/head/runtime/components")['Link']
@@ -764,6 +764,7 @@ interface _GlobalComponents {
     'LazyUiPopoverAnchor': LazyComponent<typeof import("../../components/ui/popover/index")['PopoverAnchor']>
     'LazyUiPopoverContent': LazyComponent<typeof import("../../components/ui/popover/index")['PopoverContent']>
     'LazyUiPopoverTrigger': LazyComponent<typeof import("../../components/ui/popover/index")['PopoverTrigger']>
+    'LazyUiSkeleton': LazyComponent<typeof import("../../components/ui/skeleton/index")['Skeleton']>
     'LazyUiSelect': LazyComponent<typeof import("../../components/ui/select/index")['Select']>
     'LazyUiSelectContent': LazyComponent<typeof import("../../components/ui/select/index")['SelectContent']>
     'LazyUiSelectGroup': LazyComponent<typeof import("../../components/ui/select/index")['SelectGroup']>
@@ -775,7 +776,6 @@ interface _GlobalComponents {
     'LazyUiSelectSeparator': LazyComponent<typeof import("../../components/ui/select/index")['SelectSeparator']>
     'LazyUiSelectTrigger': LazyComponent<typeof import("../../components/ui/select/index")['SelectTrigger']>
     'LazyUiSelectValue': LazyComponent<typeof import("../../components/ui/select/index")['SelectValue']>
-    'LazyUiSkeleton': LazyComponent<typeof import("../../components/ui/skeleton/index")['Skeleton']>
     'LazyUiToaster': LazyComponent<typeof import("../../components/ui/sonner/index")['Toaster']>
     'LazyUiTable': LazyComponent<typeof import("../../components/ui/table/index")['Table']>
     'LazyUiTableBody': LazyComponent<typeof import("../../components/ui/table/index")['TableBody']>
@@ -786,15 +786,15 @@ interface _GlobalComponents {
     'LazyUiTableHead': LazyComponent<typeof import("../../components/ui/table/index")['TableHead']>
     'LazyUiTableHeader': LazyComponent<typeof import("../../components/ui/table/index")['TableHeader']>
     'LazyUiTableRow': LazyComponent<typeof import("../../components/ui/table/index")['TableRow']>
-    'LazyUiTabs': LazyComponent<typeof import("../../components/ui/tabs/index")['Tabs']>
-    'LazyUiTabsContent': LazyComponent<typeof import("../../components/ui/tabs/index")['TabsContent']>
-    'LazyUiTabsList': LazyComponent<typeof import("../../components/ui/tabs/index")['TabsList']>
-    'LazyUiTabsTrigger': LazyComponent<typeof import("../../components/ui/tabs/index")['TabsTrigger']>
-    'LazyUiTextarea': LazyComponent<typeof import("../../components/ui/textarea/index")['Textarea']>
     'LazyUiTooltip': LazyComponent<typeof import("../../components/ui/tooltip/index")['Tooltip']>
     'LazyUiTooltipContent': LazyComponent<typeof import("../../components/ui/tooltip/index")['TooltipContent']>
     'LazyUiTooltipProvider': LazyComponent<typeof import("../../components/ui/tooltip/index")['TooltipProvider']>
     'LazyUiTooltipTrigger': LazyComponent<typeof import("../../components/ui/tooltip/index")['TooltipTrigger']>
+    'LazyUiTextarea': LazyComponent<typeof import("../../components/ui/textarea/index")['Textarea']>
+    'LazyUiTabs': LazyComponent<typeof import("../../components/ui/tabs/index")['Tabs']>
+    'LazyUiTabsContent': LazyComponent<typeof import("../../components/ui/tabs/index")['TabsContent']>
+    'LazyUiTabsList': LazyComponent<typeof import("../../components/ui/tabs/index")['TabsList']>
+    'LazyUiTabsTrigger': LazyComponent<typeof import("../../components/ui/tabs/index")['TabsTrigger']>
     'LazyNuxtPage': LazyComponent<typeof import("../../node_modules/nuxt/dist/pages/runtime/page")['default']>
     'LazyNoScript': LazyComponent<typeof import("../../node_modules/nuxt/dist/head/runtime/components")['NoScript']>
     'LazyLink': LazyComponent<typeof import("../../node_modules/nuxt/dist/head/runtime/components")['Link']>

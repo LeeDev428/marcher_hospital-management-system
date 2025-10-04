@@ -40,6 +40,7 @@ model User {
   patientProfile Patient?
   staffProfile   Staff?
   partnerProfile Partner?
+  doctorProfile  Doctor?
 
   // Audit fields
   createdBy String?
@@ -60,30 +61,6 @@ model RefreshToken {
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@map("refresh_tokens")
-}
-
-// User Roles
-enum UserRole {
-  ADMIN
-  STAFF
-  PATIENT
-  PARTNER
-}
-
-// User Status
-enum UserStatus {
-  ACTIVE
-  INACTIVE
-  SUSPENDED
-  PENDING_APPROVAL
-}
-
-// Gender Enum
-enum Gender {
-  MALE
-  FEMALE
-  OTHER
-  PREFER_NOT_TO_SAY
 }
 
 // Extended Patient Profile
@@ -115,26 +92,59 @@ model Patient {
 
 // Staff Profile
 model Staff {
-  id             String  @id @default(cuid())
-  userId         String  @unique
-  staffNumber    String  @unique
-  department     String?
-  position       String?
-  specialization String?
-  licenseNumber  String?
+  id          String  @id @default(cuid())
+  userId      String  @unique
+  staffNumber String  @unique
+  department  String?
+  position    String?
 
   // Employment details
-  hiredDate DateTime?
-  salary    Decimal?
+  hireDate DateTime?
+  salary   Decimal?
 
   // System fields
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
   // Relationships
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user          User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  doctorProfile Doctor?
 
   @@map("staff")
+}
+
+// Doctor Profile (extends Staff)
+model Doctor {
+  id           String @id @default(cuid())
+  userId       String @unique
+  staffId      String @unique
+  doctorNumber String @unique
+
+  // Medical credentials
+  medicalLicense     String
+  specialization     String
+  subSpecialization  String?
+  boardCertification String?
+
+  // Professional details
+  yearsOfExperience   Int?
+  education           String?
+  hospitalAffiliation String?
+  consultationFee     Decimal?
+
+  // Availability
+  isAvailable  Boolean @default(true)
+  workingHours String? // JSON string for schedule
+
+  // System fields
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relationships
+  user  User  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  staff Staff @relation(fields: [staffId], references: [id], onDelete: Cascade)
+
+  @@map("doctors")
 }
 
 // Partner Profile (Hospital/Clinic)
@@ -159,6 +169,60 @@ model Partner {
   @@map("partners")
 }
 
+// Appointments Model
+model Appointment {
+  id        String @id @default(cuid())
+  patientId String
+  doctorId  String
+
+  // Appointment details
+  scheduledAt DateTime
+  duration    Int // Duration in minutes
+  type        AppointmentType
+  status      AppointmentStatus @default(SCHEDULED)
+  reason      String?
+  notes       String?
+
+  // System fields
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("appointments")
+}
+
+// User Roles
+enum UserRole {
+  ADMIN
+  STAFF
+  PATIENT
+  PARTNER
+}
+
+// User Status
+enum UserStatus {
+  ACTIVE
+  INACTIVE
+  SUSPENDED
+  PENDING_APPROVAL
+}
+
+// Gender Enum
+enum Gender {
+  MALE
+  FEMALE
+  OTHER
+  PREFER_NOT_TO_SAY
+}
+
+// Partner Type Enum
+enum PartnerType {
+  HOSPITAL
+  CLINIC
+  LABORATORY
+  PHARMACY
+  DIAGNOSTIC_CENTER
+}
+
 // Blood Type Enum
 enum BloodType {
   A_POSITIVE
@@ -171,11 +235,21 @@ enum BloodType {
   O_NEGATIVE
 }
 
-// Partner Type Enum
-enum PartnerType {
-  HOSPITAL
-  CLINIC
-  LABORATORY
-  PHARMACY
-  DIAGNOSTIC_CENTER
+// Appointment Types
+enum AppointmentType {
+  CONSULTATION
+  FOLLOW_UP
+  EMERGENCY
+  PROCEDURE
+  CHECKUP
+}
+
+// Appointment Status
+enum AppointmentStatus {
+  SCHEDULED
+  CONFIRMED
+  IN_PROGRESS
+  COMPLETED
+  CANCELLED
+  NO_SHOW
 }

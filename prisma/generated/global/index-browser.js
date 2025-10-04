@@ -120,108 +120,22 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
   Serializable: 'Serializable'
 });
 
+exports.Prisma.ProfileScalarFieldEnum = {
+  id: 'id',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.UserScalarFieldEnum = {
   id: 'id',
+  profileId: 'profileId',
   email: 'email',
-  password: 'password',
-  firstName: 'firstName',
-  lastName: 'lastName',
-  phone: 'phone',
-  role: 'role',
+  emailHash: 'emailHash',
+  emailVerified: 'emailVerified',
+  passwordHash: 'passwordHash',
+  twoFactorSecret: 'twoFactorSecret',
+  twoFactorBackup: 'twoFactorBackup',
   status: 'status',
-  isEmailVerified: 'isEmailVerified',
-  emailVerifiedAt: 'emailVerifiedAt',
-  avatar: 'avatar',
-  dateOfBirth: 'dateOfBirth',
-  gender: 'gender',
-  address: 'address',
-  city: 'city',
-  province: 'province',
-  zipCode: 'zipCode',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt',
-  lastLoginAt: 'lastLoginAt',
-  createdBy: 'createdBy',
-  updatedBy: 'updatedBy'
-};
-
-exports.Prisma.RefreshTokenScalarFieldEnum = {
-  id: 'id',
-  token: 'token',
-  userId: 'userId',
-  expiresAt: 'expiresAt',
-  createdAt: 'createdAt',
-  isRevoked: 'isRevoked'
-};
-
-exports.Prisma.PatientScalarFieldEnum = {
-  id: 'id',
-  userId: 'userId',
-  patientNumber: 'patientNumber',
-  bloodType: 'bloodType',
-  allergies: 'allergies',
-  medicalHistory: 'medicalHistory',
-  emergencyContact: 'emergencyContact',
-  emergencyPhone: 'emergencyPhone',
-  insuranceProvider: 'insuranceProvider',
-  insuranceNumber: 'insuranceNumber',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-};
-
-exports.Prisma.StaffScalarFieldEnum = {
-  id: 'id',
-  userId: 'userId',
-  staffNumber: 'staffNumber',
-  department: 'department',
-  position: 'position',
-  hireDate: 'hireDate',
-  salary: 'salary',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-};
-
-exports.Prisma.DoctorScalarFieldEnum = {
-  id: 'id',
-  userId: 'userId',
-  staffId: 'staffId',
-  doctorNumber: 'doctorNumber',
-  medicalLicense: 'medicalLicense',
-  specialization: 'specialization',
-  subSpecialization: 'subSpecialization',
-  boardCertification: 'boardCertification',
-  yearsOfExperience: 'yearsOfExperience',
-  education: 'education',
-  hospitalAffiliation: 'hospitalAffiliation',
-  consultationFee: 'consultationFee',
-  isAvailable: 'isAvailable',
-  workingHours: 'workingHours',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-};
-
-exports.Prisma.PartnerScalarFieldEnum = {
-  id: 'id',
-  userId: 'userId',
-  institutionName: 'institutionName',
-  institutionType: 'institutionType',
-  licenseNumber: 'licenseNumber',
-  website: 'website',
-  contactPerson: 'contactPerson',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-};
-
-exports.Prisma.AppointmentScalarFieldEnum = {
-  id: 'id',
-  patientId: 'patientId',
-  doctorId: 'doctorId',
-  scheduledAt: 'scheduledAt',
-  duration: 'duration',
-  type: 'type',
-  status: 'status',
-  reason: 'reason',
-  notes: 'notes',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -240,71 +154,14 @@ exports.Prisma.NullsOrder = {
   first: 'first',
   last: 'last'
 };
-exports.UserRole = exports.$Enums.UserRole = {
-  ADMIN: 'ADMIN',
-  STAFF: 'STAFF',
-  PATIENT: 'PATIENT',
-  PARTNER: 'PARTNER'
-};
-
 exports.UserStatus = exports.$Enums.UserStatus = {
-  ACTIVE: 'ACTIVE',
-  INACTIVE: 'INACTIVE',
-  SUSPENDED: 'SUSPENDED',
-  PENDING_APPROVAL: 'PENDING_APPROVAL'
-};
-
-exports.Gender = exports.$Enums.Gender = {
-  MALE: 'MALE',
-  FEMALE: 'FEMALE',
-  OTHER: 'OTHER',
-  PREFER_NOT_TO_SAY: 'PREFER_NOT_TO_SAY'
-};
-
-exports.BloodType = exports.$Enums.BloodType = {
-  A_POSITIVE: 'A_POSITIVE',
-  A_NEGATIVE: 'A_NEGATIVE',
-  B_POSITIVE: 'B_POSITIVE',
-  B_NEGATIVE: 'B_NEGATIVE',
-  AB_POSITIVE: 'AB_POSITIVE',
-  AB_NEGATIVE: 'AB_NEGATIVE',
-  O_POSITIVE: 'O_POSITIVE',
-  O_NEGATIVE: 'O_NEGATIVE'
-};
-
-exports.PartnerType = exports.$Enums.PartnerType = {
-  HOSPITAL: 'HOSPITAL',
-  CLINIC: 'CLINIC',
-  LABORATORY: 'LABORATORY',
-  PHARMACY: 'PHARMACY',
-  DIAGNOSTIC_CENTER: 'DIAGNOSTIC_CENTER'
-};
-
-exports.AppointmentType = exports.$Enums.AppointmentType = {
-  CONSULTATION: 'CONSULTATION',
-  FOLLOW_UP: 'FOLLOW_UP',
-  EMERGENCY: 'EMERGENCY',
-  PROCEDURE: 'PROCEDURE',
-  CHECKUP: 'CHECKUP'
-};
-
-exports.AppointmentStatus = exports.$Enums.AppointmentStatus = {
-  SCHEDULED: 'SCHEDULED',
-  CONFIRMED: 'CONFIRMED',
-  IN_PROGRESS: 'IN_PROGRESS',
-  COMPLETED: 'COMPLETED',
-  CANCELLED: 'CANCELLED',
-  NO_SHOW: 'NO_SHOW'
+  ENABLED: 'ENABLED',
+  DISABLED: 'DISABLED'
 };
 
 exports.Prisma.ModelName = {
-  User: 'User',
-  RefreshToken: 'RefreshToken',
-  Patient: 'Patient',
-  Staff: 'Staff',
-  Doctor: 'Doctor',
-  Partner: 'Partner',
-  Appointment: 'Appointment'
+  Profile: 'Profile',
+  User: 'User'
 };
 
 /**
