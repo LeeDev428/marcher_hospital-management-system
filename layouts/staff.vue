@@ -20,72 +20,72 @@ const { title } = defineProps<{
 
 const links = [
 	{
-		label: "Menu",
+		label: "Dashboard",
 		links: [
 			{
-				label: "Dashboard",
+				label: "Overview",
 				icon: "mdi:view-dashboard",
-				link: "/",
-			},
-			{
-				label: "Patients",
-				icon: "mdi:identification-card",
-				link: "/patients",
-			},
-			{
-				label: "Staff",
-				icon: "mdi:account-card",
-				link: "/staff",
-			},
-			{
-				label: "Appointments",
-				icon: "mdi:calendar",
-				link: "/appointments",
-			},
-			{
-				label: "Pharmacy",
-				icon: "mdi:pill",
-				link: "/pharmacy",
-			},
-			{
-				label: "Facilities",
-				icon: "mdi:building",
-				link: "/facilities",
-			},
-			{
-				label: "Billing",
-				icon: "mdi:cash",
-				link: "/billing",
-			},
-			{
-				label: "Insurance",
-				icon: "mdi:ticket-account",
-				link: "/insurance",
-			},
-			{
-				label: "Reports",
-				icon: "mdi:chart-box",
-				link: "/reports",
+				link: "/staff/dashboard",
 			},
 		]
 	},
 	{
-		label: "Admin",
+		label: "Patient Management", 
 		links: [
 			{
-				label: "Users",
-				icon: "mdi:account",
-				link: "/users",
+				label: "Patients",
+				icon: "mdi:account-group",
+				link: "/staff/patients",
 			},
 			{
-				label: "Logs",
-				icon: "mdi:file-document",
-				link: "/logs",
+				label: "Appointments",
+				icon: "mdi:calendar",
+				link: "/staff/appointments",
+			},
+		]
+	},
+	{
+		label: "Medical Services",
+		links: [
+			{
+				label: "Staff",
+				icon: "mdi:doctor",
+				link: "/staff/staff",
 			},
 			{
-				label: "Settings",
-				icon: "mdi:cog",
-				link: "/settings",
+				label: "Pharmacy",
+				icon: "mdi:pill",
+				link: "/staff/pharmacy",
+			},
+			{
+				label: "Facilities",
+				icon: "mdi:building",
+				link: "/staff/facilities",
+			},
+		]
+	},
+	{
+		label: "Financial",
+		links: [
+			{
+				label: "Billing",
+				icon: "mdi:cash",
+				link: "/staff/billing",
+			},
+			{
+				label: "Insurance",
+				icon: "mdi:shield-account",
+				link: "/staff/insurance",
+			},
+		]
+	},
+	{
+		label: "Reports & Analytics",
+		links: [
+			{
+				label: "Reports",
+				icon: "mdi:chart-line",
+				link: "/staff/reports",
 			},
 		]
 	}
