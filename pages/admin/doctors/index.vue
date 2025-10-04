@@ -27,16 +27,20 @@ const doctors = ref([])
 const createForm = ref({
   firstName: '',
   lastName: '',
-  middleName: '',
-  suffix: '',
-  specialization: '',
-  licenseNumber: '',
-  department: '',
   email: '',
   phone: '',
-  experience: '',
+  department: '',
+  position: 'Doctor',
+  medicalLicense: '',
+  specialization: '',
+  subSpecialization: '',
+  boardCertification: '',
+  yearsOfExperience: 0,
   education: '',
-  availability: 'FULL_TIME'
+  hospitalAffiliation: '',
+  consultationFee: 0,
+  isAvailable: true,
+  workingHours: ''
 })
 
 // Medical specializations
@@ -82,22 +86,8 @@ const availabilityOptions = [
   { value: 'CONSULTANT', label: 'Consultant' }
 ]
 
-// Mock doctors data - this matches the structure used in PatientAppointmentFilters
-const mockDoctors = ref([
-  {
-    id: 'doc_001',
-    firstName: 'Sarah',
-    lastName: 'Johnson',
-    middleName: 'M',
-    suffix: 'MD',
-    specialization: 'Cardiology',
-    department: 'Cardiology',
-    licenseNumber: 'MD-12345-2024',
-    email: 'sarah.johnson@hospital.com',
-    phone: '+63 912 345 6789',
-    experience: '10 years',
-    education: 'Harvard Medical School',
-    availability: 'FULL_TIME',
+// Real doctors data (loaded from API)
+const doctors = ref([])
     status: 'ACTIVE',
     createdAt: '2024-01-15',
     role: 'DOCTOR'
@@ -147,13 +137,13 @@ const validateForm = () => {
     return false
   }
   
-  if (!createForm.value.specialization || !createForm.value.department) {
-    useToast('error', 'Validation Error', 'Specialization and department are required')
+  if (!createForm.value.email) {
+    useToast('error', 'Validation Error', 'Email is required')
     return false
   }
   
-  if (!createForm.value.licenseNumber) {
-    useToast('error', 'Validation Error', 'License number is required')
+  if (!createForm.value.specialization || !createForm.value.medicalLicense) {
+    useToast('error', 'Validation Error', 'Specialization and medical license are required')
     return false
   }
   
@@ -167,19 +157,29 @@ const createDoctor = async () => {
   loading.value = true
   
   try {
-    // Prepare doctor data according to StaffProfile schema
+    // Prepare doctor data according to new doctors API schema
     const doctorData = {
       firstName: createForm.value.firstName,
       lastName: createForm.value.lastName,
-      middleName: createForm.value.middleName || null,
-      suffix: createForm.value.suffix || null,
-      role: 'DOCTOR', // This is the StaffRole enum
-      profession: createForm.value.specialization // This maps to the profession field
+      email: createForm.value.email,
+      phone: createForm.value.phone,
+      department: createForm.value.department,
+      position: createForm.value.position,
+      medicalLicense: createForm.value.medicalLicense,
+      specialization: createForm.value.specialization,
+      subSpecialization: createForm.value.subSpecialization,
+      boardCertification: createForm.value.boardCertification,
+      yearsOfExperience: createForm.value.yearsOfExperience,
+      education: createForm.value.education,
+      hospitalAffiliation: createForm.value.hospitalAffiliation,
+      consultationFee: createForm.value.consultationFee,
+      isAvailable: createForm.value.isAvailable,
+      workingHours: createForm.value.workingHours
     }
     
-    // Call the staff profile creation API (using existing staff router)
+    // Call the new doctors creation API
     const { $trpc } = useNuxtApp()
-    const response = await $trpc.staff.profiles.createStaffProfile.mutate(doctorData)
+    const response = await $trpc.doctors.create.mutate(doctorData)
     
     if (response.success) {
       useToast('success', 'Doctor Created', 'Doctor profile created successfully')
@@ -201,18 +201,16 @@ const createDoctor = async () => {
 const loadDoctors = async () => {
   try {
     const { $trpc } = useNuxtApp()
-    const response = await $trpc.staff.profiles.getStaffProfiles.query('DOCTOR')
+    const response = await $trpc.doctors.list.query()
     
     if (response.success && response.data) {
       doctors.value = response.data
     } else {
-      // Fallback to mock data for development
-      doctors.value = mockDoctors.value
+      useToast('error', 'Load Failed', 'Failed to load doctors')
     }
   } catch (error) {
     console.error('Error loading doctors:', error)
-    // Use mock data as fallback
-    doctors.value = mockDoctors.value
+    useToast('error', 'Load Failed', 'Failed to load doctors')
   }
 }
 
@@ -221,16 +219,20 @@ const resetForm = () => {
   createForm.value = {
     firstName: '',
     lastName: '',
-    middleName: '',
-    suffix: '',
-    specialization: '',
-    licenseNumber: '',
-    department: '',
     email: '',
     phone: '',
-    experience: '',
+    department: '',
+    position: 'Doctor',
+    medicalLicense: '',
+    specialization: '',
+    subSpecialization: '',
+    boardCertification: '',
+    yearsOfExperience: 0,
     education: '',
-    availability: 'FULL_TIME'
+    hospitalAffiliation: '',
+    consultationFee: 0,
+    isAvailable: true,
+    workingHours: ''
   }
 }
 
@@ -437,7 +439,7 @@ onMounted(() => {
           <div class="flex items-center justify-between">
             <div>
               <p class="text-sm font-medium text-muted-foreground">Active Doctors</p>
-              <p class="text-2xl font-bold">{{ doctors.filter(d => d.status === 'ACTIVE').length }}</p>
+              <p class="text-2xl font-bold">{{ doctors.filter(d => d.user.status === 'ACTIVE').length }}</p>
             </div>
             <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
               <Icon name="lucide:activity" class="w-6 h-6 text-green-600" />
@@ -502,30 +504,30 @@ onMounted(() => {
                       <Icon name="lucide:user-md" class="w-5 h-5 text-blue-600" />
                     </div>
                     <div>
-                      <p class="font-medium">{{ formatDoctorName(doctor) }}</p>
-                      <p class="text-sm text-muted-foreground">{{ doctor.licenseNumber || 'License N/A' }}</p>
+                      <p class="font-medium">Dr. {{ doctor.user.firstName }} {{ doctor.user.lastName }}</p>
+                      <p class="text-sm text-muted-foreground">{{ doctor.medicalLicense || 'License N/A' }}</p>
                     </div>
                   </div>
                 </td>
                 <td class="p-3">
-                  <p class="font-medium">{{ doctor.specialization || doctor.profession || 'General Practice' }}</p>
-                  <p class="text-sm text-muted-foreground">{{ doctor.experience || 'Experience not specified' }}</p>
+                  <p class="font-medium">{{ doctor.specialization || 'General Practice' }}</p>
+                  <p class="text-sm text-muted-foreground">{{ doctor.yearsOfExperience || 0 }} years experience</p>
                 </td>
                 <td class="p-3">
-                  <p class="font-medium">{{ doctor.department || 'General Medicine' }}</p>
-                  <p class="text-sm text-muted-foreground">{{ doctor.availability || 'Full Time' }}</p>
+                  <p class="font-medium">{{ doctor.staff.department || 'General Medicine' }}</p>
+                  <p class="text-sm text-muted-foreground">{{ doctor.isAvailable ? 'Available' : 'Unavailable' }}</p>
                 </td>
                 <td class="p-3">
                   <div>
-                    <p class="text-sm">{{ doctor.email || 'Email not provided' }}</p>
-                    <p class="text-sm text-muted-foreground">{{ doctor.phone || 'Phone not provided' }}</p>
+                    <p class="text-sm">{{ doctor.user.email || 'Email not provided' }}</p>
+                    <p class="text-sm text-muted-foreground">{{ doctor.user.phone || 'Phone not provided' }}</p>
                   </div>
                 </td>
                 <td class="p-3">
                   <span :class="`inline-flex px-2 py-1 text-xs font-medium rounded-full ${
-                    (doctor.status || 'ACTIVE') === 'ACTIVE' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'
+                    doctor.user.status === 'ACTIVE' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'
                   }`">
-                    {{ doctor.status || 'ACTIVE' }}
+                    {{ doctor.user.status }}
                   </span>
                 </td>
                 <td class="p-3">
@@ -533,9 +535,9 @@ onMounted(() => {
                     <Button 
                       variant="outline" 
                       size="sm"
-                      @click="toggleDoctorStatus(doctor.id, doctor.status || 'ACTIVE')"
+                      @click="toggleDoctorStatus(doctor.id, doctor.user.status)"
                     >
-                      {{ (doctor.status || 'ACTIVE') === 'ACTIVE' ? 'Deactivate' : 'Activate' }}
+                      {{ doctor.user.status === 'ACTIVE' ? 'Deactivate' : 'Activate' }}
                     </Button>
                   </div>
                 </td>
