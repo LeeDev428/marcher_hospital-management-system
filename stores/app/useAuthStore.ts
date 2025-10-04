@@ -19,14 +19,40 @@ export const useAuthStore = defineStore("auth", {
 
 				if (response.success) {
 					this.user = response.user
+					
+					// Ensure state is persisted before redirect
+					await nextTick()
+					
 					useToast("success", "Login", "Login successful")
-					await navigateTo("/")
+					
+					// Get redirect path based on role
+					const redirectPath = this.getRedirectPath(response.user.role)
+					
+					// Add a small delay to ensure persistence is complete
+					setTimeout(async () => {
+						await navigateTo(redirectPath)
+					}, 100)
 					return
 				}
 
 				useToast("error", "Login", response.message)
 			} catch (error) {
 				useToast("error", "Login")
+			}
+		},
+
+		getRedirectPath(role: string) {
+			const normalizedRole = role.toLowerCase()
+			switch (normalizedRole) {
+				case 'admin':
+					return '/admin/dashboard'
+				case 'staff':
+					return '/staff/dashboard'
+				case 'partner':
+					return '/partner/dashboard'
+				case 'patient':
+				default:
+					return '/patient'
 			}
 		},
 
