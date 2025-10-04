@@ -132,6 +132,7 @@ export const Tooltip: typeof import("../components/ui/tooltip/Tooltip.vue")['def
 export const TooltipContent: typeof import("../components/ui/tooltip/TooltipContent.vue")['default']
 export const TooltipProvider: typeof import("../components/ui/tooltip/TooltipProvider.vue")['default']
 export const TooltipTrigger: typeof import("../components/ui/tooltip/TooltipTrigger.vue")['default']
+export const AdminDashboardAdminWelcomeHeader: typeof import("../components/admin/dashboard/AdminWelcomeHeader.vue")['default']
 export const AppFormTypedCheckbox: typeof import("../components/app/form/TypedCheckbox.vue")['default']
 export const AppFormTypedCombobox: typeof import("../components/app/form/TypedCombobox.vue")['default']
 export const AppFormTypedDate: typeof import("../components/app/form/TypedDate.vue")['default']
@@ -524,6 +525,7 @@ export const LazyTooltip: LazyComponent<typeof import("../components/ui/tooltip/
 export const LazyTooltipContent: LazyComponent<typeof import("../components/ui/tooltip/TooltipContent.vue")['default']>
 export const LazyTooltipProvider: LazyComponent<typeof import("../components/ui/tooltip/TooltipProvider.vue")['default']>
 export const LazyTooltipTrigger: LazyComponent<typeof import("../components/ui/tooltip/TooltipTrigger.vue")['default']>
+export const LazyAdminDashboardAdminWelcomeHeader: LazyComponent<typeof import("../components/admin/dashboard/AdminWelcomeHeader.vue")['default']>
 export const LazyAppFormTypedCheckbox: LazyComponent<typeof import("../components/app/form/TypedCheckbox.vue")['default']>
 export const LazyAppFormTypedCombobox: LazyComponent<typeof import("../components/app/form/TypedCombobox.vue")['default']>
 export const LazyAppFormTypedDate: LazyComponent<typeof import("../components/app/form/TypedDate.vue")['default']>
