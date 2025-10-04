@@ -64,7 +64,7 @@ router.post('/register', async (req, res) => {
           lastName,
           phone: phoneNumber,
           role: role.toUpperCase(),
-          status: (role === 'admin' || role === 'patient') ? 'ACTIVE' : 'PENDING_APPROVAL',
+          status: (role === 'admin' || role === 'patient' || role === 'staff') ? 'ACTIVE' : 'PENDING_APPROVAL',
           dateOfBirth: dateOfBirth ? new Date(dateOfBirth) : null,
           gender,
           address
