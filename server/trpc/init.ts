@@ -32,15 +32,25 @@ export const protectedProcedure = tRPC.procedure.use(
 		const refreshToken = getCookie(ctx.event, "refreshToken")
 		const accessToken = getCookie(ctx.event, "accessToken")
 
+		console.log('🔍 Debug Auth:', {
+			hasRefreshToken: !!refreshToken,
+			hasAccessToken: !!accessToken,
+			refreshTokenLength: refreshToken?.length || 0,
+		})
+
 		if (!refreshToken) {
+			console.log('❌ No refresh token found')
 			throw new TRPCError({ code: "UNAUTHORIZED", message: "You are not logged in." })
 		}
 
 		const decodedRefreshToken = verifyRefreshToken(refreshToken)
 
 		if (!decodedRefreshToken) {
+			console.log('❌ Invalid refresh token')
 			throw new TRPCError({ code: "UNAUTHORIZED", message: "Invalid session. Please login again." })
 		}
+
+		console.log('✅ Auth successful:', decodedRefreshToken)
 
 		return next({
 			ctx: {

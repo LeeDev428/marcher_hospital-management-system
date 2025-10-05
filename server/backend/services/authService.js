@@ -5,15 +5,15 @@ import { PrismaClient } from '../../../prisma/generated/instance/index.js';
 const prisma = new PrismaClient();
 
 // Generate JWT tokens
-export const generateTokens = (userId, email, role) => {
+export const generateTokens = (userId, email, role, firstName, lastName) => {
   const accessToken = jwt.sign(
-    { userId, email, role },
+    { userId, email, role, firstName, lastName },
     process.env.ACCESS_TOKEN_SECRET,
     { expiresIn: '15m' }
   );
 
   const refreshToken = jwt.sign(
-    { userId },
+    { id: userId, userId, email, role, firstName, lastName },
     process.env.REFRESH_TOKEN_SECRET,
     { expiresIn: '7d' }
   );

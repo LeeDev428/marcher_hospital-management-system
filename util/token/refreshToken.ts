@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken"
 import type { SignOptions, VerifyOptions } from "jsonwebtoken"
 
-const JWT_REFRESH_KEY = process.env.ACCESS_TOKEN_SECRET
+const JWT_REFRESH_KEY = process.env.REFRESH_TOKEN_SECRET
 
 const jwtRefreshTokenSignOptions = {
 	algorithm: "HS256",
@@ -26,13 +26,21 @@ export const signRefreshToken = (payload: Record<string, string>, subject: strin
 }
 
 export const verifyRefreshToken = (token: string) => {
-	if (!JWT_REFRESH_KEY) throw new Error("JWT_REFRESH_KEY is not defined")
+	if (!JWT_REFRESH_KEY) {
+		console.log('❌ JWT_REFRESH_KEY is not defined')
+		throw new Error("JWT_REFRESH_KEY is not defined")
+	}
 
 	try {
-		return jwt.verify(token, JWT_REFRESH_KEY, jwtRefreshTokenVerifyOptions)
+		console.log('🔍 Verifying refresh token with key:', JWT_REFRESH_KEY.substring(0, 10) + '...')
+		const result = jwt.verify(token, JWT_REFRESH_KEY, jwtRefreshTokenVerifyOptions)
+		console.log('✅ Token verification successful:', result)
+		return result
 	} catch (error) {
+		console.log('❌ Token verification failed:', error instanceof Error ? error.message : error)
 		if (error instanceof jwt.JsonWebTokenError) {
 			return false
 		}
+		throw error
 	}
 }

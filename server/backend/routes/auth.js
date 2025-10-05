@@ -112,7 +112,9 @@ router.post('/register', async (req, res) => {
     const { accessToken, refreshToken } = authService.generateTokens(
       result.id,
       result.email,
-      result.role
+      result.role,
+      result.firstName,
+      result.lastName
     );
 
     // Save refresh token
@@ -204,7 +206,9 @@ router.post('/login', async (req, res) => {
     const { accessToken, refreshToken } = authService.generateTokens(
       user.id,
       user.email,
-      user.role
+      user.role,
+      user.firstName,
+      user.lastName
     );
 
     // Save refresh token
@@ -283,7 +287,9 @@ router.post('/refresh-token', async (req, res) => {
     const { accessToken, refreshToken: newRefreshToken } = authService.generateTokens(
       user.id,
       user.email,
-      user.role
+      user.role,
+      user.firstName,
+      user.lastName
     );
 
     // Save new refresh token
