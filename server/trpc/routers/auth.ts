@@ -57,12 +57,38 @@ export const authRouter = createTRPCRouter({
 
   login: publicProcedure
     .input(loginSchema)
-    .mutation(async ({ input }) => {
+    .mutation(async ({ input, ctx }) => {
       try {
         const response = await $fetch(`${BACKEND_URL}/api/auth/login`, {
           method: 'POST',
           body: input
-        });
+        }) as any;
+
+        // Set HTTP-only cookies if login is successful
+        if (response.success && response.tokens) {
+          const { setCookie } = await import('h3');
+          
+          // Set access token cookie
+          setCookie(ctx.event, 'accessToken', response.tokens.accessToken, {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === 'production',
+            sameSite: 'lax',
+            maxAge: 15 * 60 // 15 minutes
+          });
+
+          // Set refresh token cookie  
+          setCookie(ctx.event, 'refreshToken', response.tokens.refreshToken, {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === 'production', 
+            sameSite: 'lax',
+            maxAge: 7 * 24 * 60 * 60 // 7 days
+          });
+
+          // Return response without tokens (they're now in cookies)
+          const { tokens, ...responseWithoutTokens } = response;
+          return responseWithoutTokens;
+        }
+
         return response;
       } catch (error: any) {
         if (error.data) {
@@ -83,9 +109,23 @@ export const authRouter = createTRPCRouter({
           headers: {
             'Authorization': authHeader || ''
           }
-        });
+        }) as any;
+
+        // Clear cookies on successful logout
+        if (response.success) {
+          const { deleteCookie } = await import('h3');
+          
+          deleteCookie(ctx.event, 'accessToken');
+          deleteCookie(ctx.event, 'refreshToken');
+        }
+
         return response;
       } catch (error: any) {
+        // Clear cookies even if backend logout fails
+        const { deleteCookie } = await import('h3');
+        deleteCookie(ctx.event, 'accessToken');
+        deleteCookie(ctx.event, 'refreshToken');
+        
         if (error.data) {
           throw new Error(error.data.message || 'Logout failed');
         }
