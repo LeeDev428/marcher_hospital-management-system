@@ -14,7 +14,8 @@ type HydrationStrategies = {
 type LazyComponent<T> = (T & DefineComponent<HydrationStrategies, {}, {}, {}, {}, {}, {}, { hydrated: () => void }>)
 
 interface _GlobalComponents {
-      'Breadcrumb': typeof import("../../components/ui/breadcrumb/Breadcrumb.vue")['default']
+      'Badge': typeof import("../../components/ui/badge/Badge.vue")['default']
+    'Breadcrumb': typeof import("../../components/ui/breadcrumb/Breadcrumb.vue")['default']
     'BreadcrumbEllipsis': typeof import("../../components/ui/breadcrumb/BreadcrumbEllipsis.vue")['default']
     'BreadcrumbItem': typeof import("../../components/ui/breadcrumb/BreadcrumbItem.vue")['default']
     'BreadcrumbLink': typeof import("../../components/ui/breadcrumb/BreadcrumbLink.vue")['default']
@@ -278,6 +279,7 @@ interface _GlobalComponents {
     'NuxtImg': typeof import("../../node_modules/@nuxt/image/dist/runtime/components/NuxtImg.vue")['default']
     'NuxtPicture': typeof import("../../node_modules/@nuxt/image/dist/runtime/components/NuxtPicture.vue")['default']
     'Icon': typeof import("../../node_modules/@nuxt/icon/dist/runtime/components/index")['default']
+    'UiBadge': typeof import("../../components/ui/badge/index")['Badge']
     'UiBreadcrumb': typeof import("../../components/ui/breadcrumb/index")['Breadcrumb']
     'UiBreadcrumbEllipsis': typeof import("../../components/ui/breadcrumb/index")['BreadcrumbEllipsis']
     'UiBreadcrumbItem': typeof import("../../components/ui/breadcrumb/index")['BreadcrumbItem']
@@ -285,7 +287,6 @@ interface _GlobalComponents {
     'UiBreadcrumbList': typeof import("../../components/ui/breadcrumb/index")['BreadcrumbList']
     'UiBreadcrumbPage': typeof import("../../components/ui/breadcrumb/index")['BreadcrumbPage']
     'UiBreadcrumbSeparator': typeof import("../../components/ui/breadcrumb/index")['BreadcrumbSeparator']
-    'UiButton': typeof import("../../components/ui/button/index")['Button']
     'UiCalendar': typeof import("../../components/ui/calendar/index")['Calendar']
     'UiCalendarCell': typeof import("../../components/ui/calendar/index")['CalendarCell']
     'UiCalendarCellTrigger': typeof import("../../components/ui/calendar/index")['CalendarCellTrigger']
@@ -298,6 +299,7 @@ interface _GlobalComponents {
     'UiCalendarHeading': typeof import("../../components/ui/calendar/index")['CalendarHeading']
     'UiCalendarNextButton': typeof import("../../components/ui/calendar/index")['CalendarNextButton']
     'UiCalendarPrevButton': typeof import("../../components/ui/calendar/index")['CalendarPrevButton']
+    'UiButton': typeof import("../../components/ui/button/index")['Button']
     'UiCard': typeof import("../../components/ui/card/index")['Card']
     'UiCardAction': typeof import("../../components/ui/card/index")['CardAction']
     'UiCardContent': typeof import("../../components/ui/card/index")['CardContent']
@@ -411,7 +413,8 @@ interface _GlobalComponents {
     'NuxtIsland': typeof import("../../node_modules/nuxt/dist/app/components/nuxt-island")['default']
     'AppICDBrowser': typeof import("../../node_modules/nuxt/dist/app/components/server-placeholder")['default']
     'NuxtRouteAnnouncer': typeof import("../../node_modules/nuxt/dist/app/components/server-placeholder")['default']
-      'LazyBreadcrumb': LazyComponent<typeof import("../../components/ui/breadcrumb/Breadcrumb.vue")['default']>
+      'LazyBadge': LazyComponent<typeof import("../../components/ui/badge/Badge.vue")['default']>
+    'LazyBreadcrumb': LazyComponent<typeof import("../../components/ui/breadcrumb/Breadcrumb.vue")['default']>
     'LazyBreadcrumbEllipsis': LazyComponent<typeof import("../../components/ui/breadcrumb/BreadcrumbEllipsis.vue")['default']>
     'LazyBreadcrumbItem': LazyComponent<typeof import("../../components/ui/breadcrumb/BreadcrumbItem.vue")['default']>
     'LazyBreadcrumbLink': LazyComponent<typeof import("../../components/ui/breadcrumb/BreadcrumbLink.vue")['default']>
@@ -675,6 +678,7 @@ interface _GlobalComponents {
     'LazyNuxtImg': LazyComponent<typeof import("../../node_modules/@nuxt/image/dist/runtime/components/NuxtImg.vue")['default']>
     'LazyNuxtPicture': LazyComponent<typeof import("../../node_modules/@nuxt/image/dist/runtime/components/NuxtPicture.vue")['default']>
     'LazyIcon': LazyComponent<typeof import("../../node_modules/@nuxt/icon/dist/runtime/components/index")['default']>
+    'LazyUiBadge': LazyComponent<typeof import("../../components/ui/badge/index")['Badge']>
     'LazyUiBreadcrumb': LazyComponent<typeof import("../../components/ui/breadcrumb/index")['Breadcrumb']>
     'LazyUiBreadcrumbEllipsis': LazyComponent<typeof import("../../components/ui/breadcrumb/index")['BreadcrumbEllipsis']>
     'LazyUiBreadcrumbItem': LazyComponent<typeof import("../../components/ui/breadcrumb/index")['BreadcrumbItem']>
@@ -682,7 +686,6 @@ interface _GlobalComponents {
     'LazyUiBreadcrumbList': LazyComponent<typeof import("../../components/ui/breadcrumb/index")['BreadcrumbList']>
     'LazyUiBreadcrumbPage': LazyComponent<typeof import("../../components/ui/breadcrumb/index")['BreadcrumbPage']>
     'LazyUiBreadcrumbSeparator': LazyComponent<typeof import("../../components/ui/breadcrumb/index")['BreadcrumbSeparator']>
-    'LazyUiButton': LazyComponent<typeof import("../../components/ui/button/index")['Button']>
     'LazyUiCalendar': LazyComponent<typeof import("../../components/ui/calendar/index")['Calendar']>
     'LazyUiCalendarCell': LazyComponent<typeof import("../../components/ui/calendar/index")['CalendarCell']>
     'LazyUiCalendarCellTrigger': LazyComponent<typeof import("../../components/ui/calendar/index")['CalendarCellTrigger']>
@@ -695,6 +698,7 @@ interface _GlobalComponents {
     'LazyUiCalendarHeading': LazyComponent<typeof import("../../components/ui/calendar/index")['CalendarHeading']>
     'LazyUiCalendarNextButton': LazyComponent<typeof import("../../components/ui/calendar/index")['CalendarNextButton']>
     'LazyUiCalendarPrevButton': LazyComponent<typeof import("../../components/ui/calendar/index")['CalendarPrevButton']>
+    'LazyUiButton': LazyComponent<typeof import("../../components/ui/button/index")['Button']>
     'LazyUiCard': LazyComponent<typeof import("../../components/ui/card/index")['Card']>
     'LazyUiCardAction': LazyComponent<typeof import("../../components/ui/card/index")['CardAction']>
     'LazyUiCardContent': LazyComponent<typeof import("../../components/ui/card/index")['CardContent']>
