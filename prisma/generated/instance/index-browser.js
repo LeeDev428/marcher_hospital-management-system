@@ -126,6 +126,7 @@ exports.Prisma.UserScalarFieldEnum = {
   password: 'password',
   firstName: 'firstName',
   lastName: 'lastName',
+  middleName: 'middleName',
   phone: 'phone',
   role: 'role',
   status: 'status',
@@ -138,6 +139,12 @@ exports.Prisma.UserScalarFieldEnum = {
   city: 'city',
   province: 'province',
   zipCode: 'zipCode',
+  staffNumber: 'staffNumber',
+  department: 'department',
+  position: 'position',
+  hireDate: 'hireDate',
+  salary: 'salary',
+  employmentType: 'employmentType',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   lastLoginAt: 'lastLoginAt',
@@ -145,13 +152,23 @@ exports.Prisma.UserScalarFieldEnum = {
   updatedBy: 'updatedBy'
 };
 
-exports.Prisma.RefreshTokenScalarFieldEnum = {
+exports.Prisma.StaffCredentialsScalarFieldEnum = {
   id: 'id',
-  token: 'token',
   userId: 'userId',
-  expiresAt: 'expiresAt',
+  staffType: 'staffType',
+  licenseNumber: 'licenseNumber',
+  licenseExpiryDate: 'licenseExpiryDate',
+  specialization: 'specialization',
+  subSpecialization: 'subSpecialization',
+  boardCertification: 'boardCertification',
+  education: 'education',
+  yearsOfExperience: 'yearsOfExperience',
+  consultationFee: 'consultationFee',
+  isAvailable: 'isAvailable',
+  workingHours: 'workingHours',
+  hospitalAffiliation: 'hospitalAffiliation',
   createdAt: 'createdAt',
-  isRevoked: 'isRevoked'
+  updatedAt: 'updatedAt'
 };
 
 exports.Prisma.PatientScalarFieldEnum = {
@@ -169,37 +186,6 @@ exports.Prisma.PatientScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
-exports.Prisma.StaffScalarFieldEnum = {
-  id: 'id',
-  userId: 'userId',
-  staffNumber: 'staffNumber',
-  department: 'department',
-  position: 'position',
-  hireDate: 'hireDate',
-  salary: 'salary',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-};
-
-exports.Prisma.DoctorScalarFieldEnum = {
-  id: 'id',
-  userId: 'userId',
-  staffId: 'staffId',
-  doctorNumber: 'doctorNumber',
-  medicalLicense: 'medicalLicense',
-  specialization: 'specialization',
-  subSpecialization: 'subSpecialization',
-  boardCertification: 'boardCertification',
-  yearsOfExperience: 'yearsOfExperience',
-  education: 'education',
-  hospitalAffiliation: 'hospitalAffiliation',
-  consultationFee: 'consultationFee',
-  isAvailable: 'isAvailable',
-  workingHours: 'workingHours',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-};
-
 exports.Prisma.PartnerScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
@@ -210,6 +196,15 @@ exports.Prisma.PartnerScalarFieldEnum = {
   contactPerson: 'contactPerson',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
+};
+
+exports.Prisma.RefreshTokenScalarFieldEnum = {
+  id: 'id',
+  token: 'token',
+  userId: 'userId',
+  expiresAt: 'expiresAt',
+  createdAt: 'createdAt',
+  isRevoked: 'isRevoked'
 };
 
 exports.Prisma.AppointmentScalarFieldEnum = {
@@ -231,6 +226,11 @@ exports.Prisma.SortOrder = {
   desc: 'desc'
 };
 
+exports.Prisma.NullableJsonNullValueInput = {
+  DbNull: Prisma.DbNull,
+  JsonNull: Prisma.JsonNull
+};
+
 exports.Prisma.QueryMode = {
   default: 'default',
   insensitive: 'insensitive'
@@ -239,6 +239,12 @@ exports.Prisma.QueryMode = {
 exports.Prisma.NullsOrder = {
   first: 'first',
   last: 'last'
+};
+
+exports.Prisma.JsonNullValueFilter = {
+  DbNull: Prisma.DbNull,
+  JsonNull: Prisma.JsonNull,
+  AnyNull: Prisma.AnyNull
 };
 exports.UserRole = exports.$Enums.UserRole = {
   ADMIN: 'ADMIN',
@@ -259,6 +265,27 @@ exports.Gender = exports.$Enums.Gender = {
   FEMALE: 'FEMALE',
   OTHER: 'OTHER',
   PREFER_NOT_TO_SAY: 'PREFER_NOT_TO_SAY'
+};
+
+exports.EmploymentType = exports.$Enums.EmploymentType = {
+  FULL_TIME: 'FULL_TIME',
+  PART_TIME: 'PART_TIME',
+  CONTRACT: 'CONTRACT',
+  CONSULTANT: 'CONSULTANT',
+  INTERN: 'INTERN'
+};
+
+exports.StaffType = exports.$Enums.StaffType = {
+  DOCTOR: 'DOCTOR',
+  NURSE: 'NURSE',
+  TECHNICIAN: 'TECHNICIAN',
+  PHARMACIST: 'PHARMACIST',
+  RADIOLOGIST: 'RADIOLOGIST',
+  THERAPIST: 'THERAPIST',
+  ADMINISTRATOR: 'ADMINISTRATOR',
+  SECURITY: 'SECURITY',
+  MAINTENANCE: 'MAINTENANCE',
+  OTHER: 'OTHER'
 };
 
 exports.BloodType = exports.$Enums.BloodType = {
@@ -299,11 +326,10 @@ exports.AppointmentStatus = exports.$Enums.AppointmentStatus = {
 
 exports.Prisma.ModelName = {
   User: 'User',
-  RefreshToken: 'RefreshToken',
+  StaffCredentials: 'StaffCredentials',
   Patient: 'Patient',
-  Staff: 'Staff',
-  Doctor: 'Doctor',
   Partner: 'Partner',
+  RefreshToken: 'RefreshToken',
   Appointment: 'Appointment'
 };
 
