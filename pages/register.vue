@@ -83,26 +83,6 @@
             </div>
           </div>
 
-          <!-- Role Selection -->
-          <div>
-            <label for="role" class="block text-sm font-medium text-gray-700 mb-2">
-              Account Type
-            </label>
-            <select
-              id="role"
-              v-model="form.role"
-              class="block w-full px-3 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent"
-            >
-              <option value="patient">Patient - Access your health records</option>
-              <option value="staff">Staff - Healthcare professional</option>
-              <option value="partner">Partner - Healthcare institution</option>
-              <option value="admin">Admin - System administrator</option>
-            </select>
-            <p class="text-xs text-gray-500 mt-1">
-              Note: Staff, Partner, and Admin accounts require approval
-            </p>
-          </div>
-
           <!-- Password -->
           <div>
             <label for="password" class="block text-sm font-medium text-gray-700 mb-2">
@@ -245,7 +225,6 @@ const form = reactive({
   lastName: '',
   email: '',
   phone: '',
-  role: 'patient', // Default role
   password: '',
   confirmPassword: '',
   acceptTerms: false
@@ -283,23 +262,16 @@ const handleRegister = async () => {
       firstName: form.firstName,
       lastName: form.lastName,
       email: form.email,
-      phone: form.phone,
-      role: form.role as 'admin' | 'partner' | 'patient' | 'staff',
+      phoneNumber: form.phone,
+      role: 'patient', // Always patient for public registration
       password: form.password
     }) as any
 
     if (response?.success) {
-      useToast('success', 'Account Created!', `Welcome to Marcher! Your ${form.role} account has been created.`)
+      useToast('success', 'Account Created!', `Welcome to Marcher! Your patient account has been created.`)
       
-      // Redirect to login or appropriate dashboard
-      if (form.role === 'patient') {
-        // Auto-login for patients
-        await navigateTo('/patient')
-      } else {
-        // Redirect to login for approval-required roles
-        useToast('info', 'Account Pending', 'Your account is pending approval. You will receive an email once approved.')
-        await navigateTo('/login')
-      }
+      // Auto-login and redirect to patient dashboard
+      await navigateTo('/patient')
     } else {
       useToast('error', 'Registration Failed', response.message)
     }
