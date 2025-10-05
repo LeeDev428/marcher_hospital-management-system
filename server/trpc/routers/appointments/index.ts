@@ -1,5 +1,5 @@
 import { z } from "zod"
-import { createTRPCRouter, protectedProcedure } from "../../init"
+import { createTRPCRouter, protectedProcedure, publicProcedure } from "../../init"
 import {
   createAppointmentSchema,
   deleteAppointmentSchema,
@@ -365,7 +365,7 @@ const getPatientAppointment = protectedProcedure
     }
   })
 
-const createPatientAppointment = protectedProcedure
+const createPatientAppointment = publicProcedure
   .input(createPatientAppointmentSchema)
   .mutation(async ({ ctx, input }) => {
     const { instancePrisma, user } = ctx
@@ -496,7 +496,7 @@ const getAvailableRooms = protectedProcedure
     }
   })
 
-const checkAvailability = protectedProcedure
+const checkAvailability = publicProcedure
   .input(checkAvailabilitySchema)
   .query(async ({ ctx, input }) => {
     const { instancePrisma } = ctx
@@ -528,7 +528,7 @@ const checkAvailability = protectedProcedure
     }
   })
 
-const getAvailableTimeSlots = protectedProcedure
+const getAvailableTimeSlots = publicProcedure
   .input(getAvailableTimeSlotsSchema)
   .query(async ({ ctx, input }) => {
     const { instancePrisma } = ctx
