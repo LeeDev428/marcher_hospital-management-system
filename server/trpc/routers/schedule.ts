@@ -128,6 +128,10 @@ const bulkUpdateSchedule = publicProcedure
     const { staffId, schedules } = input
 
     try {
+      console.log('=== BULK UPDATE SCHEDULE ===')
+      console.log('Staff ID:', staffId)
+      console.log('Schedules received:', JSON.stringify(schedules, null, 2))
+      
       // Delete existing schedules for this staff member
       await instancePrisma.staffSchedule.deleteMany({
         where: { staffId }
@@ -135,8 +139,9 @@ const bulkUpdateSchedule = publicProcedure
 
       // Create all new schedules
       const createdSchedules = await Promise.all(
-        schedules.map(schedule =>
-          instancePrisma.staffSchedule.create({
+        schedules.map(schedule => {
+          console.log(`Creating schedule for ${schedule.day}: isAvailable=${schedule.isAvailable}`)
+          return instancePrisma.staffSchedule.create({
             data: {
               staffId,
               day: schedule.day,
@@ -145,8 +150,10 @@ const bulkUpdateSchedule = publicProcedure
               endTime: schedule.endTime,
             }
           })
-        )
+        })
       )
+      
+      console.log('Created schedules:', createdSchedules.length)
 
       return {
         success: true,
