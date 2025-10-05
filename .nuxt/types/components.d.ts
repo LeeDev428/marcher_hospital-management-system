@@ -287,6 +287,7 @@ interface _GlobalComponents {
     'UiBreadcrumbList': typeof import("../../components/ui/breadcrumb/index")['BreadcrumbList']
     'UiBreadcrumbPage': typeof import("../../components/ui/breadcrumb/index")['BreadcrumbPage']
     'UiBreadcrumbSeparator': typeof import("../../components/ui/breadcrumb/index")['BreadcrumbSeparator']
+    'UiButton': typeof import("../../components/ui/button/index")['Button']
     'UiCalendar': typeof import("../../components/ui/calendar/index")['Calendar']
     'UiCalendarCell': typeof import("../../components/ui/calendar/index")['CalendarCell']
     'UiCalendarCellTrigger': typeof import("../../components/ui/calendar/index")['CalendarCellTrigger']
@@ -299,7 +300,6 @@ interface _GlobalComponents {
     'UiCalendarHeading': typeof import("../../components/ui/calendar/index")['CalendarHeading']
     'UiCalendarNextButton': typeof import("../../components/ui/calendar/index")['CalendarNextButton']
     'UiCalendarPrevButton': typeof import("../../components/ui/calendar/index")['CalendarPrevButton']
-    'UiButton': typeof import("../../components/ui/button/index")['Button']
     'UiCard': typeof import("../../components/ui/card/index")['Card']
     'UiCardAction': typeof import("../../components/ui/card/index")['CardAction']
     'UiCardContent': typeof import("../../components/ui/card/index")['CardContent']
@@ -320,15 +320,6 @@ interface _GlobalComponents {
     'UiComboboxTrigger': typeof import("../../components/ui/combobox/index")['ComboboxTrigger']
     'UiComboboxViewport': typeof import("../../components/ui/combobox/index")['ComboboxViewport']
     'UiComboboxCancel': typeof import("../../components/ui/combobox/index")['ComboboxCancel']
-    'UiCommand': typeof import("../../components/ui/command/index")['Command']
-    'UiCommandDialog': typeof import("../../components/ui/command/index")['CommandDialog']
-    'UiCommandEmpty': typeof import("../../components/ui/command/index")['CommandEmpty']
-    'UiCommandGroup': typeof import("../../components/ui/command/index")['CommandGroup']
-    'UiCommandInput': typeof import("../../components/ui/command/index")['CommandInput']
-    'UiCommandItem': typeof import("../../components/ui/command/index")['CommandItem']
-    'UiCommandList': typeof import("../../components/ui/command/index")['CommandList']
-    'UiCommandSeparator': typeof import("../../components/ui/command/index")['CommandSeparator']
-    'UiCommandShortcut': typeof import("../../components/ui/command/index")['CommandShortcut']
     'UiDialog': typeof import("../../components/ui/dialog/index")['Dialog']
     'UiDialogClose': typeof import("../../components/ui/dialog/index")['DialogClose']
     'UiDialogContent': typeof import("../../components/ui/dialog/index")['DialogContent']
@@ -339,6 +330,15 @@ interface _GlobalComponents {
     'UiDialogScrollContent': typeof import("../../components/ui/dialog/index")['DialogScrollContent']
     'UiDialogTitle': typeof import("../../components/ui/dialog/index")['DialogTitle']
     'UiDialogTrigger': typeof import("../../components/ui/dialog/index")['DialogTrigger']
+    'UiCommand': typeof import("../../components/ui/command/index")['Command']
+    'UiCommandDialog': typeof import("../../components/ui/command/index")['CommandDialog']
+    'UiCommandEmpty': typeof import("../../components/ui/command/index")['CommandEmpty']
+    'UiCommandGroup': typeof import("../../components/ui/command/index")['CommandGroup']
+    'UiCommandInput': typeof import("../../components/ui/command/index")['CommandInput']
+    'UiCommandItem': typeof import("../../components/ui/command/index")['CommandItem']
+    'UiCommandList': typeof import("../../components/ui/command/index")['CommandList']
+    'UiCommandSeparator': typeof import("../../components/ui/command/index")['CommandSeparator']
+    'UiCommandShortcut': typeof import("../../components/ui/command/index")['CommandShortcut']
     'UiDropdownMenu': typeof import("../../components/ui/dropdown-menu/index")['DropdownMenu']
     'UiDropdownMenuCheckboxItem': typeof import("../../components/ui/dropdown-menu/index")['DropdownMenuCheckboxItem']
     'UiDropdownMenuContent': typeof import("../../components/ui/dropdown-menu/index")['DropdownMenuContent']
@@ -382,6 +382,10 @@ interface _GlobalComponents {
     'UiSelectValue': typeof import("../../components/ui/select/index")['SelectValue']
     'UiSkeleton': typeof import("../../components/ui/skeleton/index")['Skeleton']
     'UiToaster': typeof import("../../components/ui/sonner/index")['Toaster']
+    'UiTabs': typeof import("../../components/ui/tabs/index")['Tabs']
+    'UiTabsContent': typeof import("../../components/ui/tabs/index")['TabsContent']
+    'UiTabsList': typeof import("../../components/ui/tabs/index")['TabsList']
+    'UiTabsTrigger': typeof import("../../components/ui/tabs/index")['TabsTrigger']
     'UiTable': typeof import("../../components/ui/table/index")['Table']
     'UiTableBody': typeof import("../../components/ui/table/index")['TableBody']
     'UiTableCaption': typeof import("../../components/ui/table/index")['TableCaption']
@@ -391,15 +395,11 @@ interface _GlobalComponents {
     'UiTableHead': typeof import("../../components/ui/table/index")['TableHead']
     'UiTableHeader': typeof import("../../components/ui/table/index")['TableHeader']
     'UiTableRow': typeof import("../../components/ui/table/index")['TableRow']
-    'UiTabs': typeof import("../../components/ui/tabs/index")['Tabs']
-    'UiTabsContent': typeof import("../../components/ui/tabs/index")['TabsContent']
-    'UiTabsList': typeof import("../../components/ui/tabs/index")['TabsList']
-    'UiTabsTrigger': typeof import("../../components/ui/tabs/index")['TabsTrigger']
-    'UiTextarea': typeof import("../../components/ui/textarea/index")['Textarea']
     'UiTooltip': typeof import("../../components/ui/tooltip/index")['Tooltip']
     'UiTooltipContent': typeof import("../../components/ui/tooltip/index")['TooltipContent']
     'UiTooltipProvider': typeof import("../../components/ui/tooltip/index")['TooltipProvider']
     'UiTooltipTrigger': typeof import("../../components/ui/tooltip/index")['TooltipTrigger']
+    'UiTextarea': typeof import("../../components/ui/textarea/index")['Textarea']
     'NuxtPage': typeof import("../../node_modules/nuxt/dist/pages/runtime/page")['default']
     'NoScript': typeof import("../../node_modules/nuxt/dist/head/runtime/components")['NoScript']
     'Link': typeof import("../../node_modules/nuxt/dist/head/runtime/components")['Link']
@@ -686,6 +686,7 @@ interface _GlobalComponents {
     'LazyUiBreadcrumbList': LazyComponent<typeof import("../../components/ui/breadcrumb/index")['BreadcrumbList']>
     'LazyUiBreadcrumbPage': LazyComponent<typeof import("../../components/ui/breadcrumb/index")['BreadcrumbPage']>
     'LazyUiBreadcrumbSeparator': LazyComponent<typeof import("../../components/ui/breadcrumb/index")['BreadcrumbSeparator']>
+    'LazyUiButton': LazyComponent<typeof import("../../components/ui/button/index")['Button']>
     'LazyUiCalendar': LazyComponent<typeof import("../../components/ui/calendar/index")['Calendar']>
     'LazyUiCalendarCell': LazyComponent<typeof import("../../components/ui/calendar/index")['CalendarCell']>
     'LazyUiCalendarCellTrigger': LazyComponent<typeof import("../../components/ui/calendar/index")['CalendarCellTrigger']>
@@ -698,7 +699,6 @@ interface _GlobalComponents {
     'LazyUiCalendarHeading': LazyComponent<typeof import("../../components/ui/calendar/index")['CalendarHeading']>
     'LazyUiCalendarNextButton': LazyComponent<typeof import("../../components/ui/calendar/index")['CalendarNextButton']>
     'LazyUiCalendarPrevButton': LazyComponent<typeof import("../../components/ui/calendar/index")['CalendarPrevButton']>
-    'LazyUiButton': LazyComponent<typeof import("../../components/ui/button/index")['Button']>
     'LazyUiCard': LazyComponent<typeof import("../../components/ui/card/index")['Card']>
     'LazyUiCardAction': LazyComponent<typeof import("../../components/ui/card/index")['CardAction']>
     'LazyUiCardContent': LazyComponent<typeof import("../../components/ui/card/index")['CardContent']>
@@ -719,15 +719,6 @@ interface _GlobalComponents {
     'LazyUiComboboxTrigger': LazyComponent<typeof import("../../components/ui/combobox/index")['ComboboxTrigger']>
     'LazyUiComboboxViewport': LazyComponent<typeof import("../../components/ui/combobox/index")['ComboboxViewport']>
     'LazyUiComboboxCancel': LazyComponent<typeof import("../../components/ui/combobox/index")['ComboboxCancel']>
-    'LazyUiCommand': LazyComponent<typeof import("../../components/ui/command/index")['Command']>
-    'LazyUiCommandDialog': LazyComponent<typeof import("../../components/ui/command/index")['CommandDialog']>
-    'LazyUiCommandEmpty': LazyComponent<typeof import("../../components/ui/command/index")['CommandEmpty']>
-    'LazyUiCommandGroup': LazyComponent<typeof import("../../components/ui/command/index")['CommandGroup']>
-    'LazyUiCommandInput': LazyComponent<typeof import("../../components/ui/command/index")['CommandInput']>
-    'LazyUiCommandItem': LazyComponent<typeof import("../../components/ui/command/index")['CommandItem']>
-    'LazyUiCommandList': LazyComponent<typeof import("../../components/ui/command/index")['CommandList']>
-    'LazyUiCommandSeparator': LazyComponent<typeof import("../../components/ui/command/index")['CommandSeparator']>
-    'LazyUiCommandShortcut': LazyComponent<typeof import("../../components/ui/command/index")['CommandShortcut']>
     'LazyUiDialog': LazyComponent<typeof import("../../components/ui/dialog/index")['Dialog']>
     'LazyUiDialogClose': LazyComponent<typeof import("../../components/ui/dialog/index")['DialogClose']>
     'LazyUiDialogContent': LazyComponent<typeof import("../../components/ui/dialog/index")['DialogContent']>
@@ -738,6 +729,15 @@ interface _GlobalComponents {
     'LazyUiDialogScrollContent': LazyComponent<typeof import("../../components/ui/dialog/index")['DialogScrollContent']>
     'LazyUiDialogTitle': LazyComponent<typeof import("../../components/ui/dialog/index")['DialogTitle']>
     'LazyUiDialogTrigger': LazyComponent<typeof import("../../components/ui/dialog/index")['DialogTrigger']>
+    'LazyUiCommand': LazyComponent<typeof import("../../components/ui/command/index")['Command']>
+    'LazyUiCommandDialog': LazyComponent<typeof import("../../components/ui/command/index")['CommandDialog']>
+    'LazyUiCommandEmpty': LazyComponent<typeof import("../../components/ui/command/index")['CommandEmpty']>
+    'LazyUiCommandGroup': LazyComponent<typeof import("../../components/ui/command/index")['CommandGroup']>
+    'LazyUiCommandInput': LazyComponent<typeof import("../../components/ui/command/index")['CommandInput']>
+    'LazyUiCommandItem': LazyComponent<typeof import("../../components/ui/command/index")['CommandItem']>
+    'LazyUiCommandList': LazyComponent<typeof import("../../components/ui/command/index")['CommandList']>
+    'LazyUiCommandSeparator': LazyComponent<typeof import("../../components/ui/command/index")['CommandSeparator']>
+    'LazyUiCommandShortcut': LazyComponent<typeof import("../../components/ui/command/index")['CommandShortcut']>
     'LazyUiDropdownMenu': LazyComponent<typeof import("../../components/ui/dropdown-menu/index")['DropdownMenu']>
     'LazyUiDropdownMenuCheckboxItem': LazyComponent<typeof import("../../components/ui/dropdown-menu/index")['DropdownMenuCheckboxItem']>
     'LazyUiDropdownMenuContent': LazyComponent<typeof import("../../components/ui/dropdown-menu/index")['DropdownMenuContent']>
@@ -781,6 +781,10 @@ interface _GlobalComponents {
     'LazyUiSelectValue': LazyComponent<typeof import("../../components/ui/select/index")['SelectValue']>
     'LazyUiSkeleton': LazyComponent<typeof import("../../components/ui/skeleton/index")['Skeleton']>
     'LazyUiToaster': LazyComponent<typeof import("../../components/ui/sonner/index")['Toaster']>
+    'LazyUiTabs': LazyComponent<typeof import("../../components/ui/tabs/index")['Tabs']>
+    'LazyUiTabsContent': LazyComponent<typeof import("../../components/ui/tabs/index")['TabsContent']>
+    'LazyUiTabsList': LazyComponent<typeof import("../../components/ui/tabs/index")['TabsList']>
+    'LazyUiTabsTrigger': LazyComponent<typeof import("../../components/ui/tabs/index")['TabsTrigger']>
     'LazyUiTable': LazyComponent<typeof import("../../components/ui/table/index")['Table']>
     'LazyUiTableBody': LazyComponent<typeof import("../../components/ui/table/index")['TableBody']>
     'LazyUiTableCaption': LazyComponent<typeof import("../../components/ui/table/index")['TableCaption']>
@@ -790,15 +794,11 @@ interface _GlobalComponents {
     'LazyUiTableHead': LazyComponent<typeof import("../../components/ui/table/index")['TableHead']>
     'LazyUiTableHeader': LazyComponent<typeof import("../../components/ui/table/index")['TableHeader']>
     'LazyUiTableRow': LazyComponent<typeof import("../../components/ui/table/index")['TableRow']>
-    'LazyUiTabs': LazyComponent<typeof import("../../components/ui/tabs/index")['Tabs']>
-    'LazyUiTabsContent': LazyComponent<typeof import("../../components/ui/tabs/index")['TabsContent']>
-    'LazyUiTabsList': LazyComponent<typeof import("../../components/ui/tabs/index")['TabsList']>
-    'LazyUiTabsTrigger': LazyComponent<typeof import("../../components/ui/tabs/index")['TabsTrigger']>
-    'LazyUiTextarea': LazyComponent<typeof import("../../components/ui/textarea/index")['Textarea']>
     'LazyUiTooltip': LazyComponent<typeof import("../../components/ui/tooltip/index")['Tooltip']>
     'LazyUiTooltipContent': LazyComponent<typeof import("../../components/ui/tooltip/index")['TooltipContent']>
     'LazyUiTooltipProvider': LazyComponent<typeof import("../../components/ui/tooltip/index")['TooltipProvider']>
     'LazyUiTooltipTrigger': LazyComponent<typeof import("../../components/ui/tooltip/index")['TooltipTrigger']>
+    'LazyUiTextarea': LazyComponent<typeof import("../../components/ui/textarea/index")['Textarea']>
     'LazyNuxtPage': LazyComponent<typeof import("../../node_modules/nuxt/dist/pages/runtime/page")['default']>
     'LazyNoScript': LazyComponent<typeof import("../../node_modules/nuxt/dist/head/runtime/components")['NoScript']>
     'LazyLink': LazyComponent<typeof import("../../node_modules/nuxt/dist/head/runtime/components")['Link']>
