@@ -7,6 +7,36 @@ import { staffProfilesRouter } from "./staffProfiles";
 export const staffRouter = createTRPCRouter({
 	profiles: staffProfilesRouter,
 
+	// List all staff - simple method for components
+	list: protectedProcedure.query(async ({ ctx }) => {
+		try {
+			const staff = await ctx.instancePrisma.user.findMany({
+				where: {
+					role: "STAFF",
+				},
+				include: {
+					staffCredentials: true,
+				},
+				orderBy: {
+					createdAt: "desc",
+				},
+			});
+
+			return {
+				success: true,
+				message: "Staff fetched successfully.",
+				data: staff,
+			};
+		} catch (error) {
+			console.error("Error fetching staff:", error);
+			return {
+				success: false,
+				message: "Failed to fetch staff.",
+				data: [],
+			};
+		}
+	}),
+
 	// Get all staff (doctors and nurses)
 	getAll: protectedProcedure
 		.input(
