@@ -42,11 +42,7 @@ export const usersRouter = createTRPCRouter({
     try {
       const users = await ctx.instancePrisma.user.findMany({
         include: {
-          staffProfile: {
-            include: {
-              doctorProfile: true,
-            },
-          },
+          staffCredentials: true,
           partnerProfile: true,
           patientProfile: true,
         },
@@ -78,11 +74,7 @@ export const usersRouter = createTRPCRouter({
         const user = await ctx.instancePrisma.user.findUnique({
           where: { id: input.id },
           include: {
-            staffProfile: {
-              include: {
-                doctorProfile: true,
-              },
-            },
+            staffCredentials: true,
             partnerProfile: true,
             patientProfile: true,
           },
