@@ -30,6 +30,7 @@ const createForm = ref({
   middleName: '',
   suffix: '',
   email: '',
+  password: '',
   phone: '',
   department: '',
   position: 'Doctor',
@@ -101,6 +102,11 @@ const validateForm = () => {
     return false
   }
   
+  if (!createForm.value.password || createForm.value.password.length < 8) {
+    useToast('error', 'Validation Error', 'Password must be at least 8 characters long')
+    return false
+  }
+  
   if (!createForm.value.specialization || !createForm.value.medicalLicense) {
     useToast('error', 'Validation Error', 'Specialization and medical license are required')
     return false
@@ -121,32 +127,30 @@ const createDoctor = async () => {
       firstName: createForm.value.firstName,
       lastName: createForm.value.lastName,
       email: createForm.value.email,
+      password: createForm.value.password,
       phone: createForm.value.phone,
       department: createForm.value.department,
       position: createForm.value.position,
-      medicalLicense: createForm.value.medicalLicense,
+      licenseNumber: createForm.value.medicalLicense,
       specialization: createForm.value.specialization,
       subSpecialization: createForm.value.subSpecialization,
-      boardCertification: createForm.value.boardCertification,
-      yearsOfExperience: createForm.value.yearsOfExperience,
       education: createForm.value.education,
-      hospitalAffiliation: createForm.value.hospitalAffiliation,
+      yearsOfExperience: createForm.value.yearsOfExperience,
       consultationFee: createForm.value.consultationFee,
-      isAvailable: createForm.value.isAvailable,
-      workingHours: createForm.value.workingHours
+      hireDate: new Date()
     }
     
     // Call the new doctors creation API
     const { $trpc } = useNuxtApp()
     const response = await $trpc.doctors.create.mutate(doctorData)
     
-    if (response.success) {
+    if (response.id) {
       useToast('success', 'Doctor Created', 'Doctor profile created successfully')
       showCreateDialog.value = false
       resetForm()
       await loadDoctors()
     } else {
-      useToast('error', 'Creation Failed', response.message || 'Failed to create doctor')
+      useToast('error', 'Creation Failed', 'Failed to create doctor')
     }
   } catch (error) {
     console.error('Error creating doctor:', error)
@@ -160,10 +164,10 @@ const createDoctor = async () => {
 const loadDoctors = async () => {
   try {
     const { $trpc } = useNuxtApp()
-    const response = await $trpc.doctors.list.query()
+    const doctors_data = await $trpc.doctors.getAll.query()
     
-    if (response.success && response.data) {
-      doctors.value = response.data
+    if (doctors_data && Array.isArray(doctors_data)) {
+      doctors.value = doctors_data
     } else {
       useToast('error', 'Load Failed', 'Failed to load doctors')
     }
@@ -181,6 +185,7 @@ const resetForm = () => {
     middleName: '',
     suffix: '',
     email: '',
+    password: '',
     phone: '',
     department: '',
     position: 'Doctor',
@@ -344,6 +349,13 @@ onMounted(() => {
                   <Label for="email">Email Address</Label>
                   <Input v-model="createForm.email" id="email" type="email" placeholder="doctor@hospital.com" />
                 </div>
+                <div class="space-y-2">
+                  <Label for="password">Password</Label>
+                  <Input v-model="createForm.password" id="password" type="password" placeholder="Secure password" />
+                </div>
+              </div>
+              
+              <div class="grid grid-cols-2 gap-4">
                 <div class="space-y-2">
                   <Label for="phone">Phone Number</Label>
                   <Input v-model="createForm.phone" id="phone" placeholder="+63 912 345 6789" />
