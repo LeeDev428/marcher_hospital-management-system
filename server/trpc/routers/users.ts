@@ -12,8 +12,7 @@ const createUserSchema = z.object({
   role: z.enum(['ADMIN', 'STAFF', 'PATIENT', 'PARTNER']),
   
   // Staff-specific fields (when role is STAFF)
-  staffType: z.enum(['new', 'existing']).optional(),
-  selectedDoctorId: z.string().optional(),
+  staffType: z.enum(['DOCTOR', 'NURSE', 'TECHNICIAN', 'PHARMACIST', 'RADIOLOGIST', 'THERAPIST', 'ADMINISTRATOR', 'SECURITY', 'MAINTENANCE', 'OTHER']).optional(),
   position: z.string().optional(),
   department: z.string().optional(),
   specialization: z.string().optional(),
@@ -107,30 +106,29 @@ export const usersRouter = createTRPCRouter({
   create: publicProcedure
     .input(createUserSchema)
     .mutation(async ({ ctx, input }) => {
-      const {
-        firstName,
-        lastName,
-        email,
-        password,
-        phone,
-        role,
-        staffType,
-        selectedDoctorId,
-        position,
-        department,
-        specialization,
-        licenseNumber,
-        institutionName,
-        institutionType,
-        contactPerson,
-        dateOfBirth,
-        gender,
-        address,
-        emergencyContact,
-        bloodType,
-      } = input
+        const {
+          firstName,
+          lastName,
+          email,
+          password,
+          phone,
+          role,
+          staffType,
+          position,
+          department,
+          specialization,
+          licenseNumber,
+          institutionName,
+          institutionType,
+          contactPerson,
+          dateOfBirth,
+          gender,
+          address,
+          emergencyContact,
+          bloodType,
+        } = input
 
-      try {
+        try {
         // Check if user with email already exists
         const existingUser = await ctx.instancePrisma.user.findUnique({
           where: { email },
@@ -172,33 +170,25 @@ export const usersRouter = createTRPCRouter({
 
           // Create role-specific profile
           if (role === 'STAFF') {
-            const staffCount = await prisma.staff.count()
+            const staffCount = await prisma.staffCredentials.count()
             const staffNumber = `STF${String(staffCount + 1).padStart(6, '0')}`
 
-            if (staffType === 'existing' && selectedDoctorId) {
-              // Link to existing doctor - get the doctor's staff profile
-              const existingDoctor = await prisma.doctor.findUnique({
-                where: { id: selectedDoctorId },
-                include: { staff: true },
-              })
+            // For staff users, update the user record with staff-specific fields
+            const updatedUser = await prisma.user.update({
+              where: { id: user.id },
+              data: {
+                staffNumber,
+                department,
+                position,
+              },
+            })
 
-              if (existingDoctor) {
-                // Update the existing staff record with new user
-                profile = await prisma.staff.update({
-                  where: { id: existingDoctor.staffId },
-                  data: {
-                    userId: user.id,
-                  },
-                })
-              }
-            } else {
-              // Create new staff profile
-              profile = await prisma.staff.create({
+            // Create staff credentials profile
+            if (staffType) {
+              profile = await prisma.staffCredentials.create({
                 data: {
                   userId: user.id,
-                  staffNumber,
-                  position,
-                  department,
+                  staffType: staffType as any, // DOCTOR, NURSE, etc.
                   specialization,
                   licenseNumber,
                 },
