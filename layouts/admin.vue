@@ -19,9 +19,9 @@ const navigationItems = [
 		to: "/admin/users"
 	},
     {
-        name: "Doctor Management",
+        name: "Staff Management",
         icon: "lucide:stethoscope", 
-        to: "/admin/doctors"
+        to: "/admin/staff"
     },
 	{
 		name: "System Settings",
