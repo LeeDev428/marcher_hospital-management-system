@@ -8,6 +8,7 @@ export const useAuthStore = defineStore("auth", {
 	}),
 	actions: {
 		setUser(user: { id: string; role: string; email: string; firstName: string; lastName: string } | null) {
+			console.log('🔄 Setting user in store:', user)
 			this.user = user
 		},
 
@@ -97,9 +98,14 @@ export const useAuthStore = defineStore("auth", {
 			return state.user ? `${state.user.firstName} ${state.user.lastName}` : ""
 		},
 		isAuthenticated: (state) => {
+			console.log('🔍 Checking authentication state:', !!state.user)
 			return !!state.user
 		}
 	},
 
-	persist: true
+	persist: {
+		key: 'auth',
+		pick: ['user'],
+		debug: process.env.NODE_ENV === 'development'
+	}
 })

@@ -4,6 +4,12 @@ import { useAuthStore } from "~/stores/app"
 const authStore = useAuthStore()
 const user = computed(() => authStore.user)
 
+// Add debugging
+watchEffect(() => {
+	console.log('🔍 Admin layout - Auth store user:', authStore.user)
+	console.log('🔍 Admin layout - Is authenticated:', authStore.isAuthenticated)
+})
+
 const sidebarCollapsed = ref(false)
 
 const navigationItems = [
@@ -52,7 +58,7 @@ const navigationItems = [
 
 const logout = async () => {
 	await authStore.logout()
-	await navigateTo('/auth/login')
+	await navigateTo('/login')
 }
 </script>
 

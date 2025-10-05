@@ -365,6 +365,10 @@ export const UiFormField: typeof import("../components/ui/form/index")['FormFiel
 export const UiFormFieldArray: typeof import("../components/ui/form/index")['FormFieldArray']
 export const UiInput: typeof import("../components/ui/input/index")['Input']
 export const UiLabel: typeof import("../components/ui/label/index")['Label']
+export const UiPopover: typeof import("../components/ui/popover/index")['Popover']
+export const UiPopoverAnchor: typeof import("../components/ui/popover/index")['PopoverAnchor']
+export const UiPopoverContent: typeof import("../components/ui/popover/index")['PopoverContent']
+export const UiPopoverTrigger: typeof import("../components/ui/popover/index")['PopoverTrigger']
 export const UiSelect: typeof import("../components/ui/select/index")['Select']
 export const UiSelectContent: typeof import("../components/ui/select/index")['SelectContent']
 export const UiSelectGroup: typeof import("../components/ui/select/index")['SelectGroup']
@@ -376,11 +380,8 @@ export const UiSelectScrollUpButton: typeof import("../components/ui/select/inde
 export const UiSelectSeparator: typeof import("../components/ui/select/index")['SelectSeparator']
 export const UiSelectTrigger: typeof import("../components/ui/select/index")['SelectTrigger']
 export const UiSelectValue: typeof import("../components/ui/select/index")['SelectValue']
-export const UiPopover: typeof import("../components/ui/popover/index")['Popover']
-export const UiPopoverAnchor: typeof import("../components/ui/popover/index")['PopoverAnchor']
-export const UiPopoverContent: typeof import("../components/ui/popover/index")['PopoverContent']
-export const UiPopoverTrigger: typeof import("../components/ui/popover/index")['PopoverTrigger']
 export const UiSkeleton: typeof import("../components/ui/skeleton/index")['Skeleton']
+export const UiToaster: typeof import("../components/ui/sonner/index")['Toaster']
 export const UiTable: typeof import("../components/ui/table/index")['Table']
 export const UiTableBody: typeof import("../components/ui/table/index")['TableBody']
 export const UiTableCaption: typeof import("../components/ui/table/index")['TableCaption']
@@ -390,7 +391,6 @@ export const UiTableFooter: typeof import("../components/ui/table/index")['Table
 export const UiTableHead: typeof import("../components/ui/table/index")['TableHead']
 export const UiTableHeader: typeof import("../components/ui/table/index")['TableHeader']
 export const UiTableRow: typeof import("../components/ui/table/index")['TableRow']
-export const UiToaster: typeof import("../components/ui/sonner/index")['Toaster']
 export const UiTabs: typeof import("../components/ui/tabs/index")['Tabs']
 export const UiTabsContent: typeof import("../components/ui/tabs/index")['TabsContent']
 export const UiTabsList: typeof import("../components/ui/tabs/index")['TabsList']
@@ -764,6 +764,10 @@ export const LazyUiFormField: LazyComponent<typeof import("../components/ui/form
 export const LazyUiFormFieldArray: LazyComponent<typeof import("../components/ui/form/index")['FormFieldArray']>
 export const LazyUiInput: LazyComponent<typeof import("../components/ui/input/index")['Input']>
 export const LazyUiLabel: LazyComponent<typeof import("../components/ui/label/index")['Label']>
+export const LazyUiPopover: LazyComponent<typeof import("../components/ui/popover/index")['Popover']>
+export const LazyUiPopoverAnchor: LazyComponent<typeof import("../components/ui/popover/index")['PopoverAnchor']>
+export const LazyUiPopoverContent: LazyComponent<typeof import("../components/ui/popover/index")['PopoverContent']>
+export const LazyUiPopoverTrigger: LazyComponent<typeof import("../components/ui/popover/index")['PopoverTrigger']>
 export const LazyUiSelect: LazyComponent<typeof import("../components/ui/select/index")['Select']>
 export const LazyUiSelectContent: LazyComponent<typeof import("../components/ui/select/index")['SelectContent']>
 export const LazyUiSelectGroup: LazyComponent<typeof import("../components/ui/select/index")['SelectGroup']>
@@ -775,11 +779,8 @@ export const LazyUiSelectScrollUpButton: LazyComponent<typeof import("../compone
 export const LazyUiSelectSeparator: LazyComponent<typeof import("../components/ui/select/index")['SelectSeparator']>
 export const LazyUiSelectTrigger: LazyComponent<typeof import("../components/ui/select/index")['SelectTrigger']>
 export const LazyUiSelectValue: LazyComponent<typeof import("../components/ui/select/index")['SelectValue']>
-export const LazyUiPopover: LazyComponent<typeof import("../components/ui/popover/index")['Popover']>
-export const LazyUiPopoverAnchor: LazyComponent<typeof import("../components/ui/popover/index")['PopoverAnchor']>
-export const LazyUiPopoverContent: LazyComponent<typeof import("../components/ui/popover/index")['PopoverContent']>
-export const LazyUiPopoverTrigger: LazyComponent<typeof import("../components/ui/popover/index")['PopoverTrigger']>
 export const LazyUiSkeleton: LazyComponent<typeof import("../components/ui/skeleton/index")['Skeleton']>
+export const LazyUiToaster: LazyComponent<typeof import("../components/ui/sonner/index")['Toaster']>
 export const LazyUiTable: LazyComponent<typeof import("../components/ui/table/index")['Table']>
 export const LazyUiTableBody: LazyComponent<typeof import("../components/ui/table/index")['TableBody']>
 export const LazyUiTableCaption: LazyComponent<typeof import("../components/ui/table/index")['TableCaption']>
@@ -789,7 +790,6 @@ export const LazyUiTableFooter: LazyComponent<typeof import("../components/ui/ta
 export const LazyUiTableHead: LazyComponent<typeof import("../components/ui/table/index")['TableHead']>
 export const LazyUiTableHeader: LazyComponent<typeof import("../components/ui/table/index")['TableHeader']>
 export const LazyUiTableRow: LazyComponent<typeof import("../components/ui/table/index")['TableRow']>
-export const LazyUiToaster: LazyComponent<typeof import("../components/ui/sonner/index")['Toaster']>
 export const LazyUiTabs: LazyComponent<typeof import("../components/ui/tabs/index")['Tabs']>
 export const LazyUiTabsContent: LazyComponent<typeof import("../components/ui/tabs/index")['TabsContent']>
 export const LazyUiTabsList: LazyComponent<typeof import("../components/ui/tabs/index")['TabsList']>

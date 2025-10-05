@@ -27,17 +27,12 @@ export const signRefreshToken = (payload: Record<string, string>, subject: strin
 
 export const verifyRefreshToken = (token: string) => {
 	if (!JWT_REFRESH_KEY) {
-		console.log('❌ JWT_REFRESH_KEY is not defined')
 		throw new Error("JWT_REFRESH_KEY is not defined")
 	}
 
 	try {
-		console.log('🔍 Verifying refresh token with key:', JWT_REFRESH_KEY.substring(0, 10) + '...')
-		const result = jwt.verify(token, JWT_REFRESH_KEY, jwtRefreshTokenVerifyOptions)
-		console.log('✅ Token verification successful:', result)
-		return result
+		return jwt.verify(token, JWT_REFRESH_KEY, jwtRefreshTokenVerifyOptions)
 	} catch (error) {
-		console.log('❌ Token verification failed:', error instanceof Error ? error.message : error)
 		if (error instanceof jwt.JsonWebTokenError) {
 			return false
 		}

@@ -4,7 +4,8 @@ import { Button } from '@/components/ui/button'
 import { Badge } from '~/components/ui/badge'
 
 definePageMeta({
-  layout: 'admin'
+  layout: 'admin',
+  middleware: 'auth'
 })
 
 useHead({
