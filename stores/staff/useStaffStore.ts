@@ -14,15 +14,37 @@ export const useStaffStore = defineStore("staff", {
 
 			try {
 				this.loading = true
-				const { success, message, data } = await $trpc.staff.profiles.getStaffProfiles.query(input ?? undefined)
+				const { success, message, data } = await $trpc.users.list.query()
 
 				if (success && data) {
-					this.staffProfiles = data
+					// Filter for staff members only and map to expected format
+					const staffMembers = data
+						.filter(user => user.role === 'STAFF')
+						.map(user => ({
+							id: user.id,
+							firstName: user.firstName,
+							lastName: user.lastName,
+							middleName: user.middleName || null,
+							suffix: null, // Not stored in user table, so default to null
+							email: user.email,
+							phone: user.phone,
+							role: user.staffCredentials?.staffType || 'OTHER',
+							department: user.staffCredentials?.department || '',
+							specialization: user.staffCredentials?.specialization || '',
+							position: user.staffCredentials?.position || '',
+							licenseNumber: user.staffCredentials?.licenseNumber || '',
+							profession: user.staffCredentials?.specialization || '', // Use specialization as profession
+							createdAt: user.createdAt,
+							updatedAt: user.updatedAt,
+						}))
+
+					// Filter by specific staff role if provided
+					this.staffProfiles = input ? staffMembers.filter(staff => staff.role === input) : staffMembers
 					this.loading = false
 					return {
-						success,
-						message,
-						data,
+						success: true,
+						message: "Staff profiles fetched successfully.",
+						data: this.staffProfiles,
 					}
 				}
 
@@ -30,7 +52,7 @@ export const useStaffStore = defineStore("staff", {
 				return {
 					success,
 					message,
-					data,
+					data: [],
 				}
 			} catch(error) {
 				console.log(error)
