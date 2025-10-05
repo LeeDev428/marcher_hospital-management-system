@@ -138,6 +138,9 @@ interface _GlobalComponents {
     'AdminDashboardAnalyticsChart': typeof import("../../components/admin/dashboard/AnalyticsChart.vue")['default']
     'AdminDashboardSystemMetrics': typeof import("../../components/admin/dashboard/SystemMetrics.vue")['default']
     'AdminDashboardUserManagement': typeof import("../../components/admin/dashboard/UserManagement.vue")['default']
+    'AdminStaffForm': typeof import("../../components/admin/staff/StaffForm.vue")['default']
+    'AdminStaffStats': typeof import("../../components/admin/staff/StaffStats.vue")['default']
+    'AdminStaffTable': typeof import("../../components/admin/staff/StaffTable.vue")['default']
     'AppFormTypedCheckbox': typeof import("../../components/app/form/TypedCheckbox.vue")['default']
     'AppFormTypedCombobox': typeof import("../../components/app/form/TypedCombobox.vue")['default']
     'AppFormTypedDate': typeof import("../../components/app/form/TypedDate.vue")['default']
@@ -280,6 +283,7 @@ interface _GlobalComponents {
     'NuxtPicture': typeof import("../../node_modules/@nuxt/image/dist/runtime/components/NuxtPicture.vue")['default']
     'Icon': typeof import("../../node_modules/@nuxt/icon/dist/runtime/components/index")['default']
     'UiBadge': typeof import("../../components/ui/badge/index")['Badge']
+    'UiButton': typeof import("../../components/ui/button/index")['Button']
     'UiBreadcrumb': typeof import("../../components/ui/breadcrumb/index")['Breadcrumb']
     'UiBreadcrumbEllipsis': typeof import("../../components/ui/breadcrumb/index")['BreadcrumbEllipsis']
     'UiBreadcrumbItem': typeof import("../../components/ui/breadcrumb/index")['BreadcrumbItem']
@@ -287,7 +291,6 @@ interface _GlobalComponents {
     'UiBreadcrumbList': typeof import("../../components/ui/breadcrumb/index")['BreadcrumbList']
     'UiBreadcrumbPage': typeof import("../../components/ui/breadcrumb/index")['BreadcrumbPage']
     'UiBreadcrumbSeparator': typeof import("../../components/ui/breadcrumb/index")['BreadcrumbSeparator']
-    'UiButton': typeof import("../../components/ui/button/index")['Button']
     'UiCalendar': typeof import("../../components/ui/calendar/index")['Calendar']
     'UiCalendarCell': typeof import("../../components/ui/calendar/index")['CalendarCell']
     'UiCalendarCellTrigger': typeof import("../../components/ui/calendar/index")['CalendarCellTrigger']
@@ -537,6 +540,9 @@ interface _GlobalComponents {
     'LazyAdminDashboardAnalyticsChart': LazyComponent<typeof import("../../components/admin/dashboard/AnalyticsChart.vue")['default']>
     'LazyAdminDashboardSystemMetrics': LazyComponent<typeof import("../../components/admin/dashboard/SystemMetrics.vue")['default']>
     'LazyAdminDashboardUserManagement': LazyComponent<typeof import("../../components/admin/dashboard/UserManagement.vue")['default']>
+    'LazyAdminStaffForm': LazyComponent<typeof import("../../components/admin/staff/StaffForm.vue")['default']>
+    'LazyAdminStaffStats': LazyComponent<typeof import("../../components/admin/staff/StaffStats.vue")['default']>
+    'LazyAdminStaffTable': LazyComponent<typeof import("../../components/admin/staff/StaffTable.vue")['default']>
     'LazyAppFormTypedCheckbox': LazyComponent<typeof import("../../components/app/form/TypedCheckbox.vue")['default']>
     'LazyAppFormTypedCombobox': LazyComponent<typeof import("../../components/app/form/TypedCombobox.vue")['default']>
     'LazyAppFormTypedDate': LazyComponent<typeof import("../../components/app/form/TypedDate.vue")['default']>
@@ -679,6 +685,7 @@ interface _GlobalComponents {
     'LazyNuxtPicture': LazyComponent<typeof import("../../node_modules/@nuxt/image/dist/runtime/components/NuxtPicture.vue")['default']>
     'LazyIcon': LazyComponent<typeof import("../../node_modules/@nuxt/icon/dist/runtime/components/index")['default']>
     'LazyUiBadge': LazyComponent<typeof import("../../components/ui/badge/index")['Badge']>
+    'LazyUiButton': LazyComponent<typeof import("../../components/ui/button/index")['Button']>
     'LazyUiBreadcrumb': LazyComponent<typeof import("../../components/ui/breadcrumb/index")['Breadcrumb']>
     'LazyUiBreadcrumbEllipsis': LazyComponent<typeof import("../../components/ui/breadcrumb/index")['BreadcrumbEllipsis']>
     'LazyUiBreadcrumbItem': LazyComponent<typeof import("../../components/ui/breadcrumb/index")['BreadcrumbItem']>
@@ -686,7 +693,6 @@ interface _GlobalComponents {
     'LazyUiBreadcrumbList': LazyComponent<typeof import("../../components/ui/breadcrumb/index")['BreadcrumbList']>
     'LazyUiBreadcrumbPage': LazyComponent<typeof import("../../components/ui/breadcrumb/index")['BreadcrumbPage']>
     'LazyUiBreadcrumbSeparator': LazyComponent<typeof import("../../components/ui/breadcrumb/index")['BreadcrumbSeparator']>
-    'LazyUiButton': LazyComponent<typeof import("../../components/ui/button/index")['Button']>
     'LazyUiCalendar': LazyComponent<typeof import("../../components/ui/calendar/index")['Calendar']>
     'LazyUiCalendarCell': LazyComponent<typeof import("../../components/ui/calendar/index")['CalendarCell']>
     'LazyUiCalendarCellTrigger': LazyComponent<typeof import("../../components/ui/calendar/index")['CalendarCellTrigger']>
