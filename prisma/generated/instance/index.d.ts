@@ -19,30 +19,25 @@ export type PrismaPromise<T> = $Public.PrismaPromise<T>
  */
 export type User = $Result.DefaultSelection<Prisma.$UserPayload>
 /**
- * Model RefreshToken
+ * Model StaffCredentials
  * 
  */
-export type RefreshToken = $Result.DefaultSelection<Prisma.$RefreshTokenPayload>
+export type StaffCredentials = $Result.DefaultSelection<Prisma.$StaffCredentialsPayload>
 /**
  * Model Patient
  * 
  */
 export type Patient = $Result.DefaultSelection<Prisma.$PatientPayload>
 /**
- * Model Staff
- * 
- */
-export type Staff = $Result.DefaultSelection<Prisma.$StaffPayload>
-/**
- * Model Doctor
- * 
- */
-export type Doctor = $Result.DefaultSelection<Prisma.$DoctorPayload>
-/**
  * Model Partner
  * 
  */
 export type Partner = $Result.DefaultSelection<Prisma.$PartnerPayload>
+/**
+ * Model RefreshToken
+ * 
+ */
+export type RefreshToken = $Result.DefaultSelection<Prisma.$RefreshTokenPayload>
 /**
  * Model Appointment
  * 
@@ -61,6 +56,33 @@ export namespace $Enums {
 };
 
 export type UserRole = (typeof UserRole)[keyof typeof UserRole]
+
+
+export const StaffType: {
+  DOCTOR: 'DOCTOR',
+  NURSE: 'NURSE',
+  TECHNICIAN: 'TECHNICIAN',
+  PHARMACIST: 'PHARMACIST',
+  RADIOLOGIST: 'RADIOLOGIST',
+  THERAPIST: 'THERAPIST',
+  ADMINISTRATOR: 'ADMINISTRATOR',
+  SECURITY: 'SECURITY',
+  MAINTENANCE: 'MAINTENANCE',
+  OTHER: 'OTHER'
+};
+
+export type StaffType = (typeof StaffType)[keyof typeof StaffType]
+
+
+export const EmploymentType: {
+  FULL_TIME: 'FULL_TIME',
+  PART_TIME: 'PART_TIME',
+  CONTRACT: 'CONTRACT',
+  CONSULTANT: 'CONSULTANT',
+  INTERN: 'INTERN'
+};
+
+export type EmploymentType = (typeof EmploymentType)[keyof typeof EmploymentType]
 
 
 export const UserStatus: {
@@ -135,6 +157,14 @@ export type AppointmentStatus = (typeof AppointmentStatus)[keyof typeof Appointm
 export type UserRole = $Enums.UserRole
 
 export const UserRole: typeof $Enums.UserRole
+
+export type StaffType = $Enums.StaffType
+
+export const StaffType: typeof $Enums.StaffType
+
+export type EmploymentType = $Enums.EmploymentType
+
+export const EmploymentType: typeof $Enums.EmploymentType
 
 export type UserStatus = $Enums.UserStatus
 
@@ -289,14 +319,14 @@ export class PrismaClient<
   get user(): Prisma.UserDelegate<ExtArgs, ClientOptions>;
 
   /**
-   * `prisma.refreshToken`: Exposes CRUD operations for the **RefreshToken** model.
+   * `prisma.staffCredentials`: Exposes CRUD operations for the **StaffCredentials** model.
     * Example usage:
     * ```ts
-    * // Fetch zero or more RefreshTokens
-    * const refreshTokens = await prisma.refreshToken.findMany()
+    * // Fetch zero or more StaffCredentials
+    * const staffCredentials = await prisma.staffCredentials.findMany()
     * ```
     */
-  get refreshToken(): Prisma.RefreshTokenDelegate<ExtArgs, ClientOptions>;
+  get staffCredentials(): Prisma.StaffCredentialsDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.patient`: Exposes CRUD operations for the **Patient** model.
@@ -309,26 +339,6 @@ export class PrismaClient<
   get patient(): Prisma.PatientDelegate<ExtArgs, ClientOptions>;
 
   /**
-   * `prisma.staff`: Exposes CRUD operations for the **Staff** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more Staff
-    * const staff = await prisma.staff.findMany()
-    * ```
-    */
-  get staff(): Prisma.StaffDelegate<ExtArgs, ClientOptions>;
-
-  /**
-   * `prisma.doctor`: Exposes CRUD operations for the **Doctor** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more Doctors
-    * const doctors = await prisma.doctor.findMany()
-    * ```
-    */
-  get doctor(): Prisma.DoctorDelegate<ExtArgs, ClientOptions>;
-
-  /**
    * `prisma.partner`: Exposes CRUD operations for the **Partner** model.
     * Example usage:
     * ```ts
@@ -337,6 +347,16 @@ export class PrismaClient<
     * ```
     */
   get partner(): Prisma.PartnerDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.refreshToken`: Exposes CRUD operations for the **RefreshToken** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more RefreshTokens
+    * const refreshTokens = await prisma.refreshToken.findMany()
+    * ```
+    */
+  get refreshToken(): Prisma.RefreshTokenDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.appointment`: Exposes CRUD operations for the **Appointment** model.
@@ -788,11 +808,10 @@ export namespace Prisma {
 
   export const ModelName: {
     User: 'User',
-    RefreshToken: 'RefreshToken',
+    StaffCredentials: 'StaffCredentials',
     Patient: 'Patient',
-    Staff: 'Staff',
-    Doctor: 'Doctor',
     Partner: 'Partner',
+    RefreshToken: 'RefreshToken',
     Appointment: 'Appointment'
   };
 
@@ -812,7 +831,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "refreshToken" | "patient" | "staff" | "doctor" | "partner" | "appointment"
+      modelProps: "user" | "staffCredentials" | "patient" | "partner" | "refreshToken" | "appointment"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -890,77 +909,77 @@ export namespace Prisma {
           }
         }
       }
-      RefreshToken: {
-        payload: Prisma.$RefreshTokenPayload<ExtArgs>
-        fields: Prisma.RefreshTokenFieldRefs
+      StaffCredentials: {
+        payload: Prisma.$StaffCredentialsPayload<ExtArgs>
+        fields: Prisma.StaffCredentialsFieldRefs
         operations: {
           findUnique: {
-            args: Prisma.RefreshTokenFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$RefreshTokenPayload> | null
+            args: Prisma.StaffCredentialsFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StaffCredentialsPayload> | null
           }
           findUniqueOrThrow: {
-            args: Prisma.RefreshTokenFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$RefreshTokenPayload>
+            args: Prisma.StaffCredentialsFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StaffCredentialsPayload>
           }
           findFirst: {
-            args: Prisma.RefreshTokenFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$RefreshTokenPayload> | null
+            args: Prisma.StaffCredentialsFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StaffCredentialsPayload> | null
           }
           findFirstOrThrow: {
-            args: Prisma.RefreshTokenFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$RefreshTokenPayload>
+            args: Prisma.StaffCredentialsFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StaffCredentialsPayload>
           }
           findMany: {
-            args: Prisma.RefreshTokenFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$RefreshTokenPayload>[]
+            args: Prisma.StaffCredentialsFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StaffCredentialsPayload>[]
           }
           create: {
-            args: Prisma.RefreshTokenCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$RefreshTokenPayload>
+            args: Prisma.StaffCredentialsCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StaffCredentialsPayload>
           }
           createMany: {
-            args: Prisma.RefreshTokenCreateManyArgs<ExtArgs>
+            args: Prisma.StaffCredentialsCreateManyArgs<ExtArgs>
             result: BatchPayload
           }
           createManyAndReturn: {
-            args: Prisma.RefreshTokenCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$RefreshTokenPayload>[]
+            args: Prisma.StaffCredentialsCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StaffCredentialsPayload>[]
           }
           delete: {
-            args: Prisma.RefreshTokenDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$RefreshTokenPayload>
+            args: Prisma.StaffCredentialsDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StaffCredentialsPayload>
           }
           update: {
-            args: Prisma.RefreshTokenUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$RefreshTokenPayload>
+            args: Prisma.StaffCredentialsUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StaffCredentialsPayload>
           }
           deleteMany: {
-            args: Prisma.RefreshTokenDeleteManyArgs<ExtArgs>
+            args: Prisma.StaffCredentialsDeleteManyArgs<ExtArgs>
             result: BatchPayload
           }
           updateMany: {
-            args: Prisma.RefreshTokenUpdateManyArgs<ExtArgs>
+            args: Prisma.StaffCredentialsUpdateManyArgs<ExtArgs>
             result: BatchPayload
           }
           updateManyAndReturn: {
-            args: Prisma.RefreshTokenUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$RefreshTokenPayload>[]
+            args: Prisma.StaffCredentialsUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StaffCredentialsPayload>[]
           }
           upsert: {
-            args: Prisma.RefreshTokenUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$RefreshTokenPayload>
+            args: Prisma.StaffCredentialsUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StaffCredentialsPayload>
           }
           aggregate: {
-            args: Prisma.RefreshTokenAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateRefreshToken>
+            args: Prisma.StaffCredentialsAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateStaffCredentials>
           }
           groupBy: {
-            args: Prisma.RefreshTokenGroupByArgs<ExtArgs>
-            result: $Utils.Optional<RefreshTokenGroupByOutputType>[]
+            args: Prisma.StaffCredentialsGroupByArgs<ExtArgs>
+            result: $Utils.Optional<StaffCredentialsGroupByOutputType>[]
           }
           count: {
-            args: Prisma.RefreshTokenCountArgs<ExtArgs>
-            result: $Utils.Optional<RefreshTokenCountAggregateOutputType> | number
+            args: Prisma.StaffCredentialsCountArgs<ExtArgs>
+            result: $Utils.Optional<StaffCredentialsCountAggregateOutputType> | number
           }
         }
       }
@@ -1038,154 +1057,6 @@ export namespace Prisma {
           }
         }
       }
-      Staff: {
-        payload: Prisma.$StaffPayload<ExtArgs>
-        fields: Prisma.StaffFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.StaffFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$StaffPayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.StaffFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$StaffPayload>
-          }
-          findFirst: {
-            args: Prisma.StaffFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$StaffPayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.StaffFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$StaffPayload>
-          }
-          findMany: {
-            args: Prisma.StaffFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$StaffPayload>[]
-          }
-          create: {
-            args: Prisma.StaffCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$StaffPayload>
-          }
-          createMany: {
-            args: Prisma.StaffCreateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          createManyAndReturn: {
-            args: Prisma.StaffCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$StaffPayload>[]
-          }
-          delete: {
-            args: Prisma.StaffDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$StaffPayload>
-          }
-          update: {
-            args: Prisma.StaffUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$StaffPayload>
-          }
-          deleteMany: {
-            args: Prisma.StaffDeleteManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateMany: {
-            args: Prisma.StaffUpdateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateManyAndReturn: {
-            args: Prisma.StaffUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$StaffPayload>[]
-          }
-          upsert: {
-            args: Prisma.StaffUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$StaffPayload>
-          }
-          aggregate: {
-            args: Prisma.StaffAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateStaff>
-          }
-          groupBy: {
-            args: Prisma.StaffGroupByArgs<ExtArgs>
-            result: $Utils.Optional<StaffGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.StaffCountArgs<ExtArgs>
-            result: $Utils.Optional<StaffCountAggregateOutputType> | number
-          }
-        }
-      }
-      Doctor: {
-        payload: Prisma.$DoctorPayload<ExtArgs>
-        fields: Prisma.DoctorFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.DoctorFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$DoctorPayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.DoctorFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$DoctorPayload>
-          }
-          findFirst: {
-            args: Prisma.DoctorFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$DoctorPayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.DoctorFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$DoctorPayload>
-          }
-          findMany: {
-            args: Prisma.DoctorFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$DoctorPayload>[]
-          }
-          create: {
-            args: Prisma.DoctorCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$DoctorPayload>
-          }
-          createMany: {
-            args: Prisma.DoctorCreateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          createManyAndReturn: {
-            args: Prisma.DoctorCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$DoctorPayload>[]
-          }
-          delete: {
-            args: Prisma.DoctorDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$DoctorPayload>
-          }
-          update: {
-            args: Prisma.DoctorUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$DoctorPayload>
-          }
-          deleteMany: {
-            args: Prisma.DoctorDeleteManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateMany: {
-            args: Prisma.DoctorUpdateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateManyAndReturn: {
-            args: Prisma.DoctorUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$DoctorPayload>[]
-          }
-          upsert: {
-            args: Prisma.DoctorUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$DoctorPayload>
-          }
-          aggregate: {
-            args: Prisma.DoctorAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateDoctor>
-          }
-          groupBy: {
-            args: Prisma.DoctorGroupByArgs<ExtArgs>
-            result: $Utils.Optional<DoctorGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.DoctorCountArgs<ExtArgs>
-            result: $Utils.Optional<DoctorCountAggregateOutputType> | number
-          }
-        }
-      }
       Partner: {
         payload: Prisma.$PartnerPayload<ExtArgs>
         fields: Prisma.PartnerFieldRefs
@@ -1257,6 +1128,80 @@ export namespace Prisma {
           count: {
             args: Prisma.PartnerCountArgs<ExtArgs>
             result: $Utils.Optional<PartnerCountAggregateOutputType> | number
+          }
+        }
+      }
+      RefreshToken: {
+        payload: Prisma.$RefreshTokenPayload<ExtArgs>
+        fields: Prisma.RefreshTokenFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.RefreshTokenFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RefreshTokenPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.RefreshTokenFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RefreshTokenPayload>
+          }
+          findFirst: {
+            args: Prisma.RefreshTokenFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RefreshTokenPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.RefreshTokenFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RefreshTokenPayload>
+          }
+          findMany: {
+            args: Prisma.RefreshTokenFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RefreshTokenPayload>[]
+          }
+          create: {
+            args: Prisma.RefreshTokenCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RefreshTokenPayload>
+          }
+          createMany: {
+            args: Prisma.RefreshTokenCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.RefreshTokenCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RefreshTokenPayload>[]
+          }
+          delete: {
+            args: Prisma.RefreshTokenDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RefreshTokenPayload>
+          }
+          update: {
+            args: Prisma.RefreshTokenUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RefreshTokenPayload>
+          }
+          deleteMany: {
+            args: Prisma.RefreshTokenDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.RefreshTokenUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.RefreshTokenUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RefreshTokenPayload>[]
+          }
+          upsert: {
+            args: Prisma.RefreshTokenUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RefreshTokenPayload>
+          }
+          aggregate: {
+            args: Prisma.RefreshTokenAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateRefreshToken>
+          }
+          groupBy: {
+            args: Prisma.RefreshTokenGroupByArgs<ExtArgs>
+            result: $Utils.Optional<RefreshTokenGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.RefreshTokenCountArgs<ExtArgs>
+            result: $Utils.Optional<RefreshTokenCountAggregateOutputType> | number
           }
         }
       }
@@ -1431,11 +1376,10 @@ export namespace Prisma {
   }
   export type GlobalOmitConfig = {
     user?: UserOmit
-    refreshToken?: RefreshTokenOmit
+    staffCredentials?: StaffCredentialsOmit
     patient?: PatientOmit
-    staff?: StaffOmit
-    doctor?: DoctorOmit
     partner?: PartnerOmit
+    refreshToken?: RefreshTokenOmit
     appointment?: AppointmentOmit
   }
 
@@ -1518,10 +1462,12 @@ export namespace Prisma {
 
   export type UserCountOutputType = {
     refreshTokens: number
+    appointments: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     refreshTokens?: boolean | UserCountOutputTypeCountRefreshTokensArgs
+    appointments?: boolean | UserCountOutputTypeCountAppointmentsArgs
   }
 
   // Custom InputTypes
@@ -1542,6 +1488,13 @@ export namespace Prisma {
     where?: RefreshTokenWhereInput
   }
 
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountAppointmentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AppointmentWhereInput
+  }
+
 
   /**
    * Models
@@ -1553,8 +1506,18 @@ export namespace Prisma {
 
   export type AggregateUser = {
     _count: UserCountAggregateOutputType | null
+    _avg: UserAvgAggregateOutputType | null
+    _sum: UserSumAggregateOutputType | null
     _min: UserMinAggregateOutputType | null
     _max: UserMaxAggregateOutputType | null
+  }
+
+  export type UserAvgAggregateOutputType = {
+    salary: Decimal | null
+  }
+
+  export type UserSumAggregateOutputType = {
+    salary: Decimal | null
   }
 
   export type UserMinAggregateOutputType = {
@@ -1563,6 +1526,7 @@ export namespace Prisma {
     password: string | null
     firstName: string | null
     lastName: string | null
+    middleName: string | null
     phone: string | null
     role: $Enums.UserRole | null
     status: $Enums.UserStatus | null
@@ -1575,6 +1539,12 @@ export namespace Prisma {
     city: string | null
     province: string | null
     zipCode: string | null
+    staffNumber: string | null
+    department: string | null
+    position: string | null
+    hireDate: Date | null
+    salary: Decimal | null
+    employmentType: $Enums.EmploymentType | null
     createdAt: Date | null
     updatedAt: Date | null
     lastLoginAt: Date | null
@@ -1588,6 +1558,7 @@ export namespace Prisma {
     password: string | null
     firstName: string | null
     lastName: string | null
+    middleName: string | null
     phone: string | null
     role: $Enums.UserRole | null
     status: $Enums.UserStatus | null
@@ -1600,6 +1571,12 @@ export namespace Prisma {
     city: string | null
     province: string | null
     zipCode: string | null
+    staffNumber: string | null
+    department: string | null
+    position: string | null
+    hireDate: Date | null
+    salary: Decimal | null
+    employmentType: $Enums.EmploymentType | null
     createdAt: Date | null
     updatedAt: Date | null
     lastLoginAt: Date | null
@@ -1613,6 +1590,7 @@ export namespace Prisma {
     password: number
     firstName: number
     lastName: number
+    middleName: number
     phone: number
     role: number
     status: number
@@ -1625,6 +1603,12 @@ export namespace Prisma {
     city: number
     province: number
     zipCode: number
+    staffNumber: number
+    department: number
+    position: number
+    hireDate: number
+    salary: number
+    employmentType: number
     createdAt: number
     updatedAt: number
     lastLoginAt: number
@@ -1634,12 +1618,21 @@ export namespace Prisma {
   }
 
 
+  export type UserAvgAggregateInputType = {
+    salary?: true
+  }
+
+  export type UserSumAggregateInputType = {
+    salary?: true
+  }
+
   export type UserMinAggregateInputType = {
     id?: true
     email?: true
     password?: true
     firstName?: true
     lastName?: true
+    middleName?: true
     phone?: true
     role?: true
     status?: true
@@ -1652,6 +1645,12 @@ export namespace Prisma {
     city?: true
     province?: true
     zipCode?: true
+    staffNumber?: true
+    department?: true
+    position?: true
+    hireDate?: true
+    salary?: true
+    employmentType?: true
     createdAt?: true
     updatedAt?: true
     lastLoginAt?: true
@@ -1665,6 +1664,7 @@ export namespace Prisma {
     password?: true
     firstName?: true
     lastName?: true
+    middleName?: true
     phone?: true
     role?: true
     status?: true
@@ -1677,6 +1677,12 @@ export namespace Prisma {
     city?: true
     province?: true
     zipCode?: true
+    staffNumber?: true
+    department?: true
+    position?: true
+    hireDate?: true
+    salary?: true
+    employmentType?: true
     createdAt?: true
     updatedAt?: true
     lastLoginAt?: true
@@ -1690,6 +1696,7 @@ export namespace Prisma {
     password?: true
     firstName?: true
     lastName?: true
+    middleName?: true
     phone?: true
     role?: true
     status?: true
@@ -1702,6 +1709,12 @@ export namespace Prisma {
     city?: true
     province?: true
     zipCode?: true
+    staffNumber?: true
+    department?: true
+    position?: true
+    hireDate?: true
+    salary?: true
+    employmentType?: true
     createdAt?: true
     updatedAt?: true
     lastLoginAt?: true
@@ -1748,6 +1761,18 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
+     * Select which fields to average
+    **/
+    _avg?: UserAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: UserSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
      * Select which fields to find the minimum value
     **/
     _min?: UserMinAggregateInputType
@@ -1778,6 +1803,8 @@ export namespace Prisma {
     take?: number
     skip?: number
     _count?: UserCountAggregateInputType | true
+    _avg?: UserAvgAggregateInputType
+    _sum?: UserSumAggregateInputType
     _min?: UserMinAggregateInputType
     _max?: UserMaxAggregateInputType
   }
@@ -1788,6 +1815,7 @@ export namespace Prisma {
     password: string
     firstName: string
     lastName: string
+    middleName: string | null
     phone: string | null
     role: $Enums.UserRole
     status: $Enums.UserStatus
@@ -1800,12 +1828,20 @@ export namespace Prisma {
     city: string | null
     province: string | null
     zipCode: string | null
+    staffNumber: string | null
+    department: string | null
+    position: string | null
+    hireDate: Date | null
+    salary: Decimal | null
+    employmentType: $Enums.EmploymentType | null
     createdAt: Date
     updatedAt: Date
     lastLoginAt: Date | null
     createdBy: string | null
     updatedBy: string | null
     _count: UserCountAggregateOutputType | null
+    _avg: UserAvgAggregateOutputType | null
+    _sum: UserSumAggregateOutputType | null
     _min: UserMinAggregateOutputType | null
     _max: UserMaxAggregateOutputType | null
   }
@@ -1830,6 +1866,7 @@ export namespace Prisma {
     password?: boolean
     firstName?: boolean
     lastName?: boolean
+    middleName?: boolean
     phone?: boolean
     role?: boolean
     status?: boolean
@@ -1842,6 +1879,12 @@ export namespace Prisma {
     city?: boolean
     province?: boolean
     zipCode?: boolean
+    staffNumber?: boolean
+    department?: boolean
+    position?: boolean
+    hireDate?: boolean
+    salary?: boolean
+    employmentType?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     lastLoginAt?: boolean
@@ -1849,9 +1892,9 @@ export namespace Prisma {
     updatedBy?: boolean
     refreshTokens?: boolean | User$refreshTokensArgs<ExtArgs>
     patientProfile?: boolean | User$patientProfileArgs<ExtArgs>
-    staffProfile?: boolean | User$staffProfileArgs<ExtArgs>
     partnerProfile?: boolean | User$partnerProfileArgs<ExtArgs>
-    doctorProfile?: boolean | User$doctorProfileArgs<ExtArgs>
+    staffCredentials?: boolean | User$staffCredentialsArgs<ExtArgs>
+    appointments?: boolean | User$appointmentsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -1861,6 +1904,7 @@ export namespace Prisma {
     password?: boolean
     firstName?: boolean
     lastName?: boolean
+    middleName?: boolean
     phone?: boolean
     role?: boolean
     status?: boolean
@@ -1873,6 +1917,12 @@ export namespace Prisma {
     city?: boolean
     province?: boolean
     zipCode?: boolean
+    staffNumber?: boolean
+    department?: boolean
+    position?: boolean
+    hireDate?: boolean
+    salary?: boolean
+    employmentType?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     lastLoginAt?: boolean
@@ -1886,6 +1936,7 @@ export namespace Prisma {
     password?: boolean
     firstName?: boolean
     lastName?: boolean
+    middleName?: boolean
     phone?: boolean
     role?: boolean
     status?: boolean
@@ -1898,6 +1949,12 @@ export namespace Prisma {
     city?: boolean
     province?: boolean
     zipCode?: boolean
+    staffNumber?: boolean
+    department?: boolean
+    position?: boolean
+    hireDate?: boolean
+    salary?: boolean
+    employmentType?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     lastLoginAt?: boolean
@@ -1911,6 +1968,7 @@ export namespace Prisma {
     password?: boolean
     firstName?: boolean
     lastName?: boolean
+    middleName?: boolean
     phone?: boolean
     role?: boolean
     status?: boolean
@@ -1923,6 +1981,12 @@ export namespace Prisma {
     city?: boolean
     province?: boolean
     zipCode?: boolean
+    staffNumber?: boolean
+    department?: boolean
+    position?: boolean
+    hireDate?: boolean
+    salary?: boolean
+    employmentType?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     lastLoginAt?: boolean
@@ -1930,13 +1994,13 @@ export namespace Prisma {
     updatedBy?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "password" | "firstName" | "lastName" | "phone" | "role" | "status" | "isEmailVerified" | "emailVerifiedAt" | "avatar" | "dateOfBirth" | "gender" | "address" | "city" | "province" | "zipCode" | "createdAt" | "updatedAt" | "lastLoginAt" | "createdBy" | "updatedBy", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "password" | "firstName" | "lastName" | "middleName" | "phone" | "role" | "status" | "isEmailVerified" | "emailVerifiedAt" | "avatar" | "dateOfBirth" | "gender" | "address" | "city" | "province" | "zipCode" | "staffNumber" | "department" | "position" | "hireDate" | "salary" | "employmentType" | "createdAt" | "updatedAt" | "lastLoginAt" | "createdBy" | "updatedBy", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     refreshTokens?: boolean | User$refreshTokensArgs<ExtArgs>
     patientProfile?: boolean | User$patientProfileArgs<ExtArgs>
-    staffProfile?: boolean | User$staffProfileArgs<ExtArgs>
     partnerProfile?: boolean | User$partnerProfileArgs<ExtArgs>
-    doctorProfile?: boolean | User$doctorProfileArgs<ExtArgs>
+    staffCredentials?: boolean | User$staffCredentialsArgs<ExtArgs>
+    appointments?: boolean | User$appointmentsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -1947,9 +2011,9 @@ export namespace Prisma {
     objects: {
       refreshTokens: Prisma.$RefreshTokenPayload<ExtArgs>[]
       patientProfile: Prisma.$PatientPayload<ExtArgs> | null
-      staffProfile: Prisma.$StaffPayload<ExtArgs> | null
       partnerProfile: Prisma.$PartnerPayload<ExtArgs> | null
-      doctorProfile: Prisma.$DoctorPayload<ExtArgs> | null
+      staffCredentials: Prisma.$StaffCredentialsPayload<ExtArgs> | null
+      appointments: Prisma.$AppointmentPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -1957,6 +2021,7 @@ export namespace Prisma {
       password: string
       firstName: string
       lastName: string
+      middleName: string | null
       phone: string | null
       role: $Enums.UserRole
       status: $Enums.UserStatus
@@ -1969,6 +2034,12 @@ export namespace Prisma {
       city: string | null
       province: string | null
       zipCode: string | null
+      staffNumber: string | null
+      department: string | null
+      position: string | null
+      hireDate: Date | null
+      salary: Prisma.Decimal | null
+      employmentType: $Enums.EmploymentType | null
       createdAt: Date
       updatedAt: Date
       lastLoginAt: Date | null
@@ -2370,9 +2441,9 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     refreshTokens<T extends User$refreshTokensArgs<ExtArgs> = {}>(args?: Subset<T, User$refreshTokensArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RefreshTokenPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     patientProfile<T extends User$patientProfileArgs<ExtArgs> = {}>(args?: Subset<T, User$patientProfileArgs<ExtArgs>>): Prisma__PatientClient<$Result.GetResult<Prisma.$PatientPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-    staffProfile<T extends User$staffProfileArgs<ExtArgs> = {}>(args?: Subset<T, User$staffProfileArgs<ExtArgs>>): Prisma__StaffClient<$Result.GetResult<Prisma.$StaffPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     partnerProfile<T extends User$partnerProfileArgs<ExtArgs> = {}>(args?: Subset<T, User$partnerProfileArgs<ExtArgs>>): Prisma__PartnerClient<$Result.GetResult<Prisma.$PartnerPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-    doctorProfile<T extends User$doctorProfileArgs<ExtArgs> = {}>(args?: Subset<T, User$doctorProfileArgs<ExtArgs>>): Prisma__DoctorClient<$Result.GetResult<Prisma.$DoctorPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    staffCredentials<T extends User$staffCredentialsArgs<ExtArgs> = {}>(args?: Subset<T, User$staffCredentialsArgs<ExtArgs>>): Prisma__StaffCredentialsClient<$Result.GetResult<Prisma.$StaffCredentialsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    appointments<T extends User$appointmentsArgs<ExtArgs> = {}>(args?: Subset<T, User$appointmentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AppointmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2407,6 +2478,7 @@ export namespace Prisma {
     readonly password: FieldRef<"User", 'String'>
     readonly firstName: FieldRef<"User", 'String'>
     readonly lastName: FieldRef<"User", 'String'>
+    readonly middleName: FieldRef<"User", 'String'>
     readonly phone: FieldRef<"User", 'String'>
     readonly role: FieldRef<"User", 'UserRole'>
     readonly status: FieldRef<"User", 'UserStatus'>
@@ -2419,6 +2491,12 @@ export namespace Prisma {
     readonly city: FieldRef<"User", 'String'>
     readonly province: FieldRef<"User", 'String'>
     readonly zipCode: FieldRef<"User", 'String'>
+    readonly staffNumber: FieldRef<"User", 'String'>
+    readonly department: FieldRef<"User", 'String'>
+    readonly position: FieldRef<"User", 'String'>
+    readonly hireDate: FieldRef<"User", 'DateTime'>
+    readonly salary: FieldRef<"User", 'Decimal'>
+    readonly employmentType: FieldRef<"User", 'EmploymentType'>
     readonly createdAt: FieldRef<"User", 'DateTime'>
     readonly updatedAt: FieldRef<"User", 'DateTime'>
     readonly lastLoginAt: FieldRef<"User", 'DateTime'>
@@ -2855,25 +2933,6 @@ export namespace Prisma {
   }
 
   /**
-   * User.staffProfile
-   */
-  export type User$staffProfileArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Staff
-     */
-    select?: StaffSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Staff
-     */
-    omit?: StaffOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: StaffInclude<ExtArgs> | null
-    where?: StaffWhereInput
-  }
-
-  /**
    * User.partnerProfile
    */
   export type User$partnerProfileArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2893,22 +2952,46 @@ export namespace Prisma {
   }
 
   /**
-   * User.doctorProfile
+   * User.staffCredentials
    */
-  export type User$doctorProfileArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type User$staffCredentialsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Doctor
+     * Select specific fields to fetch from the StaffCredentials
      */
-    select?: DoctorSelect<ExtArgs> | null
+    select?: StaffCredentialsSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Doctor
+     * Omit specific fields from the StaffCredentials
      */
-    omit?: DoctorOmit<ExtArgs> | null
+    omit?: StaffCredentialsOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: DoctorInclude<ExtArgs> | null
-    where?: DoctorWhereInput
+    include?: StaffCredentialsInclude<ExtArgs> | null
+    where?: StaffCredentialsWhereInput
+  }
+
+  /**
+   * User.appointments
+   */
+  export type User$appointmentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Appointment
+     */
+    select?: AppointmentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Appointment
+     */
+    omit?: AppointmentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AppointmentInclude<ExtArgs> | null
+    where?: AppointmentWhereInput
+    orderBy?: AppointmentOrderByWithRelationInput | AppointmentOrderByWithRelationInput[]
+    cursor?: AppointmentWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: AppointmentScalarFieldEnum | AppointmentScalarFieldEnum[]
   }
 
   /**
@@ -2931,362 +3014,512 @@ export namespace Prisma {
 
 
   /**
-   * Model RefreshToken
+   * Model StaffCredentials
    */
 
-  export type AggregateRefreshToken = {
-    _count: RefreshTokenCountAggregateOutputType | null
-    _min: RefreshTokenMinAggregateOutputType | null
-    _max: RefreshTokenMaxAggregateOutputType | null
+  export type AggregateStaffCredentials = {
+    _count: StaffCredentialsCountAggregateOutputType | null
+    _avg: StaffCredentialsAvgAggregateOutputType | null
+    _sum: StaffCredentialsSumAggregateOutputType | null
+    _min: StaffCredentialsMinAggregateOutputType | null
+    _max: StaffCredentialsMaxAggregateOutputType | null
   }
 
-  export type RefreshTokenMinAggregateOutputType = {
+  export type StaffCredentialsAvgAggregateOutputType = {
+    yearsOfExperience: number | null
+    consultationFee: Decimal | null
+  }
+
+  export type StaffCredentialsSumAggregateOutputType = {
+    yearsOfExperience: number | null
+    consultationFee: Decimal | null
+  }
+
+  export type StaffCredentialsMinAggregateOutputType = {
     id: string | null
-    token: string | null
     userId: string | null
-    expiresAt: Date | null
+    staffType: $Enums.StaffType | null
+    licenseNumber: string | null
+    licenseExpiryDate: Date | null
+    specialization: string | null
+    subSpecialization: string | null
+    education: string | null
+    yearsOfExperience: number | null
+    consultationFee: Decimal | null
+    isAvailable: boolean | null
+    hospitalAffiliation: string | null
     createdAt: Date | null
-    isRevoked: boolean | null
+    updatedAt: Date | null
   }
 
-  export type RefreshTokenMaxAggregateOutputType = {
+  export type StaffCredentialsMaxAggregateOutputType = {
     id: string | null
-    token: string | null
     userId: string | null
-    expiresAt: Date | null
+    staffType: $Enums.StaffType | null
+    licenseNumber: string | null
+    licenseExpiryDate: Date | null
+    specialization: string | null
+    subSpecialization: string | null
+    education: string | null
+    yearsOfExperience: number | null
+    consultationFee: Decimal | null
+    isAvailable: boolean | null
+    hospitalAffiliation: string | null
     createdAt: Date | null
-    isRevoked: boolean | null
+    updatedAt: Date | null
   }
 
-  export type RefreshTokenCountAggregateOutputType = {
+  export type StaffCredentialsCountAggregateOutputType = {
     id: number
-    token: number
     userId: number
-    expiresAt: number
+    staffType: number
+    licenseNumber: number
+    licenseExpiryDate: number
+    specialization: number
+    subSpecialization: number
+    boardCertification: number
+    education: number
+    yearsOfExperience: number
+    consultationFee: number
+    isAvailable: number
+    workingHours: number
+    hospitalAffiliation: number
     createdAt: number
-    isRevoked: number
+    updatedAt: number
     _all: number
   }
 
 
-  export type RefreshTokenMinAggregateInputType = {
-    id?: true
-    token?: true
-    userId?: true
-    expiresAt?: true
-    createdAt?: true
-    isRevoked?: true
+  export type StaffCredentialsAvgAggregateInputType = {
+    yearsOfExperience?: true
+    consultationFee?: true
   }
 
-  export type RefreshTokenMaxAggregateInputType = {
-    id?: true
-    token?: true
-    userId?: true
-    expiresAt?: true
-    createdAt?: true
-    isRevoked?: true
+  export type StaffCredentialsSumAggregateInputType = {
+    yearsOfExperience?: true
+    consultationFee?: true
   }
 
-  export type RefreshTokenCountAggregateInputType = {
+  export type StaffCredentialsMinAggregateInputType = {
     id?: true
-    token?: true
     userId?: true
-    expiresAt?: true
+    staffType?: true
+    licenseNumber?: true
+    licenseExpiryDate?: true
+    specialization?: true
+    subSpecialization?: true
+    education?: true
+    yearsOfExperience?: true
+    consultationFee?: true
+    isAvailable?: true
+    hospitalAffiliation?: true
     createdAt?: true
-    isRevoked?: true
+    updatedAt?: true
+  }
+
+  export type StaffCredentialsMaxAggregateInputType = {
+    id?: true
+    userId?: true
+    staffType?: true
+    licenseNumber?: true
+    licenseExpiryDate?: true
+    specialization?: true
+    subSpecialization?: true
+    education?: true
+    yearsOfExperience?: true
+    consultationFee?: true
+    isAvailable?: true
+    hospitalAffiliation?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type StaffCredentialsCountAggregateInputType = {
+    id?: true
+    userId?: true
+    staffType?: true
+    licenseNumber?: true
+    licenseExpiryDate?: true
+    specialization?: true
+    subSpecialization?: true
+    boardCertification?: true
+    education?: true
+    yearsOfExperience?: true
+    consultationFee?: true
+    isAvailable?: true
+    workingHours?: true
+    hospitalAffiliation?: true
+    createdAt?: true
+    updatedAt?: true
     _all?: true
   }
 
-  export type RefreshTokenAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type StaffCredentialsAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Filter which RefreshToken to aggregate.
+     * Filter which StaffCredentials to aggregate.
      */
-    where?: RefreshTokenWhereInput
+    where?: StaffCredentialsWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of RefreshTokens to fetch.
+     * Determine the order of StaffCredentials to fetch.
      */
-    orderBy?: RefreshTokenOrderByWithRelationInput | RefreshTokenOrderByWithRelationInput[]
+    orderBy?: StaffCredentialsOrderByWithRelationInput | StaffCredentialsOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
      * Sets the start position
      */
-    cursor?: RefreshTokenWhereUniqueInput
+    cursor?: StaffCredentialsWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` RefreshTokens from the position of the cursor.
+     * Take `±n` StaffCredentials from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` RefreshTokens.
+     * Skip the first `n` StaffCredentials.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
-     * Count returned RefreshTokens
+     * Count returned StaffCredentials
     **/
-    _count?: true | RefreshTokenCountAggregateInputType
+    _count?: true | StaffCredentialsCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: StaffCredentialsAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: StaffCredentialsSumAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the minimum value
     **/
-    _min?: RefreshTokenMinAggregateInputType
+    _min?: StaffCredentialsMinAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the maximum value
     **/
-    _max?: RefreshTokenMaxAggregateInputType
+    _max?: StaffCredentialsMaxAggregateInputType
   }
 
-  export type GetRefreshTokenAggregateType<T extends RefreshTokenAggregateArgs> = {
-        [P in keyof T & keyof AggregateRefreshToken]: P extends '_count' | 'count'
+  export type GetStaffCredentialsAggregateType<T extends StaffCredentialsAggregateArgs> = {
+        [P in keyof T & keyof AggregateStaffCredentials]: P extends '_count' | 'count'
       ? T[P] extends true
         ? number
-        : GetScalarType<T[P], AggregateRefreshToken[P]>
-      : GetScalarType<T[P], AggregateRefreshToken[P]>
+        : GetScalarType<T[P], AggregateStaffCredentials[P]>
+      : GetScalarType<T[P], AggregateStaffCredentials[P]>
   }
 
 
 
 
-  export type RefreshTokenGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: RefreshTokenWhereInput
-    orderBy?: RefreshTokenOrderByWithAggregationInput | RefreshTokenOrderByWithAggregationInput[]
-    by: RefreshTokenScalarFieldEnum[] | RefreshTokenScalarFieldEnum
-    having?: RefreshTokenScalarWhereWithAggregatesInput
+  export type StaffCredentialsGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: StaffCredentialsWhereInput
+    orderBy?: StaffCredentialsOrderByWithAggregationInput | StaffCredentialsOrderByWithAggregationInput[]
+    by: StaffCredentialsScalarFieldEnum[] | StaffCredentialsScalarFieldEnum
+    having?: StaffCredentialsScalarWhereWithAggregatesInput
     take?: number
     skip?: number
-    _count?: RefreshTokenCountAggregateInputType | true
-    _min?: RefreshTokenMinAggregateInputType
-    _max?: RefreshTokenMaxAggregateInputType
+    _count?: StaffCredentialsCountAggregateInputType | true
+    _avg?: StaffCredentialsAvgAggregateInputType
+    _sum?: StaffCredentialsSumAggregateInputType
+    _min?: StaffCredentialsMinAggregateInputType
+    _max?: StaffCredentialsMaxAggregateInputType
   }
 
-  export type RefreshTokenGroupByOutputType = {
+  export type StaffCredentialsGroupByOutputType = {
     id: string
-    token: string
     userId: string
-    expiresAt: Date
+    staffType: $Enums.StaffType
+    licenseNumber: string | null
+    licenseExpiryDate: Date | null
+    specialization: string | null
+    subSpecialization: string | null
+    boardCertification: string[]
+    education: string | null
+    yearsOfExperience: number | null
+    consultationFee: Decimal | null
+    isAvailable: boolean
+    workingHours: JsonValue | null
+    hospitalAffiliation: string | null
     createdAt: Date
-    isRevoked: boolean
-    _count: RefreshTokenCountAggregateOutputType | null
-    _min: RefreshTokenMinAggregateOutputType | null
-    _max: RefreshTokenMaxAggregateOutputType | null
+    updatedAt: Date
+    _count: StaffCredentialsCountAggregateOutputType | null
+    _avg: StaffCredentialsAvgAggregateOutputType | null
+    _sum: StaffCredentialsSumAggregateOutputType | null
+    _min: StaffCredentialsMinAggregateOutputType | null
+    _max: StaffCredentialsMaxAggregateOutputType | null
   }
 
-  type GetRefreshTokenGroupByPayload<T extends RefreshTokenGroupByArgs> = Prisma.PrismaPromise<
+  type GetStaffCredentialsGroupByPayload<T extends StaffCredentialsGroupByArgs> = Prisma.PrismaPromise<
     Array<
-      PickEnumerable<RefreshTokenGroupByOutputType, T['by']> &
+      PickEnumerable<StaffCredentialsGroupByOutputType, T['by']> &
         {
-          [P in ((keyof T) & (keyof RefreshTokenGroupByOutputType))]: P extends '_count'
+          [P in ((keyof T) & (keyof StaffCredentialsGroupByOutputType))]: P extends '_count'
             ? T[P] extends boolean
               ? number
-              : GetScalarType<T[P], RefreshTokenGroupByOutputType[P]>
-            : GetScalarType<T[P], RefreshTokenGroupByOutputType[P]>
+              : GetScalarType<T[P], StaffCredentialsGroupByOutputType[P]>
+            : GetScalarType<T[P], StaffCredentialsGroupByOutputType[P]>
         }
       >
     >
 
 
-  export type RefreshTokenSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type StaffCredentialsSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    token?: boolean
     userId?: boolean
-    expiresAt?: boolean
+    staffType?: boolean
+    licenseNumber?: boolean
+    licenseExpiryDate?: boolean
+    specialization?: boolean
+    subSpecialization?: boolean
+    boardCertification?: boolean
+    education?: boolean
+    yearsOfExperience?: boolean
+    consultationFee?: boolean
+    isAvailable?: boolean
+    workingHours?: boolean
+    hospitalAffiliation?: boolean
     createdAt?: boolean
-    isRevoked?: boolean
+    updatedAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["refreshToken"]>
+  }, ExtArgs["result"]["staffCredentials"]>
 
-  export type RefreshTokenSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type StaffCredentialsSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    token?: boolean
     userId?: boolean
-    expiresAt?: boolean
+    staffType?: boolean
+    licenseNumber?: boolean
+    licenseExpiryDate?: boolean
+    specialization?: boolean
+    subSpecialization?: boolean
+    boardCertification?: boolean
+    education?: boolean
+    yearsOfExperience?: boolean
+    consultationFee?: boolean
+    isAvailable?: boolean
+    workingHours?: boolean
+    hospitalAffiliation?: boolean
     createdAt?: boolean
-    isRevoked?: boolean
+    updatedAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["refreshToken"]>
+  }, ExtArgs["result"]["staffCredentials"]>
 
-  export type RefreshTokenSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type StaffCredentialsSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    token?: boolean
     userId?: boolean
-    expiresAt?: boolean
+    staffType?: boolean
+    licenseNumber?: boolean
+    licenseExpiryDate?: boolean
+    specialization?: boolean
+    subSpecialization?: boolean
+    boardCertification?: boolean
+    education?: boolean
+    yearsOfExperience?: boolean
+    consultationFee?: boolean
+    isAvailable?: boolean
+    workingHours?: boolean
+    hospitalAffiliation?: boolean
     createdAt?: boolean
-    isRevoked?: boolean
+    updatedAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["refreshToken"]>
+  }, ExtArgs["result"]["staffCredentials"]>
 
-  export type RefreshTokenSelectScalar = {
+  export type StaffCredentialsSelectScalar = {
     id?: boolean
-    token?: boolean
     userId?: boolean
-    expiresAt?: boolean
+    staffType?: boolean
+    licenseNumber?: boolean
+    licenseExpiryDate?: boolean
+    specialization?: boolean
+    subSpecialization?: boolean
+    boardCertification?: boolean
+    education?: boolean
+    yearsOfExperience?: boolean
+    consultationFee?: boolean
+    isAvailable?: boolean
+    workingHours?: boolean
+    hospitalAffiliation?: boolean
     createdAt?: boolean
-    isRevoked?: boolean
+    updatedAt?: boolean
   }
 
-  export type RefreshTokenOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "token" | "userId" | "expiresAt" | "createdAt" | "isRevoked", ExtArgs["result"]["refreshToken"]>
-  export type RefreshTokenInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type StaffCredentialsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "staffType" | "licenseNumber" | "licenseExpiryDate" | "specialization" | "subSpecialization" | "boardCertification" | "education" | "yearsOfExperience" | "consultationFee" | "isAvailable" | "workingHours" | "hospitalAffiliation" | "createdAt" | "updatedAt", ExtArgs["result"]["staffCredentials"]>
+  export type StaffCredentialsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
   }
-  export type RefreshTokenIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type StaffCredentialsIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
   }
-  export type RefreshTokenIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type StaffCredentialsIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
   }
 
-  export type $RefreshTokenPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "RefreshToken"
+  export type $StaffCredentialsPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "StaffCredentials"
     objects: {
       user: Prisma.$UserPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
-      token: string
       userId: string
-      expiresAt: Date
+      staffType: $Enums.StaffType
+      licenseNumber: string | null
+      licenseExpiryDate: Date | null
+      specialization: string | null
+      subSpecialization: string | null
+      boardCertification: string[]
+      education: string | null
+      yearsOfExperience: number | null
+      consultationFee: Prisma.Decimal | null
+      isAvailable: boolean
+      workingHours: Prisma.JsonValue | null
+      hospitalAffiliation: string | null
       createdAt: Date
-      isRevoked: boolean
-    }, ExtArgs["result"]["refreshToken"]>
+      updatedAt: Date
+    }, ExtArgs["result"]["staffCredentials"]>
     composites: {}
   }
 
-  type RefreshTokenGetPayload<S extends boolean | null | undefined | RefreshTokenDefaultArgs> = $Result.GetResult<Prisma.$RefreshTokenPayload, S>
+  type StaffCredentialsGetPayload<S extends boolean | null | undefined | StaffCredentialsDefaultArgs> = $Result.GetResult<Prisma.$StaffCredentialsPayload, S>
 
-  type RefreshTokenCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<RefreshTokenFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: RefreshTokenCountAggregateInputType | true
+  type StaffCredentialsCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<StaffCredentialsFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: StaffCredentialsCountAggregateInputType | true
     }
 
-  export interface RefreshTokenDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['RefreshToken'], meta: { name: 'RefreshToken' } }
+  export interface StaffCredentialsDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['StaffCredentials'], meta: { name: 'StaffCredentials' } }
     /**
-     * Find zero or one RefreshToken that matches the filter.
-     * @param {RefreshTokenFindUniqueArgs} args - Arguments to find a RefreshToken
+     * Find zero or one StaffCredentials that matches the filter.
+     * @param {StaffCredentialsFindUniqueArgs} args - Arguments to find a StaffCredentials
      * @example
-     * // Get one RefreshToken
-     * const refreshToken = await prisma.refreshToken.findUnique({
+     * // Get one StaffCredentials
+     * const staffCredentials = await prisma.staffCredentials.findUnique({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findUnique<T extends RefreshTokenFindUniqueArgs>(args: SelectSubset<T, RefreshTokenFindUniqueArgs<ExtArgs>>): Prisma__RefreshTokenClient<$Result.GetResult<Prisma.$RefreshTokenPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    findUnique<T extends StaffCredentialsFindUniqueArgs>(args: SelectSubset<T, StaffCredentialsFindUniqueArgs<ExtArgs>>): Prisma__StaffCredentialsClient<$Result.GetResult<Prisma.$StaffCredentialsPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find one RefreshToken that matches the filter or throw an error with `error.code='P2025'`
+     * Find one StaffCredentials that matches the filter or throw an error with `error.code='P2025'`
      * if no matches were found.
-     * @param {RefreshTokenFindUniqueOrThrowArgs} args - Arguments to find a RefreshToken
+     * @param {StaffCredentialsFindUniqueOrThrowArgs} args - Arguments to find a StaffCredentials
      * @example
-     * // Get one RefreshToken
-     * const refreshToken = await prisma.refreshToken.findUniqueOrThrow({
+     * // Get one StaffCredentials
+     * const staffCredentials = await prisma.staffCredentials.findUniqueOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findUniqueOrThrow<T extends RefreshTokenFindUniqueOrThrowArgs>(args: SelectSubset<T, RefreshTokenFindUniqueOrThrowArgs<ExtArgs>>): Prisma__RefreshTokenClient<$Result.GetResult<Prisma.$RefreshTokenPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    findUniqueOrThrow<T extends StaffCredentialsFindUniqueOrThrowArgs>(args: SelectSubset<T, StaffCredentialsFindUniqueOrThrowArgs<ExtArgs>>): Prisma__StaffCredentialsClient<$Result.GetResult<Prisma.$StaffCredentialsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find the first RefreshToken that matches the filter.
+     * Find the first StaffCredentials that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {RefreshTokenFindFirstArgs} args - Arguments to find a RefreshToken
+     * @param {StaffCredentialsFindFirstArgs} args - Arguments to find a StaffCredentials
      * @example
-     * // Get one RefreshToken
-     * const refreshToken = await prisma.refreshToken.findFirst({
+     * // Get one StaffCredentials
+     * const staffCredentials = await prisma.staffCredentials.findFirst({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findFirst<T extends RefreshTokenFindFirstArgs>(args?: SelectSubset<T, RefreshTokenFindFirstArgs<ExtArgs>>): Prisma__RefreshTokenClient<$Result.GetResult<Prisma.$RefreshTokenPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    findFirst<T extends StaffCredentialsFindFirstArgs>(args?: SelectSubset<T, StaffCredentialsFindFirstArgs<ExtArgs>>): Prisma__StaffCredentialsClient<$Result.GetResult<Prisma.$StaffCredentialsPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find the first RefreshToken that matches the filter or
+     * Find the first StaffCredentials that matches the filter or
      * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {RefreshTokenFindFirstOrThrowArgs} args - Arguments to find a RefreshToken
+     * @param {StaffCredentialsFindFirstOrThrowArgs} args - Arguments to find a StaffCredentials
      * @example
-     * // Get one RefreshToken
-     * const refreshToken = await prisma.refreshToken.findFirstOrThrow({
+     * // Get one StaffCredentials
+     * const staffCredentials = await prisma.staffCredentials.findFirstOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findFirstOrThrow<T extends RefreshTokenFindFirstOrThrowArgs>(args?: SelectSubset<T, RefreshTokenFindFirstOrThrowArgs<ExtArgs>>): Prisma__RefreshTokenClient<$Result.GetResult<Prisma.$RefreshTokenPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    findFirstOrThrow<T extends StaffCredentialsFindFirstOrThrowArgs>(args?: SelectSubset<T, StaffCredentialsFindFirstOrThrowArgs<ExtArgs>>): Prisma__StaffCredentialsClient<$Result.GetResult<Prisma.$StaffCredentialsPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find zero or more RefreshTokens that matches the filter.
+     * Find zero or more StaffCredentials that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {RefreshTokenFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @param {StaffCredentialsFindManyArgs} args - Arguments to filter and select certain fields only.
      * @example
-     * // Get all RefreshTokens
-     * const refreshTokens = await prisma.refreshToken.findMany()
+     * // Get all StaffCredentials
+     * const staffCredentials = await prisma.staffCredentials.findMany()
      * 
-     * // Get first 10 RefreshTokens
-     * const refreshTokens = await prisma.refreshToken.findMany({ take: 10 })
+     * // Get first 10 StaffCredentials
+     * const staffCredentials = await prisma.staffCredentials.findMany({ take: 10 })
      * 
      * // Only select the `id`
-     * const refreshTokenWithIdOnly = await prisma.refreshToken.findMany({ select: { id: true } })
+     * const staffCredentialsWithIdOnly = await prisma.staffCredentials.findMany({ select: { id: true } })
      * 
      */
-    findMany<T extends RefreshTokenFindManyArgs>(args?: SelectSubset<T, RefreshTokenFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RefreshTokenPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+    findMany<T extends StaffCredentialsFindManyArgs>(args?: SelectSubset<T, StaffCredentialsFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StaffCredentialsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
 
     /**
-     * Create a RefreshToken.
-     * @param {RefreshTokenCreateArgs} args - Arguments to create a RefreshToken.
+     * Create a StaffCredentials.
+     * @param {StaffCredentialsCreateArgs} args - Arguments to create a StaffCredentials.
      * @example
-     * // Create one RefreshToken
-     * const RefreshToken = await prisma.refreshToken.create({
+     * // Create one StaffCredentials
+     * const StaffCredentials = await prisma.staffCredentials.create({
      *   data: {
-     *     // ... data to create a RefreshToken
+     *     // ... data to create a StaffCredentials
      *   }
      * })
      * 
      */
-    create<T extends RefreshTokenCreateArgs>(args: SelectSubset<T, RefreshTokenCreateArgs<ExtArgs>>): Prisma__RefreshTokenClient<$Result.GetResult<Prisma.$RefreshTokenPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    create<T extends StaffCredentialsCreateArgs>(args: SelectSubset<T, StaffCredentialsCreateArgs<ExtArgs>>): Prisma__StaffCredentialsClient<$Result.GetResult<Prisma.$StaffCredentialsPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Create many RefreshTokens.
-     * @param {RefreshTokenCreateManyArgs} args - Arguments to create many RefreshTokens.
+     * Create many StaffCredentials.
+     * @param {StaffCredentialsCreateManyArgs} args - Arguments to create many StaffCredentials.
      * @example
-     * // Create many RefreshTokens
-     * const refreshToken = await prisma.refreshToken.createMany({
+     * // Create many StaffCredentials
+     * const staffCredentials = await prisma.staffCredentials.createMany({
      *   data: [
      *     // ... provide data here
      *   ]
      * })
      *     
      */
-    createMany<T extends RefreshTokenCreateManyArgs>(args?: SelectSubset<T, RefreshTokenCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    createMany<T extends StaffCredentialsCreateManyArgs>(args?: SelectSubset<T, StaffCredentialsCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Create many RefreshTokens and returns the data saved in the database.
-     * @param {RefreshTokenCreateManyAndReturnArgs} args - Arguments to create many RefreshTokens.
+     * Create many StaffCredentials and returns the data saved in the database.
+     * @param {StaffCredentialsCreateManyAndReturnArgs} args - Arguments to create many StaffCredentials.
      * @example
-     * // Create many RefreshTokens
-     * const refreshToken = await prisma.refreshToken.createManyAndReturn({
+     * // Create many StaffCredentials
+     * const staffCredentials = await prisma.staffCredentials.createManyAndReturn({
      *   data: [
      *     // ... provide data here
      *   ]
      * })
      * 
-     * // Create many RefreshTokens and only return the `id`
-     * const refreshTokenWithIdOnly = await prisma.refreshToken.createManyAndReturn({
+     * // Create many StaffCredentials and only return the `id`
+     * const staffCredentialsWithIdOnly = await prisma.staffCredentials.createManyAndReturn({
      *   select: { id: true },
      *   data: [
      *     // ... provide data here
@@ -3296,28 +3529,28 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    createManyAndReturn<T extends RefreshTokenCreateManyAndReturnArgs>(args?: SelectSubset<T, RefreshTokenCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RefreshTokenPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+    createManyAndReturn<T extends StaffCredentialsCreateManyAndReturnArgs>(args?: SelectSubset<T, StaffCredentialsCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StaffCredentialsPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
 
     /**
-     * Delete a RefreshToken.
-     * @param {RefreshTokenDeleteArgs} args - Arguments to delete one RefreshToken.
+     * Delete a StaffCredentials.
+     * @param {StaffCredentialsDeleteArgs} args - Arguments to delete one StaffCredentials.
      * @example
-     * // Delete one RefreshToken
-     * const RefreshToken = await prisma.refreshToken.delete({
+     * // Delete one StaffCredentials
+     * const StaffCredentials = await prisma.staffCredentials.delete({
      *   where: {
-     *     // ... filter to delete one RefreshToken
+     *     // ... filter to delete one StaffCredentials
      *   }
      * })
      * 
      */
-    delete<T extends RefreshTokenDeleteArgs>(args: SelectSubset<T, RefreshTokenDeleteArgs<ExtArgs>>): Prisma__RefreshTokenClient<$Result.GetResult<Prisma.$RefreshTokenPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    delete<T extends StaffCredentialsDeleteArgs>(args: SelectSubset<T, StaffCredentialsDeleteArgs<ExtArgs>>): Prisma__StaffCredentialsClient<$Result.GetResult<Prisma.$StaffCredentialsPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Update one RefreshToken.
-     * @param {RefreshTokenUpdateArgs} args - Arguments to update one RefreshToken.
+     * Update one StaffCredentials.
+     * @param {StaffCredentialsUpdateArgs} args - Arguments to update one StaffCredentials.
      * @example
-     * // Update one RefreshToken
-     * const refreshToken = await prisma.refreshToken.update({
+     * // Update one StaffCredentials
+     * const staffCredentials = await prisma.staffCredentials.update({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -3327,30 +3560,30 @@ export namespace Prisma {
      * })
      * 
      */
-    update<T extends RefreshTokenUpdateArgs>(args: SelectSubset<T, RefreshTokenUpdateArgs<ExtArgs>>): Prisma__RefreshTokenClient<$Result.GetResult<Prisma.$RefreshTokenPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    update<T extends StaffCredentialsUpdateArgs>(args: SelectSubset<T, StaffCredentialsUpdateArgs<ExtArgs>>): Prisma__StaffCredentialsClient<$Result.GetResult<Prisma.$StaffCredentialsPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Delete zero or more RefreshTokens.
-     * @param {RefreshTokenDeleteManyArgs} args - Arguments to filter RefreshTokens to delete.
+     * Delete zero or more StaffCredentials.
+     * @param {StaffCredentialsDeleteManyArgs} args - Arguments to filter StaffCredentials to delete.
      * @example
-     * // Delete a few RefreshTokens
-     * const { count } = await prisma.refreshToken.deleteMany({
+     * // Delete a few StaffCredentials
+     * const { count } = await prisma.staffCredentials.deleteMany({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      * 
      */
-    deleteMany<T extends RefreshTokenDeleteManyArgs>(args?: SelectSubset<T, RefreshTokenDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    deleteMany<T extends StaffCredentialsDeleteManyArgs>(args?: SelectSubset<T, StaffCredentialsDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Update zero or more RefreshTokens.
+     * Update zero or more StaffCredentials.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {RefreshTokenUpdateManyArgs} args - Arguments to update one or more rows.
+     * @param {StaffCredentialsUpdateManyArgs} args - Arguments to update one or more rows.
      * @example
-     * // Update many RefreshTokens
-     * const refreshToken = await prisma.refreshToken.updateMany({
+     * // Update many StaffCredentials
+     * const staffCredentials = await prisma.staffCredentials.updateMany({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -3360,14 +3593,14 @@ export namespace Prisma {
      * })
      * 
      */
-    updateMany<T extends RefreshTokenUpdateManyArgs>(args: SelectSubset<T, RefreshTokenUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    updateMany<T extends StaffCredentialsUpdateManyArgs>(args: SelectSubset<T, StaffCredentialsUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Update zero or more RefreshTokens and returns the data updated in the database.
-     * @param {RefreshTokenUpdateManyAndReturnArgs} args - Arguments to update many RefreshTokens.
+     * Update zero or more StaffCredentials and returns the data updated in the database.
+     * @param {StaffCredentialsUpdateManyAndReturnArgs} args - Arguments to update many StaffCredentials.
      * @example
-     * // Update many RefreshTokens
-     * const refreshToken = await prisma.refreshToken.updateManyAndReturn({
+     * // Update many StaffCredentials
+     * const staffCredentials = await prisma.staffCredentials.updateManyAndReturn({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -3376,8 +3609,8 @@ export namespace Prisma {
      *   ]
      * })
      * 
-     * // Update zero or more RefreshTokens and only return the `id`
-     * const refreshTokenWithIdOnly = await prisma.refreshToken.updateManyAndReturn({
+     * // Update zero or more StaffCredentials and only return the `id`
+     * const staffCredentialsWithIdOnly = await prisma.staffCredentials.updateManyAndReturn({
      *   select: { id: true },
      *   where: {
      *     // ... provide filter here
@@ -3390,56 +3623,56 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    updateManyAndReturn<T extends RefreshTokenUpdateManyAndReturnArgs>(args: SelectSubset<T, RefreshTokenUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RefreshTokenPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+    updateManyAndReturn<T extends StaffCredentialsUpdateManyAndReturnArgs>(args: SelectSubset<T, StaffCredentialsUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StaffCredentialsPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
     /**
-     * Create or update one RefreshToken.
-     * @param {RefreshTokenUpsertArgs} args - Arguments to update or create a RefreshToken.
+     * Create or update one StaffCredentials.
+     * @param {StaffCredentialsUpsertArgs} args - Arguments to update or create a StaffCredentials.
      * @example
-     * // Update or create a RefreshToken
-     * const refreshToken = await prisma.refreshToken.upsert({
+     * // Update or create a StaffCredentials
+     * const staffCredentials = await prisma.staffCredentials.upsert({
      *   create: {
-     *     // ... data to create a RefreshToken
+     *     // ... data to create a StaffCredentials
      *   },
      *   update: {
      *     // ... in case it already exists, update
      *   },
      *   where: {
-     *     // ... the filter for the RefreshToken we want to update
+     *     // ... the filter for the StaffCredentials we want to update
      *   }
      * })
      */
-    upsert<T extends RefreshTokenUpsertArgs>(args: SelectSubset<T, RefreshTokenUpsertArgs<ExtArgs>>): Prisma__RefreshTokenClient<$Result.GetResult<Prisma.$RefreshTokenPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    upsert<T extends StaffCredentialsUpsertArgs>(args: SelectSubset<T, StaffCredentialsUpsertArgs<ExtArgs>>): Prisma__StaffCredentialsClient<$Result.GetResult<Prisma.$StaffCredentialsPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
 
     /**
-     * Count the number of RefreshTokens.
+     * Count the number of StaffCredentials.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {RefreshTokenCountArgs} args - Arguments to filter RefreshTokens to count.
+     * @param {StaffCredentialsCountArgs} args - Arguments to filter StaffCredentials to count.
      * @example
-     * // Count the number of RefreshTokens
-     * const count = await prisma.refreshToken.count({
+     * // Count the number of StaffCredentials
+     * const count = await prisma.staffCredentials.count({
      *   where: {
-     *     // ... the filter for the RefreshTokens we want to count
+     *     // ... the filter for the StaffCredentials we want to count
      *   }
      * })
     **/
-    count<T extends RefreshTokenCountArgs>(
-      args?: Subset<T, RefreshTokenCountArgs>,
+    count<T extends StaffCredentialsCountArgs>(
+      args?: Subset<T, StaffCredentialsCountArgs>,
     ): Prisma.PrismaPromise<
       T extends $Utils.Record<'select', any>
         ? T['select'] extends true
           ? number
-          : GetScalarType<T['select'], RefreshTokenCountAggregateOutputType>
+          : GetScalarType<T['select'], StaffCredentialsCountAggregateOutputType>
         : number
     >
 
     /**
-     * Allows you to perform aggregations operations on a RefreshToken.
+     * Allows you to perform aggregations operations on a StaffCredentials.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {RefreshTokenAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @param {StaffCredentialsAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
      * @example
      * // Ordered by age ascending
      * // Where email contains prisma.io
@@ -3459,13 +3692,13 @@ export namespace Prisma {
      *   take: 10,
      * })
     **/
-    aggregate<T extends RefreshTokenAggregateArgs>(args: Subset<T, RefreshTokenAggregateArgs>): Prisma.PrismaPromise<GetRefreshTokenAggregateType<T>>
+    aggregate<T extends StaffCredentialsAggregateArgs>(args: Subset<T, StaffCredentialsAggregateArgs>): Prisma.PrismaPromise<GetStaffCredentialsAggregateType<T>>
 
     /**
-     * Group by RefreshToken.
+     * Group by StaffCredentials.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {RefreshTokenGroupByArgs} args - Group by arguments.
+     * @param {StaffCredentialsGroupByArgs} args - Group by arguments.
      * @example
      * // Group by city, order by createdAt, get count
      * const result = await prisma.user.groupBy({
@@ -3480,14 +3713,14 @@ export namespace Prisma {
      * 
     **/
     groupBy<
-      T extends RefreshTokenGroupByArgs,
+      T extends StaffCredentialsGroupByArgs,
       HasSelectOrTake extends Or<
         Extends<'skip', Keys<T>>,
         Extends<'take', Keys<T>>
       >,
       OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: RefreshTokenGroupByArgs['orderBy'] }
-        : { orderBy?: RefreshTokenGroupByArgs['orderBy'] },
+        ? { orderBy: StaffCredentialsGroupByArgs['orderBy'] }
+        : { orderBy?: StaffCredentialsGroupByArgs['orderBy'] },
       OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
       ByFields extends MaybeTupleToUnion<T['by']>,
       ByValid extends Has<ByFields, OrderFields>,
@@ -3536,20 +3769,20 @@ export namespace Prisma {
             ? never
             : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
         }[OrderFields]
-    >(args: SubsetIntersection<T, RefreshTokenGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetRefreshTokenGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+    >(args: SubsetIntersection<T, StaffCredentialsGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetStaffCredentialsGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
   /**
-   * Fields of the RefreshToken model
+   * Fields of the StaffCredentials model
    */
-  readonly fields: RefreshTokenFieldRefs;
+  readonly fields: StaffCredentialsFieldRefs;
   }
 
   /**
-   * The delegate class that acts as a "Promise-like" for RefreshToken.
+   * The delegate class that acts as a "Promise-like" for StaffCredentials.
    * Why is this prefixed with `Prisma__`?
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export interface Prisma__RefreshTokenClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+  export interface Prisma__StaffCredentialsClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
@@ -3578,426 +3811,436 @@ export namespace Prisma {
 
 
   /**
-   * Fields of the RefreshToken model
+   * Fields of the StaffCredentials model
    */
-  interface RefreshTokenFieldRefs {
-    readonly id: FieldRef<"RefreshToken", 'String'>
-    readonly token: FieldRef<"RefreshToken", 'String'>
-    readonly userId: FieldRef<"RefreshToken", 'String'>
-    readonly expiresAt: FieldRef<"RefreshToken", 'DateTime'>
-    readonly createdAt: FieldRef<"RefreshToken", 'DateTime'>
-    readonly isRevoked: FieldRef<"RefreshToken", 'Boolean'>
+  interface StaffCredentialsFieldRefs {
+    readonly id: FieldRef<"StaffCredentials", 'String'>
+    readonly userId: FieldRef<"StaffCredentials", 'String'>
+    readonly staffType: FieldRef<"StaffCredentials", 'StaffType'>
+    readonly licenseNumber: FieldRef<"StaffCredentials", 'String'>
+    readonly licenseExpiryDate: FieldRef<"StaffCredentials", 'DateTime'>
+    readonly specialization: FieldRef<"StaffCredentials", 'String'>
+    readonly subSpecialization: FieldRef<"StaffCredentials", 'String'>
+    readonly boardCertification: FieldRef<"StaffCredentials", 'String[]'>
+    readonly education: FieldRef<"StaffCredentials", 'String'>
+    readonly yearsOfExperience: FieldRef<"StaffCredentials", 'Int'>
+    readonly consultationFee: FieldRef<"StaffCredentials", 'Decimal'>
+    readonly isAvailable: FieldRef<"StaffCredentials", 'Boolean'>
+    readonly workingHours: FieldRef<"StaffCredentials", 'Json'>
+    readonly hospitalAffiliation: FieldRef<"StaffCredentials", 'String'>
+    readonly createdAt: FieldRef<"StaffCredentials", 'DateTime'>
+    readonly updatedAt: FieldRef<"StaffCredentials", 'DateTime'>
   }
     
 
   // Custom InputTypes
   /**
-   * RefreshToken findUnique
+   * StaffCredentials findUnique
    */
-  export type RefreshTokenFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type StaffCredentialsFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the RefreshToken
+     * Select specific fields to fetch from the StaffCredentials
      */
-    select?: RefreshTokenSelect<ExtArgs> | null
+    select?: StaffCredentialsSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the RefreshToken
+     * Omit specific fields from the StaffCredentials
      */
-    omit?: RefreshTokenOmit<ExtArgs> | null
+    omit?: StaffCredentialsOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: RefreshTokenInclude<ExtArgs> | null
+    include?: StaffCredentialsInclude<ExtArgs> | null
     /**
-     * Filter, which RefreshToken to fetch.
+     * Filter, which StaffCredentials to fetch.
      */
-    where: RefreshTokenWhereUniqueInput
+    where: StaffCredentialsWhereUniqueInput
   }
 
   /**
-   * RefreshToken findUniqueOrThrow
+   * StaffCredentials findUniqueOrThrow
    */
-  export type RefreshTokenFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type StaffCredentialsFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the RefreshToken
+     * Select specific fields to fetch from the StaffCredentials
      */
-    select?: RefreshTokenSelect<ExtArgs> | null
+    select?: StaffCredentialsSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the RefreshToken
+     * Omit specific fields from the StaffCredentials
      */
-    omit?: RefreshTokenOmit<ExtArgs> | null
+    omit?: StaffCredentialsOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: RefreshTokenInclude<ExtArgs> | null
+    include?: StaffCredentialsInclude<ExtArgs> | null
     /**
-     * Filter, which RefreshToken to fetch.
+     * Filter, which StaffCredentials to fetch.
      */
-    where: RefreshTokenWhereUniqueInput
+    where: StaffCredentialsWhereUniqueInput
   }
 
   /**
-   * RefreshToken findFirst
+   * StaffCredentials findFirst
    */
-  export type RefreshTokenFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type StaffCredentialsFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the RefreshToken
+     * Select specific fields to fetch from the StaffCredentials
      */
-    select?: RefreshTokenSelect<ExtArgs> | null
+    select?: StaffCredentialsSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the RefreshToken
+     * Omit specific fields from the StaffCredentials
      */
-    omit?: RefreshTokenOmit<ExtArgs> | null
+    omit?: StaffCredentialsOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: RefreshTokenInclude<ExtArgs> | null
+    include?: StaffCredentialsInclude<ExtArgs> | null
     /**
-     * Filter, which RefreshToken to fetch.
+     * Filter, which StaffCredentials to fetch.
      */
-    where?: RefreshTokenWhereInput
+    where?: StaffCredentialsWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of RefreshTokens to fetch.
+     * Determine the order of StaffCredentials to fetch.
      */
-    orderBy?: RefreshTokenOrderByWithRelationInput | RefreshTokenOrderByWithRelationInput[]
+    orderBy?: StaffCredentialsOrderByWithRelationInput | StaffCredentialsOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for RefreshTokens.
+     * Sets the position for searching for StaffCredentials.
      */
-    cursor?: RefreshTokenWhereUniqueInput
+    cursor?: StaffCredentialsWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` RefreshTokens from the position of the cursor.
+     * Take `±n` StaffCredentials from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` RefreshTokens.
+     * Skip the first `n` StaffCredentials.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of RefreshTokens.
+     * Filter by unique combinations of StaffCredentials.
      */
-    distinct?: RefreshTokenScalarFieldEnum | RefreshTokenScalarFieldEnum[]
+    distinct?: StaffCredentialsScalarFieldEnum | StaffCredentialsScalarFieldEnum[]
   }
 
   /**
-   * RefreshToken findFirstOrThrow
+   * StaffCredentials findFirstOrThrow
    */
-  export type RefreshTokenFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type StaffCredentialsFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the RefreshToken
+     * Select specific fields to fetch from the StaffCredentials
      */
-    select?: RefreshTokenSelect<ExtArgs> | null
+    select?: StaffCredentialsSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the RefreshToken
+     * Omit specific fields from the StaffCredentials
      */
-    omit?: RefreshTokenOmit<ExtArgs> | null
+    omit?: StaffCredentialsOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: RefreshTokenInclude<ExtArgs> | null
+    include?: StaffCredentialsInclude<ExtArgs> | null
     /**
-     * Filter, which RefreshToken to fetch.
+     * Filter, which StaffCredentials to fetch.
      */
-    where?: RefreshTokenWhereInput
+    where?: StaffCredentialsWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of RefreshTokens to fetch.
+     * Determine the order of StaffCredentials to fetch.
      */
-    orderBy?: RefreshTokenOrderByWithRelationInput | RefreshTokenOrderByWithRelationInput[]
+    orderBy?: StaffCredentialsOrderByWithRelationInput | StaffCredentialsOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for RefreshTokens.
+     * Sets the position for searching for StaffCredentials.
      */
-    cursor?: RefreshTokenWhereUniqueInput
+    cursor?: StaffCredentialsWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` RefreshTokens from the position of the cursor.
+     * Take `±n` StaffCredentials from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` RefreshTokens.
+     * Skip the first `n` StaffCredentials.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of RefreshTokens.
+     * Filter by unique combinations of StaffCredentials.
      */
-    distinct?: RefreshTokenScalarFieldEnum | RefreshTokenScalarFieldEnum[]
+    distinct?: StaffCredentialsScalarFieldEnum | StaffCredentialsScalarFieldEnum[]
   }
 
   /**
-   * RefreshToken findMany
+   * StaffCredentials findMany
    */
-  export type RefreshTokenFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type StaffCredentialsFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the RefreshToken
+     * Select specific fields to fetch from the StaffCredentials
      */
-    select?: RefreshTokenSelect<ExtArgs> | null
+    select?: StaffCredentialsSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the RefreshToken
+     * Omit specific fields from the StaffCredentials
      */
-    omit?: RefreshTokenOmit<ExtArgs> | null
+    omit?: StaffCredentialsOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: RefreshTokenInclude<ExtArgs> | null
+    include?: StaffCredentialsInclude<ExtArgs> | null
     /**
-     * Filter, which RefreshTokens to fetch.
+     * Filter, which StaffCredentials to fetch.
      */
-    where?: RefreshTokenWhereInput
+    where?: StaffCredentialsWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of RefreshTokens to fetch.
+     * Determine the order of StaffCredentials to fetch.
      */
-    orderBy?: RefreshTokenOrderByWithRelationInput | RefreshTokenOrderByWithRelationInput[]
+    orderBy?: StaffCredentialsOrderByWithRelationInput | StaffCredentialsOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for listing RefreshTokens.
+     * Sets the position for listing StaffCredentials.
      */
-    cursor?: RefreshTokenWhereUniqueInput
+    cursor?: StaffCredentialsWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` RefreshTokens from the position of the cursor.
+     * Take `±n` StaffCredentials from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` RefreshTokens.
+     * Skip the first `n` StaffCredentials.
      */
     skip?: number
-    distinct?: RefreshTokenScalarFieldEnum | RefreshTokenScalarFieldEnum[]
+    distinct?: StaffCredentialsScalarFieldEnum | StaffCredentialsScalarFieldEnum[]
   }
 
   /**
-   * RefreshToken create
+   * StaffCredentials create
    */
-  export type RefreshTokenCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type StaffCredentialsCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the RefreshToken
+     * Select specific fields to fetch from the StaffCredentials
      */
-    select?: RefreshTokenSelect<ExtArgs> | null
+    select?: StaffCredentialsSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the RefreshToken
+     * Omit specific fields from the StaffCredentials
      */
-    omit?: RefreshTokenOmit<ExtArgs> | null
+    omit?: StaffCredentialsOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: RefreshTokenInclude<ExtArgs> | null
+    include?: StaffCredentialsInclude<ExtArgs> | null
     /**
-     * The data needed to create a RefreshToken.
+     * The data needed to create a StaffCredentials.
      */
-    data: XOR<RefreshTokenCreateInput, RefreshTokenUncheckedCreateInput>
+    data: XOR<StaffCredentialsCreateInput, StaffCredentialsUncheckedCreateInput>
   }
 
   /**
-   * RefreshToken createMany
+   * StaffCredentials createMany
    */
-  export type RefreshTokenCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type StaffCredentialsCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to create many RefreshTokens.
+     * The data used to create many StaffCredentials.
      */
-    data: RefreshTokenCreateManyInput | RefreshTokenCreateManyInput[]
+    data: StaffCredentialsCreateManyInput | StaffCredentialsCreateManyInput[]
     skipDuplicates?: boolean
   }
 
   /**
-   * RefreshToken createManyAndReturn
+   * StaffCredentials createManyAndReturn
    */
-  export type RefreshTokenCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type StaffCredentialsCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the RefreshToken
+     * Select specific fields to fetch from the StaffCredentials
      */
-    select?: RefreshTokenSelectCreateManyAndReturn<ExtArgs> | null
+    select?: StaffCredentialsSelectCreateManyAndReturn<ExtArgs> | null
     /**
-     * Omit specific fields from the RefreshToken
+     * Omit specific fields from the StaffCredentials
      */
-    omit?: RefreshTokenOmit<ExtArgs> | null
+    omit?: StaffCredentialsOmit<ExtArgs> | null
     /**
-     * The data used to create many RefreshTokens.
+     * The data used to create many StaffCredentials.
      */
-    data: RefreshTokenCreateManyInput | RefreshTokenCreateManyInput[]
+    data: StaffCredentialsCreateManyInput | StaffCredentialsCreateManyInput[]
     skipDuplicates?: boolean
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: RefreshTokenIncludeCreateManyAndReturn<ExtArgs> | null
+    include?: StaffCredentialsIncludeCreateManyAndReturn<ExtArgs> | null
   }
 
   /**
-   * RefreshToken update
+   * StaffCredentials update
    */
-  export type RefreshTokenUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type StaffCredentialsUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the RefreshToken
+     * Select specific fields to fetch from the StaffCredentials
      */
-    select?: RefreshTokenSelect<ExtArgs> | null
+    select?: StaffCredentialsSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the RefreshToken
+     * Omit specific fields from the StaffCredentials
      */
-    omit?: RefreshTokenOmit<ExtArgs> | null
+    omit?: StaffCredentialsOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: RefreshTokenInclude<ExtArgs> | null
+    include?: StaffCredentialsInclude<ExtArgs> | null
     /**
-     * The data needed to update a RefreshToken.
+     * The data needed to update a StaffCredentials.
      */
-    data: XOR<RefreshTokenUpdateInput, RefreshTokenUncheckedUpdateInput>
+    data: XOR<StaffCredentialsUpdateInput, StaffCredentialsUncheckedUpdateInput>
     /**
-     * Choose, which RefreshToken to update.
+     * Choose, which StaffCredentials to update.
      */
-    where: RefreshTokenWhereUniqueInput
+    where: StaffCredentialsWhereUniqueInput
   }
 
   /**
-   * RefreshToken updateMany
+   * StaffCredentials updateMany
    */
-  export type RefreshTokenUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type StaffCredentialsUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to update RefreshTokens.
+     * The data used to update StaffCredentials.
      */
-    data: XOR<RefreshTokenUpdateManyMutationInput, RefreshTokenUncheckedUpdateManyInput>
+    data: XOR<StaffCredentialsUpdateManyMutationInput, StaffCredentialsUncheckedUpdateManyInput>
     /**
-     * Filter which RefreshTokens to update
+     * Filter which StaffCredentials to update
      */
-    where?: RefreshTokenWhereInput
+    where?: StaffCredentialsWhereInput
     /**
-     * Limit how many RefreshTokens to update.
+     * Limit how many StaffCredentials to update.
      */
     limit?: number
   }
 
   /**
-   * RefreshToken updateManyAndReturn
+   * StaffCredentials updateManyAndReturn
    */
-  export type RefreshTokenUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type StaffCredentialsUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the RefreshToken
+     * Select specific fields to fetch from the StaffCredentials
      */
-    select?: RefreshTokenSelectUpdateManyAndReturn<ExtArgs> | null
+    select?: StaffCredentialsSelectUpdateManyAndReturn<ExtArgs> | null
     /**
-     * Omit specific fields from the RefreshToken
+     * Omit specific fields from the StaffCredentials
      */
-    omit?: RefreshTokenOmit<ExtArgs> | null
+    omit?: StaffCredentialsOmit<ExtArgs> | null
     /**
-     * The data used to update RefreshTokens.
+     * The data used to update StaffCredentials.
      */
-    data: XOR<RefreshTokenUpdateManyMutationInput, RefreshTokenUncheckedUpdateManyInput>
+    data: XOR<StaffCredentialsUpdateManyMutationInput, StaffCredentialsUncheckedUpdateManyInput>
     /**
-     * Filter which RefreshTokens to update
+     * Filter which StaffCredentials to update
      */
-    where?: RefreshTokenWhereInput
+    where?: StaffCredentialsWhereInput
     /**
-     * Limit how many RefreshTokens to update.
+     * Limit how many StaffCredentials to update.
      */
     limit?: number
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: RefreshTokenIncludeUpdateManyAndReturn<ExtArgs> | null
+    include?: StaffCredentialsIncludeUpdateManyAndReturn<ExtArgs> | null
   }
 
   /**
-   * RefreshToken upsert
+   * StaffCredentials upsert
    */
-  export type RefreshTokenUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type StaffCredentialsUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the RefreshToken
+     * Select specific fields to fetch from the StaffCredentials
      */
-    select?: RefreshTokenSelect<ExtArgs> | null
+    select?: StaffCredentialsSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the RefreshToken
+     * Omit specific fields from the StaffCredentials
      */
-    omit?: RefreshTokenOmit<ExtArgs> | null
+    omit?: StaffCredentialsOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: RefreshTokenInclude<ExtArgs> | null
+    include?: StaffCredentialsInclude<ExtArgs> | null
     /**
-     * The filter to search for the RefreshToken to update in case it exists.
+     * The filter to search for the StaffCredentials to update in case it exists.
      */
-    where: RefreshTokenWhereUniqueInput
+    where: StaffCredentialsWhereUniqueInput
     /**
-     * In case the RefreshToken found by the `where` argument doesn't exist, create a new RefreshToken with this data.
+     * In case the StaffCredentials found by the `where` argument doesn't exist, create a new StaffCredentials with this data.
      */
-    create: XOR<RefreshTokenCreateInput, RefreshTokenUncheckedCreateInput>
+    create: XOR<StaffCredentialsCreateInput, StaffCredentialsUncheckedCreateInput>
     /**
-     * In case the RefreshToken was found with the provided `where` argument, update it with this data.
+     * In case the StaffCredentials was found with the provided `where` argument, update it with this data.
      */
-    update: XOR<RefreshTokenUpdateInput, RefreshTokenUncheckedUpdateInput>
+    update: XOR<StaffCredentialsUpdateInput, StaffCredentialsUncheckedUpdateInput>
   }
 
   /**
-   * RefreshToken delete
+   * StaffCredentials delete
    */
-  export type RefreshTokenDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type StaffCredentialsDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the RefreshToken
+     * Select specific fields to fetch from the StaffCredentials
      */
-    select?: RefreshTokenSelect<ExtArgs> | null
+    select?: StaffCredentialsSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the RefreshToken
+     * Omit specific fields from the StaffCredentials
      */
-    omit?: RefreshTokenOmit<ExtArgs> | null
+    omit?: StaffCredentialsOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: RefreshTokenInclude<ExtArgs> | null
+    include?: StaffCredentialsInclude<ExtArgs> | null
     /**
-     * Filter which RefreshToken to delete.
+     * Filter which StaffCredentials to delete.
      */
-    where: RefreshTokenWhereUniqueInput
+    where: StaffCredentialsWhereUniqueInput
   }
 
   /**
-   * RefreshToken deleteMany
+   * StaffCredentials deleteMany
    */
-  export type RefreshTokenDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type StaffCredentialsDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Filter which RefreshTokens to delete
+     * Filter which StaffCredentials to delete
      */
-    where?: RefreshTokenWhereInput
+    where?: StaffCredentialsWhereInput
     /**
-     * Limit how many RefreshTokens to delete.
+     * Limit how many StaffCredentials to delete.
      */
     limit?: number
   }
 
   /**
-   * RefreshToken without action
+   * StaffCredentials without action
    */
-  export type RefreshTokenDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type StaffCredentialsDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the RefreshToken
+     * Select specific fields to fetch from the StaffCredentials
      */
-    select?: RefreshTokenSelect<ExtArgs> | null
+    select?: StaffCredentialsSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the RefreshToken
+     * Omit specific fields from the StaffCredentials
      */
-    omit?: RefreshTokenOmit<ExtArgs> | null
+    omit?: StaffCredentialsOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: RefreshTokenInclude<ExtArgs> | null
+    include?: StaffCredentialsInclude<ExtArgs> | null
   }
 
 
@@ -5151,2420 +5394,6 @@ export namespace Prisma {
 
 
   /**
-   * Model Staff
-   */
-
-  export type AggregateStaff = {
-    _count: StaffCountAggregateOutputType | null
-    _avg: StaffAvgAggregateOutputType | null
-    _sum: StaffSumAggregateOutputType | null
-    _min: StaffMinAggregateOutputType | null
-    _max: StaffMaxAggregateOutputType | null
-  }
-
-  export type StaffAvgAggregateOutputType = {
-    salary: Decimal | null
-  }
-
-  export type StaffSumAggregateOutputType = {
-    salary: Decimal | null
-  }
-
-  export type StaffMinAggregateOutputType = {
-    id: string | null
-    userId: string | null
-    staffNumber: string | null
-    department: string | null
-    position: string | null
-    hireDate: Date | null
-    salary: Decimal | null
-    createdAt: Date | null
-    updatedAt: Date | null
-  }
-
-  export type StaffMaxAggregateOutputType = {
-    id: string | null
-    userId: string | null
-    staffNumber: string | null
-    department: string | null
-    position: string | null
-    hireDate: Date | null
-    salary: Decimal | null
-    createdAt: Date | null
-    updatedAt: Date | null
-  }
-
-  export type StaffCountAggregateOutputType = {
-    id: number
-    userId: number
-    staffNumber: number
-    department: number
-    position: number
-    hireDate: number
-    salary: number
-    createdAt: number
-    updatedAt: number
-    _all: number
-  }
-
-
-  export type StaffAvgAggregateInputType = {
-    salary?: true
-  }
-
-  export type StaffSumAggregateInputType = {
-    salary?: true
-  }
-
-  export type StaffMinAggregateInputType = {
-    id?: true
-    userId?: true
-    staffNumber?: true
-    department?: true
-    position?: true
-    hireDate?: true
-    salary?: true
-    createdAt?: true
-    updatedAt?: true
-  }
-
-  export type StaffMaxAggregateInputType = {
-    id?: true
-    userId?: true
-    staffNumber?: true
-    department?: true
-    position?: true
-    hireDate?: true
-    salary?: true
-    createdAt?: true
-    updatedAt?: true
-  }
-
-  export type StaffCountAggregateInputType = {
-    id?: true
-    userId?: true
-    staffNumber?: true
-    department?: true
-    position?: true
-    hireDate?: true
-    salary?: true
-    createdAt?: true
-    updatedAt?: true
-    _all?: true
-  }
-
-  export type StaffAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which Staff to aggregate.
-     */
-    where?: StaffWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Staff to fetch.
-     */
-    orderBy?: StaffOrderByWithRelationInput | StaffOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: StaffWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Staff from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Staff.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned Staff
-    **/
-    _count?: true | StaffCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to average
-    **/
-    _avg?: StaffAvgAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to sum
-    **/
-    _sum?: StaffSumAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: StaffMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: StaffMaxAggregateInputType
-  }
-
-  export type GetStaffAggregateType<T extends StaffAggregateArgs> = {
-        [P in keyof T & keyof AggregateStaff]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregateStaff[P]>
-      : GetScalarType<T[P], AggregateStaff[P]>
-  }
-
-
-
-
-  export type StaffGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: StaffWhereInput
-    orderBy?: StaffOrderByWithAggregationInput | StaffOrderByWithAggregationInput[]
-    by: StaffScalarFieldEnum[] | StaffScalarFieldEnum
-    having?: StaffScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: StaffCountAggregateInputType | true
-    _avg?: StaffAvgAggregateInputType
-    _sum?: StaffSumAggregateInputType
-    _min?: StaffMinAggregateInputType
-    _max?: StaffMaxAggregateInputType
-  }
-
-  export type StaffGroupByOutputType = {
-    id: string
-    userId: string
-    staffNumber: string
-    department: string | null
-    position: string | null
-    hireDate: Date | null
-    salary: Decimal | null
-    createdAt: Date
-    updatedAt: Date
-    _count: StaffCountAggregateOutputType | null
-    _avg: StaffAvgAggregateOutputType | null
-    _sum: StaffSumAggregateOutputType | null
-    _min: StaffMinAggregateOutputType | null
-    _max: StaffMaxAggregateOutputType | null
-  }
-
-  type GetStaffGroupByPayload<T extends StaffGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<StaffGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof StaffGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], StaffGroupByOutputType[P]>
-            : GetScalarType<T[P], StaffGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type StaffSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    userId?: boolean
-    staffNumber?: boolean
-    department?: boolean
-    position?: boolean
-    hireDate?: boolean
-    salary?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
-    doctorProfile?: boolean | Staff$doctorProfileArgs<ExtArgs>
-  }, ExtArgs["result"]["staff"]>
-
-  export type StaffSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    userId?: boolean
-    staffNumber?: boolean
-    department?: boolean
-    position?: boolean
-    hireDate?: boolean
-    salary?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["staff"]>
-
-  export type StaffSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    userId?: boolean
-    staffNumber?: boolean
-    department?: boolean
-    position?: boolean
-    hireDate?: boolean
-    salary?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["staff"]>
-
-  export type StaffSelectScalar = {
-    id?: boolean
-    userId?: boolean
-    staffNumber?: boolean
-    department?: boolean
-    position?: boolean
-    hireDate?: boolean
-    salary?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-  }
-
-  export type StaffOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "staffNumber" | "department" | "position" | "hireDate" | "salary" | "createdAt" | "updatedAt", ExtArgs["result"]["staff"]>
-  export type StaffInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
-    doctorProfile?: boolean | Staff$doctorProfileArgs<ExtArgs>
-  }
-  export type StaffIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
-  }
-  export type StaffIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
-  }
-
-  export type $StaffPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "Staff"
-    objects: {
-      user: Prisma.$UserPayload<ExtArgs>
-      doctorProfile: Prisma.$DoctorPayload<ExtArgs> | null
-    }
-    scalars: $Extensions.GetPayloadResult<{
-      id: string
-      userId: string
-      staffNumber: string
-      department: string | null
-      position: string | null
-      hireDate: Date | null
-      salary: Prisma.Decimal | null
-      createdAt: Date
-      updatedAt: Date
-    }, ExtArgs["result"]["staff"]>
-    composites: {}
-  }
-
-  type StaffGetPayload<S extends boolean | null | undefined | StaffDefaultArgs> = $Result.GetResult<Prisma.$StaffPayload, S>
-
-  type StaffCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<StaffFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: StaffCountAggregateInputType | true
-    }
-
-  export interface StaffDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Staff'], meta: { name: 'Staff' } }
-    /**
-     * Find zero or one Staff that matches the filter.
-     * @param {StaffFindUniqueArgs} args - Arguments to find a Staff
-     * @example
-     * // Get one Staff
-     * const staff = await prisma.staff.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUnique<T extends StaffFindUniqueArgs>(args: SelectSubset<T, StaffFindUniqueArgs<ExtArgs>>): Prisma__StaffClient<$Result.GetResult<Prisma.$StaffPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find one Staff that matches the filter or throw an error with `error.code='P2025'`
-     * if no matches were found.
-     * @param {StaffFindUniqueOrThrowArgs} args - Arguments to find a Staff
-     * @example
-     * // Get one Staff
-     * const staff = await prisma.staff.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUniqueOrThrow<T extends StaffFindUniqueOrThrowArgs>(args: SelectSubset<T, StaffFindUniqueOrThrowArgs<ExtArgs>>): Prisma__StaffClient<$Result.GetResult<Prisma.$StaffPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first Staff that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {StaffFindFirstArgs} args - Arguments to find a Staff
-     * @example
-     * // Get one Staff
-     * const staff = await prisma.staff.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirst<T extends StaffFindFirstArgs>(args?: SelectSubset<T, StaffFindFirstArgs<ExtArgs>>): Prisma__StaffClient<$Result.GetResult<Prisma.$StaffPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first Staff that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {StaffFindFirstOrThrowArgs} args - Arguments to find a Staff
-     * @example
-     * // Get one Staff
-     * const staff = await prisma.staff.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirstOrThrow<T extends StaffFindFirstOrThrowArgs>(args?: SelectSubset<T, StaffFindFirstOrThrowArgs<ExtArgs>>): Prisma__StaffClient<$Result.GetResult<Prisma.$StaffPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find zero or more Staff that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {StaffFindManyArgs} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all Staff
-     * const staff = await prisma.staff.findMany()
-     * 
-     * // Get first 10 Staff
-     * const staff = await prisma.staff.findMany({ take: 10 })
-     * 
-     * // Only select the `id`
-     * const staffWithIdOnly = await prisma.staff.findMany({ select: { id: true } })
-     * 
-     */
-    findMany<T extends StaffFindManyArgs>(args?: SelectSubset<T, StaffFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StaffPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
-
-    /**
-     * Create a Staff.
-     * @param {StaffCreateArgs} args - Arguments to create a Staff.
-     * @example
-     * // Create one Staff
-     * const Staff = await prisma.staff.create({
-     *   data: {
-     *     // ... data to create a Staff
-     *   }
-     * })
-     * 
-     */
-    create<T extends StaffCreateArgs>(args: SelectSubset<T, StaffCreateArgs<ExtArgs>>): Prisma__StaffClient<$Result.GetResult<Prisma.$StaffPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Create many Staff.
-     * @param {StaffCreateManyArgs} args - Arguments to create many Staff.
-     * @example
-     * // Create many Staff
-     * const staff = await prisma.staff.createMany({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     *     
-     */
-    createMany<T extends StaffCreateManyArgs>(args?: SelectSubset<T, StaffCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create many Staff and returns the data saved in the database.
-     * @param {StaffCreateManyAndReturnArgs} args - Arguments to create many Staff.
-     * @example
-     * // Create many Staff
-     * const staff = await prisma.staff.createManyAndReturn({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Create many Staff and only return the `id`
-     * const staffWithIdOnly = await prisma.staff.createManyAndReturn({
-     *   select: { id: true },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    createManyAndReturn<T extends StaffCreateManyAndReturnArgs>(args?: SelectSubset<T, StaffCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StaffPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Delete a Staff.
-     * @param {StaffDeleteArgs} args - Arguments to delete one Staff.
-     * @example
-     * // Delete one Staff
-     * const Staff = await prisma.staff.delete({
-     *   where: {
-     *     // ... filter to delete one Staff
-     *   }
-     * })
-     * 
-     */
-    delete<T extends StaffDeleteArgs>(args: SelectSubset<T, StaffDeleteArgs<ExtArgs>>): Prisma__StaffClient<$Result.GetResult<Prisma.$StaffPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Update one Staff.
-     * @param {StaffUpdateArgs} args - Arguments to update one Staff.
-     * @example
-     * // Update one Staff
-     * const staff = await prisma.staff.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    update<T extends StaffUpdateArgs>(args: SelectSubset<T, StaffUpdateArgs<ExtArgs>>): Prisma__StaffClient<$Result.GetResult<Prisma.$StaffPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Delete zero or more Staff.
-     * @param {StaffDeleteManyArgs} args - Arguments to filter Staff to delete.
-     * @example
-     * // Delete a few Staff
-     * const { count } = await prisma.staff.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-     */
-    deleteMany<T extends StaffDeleteManyArgs>(args?: SelectSubset<T, StaffDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more Staff.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {StaffUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many Staff
-     * const staff = await prisma.staff.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    updateMany<T extends StaffUpdateManyArgs>(args: SelectSubset<T, StaffUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more Staff and returns the data updated in the database.
-     * @param {StaffUpdateManyAndReturnArgs} args - Arguments to update many Staff.
-     * @example
-     * // Update many Staff
-     * const staff = await prisma.staff.updateManyAndReturn({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Update zero or more Staff and only return the `id`
-     * const staffWithIdOnly = await prisma.staff.updateManyAndReturn({
-     *   select: { id: true },
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    updateManyAndReturn<T extends StaffUpdateManyAndReturnArgs>(args: SelectSubset<T, StaffUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StaffPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Create or update one Staff.
-     * @param {StaffUpsertArgs} args - Arguments to update or create a Staff.
-     * @example
-     * // Update or create a Staff
-     * const staff = await prisma.staff.upsert({
-     *   create: {
-     *     // ... data to create a Staff
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the Staff we want to update
-     *   }
-     * })
-     */
-    upsert<T extends StaffUpsertArgs>(args: SelectSubset<T, StaffUpsertArgs<ExtArgs>>): Prisma__StaffClient<$Result.GetResult<Prisma.$StaffPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-
-    /**
-     * Count the number of Staff.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {StaffCountArgs} args - Arguments to filter Staff to count.
-     * @example
-     * // Count the number of Staff
-     * const count = await prisma.staff.count({
-     *   where: {
-     *     // ... the filter for the Staff we want to count
-     *   }
-     * })
-    **/
-    count<T extends StaffCountArgs>(
-      args?: Subset<T, StaffCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], StaffCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a Staff.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {StaffAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends StaffAggregateArgs>(args: Subset<T, StaffAggregateArgs>): Prisma.PrismaPromise<GetStaffAggregateType<T>>
-
-    /**
-     * Group by Staff.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {StaffGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends StaffGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: StaffGroupByArgs['orderBy'] }
-        : { orderBy?: StaffGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, StaffGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetStaffGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the Staff model
-   */
-  readonly fields: StaffFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for Staff.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__StaffClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    doctorProfile<T extends Staff$doctorProfileArgs<ExtArgs> = {}>(args?: Subset<T, Staff$doctorProfileArgs<ExtArgs>>): Prisma__DoctorClient<$Result.GetResult<Prisma.$DoctorPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
-  }
-
-
-
-
-  /**
-   * Fields of the Staff model
-   */
-  interface StaffFieldRefs {
-    readonly id: FieldRef<"Staff", 'String'>
-    readonly userId: FieldRef<"Staff", 'String'>
-    readonly staffNumber: FieldRef<"Staff", 'String'>
-    readonly department: FieldRef<"Staff", 'String'>
-    readonly position: FieldRef<"Staff", 'String'>
-    readonly hireDate: FieldRef<"Staff", 'DateTime'>
-    readonly salary: FieldRef<"Staff", 'Decimal'>
-    readonly createdAt: FieldRef<"Staff", 'DateTime'>
-    readonly updatedAt: FieldRef<"Staff", 'DateTime'>
-  }
-    
-
-  // Custom InputTypes
-  /**
-   * Staff findUnique
-   */
-  export type StaffFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Staff
-     */
-    select?: StaffSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Staff
-     */
-    omit?: StaffOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: StaffInclude<ExtArgs> | null
-    /**
-     * Filter, which Staff to fetch.
-     */
-    where: StaffWhereUniqueInput
-  }
-
-  /**
-   * Staff findUniqueOrThrow
-   */
-  export type StaffFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Staff
-     */
-    select?: StaffSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Staff
-     */
-    omit?: StaffOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: StaffInclude<ExtArgs> | null
-    /**
-     * Filter, which Staff to fetch.
-     */
-    where: StaffWhereUniqueInput
-  }
-
-  /**
-   * Staff findFirst
-   */
-  export type StaffFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Staff
-     */
-    select?: StaffSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Staff
-     */
-    omit?: StaffOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: StaffInclude<ExtArgs> | null
-    /**
-     * Filter, which Staff to fetch.
-     */
-    where?: StaffWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Staff to fetch.
-     */
-    orderBy?: StaffOrderByWithRelationInput | StaffOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for Staff.
-     */
-    cursor?: StaffWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Staff from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Staff.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of Staff.
-     */
-    distinct?: StaffScalarFieldEnum | StaffScalarFieldEnum[]
-  }
-
-  /**
-   * Staff findFirstOrThrow
-   */
-  export type StaffFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Staff
-     */
-    select?: StaffSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Staff
-     */
-    omit?: StaffOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: StaffInclude<ExtArgs> | null
-    /**
-     * Filter, which Staff to fetch.
-     */
-    where?: StaffWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Staff to fetch.
-     */
-    orderBy?: StaffOrderByWithRelationInput | StaffOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for Staff.
-     */
-    cursor?: StaffWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Staff from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Staff.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of Staff.
-     */
-    distinct?: StaffScalarFieldEnum | StaffScalarFieldEnum[]
-  }
-
-  /**
-   * Staff findMany
-   */
-  export type StaffFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Staff
-     */
-    select?: StaffSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Staff
-     */
-    omit?: StaffOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: StaffInclude<ExtArgs> | null
-    /**
-     * Filter, which Staff to fetch.
-     */
-    where?: StaffWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Staff to fetch.
-     */
-    orderBy?: StaffOrderByWithRelationInput | StaffOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing Staff.
-     */
-    cursor?: StaffWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Staff from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Staff.
-     */
-    skip?: number
-    distinct?: StaffScalarFieldEnum | StaffScalarFieldEnum[]
-  }
-
-  /**
-   * Staff create
-   */
-  export type StaffCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Staff
-     */
-    select?: StaffSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Staff
-     */
-    omit?: StaffOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: StaffInclude<ExtArgs> | null
-    /**
-     * The data needed to create a Staff.
-     */
-    data: XOR<StaffCreateInput, StaffUncheckedCreateInput>
-  }
-
-  /**
-   * Staff createMany
-   */
-  export type StaffCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many Staff.
-     */
-    data: StaffCreateManyInput | StaffCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * Staff createManyAndReturn
-   */
-  export type StaffCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Staff
-     */
-    select?: StaffSelectCreateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the Staff
-     */
-    omit?: StaffOmit<ExtArgs> | null
-    /**
-     * The data used to create many Staff.
-     */
-    data: StaffCreateManyInput | StaffCreateManyInput[]
-    skipDuplicates?: boolean
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: StaffIncludeCreateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * Staff update
-   */
-  export type StaffUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Staff
-     */
-    select?: StaffSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Staff
-     */
-    omit?: StaffOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: StaffInclude<ExtArgs> | null
-    /**
-     * The data needed to update a Staff.
-     */
-    data: XOR<StaffUpdateInput, StaffUncheckedUpdateInput>
-    /**
-     * Choose, which Staff to update.
-     */
-    where: StaffWhereUniqueInput
-  }
-
-  /**
-   * Staff updateMany
-   */
-  export type StaffUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update Staff.
-     */
-    data: XOR<StaffUpdateManyMutationInput, StaffUncheckedUpdateManyInput>
-    /**
-     * Filter which Staff to update
-     */
-    where?: StaffWhereInput
-    /**
-     * Limit how many Staff to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * Staff updateManyAndReturn
-   */
-  export type StaffUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Staff
-     */
-    select?: StaffSelectUpdateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the Staff
-     */
-    omit?: StaffOmit<ExtArgs> | null
-    /**
-     * The data used to update Staff.
-     */
-    data: XOR<StaffUpdateManyMutationInput, StaffUncheckedUpdateManyInput>
-    /**
-     * Filter which Staff to update
-     */
-    where?: StaffWhereInput
-    /**
-     * Limit how many Staff to update.
-     */
-    limit?: number
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: StaffIncludeUpdateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * Staff upsert
-   */
-  export type StaffUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Staff
-     */
-    select?: StaffSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Staff
-     */
-    omit?: StaffOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: StaffInclude<ExtArgs> | null
-    /**
-     * The filter to search for the Staff to update in case it exists.
-     */
-    where: StaffWhereUniqueInput
-    /**
-     * In case the Staff found by the `where` argument doesn't exist, create a new Staff with this data.
-     */
-    create: XOR<StaffCreateInput, StaffUncheckedCreateInput>
-    /**
-     * In case the Staff was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<StaffUpdateInput, StaffUncheckedUpdateInput>
-  }
-
-  /**
-   * Staff delete
-   */
-  export type StaffDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Staff
-     */
-    select?: StaffSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Staff
-     */
-    omit?: StaffOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: StaffInclude<ExtArgs> | null
-    /**
-     * Filter which Staff to delete.
-     */
-    where: StaffWhereUniqueInput
-  }
-
-  /**
-   * Staff deleteMany
-   */
-  export type StaffDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which Staff to delete
-     */
-    where?: StaffWhereInput
-    /**
-     * Limit how many Staff to delete.
-     */
-    limit?: number
-  }
-
-  /**
-   * Staff.doctorProfile
-   */
-  export type Staff$doctorProfileArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Doctor
-     */
-    select?: DoctorSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Doctor
-     */
-    omit?: DoctorOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: DoctorInclude<ExtArgs> | null
-    where?: DoctorWhereInput
-  }
-
-  /**
-   * Staff without action
-   */
-  export type StaffDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Staff
-     */
-    select?: StaffSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Staff
-     */
-    omit?: StaffOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: StaffInclude<ExtArgs> | null
-  }
-
-
-  /**
-   * Model Doctor
-   */
-
-  export type AggregateDoctor = {
-    _count: DoctorCountAggregateOutputType | null
-    _avg: DoctorAvgAggregateOutputType | null
-    _sum: DoctorSumAggregateOutputType | null
-    _min: DoctorMinAggregateOutputType | null
-    _max: DoctorMaxAggregateOutputType | null
-  }
-
-  export type DoctorAvgAggregateOutputType = {
-    yearsOfExperience: number | null
-    consultationFee: Decimal | null
-  }
-
-  export type DoctorSumAggregateOutputType = {
-    yearsOfExperience: number | null
-    consultationFee: Decimal | null
-  }
-
-  export type DoctorMinAggregateOutputType = {
-    id: string | null
-    userId: string | null
-    staffId: string | null
-    doctorNumber: string | null
-    medicalLicense: string | null
-    specialization: string | null
-    subSpecialization: string | null
-    boardCertification: string | null
-    yearsOfExperience: number | null
-    education: string | null
-    hospitalAffiliation: string | null
-    consultationFee: Decimal | null
-    isAvailable: boolean | null
-    workingHours: string | null
-    createdAt: Date | null
-    updatedAt: Date | null
-  }
-
-  export type DoctorMaxAggregateOutputType = {
-    id: string | null
-    userId: string | null
-    staffId: string | null
-    doctorNumber: string | null
-    medicalLicense: string | null
-    specialization: string | null
-    subSpecialization: string | null
-    boardCertification: string | null
-    yearsOfExperience: number | null
-    education: string | null
-    hospitalAffiliation: string | null
-    consultationFee: Decimal | null
-    isAvailable: boolean | null
-    workingHours: string | null
-    createdAt: Date | null
-    updatedAt: Date | null
-  }
-
-  export type DoctorCountAggregateOutputType = {
-    id: number
-    userId: number
-    staffId: number
-    doctorNumber: number
-    medicalLicense: number
-    specialization: number
-    subSpecialization: number
-    boardCertification: number
-    yearsOfExperience: number
-    education: number
-    hospitalAffiliation: number
-    consultationFee: number
-    isAvailable: number
-    workingHours: number
-    createdAt: number
-    updatedAt: number
-    _all: number
-  }
-
-
-  export type DoctorAvgAggregateInputType = {
-    yearsOfExperience?: true
-    consultationFee?: true
-  }
-
-  export type DoctorSumAggregateInputType = {
-    yearsOfExperience?: true
-    consultationFee?: true
-  }
-
-  export type DoctorMinAggregateInputType = {
-    id?: true
-    userId?: true
-    staffId?: true
-    doctorNumber?: true
-    medicalLicense?: true
-    specialization?: true
-    subSpecialization?: true
-    boardCertification?: true
-    yearsOfExperience?: true
-    education?: true
-    hospitalAffiliation?: true
-    consultationFee?: true
-    isAvailable?: true
-    workingHours?: true
-    createdAt?: true
-    updatedAt?: true
-  }
-
-  export type DoctorMaxAggregateInputType = {
-    id?: true
-    userId?: true
-    staffId?: true
-    doctorNumber?: true
-    medicalLicense?: true
-    specialization?: true
-    subSpecialization?: true
-    boardCertification?: true
-    yearsOfExperience?: true
-    education?: true
-    hospitalAffiliation?: true
-    consultationFee?: true
-    isAvailable?: true
-    workingHours?: true
-    createdAt?: true
-    updatedAt?: true
-  }
-
-  export type DoctorCountAggregateInputType = {
-    id?: true
-    userId?: true
-    staffId?: true
-    doctorNumber?: true
-    medicalLicense?: true
-    specialization?: true
-    subSpecialization?: true
-    boardCertification?: true
-    yearsOfExperience?: true
-    education?: true
-    hospitalAffiliation?: true
-    consultationFee?: true
-    isAvailable?: true
-    workingHours?: true
-    createdAt?: true
-    updatedAt?: true
-    _all?: true
-  }
-
-  export type DoctorAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which Doctor to aggregate.
-     */
-    where?: DoctorWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Doctors to fetch.
-     */
-    orderBy?: DoctorOrderByWithRelationInput | DoctorOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: DoctorWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Doctors from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Doctors.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned Doctors
-    **/
-    _count?: true | DoctorCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to average
-    **/
-    _avg?: DoctorAvgAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to sum
-    **/
-    _sum?: DoctorSumAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: DoctorMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: DoctorMaxAggregateInputType
-  }
-
-  export type GetDoctorAggregateType<T extends DoctorAggregateArgs> = {
-        [P in keyof T & keyof AggregateDoctor]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregateDoctor[P]>
-      : GetScalarType<T[P], AggregateDoctor[P]>
-  }
-
-
-
-
-  export type DoctorGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: DoctorWhereInput
-    orderBy?: DoctorOrderByWithAggregationInput | DoctorOrderByWithAggregationInput[]
-    by: DoctorScalarFieldEnum[] | DoctorScalarFieldEnum
-    having?: DoctorScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: DoctorCountAggregateInputType | true
-    _avg?: DoctorAvgAggregateInputType
-    _sum?: DoctorSumAggregateInputType
-    _min?: DoctorMinAggregateInputType
-    _max?: DoctorMaxAggregateInputType
-  }
-
-  export type DoctorGroupByOutputType = {
-    id: string
-    userId: string
-    staffId: string
-    doctorNumber: string
-    medicalLicense: string
-    specialization: string
-    subSpecialization: string | null
-    boardCertification: string | null
-    yearsOfExperience: number | null
-    education: string | null
-    hospitalAffiliation: string | null
-    consultationFee: Decimal | null
-    isAvailable: boolean
-    workingHours: string | null
-    createdAt: Date
-    updatedAt: Date
-    _count: DoctorCountAggregateOutputType | null
-    _avg: DoctorAvgAggregateOutputType | null
-    _sum: DoctorSumAggregateOutputType | null
-    _min: DoctorMinAggregateOutputType | null
-    _max: DoctorMaxAggregateOutputType | null
-  }
-
-  type GetDoctorGroupByPayload<T extends DoctorGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<DoctorGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof DoctorGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], DoctorGroupByOutputType[P]>
-            : GetScalarType<T[P], DoctorGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type DoctorSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    userId?: boolean
-    staffId?: boolean
-    doctorNumber?: boolean
-    medicalLicense?: boolean
-    specialization?: boolean
-    subSpecialization?: boolean
-    boardCertification?: boolean
-    yearsOfExperience?: boolean
-    education?: boolean
-    hospitalAffiliation?: boolean
-    consultationFee?: boolean
-    isAvailable?: boolean
-    workingHours?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
-    staff?: boolean | StaffDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["doctor"]>
-
-  export type DoctorSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    userId?: boolean
-    staffId?: boolean
-    doctorNumber?: boolean
-    medicalLicense?: boolean
-    specialization?: boolean
-    subSpecialization?: boolean
-    boardCertification?: boolean
-    yearsOfExperience?: boolean
-    education?: boolean
-    hospitalAffiliation?: boolean
-    consultationFee?: boolean
-    isAvailable?: boolean
-    workingHours?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
-    staff?: boolean | StaffDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["doctor"]>
-
-  export type DoctorSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    userId?: boolean
-    staffId?: boolean
-    doctorNumber?: boolean
-    medicalLicense?: boolean
-    specialization?: boolean
-    subSpecialization?: boolean
-    boardCertification?: boolean
-    yearsOfExperience?: boolean
-    education?: boolean
-    hospitalAffiliation?: boolean
-    consultationFee?: boolean
-    isAvailable?: boolean
-    workingHours?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
-    staff?: boolean | StaffDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["doctor"]>
-
-  export type DoctorSelectScalar = {
-    id?: boolean
-    userId?: boolean
-    staffId?: boolean
-    doctorNumber?: boolean
-    medicalLicense?: boolean
-    specialization?: boolean
-    subSpecialization?: boolean
-    boardCertification?: boolean
-    yearsOfExperience?: boolean
-    education?: boolean
-    hospitalAffiliation?: boolean
-    consultationFee?: boolean
-    isAvailable?: boolean
-    workingHours?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-  }
-
-  export type DoctorOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "staffId" | "doctorNumber" | "medicalLicense" | "specialization" | "subSpecialization" | "boardCertification" | "yearsOfExperience" | "education" | "hospitalAffiliation" | "consultationFee" | "isAvailable" | "workingHours" | "createdAt" | "updatedAt", ExtArgs["result"]["doctor"]>
-  export type DoctorInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
-    staff?: boolean | StaffDefaultArgs<ExtArgs>
-  }
-  export type DoctorIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
-    staff?: boolean | StaffDefaultArgs<ExtArgs>
-  }
-  export type DoctorIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
-    staff?: boolean | StaffDefaultArgs<ExtArgs>
-  }
-
-  export type $DoctorPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "Doctor"
-    objects: {
-      user: Prisma.$UserPayload<ExtArgs>
-      staff: Prisma.$StaffPayload<ExtArgs>
-    }
-    scalars: $Extensions.GetPayloadResult<{
-      id: string
-      userId: string
-      staffId: string
-      doctorNumber: string
-      medicalLicense: string
-      specialization: string
-      subSpecialization: string | null
-      boardCertification: string | null
-      yearsOfExperience: number | null
-      education: string | null
-      hospitalAffiliation: string | null
-      consultationFee: Prisma.Decimal | null
-      isAvailable: boolean
-      workingHours: string | null
-      createdAt: Date
-      updatedAt: Date
-    }, ExtArgs["result"]["doctor"]>
-    composites: {}
-  }
-
-  type DoctorGetPayload<S extends boolean | null | undefined | DoctorDefaultArgs> = $Result.GetResult<Prisma.$DoctorPayload, S>
-
-  type DoctorCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<DoctorFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: DoctorCountAggregateInputType | true
-    }
-
-  export interface DoctorDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Doctor'], meta: { name: 'Doctor' } }
-    /**
-     * Find zero or one Doctor that matches the filter.
-     * @param {DoctorFindUniqueArgs} args - Arguments to find a Doctor
-     * @example
-     * // Get one Doctor
-     * const doctor = await prisma.doctor.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUnique<T extends DoctorFindUniqueArgs>(args: SelectSubset<T, DoctorFindUniqueArgs<ExtArgs>>): Prisma__DoctorClient<$Result.GetResult<Prisma.$DoctorPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find one Doctor that matches the filter or throw an error with `error.code='P2025'`
-     * if no matches were found.
-     * @param {DoctorFindUniqueOrThrowArgs} args - Arguments to find a Doctor
-     * @example
-     * // Get one Doctor
-     * const doctor = await prisma.doctor.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUniqueOrThrow<T extends DoctorFindUniqueOrThrowArgs>(args: SelectSubset<T, DoctorFindUniqueOrThrowArgs<ExtArgs>>): Prisma__DoctorClient<$Result.GetResult<Prisma.$DoctorPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first Doctor that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {DoctorFindFirstArgs} args - Arguments to find a Doctor
-     * @example
-     * // Get one Doctor
-     * const doctor = await prisma.doctor.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirst<T extends DoctorFindFirstArgs>(args?: SelectSubset<T, DoctorFindFirstArgs<ExtArgs>>): Prisma__DoctorClient<$Result.GetResult<Prisma.$DoctorPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first Doctor that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {DoctorFindFirstOrThrowArgs} args - Arguments to find a Doctor
-     * @example
-     * // Get one Doctor
-     * const doctor = await prisma.doctor.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirstOrThrow<T extends DoctorFindFirstOrThrowArgs>(args?: SelectSubset<T, DoctorFindFirstOrThrowArgs<ExtArgs>>): Prisma__DoctorClient<$Result.GetResult<Prisma.$DoctorPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find zero or more Doctors that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {DoctorFindManyArgs} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all Doctors
-     * const doctors = await prisma.doctor.findMany()
-     * 
-     * // Get first 10 Doctors
-     * const doctors = await prisma.doctor.findMany({ take: 10 })
-     * 
-     * // Only select the `id`
-     * const doctorWithIdOnly = await prisma.doctor.findMany({ select: { id: true } })
-     * 
-     */
-    findMany<T extends DoctorFindManyArgs>(args?: SelectSubset<T, DoctorFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DoctorPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
-
-    /**
-     * Create a Doctor.
-     * @param {DoctorCreateArgs} args - Arguments to create a Doctor.
-     * @example
-     * // Create one Doctor
-     * const Doctor = await prisma.doctor.create({
-     *   data: {
-     *     // ... data to create a Doctor
-     *   }
-     * })
-     * 
-     */
-    create<T extends DoctorCreateArgs>(args: SelectSubset<T, DoctorCreateArgs<ExtArgs>>): Prisma__DoctorClient<$Result.GetResult<Prisma.$DoctorPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Create many Doctors.
-     * @param {DoctorCreateManyArgs} args - Arguments to create many Doctors.
-     * @example
-     * // Create many Doctors
-     * const doctor = await prisma.doctor.createMany({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     *     
-     */
-    createMany<T extends DoctorCreateManyArgs>(args?: SelectSubset<T, DoctorCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create many Doctors and returns the data saved in the database.
-     * @param {DoctorCreateManyAndReturnArgs} args - Arguments to create many Doctors.
-     * @example
-     * // Create many Doctors
-     * const doctor = await prisma.doctor.createManyAndReturn({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Create many Doctors and only return the `id`
-     * const doctorWithIdOnly = await prisma.doctor.createManyAndReturn({
-     *   select: { id: true },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    createManyAndReturn<T extends DoctorCreateManyAndReturnArgs>(args?: SelectSubset<T, DoctorCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DoctorPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Delete a Doctor.
-     * @param {DoctorDeleteArgs} args - Arguments to delete one Doctor.
-     * @example
-     * // Delete one Doctor
-     * const Doctor = await prisma.doctor.delete({
-     *   where: {
-     *     // ... filter to delete one Doctor
-     *   }
-     * })
-     * 
-     */
-    delete<T extends DoctorDeleteArgs>(args: SelectSubset<T, DoctorDeleteArgs<ExtArgs>>): Prisma__DoctorClient<$Result.GetResult<Prisma.$DoctorPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Update one Doctor.
-     * @param {DoctorUpdateArgs} args - Arguments to update one Doctor.
-     * @example
-     * // Update one Doctor
-     * const doctor = await prisma.doctor.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    update<T extends DoctorUpdateArgs>(args: SelectSubset<T, DoctorUpdateArgs<ExtArgs>>): Prisma__DoctorClient<$Result.GetResult<Prisma.$DoctorPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Delete zero or more Doctors.
-     * @param {DoctorDeleteManyArgs} args - Arguments to filter Doctors to delete.
-     * @example
-     * // Delete a few Doctors
-     * const { count } = await prisma.doctor.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-     */
-    deleteMany<T extends DoctorDeleteManyArgs>(args?: SelectSubset<T, DoctorDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more Doctors.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {DoctorUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many Doctors
-     * const doctor = await prisma.doctor.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    updateMany<T extends DoctorUpdateManyArgs>(args: SelectSubset<T, DoctorUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more Doctors and returns the data updated in the database.
-     * @param {DoctorUpdateManyAndReturnArgs} args - Arguments to update many Doctors.
-     * @example
-     * // Update many Doctors
-     * const doctor = await prisma.doctor.updateManyAndReturn({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Update zero or more Doctors and only return the `id`
-     * const doctorWithIdOnly = await prisma.doctor.updateManyAndReturn({
-     *   select: { id: true },
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    updateManyAndReturn<T extends DoctorUpdateManyAndReturnArgs>(args: SelectSubset<T, DoctorUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DoctorPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Create or update one Doctor.
-     * @param {DoctorUpsertArgs} args - Arguments to update or create a Doctor.
-     * @example
-     * // Update or create a Doctor
-     * const doctor = await prisma.doctor.upsert({
-     *   create: {
-     *     // ... data to create a Doctor
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the Doctor we want to update
-     *   }
-     * })
-     */
-    upsert<T extends DoctorUpsertArgs>(args: SelectSubset<T, DoctorUpsertArgs<ExtArgs>>): Prisma__DoctorClient<$Result.GetResult<Prisma.$DoctorPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-
-    /**
-     * Count the number of Doctors.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {DoctorCountArgs} args - Arguments to filter Doctors to count.
-     * @example
-     * // Count the number of Doctors
-     * const count = await prisma.doctor.count({
-     *   where: {
-     *     // ... the filter for the Doctors we want to count
-     *   }
-     * })
-    **/
-    count<T extends DoctorCountArgs>(
-      args?: Subset<T, DoctorCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], DoctorCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a Doctor.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {DoctorAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends DoctorAggregateArgs>(args: Subset<T, DoctorAggregateArgs>): Prisma.PrismaPromise<GetDoctorAggregateType<T>>
-
-    /**
-     * Group by Doctor.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {DoctorGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends DoctorGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: DoctorGroupByArgs['orderBy'] }
-        : { orderBy?: DoctorGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, DoctorGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetDoctorGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the Doctor model
-   */
-  readonly fields: DoctorFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for Doctor.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__DoctorClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    staff<T extends StaffDefaultArgs<ExtArgs> = {}>(args?: Subset<T, StaffDefaultArgs<ExtArgs>>): Prisma__StaffClient<$Result.GetResult<Prisma.$StaffPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
-  }
-
-
-
-
-  /**
-   * Fields of the Doctor model
-   */
-  interface DoctorFieldRefs {
-    readonly id: FieldRef<"Doctor", 'String'>
-    readonly userId: FieldRef<"Doctor", 'String'>
-    readonly staffId: FieldRef<"Doctor", 'String'>
-    readonly doctorNumber: FieldRef<"Doctor", 'String'>
-    readonly medicalLicense: FieldRef<"Doctor", 'String'>
-    readonly specialization: FieldRef<"Doctor", 'String'>
-    readonly subSpecialization: FieldRef<"Doctor", 'String'>
-    readonly boardCertification: FieldRef<"Doctor", 'String'>
-    readonly yearsOfExperience: FieldRef<"Doctor", 'Int'>
-    readonly education: FieldRef<"Doctor", 'String'>
-    readonly hospitalAffiliation: FieldRef<"Doctor", 'String'>
-    readonly consultationFee: FieldRef<"Doctor", 'Decimal'>
-    readonly isAvailable: FieldRef<"Doctor", 'Boolean'>
-    readonly workingHours: FieldRef<"Doctor", 'String'>
-    readonly createdAt: FieldRef<"Doctor", 'DateTime'>
-    readonly updatedAt: FieldRef<"Doctor", 'DateTime'>
-  }
-    
-
-  // Custom InputTypes
-  /**
-   * Doctor findUnique
-   */
-  export type DoctorFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Doctor
-     */
-    select?: DoctorSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Doctor
-     */
-    omit?: DoctorOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: DoctorInclude<ExtArgs> | null
-    /**
-     * Filter, which Doctor to fetch.
-     */
-    where: DoctorWhereUniqueInput
-  }
-
-  /**
-   * Doctor findUniqueOrThrow
-   */
-  export type DoctorFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Doctor
-     */
-    select?: DoctorSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Doctor
-     */
-    omit?: DoctorOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: DoctorInclude<ExtArgs> | null
-    /**
-     * Filter, which Doctor to fetch.
-     */
-    where: DoctorWhereUniqueInput
-  }
-
-  /**
-   * Doctor findFirst
-   */
-  export type DoctorFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Doctor
-     */
-    select?: DoctorSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Doctor
-     */
-    omit?: DoctorOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: DoctorInclude<ExtArgs> | null
-    /**
-     * Filter, which Doctor to fetch.
-     */
-    where?: DoctorWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Doctors to fetch.
-     */
-    orderBy?: DoctorOrderByWithRelationInput | DoctorOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for Doctors.
-     */
-    cursor?: DoctorWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Doctors from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Doctors.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of Doctors.
-     */
-    distinct?: DoctorScalarFieldEnum | DoctorScalarFieldEnum[]
-  }
-
-  /**
-   * Doctor findFirstOrThrow
-   */
-  export type DoctorFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Doctor
-     */
-    select?: DoctorSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Doctor
-     */
-    omit?: DoctorOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: DoctorInclude<ExtArgs> | null
-    /**
-     * Filter, which Doctor to fetch.
-     */
-    where?: DoctorWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Doctors to fetch.
-     */
-    orderBy?: DoctorOrderByWithRelationInput | DoctorOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for Doctors.
-     */
-    cursor?: DoctorWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Doctors from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Doctors.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of Doctors.
-     */
-    distinct?: DoctorScalarFieldEnum | DoctorScalarFieldEnum[]
-  }
-
-  /**
-   * Doctor findMany
-   */
-  export type DoctorFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Doctor
-     */
-    select?: DoctorSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Doctor
-     */
-    omit?: DoctorOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: DoctorInclude<ExtArgs> | null
-    /**
-     * Filter, which Doctors to fetch.
-     */
-    where?: DoctorWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Doctors to fetch.
-     */
-    orderBy?: DoctorOrderByWithRelationInput | DoctorOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing Doctors.
-     */
-    cursor?: DoctorWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Doctors from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Doctors.
-     */
-    skip?: number
-    distinct?: DoctorScalarFieldEnum | DoctorScalarFieldEnum[]
-  }
-
-  /**
-   * Doctor create
-   */
-  export type DoctorCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Doctor
-     */
-    select?: DoctorSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Doctor
-     */
-    omit?: DoctorOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: DoctorInclude<ExtArgs> | null
-    /**
-     * The data needed to create a Doctor.
-     */
-    data: XOR<DoctorCreateInput, DoctorUncheckedCreateInput>
-  }
-
-  /**
-   * Doctor createMany
-   */
-  export type DoctorCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many Doctors.
-     */
-    data: DoctorCreateManyInput | DoctorCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * Doctor createManyAndReturn
-   */
-  export type DoctorCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Doctor
-     */
-    select?: DoctorSelectCreateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the Doctor
-     */
-    omit?: DoctorOmit<ExtArgs> | null
-    /**
-     * The data used to create many Doctors.
-     */
-    data: DoctorCreateManyInput | DoctorCreateManyInput[]
-    skipDuplicates?: boolean
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: DoctorIncludeCreateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * Doctor update
-   */
-  export type DoctorUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Doctor
-     */
-    select?: DoctorSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Doctor
-     */
-    omit?: DoctorOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: DoctorInclude<ExtArgs> | null
-    /**
-     * The data needed to update a Doctor.
-     */
-    data: XOR<DoctorUpdateInput, DoctorUncheckedUpdateInput>
-    /**
-     * Choose, which Doctor to update.
-     */
-    where: DoctorWhereUniqueInput
-  }
-
-  /**
-   * Doctor updateMany
-   */
-  export type DoctorUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update Doctors.
-     */
-    data: XOR<DoctorUpdateManyMutationInput, DoctorUncheckedUpdateManyInput>
-    /**
-     * Filter which Doctors to update
-     */
-    where?: DoctorWhereInput
-    /**
-     * Limit how many Doctors to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * Doctor updateManyAndReturn
-   */
-  export type DoctorUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Doctor
-     */
-    select?: DoctorSelectUpdateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the Doctor
-     */
-    omit?: DoctorOmit<ExtArgs> | null
-    /**
-     * The data used to update Doctors.
-     */
-    data: XOR<DoctorUpdateManyMutationInput, DoctorUncheckedUpdateManyInput>
-    /**
-     * Filter which Doctors to update
-     */
-    where?: DoctorWhereInput
-    /**
-     * Limit how many Doctors to update.
-     */
-    limit?: number
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: DoctorIncludeUpdateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * Doctor upsert
-   */
-  export type DoctorUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Doctor
-     */
-    select?: DoctorSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Doctor
-     */
-    omit?: DoctorOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: DoctorInclude<ExtArgs> | null
-    /**
-     * The filter to search for the Doctor to update in case it exists.
-     */
-    where: DoctorWhereUniqueInput
-    /**
-     * In case the Doctor found by the `where` argument doesn't exist, create a new Doctor with this data.
-     */
-    create: XOR<DoctorCreateInput, DoctorUncheckedCreateInput>
-    /**
-     * In case the Doctor was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<DoctorUpdateInput, DoctorUncheckedUpdateInput>
-  }
-
-  /**
-   * Doctor delete
-   */
-  export type DoctorDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Doctor
-     */
-    select?: DoctorSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Doctor
-     */
-    omit?: DoctorOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: DoctorInclude<ExtArgs> | null
-    /**
-     * Filter which Doctor to delete.
-     */
-    where: DoctorWhereUniqueInput
-  }
-
-  /**
-   * Doctor deleteMany
-   */
-  export type DoctorDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which Doctors to delete
-     */
-    where?: DoctorWhereInput
-    /**
-     * Limit how many Doctors to delete.
-     */
-    limit?: number
-  }
-
-  /**
-   * Doctor without action
-   */
-  export type DoctorDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Doctor
-     */
-    select?: DoctorSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Doctor
-     */
-    omit?: DoctorOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: DoctorInclude<ExtArgs> | null
-  }
-
-
-  /**
    * Model Partner
    */
 
@@ -8675,6 +6504,1077 @@ export namespace Prisma {
 
 
   /**
+   * Model RefreshToken
+   */
+
+  export type AggregateRefreshToken = {
+    _count: RefreshTokenCountAggregateOutputType | null
+    _min: RefreshTokenMinAggregateOutputType | null
+    _max: RefreshTokenMaxAggregateOutputType | null
+  }
+
+  export type RefreshTokenMinAggregateOutputType = {
+    id: string | null
+    token: string | null
+    userId: string | null
+    expiresAt: Date | null
+    createdAt: Date | null
+    isRevoked: boolean | null
+  }
+
+  export type RefreshTokenMaxAggregateOutputType = {
+    id: string | null
+    token: string | null
+    userId: string | null
+    expiresAt: Date | null
+    createdAt: Date | null
+    isRevoked: boolean | null
+  }
+
+  export type RefreshTokenCountAggregateOutputType = {
+    id: number
+    token: number
+    userId: number
+    expiresAt: number
+    createdAt: number
+    isRevoked: number
+    _all: number
+  }
+
+
+  export type RefreshTokenMinAggregateInputType = {
+    id?: true
+    token?: true
+    userId?: true
+    expiresAt?: true
+    createdAt?: true
+    isRevoked?: true
+  }
+
+  export type RefreshTokenMaxAggregateInputType = {
+    id?: true
+    token?: true
+    userId?: true
+    expiresAt?: true
+    createdAt?: true
+    isRevoked?: true
+  }
+
+  export type RefreshTokenCountAggregateInputType = {
+    id?: true
+    token?: true
+    userId?: true
+    expiresAt?: true
+    createdAt?: true
+    isRevoked?: true
+    _all?: true
+  }
+
+  export type RefreshTokenAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which RefreshToken to aggregate.
+     */
+    where?: RefreshTokenWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of RefreshTokens to fetch.
+     */
+    orderBy?: RefreshTokenOrderByWithRelationInput | RefreshTokenOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: RefreshTokenWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` RefreshTokens from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` RefreshTokens.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned RefreshTokens
+    **/
+    _count?: true | RefreshTokenCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: RefreshTokenMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: RefreshTokenMaxAggregateInputType
+  }
+
+  export type GetRefreshTokenAggregateType<T extends RefreshTokenAggregateArgs> = {
+        [P in keyof T & keyof AggregateRefreshToken]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateRefreshToken[P]>
+      : GetScalarType<T[P], AggregateRefreshToken[P]>
+  }
+
+
+
+
+  export type RefreshTokenGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: RefreshTokenWhereInput
+    orderBy?: RefreshTokenOrderByWithAggregationInput | RefreshTokenOrderByWithAggregationInput[]
+    by: RefreshTokenScalarFieldEnum[] | RefreshTokenScalarFieldEnum
+    having?: RefreshTokenScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: RefreshTokenCountAggregateInputType | true
+    _min?: RefreshTokenMinAggregateInputType
+    _max?: RefreshTokenMaxAggregateInputType
+  }
+
+  export type RefreshTokenGroupByOutputType = {
+    id: string
+    token: string
+    userId: string
+    expiresAt: Date
+    createdAt: Date
+    isRevoked: boolean
+    _count: RefreshTokenCountAggregateOutputType | null
+    _min: RefreshTokenMinAggregateOutputType | null
+    _max: RefreshTokenMaxAggregateOutputType | null
+  }
+
+  type GetRefreshTokenGroupByPayload<T extends RefreshTokenGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<RefreshTokenGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof RefreshTokenGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], RefreshTokenGroupByOutputType[P]>
+            : GetScalarType<T[P], RefreshTokenGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type RefreshTokenSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    token?: boolean
+    userId?: boolean
+    expiresAt?: boolean
+    createdAt?: boolean
+    isRevoked?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["refreshToken"]>
+
+  export type RefreshTokenSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    token?: boolean
+    userId?: boolean
+    expiresAt?: boolean
+    createdAt?: boolean
+    isRevoked?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["refreshToken"]>
+
+  export type RefreshTokenSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    token?: boolean
+    userId?: boolean
+    expiresAt?: boolean
+    createdAt?: boolean
+    isRevoked?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["refreshToken"]>
+
+  export type RefreshTokenSelectScalar = {
+    id?: boolean
+    token?: boolean
+    userId?: boolean
+    expiresAt?: boolean
+    createdAt?: boolean
+    isRevoked?: boolean
+  }
+
+  export type RefreshTokenOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "token" | "userId" | "expiresAt" | "createdAt" | "isRevoked", ExtArgs["result"]["refreshToken"]>
+  export type RefreshTokenInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type RefreshTokenIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type RefreshTokenIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $RefreshTokenPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "RefreshToken"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      token: string
+      userId: string
+      expiresAt: Date
+      createdAt: Date
+      isRevoked: boolean
+    }, ExtArgs["result"]["refreshToken"]>
+    composites: {}
+  }
+
+  type RefreshTokenGetPayload<S extends boolean | null | undefined | RefreshTokenDefaultArgs> = $Result.GetResult<Prisma.$RefreshTokenPayload, S>
+
+  type RefreshTokenCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<RefreshTokenFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: RefreshTokenCountAggregateInputType | true
+    }
+
+  export interface RefreshTokenDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['RefreshToken'], meta: { name: 'RefreshToken' } }
+    /**
+     * Find zero or one RefreshToken that matches the filter.
+     * @param {RefreshTokenFindUniqueArgs} args - Arguments to find a RefreshToken
+     * @example
+     * // Get one RefreshToken
+     * const refreshToken = await prisma.refreshToken.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends RefreshTokenFindUniqueArgs>(args: SelectSubset<T, RefreshTokenFindUniqueArgs<ExtArgs>>): Prisma__RefreshTokenClient<$Result.GetResult<Prisma.$RefreshTokenPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one RefreshToken that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {RefreshTokenFindUniqueOrThrowArgs} args - Arguments to find a RefreshToken
+     * @example
+     * // Get one RefreshToken
+     * const refreshToken = await prisma.refreshToken.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends RefreshTokenFindUniqueOrThrowArgs>(args: SelectSubset<T, RefreshTokenFindUniqueOrThrowArgs<ExtArgs>>): Prisma__RefreshTokenClient<$Result.GetResult<Prisma.$RefreshTokenPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first RefreshToken that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RefreshTokenFindFirstArgs} args - Arguments to find a RefreshToken
+     * @example
+     * // Get one RefreshToken
+     * const refreshToken = await prisma.refreshToken.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends RefreshTokenFindFirstArgs>(args?: SelectSubset<T, RefreshTokenFindFirstArgs<ExtArgs>>): Prisma__RefreshTokenClient<$Result.GetResult<Prisma.$RefreshTokenPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first RefreshToken that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RefreshTokenFindFirstOrThrowArgs} args - Arguments to find a RefreshToken
+     * @example
+     * // Get one RefreshToken
+     * const refreshToken = await prisma.refreshToken.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends RefreshTokenFindFirstOrThrowArgs>(args?: SelectSubset<T, RefreshTokenFindFirstOrThrowArgs<ExtArgs>>): Prisma__RefreshTokenClient<$Result.GetResult<Prisma.$RefreshTokenPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more RefreshTokens that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RefreshTokenFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all RefreshTokens
+     * const refreshTokens = await prisma.refreshToken.findMany()
+     * 
+     * // Get first 10 RefreshTokens
+     * const refreshTokens = await prisma.refreshToken.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const refreshTokenWithIdOnly = await prisma.refreshToken.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends RefreshTokenFindManyArgs>(args?: SelectSubset<T, RefreshTokenFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RefreshTokenPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a RefreshToken.
+     * @param {RefreshTokenCreateArgs} args - Arguments to create a RefreshToken.
+     * @example
+     * // Create one RefreshToken
+     * const RefreshToken = await prisma.refreshToken.create({
+     *   data: {
+     *     // ... data to create a RefreshToken
+     *   }
+     * })
+     * 
+     */
+    create<T extends RefreshTokenCreateArgs>(args: SelectSubset<T, RefreshTokenCreateArgs<ExtArgs>>): Prisma__RefreshTokenClient<$Result.GetResult<Prisma.$RefreshTokenPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many RefreshTokens.
+     * @param {RefreshTokenCreateManyArgs} args - Arguments to create many RefreshTokens.
+     * @example
+     * // Create many RefreshTokens
+     * const refreshToken = await prisma.refreshToken.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends RefreshTokenCreateManyArgs>(args?: SelectSubset<T, RefreshTokenCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many RefreshTokens and returns the data saved in the database.
+     * @param {RefreshTokenCreateManyAndReturnArgs} args - Arguments to create many RefreshTokens.
+     * @example
+     * // Create many RefreshTokens
+     * const refreshToken = await prisma.refreshToken.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many RefreshTokens and only return the `id`
+     * const refreshTokenWithIdOnly = await prisma.refreshToken.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends RefreshTokenCreateManyAndReturnArgs>(args?: SelectSubset<T, RefreshTokenCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RefreshTokenPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a RefreshToken.
+     * @param {RefreshTokenDeleteArgs} args - Arguments to delete one RefreshToken.
+     * @example
+     * // Delete one RefreshToken
+     * const RefreshToken = await prisma.refreshToken.delete({
+     *   where: {
+     *     // ... filter to delete one RefreshToken
+     *   }
+     * })
+     * 
+     */
+    delete<T extends RefreshTokenDeleteArgs>(args: SelectSubset<T, RefreshTokenDeleteArgs<ExtArgs>>): Prisma__RefreshTokenClient<$Result.GetResult<Prisma.$RefreshTokenPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one RefreshToken.
+     * @param {RefreshTokenUpdateArgs} args - Arguments to update one RefreshToken.
+     * @example
+     * // Update one RefreshToken
+     * const refreshToken = await prisma.refreshToken.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends RefreshTokenUpdateArgs>(args: SelectSubset<T, RefreshTokenUpdateArgs<ExtArgs>>): Prisma__RefreshTokenClient<$Result.GetResult<Prisma.$RefreshTokenPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more RefreshTokens.
+     * @param {RefreshTokenDeleteManyArgs} args - Arguments to filter RefreshTokens to delete.
+     * @example
+     * // Delete a few RefreshTokens
+     * const { count } = await prisma.refreshToken.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends RefreshTokenDeleteManyArgs>(args?: SelectSubset<T, RefreshTokenDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more RefreshTokens.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RefreshTokenUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many RefreshTokens
+     * const refreshToken = await prisma.refreshToken.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends RefreshTokenUpdateManyArgs>(args: SelectSubset<T, RefreshTokenUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more RefreshTokens and returns the data updated in the database.
+     * @param {RefreshTokenUpdateManyAndReturnArgs} args - Arguments to update many RefreshTokens.
+     * @example
+     * // Update many RefreshTokens
+     * const refreshToken = await prisma.refreshToken.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more RefreshTokens and only return the `id`
+     * const refreshTokenWithIdOnly = await prisma.refreshToken.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends RefreshTokenUpdateManyAndReturnArgs>(args: SelectSubset<T, RefreshTokenUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RefreshTokenPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one RefreshToken.
+     * @param {RefreshTokenUpsertArgs} args - Arguments to update or create a RefreshToken.
+     * @example
+     * // Update or create a RefreshToken
+     * const refreshToken = await prisma.refreshToken.upsert({
+     *   create: {
+     *     // ... data to create a RefreshToken
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the RefreshToken we want to update
+     *   }
+     * })
+     */
+    upsert<T extends RefreshTokenUpsertArgs>(args: SelectSubset<T, RefreshTokenUpsertArgs<ExtArgs>>): Prisma__RefreshTokenClient<$Result.GetResult<Prisma.$RefreshTokenPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of RefreshTokens.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RefreshTokenCountArgs} args - Arguments to filter RefreshTokens to count.
+     * @example
+     * // Count the number of RefreshTokens
+     * const count = await prisma.refreshToken.count({
+     *   where: {
+     *     // ... the filter for the RefreshTokens we want to count
+     *   }
+     * })
+    **/
+    count<T extends RefreshTokenCountArgs>(
+      args?: Subset<T, RefreshTokenCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], RefreshTokenCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a RefreshToken.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RefreshTokenAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends RefreshTokenAggregateArgs>(args: Subset<T, RefreshTokenAggregateArgs>): Prisma.PrismaPromise<GetRefreshTokenAggregateType<T>>
+
+    /**
+     * Group by RefreshToken.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RefreshTokenGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends RefreshTokenGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: RefreshTokenGroupByArgs['orderBy'] }
+        : { orderBy?: RefreshTokenGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, RefreshTokenGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetRefreshTokenGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the RefreshToken model
+   */
+  readonly fields: RefreshTokenFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for RefreshToken.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__RefreshTokenClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the RefreshToken model
+   */
+  interface RefreshTokenFieldRefs {
+    readonly id: FieldRef<"RefreshToken", 'String'>
+    readonly token: FieldRef<"RefreshToken", 'String'>
+    readonly userId: FieldRef<"RefreshToken", 'String'>
+    readonly expiresAt: FieldRef<"RefreshToken", 'DateTime'>
+    readonly createdAt: FieldRef<"RefreshToken", 'DateTime'>
+    readonly isRevoked: FieldRef<"RefreshToken", 'Boolean'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * RefreshToken findUnique
+   */
+  export type RefreshTokenFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RefreshToken
+     */
+    select?: RefreshTokenSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RefreshToken
+     */
+    omit?: RefreshTokenOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RefreshTokenInclude<ExtArgs> | null
+    /**
+     * Filter, which RefreshToken to fetch.
+     */
+    where: RefreshTokenWhereUniqueInput
+  }
+
+  /**
+   * RefreshToken findUniqueOrThrow
+   */
+  export type RefreshTokenFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RefreshToken
+     */
+    select?: RefreshTokenSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RefreshToken
+     */
+    omit?: RefreshTokenOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RefreshTokenInclude<ExtArgs> | null
+    /**
+     * Filter, which RefreshToken to fetch.
+     */
+    where: RefreshTokenWhereUniqueInput
+  }
+
+  /**
+   * RefreshToken findFirst
+   */
+  export type RefreshTokenFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RefreshToken
+     */
+    select?: RefreshTokenSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RefreshToken
+     */
+    omit?: RefreshTokenOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RefreshTokenInclude<ExtArgs> | null
+    /**
+     * Filter, which RefreshToken to fetch.
+     */
+    where?: RefreshTokenWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of RefreshTokens to fetch.
+     */
+    orderBy?: RefreshTokenOrderByWithRelationInput | RefreshTokenOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for RefreshTokens.
+     */
+    cursor?: RefreshTokenWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` RefreshTokens from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` RefreshTokens.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of RefreshTokens.
+     */
+    distinct?: RefreshTokenScalarFieldEnum | RefreshTokenScalarFieldEnum[]
+  }
+
+  /**
+   * RefreshToken findFirstOrThrow
+   */
+  export type RefreshTokenFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RefreshToken
+     */
+    select?: RefreshTokenSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RefreshToken
+     */
+    omit?: RefreshTokenOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RefreshTokenInclude<ExtArgs> | null
+    /**
+     * Filter, which RefreshToken to fetch.
+     */
+    where?: RefreshTokenWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of RefreshTokens to fetch.
+     */
+    orderBy?: RefreshTokenOrderByWithRelationInput | RefreshTokenOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for RefreshTokens.
+     */
+    cursor?: RefreshTokenWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` RefreshTokens from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` RefreshTokens.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of RefreshTokens.
+     */
+    distinct?: RefreshTokenScalarFieldEnum | RefreshTokenScalarFieldEnum[]
+  }
+
+  /**
+   * RefreshToken findMany
+   */
+  export type RefreshTokenFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RefreshToken
+     */
+    select?: RefreshTokenSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RefreshToken
+     */
+    omit?: RefreshTokenOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RefreshTokenInclude<ExtArgs> | null
+    /**
+     * Filter, which RefreshTokens to fetch.
+     */
+    where?: RefreshTokenWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of RefreshTokens to fetch.
+     */
+    orderBy?: RefreshTokenOrderByWithRelationInput | RefreshTokenOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing RefreshTokens.
+     */
+    cursor?: RefreshTokenWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` RefreshTokens from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` RefreshTokens.
+     */
+    skip?: number
+    distinct?: RefreshTokenScalarFieldEnum | RefreshTokenScalarFieldEnum[]
+  }
+
+  /**
+   * RefreshToken create
+   */
+  export type RefreshTokenCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RefreshToken
+     */
+    select?: RefreshTokenSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RefreshToken
+     */
+    omit?: RefreshTokenOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RefreshTokenInclude<ExtArgs> | null
+    /**
+     * The data needed to create a RefreshToken.
+     */
+    data: XOR<RefreshTokenCreateInput, RefreshTokenUncheckedCreateInput>
+  }
+
+  /**
+   * RefreshToken createMany
+   */
+  export type RefreshTokenCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many RefreshTokens.
+     */
+    data: RefreshTokenCreateManyInput | RefreshTokenCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * RefreshToken createManyAndReturn
+   */
+  export type RefreshTokenCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RefreshToken
+     */
+    select?: RefreshTokenSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the RefreshToken
+     */
+    omit?: RefreshTokenOmit<ExtArgs> | null
+    /**
+     * The data used to create many RefreshTokens.
+     */
+    data: RefreshTokenCreateManyInput | RefreshTokenCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RefreshTokenIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * RefreshToken update
+   */
+  export type RefreshTokenUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RefreshToken
+     */
+    select?: RefreshTokenSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RefreshToken
+     */
+    omit?: RefreshTokenOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RefreshTokenInclude<ExtArgs> | null
+    /**
+     * The data needed to update a RefreshToken.
+     */
+    data: XOR<RefreshTokenUpdateInput, RefreshTokenUncheckedUpdateInput>
+    /**
+     * Choose, which RefreshToken to update.
+     */
+    where: RefreshTokenWhereUniqueInput
+  }
+
+  /**
+   * RefreshToken updateMany
+   */
+  export type RefreshTokenUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update RefreshTokens.
+     */
+    data: XOR<RefreshTokenUpdateManyMutationInput, RefreshTokenUncheckedUpdateManyInput>
+    /**
+     * Filter which RefreshTokens to update
+     */
+    where?: RefreshTokenWhereInput
+    /**
+     * Limit how many RefreshTokens to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * RefreshToken updateManyAndReturn
+   */
+  export type RefreshTokenUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RefreshToken
+     */
+    select?: RefreshTokenSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the RefreshToken
+     */
+    omit?: RefreshTokenOmit<ExtArgs> | null
+    /**
+     * The data used to update RefreshTokens.
+     */
+    data: XOR<RefreshTokenUpdateManyMutationInput, RefreshTokenUncheckedUpdateManyInput>
+    /**
+     * Filter which RefreshTokens to update
+     */
+    where?: RefreshTokenWhereInput
+    /**
+     * Limit how many RefreshTokens to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RefreshTokenIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * RefreshToken upsert
+   */
+  export type RefreshTokenUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RefreshToken
+     */
+    select?: RefreshTokenSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RefreshToken
+     */
+    omit?: RefreshTokenOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RefreshTokenInclude<ExtArgs> | null
+    /**
+     * The filter to search for the RefreshToken to update in case it exists.
+     */
+    where: RefreshTokenWhereUniqueInput
+    /**
+     * In case the RefreshToken found by the `where` argument doesn't exist, create a new RefreshToken with this data.
+     */
+    create: XOR<RefreshTokenCreateInput, RefreshTokenUncheckedCreateInput>
+    /**
+     * In case the RefreshToken was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<RefreshTokenUpdateInput, RefreshTokenUncheckedUpdateInput>
+  }
+
+  /**
+   * RefreshToken delete
+   */
+  export type RefreshTokenDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RefreshToken
+     */
+    select?: RefreshTokenSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RefreshToken
+     */
+    omit?: RefreshTokenOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RefreshTokenInclude<ExtArgs> | null
+    /**
+     * Filter which RefreshToken to delete.
+     */
+    where: RefreshTokenWhereUniqueInput
+  }
+
+  /**
+   * RefreshToken deleteMany
+   */
+  export type RefreshTokenDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which RefreshTokens to delete
+     */
+    where?: RefreshTokenWhereInput
+    /**
+     * Limit how many RefreshTokens to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * RefreshToken without action
+   */
+  export type RefreshTokenDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RefreshToken
+     */
+    select?: RefreshTokenSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RefreshToken
+     */
+    omit?: RefreshTokenOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RefreshTokenInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Model Appointment
    */
 
@@ -8920,6 +7820,7 @@ export namespace Prisma {
     notes?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    doctor?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["appointment"]>
 
   export type AppointmentSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -8934,6 +7835,7 @@ export namespace Prisma {
     notes?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    doctor?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["appointment"]>
 
   export type AppointmentSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -8948,6 +7850,7 @@ export namespace Prisma {
     notes?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    doctor?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["appointment"]>
 
   export type AppointmentSelectScalar = {
@@ -8965,10 +7868,21 @@ export namespace Prisma {
   }
 
   export type AppointmentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "patientId" | "doctorId" | "scheduledAt" | "duration" | "type" | "status" | "reason" | "notes" | "createdAt" | "updatedAt", ExtArgs["result"]["appointment"]>
+  export type AppointmentInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    doctor?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type AppointmentIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    doctor?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type AppointmentIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    doctor?: boolean | UserDefaultArgs<ExtArgs>
+  }
 
   export type $AppointmentPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Appointment"
-    objects: {}
+    objects: {
+      doctor: Prisma.$UserPayload<ExtArgs>
+    }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       patientId: string
@@ -9375,6 +8289,7 @@ export namespace Prisma {
    */
   export interface Prisma__AppointmentClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    doctor<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -9432,6 +8347,10 @@ export namespace Prisma {
      */
     omit?: AppointmentOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AppointmentInclude<ExtArgs> | null
+    /**
      * Filter, which Appointment to fetch.
      */
     where: AppointmentWhereUniqueInput
@@ -9450,6 +8369,10 @@ export namespace Prisma {
      */
     omit?: AppointmentOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AppointmentInclude<ExtArgs> | null
+    /**
      * Filter, which Appointment to fetch.
      */
     where: AppointmentWhereUniqueInput
@@ -9467,6 +8390,10 @@ export namespace Prisma {
      * Omit specific fields from the Appointment
      */
     omit?: AppointmentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AppointmentInclude<ExtArgs> | null
     /**
      * Filter, which Appointment to fetch.
      */
@@ -9516,6 +8443,10 @@ export namespace Prisma {
      */
     omit?: AppointmentOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AppointmentInclude<ExtArgs> | null
+    /**
      * Filter, which Appointment to fetch.
      */
     where?: AppointmentWhereInput
@@ -9564,6 +8495,10 @@ export namespace Prisma {
      */
     omit?: AppointmentOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AppointmentInclude<ExtArgs> | null
+    /**
      * Filter, which Appointments to fetch.
      */
     where?: AppointmentWhereInput
@@ -9607,6 +8542,10 @@ export namespace Prisma {
      */
     omit?: AppointmentOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AppointmentInclude<ExtArgs> | null
+    /**
      * The data needed to create a Appointment.
      */
     data: XOR<AppointmentCreateInput, AppointmentUncheckedCreateInput>
@@ -9640,6 +8579,10 @@ export namespace Prisma {
      */
     data: AppointmentCreateManyInput | AppointmentCreateManyInput[]
     skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AppointmentIncludeCreateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -9654,6 +8597,10 @@ export namespace Prisma {
      * Omit specific fields from the Appointment
      */
     omit?: AppointmentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AppointmentInclude<ExtArgs> | null
     /**
      * The data needed to update a Appointment.
      */
@@ -9706,6 +8653,10 @@ export namespace Prisma {
      * Limit how many Appointments to update.
      */
     limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AppointmentIncludeUpdateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -9720,6 +8671,10 @@ export namespace Prisma {
      * Omit specific fields from the Appointment
      */
     omit?: AppointmentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AppointmentInclude<ExtArgs> | null
     /**
      * The filter to search for the Appointment to update in case it exists.
      */
@@ -9746,6 +8701,10 @@ export namespace Prisma {
      * Omit specific fields from the Appointment
      */
     omit?: AppointmentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AppointmentInclude<ExtArgs> | null
     /**
      * Filter which Appointment to delete.
      */
@@ -9778,6 +8737,10 @@ export namespace Prisma {
      * Omit specific fields from the Appointment
      */
     omit?: AppointmentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AppointmentInclude<ExtArgs> | null
   }
 
 
@@ -9801,6 +8764,7 @@ export namespace Prisma {
     password: 'password',
     firstName: 'firstName',
     lastName: 'lastName',
+    middleName: 'middleName',
     phone: 'phone',
     role: 'role',
     status: 'status',
@@ -9813,6 +8777,12 @@ export namespace Prisma {
     city: 'city',
     province: 'province',
     zipCode: 'zipCode',
+    staffNumber: 'staffNumber',
+    department: 'department',
+    position: 'position',
+    hireDate: 'hireDate',
+    salary: 'salary',
+    employmentType: 'employmentType',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt',
     lastLoginAt: 'lastLoginAt',
@@ -9823,16 +8793,26 @@ export namespace Prisma {
   export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
 
 
-  export const RefreshTokenScalarFieldEnum: {
+  export const StaffCredentialsScalarFieldEnum: {
     id: 'id',
-    token: 'token',
     userId: 'userId',
-    expiresAt: 'expiresAt',
+    staffType: 'staffType',
+    licenseNumber: 'licenseNumber',
+    licenseExpiryDate: 'licenseExpiryDate',
+    specialization: 'specialization',
+    subSpecialization: 'subSpecialization',
+    boardCertification: 'boardCertification',
+    education: 'education',
+    yearsOfExperience: 'yearsOfExperience',
+    consultationFee: 'consultationFee',
+    isAvailable: 'isAvailable',
+    workingHours: 'workingHours',
+    hospitalAffiliation: 'hospitalAffiliation',
     createdAt: 'createdAt',
-    isRevoked: 'isRevoked'
+    updatedAt: 'updatedAt'
   };
 
-  export type RefreshTokenScalarFieldEnum = (typeof RefreshTokenScalarFieldEnum)[keyof typeof RefreshTokenScalarFieldEnum]
+  export type StaffCredentialsScalarFieldEnum = (typeof StaffCredentialsScalarFieldEnum)[keyof typeof StaffCredentialsScalarFieldEnum]
 
 
   export const PatientScalarFieldEnum: {
@@ -9853,43 +8833,6 @@ export namespace Prisma {
   export type PatientScalarFieldEnum = (typeof PatientScalarFieldEnum)[keyof typeof PatientScalarFieldEnum]
 
 
-  export const StaffScalarFieldEnum: {
-    id: 'id',
-    userId: 'userId',
-    staffNumber: 'staffNumber',
-    department: 'department',
-    position: 'position',
-    hireDate: 'hireDate',
-    salary: 'salary',
-    createdAt: 'createdAt',
-    updatedAt: 'updatedAt'
-  };
-
-  export type StaffScalarFieldEnum = (typeof StaffScalarFieldEnum)[keyof typeof StaffScalarFieldEnum]
-
-
-  export const DoctorScalarFieldEnum: {
-    id: 'id',
-    userId: 'userId',
-    staffId: 'staffId',
-    doctorNumber: 'doctorNumber',
-    medicalLicense: 'medicalLicense',
-    specialization: 'specialization',
-    subSpecialization: 'subSpecialization',
-    boardCertification: 'boardCertification',
-    yearsOfExperience: 'yearsOfExperience',
-    education: 'education',
-    hospitalAffiliation: 'hospitalAffiliation',
-    consultationFee: 'consultationFee',
-    isAvailable: 'isAvailable',
-    workingHours: 'workingHours',
-    createdAt: 'createdAt',
-    updatedAt: 'updatedAt'
-  };
-
-  export type DoctorScalarFieldEnum = (typeof DoctorScalarFieldEnum)[keyof typeof DoctorScalarFieldEnum]
-
-
   export const PartnerScalarFieldEnum: {
     id: 'id',
     userId: 'userId',
@@ -9903,6 +8846,18 @@ export namespace Prisma {
   };
 
   export type PartnerScalarFieldEnum = (typeof PartnerScalarFieldEnum)[keyof typeof PartnerScalarFieldEnum]
+
+
+  export const RefreshTokenScalarFieldEnum: {
+    id: 'id',
+    token: 'token',
+    userId: 'userId',
+    expiresAt: 'expiresAt',
+    createdAt: 'createdAt',
+    isRevoked: 'isRevoked'
+  };
+
+  export type RefreshTokenScalarFieldEnum = (typeof RefreshTokenScalarFieldEnum)[keyof typeof RefreshTokenScalarFieldEnum]
 
 
   export const AppointmentScalarFieldEnum: {
@@ -9930,6 +8885,14 @@ export namespace Prisma {
   export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
 
 
+  export const NullableJsonNullValueInput: {
+    DbNull: typeof DbNull,
+    JsonNull: typeof JsonNull
+  };
+
+  export type NullableJsonNullValueInput = (typeof NullableJsonNullValueInput)[keyof typeof NullableJsonNullValueInput]
+
+
   export const QueryMode: {
     default: 'default',
     insensitive: 'insensitive'
@@ -9944,6 +8907,15 @@ export namespace Prisma {
   };
 
   export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
+
+
+  export const JsonNullValueFilter: {
+    DbNull: typeof DbNull,
+    JsonNull: typeof JsonNull,
+    AnyNull: typeof AnyNull
+  };
+
+  export type JsonNullValueFilter = (typeof JsonNullValueFilter)[keyof typeof JsonNullValueFilter]
 
 
   /**
@@ -10029,20 +9001,6 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'BloodType'
-   */
-  export type EnumBloodTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BloodType'>
-    
-
-
-  /**
-   * Reference to a field of type 'BloodType[]'
-   */
-  export type ListEnumBloodTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BloodType[]'>
-    
-
-
-  /**
    * Reference to a field of type 'Decimal'
    */
   export type DecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Decimal'>
@@ -10057,6 +9015,34 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'EmploymentType'
+   */
+  export type EnumEmploymentTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'EmploymentType'>
+    
+
+
+  /**
+   * Reference to a field of type 'EmploymentType[]'
+   */
+  export type ListEnumEmploymentTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'EmploymentType[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'StaffType'
+   */
+  export type EnumStaffTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'StaffType'>
+    
+
+
+  /**
+   * Reference to a field of type 'StaffType[]'
+   */
+  export type ListEnumStaffTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'StaffType[]'>
+    
+
+
+  /**
    * Reference to a field of type 'Int'
    */
   export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
@@ -10067,6 +9053,34 @@ export namespace Prisma {
    * Reference to a field of type 'Int[]'
    */
   export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'Json'
+   */
+  export type JsonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Json'>
+    
+
+
+  /**
+   * Reference to a field of type 'QueryMode'
+   */
+  export type EnumQueryModeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'QueryMode'>
+    
+
+
+  /**
+   * Reference to a field of type 'BloodType'
+   */
+  export type EnumBloodTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BloodType'>
+    
+
+
+  /**
+   * Reference to a field of type 'BloodType[]'
+   */
+  export type ListEnumBloodTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BloodType[]'>
     
 
 
@@ -10138,6 +9152,7 @@ export namespace Prisma {
     password?: StringFilter<"User"> | string
     firstName?: StringFilter<"User"> | string
     lastName?: StringFilter<"User"> | string
+    middleName?: StringNullableFilter<"User"> | string | null
     phone?: StringNullableFilter<"User"> | string | null
     role?: EnumUserRoleFilter<"User"> | $Enums.UserRole
     status?: EnumUserStatusFilter<"User"> | $Enums.UserStatus
@@ -10150,6 +9165,12 @@ export namespace Prisma {
     city?: StringNullableFilter<"User"> | string | null
     province?: StringNullableFilter<"User"> | string | null
     zipCode?: StringNullableFilter<"User"> | string | null
+    staffNumber?: StringNullableFilter<"User"> | string | null
+    department?: StringNullableFilter<"User"> | string | null
+    position?: StringNullableFilter<"User"> | string | null
+    hireDate?: DateTimeNullableFilter<"User"> | Date | string | null
+    salary?: DecimalNullableFilter<"User"> | Decimal | DecimalJsLike | number | string | null
+    employmentType?: EnumEmploymentTypeNullableFilter<"User"> | $Enums.EmploymentType | null
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
     lastLoginAt?: DateTimeNullableFilter<"User"> | Date | string | null
@@ -10157,9 +9178,9 @@ export namespace Prisma {
     updatedBy?: StringNullableFilter<"User"> | string | null
     refreshTokens?: RefreshTokenListRelationFilter
     patientProfile?: XOR<PatientNullableScalarRelationFilter, PatientWhereInput> | null
-    staffProfile?: XOR<StaffNullableScalarRelationFilter, StaffWhereInput> | null
     partnerProfile?: XOR<PartnerNullableScalarRelationFilter, PartnerWhereInput> | null
-    doctorProfile?: XOR<DoctorNullableScalarRelationFilter, DoctorWhereInput> | null
+    staffCredentials?: XOR<StaffCredentialsNullableScalarRelationFilter, StaffCredentialsWhereInput> | null
+    appointments?: AppointmentListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -10168,6 +9189,7 @@ export namespace Prisma {
     password?: SortOrder
     firstName?: SortOrder
     lastName?: SortOrder
+    middleName?: SortOrderInput | SortOrder
     phone?: SortOrderInput | SortOrder
     role?: SortOrder
     status?: SortOrder
@@ -10180,6 +9202,12 @@ export namespace Prisma {
     city?: SortOrderInput | SortOrder
     province?: SortOrderInput | SortOrder
     zipCode?: SortOrderInput | SortOrder
+    staffNumber?: SortOrderInput | SortOrder
+    department?: SortOrderInput | SortOrder
+    position?: SortOrderInput | SortOrder
+    hireDate?: SortOrderInput | SortOrder
+    salary?: SortOrderInput | SortOrder
+    employmentType?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     lastLoginAt?: SortOrderInput | SortOrder
@@ -10187,20 +9215,22 @@ export namespace Prisma {
     updatedBy?: SortOrderInput | SortOrder
     refreshTokens?: RefreshTokenOrderByRelationAggregateInput
     patientProfile?: PatientOrderByWithRelationInput
-    staffProfile?: StaffOrderByWithRelationInput
     partnerProfile?: PartnerOrderByWithRelationInput
-    doctorProfile?: DoctorOrderByWithRelationInput
+    staffCredentials?: StaffCredentialsOrderByWithRelationInput
+    appointments?: AppointmentOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
     id?: string
     email?: string
+    staffNumber?: string
     AND?: UserWhereInput | UserWhereInput[]
     OR?: UserWhereInput[]
     NOT?: UserWhereInput | UserWhereInput[]
     password?: StringFilter<"User"> | string
     firstName?: StringFilter<"User"> | string
     lastName?: StringFilter<"User"> | string
+    middleName?: StringNullableFilter<"User"> | string | null
     phone?: StringNullableFilter<"User"> | string | null
     role?: EnumUserRoleFilter<"User"> | $Enums.UserRole
     status?: EnumUserStatusFilter<"User"> | $Enums.UserStatus
@@ -10213,6 +9243,11 @@ export namespace Prisma {
     city?: StringNullableFilter<"User"> | string | null
     province?: StringNullableFilter<"User"> | string | null
     zipCode?: StringNullableFilter<"User"> | string | null
+    department?: StringNullableFilter<"User"> | string | null
+    position?: StringNullableFilter<"User"> | string | null
+    hireDate?: DateTimeNullableFilter<"User"> | Date | string | null
+    salary?: DecimalNullableFilter<"User"> | Decimal | DecimalJsLike | number | string | null
+    employmentType?: EnumEmploymentTypeNullableFilter<"User"> | $Enums.EmploymentType | null
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
     lastLoginAt?: DateTimeNullableFilter<"User"> | Date | string | null
@@ -10220,10 +9255,10 @@ export namespace Prisma {
     updatedBy?: StringNullableFilter<"User"> | string | null
     refreshTokens?: RefreshTokenListRelationFilter
     patientProfile?: XOR<PatientNullableScalarRelationFilter, PatientWhereInput> | null
-    staffProfile?: XOR<StaffNullableScalarRelationFilter, StaffWhereInput> | null
     partnerProfile?: XOR<PartnerNullableScalarRelationFilter, PartnerWhereInput> | null
-    doctorProfile?: XOR<DoctorNullableScalarRelationFilter, DoctorWhereInput> | null
-  }, "id" | "email">
+    staffCredentials?: XOR<StaffCredentialsNullableScalarRelationFilter, StaffCredentialsWhereInput> | null
+    appointments?: AppointmentListRelationFilter
+  }, "id" | "email" | "staffNumber">
 
   export type UserOrderByWithAggregationInput = {
     id?: SortOrder
@@ -10231,6 +9266,7 @@ export namespace Prisma {
     password?: SortOrder
     firstName?: SortOrder
     lastName?: SortOrder
+    middleName?: SortOrderInput | SortOrder
     phone?: SortOrderInput | SortOrder
     role?: SortOrder
     status?: SortOrder
@@ -10243,14 +9279,22 @@ export namespace Prisma {
     city?: SortOrderInput | SortOrder
     province?: SortOrderInput | SortOrder
     zipCode?: SortOrderInput | SortOrder
+    staffNumber?: SortOrderInput | SortOrder
+    department?: SortOrderInput | SortOrder
+    position?: SortOrderInput | SortOrder
+    hireDate?: SortOrderInput | SortOrder
+    salary?: SortOrderInput | SortOrder
+    employmentType?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     lastLoginAt?: SortOrderInput | SortOrder
     createdBy?: SortOrderInput | SortOrder
     updatedBy?: SortOrderInput | SortOrder
     _count?: UserCountOrderByAggregateInput
+    _avg?: UserAvgOrderByAggregateInput
     _max?: UserMaxOrderByAggregateInput
     _min?: UserMinOrderByAggregateInput
+    _sum?: UserSumOrderByAggregateInput
   }
 
   export type UserScalarWhereWithAggregatesInput = {
@@ -10262,6 +9306,7 @@ export namespace Prisma {
     password?: StringWithAggregatesFilter<"User"> | string
     firstName?: StringWithAggregatesFilter<"User"> | string
     lastName?: StringWithAggregatesFilter<"User"> | string
+    middleName?: StringNullableWithAggregatesFilter<"User"> | string | null
     phone?: StringNullableWithAggregatesFilter<"User"> | string | null
     role?: EnumUserRoleWithAggregatesFilter<"User"> | $Enums.UserRole
     status?: EnumUserStatusWithAggregatesFilter<"User"> | $Enums.UserStatus
@@ -10274,6 +9319,12 @@ export namespace Prisma {
     city?: StringNullableWithAggregatesFilter<"User"> | string | null
     province?: StringNullableWithAggregatesFilter<"User"> | string | null
     zipCode?: StringNullableWithAggregatesFilter<"User"> | string | null
+    staffNumber?: StringNullableWithAggregatesFilter<"User"> | string | null
+    department?: StringNullableWithAggregatesFilter<"User"> | string | null
+    position?: StringNullableWithAggregatesFilter<"User"> | string | null
+    hireDate?: DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
+    salary?: DecimalNullableWithAggregatesFilter<"User"> | Decimal | DecimalJsLike | number | string | null
+    employmentType?: EnumEmploymentTypeNullableWithAggregatesFilter<"User"> | $Enums.EmploymentType | null
     createdAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
     lastLoginAt?: DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
@@ -10281,64 +9332,116 @@ export namespace Prisma {
     updatedBy?: StringNullableWithAggregatesFilter<"User"> | string | null
   }
 
-  export type RefreshTokenWhereInput = {
-    AND?: RefreshTokenWhereInput | RefreshTokenWhereInput[]
-    OR?: RefreshTokenWhereInput[]
-    NOT?: RefreshTokenWhereInput | RefreshTokenWhereInput[]
-    id?: StringFilter<"RefreshToken"> | string
-    token?: StringFilter<"RefreshToken"> | string
-    userId?: StringFilter<"RefreshToken"> | string
-    expiresAt?: DateTimeFilter<"RefreshToken"> | Date | string
-    createdAt?: DateTimeFilter<"RefreshToken"> | Date | string
-    isRevoked?: BoolFilter<"RefreshToken"> | boolean
+  export type StaffCredentialsWhereInput = {
+    AND?: StaffCredentialsWhereInput | StaffCredentialsWhereInput[]
+    OR?: StaffCredentialsWhereInput[]
+    NOT?: StaffCredentialsWhereInput | StaffCredentialsWhereInput[]
+    id?: StringFilter<"StaffCredentials"> | string
+    userId?: StringFilter<"StaffCredentials"> | string
+    staffType?: EnumStaffTypeFilter<"StaffCredentials"> | $Enums.StaffType
+    licenseNumber?: StringNullableFilter<"StaffCredentials"> | string | null
+    licenseExpiryDate?: DateTimeNullableFilter<"StaffCredentials"> | Date | string | null
+    specialization?: StringNullableFilter<"StaffCredentials"> | string | null
+    subSpecialization?: StringNullableFilter<"StaffCredentials"> | string | null
+    boardCertification?: StringNullableListFilter<"StaffCredentials">
+    education?: StringNullableFilter<"StaffCredentials"> | string | null
+    yearsOfExperience?: IntNullableFilter<"StaffCredentials"> | number | null
+    consultationFee?: DecimalNullableFilter<"StaffCredentials"> | Decimal | DecimalJsLike | number | string | null
+    isAvailable?: BoolFilter<"StaffCredentials"> | boolean
+    workingHours?: JsonNullableFilter<"StaffCredentials">
+    hospitalAffiliation?: StringNullableFilter<"StaffCredentials"> | string | null
+    createdAt?: DateTimeFilter<"StaffCredentials"> | Date | string
+    updatedAt?: DateTimeFilter<"StaffCredentials"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }
 
-  export type RefreshTokenOrderByWithRelationInput = {
+  export type StaffCredentialsOrderByWithRelationInput = {
     id?: SortOrder
-    token?: SortOrder
     userId?: SortOrder
-    expiresAt?: SortOrder
+    staffType?: SortOrder
+    licenseNumber?: SortOrderInput | SortOrder
+    licenseExpiryDate?: SortOrderInput | SortOrder
+    specialization?: SortOrderInput | SortOrder
+    subSpecialization?: SortOrderInput | SortOrder
+    boardCertification?: SortOrder
+    education?: SortOrderInput | SortOrder
+    yearsOfExperience?: SortOrderInput | SortOrder
+    consultationFee?: SortOrderInput | SortOrder
+    isAvailable?: SortOrder
+    workingHours?: SortOrderInput | SortOrder
+    hospitalAffiliation?: SortOrderInput | SortOrder
     createdAt?: SortOrder
-    isRevoked?: SortOrder
+    updatedAt?: SortOrder
     user?: UserOrderByWithRelationInput
   }
 
-  export type RefreshTokenWhereUniqueInput = Prisma.AtLeast<{
+  export type StaffCredentialsWhereUniqueInput = Prisma.AtLeast<{
     id?: string
-    token?: string
-    AND?: RefreshTokenWhereInput | RefreshTokenWhereInput[]
-    OR?: RefreshTokenWhereInput[]
-    NOT?: RefreshTokenWhereInput | RefreshTokenWhereInput[]
-    userId?: StringFilter<"RefreshToken"> | string
-    expiresAt?: DateTimeFilter<"RefreshToken"> | Date | string
-    createdAt?: DateTimeFilter<"RefreshToken"> | Date | string
-    isRevoked?: BoolFilter<"RefreshToken"> | boolean
+    userId?: string
+    AND?: StaffCredentialsWhereInput | StaffCredentialsWhereInput[]
+    OR?: StaffCredentialsWhereInput[]
+    NOT?: StaffCredentialsWhereInput | StaffCredentialsWhereInput[]
+    staffType?: EnumStaffTypeFilter<"StaffCredentials"> | $Enums.StaffType
+    licenseNumber?: StringNullableFilter<"StaffCredentials"> | string | null
+    licenseExpiryDate?: DateTimeNullableFilter<"StaffCredentials"> | Date | string | null
+    specialization?: StringNullableFilter<"StaffCredentials"> | string | null
+    subSpecialization?: StringNullableFilter<"StaffCredentials"> | string | null
+    boardCertification?: StringNullableListFilter<"StaffCredentials">
+    education?: StringNullableFilter<"StaffCredentials"> | string | null
+    yearsOfExperience?: IntNullableFilter<"StaffCredentials"> | number | null
+    consultationFee?: DecimalNullableFilter<"StaffCredentials"> | Decimal | DecimalJsLike | number | string | null
+    isAvailable?: BoolFilter<"StaffCredentials"> | boolean
+    workingHours?: JsonNullableFilter<"StaffCredentials">
+    hospitalAffiliation?: StringNullableFilter<"StaffCredentials"> | string | null
+    createdAt?: DateTimeFilter<"StaffCredentials"> | Date | string
+    updatedAt?: DateTimeFilter<"StaffCredentials"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
-  }, "id" | "token">
+  }, "id" | "userId">
 
-  export type RefreshTokenOrderByWithAggregationInput = {
+  export type StaffCredentialsOrderByWithAggregationInput = {
     id?: SortOrder
-    token?: SortOrder
     userId?: SortOrder
-    expiresAt?: SortOrder
+    staffType?: SortOrder
+    licenseNumber?: SortOrderInput | SortOrder
+    licenseExpiryDate?: SortOrderInput | SortOrder
+    specialization?: SortOrderInput | SortOrder
+    subSpecialization?: SortOrderInput | SortOrder
+    boardCertification?: SortOrder
+    education?: SortOrderInput | SortOrder
+    yearsOfExperience?: SortOrderInput | SortOrder
+    consultationFee?: SortOrderInput | SortOrder
+    isAvailable?: SortOrder
+    workingHours?: SortOrderInput | SortOrder
+    hospitalAffiliation?: SortOrderInput | SortOrder
     createdAt?: SortOrder
-    isRevoked?: SortOrder
-    _count?: RefreshTokenCountOrderByAggregateInput
-    _max?: RefreshTokenMaxOrderByAggregateInput
-    _min?: RefreshTokenMinOrderByAggregateInput
+    updatedAt?: SortOrder
+    _count?: StaffCredentialsCountOrderByAggregateInput
+    _avg?: StaffCredentialsAvgOrderByAggregateInput
+    _max?: StaffCredentialsMaxOrderByAggregateInput
+    _min?: StaffCredentialsMinOrderByAggregateInput
+    _sum?: StaffCredentialsSumOrderByAggregateInput
   }
 
-  export type RefreshTokenScalarWhereWithAggregatesInput = {
-    AND?: RefreshTokenScalarWhereWithAggregatesInput | RefreshTokenScalarWhereWithAggregatesInput[]
-    OR?: RefreshTokenScalarWhereWithAggregatesInput[]
-    NOT?: RefreshTokenScalarWhereWithAggregatesInput | RefreshTokenScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"RefreshToken"> | string
-    token?: StringWithAggregatesFilter<"RefreshToken"> | string
-    userId?: StringWithAggregatesFilter<"RefreshToken"> | string
-    expiresAt?: DateTimeWithAggregatesFilter<"RefreshToken"> | Date | string
-    createdAt?: DateTimeWithAggregatesFilter<"RefreshToken"> | Date | string
-    isRevoked?: BoolWithAggregatesFilter<"RefreshToken"> | boolean
+  export type StaffCredentialsScalarWhereWithAggregatesInput = {
+    AND?: StaffCredentialsScalarWhereWithAggregatesInput | StaffCredentialsScalarWhereWithAggregatesInput[]
+    OR?: StaffCredentialsScalarWhereWithAggregatesInput[]
+    NOT?: StaffCredentialsScalarWhereWithAggregatesInput | StaffCredentialsScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"StaffCredentials"> | string
+    userId?: StringWithAggregatesFilter<"StaffCredentials"> | string
+    staffType?: EnumStaffTypeWithAggregatesFilter<"StaffCredentials"> | $Enums.StaffType
+    licenseNumber?: StringNullableWithAggregatesFilter<"StaffCredentials"> | string | null
+    licenseExpiryDate?: DateTimeNullableWithAggregatesFilter<"StaffCredentials"> | Date | string | null
+    specialization?: StringNullableWithAggregatesFilter<"StaffCredentials"> | string | null
+    subSpecialization?: StringNullableWithAggregatesFilter<"StaffCredentials"> | string | null
+    boardCertification?: StringNullableListFilter<"StaffCredentials">
+    education?: StringNullableWithAggregatesFilter<"StaffCredentials"> | string | null
+    yearsOfExperience?: IntNullableWithAggregatesFilter<"StaffCredentials"> | number | null
+    consultationFee?: DecimalNullableWithAggregatesFilter<"StaffCredentials"> | Decimal | DecimalJsLike | number | string | null
+    isAvailable?: BoolWithAggregatesFilter<"StaffCredentials"> | boolean
+    workingHours?: JsonNullableWithAggregatesFilter<"StaffCredentials">
+    hospitalAffiliation?: StringNullableWithAggregatesFilter<"StaffCredentials"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"StaffCredentials"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"StaffCredentials"> | Date | string
   }
 
   export type PatientWhereInput = {
@@ -10431,201 +9534,6 @@ export namespace Prisma {
     updatedAt?: DateTimeWithAggregatesFilter<"Patient"> | Date | string
   }
 
-  export type StaffWhereInput = {
-    AND?: StaffWhereInput | StaffWhereInput[]
-    OR?: StaffWhereInput[]
-    NOT?: StaffWhereInput | StaffWhereInput[]
-    id?: StringFilter<"Staff"> | string
-    userId?: StringFilter<"Staff"> | string
-    staffNumber?: StringFilter<"Staff"> | string
-    department?: StringNullableFilter<"Staff"> | string | null
-    position?: StringNullableFilter<"Staff"> | string | null
-    hireDate?: DateTimeNullableFilter<"Staff"> | Date | string | null
-    salary?: DecimalNullableFilter<"Staff"> | Decimal | DecimalJsLike | number | string | null
-    createdAt?: DateTimeFilter<"Staff"> | Date | string
-    updatedAt?: DateTimeFilter<"Staff"> | Date | string
-    user?: XOR<UserScalarRelationFilter, UserWhereInput>
-    doctorProfile?: XOR<DoctorNullableScalarRelationFilter, DoctorWhereInput> | null
-  }
-
-  export type StaffOrderByWithRelationInput = {
-    id?: SortOrder
-    userId?: SortOrder
-    staffNumber?: SortOrder
-    department?: SortOrderInput | SortOrder
-    position?: SortOrderInput | SortOrder
-    hireDate?: SortOrderInput | SortOrder
-    salary?: SortOrderInput | SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    user?: UserOrderByWithRelationInput
-    doctorProfile?: DoctorOrderByWithRelationInput
-  }
-
-  export type StaffWhereUniqueInput = Prisma.AtLeast<{
-    id?: string
-    userId?: string
-    staffNumber?: string
-    AND?: StaffWhereInput | StaffWhereInput[]
-    OR?: StaffWhereInput[]
-    NOT?: StaffWhereInput | StaffWhereInput[]
-    department?: StringNullableFilter<"Staff"> | string | null
-    position?: StringNullableFilter<"Staff"> | string | null
-    hireDate?: DateTimeNullableFilter<"Staff"> | Date | string | null
-    salary?: DecimalNullableFilter<"Staff"> | Decimal | DecimalJsLike | number | string | null
-    createdAt?: DateTimeFilter<"Staff"> | Date | string
-    updatedAt?: DateTimeFilter<"Staff"> | Date | string
-    user?: XOR<UserScalarRelationFilter, UserWhereInput>
-    doctorProfile?: XOR<DoctorNullableScalarRelationFilter, DoctorWhereInput> | null
-  }, "id" | "userId" | "staffNumber">
-
-  export type StaffOrderByWithAggregationInput = {
-    id?: SortOrder
-    userId?: SortOrder
-    staffNumber?: SortOrder
-    department?: SortOrderInput | SortOrder
-    position?: SortOrderInput | SortOrder
-    hireDate?: SortOrderInput | SortOrder
-    salary?: SortOrderInput | SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    _count?: StaffCountOrderByAggregateInput
-    _avg?: StaffAvgOrderByAggregateInput
-    _max?: StaffMaxOrderByAggregateInput
-    _min?: StaffMinOrderByAggregateInput
-    _sum?: StaffSumOrderByAggregateInput
-  }
-
-  export type StaffScalarWhereWithAggregatesInput = {
-    AND?: StaffScalarWhereWithAggregatesInput | StaffScalarWhereWithAggregatesInput[]
-    OR?: StaffScalarWhereWithAggregatesInput[]
-    NOT?: StaffScalarWhereWithAggregatesInput | StaffScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"Staff"> | string
-    userId?: StringWithAggregatesFilter<"Staff"> | string
-    staffNumber?: StringWithAggregatesFilter<"Staff"> | string
-    department?: StringNullableWithAggregatesFilter<"Staff"> | string | null
-    position?: StringNullableWithAggregatesFilter<"Staff"> | string | null
-    hireDate?: DateTimeNullableWithAggregatesFilter<"Staff"> | Date | string | null
-    salary?: DecimalNullableWithAggregatesFilter<"Staff"> | Decimal | DecimalJsLike | number | string | null
-    createdAt?: DateTimeWithAggregatesFilter<"Staff"> | Date | string
-    updatedAt?: DateTimeWithAggregatesFilter<"Staff"> | Date | string
-  }
-
-  export type DoctorWhereInput = {
-    AND?: DoctorWhereInput | DoctorWhereInput[]
-    OR?: DoctorWhereInput[]
-    NOT?: DoctorWhereInput | DoctorWhereInput[]
-    id?: StringFilter<"Doctor"> | string
-    userId?: StringFilter<"Doctor"> | string
-    staffId?: StringFilter<"Doctor"> | string
-    doctorNumber?: StringFilter<"Doctor"> | string
-    medicalLicense?: StringFilter<"Doctor"> | string
-    specialization?: StringFilter<"Doctor"> | string
-    subSpecialization?: StringNullableFilter<"Doctor"> | string | null
-    boardCertification?: StringNullableFilter<"Doctor"> | string | null
-    yearsOfExperience?: IntNullableFilter<"Doctor"> | number | null
-    education?: StringNullableFilter<"Doctor"> | string | null
-    hospitalAffiliation?: StringNullableFilter<"Doctor"> | string | null
-    consultationFee?: DecimalNullableFilter<"Doctor"> | Decimal | DecimalJsLike | number | string | null
-    isAvailable?: BoolFilter<"Doctor"> | boolean
-    workingHours?: StringNullableFilter<"Doctor"> | string | null
-    createdAt?: DateTimeFilter<"Doctor"> | Date | string
-    updatedAt?: DateTimeFilter<"Doctor"> | Date | string
-    user?: XOR<UserScalarRelationFilter, UserWhereInput>
-    staff?: XOR<StaffScalarRelationFilter, StaffWhereInput>
-  }
-
-  export type DoctorOrderByWithRelationInput = {
-    id?: SortOrder
-    userId?: SortOrder
-    staffId?: SortOrder
-    doctorNumber?: SortOrder
-    medicalLicense?: SortOrder
-    specialization?: SortOrder
-    subSpecialization?: SortOrderInput | SortOrder
-    boardCertification?: SortOrderInput | SortOrder
-    yearsOfExperience?: SortOrderInput | SortOrder
-    education?: SortOrderInput | SortOrder
-    hospitalAffiliation?: SortOrderInput | SortOrder
-    consultationFee?: SortOrderInput | SortOrder
-    isAvailable?: SortOrder
-    workingHours?: SortOrderInput | SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    user?: UserOrderByWithRelationInput
-    staff?: StaffOrderByWithRelationInput
-  }
-
-  export type DoctorWhereUniqueInput = Prisma.AtLeast<{
-    id?: string
-    userId?: string
-    staffId?: string
-    doctorNumber?: string
-    AND?: DoctorWhereInput | DoctorWhereInput[]
-    OR?: DoctorWhereInput[]
-    NOT?: DoctorWhereInput | DoctorWhereInput[]
-    medicalLicense?: StringFilter<"Doctor"> | string
-    specialization?: StringFilter<"Doctor"> | string
-    subSpecialization?: StringNullableFilter<"Doctor"> | string | null
-    boardCertification?: StringNullableFilter<"Doctor"> | string | null
-    yearsOfExperience?: IntNullableFilter<"Doctor"> | number | null
-    education?: StringNullableFilter<"Doctor"> | string | null
-    hospitalAffiliation?: StringNullableFilter<"Doctor"> | string | null
-    consultationFee?: DecimalNullableFilter<"Doctor"> | Decimal | DecimalJsLike | number | string | null
-    isAvailable?: BoolFilter<"Doctor"> | boolean
-    workingHours?: StringNullableFilter<"Doctor"> | string | null
-    createdAt?: DateTimeFilter<"Doctor"> | Date | string
-    updatedAt?: DateTimeFilter<"Doctor"> | Date | string
-    user?: XOR<UserScalarRelationFilter, UserWhereInput>
-    staff?: XOR<StaffScalarRelationFilter, StaffWhereInput>
-  }, "id" | "userId" | "staffId" | "doctorNumber">
-
-  export type DoctorOrderByWithAggregationInput = {
-    id?: SortOrder
-    userId?: SortOrder
-    staffId?: SortOrder
-    doctorNumber?: SortOrder
-    medicalLicense?: SortOrder
-    specialization?: SortOrder
-    subSpecialization?: SortOrderInput | SortOrder
-    boardCertification?: SortOrderInput | SortOrder
-    yearsOfExperience?: SortOrderInput | SortOrder
-    education?: SortOrderInput | SortOrder
-    hospitalAffiliation?: SortOrderInput | SortOrder
-    consultationFee?: SortOrderInput | SortOrder
-    isAvailable?: SortOrder
-    workingHours?: SortOrderInput | SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    _count?: DoctorCountOrderByAggregateInput
-    _avg?: DoctorAvgOrderByAggregateInput
-    _max?: DoctorMaxOrderByAggregateInput
-    _min?: DoctorMinOrderByAggregateInput
-    _sum?: DoctorSumOrderByAggregateInput
-  }
-
-  export type DoctorScalarWhereWithAggregatesInput = {
-    AND?: DoctorScalarWhereWithAggregatesInput | DoctorScalarWhereWithAggregatesInput[]
-    OR?: DoctorScalarWhereWithAggregatesInput[]
-    NOT?: DoctorScalarWhereWithAggregatesInput | DoctorScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"Doctor"> | string
-    userId?: StringWithAggregatesFilter<"Doctor"> | string
-    staffId?: StringWithAggregatesFilter<"Doctor"> | string
-    doctorNumber?: StringWithAggregatesFilter<"Doctor"> | string
-    medicalLicense?: StringWithAggregatesFilter<"Doctor"> | string
-    specialization?: StringWithAggregatesFilter<"Doctor"> | string
-    subSpecialization?: StringNullableWithAggregatesFilter<"Doctor"> | string | null
-    boardCertification?: StringNullableWithAggregatesFilter<"Doctor"> | string | null
-    yearsOfExperience?: IntNullableWithAggregatesFilter<"Doctor"> | number | null
-    education?: StringNullableWithAggregatesFilter<"Doctor"> | string | null
-    hospitalAffiliation?: StringNullableWithAggregatesFilter<"Doctor"> | string | null
-    consultationFee?: DecimalNullableWithAggregatesFilter<"Doctor"> | Decimal | DecimalJsLike | number | string | null
-    isAvailable?: BoolWithAggregatesFilter<"Doctor"> | boolean
-    workingHours?: StringNullableWithAggregatesFilter<"Doctor"> | string | null
-    createdAt?: DateTimeWithAggregatesFilter<"Doctor"> | Date | string
-    updatedAt?: DateTimeWithAggregatesFilter<"Doctor"> | Date | string
-  }
-
   export type PartnerWhereInput = {
     AND?: PartnerWhereInput | PartnerWhereInput[]
     OR?: PartnerWhereInput[]
@@ -10701,6 +9609,66 @@ export namespace Prisma {
     updatedAt?: DateTimeWithAggregatesFilter<"Partner"> | Date | string
   }
 
+  export type RefreshTokenWhereInput = {
+    AND?: RefreshTokenWhereInput | RefreshTokenWhereInput[]
+    OR?: RefreshTokenWhereInput[]
+    NOT?: RefreshTokenWhereInput | RefreshTokenWhereInput[]
+    id?: StringFilter<"RefreshToken"> | string
+    token?: StringFilter<"RefreshToken"> | string
+    userId?: StringFilter<"RefreshToken"> | string
+    expiresAt?: DateTimeFilter<"RefreshToken"> | Date | string
+    createdAt?: DateTimeFilter<"RefreshToken"> | Date | string
+    isRevoked?: BoolFilter<"RefreshToken"> | boolean
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }
+
+  export type RefreshTokenOrderByWithRelationInput = {
+    id?: SortOrder
+    token?: SortOrder
+    userId?: SortOrder
+    expiresAt?: SortOrder
+    createdAt?: SortOrder
+    isRevoked?: SortOrder
+    user?: UserOrderByWithRelationInput
+  }
+
+  export type RefreshTokenWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    token?: string
+    AND?: RefreshTokenWhereInput | RefreshTokenWhereInput[]
+    OR?: RefreshTokenWhereInput[]
+    NOT?: RefreshTokenWhereInput | RefreshTokenWhereInput[]
+    userId?: StringFilter<"RefreshToken"> | string
+    expiresAt?: DateTimeFilter<"RefreshToken"> | Date | string
+    createdAt?: DateTimeFilter<"RefreshToken"> | Date | string
+    isRevoked?: BoolFilter<"RefreshToken"> | boolean
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }, "id" | "token">
+
+  export type RefreshTokenOrderByWithAggregationInput = {
+    id?: SortOrder
+    token?: SortOrder
+    userId?: SortOrder
+    expiresAt?: SortOrder
+    createdAt?: SortOrder
+    isRevoked?: SortOrder
+    _count?: RefreshTokenCountOrderByAggregateInput
+    _max?: RefreshTokenMaxOrderByAggregateInput
+    _min?: RefreshTokenMinOrderByAggregateInput
+  }
+
+  export type RefreshTokenScalarWhereWithAggregatesInput = {
+    AND?: RefreshTokenScalarWhereWithAggregatesInput | RefreshTokenScalarWhereWithAggregatesInput[]
+    OR?: RefreshTokenScalarWhereWithAggregatesInput[]
+    NOT?: RefreshTokenScalarWhereWithAggregatesInput | RefreshTokenScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"RefreshToken"> | string
+    token?: StringWithAggregatesFilter<"RefreshToken"> | string
+    userId?: StringWithAggregatesFilter<"RefreshToken"> | string
+    expiresAt?: DateTimeWithAggregatesFilter<"RefreshToken"> | Date | string
+    createdAt?: DateTimeWithAggregatesFilter<"RefreshToken"> | Date | string
+    isRevoked?: BoolWithAggregatesFilter<"RefreshToken"> | boolean
+  }
+
   export type AppointmentWhereInput = {
     AND?: AppointmentWhereInput | AppointmentWhereInput[]
     OR?: AppointmentWhereInput[]
@@ -10716,6 +9684,7 @@ export namespace Prisma {
     notes?: StringNullableFilter<"Appointment"> | string | null
     createdAt?: DateTimeFilter<"Appointment"> | Date | string
     updatedAt?: DateTimeFilter<"Appointment"> | Date | string
+    doctor?: XOR<UserScalarRelationFilter, UserWhereInput>
   }
 
   export type AppointmentOrderByWithRelationInput = {
@@ -10730,6 +9699,7 @@ export namespace Prisma {
     notes?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    doctor?: UserOrderByWithRelationInput
   }
 
   export type AppointmentWhereUniqueInput = Prisma.AtLeast<{
@@ -10747,6 +9717,7 @@ export namespace Prisma {
     notes?: StringNullableFilter<"Appointment"> | string | null
     createdAt?: DateTimeFilter<"Appointment"> | Date | string
     updatedAt?: DateTimeFilter<"Appointment"> | Date | string
+    doctor?: XOR<UserScalarRelationFilter, UserWhereInput>
   }, "id">
 
   export type AppointmentOrderByWithAggregationInput = {
@@ -10791,6 +9762,7 @@ export namespace Prisma {
     password: string
     firstName: string
     lastName: string
+    middleName?: string | null
     phone?: string | null
     role?: $Enums.UserRole
     status?: $Enums.UserStatus
@@ -10803,6 +9775,12 @@ export namespace Prisma {
     city?: string | null
     province?: string | null
     zipCode?: string | null
+    staffNumber?: string | null
+    department?: string | null
+    position?: string | null
+    hireDate?: Date | string | null
+    salary?: Decimal | DecimalJsLike | number | string | null
+    employmentType?: $Enums.EmploymentType | null
     createdAt?: Date | string
     updatedAt?: Date | string
     lastLoginAt?: Date | string | null
@@ -10810,9 +9788,9 @@ export namespace Prisma {
     updatedBy?: string | null
     refreshTokens?: RefreshTokenCreateNestedManyWithoutUserInput
     patientProfile?: PatientCreateNestedOneWithoutUserInput
-    staffProfile?: StaffCreateNestedOneWithoutUserInput
     partnerProfile?: PartnerCreateNestedOneWithoutUserInput
-    doctorProfile?: DoctorCreateNestedOneWithoutUserInput
+    staffCredentials?: StaffCredentialsCreateNestedOneWithoutUserInput
+    appointments?: AppointmentCreateNestedManyWithoutDoctorInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -10821,6 +9799,7 @@ export namespace Prisma {
     password: string
     firstName: string
     lastName: string
+    middleName?: string | null
     phone?: string | null
     role?: $Enums.UserRole
     status?: $Enums.UserStatus
@@ -10833,6 +9812,12 @@ export namespace Prisma {
     city?: string | null
     province?: string | null
     zipCode?: string | null
+    staffNumber?: string | null
+    department?: string | null
+    position?: string | null
+    hireDate?: Date | string | null
+    salary?: Decimal | DecimalJsLike | number | string | null
+    employmentType?: $Enums.EmploymentType | null
     createdAt?: Date | string
     updatedAt?: Date | string
     lastLoginAt?: Date | string | null
@@ -10840,9 +9825,9 @@ export namespace Prisma {
     updatedBy?: string | null
     refreshTokens?: RefreshTokenUncheckedCreateNestedManyWithoutUserInput
     patientProfile?: PatientUncheckedCreateNestedOneWithoutUserInput
-    staffProfile?: StaffUncheckedCreateNestedOneWithoutUserInput
     partnerProfile?: PartnerUncheckedCreateNestedOneWithoutUserInput
-    doctorProfile?: DoctorUncheckedCreateNestedOneWithoutUserInput
+    staffCredentials?: StaffCredentialsUncheckedCreateNestedOneWithoutUserInput
+    appointments?: AppointmentUncheckedCreateNestedManyWithoutDoctorInput
   }
 
   export type UserUpdateInput = {
@@ -10851,6 +9836,7 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: StringFieldUpdateOperationsInput | string
+    middleName?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     status?: EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
@@ -10863,6 +9849,12 @@ export namespace Prisma {
     city?: NullableStringFieldUpdateOperationsInput | string | null
     province?: NullableStringFieldUpdateOperationsInput | string | null
     zipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    staffNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    department?: NullableStringFieldUpdateOperationsInput | string | null
+    position?: NullableStringFieldUpdateOperationsInput | string | null
+    hireDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    salary?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    employmentType?: NullableEnumEmploymentTypeFieldUpdateOperationsInput | $Enums.EmploymentType | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -10870,9 +9862,9 @@ export namespace Prisma {
     updatedBy?: NullableStringFieldUpdateOperationsInput | string | null
     refreshTokens?: RefreshTokenUpdateManyWithoutUserNestedInput
     patientProfile?: PatientUpdateOneWithoutUserNestedInput
-    staffProfile?: StaffUpdateOneWithoutUserNestedInput
     partnerProfile?: PartnerUpdateOneWithoutUserNestedInput
-    doctorProfile?: DoctorUpdateOneWithoutUserNestedInput
+    staffCredentials?: StaffCredentialsUpdateOneWithoutUserNestedInput
+    appointments?: AppointmentUpdateManyWithoutDoctorNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -10881,6 +9873,7 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: StringFieldUpdateOperationsInput | string
+    middleName?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     status?: EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
@@ -10893,6 +9886,12 @@ export namespace Prisma {
     city?: NullableStringFieldUpdateOperationsInput | string | null
     province?: NullableStringFieldUpdateOperationsInput | string | null
     zipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    staffNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    department?: NullableStringFieldUpdateOperationsInput | string | null
+    position?: NullableStringFieldUpdateOperationsInput | string | null
+    hireDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    salary?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    employmentType?: NullableEnumEmploymentTypeFieldUpdateOperationsInput | $Enums.EmploymentType | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -10900,9 +9899,9 @@ export namespace Prisma {
     updatedBy?: NullableStringFieldUpdateOperationsInput | string | null
     refreshTokens?: RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
     patientProfile?: PatientUncheckedUpdateOneWithoutUserNestedInput
-    staffProfile?: StaffUncheckedUpdateOneWithoutUserNestedInput
     partnerProfile?: PartnerUncheckedUpdateOneWithoutUserNestedInput
-    doctorProfile?: DoctorUncheckedUpdateOneWithoutUserNestedInput
+    staffCredentials?: StaffCredentialsUncheckedUpdateOneWithoutUserNestedInput
+    appointments?: AppointmentUncheckedUpdateManyWithoutDoctorNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -10911,6 +9910,7 @@ export namespace Prisma {
     password: string
     firstName: string
     lastName: string
+    middleName?: string | null
     phone?: string | null
     role?: $Enums.UserRole
     status?: $Enums.UserStatus
@@ -10923,6 +9923,12 @@ export namespace Prisma {
     city?: string | null
     province?: string | null
     zipCode?: string | null
+    staffNumber?: string | null
+    department?: string | null
+    position?: string | null
+    hireDate?: Date | string | null
+    salary?: Decimal | DecimalJsLike | number | string | null
+    employmentType?: $Enums.EmploymentType | null
     createdAt?: Date | string
     updatedAt?: Date | string
     lastLoginAt?: Date | string | null
@@ -10936,6 +9942,7 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: StringFieldUpdateOperationsInput | string
+    middleName?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     status?: EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
@@ -10948,6 +9955,12 @@ export namespace Prisma {
     city?: NullableStringFieldUpdateOperationsInput | string | null
     province?: NullableStringFieldUpdateOperationsInput | string | null
     zipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    staffNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    department?: NullableStringFieldUpdateOperationsInput | string | null
+    position?: NullableStringFieldUpdateOperationsInput | string | null
+    hireDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    salary?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    employmentType?: NullableEnumEmploymentTypeFieldUpdateOperationsInput | $Enums.EmploymentType | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -10961,6 +9974,7 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: StringFieldUpdateOperationsInput | string
+    middleName?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     status?: EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
@@ -10973,6 +9987,12 @@ export namespace Prisma {
     city?: NullableStringFieldUpdateOperationsInput | string | null
     province?: NullableStringFieldUpdateOperationsInput | string | null
     zipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    staffNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    department?: NullableStringFieldUpdateOperationsInput | string | null
+    position?: NullableStringFieldUpdateOperationsInput | string | null
+    hireDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    salary?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    employmentType?: NullableEnumEmploymentTypeFieldUpdateOperationsInput | $Enums.EmploymentType | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -10980,66 +10000,136 @@ export namespace Prisma {
     updatedBy?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
-  export type RefreshTokenCreateInput = {
+  export type StaffCredentialsCreateInput = {
     id?: string
-    token: string
-    expiresAt: Date | string
+    staffType: $Enums.StaffType
+    licenseNumber?: string | null
+    licenseExpiryDate?: Date | string | null
+    specialization?: string | null
+    subSpecialization?: string | null
+    boardCertification?: StaffCredentialsCreateboardCertificationInput | string[]
+    education?: string | null
+    yearsOfExperience?: number | null
+    consultationFee?: Decimal | DecimalJsLike | number | string | null
+    isAvailable?: boolean
+    workingHours?: NullableJsonNullValueInput | InputJsonValue
+    hospitalAffiliation?: string | null
     createdAt?: Date | string
-    isRevoked?: boolean
-    user: UserCreateNestedOneWithoutRefreshTokensInput
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutStaffCredentialsInput
   }
 
-  export type RefreshTokenUncheckedCreateInput = {
+  export type StaffCredentialsUncheckedCreateInput = {
     id?: string
-    token: string
     userId: string
-    expiresAt: Date | string
+    staffType: $Enums.StaffType
+    licenseNumber?: string | null
+    licenseExpiryDate?: Date | string | null
+    specialization?: string | null
+    subSpecialization?: string | null
+    boardCertification?: StaffCredentialsCreateboardCertificationInput | string[]
+    education?: string | null
+    yearsOfExperience?: number | null
+    consultationFee?: Decimal | DecimalJsLike | number | string | null
+    isAvailable?: boolean
+    workingHours?: NullableJsonNullValueInput | InputJsonValue
+    hospitalAffiliation?: string | null
     createdAt?: Date | string
-    isRevoked?: boolean
+    updatedAt?: Date | string
   }
 
-  export type RefreshTokenUpdateInput = {
+  export type StaffCredentialsUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    token?: StringFieldUpdateOperationsInput | string
-    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    staffType?: EnumStaffTypeFieldUpdateOperationsInput | $Enums.StaffType
+    licenseNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    licenseExpiryDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    specialization?: NullableStringFieldUpdateOperationsInput | string | null
+    subSpecialization?: NullableStringFieldUpdateOperationsInput | string | null
+    boardCertification?: StaffCredentialsUpdateboardCertificationInput | string[]
+    education?: NullableStringFieldUpdateOperationsInput | string | null
+    yearsOfExperience?: NullableIntFieldUpdateOperationsInput | number | null
+    consultationFee?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    isAvailable?: BoolFieldUpdateOperationsInput | boolean
+    workingHours?: NullableJsonNullValueInput | InputJsonValue
+    hospitalAffiliation?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    isRevoked?: BoolFieldUpdateOperationsInput | boolean
-    user?: UserUpdateOneRequiredWithoutRefreshTokensNestedInput
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutStaffCredentialsNestedInput
   }
 
-  export type RefreshTokenUncheckedUpdateInput = {
+  export type StaffCredentialsUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    token?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
-    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    staffType?: EnumStaffTypeFieldUpdateOperationsInput | $Enums.StaffType
+    licenseNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    licenseExpiryDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    specialization?: NullableStringFieldUpdateOperationsInput | string | null
+    subSpecialization?: NullableStringFieldUpdateOperationsInput | string | null
+    boardCertification?: StaffCredentialsUpdateboardCertificationInput | string[]
+    education?: NullableStringFieldUpdateOperationsInput | string | null
+    yearsOfExperience?: NullableIntFieldUpdateOperationsInput | number | null
+    consultationFee?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    isAvailable?: BoolFieldUpdateOperationsInput | boolean
+    workingHours?: NullableJsonNullValueInput | InputJsonValue
+    hospitalAffiliation?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    isRevoked?: BoolFieldUpdateOperationsInput | boolean
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type RefreshTokenCreateManyInput = {
+  export type StaffCredentialsCreateManyInput = {
     id?: string
-    token: string
     userId: string
-    expiresAt: Date | string
+    staffType: $Enums.StaffType
+    licenseNumber?: string | null
+    licenseExpiryDate?: Date | string | null
+    specialization?: string | null
+    subSpecialization?: string | null
+    boardCertification?: StaffCredentialsCreateboardCertificationInput | string[]
+    education?: string | null
+    yearsOfExperience?: number | null
+    consultationFee?: Decimal | DecimalJsLike | number | string | null
+    isAvailable?: boolean
+    workingHours?: NullableJsonNullValueInput | InputJsonValue
+    hospitalAffiliation?: string | null
     createdAt?: Date | string
-    isRevoked?: boolean
+    updatedAt?: Date | string
   }
 
-  export type RefreshTokenUpdateManyMutationInput = {
+  export type StaffCredentialsUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
-    token?: StringFieldUpdateOperationsInput | string
-    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    staffType?: EnumStaffTypeFieldUpdateOperationsInput | $Enums.StaffType
+    licenseNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    licenseExpiryDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    specialization?: NullableStringFieldUpdateOperationsInput | string | null
+    subSpecialization?: NullableStringFieldUpdateOperationsInput | string | null
+    boardCertification?: StaffCredentialsUpdateboardCertificationInput | string[]
+    education?: NullableStringFieldUpdateOperationsInput | string | null
+    yearsOfExperience?: NullableIntFieldUpdateOperationsInput | number | null
+    consultationFee?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    isAvailable?: BoolFieldUpdateOperationsInput | boolean
+    workingHours?: NullableJsonNullValueInput | InputJsonValue
+    hospitalAffiliation?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    isRevoked?: BoolFieldUpdateOperationsInput | boolean
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type RefreshTokenUncheckedUpdateManyInput = {
+  export type StaffCredentialsUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
-    token?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
-    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    staffType?: EnumStaffTypeFieldUpdateOperationsInput | $Enums.StaffType
+    licenseNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    licenseExpiryDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    specialization?: NullableStringFieldUpdateOperationsInput | string | null
+    subSpecialization?: NullableStringFieldUpdateOperationsInput | string | null
+    boardCertification?: StaffCredentialsUpdateboardCertificationInput | string[]
+    education?: NullableStringFieldUpdateOperationsInput | string | null
+    yearsOfExperience?: NullableIntFieldUpdateOperationsInput | number | null
+    consultationFee?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    isAvailable?: BoolFieldUpdateOperationsInput | boolean
+    workingHours?: NullableJsonNullValueInput | InputJsonValue
+    hospitalAffiliation?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    isRevoked?: BoolFieldUpdateOperationsInput | boolean
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type PatientCreateInput = {
@@ -11146,224 +10236,6 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type StaffCreateInput = {
-    id?: string
-    staffNumber: string
-    department?: string | null
-    position?: string | null
-    hireDate?: Date | string | null
-    salary?: Decimal | DecimalJsLike | number | string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    user: UserCreateNestedOneWithoutStaffProfileInput
-    doctorProfile?: DoctorCreateNestedOneWithoutStaffInput
-  }
-
-  export type StaffUncheckedCreateInput = {
-    id?: string
-    userId: string
-    staffNumber: string
-    department?: string | null
-    position?: string | null
-    hireDate?: Date | string | null
-    salary?: Decimal | DecimalJsLike | number | string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    doctorProfile?: DoctorUncheckedCreateNestedOneWithoutStaffInput
-  }
-
-  export type StaffUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    staffNumber?: StringFieldUpdateOperationsInput | string
-    department?: NullableStringFieldUpdateOperationsInput | string | null
-    position?: NullableStringFieldUpdateOperationsInput | string | null
-    hireDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    salary?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    user?: UserUpdateOneRequiredWithoutStaffProfileNestedInput
-    doctorProfile?: DoctorUpdateOneWithoutStaffNestedInput
-  }
-
-  export type StaffUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
-    staffNumber?: StringFieldUpdateOperationsInput | string
-    department?: NullableStringFieldUpdateOperationsInput | string | null
-    position?: NullableStringFieldUpdateOperationsInput | string | null
-    hireDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    salary?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    doctorProfile?: DoctorUncheckedUpdateOneWithoutStaffNestedInput
-  }
-
-  export type StaffCreateManyInput = {
-    id?: string
-    userId: string
-    staffNumber: string
-    department?: string | null
-    position?: string | null
-    hireDate?: Date | string | null
-    salary?: Decimal | DecimalJsLike | number | string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type StaffUpdateManyMutationInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    staffNumber?: StringFieldUpdateOperationsInput | string
-    department?: NullableStringFieldUpdateOperationsInput | string | null
-    position?: NullableStringFieldUpdateOperationsInput | string | null
-    hireDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    salary?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type StaffUncheckedUpdateManyInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
-    staffNumber?: StringFieldUpdateOperationsInput | string
-    department?: NullableStringFieldUpdateOperationsInput | string | null
-    position?: NullableStringFieldUpdateOperationsInput | string | null
-    hireDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    salary?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type DoctorCreateInput = {
-    id?: string
-    doctorNumber: string
-    medicalLicense: string
-    specialization: string
-    subSpecialization?: string | null
-    boardCertification?: string | null
-    yearsOfExperience?: number | null
-    education?: string | null
-    hospitalAffiliation?: string | null
-    consultationFee?: Decimal | DecimalJsLike | number | string | null
-    isAvailable?: boolean
-    workingHours?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    user: UserCreateNestedOneWithoutDoctorProfileInput
-    staff: StaffCreateNestedOneWithoutDoctorProfileInput
-  }
-
-  export type DoctorUncheckedCreateInput = {
-    id?: string
-    userId: string
-    staffId: string
-    doctorNumber: string
-    medicalLicense: string
-    specialization: string
-    subSpecialization?: string | null
-    boardCertification?: string | null
-    yearsOfExperience?: number | null
-    education?: string | null
-    hospitalAffiliation?: string | null
-    consultationFee?: Decimal | DecimalJsLike | number | string | null
-    isAvailable?: boolean
-    workingHours?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type DoctorUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    doctorNumber?: StringFieldUpdateOperationsInput | string
-    medicalLicense?: StringFieldUpdateOperationsInput | string
-    specialization?: StringFieldUpdateOperationsInput | string
-    subSpecialization?: NullableStringFieldUpdateOperationsInput | string | null
-    boardCertification?: NullableStringFieldUpdateOperationsInput | string | null
-    yearsOfExperience?: NullableIntFieldUpdateOperationsInput | number | null
-    education?: NullableStringFieldUpdateOperationsInput | string | null
-    hospitalAffiliation?: NullableStringFieldUpdateOperationsInput | string | null
-    consultationFee?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
-    isAvailable?: BoolFieldUpdateOperationsInput | boolean
-    workingHours?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    user?: UserUpdateOneRequiredWithoutDoctorProfileNestedInput
-    staff?: StaffUpdateOneRequiredWithoutDoctorProfileNestedInput
-  }
-
-  export type DoctorUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
-    staffId?: StringFieldUpdateOperationsInput | string
-    doctorNumber?: StringFieldUpdateOperationsInput | string
-    medicalLicense?: StringFieldUpdateOperationsInput | string
-    specialization?: StringFieldUpdateOperationsInput | string
-    subSpecialization?: NullableStringFieldUpdateOperationsInput | string | null
-    boardCertification?: NullableStringFieldUpdateOperationsInput | string | null
-    yearsOfExperience?: NullableIntFieldUpdateOperationsInput | number | null
-    education?: NullableStringFieldUpdateOperationsInput | string | null
-    hospitalAffiliation?: NullableStringFieldUpdateOperationsInput | string | null
-    consultationFee?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
-    isAvailable?: BoolFieldUpdateOperationsInput | boolean
-    workingHours?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type DoctorCreateManyInput = {
-    id?: string
-    userId: string
-    staffId: string
-    doctorNumber: string
-    medicalLicense: string
-    specialization: string
-    subSpecialization?: string | null
-    boardCertification?: string | null
-    yearsOfExperience?: number | null
-    education?: string | null
-    hospitalAffiliation?: string | null
-    consultationFee?: Decimal | DecimalJsLike | number | string | null
-    isAvailable?: boolean
-    workingHours?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type DoctorUpdateManyMutationInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    doctorNumber?: StringFieldUpdateOperationsInput | string
-    medicalLicense?: StringFieldUpdateOperationsInput | string
-    specialization?: StringFieldUpdateOperationsInput | string
-    subSpecialization?: NullableStringFieldUpdateOperationsInput | string | null
-    boardCertification?: NullableStringFieldUpdateOperationsInput | string | null
-    yearsOfExperience?: NullableIntFieldUpdateOperationsInput | number | null
-    education?: NullableStringFieldUpdateOperationsInput | string | null
-    hospitalAffiliation?: NullableStringFieldUpdateOperationsInput | string | null
-    consultationFee?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
-    isAvailable?: BoolFieldUpdateOperationsInput | boolean
-    workingHours?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type DoctorUncheckedUpdateManyInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
-    staffId?: StringFieldUpdateOperationsInput | string
-    doctorNumber?: StringFieldUpdateOperationsInput | string
-    medicalLicense?: StringFieldUpdateOperationsInput | string
-    specialization?: StringFieldUpdateOperationsInput | string
-    subSpecialization?: NullableStringFieldUpdateOperationsInput | string | null
-    boardCertification?: NullableStringFieldUpdateOperationsInput | string | null
-    yearsOfExperience?: NullableIntFieldUpdateOperationsInput | number | null
-    education?: NullableStringFieldUpdateOperationsInput | string | null
-    hospitalAffiliation?: NullableStringFieldUpdateOperationsInput | string | null
-    consultationFee?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
-    isAvailable?: BoolFieldUpdateOperationsInput | boolean
-    workingHours?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
   export type PartnerCreateInput = {
     id?: string
     institutionName: string
@@ -11447,10 +10319,71 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type RefreshTokenCreateInput = {
+    id?: string
+    token: string
+    expiresAt: Date | string
+    createdAt?: Date | string
+    isRevoked?: boolean
+    user: UserCreateNestedOneWithoutRefreshTokensInput
+  }
+
+  export type RefreshTokenUncheckedCreateInput = {
+    id?: string
+    token: string
+    userId: string
+    expiresAt: Date | string
+    createdAt?: Date | string
+    isRevoked?: boolean
+  }
+
+  export type RefreshTokenUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    token?: StringFieldUpdateOperationsInput | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isRevoked?: BoolFieldUpdateOperationsInput | boolean
+    user?: UserUpdateOneRequiredWithoutRefreshTokensNestedInput
+  }
+
+  export type RefreshTokenUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    token?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isRevoked?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type RefreshTokenCreateManyInput = {
+    id?: string
+    token: string
+    userId: string
+    expiresAt: Date | string
+    createdAt?: Date | string
+    isRevoked?: boolean
+  }
+
+  export type RefreshTokenUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    token?: StringFieldUpdateOperationsInput | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isRevoked?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type RefreshTokenUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    token?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isRevoked?: BoolFieldUpdateOperationsInput | boolean
+  }
+
   export type AppointmentCreateInput = {
     id?: string
     patientId: string
-    doctorId: string
     scheduledAt: Date | string
     duration: number
     type: $Enums.AppointmentType
@@ -11459,6 +10392,7 @@ export namespace Prisma {
     notes?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    doctor: UserCreateNestedOneWithoutAppointmentsInput
   }
 
   export type AppointmentUncheckedCreateInput = {
@@ -11478,7 +10412,6 @@ export namespace Prisma {
   export type AppointmentUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     patientId?: StringFieldUpdateOperationsInput | string
-    doctorId?: StringFieldUpdateOperationsInput | string
     scheduledAt?: DateTimeFieldUpdateOperationsInput | Date | string
     duration?: IntFieldUpdateOperationsInput | number
     type?: EnumAppointmentTypeFieldUpdateOperationsInput | $Enums.AppointmentType
@@ -11487,6 +10420,7 @@ export namespace Prisma {
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    doctor?: UserUpdateOneRequiredWithoutAppointmentsNestedInput
   }
 
   export type AppointmentUncheckedUpdateInput = {
@@ -11520,7 +10454,6 @@ export namespace Prisma {
   export type AppointmentUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     patientId?: StringFieldUpdateOperationsInput | string
-    doctorId?: StringFieldUpdateOperationsInput | string
     scheduledAt?: DateTimeFieldUpdateOperationsInput | Date | string
     duration?: IntFieldUpdateOperationsInput | number
     type?: EnumAppointmentTypeFieldUpdateOperationsInput | $Enums.AppointmentType
@@ -11612,6 +10545,24 @@ export namespace Prisma {
     not?: NestedEnumGenderNullableFilter<$PrismaModel> | $Enums.Gender | null
   }
 
+  export type DecimalNullableFilter<$PrismaModel = never> = {
+    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel> | null
+    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel> | null
+    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel> | null
+    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    not?: NestedDecimalNullableFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string | null
+  }
+
+  export type EnumEmploymentTypeNullableFilter<$PrismaModel = never> = {
+    equals?: $Enums.EmploymentType | EnumEmploymentTypeFieldRefInput<$PrismaModel> | null
+    in?: $Enums.EmploymentType[] | ListEnumEmploymentTypeFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.EmploymentType[] | ListEnumEmploymentTypeFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumEmploymentTypeNullableFilter<$PrismaModel> | $Enums.EmploymentType | null
+  }
+
   export type DateTimeFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -11634,19 +10585,20 @@ export namespace Prisma {
     isNot?: PatientWhereInput | null
   }
 
-  export type StaffNullableScalarRelationFilter = {
-    is?: StaffWhereInput | null
-    isNot?: StaffWhereInput | null
-  }
-
   export type PartnerNullableScalarRelationFilter = {
     is?: PartnerWhereInput | null
     isNot?: PartnerWhereInput | null
   }
 
-  export type DoctorNullableScalarRelationFilter = {
-    is?: DoctorWhereInput | null
-    isNot?: DoctorWhereInput | null
+  export type StaffCredentialsNullableScalarRelationFilter = {
+    is?: StaffCredentialsWhereInput | null
+    isNot?: StaffCredentialsWhereInput | null
+  }
+
+  export type AppointmentListRelationFilter = {
+    every?: AppointmentWhereInput
+    some?: AppointmentWhereInput
+    none?: AppointmentWhereInput
   }
 
   export type SortOrderInput = {
@@ -11658,12 +10610,17 @@ export namespace Prisma {
     _count?: SortOrder
   }
 
+  export type AppointmentOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
   export type UserCountOrderByAggregateInput = {
     id?: SortOrder
     email?: SortOrder
     password?: SortOrder
     firstName?: SortOrder
     lastName?: SortOrder
+    middleName?: SortOrder
     phone?: SortOrder
     role?: SortOrder
     status?: SortOrder
@@ -11676,11 +10633,21 @@ export namespace Prisma {
     city?: SortOrder
     province?: SortOrder
     zipCode?: SortOrder
+    staffNumber?: SortOrder
+    department?: SortOrder
+    position?: SortOrder
+    hireDate?: SortOrder
+    salary?: SortOrder
+    employmentType?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     lastLoginAt?: SortOrder
     createdBy?: SortOrder
     updatedBy?: SortOrder
+  }
+
+  export type UserAvgOrderByAggregateInput = {
+    salary?: SortOrder
   }
 
   export type UserMaxOrderByAggregateInput = {
@@ -11689,6 +10656,7 @@ export namespace Prisma {
     password?: SortOrder
     firstName?: SortOrder
     lastName?: SortOrder
+    middleName?: SortOrder
     phone?: SortOrder
     role?: SortOrder
     status?: SortOrder
@@ -11701,6 +10669,12 @@ export namespace Prisma {
     city?: SortOrder
     province?: SortOrder
     zipCode?: SortOrder
+    staffNumber?: SortOrder
+    department?: SortOrder
+    position?: SortOrder
+    hireDate?: SortOrder
+    salary?: SortOrder
+    employmentType?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     lastLoginAt?: SortOrder
@@ -11714,6 +10688,7 @@ export namespace Prisma {
     password?: SortOrder
     firstName?: SortOrder
     lastName?: SortOrder
+    middleName?: SortOrder
     phone?: SortOrder
     role?: SortOrder
     status?: SortOrder
@@ -11726,11 +10701,21 @@ export namespace Prisma {
     city?: SortOrder
     province?: SortOrder
     zipCode?: SortOrder
+    staffNumber?: SortOrder
+    department?: SortOrder
+    position?: SortOrder
+    hireDate?: SortOrder
+    salary?: SortOrder
+    employmentType?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     lastLoginAt?: SortOrder
     createdBy?: SortOrder
     updatedBy?: SortOrder
+  }
+
+  export type UserSumOrderByAggregateInput = {
+    salary?: SortOrder
   }
 
   export type StringWithAggregatesFilter<$PrismaModel = never> = {
@@ -11821,6 +10806,32 @@ export namespace Prisma {
     _max?: NestedEnumGenderNullableFilter<$PrismaModel>
   }
 
+  export type DecimalNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel> | null
+    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel> | null
+    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel> | null
+    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    not?: NestedDecimalNullableWithAggregatesFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedDecimalNullableFilter<$PrismaModel>
+    _sum?: NestedDecimalNullableFilter<$PrismaModel>
+    _min?: NestedDecimalNullableFilter<$PrismaModel>
+    _max?: NestedDecimalNullableFilter<$PrismaModel>
+  }
+
+  export type EnumEmploymentTypeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.EmploymentType | EnumEmploymentTypeFieldRefInput<$PrismaModel> | null
+    in?: $Enums.EmploymentType[] | ListEnumEmploymentTypeFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.EmploymentType[] | ListEnumEmploymentTypeFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumEmploymentTypeNullableWithAggregatesFilter<$PrismaModel> | $Enums.EmploymentType | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedEnumEmploymentTypeNullableFilter<$PrismaModel>
+    _max?: NestedEnumEmploymentTypeNullableFilter<$PrismaModel>
+  }
+
   export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -11835,36 +10846,173 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
+  export type EnumStaffTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.StaffType | EnumStaffTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.StaffType[] | ListEnumStaffTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.StaffType[] | ListEnumStaffTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumStaffTypeFilter<$PrismaModel> | $Enums.StaffType
+  }
+
+  export type StringNullableListFilter<$PrismaModel = never> = {
+    equals?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    has?: string | StringFieldRefInput<$PrismaModel> | null
+    hasEvery?: string[] | ListStringFieldRefInput<$PrismaModel>
+    hasSome?: string[] | ListStringFieldRefInput<$PrismaModel>
+    isEmpty?: boolean
+  }
+
+  export type IntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+  export type JsonNullableFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<JsonNullableFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonNullableFilterBase<$PrismaModel>>, 'path'>>,
+        Required<JsonNullableFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<JsonNullableFilterBase<$PrismaModel>>, 'path'>>
+
+  export type JsonNullableFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+  }
+
   export type UserScalarRelationFilter = {
     is?: UserWhereInput
     isNot?: UserWhereInput
   }
 
-  export type RefreshTokenCountOrderByAggregateInput = {
+  export type StaffCredentialsCountOrderByAggregateInput = {
     id?: SortOrder
-    token?: SortOrder
     userId?: SortOrder
-    expiresAt?: SortOrder
+    staffType?: SortOrder
+    licenseNumber?: SortOrder
+    licenseExpiryDate?: SortOrder
+    specialization?: SortOrder
+    subSpecialization?: SortOrder
+    boardCertification?: SortOrder
+    education?: SortOrder
+    yearsOfExperience?: SortOrder
+    consultationFee?: SortOrder
+    isAvailable?: SortOrder
+    workingHours?: SortOrder
+    hospitalAffiliation?: SortOrder
     createdAt?: SortOrder
-    isRevoked?: SortOrder
+    updatedAt?: SortOrder
   }
 
-  export type RefreshTokenMaxOrderByAggregateInput = {
-    id?: SortOrder
-    token?: SortOrder
-    userId?: SortOrder
-    expiresAt?: SortOrder
-    createdAt?: SortOrder
-    isRevoked?: SortOrder
+  export type StaffCredentialsAvgOrderByAggregateInput = {
+    yearsOfExperience?: SortOrder
+    consultationFee?: SortOrder
   }
 
-  export type RefreshTokenMinOrderByAggregateInput = {
+  export type StaffCredentialsMaxOrderByAggregateInput = {
     id?: SortOrder
-    token?: SortOrder
     userId?: SortOrder
-    expiresAt?: SortOrder
+    staffType?: SortOrder
+    licenseNumber?: SortOrder
+    licenseExpiryDate?: SortOrder
+    specialization?: SortOrder
+    subSpecialization?: SortOrder
+    education?: SortOrder
+    yearsOfExperience?: SortOrder
+    consultationFee?: SortOrder
+    isAvailable?: SortOrder
+    hospitalAffiliation?: SortOrder
     createdAt?: SortOrder
-    isRevoked?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type StaffCredentialsMinOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    staffType?: SortOrder
+    licenseNumber?: SortOrder
+    licenseExpiryDate?: SortOrder
+    specialization?: SortOrder
+    subSpecialization?: SortOrder
+    education?: SortOrder
+    yearsOfExperience?: SortOrder
+    consultationFee?: SortOrder
+    isAvailable?: SortOrder
+    hospitalAffiliation?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type StaffCredentialsSumOrderByAggregateInput = {
+    yearsOfExperience?: SortOrder
+    consultationFee?: SortOrder
+  }
+
+  export type EnumStaffTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.StaffType | EnumStaffTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.StaffType[] | ListEnumStaffTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.StaffType[] | ListEnumStaffTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumStaffTypeWithAggregatesFilter<$PrismaModel> | $Enums.StaffType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumStaffTypeFilter<$PrismaModel>
+    _max?: NestedEnumStaffTypeFilter<$PrismaModel>
+  }
+
+  export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
+  }
+  export type JsonNullableWithAggregatesFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>, 'path'>>,
+        Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>, 'path'>>
+
+  export type JsonNullableWithAggregatesFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedJsonNullableFilter<$PrismaModel>
+    _max?: NestedJsonNullableFilter<$PrismaModel>
   }
 
   export type EnumBloodTypeNullableFilter<$PrismaModel = never> = {
@@ -11929,176 +11077,6 @@ export namespace Prisma {
     _max?: NestedEnumBloodTypeNullableFilter<$PrismaModel>
   }
 
-  export type DecimalNullableFilter<$PrismaModel = never> = {
-    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel> | null
-    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel> | null
-    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel> | null
-    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    not?: NestedDecimalNullableFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string | null
-  }
-
-  export type StaffCountOrderByAggregateInput = {
-    id?: SortOrder
-    userId?: SortOrder
-    staffNumber?: SortOrder
-    department?: SortOrder
-    position?: SortOrder
-    hireDate?: SortOrder
-    salary?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-  }
-
-  export type StaffAvgOrderByAggregateInput = {
-    salary?: SortOrder
-  }
-
-  export type StaffMaxOrderByAggregateInput = {
-    id?: SortOrder
-    userId?: SortOrder
-    staffNumber?: SortOrder
-    department?: SortOrder
-    position?: SortOrder
-    hireDate?: SortOrder
-    salary?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-  }
-
-  export type StaffMinOrderByAggregateInput = {
-    id?: SortOrder
-    userId?: SortOrder
-    staffNumber?: SortOrder
-    department?: SortOrder
-    position?: SortOrder
-    hireDate?: SortOrder
-    salary?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-  }
-
-  export type StaffSumOrderByAggregateInput = {
-    salary?: SortOrder
-  }
-
-  export type DecimalNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel> | null
-    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel> | null
-    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel> | null
-    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    not?: NestedDecimalNullableWithAggregatesFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _avg?: NestedDecimalNullableFilter<$PrismaModel>
-    _sum?: NestedDecimalNullableFilter<$PrismaModel>
-    _min?: NestedDecimalNullableFilter<$PrismaModel>
-    _max?: NestedDecimalNullableFilter<$PrismaModel>
-  }
-
-  export type IntNullableFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntNullableFilter<$PrismaModel> | number | null
-  }
-
-  export type StaffScalarRelationFilter = {
-    is?: StaffWhereInput
-    isNot?: StaffWhereInput
-  }
-
-  export type DoctorCountOrderByAggregateInput = {
-    id?: SortOrder
-    userId?: SortOrder
-    staffId?: SortOrder
-    doctorNumber?: SortOrder
-    medicalLicense?: SortOrder
-    specialization?: SortOrder
-    subSpecialization?: SortOrder
-    boardCertification?: SortOrder
-    yearsOfExperience?: SortOrder
-    education?: SortOrder
-    hospitalAffiliation?: SortOrder
-    consultationFee?: SortOrder
-    isAvailable?: SortOrder
-    workingHours?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-  }
-
-  export type DoctorAvgOrderByAggregateInput = {
-    yearsOfExperience?: SortOrder
-    consultationFee?: SortOrder
-  }
-
-  export type DoctorMaxOrderByAggregateInput = {
-    id?: SortOrder
-    userId?: SortOrder
-    staffId?: SortOrder
-    doctorNumber?: SortOrder
-    medicalLicense?: SortOrder
-    specialization?: SortOrder
-    subSpecialization?: SortOrder
-    boardCertification?: SortOrder
-    yearsOfExperience?: SortOrder
-    education?: SortOrder
-    hospitalAffiliation?: SortOrder
-    consultationFee?: SortOrder
-    isAvailable?: SortOrder
-    workingHours?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-  }
-
-  export type DoctorMinOrderByAggregateInput = {
-    id?: SortOrder
-    userId?: SortOrder
-    staffId?: SortOrder
-    doctorNumber?: SortOrder
-    medicalLicense?: SortOrder
-    specialization?: SortOrder
-    subSpecialization?: SortOrder
-    boardCertification?: SortOrder
-    yearsOfExperience?: SortOrder
-    education?: SortOrder
-    hospitalAffiliation?: SortOrder
-    consultationFee?: SortOrder
-    isAvailable?: SortOrder
-    workingHours?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-  }
-
-  export type DoctorSumOrderByAggregateInput = {
-    yearsOfExperience?: SortOrder
-    consultationFee?: SortOrder
-  }
-
-  export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _avg?: NestedFloatNullableFilter<$PrismaModel>
-    _sum?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedIntNullableFilter<$PrismaModel>
-    _max?: NestedIntNullableFilter<$PrismaModel>
-  }
-
   export type EnumPartnerTypeFilter<$PrismaModel = never> = {
     equals?: $Enums.PartnerType | EnumPartnerTypeFieldRefInput<$PrismaModel>
     in?: $Enums.PartnerType[] | ListEnumPartnerTypeFieldRefInput<$PrismaModel>
@@ -12150,6 +11128,33 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumPartnerTypeFilter<$PrismaModel>
     _max?: NestedEnumPartnerTypeFilter<$PrismaModel>
+  }
+
+  export type RefreshTokenCountOrderByAggregateInput = {
+    id?: SortOrder
+    token?: SortOrder
+    userId?: SortOrder
+    expiresAt?: SortOrder
+    createdAt?: SortOrder
+    isRevoked?: SortOrder
+  }
+
+  export type RefreshTokenMaxOrderByAggregateInput = {
+    id?: SortOrder
+    token?: SortOrder
+    userId?: SortOrder
+    expiresAt?: SortOrder
+    createdAt?: SortOrder
+    isRevoked?: SortOrder
+  }
+
+  export type RefreshTokenMinOrderByAggregateInput = {
+    id?: SortOrder
+    token?: SortOrder
+    userId?: SortOrder
+    expiresAt?: SortOrder
+    createdAt?: SortOrder
+    isRevoked?: SortOrder
   }
 
   export type IntFilter<$PrismaModel = never> = {
@@ -12276,22 +11281,23 @@ export namespace Prisma {
     connect?: PatientWhereUniqueInput
   }
 
-  export type StaffCreateNestedOneWithoutUserInput = {
-    create?: XOR<StaffCreateWithoutUserInput, StaffUncheckedCreateWithoutUserInput>
-    connectOrCreate?: StaffCreateOrConnectWithoutUserInput
-    connect?: StaffWhereUniqueInput
-  }
-
   export type PartnerCreateNestedOneWithoutUserInput = {
     create?: XOR<PartnerCreateWithoutUserInput, PartnerUncheckedCreateWithoutUserInput>
     connectOrCreate?: PartnerCreateOrConnectWithoutUserInput
     connect?: PartnerWhereUniqueInput
   }
 
-  export type DoctorCreateNestedOneWithoutUserInput = {
-    create?: XOR<DoctorCreateWithoutUserInput, DoctorUncheckedCreateWithoutUserInput>
-    connectOrCreate?: DoctorCreateOrConnectWithoutUserInput
-    connect?: DoctorWhereUniqueInput
+  export type StaffCredentialsCreateNestedOneWithoutUserInput = {
+    create?: XOR<StaffCredentialsCreateWithoutUserInput, StaffCredentialsUncheckedCreateWithoutUserInput>
+    connectOrCreate?: StaffCredentialsCreateOrConnectWithoutUserInput
+    connect?: StaffCredentialsWhereUniqueInput
+  }
+
+  export type AppointmentCreateNestedManyWithoutDoctorInput = {
+    create?: XOR<AppointmentCreateWithoutDoctorInput, AppointmentUncheckedCreateWithoutDoctorInput> | AppointmentCreateWithoutDoctorInput[] | AppointmentUncheckedCreateWithoutDoctorInput[]
+    connectOrCreate?: AppointmentCreateOrConnectWithoutDoctorInput | AppointmentCreateOrConnectWithoutDoctorInput[]
+    createMany?: AppointmentCreateManyDoctorInputEnvelope
+    connect?: AppointmentWhereUniqueInput | AppointmentWhereUniqueInput[]
   }
 
   export type RefreshTokenUncheckedCreateNestedManyWithoutUserInput = {
@@ -12307,22 +11313,23 @@ export namespace Prisma {
     connect?: PatientWhereUniqueInput
   }
 
-  export type StaffUncheckedCreateNestedOneWithoutUserInput = {
-    create?: XOR<StaffCreateWithoutUserInput, StaffUncheckedCreateWithoutUserInput>
-    connectOrCreate?: StaffCreateOrConnectWithoutUserInput
-    connect?: StaffWhereUniqueInput
-  }
-
   export type PartnerUncheckedCreateNestedOneWithoutUserInput = {
     create?: XOR<PartnerCreateWithoutUserInput, PartnerUncheckedCreateWithoutUserInput>
     connectOrCreate?: PartnerCreateOrConnectWithoutUserInput
     connect?: PartnerWhereUniqueInput
   }
 
-  export type DoctorUncheckedCreateNestedOneWithoutUserInput = {
-    create?: XOR<DoctorCreateWithoutUserInput, DoctorUncheckedCreateWithoutUserInput>
-    connectOrCreate?: DoctorCreateOrConnectWithoutUserInput
-    connect?: DoctorWhereUniqueInput
+  export type StaffCredentialsUncheckedCreateNestedOneWithoutUserInput = {
+    create?: XOR<StaffCredentialsCreateWithoutUserInput, StaffCredentialsUncheckedCreateWithoutUserInput>
+    connectOrCreate?: StaffCredentialsCreateOrConnectWithoutUserInput
+    connect?: StaffCredentialsWhereUniqueInput
+  }
+
+  export type AppointmentUncheckedCreateNestedManyWithoutDoctorInput = {
+    create?: XOR<AppointmentCreateWithoutDoctorInput, AppointmentUncheckedCreateWithoutDoctorInput> | AppointmentCreateWithoutDoctorInput[] | AppointmentUncheckedCreateWithoutDoctorInput[]
+    connectOrCreate?: AppointmentCreateOrConnectWithoutDoctorInput | AppointmentCreateOrConnectWithoutDoctorInput[]
+    createMany?: AppointmentCreateManyDoctorInputEnvelope
+    connect?: AppointmentWhereUniqueInput | AppointmentWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -12353,6 +11360,18 @@ export namespace Prisma {
     set?: $Enums.Gender | null
   }
 
+  export type NullableDecimalFieldUpdateOperationsInput = {
+    set?: Decimal | DecimalJsLike | number | string | null
+    increment?: Decimal | DecimalJsLike | number | string
+    decrement?: Decimal | DecimalJsLike | number | string
+    multiply?: Decimal | DecimalJsLike | number | string
+    divide?: Decimal | DecimalJsLike | number | string
+  }
+
+  export type NullableEnumEmploymentTypeFieldUpdateOperationsInput = {
+    set?: $Enums.EmploymentType | null
+  }
+
   export type DateTimeFieldUpdateOperationsInput = {
     set?: Date | string
   }
@@ -12381,16 +11400,6 @@ export namespace Prisma {
     update?: XOR<XOR<PatientUpdateToOneWithWhereWithoutUserInput, PatientUpdateWithoutUserInput>, PatientUncheckedUpdateWithoutUserInput>
   }
 
-  export type StaffUpdateOneWithoutUserNestedInput = {
-    create?: XOR<StaffCreateWithoutUserInput, StaffUncheckedCreateWithoutUserInput>
-    connectOrCreate?: StaffCreateOrConnectWithoutUserInput
-    upsert?: StaffUpsertWithoutUserInput
-    disconnect?: StaffWhereInput | boolean
-    delete?: StaffWhereInput | boolean
-    connect?: StaffWhereUniqueInput
-    update?: XOR<XOR<StaffUpdateToOneWithWhereWithoutUserInput, StaffUpdateWithoutUserInput>, StaffUncheckedUpdateWithoutUserInput>
-  }
-
   export type PartnerUpdateOneWithoutUserNestedInput = {
     create?: XOR<PartnerCreateWithoutUserInput, PartnerUncheckedCreateWithoutUserInput>
     connectOrCreate?: PartnerCreateOrConnectWithoutUserInput
@@ -12401,14 +11410,28 @@ export namespace Prisma {
     update?: XOR<XOR<PartnerUpdateToOneWithWhereWithoutUserInput, PartnerUpdateWithoutUserInput>, PartnerUncheckedUpdateWithoutUserInput>
   }
 
-  export type DoctorUpdateOneWithoutUserNestedInput = {
-    create?: XOR<DoctorCreateWithoutUserInput, DoctorUncheckedCreateWithoutUserInput>
-    connectOrCreate?: DoctorCreateOrConnectWithoutUserInput
-    upsert?: DoctorUpsertWithoutUserInput
-    disconnect?: DoctorWhereInput | boolean
-    delete?: DoctorWhereInput | boolean
-    connect?: DoctorWhereUniqueInput
-    update?: XOR<XOR<DoctorUpdateToOneWithWhereWithoutUserInput, DoctorUpdateWithoutUserInput>, DoctorUncheckedUpdateWithoutUserInput>
+  export type StaffCredentialsUpdateOneWithoutUserNestedInput = {
+    create?: XOR<StaffCredentialsCreateWithoutUserInput, StaffCredentialsUncheckedCreateWithoutUserInput>
+    connectOrCreate?: StaffCredentialsCreateOrConnectWithoutUserInput
+    upsert?: StaffCredentialsUpsertWithoutUserInput
+    disconnect?: StaffCredentialsWhereInput | boolean
+    delete?: StaffCredentialsWhereInput | boolean
+    connect?: StaffCredentialsWhereUniqueInput
+    update?: XOR<XOR<StaffCredentialsUpdateToOneWithWhereWithoutUserInput, StaffCredentialsUpdateWithoutUserInput>, StaffCredentialsUncheckedUpdateWithoutUserInput>
+  }
+
+  export type AppointmentUpdateManyWithoutDoctorNestedInput = {
+    create?: XOR<AppointmentCreateWithoutDoctorInput, AppointmentUncheckedCreateWithoutDoctorInput> | AppointmentCreateWithoutDoctorInput[] | AppointmentUncheckedCreateWithoutDoctorInput[]
+    connectOrCreate?: AppointmentCreateOrConnectWithoutDoctorInput | AppointmentCreateOrConnectWithoutDoctorInput[]
+    upsert?: AppointmentUpsertWithWhereUniqueWithoutDoctorInput | AppointmentUpsertWithWhereUniqueWithoutDoctorInput[]
+    createMany?: AppointmentCreateManyDoctorInputEnvelope
+    set?: AppointmentWhereUniqueInput | AppointmentWhereUniqueInput[]
+    disconnect?: AppointmentWhereUniqueInput | AppointmentWhereUniqueInput[]
+    delete?: AppointmentWhereUniqueInput | AppointmentWhereUniqueInput[]
+    connect?: AppointmentWhereUniqueInput | AppointmentWhereUniqueInput[]
+    update?: AppointmentUpdateWithWhereUniqueWithoutDoctorInput | AppointmentUpdateWithWhereUniqueWithoutDoctorInput[]
+    updateMany?: AppointmentUpdateManyWithWhereWithoutDoctorInput | AppointmentUpdateManyWithWhereWithoutDoctorInput[]
+    deleteMany?: AppointmentScalarWhereInput | AppointmentScalarWhereInput[]
   }
 
   export type RefreshTokenUncheckedUpdateManyWithoutUserNestedInput = {
@@ -12435,16 +11458,6 @@ export namespace Prisma {
     update?: XOR<XOR<PatientUpdateToOneWithWhereWithoutUserInput, PatientUpdateWithoutUserInput>, PatientUncheckedUpdateWithoutUserInput>
   }
 
-  export type StaffUncheckedUpdateOneWithoutUserNestedInput = {
-    create?: XOR<StaffCreateWithoutUserInput, StaffUncheckedCreateWithoutUserInput>
-    connectOrCreate?: StaffCreateOrConnectWithoutUserInput
-    upsert?: StaffUpsertWithoutUserInput
-    disconnect?: StaffWhereInput | boolean
-    delete?: StaffWhereInput | boolean
-    connect?: StaffWhereUniqueInput
-    update?: XOR<XOR<StaffUpdateToOneWithWhereWithoutUserInput, StaffUpdateWithoutUserInput>, StaffUncheckedUpdateWithoutUserInput>
-  }
-
   export type PartnerUncheckedUpdateOneWithoutUserNestedInput = {
     create?: XOR<PartnerCreateWithoutUserInput, PartnerUncheckedCreateWithoutUserInput>
     connectOrCreate?: PartnerCreateOrConnectWithoutUserInput
@@ -12455,28 +11468,63 @@ export namespace Prisma {
     update?: XOR<XOR<PartnerUpdateToOneWithWhereWithoutUserInput, PartnerUpdateWithoutUserInput>, PartnerUncheckedUpdateWithoutUserInput>
   }
 
-  export type DoctorUncheckedUpdateOneWithoutUserNestedInput = {
-    create?: XOR<DoctorCreateWithoutUserInput, DoctorUncheckedCreateWithoutUserInput>
-    connectOrCreate?: DoctorCreateOrConnectWithoutUserInput
-    upsert?: DoctorUpsertWithoutUserInput
-    disconnect?: DoctorWhereInput | boolean
-    delete?: DoctorWhereInput | boolean
-    connect?: DoctorWhereUniqueInput
-    update?: XOR<XOR<DoctorUpdateToOneWithWhereWithoutUserInput, DoctorUpdateWithoutUserInput>, DoctorUncheckedUpdateWithoutUserInput>
+  export type StaffCredentialsUncheckedUpdateOneWithoutUserNestedInput = {
+    create?: XOR<StaffCredentialsCreateWithoutUserInput, StaffCredentialsUncheckedCreateWithoutUserInput>
+    connectOrCreate?: StaffCredentialsCreateOrConnectWithoutUserInput
+    upsert?: StaffCredentialsUpsertWithoutUserInput
+    disconnect?: StaffCredentialsWhereInput | boolean
+    delete?: StaffCredentialsWhereInput | boolean
+    connect?: StaffCredentialsWhereUniqueInput
+    update?: XOR<XOR<StaffCredentialsUpdateToOneWithWhereWithoutUserInput, StaffCredentialsUpdateWithoutUserInput>, StaffCredentialsUncheckedUpdateWithoutUserInput>
   }
 
-  export type UserCreateNestedOneWithoutRefreshTokensInput = {
-    create?: XOR<UserCreateWithoutRefreshTokensInput, UserUncheckedCreateWithoutRefreshTokensInput>
-    connectOrCreate?: UserCreateOrConnectWithoutRefreshTokensInput
+  export type AppointmentUncheckedUpdateManyWithoutDoctorNestedInput = {
+    create?: XOR<AppointmentCreateWithoutDoctorInput, AppointmentUncheckedCreateWithoutDoctorInput> | AppointmentCreateWithoutDoctorInput[] | AppointmentUncheckedCreateWithoutDoctorInput[]
+    connectOrCreate?: AppointmentCreateOrConnectWithoutDoctorInput | AppointmentCreateOrConnectWithoutDoctorInput[]
+    upsert?: AppointmentUpsertWithWhereUniqueWithoutDoctorInput | AppointmentUpsertWithWhereUniqueWithoutDoctorInput[]
+    createMany?: AppointmentCreateManyDoctorInputEnvelope
+    set?: AppointmentWhereUniqueInput | AppointmentWhereUniqueInput[]
+    disconnect?: AppointmentWhereUniqueInput | AppointmentWhereUniqueInput[]
+    delete?: AppointmentWhereUniqueInput | AppointmentWhereUniqueInput[]
+    connect?: AppointmentWhereUniqueInput | AppointmentWhereUniqueInput[]
+    update?: AppointmentUpdateWithWhereUniqueWithoutDoctorInput | AppointmentUpdateWithWhereUniqueWithoutDoctorInput[]
+    updateMany?: AppointmentUpdateManyWithWhereWithoutDoctorInput | AppointmentUpdateManyWithWhereWithoutDoctorInput[]
+    deleteMany?: AppointmentScalarWhereInput | AppointmentScalarWhereInput[]
+  }
+
+  export type StaffCredentialsCreateboardCertificationInput = {
+    set: string[]
+  }
+
+  export type UserCreateNestedOneWithoutStaffCredentialsInput = {
+    create?: XOR<UserCreateWithoutStaffCredentialsInput, UserUncheckedCreateWithoutStaffCredentialsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutStaffCredentialsInput
     connect?: UserWhereUniqueInput
   }
 
-  export type UserUpdateOneRequiredWithoutRefreshTokensNestedInput = {
-    create?: XOR<UserCreateWithoutRefreshTokensInput, UserUncheckedCreateWithoutRefreshTokensInput>
-    connectOrCreate?: UserCreateOrConnectWithoutRefreshTokensInput
-    upsert?: UserUpsertWithoutRefreshTokensInput
+  export type EnumStaffTypeFieldUpdateOperationsInput = {
+    set?: $Enums.StaffType
+  }
+
+  export type StaffCredentialsUpdateboardCertificationInput = {
+    set?: string[]
+    push?: string | string[]
+  }
+
+  export type NullableIntFieldUpdateOperationsInput = {
+    set?: number | null
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
+  export type UserUpdateOneRequiredWithoutStaffCredentialsNestedInput = {
+    create?: XOR<UserCreateWithoutStaffCredentialsInput, UserUncheckedCreateWithoutStaffCredentialsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutStaffCredentialsInput
+    upsert?: UserUpsertWithoutStaffCredentialsInput
     connect?: UserWhereUniqueInput
-    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutRefreshTokensInput, UserUpdateWithoutRefreshTokensInput>, UserUncheckedUpdateWithoutRefreshTokensInput>
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutStaffCredentialsInput, UserUpdateWithoutStaffCredentialsInput>, UserUncheckedUpdateWithoutStaffCredentialsInput>
   }
 
   export type UserCreateNestedOneWithoutPatientProfileInput = {
@@ -12497,96 +11545,6 @@ export namespace Prisma {
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutPatientProfileInput, UserUpdateWithoutPatientProfileInput>, UserUncheckedUpdateWithoutPatientProfileInput>
   }
 
-  export type UserCreateNestedOneWithoutStaffProfileInput = {
-    create?: XOR<UserCreateWithoutStaffProfileInput, UserUncheckedCreateWithoutStaffProfileInput>
-    connectOrCreate?: UserCreateOrConnectWithoutStaffProfileInput
-    connect?: UserWhereUniqueInput
-  }
-
-  export type DoctorCreateNestedOneWithoutStaffInput = {
-    create?: XOR<DoctorCreateWithoutStaffInput, DoctorUncheckedCreateWithoutStaffInput>
-    connectOrCreate?: DoctorCreateOrConnectWithoutStaffInput
-    connect?: DoctorWhereUniqueInput
-  }
-
-  export type DoctorUncheckedCreateNestedOneWithoutStaffInput = {
-    create?: XOR<DoctorCreateWithoutStaffInput, DoctorUncheckedCreateWithoutStaffInput>
-    connectOrCreate?: DoctorCreateOrConnectWithoutStaffInput
-    connect?: DoctorWhereUniqueInput
-  }
-
-  export type NullableDecimalFieldUpdateOperationsInput = {
-    set?: Decimal | DecimalJsLike | number | string | null
-    increment?: Decimal | DecimalJsLike | number | string
-    decrement?: Decimal | DecimalJsLike | number | string
-    multiply?: Decimal | DecimalJsLike | number | string
-    divide?: Decimal | DecimalJsLike | number | string
-  }
-
-  export type UserUpdateOneRequiredWithoutStaffProfileNestedInput = {
-    create?: XOR<UserCreateWithoutStaffProfileInput, UserUncheckedCreateWithoutStaffProfileInput>
-    connectOrCreate?: UserCreateOrConnectWithoutStaffProfileInput
-    upsert?: UserUpsertWithoutStaffProfileInput
-    connect?: UserWhereUniqueInput
-    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutStaffProfileInput, UserUpdateWithoutStaffProfileInput>, UserUncheckedUpdateWithoutStaffProfileInput>
-  }
-
-  export type DoctorUpdateOneWithoutStaffNestedInput = {
-    create?: XOR<DoctorCreateWithoutStaffInput, DoctorUncheckedCreateWithoutStaffInput>
-    connectOrCreate?: DoctorCreateOrConnectWithoutStaffInput
-    upsert?: DoctorUpsertWithoutStaffInput
-    disconnect?: DoctorWhereInput | boolean
-    delete?: DoctorWhereInput | boolean
-    connect?: DoctorWhereUniqueInput
-    update?: XOR<XOR<DoctorUpdateToOneWithWhereWithoutStaffInput, DoctorUpdateWithoutStaffInput>, DoctorUncheckedUpdateWithoutStaffInput>
-  }
-
-  export type DoctorUncheckedUpdateOneWithoutStaffNestedInput = {
-    create?: XOR<DoctorCreateWithoutStaffInput, DoctorUncheckedCreateWithoutStaffInput>
-    connectOrCreate?: DoctorCreateOrConnectWithoutStaffInput
-    upsert?: DoctorUpsertWithoutStaffInput
-    disconnect?: DoctorWhereInput | boolean
-    delete?: DoctorWhereInput | boolean
-    connect?: DoctorWhereUniqueInput
-    update?: XOR<XOR<DoctorUpdateToOneWithWhereWithoutStaffInput, DoctorUpdateWithoutStaffInput>, DoctorUncheckedUpdateWithoutStaffInput>
-  }
-
-  export type UserCreateNestedOneWithoutDoctorProfileInput = {
-    create?: XOR<UserCreateWithoutDoctorProfileInput, UserUncheckedCreateWithoutDoctorProfileInput>
-    connectOrCreate?: UserCreateOrConnectWithoutDoctorProfileInput
-    connect?: UserWhereUniqueInput
-  }
-
-  export type StaffCreateNestedOneWithoutDoctorProfileInput = {
-    create?: XOR<StaffCreateWithoutDoctorProfileInput, StaffUncheckedCreateWithoutDoctorProfileInput>
-    connectOrCreate?: StaffCreateOrConnectWithoutDoctorProfileInput
-    connect?: StaffWhereUniqueInput
-  }
-
-  export type NullableIntFieldUpdateOperationsInput = {
-    set?: number | null
-    increment?: number
-    decrement?: number
-    multiply?: number
-    divide?: number
-  }
-
-  export type UserUpdateOneRequiredWithoutDoctorProfileNestedInput = {
-    create?: XOR<UserCreateWithoutDoctorProfileInput, UserUncheckedCreateWithoutDoctorProfileInput>
-    connectOrCreate?: UserCreateOrConnectWithoutDoctorProfileInput
-    upsert?: UserUpsertWithoutDoctorProfileInput
-    connect?: UserWhereUniqueInput
-    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutDoctorProfileInput, UserUpdateWithoutDoctorProfileInput>, UserUncheckedUpdateWithoutDoctorProfileInput>
-  }
-
-  export type StaffUpdateOneRequiredWithoutDoctorProfileNestedInput = {
-    create?: XOR<StaffCreateWithoutDoctorProfileInput, StaffUncheckedCreateWithoutDoctorProfileInput>
-    connectOrCreate?: StaffCreateOrConnectWithoutDoctorProfileInput
-    upsert?: StaffUpsertWithoutDoctorProfileInput
-    connect?: StaffWhereUniqueInput
-    update?: XOR<XOR<StaffUpdateToOneWithWhereWithoutDoctorProfileInput, StaffUpdateWithoutDoctorProfileInput>, StaffUncheckedUpdateWithoutDoctorProfileInput>
-  }
-
   export type UserCreateNestedOneWithoutPartnerProfileInput = {
     create?: XOR<UserCreateWithoutPartnerProfileInput, UserUncheckedCreateWithoutPartnerProfileInput>
     connectOrCreate?: UserCreateOrConnectWithoutPartnerProfileInput
@@ -12605,6 +11563,26 @@ export namespace Prisma {
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutPartnerProfileInput, UserUpdateWithoutPartnerProfileInput>, UserUncheckedUpdateWithoutPartnerProfileInput>
   }
 
+  export type UserCreateNestedOneWithoutRefreshTokensInput = {
+    create?: XOR<UserCreateWithoutRefreshTokensInput, UserUncheckedCreateWithoutRefreshTokensInput>
+    connectOrCreate?: UserCreateOrConnectWithoutRefreshTokensInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type UserUpdateOneRequiredWithoutRefreshTokensNestedInput = {
+    create?: XOR<UserCreateWithoutRefreshTokensInput, UserUncheckedCreateWithoutRefreshTokensInput>
+    connectOrCreate?: UserCreateOrConnectWithoutRefreshTokensInput
+    upsert?: UserUpsertWithoutRefreshTokensInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutRefreshTokensInput, UserUpdateWithoutRefreshTokensInput>, UserUncheckedUpdateWithoutRefreshTokensInput>
+  }
+
+  export type UserCreateNestedOneWithoutAppointmentsInput = {
+    create?: XOR<UserCreateWithoutAppointmentsInput, UserUncheckedCreateWithoutAppointmentsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutAppointmentsInput
+    connect?: UserWhereUniqueInput
+  }
+
   export type IntFieldUpdateOperationsInput = {
     set?: number
     increment?: number
@@ -12619,6 +11597,14 @@ export namespace Prisma {
 
   export type EnumAppointmentStatusFieldUpdateOperationsInput = {
     set?: $Enums.AppointmentStatus
+  }
+
+  export type UserUpdateOneRequiredWithoutAppointmentsNestedInput = {
+    create?: XOR<UserCreateWithoutAppointmentsInput, UserUncheckedCreateWithoutAppointmentsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutAppointmentsInput
+    upsert?: UserUpsertWithoutAppointmentsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutAppointmentsInput, UserUpdateWithoutAppointmentsInput>, UserUncheckedUpdateWithoutAppointmentsInput>
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -12684,6 +11670,24 @@ export namespace Prisma {
     in?: $Enums.Gender[] | ListEnumGenderFieldRefInput<$PrismaModel> | null
     notIn?: $Enums.Gender[] | ListEnumGenderFieldRefInput<$PrismaModel> | null
     not?: NestedEnumGenderNullableFilter<$PrismaModel> | $Enums.Gender | null
+  }
+
+  export type NestedDecimalNullableFilter<$PrismaModel = never> = {
+    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel> | null
+    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel> | null
+    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel> | null
+    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    not?: NestedDecimalNullableFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string | null
+  }
+
+  export type NestedEnumEmploymentTypeNullableFilter<$PrismaModel = never> = {
+    equals?: $Enums.EmploymentType | EnumEmploymentTypeFieldRefInput<$PrismaModel> | null
+    in?: $Enums.EmploymentType[] | ListEnumEmploymentTypeFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.EmploymentType[] | ListEnumEmploymentTypeFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumEmploymentTypeNullableFilter<$PrismaModel> | $Enums.EmploymentType | null
   }
 
   export type NestedDateTimeFilter<$PrismaModel = never> = {
@@ -12805,48 +11809,6 @@ export namespace Prisma {
     _max?: NestedEnumGenderNullableFilter<$PrismaModel>
   }
 
-  export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedDateTimeFilter<$PrismaModel>
-    _max?: NestedDateTimeFilter<$PrismaModel>
-  }
-
-  export type NestedEnumBloodTypeNullableFilter<$PrismaModel = never> = {
-    equals?: $Enums.BloodType | EnumBloodTypeFieldRefInput<$PrismaModel> | null
-    in?: $Enums.BloodType[] | ListEnumBloodTypeFieldRefInput<$PrismaModel> | null
-    notIn?: $Enums.BloodType[] | ListEnumBloodTypeFieldRefInput<$PrismaModel> | null
-    not?: NestedEnumBloodTypeNullableFilter<$PrismaModel> | $Enums.BloodType | null
-  }
-
-  export type NestedEnumBloodTypeNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.BloodType | EnumBloodTypeFieldRefInput<$PrismaModel> | null
-    in?: $Enums.BloodType[] | ListEnumBloodTypeFieldRefInput<$PrismaModel> | null
-    notIn?: $Enums.BloodType[] | ListEnumBloodTypeFieldRefInput<$PrismaModel> | null
-    not?: NestedEnumBloodTypeNullableWithAggregatesFilter<$PrismaModel> | $Enums.BloodType | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedEnumBloodTypeNullableFilter<$PrismaModel>
-    _max?: NestedEnumBloodTypeNullableFilter<$PrismaModel>
-  }
-
-  export type NestedDecimalNullableFilter<$PrismaModel = never> = {
-    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel> | null
-    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel> | null
-    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel> | null
-    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    not?: NestedDecimalNullableFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string | null
-  }
-
   export type NestedDecimalNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel> | null
     in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel> | null
@@ -12861,6 +11823,47 @@ export namespace Prisma {
     _sum?: NestedDecimalNullableFilter<$PrismaModel>
     _min?: NestedDecimalNullableFilter<$PrismaModel>
     _max?: NestedDecimalNullableFilter<$PrismaModel>
+  }
+
+  export type NestedEnumEmploymentTypeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.EmploymentType | EnumEmploymentTypeFieldRefInput<$PrismaModel> | null
+    in?: $Enums.EmploymentType[] | ListEnumEmploymentTypeFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.EmploymentType[] | ListEnumEmploymentTypeFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumEmploymentTypeNullableWithAggregatesFilter<$PrismaModel> | $Enums.EmploymentType | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedEnumEmploymentTypeNullableFilter<$PrismaModel>
+    _max?: NestedEnumEmploymentTypeNullableFilter<$PrismaModel>
+  }
+
+  export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
+  export type NestedEnumStaffTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.StaffType | EnumStaffTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.StaffType[] | ListEnumStaffTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.StaffType[] | ListEnumStaffTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumStaffTypeFilter<$PrismaModel> | $Enums.StaffType
+  }
+
+  export type NestedEnumStaffTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.StaffType | EnumStaffTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.StaffType[] | ListEnumStaffTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.StaffType[] | ListEnumStaffTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumStaffTypeWithAggregatesFilter<$PrismaModel> | $Enums.StaffType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumStaffTypeFilter<$PrismaModel>
+    _max?: NestedEnumStaffTypeFilter<$PrismaModel>
   }
 
   export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -12888,6 +11891,46 @@ export namespace Prisma {
     gt?: number | FloatFieldRefInput<$PrismaModel>
     gte?: number | FloatFieldRefInput<$PrismaModel>
     not?: NestedFloatNullableFilter<$PrismaModel> | number | null
+  }
+  export type NestedJsonNullableFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<NestedJsonNullableFilterBase<$PrismaModel>>, Exclude<keyof Required<NestedJsonNullableFilterBase<$PrismaModel>>, 'path'>>,
+        Required<NestedJsonNullableFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<NestedJsonNullableFilterBase<$PrismaModel>>, 'path'>>
+
+  export type NestedJsonNullableFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+  }
+
+  export type NestedEnumBloodTypeNullableFilter<$PrismaModel = never> = {
+    equals?: $Enums.BloodType | EnumBloodTypeFieldRefInput<$PrismaModel> | null
+    in?: $Enums.BloodType[] | ListEnumBloodTypeFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.BloodType[] | ListEnumBloodTypeFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumBloodTypeNullableFilter<$PrismaModel> | $Enums.BloodType | null
+  }
+
+  export type NestedEnumBloodTypeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.BloodType | EnumBloodTypeFieldRefInput<$PrismaModel> | null
+    in?: $Enums.BloodType[] | ListEnumBloodTypeFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.BloodType[] | ListEnumBloodTypeFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumBloodTypeNullableWithAggregatesFilter<$PrismaModel> | $Enums.BloodType | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedEnumBloodTypeNullableFilter<$PrismaModel>
+    _max?: NestedEnumBloodTypeNullableFilter<$PrismaModel>
   }
 
   export type NestedEnumPartnerTypeFilter<$PrismaModel = never> = {
@@ -13027,35 +12070,6 @@ export namespace Prisma {
     create: XOR<PatientCreateWithoutUserInput, PatientUncheckedCreateWithoutUserInput>
   }
 
-  export type StaffCreateWithoutUserInput = {
-    id?: string
-    staffNumber: string
-    department?: string | null
-    position?: string | null
-    hireDate?: Date | string | null
-    salary?: Decimal | DecimalJsLike | number | string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    doctorProfile?: DoctorCreateNestedOneWithoutStaffInput
-  }
-
-  export type StaffUncheckedCreateWithoutUserInput = {
-    id?: string
-    staffNumber: string
-    department?: string | null
-    position?: string | null
-    hireDate?: Date | string | null
-    salary?: Decimal | DecimalJsLike | number | string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    doctorProfile?: DoctorUncheckedCreateNestedOneWithoutStaffInput
-  }
-
-  export type StaffCreateOrConnectWithoutUserInput = {
-    where: StaffWhereUniqueInput
-    create: XOR<StaffCreateWithoutUserInput, StaffUncheckedCreateWithoutUserInput>
-  }
-
   export type PartnerCreateWithoutUserInput = {
     id?: string
     institutionName: string
@@ -13083,45 +12097,81 @@ export namespace Prisma {
     create: XOR<PartnerCreateWithoutUserInput, PartnerUncheckedCreateWithoutUserInput>
   }
 
-  export type DoctorCreateWithoutUserInput = {
+  export type StaffCredentialsCreateWithoutUserInput = {
     id?: string
-    doctorNumber: string
-    medicalLicense: string
-    specialization: string
+    staffType: $Enums.StaffType
+    licenseNumber?: string | null
+    licenseExpiryDate?: Date | string | null
+    specialization?: string | null
     subSpecialization?: string | null
-    boardCertification?: string | null
-    yearsOfExperience?: number | null
+    boardCertification?: StaffCredentialsCreateboardCertificationInput | string[]
     education?: string | null
-    hospitalAffiliation?: string | null
+    yearsOfExperience?: number | null
     consultationFee?: Decimal | DecimalJsLike | number | string | null
     isAvailable?: boolean
-    workingHours?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    staff: StaffCreateNestedOneWithoutDoctorProfileInput
-  }
-
-  export type DoctorUncheckedCreateWithoutUserInput = {
-    id?: string
-    staffId: string
-    doctorNumber: string
-    medicalLicense: string
-    specialization: string
-    subSpecialization?: string | null
-    boardCertification?: string | null
-    yearsOfExperience?: number | null
-    education?: string | null
+    workingHours?: NullableJsonNullValueInput | InputJsonValue
     hospitalAffiliation?: string | null
-    consultationFee?: Decimal | DecimalJsLike | number | string | null
-    isAvailable?: boolean
-    workingHours?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
 
-  export type DoctorCreateOrConnectWithoutUserInput = {
-    where: DoctorWhereUniqueInput
-    create: XOR<DoctorCreateWithoutUserInput, DoctorUncheckedCreateWithoutUserInput>
+  export type StaffCredentialsUncheckedCreateWithoutUserInput = {
+    id?: string
+    staffType: $Enums.StaffType
+    licenseNumber?: string | null
+    licenseExpiryDate?: Date | string | null
+    specialization?: string | null
+    subSpecialization?: string | null
+    boardCertification?: StaffCredentialsCreateboardCertificationInput | string[]
+    education?: string | null
+    yearsOfExperience?: number | null
+    consultationFee?: Decimal | DecimalJsLike | number | string | null
+    isAvailable?: boolean
+    workingHours?: NullableJsonNullValueInput | InputJsonValue
+    hospitalAffiliation?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type StaffCredentialsCreateOrConnectWithoutUserInput = {
+    where: StaffCredentialsWhereUniqueInput
+    create: XOR<StaffCredentialsCreateWithoutUserInput, StaffCredentialsUncheckedCreateWithoutUserInput>
+  }
+
+  export type AppointmentCreateWithoutDoctorInput = {
+    id?: string
+    patientId: string
+    scheduledAt: Date | string
+    duration: number
+    type: $Enums.AppointmentType
+    status?: $Enums.AppointmentStatus
+    reason?: string | null
+    notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type AppointmentUncheckedCreateWithoutDoctorInput = {
+    id?: string
+    patientId: string
+    scheduledAt: Date | string
+    duration: number
+    type: $Enums.AppointmentType
+    status?: $Enums.AppointmentStatus
+    reason?: string | null
+    notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type AppointmentCreateOrConnectWithoutDoctorInput = {
+    where: AppointmentWhereUniqueInput
+    create: XOR<AppointmentCreateWithoutDoctorInput, AppointmentUncheckedCreateWithoutDoctorInput>
+  }
+
+  export type AppointmentCreateManyDoctorInputEnvelope = {
+    data: AppointmentCreateManyDoctorInput | AppointmentCreateManyDoctorInput[]
+    skipDuplicates?: boolean
   }
 
   export type RefreshTokenUpsertWithWhereUniqueWithoutUserInput = {
@@ -13191,41 +12241,6 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type StaffUpsertWithoutUserInput = {
-    update: XOR<StaffUpdateWithoutUserInput, StaffUncheckedUpdateWithoutUserInput>
-    create: XOR<StaffCreateWithoutUserInput, StaffUncheckedCreateWithoutUserInput>
-    where?: StaffWhereInput
-  }
-
-  export type StaffUpdateToOneWithWhereWithoutUserInput = {
-    where?: StaffWhereInput
-    data: XOR<StaffUpdateWithoutUserInput, StaffUncheckedUpdateWithoutUserInput>
-  }
-
-  export type StaffUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    staffNumber?: StringFieldUpdateOperationsInput | string
-    department?: NullableStringFieldUpdateOperationsInput | string | null
-    position?: NullableStringFieldUpdateOperationsInput | string | null
-    hireDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    salary?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    doctorProfile?: DoctorUpdateOneWithoutStaffNestedInput
-  }
-
-  export type StaffUncheckedUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    staffNumber?: StringFieldUpdateOperationsInput | string
-    department?: NullableStringFieldUpdateOperationsInput | string | null
-    position?: NullableStringFieldUpdateOperationsInput | string | null
-    hireDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    salary?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    doctorProfile?: DoctorUncheckedUpdateOneWithoutStaffNestedInput
-  }
-
   export type PartnerUpsertWithoutUserInput = {
     update: XOR<PartnerUpdateWithoutUserInput, PartnerUncheckedUpdateWithoutUserInput>
     create: XOR<PartnerCreateWithoutUserInput, PartnerUncheckedCreateWithoutUserInput>
@@ -13259,59 +12274,93 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type DoctorUpsertWithoutUserInput = {
-    update: XOR<DoctorUpdateWithoutUserInput, DoctorUncheckedUpdateWithoutUserInput>
-    create: XOR<DoctorCreateWithoutUserInput, DoctorUncheckedCreateWithoutUserInput>
-    where?: DoctorWhereInput
+  export type StaffCredentialsUpsertWithoutUserInput = {
+    update: XOR<StaffCredentialsUpdateWithoutUserInput, StaffCredentialsUncheckedUpdateWithoutUserInput>
+    create: XOR<StaffCredentialsCreateWithoutUserInput, StaffCredentialsUncheckedCreateWithoutUserInput>
+    where?: StaffCredentialsWhereInput
   }
 
-  export type DoctorUpdateToOneWithWhereWithoutUserInput = {
-    where?: DoctorWhereInput
-    data: XOR<DoctorUpdateWithoutUserInput, DoctorUncheckedUpdateWithoutUserInput>
+  export type StaffCredentialsUpdateToOneWithWhereWithoutUserInput = {
+    where?: StaffCredentialsWhereInput
+    data: XOR<StaffCredentialsUpdateWithoutUserInput, StaffCredentialsUncheckedUpdateWithoutUserInput>
   }
 
-  export type DoctorUpdateWithoutUserInput = {
+  export type StaffCredentialsUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
-    doctorNumber?: StringFieldUpdateOperationsInput | string
-    medicalLicense?: StringFieldUpdateOperationsInput | string
-    specialization?: StringFieldUpdateOperationsInput | string
+    staffType?: EnumStaffTypeFieldUpdateOperationsInput | $Enums.StaffType
+    licenseNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    licenseExpiryDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    specialization?: NullableStringFieldUpdateOperationsInput | string | null
     subSpecialization?: NullableStringFieldUpdateOperationsInput | string | null
-    boardCertification?: NullableStringFieldUpdateOperationsInput | string | null
-    yearsOfExperience?: NullableIntFieldUpdateOperationsInput | number | null
+    boardCertification?: StaffCredentialsUpdateboardCertificationInput | string[]
     education?: NullableStringFieldUpdateOperationsInput | string | null
-    hospitalAffiliation?: NullableStringFieldUpdateOperationsInput | string | null
+    yearsOfExperience?: NullableIntFieldUpdateOperationsInput | number | null
     consultationFee?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     isAvailable?: BoolFieldUpdateOperationsInput | boolean
-    workingHours?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    staff?: StaffUpdateOneRequiredWithoutDoctorProfileNestedInput
-  }
-
-  export type DoctorUncheckedUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    staffId?: StringFieldUpdateOperationsInput | string
-    doctorNumber?: StringFieldUpdateOperationsInput | string
-    medicalLicense?: StringFieldUpdateOperationsInput | string
-    specialization?: StringFieldUpdateOperationsInput | string
-    subSpecialization?: NullableStringFieldUpdateOperationsInput | string | null
-    boardCertification?: NullableStringFieldUpdateOperationsInput | string | null
-    yearsOfExperience?: NullableIntFieldUpdateOperationsInput | number | null
-    education?: NullableStringFieldUpdateOperationsInput | string | null
+    workingHours?: NullableJsonNullValueInput | InputJsonValue
     hospitalAffiliation?: NullableStringFieldUpdateOperationsInput | string | null
-    consultationFee?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
-    isAvailable?: BoolFieldUpdateOperationsInput | boolean
-    workingHours?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type UserCreateWithoutRefreshTokensInput = {
+  export type StaffCredentialsUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    staffType?: EnumStaffTypeFieldUpdateOperationsInput | $Enums.StaffType
+    licenseNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    licenseExpiryDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    specialization?: NullableStringFieldUpdateOperationsInput | string | null
+    subSpecialization?: NullableStringFieldUpdateOperationsInput | string | null
+    boardCertification?: StaffCredentialsUpdateboardCertificationInput | string[]
+    education?: NullableStringFieldUpdateOperationsInput | string | null
+    yearsOfExperience?: NullableIntFieldUpdateOperationsInput | number | null
+    consultationFee?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    isAvailable?: BoolFieldUpdateOperationsInput | boolean
+    workingHours?: NullableJsonNullValueInput | InputJsonValue
+    hospitalAffiliation?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AppointmentUpsertWithWhereUniqueWithoutDoctorInput = {
+    where: AppointmentWhereUniqueInput
+    update: XOR<AppointmentUpdateWithoutDoctorInput, AppointmentUncheckedUpdateWithoutDoctorInput>
+    create: XOR<AppointmentCreateWithoutDoctorInput, AppointmentUncheckedCreateWithoutDoctorInput>
+  }
+
+  export type AppointmentUpdateWithWhereUniqueWithoutDoctorInput = {
+    where: AppointmentWhereUniqueInput
+    data: XOR<AppointmentUpdateWithoutDoctorInput, AppointmentUncheckedUpdateWithoutDoctorInput>
+  }
+
+  export type AppointmentUpdateManyWithWhereWithoutDoctorInput = {
+    where: AppointmentScalarWhereInput
+    data: XOR<AppointmentUpdateManyMutationInput, AppointmentUncheckedUpdateManyWithoutDoctorInput>
+  }
+
+  export type AppointmentScalarWhereInput = {
+    AND?: AppointmentScalarWhereInput | AppointmentScalarWhereInput[]
+    OR?: AppointmentScalarWhereInput[]
+    NOT?: AppointmentScalarWhereInput | AppointmentScalarWhereInput[]
+    id?: StringFilter<"Appointment"> | string
+    patientId?: StringFilter<"Appointment"> | string
+    doctorId?: StringFilter<"Appointment"> | string
+    scheduledAt?: DateTimeFilter<"Appointment"> | Date | string
+    duration?: IntFilter<"Appointment"> | number
+    type?: EnumAppointmentTypeFilter<"Appointment"> | $Enums.AppointmentType
+    status?: EnumAppointmentStatusFilter<"Appointment"> | $Enums.AppointmentStatus
+    reason?: StringNullableFilter<"Appointment"> | string | null
+    notes?: StringNullableFilter<"Appointment"> | string | null
+    createdAt?: DateTimeFilter<"Appointment"> | Date | string
+    updatedAt?: DateTimeFilter<"Appointment"> | Date | string
+  }
+
+  export type UserCreateWithoutStaffCredentialsInput = {
     id?: string
     email: string
     password: string
     firstName: string
     lastName: string
+    middleName?: string | null
     phone?: string | null
     role?: $Enums.UserRole
     status?: $Enums.UserStatus
@@ -13324,23 +12373,30 @@ export namespace Prisma {
     city?: string | null
     province?: string | null
     zipCode?: string | null
+    staffNumber?: string | null
+    department?: string | null
+    position?: string | null
+    hireDate?: Date | string | null
+    salary?: Decimal | DecimalJsLike | number | string | null
+    employmentType?: $Enums.EmploymentType | null
     createdAt?: Date | string
     updatedAt?: Date | string
     lastLoginAt?: Date | string | null
     createdBy?: string | null
     updatedBy?: string | null
+    refreshTokens?: RefreshTokenCreateNestedManyWithoutUserInput
     patientProfile?: PatientCreateNestedOneWithoutUserInput
-    staffProfile?: StaffCreateNestedOneWithoutUserInput
     partnerProfile?: PartnerCreateNestedOneWithoutUserInput
-    doctorProfile?: DoctorCreateNestedOneWithoutUserInput
+    appointments?: AppointmentCreateNestedManyWithoutDoctorInput
   }
 
-  export type UserUncheckedCreateWithoutRefreshTokensInput = {
+  export type UserUncheckedCreateWithoutStaffCredentialsInput = {
     id?: string
     email: string
     password: string
     firstName: string
     lastName: string
+    middleName?: string | null
     phone?: string | null
     role?: $Enums.UserRole
     status?: $Enums.UserStatus
@@ -13353,39 +12409,46 @@ export namespace Prisma {
     city?: string | null
     province?: string | null
     zipCode?: string | null
+    staffNumber?: string | null
+    department?: string | null
+    position?: string | null
+    hireDate?: Date | string | null
+    salary?: Decimal | DecimalJsLike | number | string | null
+    employmentType?: $Enums.EmploymentType | null
     createdAt?: Date | string
     updatedAt?: Date | string
     lastLoginAt?: Date | string | null
     createdBy?: string | null
     updatedBy?: string | null
+    refreshTokens?: RefreshTokenUncheckedCreateNestedManyWithoutUserInput
     patientProfile?: PatientUncheckedCreateNestedOneWithoutUserInput
-    staffProfile?: StaffUncheckedCreateNestedOneWithoutUserInput
     partnerProfile?: PartnerUncheckedCreateNestedOneWithoutUserInput
-    doctorProfile?: DoctorUncheckedCreateNestedOneWithoutUserInput
+    appointments?: AppointmentUncheckedCreateNestedManyWithoutDoctorInput
   }
 
-  export type UserCreateOrConnectWithoutRefreshTokensInput = {
+  export type UserCreateOrConnectWithoutStaffCredentialsInput = {
     where: UserWhereUniqueInput
-    create: XOR<UserCreateWithoutRefreshTokensInput, UserUncheckedCreateWithoutRefreshTokensInput>
+    create: XOR<UserCreateWithoutStaffCredentialsInput, UserUncheckedCreateWithoutStaffCredentialsInput>
   }
 
-  export type UserUpsertWithoutRefreshTokensInput = {
-    update: XOR<UserUpdateWithoutRefreshTokensInput, UserUncheckedUpdateWithoutRefreshTokensInput>
-    create: XOR<UserCreateWithoutRefreshTokensInput, UserUncheckedCreateWithoutRefreshTokensInput>
+  export type UserUpsertWithoutStaffCredentialsInput = {
+    update: XOR<UserUpdateWithoutStaffCredentialsInput, UserUncheckedUpdateWithoutStaffCredentialsInput>
+    create: XOR<UserCreateWithoutStaffCredentialsInput, UserUncheckedCreateWithoutStaffCredentialsInput>
     where?: UserWhereInput
   }
 
-  export type UserUpdateToOneWithWhereWithoutRefreshTokensInput = {
+  export type UserUpdateToOneWithWhereWithoutStaffCredentialsInput = {
     where?: UserWhereInput
-    data: XOR<UserUpdateWithoutRefreshTokensInput, UserUncheckedUpdateWithoutRefreshTokensInput>
+    data: XOR<UserUpdateWithoutStaffCredentialsInput, UserUncheckedUpdateWithoutStaffCredentialsInput>
   }
 
-  export type UserUpdateWithoutRefreshTokensInput = {
+  export type UserUpdateWithoutStaffCredentialsInput = {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: StringFieldUpdateOperationsInput | string
+    middleName?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     status?: EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
@@ -13398,23 +12461,30 @@ export namespace Prisma {
     city?: NullableStringFieldUpdateOperationsInput | string | null
     province?: NullableStringFieldUpdateOperationsInput | string | null
     zipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    staffNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    department?: NullableStringFieldUpdateOperationsInput | string | null
+    position?: NullableStringFieldUpdateOperationsInput | string | null
+    hireDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    salary?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    employmentType?: NullableEnumEmploymentTypeFieldUpdateOperationsInput | $Enums.EmploymentType | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdBy?: NullableStringFieldUpdateOperationsInput | string | null
     updatedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    refreshTokens?: RefreshTokenUpdateManyWithoutUserNestedInput
     patientProfile?: PatientUpdateOneWithoutUserNestedInput
-    staffProfile?: StaffUpdateOneWithoutUserNestedInput
     partnerProfile?: PartnerUpdateOneWithoutUserNestedInput
-    doctorProfile?: DoctorUpdateOneWithoutUserNestedInput
+    appointments?: AppointmentUpdateManyWithoutDoctorNestedInput
   }
 
-  export type UserUncheckedUpdateWithoutRefreshTokensInput = {
+  export type UserUncheckedUpdateWithoutStaffCredentialsInput = {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: StringFieldUpdateOperationsInput | string
+    middleName?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     status?: EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
@@ -13427,15 +12497,21 @@ export namespace Prisma {
     city?: NullableStringFieldUpdateOperationsInput | string | null
     province?: NullableStringFieldUpdateOperationsInput | string | null
     zipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    staffNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    department?: NullableStringFieldUpdateOperationsInput | string | null
+    position?: NullableStringFieldUpdateOperationsInput | string | null
+    hireDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    salary?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    employmentType?: NullableEnumEmploymentTypeFieldUpdateOperationsInput | $Enums.EmploymentType | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdBy?: NullableStringFieldUpdateOperationsInput | string | null
     updatedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    refreshTokens?: RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
     patientProfile?: PatientUncheckedUpdateOneWithoutUserNestedInput
-    staffProfile?: StaffUncheckedUpdateOneWithoutUserNestedInput
     partnerProfile?: PartnerUncheckedUpdateOneWithoutUserNestedInput
-    doctorProfile?: DoctorUncheckedUpdateOneWithoutUserNestedInput
+    appointments?: AppointmentUncheckedUpdateManyWithoutDoctorNestedInput
   }
 
   export type UserCreateWithoutPatientProfileInput = {
@@ -13444,6 +12520,7 @@ export namespace Prisma {
     password: string
     firstName: string
     lastName: string
+    middleName?: string | null
     phone?: string | null
     role?: $Enums.UserRole
     status?: $Enums.UserStatus
@@ -13456,15 +12533,21 @@ export namespace Prisma {
     city?: string | null
     province?: string | null
     zipCode?: string | null
+    staffNumber?: string | null
+    department?: string | null
+    position?: string | null
+    hireDate?: Date | string | null
+    salary?: Decimal | DecimalJsLike | number | string | null
+    employmentType?: $Enums.EmploymentType | null
     createdAt?: Date | string
     updatedAt?: Date | string
     lastLoginAt?: Date | string | null
     createdBy?: string | null
     updatedBy?: string | null
     refreshTokens?: RefreshTokenCreateNestedManyWithoutUserInput
-    staffProfile?: StaffCreateNestedOneWithoutUserInput
     partnerProfile?: PartnerCreateNestedOneWithoutUserInput
-    doctorProfile?: DoctorCreateNestedOneWithoutUserInput
+    staffCredentials?: StaffCredentialsCreateNestedOneWithoutUserInput
+    appointments?: AppointmentCreateNestedManyWithoutDoctorInput
   }
 
   export type UserUncheckedCreateWithoutPatientProfileInput = {
@@ -13473,6 +12556,7 @@ export namespace Prisma {
     password: string
     firstName: string
     lastName: string
+    middleName?: string | null
     phone?: string | null
     role?: $Enums.UserRole
     status?: $Enums.UserStatus
@@ -13485,15 +12569,21 @@ export namespace Prisma {
     city?: string | null
     province?: string | null
     zipCode?: string | null
+    staffNumber?: string | null
+    department?: string | null
+    position?: string | null
+    hireDate?: Date | string | null
+    salary?: Decimal | DecimalJsLike | number | string | null
+    employmentType?: $Enums.EmploymentType | null
     createdAt?: Date | string
     updatedAt?: Date | string
     lastLoginAt?: Date | string | null
     createdBy?: string | null
     updatedBy?: string | null
     refreshTokens?: RefreshTokenUncheckedCreateNestedManyWithoutUserInput
-    staffProfile?: StaffUncheckedCreateNestedOneWithoutUserInput
     partnerProfile?: PartnerUncheckedCreateNestedOneWithoutUserInput
-    doctorProfile?: DoctorUncheckedCreateNestedOneWithoutUserInput
+    staffCredentials?: StaffCredentialsUncheckedCreateNestedOneWithoutUserInput
+    appointments?: AppointmentUncheckedCreateNestedManyWithoutDoctorInput
   }
 
   export type UserCreateOrConnectWithoutPatientProfileInput = {
@@ -13518,6 +12608,7 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: StringFieldUpdateOperationsInput | string
+    middleName?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     status?: EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
@@ -13530,15 +12621,21 @@ export namespace Prisma {
     city?: NullableStringFieldUpdateOperationsInput | string | null
     province?: NullableStringFieldUpdateOperationsInput | string | null
     zipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    staffNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    department?: NullableStringFieldUpdateOperationsInput | string | null
+    position?: NullableStringFieldUpdateOperationsInput | string | null
+    hireDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    salary?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    employmentType?: NullableEnumEmploymentTypeFieldUpdateOperationsInput | $Enums.EmploymentType | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdBy?: NullableStringFieldUpdateOperationsInput | string | null
     updatedBy?: NullableStringFieldUpdateOperationsInput | string | null
     refreshTokens?: RefreshTokenUpdateManyWithoutUserNestedInput
-    staffProfile?: StaffUpdateOneWithoutUserNestedInput
     partnerProfile?: PartnerUpdateOneWithoutUserNestedInput
-    doctorProfile?: DoctorUpdateOneWithoutUserNestedInput
+    staffCredentials?: StaffCredentialsUpdateOneWithoutUserNestedInput
+    appointments?: AppointmentUpdateManyWithoutDoctorNestedInput
   }
 
   export type UserUncheckedUpdateWithoutPatientProfileInput = {
@@ -13547,6 +12644,7 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: StringFieldUpdateOperationsInput | string
+    middleName?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     status?: EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
@@ -13559,431 +12657,21 @@ export namespace Prisma {
     city?: NullableStringFieldUpdateOperationsInput | string | null
     province?: NullableStringFieldUpdateOperationsInput | string | null
     zipCode?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    createdBy?: NullableStringFieldUpdateOperationsInput | string | null
-    updatedBy?: NullableStringFieldUpdateOperationsInput | string | null
-    refreshTokens?: RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
-    staffProfile?: StaffUncheckedUpdateOneWithoutUserNestedInput
-    partnerProfile?: PartnerUncheckedUpdateOneWithoutUserNestedInput
-    doctorProfile?: DoctorUncheckedUpdateOneWithoutUserNestedInput
-  }
-
-  export type UserCreateWithoutStaffProfileInput = {
-    id?: string
-    email: string
-    password: string
-    firstName: string
-    lastName: string
-    phone?: string | null
-    role?: $Enums.UserRole
-    status?: $Enums.UserStatus
-    isEmailVerified?: boolean
-    emailVerifiedAt?: Date | string | null
-    avatar?: string | null
-    dateOfBirth?: Date | string | null
-    gender?: $Enums.Gender | null
-    address?: string | null
-    city?: string | null
-    province?: string | null
-    zipCode?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    lastLoginAt?: Date | string | null
-    createdBy?: string | null
-    updatedBy?: string | null
-    refreshTokens?: RefreshTokenCreateNestedManyWithoutUserInput
-    patientProfile?: PatientCreateNestedOneWithoutUserInput
-    partnerProfile?: PartnerCreateNestedOneWithoutUserInput
-    doctorProfile?: DoctorCreateNestedOneWithoutUserInput
-  }
-
-  export type UserUncheckedCreateWithoutStaffProfileInput = {
-    id?: string
-    email: string
-    password: string
-    firstName: string
-    lastName: string
-    phone?: string | null
-    role?: $Enums.UserRole
-    status?: $Enums.UserStatus
-    isEmailVerified?: boolean
-    emailVerifiedAt?: Date | string | null
-    avatar?: string | null
-    dateOfBirth?: Date | string | null
-    gender?: $Enums.Gender | null
-    address?: string | null
-    city?: string | null
-    province?: string | null
-    zipCode?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    lastLoginAt?: Date | string | null
-    createdBy?: string | null
-    updatedBy?: string | null
-    refreshTokens?: RefreshTokenUncheckedCreateNestedManyWithoutUserInput
-    patientProfile?: PatientUncheckedCreateNestedOneWithoutUserInput
-    partnerProfile?: PartnerUncheckedCreateNestedOneWithoutUserInput
-    doctorProfile?: DoctorUncheckedCreateNestedOneWithoutUserInput
-  }
-
-  export type UserCreateOrConnectWithoutStaffProfileInput = {
-    where: UserWhereUniqueInput
-    create: XOR<UserCreateWithoutStaffProfileInput, UserUncheckedCreateWithoutStaffProfileInput>
-  }
-
-  export type DoctorCreateWithoutStaffInput = {
-    id?: string
-    doctorNumber: string
-    medicalLicense: string
-    specialization: string
-    subSpecialization?: string | null
-    boardCertification?: string | null
-    yearsOfExperience?: number | null
-    education?: string | null
-    hospitalAffiliation?: string | null
-    consultationFee?: Decimal | DecimalJsLike | number | string | null
-    isAvailable?: boolean
-    workingHours?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    user: UserCreateNestedOneWithoutDoctorProfileInput
-  }
-
-  export type DoctorUncheckedCreateWithoutStaffInput = {
-    id?: string
-    userId: string
-    doctorNumber: string
-    medicalLicense: string
-    specialization: string
-    subSpecialization?: string | null
-    boardCertification?: string | null
-    yearsOfExperience?: number | null
-    education?: string | null
-    hospitalAffiliation?: string | null
-    consultationFee?: Decimal | DecimalJsLike | number | string | null
-    isAvailable?: boolean
-    workingHours?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type DoctorCreateOrConnectWithoutStaffInput = {
-    where: DoctorWhereUniqueInput
-    create: XOR<DoctorCreateWithoutStaffInput, DoctorUncheckedCreateWithoutStaffInput>
-  }
-
-  export type UserUpsertWithoutStaffProfileInput = {
-    update: XOR<UserUpdateWithoutStaffProfileInput, UserUncheckedUpdateWithoutStaffProfileInput>
-    create: XOR<UserCreateWithoutStaffProfileInput, UserUncheckedCreateWithoutStaffProfileInput>
-    where?: UserWhereInput
-  }
-
-  export type UserUpdateToOneWithWhereWithoutStaffProfileInput = {
-    where?: UserWhereInput
-    data: XOR<UserUpdateWithoutStaffProfileInput, UserUncheckedUpdateWithoutStaffProfileInput>
-  }
-
-  export type UserUpdateWithoutStaffProfileInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
-    firstName?: StringFieldUpdateOperationsInput | string
-    lastName?: StringFieldUpdateOperationsInput | string
-    phone?: NullableStringFieldUpdateOperationsInput | string | null
-    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
-    status?: EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
-    isEmailVerified?: BoolFieldUpdateOperationsInput | boolean
-    emailVerifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    avatar?: NullableStringFieldUpdateOperationsInput | string | null
-    dateOfBirth?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    gender?: NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
-    address?: NullableStringFieldUpdateOperationsInput | string | null
-    city?: NullableStringFieldUpdateOperationsInput | string | null
-    province?: NullableStringFieldUpdateOperationsInput | string | null
-    zipCode?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    createdBy?: NullableStringFieldUpdateOperationsInput | string | null
-    updatedBy?: NullableStringFieldUpdateOperationsInput | string | null
-    refreshTokens?: RefreshTokenUpdateManyWithoutUserNestedInput
-    patientProfile?: PatientUpdateOneWithoutUserNestedInput
-    partnerProfile?: PartnerUpdateOneWithoutUserNestedInput
-    doctorProfile?: DoctorUpdateOneWithoutUserNestedInput
-  }
-
-  export type UserUncheckedUpdateWithoutStaffProfileInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
-    firstName?: StringFieldUpdateOperationsInput | string
-    lastName?: StringFieldUpdateOperationsInput | string
-    phone?: NullableStringFieldUpdateOperationsInput | string | null
-    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
-    status?: EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
-    isEmailVerified?: BoolFieldUpdateOperationsInput | boolean
-    emailVerifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    avatar?: NullableStringFieldUpdateOperationsInput | string | null
-    dateOfBirth?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    gender?: NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
-    address?: NullableStringFieldUpdateOperationsInput | string | null
-    city?: NullableStringFieldUpdateOperationsInput | string | null
-    province?: NullableStringFieldUpdateOperationsInput | string | null
-    zipCode?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    createdBy?: NullableStringFieldUpdateOperationsInput | string | null
-    updatedBy?: NullableStringFieldUpdateOperationsInput | string | null
-    refreshTokens?: RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
-    patientProfile?: PatientUncheckedUpdateOneWithoutUserNestedInput
-    partnerProfile?: PartnerUncheckedUpdateOneWithoutUserNestedInput
-    doctorProfile?: DoctorUncheckedUpdateOneWithoutUserNestedInput
-  }
-
-  export type DoctorUpsertWithoutStaffInput = {
-    update: XOR<DoctorUpdateWithoutStaffInput, DoctorUncheckedUpdateWithoutStaffInput>
-    create: XOR<DoctorCreateWithoutStaffInput, DoctorUncheckedCreateWithoutStaffInput>
-    where?: DoctorWhereInput
-  }
-
-  export type DoctorUpdateToOneWithWhereWithoutStaffInput = {
-    where?: DoctorWhereInput
-    data: XOR<DoctorUpdateWithoutStaffInput, DoctorUncheckedUpdateWithoutStaffInput>
-  }
-
-  export type DoctorUpdateWithoutStaffInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    doctorNumber?: StringFieldUpdateOperationsInput | string
-    medicalLicense?: StringFieldUpdateOperationsInput | string
-    specialization?: StringFieldUpdateOperationsInput | string
-    subSpecialization?: NullableStringFieldUpdateOperationsInput | string | null
-    boardCertification?: NullableStringFieldUpdateOperationsInput | string | null
-    yearsOfExperience?: NullableIntFieldUpdateOperationsInput | number | null
-    education?: NullableStringFieldUpdateOperationsInput | string | null
-    hospitalAffiliation?: NullableStringFieldUpdateOperationsInput | string | null
-    consultationFee?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
-    isAvailable?: BoolFieldUpdateOperationsInput | boolean
-    workingHours?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    user?: UserUpdateOneRequiredWithoutDoctorProfileNestedInput
-  }
-
-  export type DoctorUncheckedUpdateWithoutStaffInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
-    doctorNumber?: StringFieldUpdateOperationsInput | string
-    medicalLicense?: StringFieldUpdateOperationsInput | string
-    specialization?: StringFieldUpdateOperationsInput | string
-    subSpecialization?: NullableStringFieldUpdateOperationsInput | string | null
-    boardCertification?: NullableStringFieldUpdateOperationsInput | string | null
-    yearsOfExperience?: NullableIntFieldUpdateOperationsInput | number | null
-    education?: NullableStringFieldUpdateOperationsInput | string | null
-    hospitalAffiliation?: NullableStringFieldUpdateOperationsInput | string | null
-    consultationFee?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
-    isAvailable?: BoolFieldUpdateOperationsInput | boolean
-    workingHours?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type UserCreateWithoutDoctorProfileInput = {
-    id?: string
-    email: string
-    password: string
-    firstName: string
-    lastName: string
-    phone?: string | null
-    role?: $Enums.UserRole
-    status?: $Enums.UserStatus
-    isEmailVerified?: boolean
-    emailVerifiedAt?: Date | string | null
-    avatar?: string | null
-    dateOfBirth?: Date | string | null
-    gender?: $Enums.Gender | null
-    address?: string | null
-    city?: string | null
-    province?: string | null
-    zipCode?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    lastLoginAt?: Date | string | null
-    createdBy?: string | null
-    updatedBy?: string | null
-    refreshTokens?: RefreshTokenCreateNestedManyWithoutUserInput
-    patientProfile?: PatientCreateNestedOneWithoutUserInput
-    staffProfile?: StaffCreateNestedOneWithoutUserInput
-    partnerProfile?: PartnerCreateNestedOneWithoutUserInput
-  }
-
-  export type UserUncheckedCreateWithoutDoctorProfileInput = {
-    id?: string
-    email: string
-    password: string
-    firstName: string
-    lastName: string
-    phone?: string | null
-    role?: $Enums.UserRole
-    status?: $Enums.UserStatus
-    isEmailVerified?: boolean
-    emailVerifiedAt?: Date | string | null
-    avatar?: string | null
-    dateOfBirth?: Date | string | null
-    gender?: $Enums.Gender | null
-    address?: string | null
-    city?: string | null
-    province?: string | null
-    zipCode?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    lastLoginAt?: Date | string | null
-    createdBy?: string | null
-    updatedBy?: string | null
-    refreshTokens?: RefreshTokenUncheckedCreateNestedManyWithoutUserInput
-    patientProfile?: PatientUncheckedCreateNestedOneWithoutUserInput
-    staffProfile?: StaffUncheckedCreateNestedOneWithoutUserInput
-    partnerProfile?: PartnerUncheckedCreateNestedOneWithoutUserInput
-  }
-
-  export type UserCreateOrConnectWithoutDoctorProfileInput = {
-    where: UserWhereUniqueInput
-    create: XOR<UserCreateWithoutDoctorProfileInput, UserUncheckedCreateWithoutDoctorProfileInput>
-  }
-
-  export type StaffCreateWithoutDoctorProfileInput = {
-    id?: string
-    staffNumber: string
-    department?: string | null
-    position?: string | null
-    hireDate?: Date | string | null
-    salary?: Decimal | DecimalJsLike | number | string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    user: UserCreateNestedOneWithoutStaffProfileInput
-  }
-
-  export type StaffUncheckedCreateWithoutDoctorProfileInput = {
-    id?: string
-    userId: string
-    staffNumber: string
-    department?: string | null
-    position?: string | null
-    hireDate?: Date | string | null
-    salary?: Decimal | DecimalJsLike | number | string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type StaffCreateOrConnectWithoutDoctorProfileInput = {
-    where: StaffWhereUniqueInput
-    create: XOR<StaffCreateWithoutDoctorProfileInput, StaffUncheckedCreateWithoutDoctorProfileInput>
-  }
-
-  export type UserUpsertWithoutDoctorProfileInput = {
-    update: XOR<UserUpdateWithoutDoctorProfileInput, UserUncheckedUpdateWithoutDoctorProfileInput>
-    create: XOR<UserCreateWithoutDoctorProfileInput, UserUncheckedCreateWithoutDoctorProfileInput>
-    where?: UserWhereInput
-  }
-
-  export type UserUpdateToOneWithWhereWithoutDoctorProfileInput = {
-    where?: UserWhereInput
-    data: XOR<UserUpdateWithoutDoctorProfileInput, UserUncheckedUpdateWithoutDoctorProfileInput>
-  }
-
-  export type UserUpdateWithoutDoctorProfileInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
-    firstName?: StringFieldUpdateOperationsInput | string
-    lastName?: StringFieldUpdateOperationsInput | string
-    phone?: NullableStringFieldUpdateOperationsInput | string | null
-    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
-    status?: EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
-    isEmailVerified?: BoolFieldUpdateOperationsInput | boolean
-    emailVerifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    avatar?: NullableStringFieldUpdateOperationsInput | string | null
-    dateOfBirth?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    gender?: NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
-    address?: NullableStringFieldUpdateOperationsInput | string | null
-    city?: NullableStringFieldUpdateOperationsInput | string | null
-    province?: NullableStringFieldUpdateOperationsInput | string | null
-    zipCode?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    createdBy?: NullableStringFieldUpdateOperationsInput | string | null
-    updatedBy?: NullableStringFieldUpdateOperationsInput | string | null
-    refreshTokens?: RefreshTokenUpdateManyWithoutUserNestedInput
-    patientProfile?: PatientUpdateOneWithoutUserNestedInput
-    staffProfile?: StaffUpdateOneWithoutUserNestedInput
-    partnerProfile?: PartnerUpdateOneWithoutUserNestedInput
-  }
-
-  export type UserUncheckedUpdateWithoutDoctorProfileInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
-    firstName?: StringFieldUpdateOperationsInput | string
-    lastName?: StringFieldUpdateOperationsInput | string
-    phone?: NullableStringFieldUpdateOperationsInput | string | null
-    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
-    status?: EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
-    isEmailVerified?: BoolFieldUpdateOperationsInput | boolean
-    emailVerifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    avatar?: NullableStringFieldUpdateOperationsInput | string | null
-    dateOfBirth?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    gender?: NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
-    address?: NullableStringFieldUpdateOperationsInput | string | null
-    city?: NullableStringFieldUpdateOperationsInput | string | null
-    province?: NullableStringFieldUpdateOperationsInput | string | null
-    zipCode?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    createdBy?: NullableStringFieldUpdateOperationsInput | string | null
-    updatedBy?: NullableStringFieldUpdateOperationsInput | string | null
-    refreshTokens?: RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
-    patientProfile?: PatientUncheckedUpdateOneWithoutUserNestedInput
-    staffProfile?: StaffUncheckedUpdateOneWithoutUserNestedInput
-    partnerProfile?: PartnerUncheckedUpdateOneWithoutUserNestedInput
-  }
-
-  export type StaffUpsertWithoutDoctorProfileInput = {
-    update: XOR<StaffUpdateWithoutDoctorProfileInput, StaffUncheckedUpdateWithoutDoctorProfileInput>
-    create: XOR<StaffCreateWithoutDoctorProfileInput, StaffUncheckedCreateWithoutDoctorProfileInput>
-    where?: StaffWhereInput
-  }
-
-  export type StaffUpdateToOneWithWhereWithoutDoctorProfileInput = {
-    where?: StaffWhereInput
-    data: XOR<StaffUpdateWithoutDoctorProfileInput, StaffUncheckedUpdateWithoutDoctorProfileInput>
-  }
-
-  export type StaffUpdateWithoutDoctorProfileInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    staffNumber?: StringFieldUpdateOperationsInput | string
+    staffNumber?: NullableStringFieldUpdateOperationsInput | string | null
     department?: NullableStringFieldUpdateOperationsInput | string | null
     position?: NullableStringFieldUpdateOperationsInput | string | null
     hireDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     salary?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    employmentType?: NullableEnumEmploymentTypeFieldUpdateOperationsInput | $Enums.EmploymentType | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    user?: UserUpdateOneRequiredWithoutStaffProfileNestedInput
-  }
-
-  export type StaffUncheckedUpdateWithoutDoctorProfileInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
-    staffNumber?: StringFieldUpdateOperationsInput | string
-    department?: NullableStringFieldUpdateOperationsInput | string | null
-    position?: NullableStringFieldUpdateOperationsInput | string | null
-    hireDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    salary?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdBy?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    refreshTokens?: RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+    partnerProfile?: PartnerUncheckedUpdateOneWithoutUserNestedInput
+    staffCredentials?: StaffCredentialsUncheckedUpdateOneWithoutUserNestedInput
+    appointments?: AppointmentUncheckedUpdateManyWithoutDoctorNestedInput
   }
 
   export type UserCreateWithoutPartnerProfileInput = {
@@ -13992,6 +12680,7 @@ export namespace Prisma {
     password: string
     firstName: string
     lastName: string
+    middleName?: string | null
     phone?: string | null
     role?: $Enums.UserRole
     status?: $Enums.UserStatus
@@ -14004,6 +12693,12 @@ export namespace Prisma {
     city?: string | null
     province?: string | null
     zipCode?: string | null
+    staffNumber?: string | null
+    department?: string | null
+    position?: string | null
+    hireDate?: Date | string | null
+    salary?: Decimal | DecimalJsLike | number | string | null
+    employmentType?: $Enums.EmploymentType | null
     createdAt?: Date | string
     updatedAt?: Date | string
     lastLoginAt?: Date | string | null
@@ -14011,8 +12706,8 @@ export namespace Prisma {
     updatedBy?: string | null
     refreshTokens?: RefreshTokenCreateNestedManyWithoutUserInput
     patientProfile?: PatientCreateNestedOneWithoutUserInput
-    staffProfile?: StaffCreateNestedOneWithoutUserInput
-    doctorProfile?: DoctorCreateNestedOneWithoutUserInput
+    staffCredentials?: StaffCredentialsCreateNestedOneWithoutUserInput
+    appointments?: AppointmentCreateNestedManyWithoutDoctorInput
   }
 
   export type UserUncheckedCreateWithoutPartnerProfileInput = {
@@ -14021,6 +12716,7 @@ export namespace Prisma {
     password: string
     firstName: string
     lastName: string
+    middleName?: string | null
     phone?: string | null
     role?: $Enums.UserRole
     status?: $Enums.UserStatus
@@ -14033,6 +12729,12 @@ export namespace Prisma {
     city?: string | null
     province?: string | null
     zipCode?: string | null
+    staffNumber?: string | null
+    department?: string | null
+    position?: string | null
+    hireDate?: Date | string | null
+    salary?: Decimal | DecimalJsLike | number | string | null
+    employmentType?: $Enums.EmploymentType | null
     createdAt?: Date | string
     updatedAt?: Date | string
     lastLoginAt?: Date | string | null
@@ -14040,8 +12742,8 @@ export namespace Prisma {
     updatedBy?: string | null
     refreshTokens?: RefreshTokenUncheckedCreateNestedManyWithoutUserInput
     patientProfile?: PatientUncheckedCreateNestedOneWithoutUserInput
-    staffProfile?: StaffUncheckedCreateNestedOneWithoutUserInput
-    doctorProfile?: DoctorUncheckedCreateNestedOneWithoutUserInput
+    staffCredentials?: StaffCredentialsUncheckedCreateNestedOneWithoutUserInput
+    appointments?: AppointmentUncheckedCreateNestedManyWithoutDoctorInput
   }
 
   export type UserCreateOrConnectWithoutPartnerProfileInput = {
@@ -14066,6 +12768,7 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: StringFieldUpdateOperationsInput | string
+    middleName?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     status?: EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
@@ -14078,6 +12781,12 @@ export namespace Prisma {
     city?: NullableStringFieldUpdateOperationsInput | string | null
     province?: NullableStringFieldUpdateOperationsInput | string | null
     zipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    staffNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    department?: NullableStringFieldUpdateOperationsInput | string | null
+    position?: NullableStringFieldUpdateOperationsInput | string | null
+    hireDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    salary?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    employmentType?: NullableEnumEmploymentTypeFieldUpdateOperationsInput | $Enums.EmploymentType | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -14085,8 +12794,8 @@ export namespace Prisma {
     updatedBy?: NullableStringFieldUpdateOperationsInput | string | null
     refreshTokens?: RefreshTokenUpdateManyWithoutUserNestedInput
     patientProfile?: PatientUpdateOneWithoutUserNestedInput
-    staffProfile?: StaffUpdateOneWithoutUserNestedInput
-    doctorProfile?: DoctorUpdateOneWithoutUserNestedInput
+    staffCredentials?: StaffCredentialsUpdateOneWithoutUserNestedInput
+    appointments?: AppointmentUpdateManyWithoutDoctorNestedInput
   }
 
   export type UserUncheckedUpdateWithoutPartnerProfileInput = {
@@ -14095,6 +12804,7 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: StringFieldUpdateOperationsInput | string
+    middleName?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     status?: EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
@@ -14107,6 +12817,12 @@ export namespace Prisma {
     city?: NullableStringFieldUpdateOperationsInput | string | null
     province?: NullableStringFieldUpdateOperationsInput | string | null
     zipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    staffNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    department?: NullableStringFieldUpdateOperationsInput | string | null
+    position?: NullableStringFieldUpdateOperationsInput | string | null
+    hireDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    salary?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    employmentType?: NullableEnumEmploymentTypeFieldUpdateOperationsInput | $Enums.EmploymentType | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -14114,8 +12830,328 @@ export namespace Prisma {
     updatedBy?: NullableStringFieldUpdateOperationsInput | string | null
     refreshTokens?: RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
     patientProfile?: PatientUncheckedUpdateOneWithoutUserNestedInput
-    staffProfile?: StaffUncheckedUpdateOneWithoutUserNestedInput
-    doctorProfile?: DoctorUncheckedUpdateOneWithoutUserNestedInput
+    staffCredentials?: StaffCredentialsUncheckedUpdateOneWithoutUserNestedInput
+    appointments?: AppointmentUncheckedUpdateManyWithoutDoctorNestedInput
+  }
+
+  export type UserCreateWithoutRefreshTokensInput = {
+    id?: string
+    email: string
+    password: string
+    firstName: string
+    lastName: string
+    middleName?: string | null
+    phone?: string | null
+    role?: $Enums.UserRole
+    status?: $Enums.UserStatus
+    isEmailVerified?: boolean
+    emailVerifiedAt?: Date | string | null
+    avatar?: string | null
+    dateOfBirth?: Date | string | null
+    gender?: $Enums.Gender | null
+    address?: string | null
+    city?: string | null
+    province?: string | null
+    zipCode?: string | null
+    staffNumber?: string | null
+    department?: string | null
+    position?: string | null
+    hireDate?: Date | string | null
+    salary?: Decimal | DecimalJsLike | number | string | null
+    employmentType?: $Enums.EmploymentType | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    lastLoginAt?: Date | string | null
+    createdBy?: string | null
+    updatedBy?: string | null
+    patientProfile?: PatientCreateNestedOneWithoutUserInput
+    partnerProfile?: PartnerCreateNestedOneWithoutUserInput
+    staffCredentials?: StaffCredentialsCreateNestedOneWithoutUserInput
+    appointments?: AppointmentCreateNestedManyWithoutDoctorInput
+  }
+
+  export type UserUncheckedCreateWithoutRefreshTokensInput = {
+    id?: string
+    email: string
+    password: string
+    firstName: string
+    lastName: string
+    middleName?: string | null
+    phone?: string | null
+    role?: $Enums.UserRole
+    status?: $Enums.UserStatus
+    isEmailVerified?: boolean
+    emailVerifiedAt?: Date | string | null
+    avatar?: string | null
+    dateOfBirth?: Date | string | null
+    gender?: $Enums.Gender | null
+    address?: string | null
+    city?: string | null
+    province?: string | null
+    zipCode?: string | null
+    staffNumber?: string | null
+    department?: string | null
+    position?: string | null
+    hireDate?: Date | string | null
+    salary?: Decimal | DecimalJsLike | number | string | null
+    employmentType?: $Enums.EmploymentType | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    lastLoginAt?: Date | string | null
+    createdBy?: string | null
+    updatedBy?: string | null
+    patientProfile?: PatientUncheckedCreateNestedOneWithoutUserInput
+    partnerProfile?: PartnerUncheckedCreateNestedOneWithoutUserInput
+    staffCredentials?: StaffCredentialsUncheckedCreateNestedOneWithoutUserInput
+    appointments?: AppointmentUncheckedCreateNestedManyWithoutDoctorInput
+  }
+
+  export type UserCreateOrConnectWithoutRefreshTokensInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutRefreshTokensInput, UserUncheckedCreateWithoutRefreshTokensInput>
+  }
+
+  export type UserUpsertWithoutRefreshTokensInput = {
+    update: XOR<UserUpdateWithoutRefreshTokensInput, UserUncheckedUpdateWithoutRefreshTokensInput>
+    create: XOR<UserCreateWithoutRefreshTokensInput, UserUncheckedCreateWithoutRefreshTokensInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutRefreshTokensInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutRefreshTokensInput, UserUncheckedUpdateWithoutRefreshTokensInput>
+  }
+
+  export type UserUpdateWithoutRefreshTokensInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    middleName?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    status?: EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+    isEmailVerified?: BoolFieldUpdateOperationsInput | boolean
+    emailVerifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    dateOfBirth?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    gender?: NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    province?: NullableStringFieldUpdateOperationsInput | string | null
+    zipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    staffNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    department?: NullableStringFieldUpdateOperationsInput | string | null
+    position?: NullableStringFieldUpdateOperationsInput | string | null
+    hireDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    salary?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    employmentType?: NullableEnumEmploymentTypeFieldUpdateOperationsInput | $Enums.EmploymentType | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdBy?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    patientProfile?: PatientUpdateOneWithoutUserNestedInput
+    partnerProfile?: PartnerUpdateOneWithoutUserNestedInput
+    staffCredentials?: StaffCredentialsUpdateOneWithoutUserNestedInput
+    appointments?: AppointmentUpdateManyWithoutDoctorNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutRefreshTokensInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    middleName?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    status?: EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+    isEmailVerified?: BoolFieldUpdateOperationsInput | boolean
+    emailVerifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    dateOfBirth?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    gender?: NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    province?: NullableStringFieldUpdateOperationsInput | string | null
+    zipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    staffNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    department?: NullableStringFieldUpdateOperationsInput | string | null
+    position?: NullableStringFieldUpdateOperationsInput | string | null
+    hireDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    salary?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    employmentType?: NullableEnumEmploymentTypeFieldUpdateOperationsInput | $Enums.EmploymentType | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdBy?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    patientProfile?: PatientUncheckedUpdateOneWithoutUserNestedInput
+    partnerProfile?: PartnerUncheckedUpdateOneWithoutUserNestedInput
+    staffCredentials?: StaffCredentialsUncheckedUpdateOneWithoutUserNestedInput
+    appointments?: AppointmentUncheckedUpdateManyWithoutDoctorNestedInput
+  }
+
+  export type UserCreateWithoutAppointmentsInput = {
+    id?: string
+    email: string
+    password: string
+    firstName: string
+    lastName: string
+    middleName?: string | null
+    phone?: string | null
+    role?: $Enums.UserRole
+    status?: $Enums.UserStatus
+    isEmailVerified?: boolean
+    emailVerifiedAt?: Date | string | null
+    avatar?: string | null
+    dateOfBirth?: Date | string | null
+    gender?: $Enums.Gender | null
+    address?: string | null
+    city?: string | null
+    province?: string | null
+    zipCode?: string | null
+    staffNumber?: string | null
+    department?: string | null
+    position?: string | null
+    hireDate?: Date | string | null
+    salary?: Decimal | DecimalJsLike | number | string | null
+    employmentType?: $Enums.EmploymentType | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    lastLoginAt?: Date | string | null
+    createdBy?: string | null
+    updatedBy?: string | null
+    refreshTokens?: RefreshTokenCreateNestedManyWithoutUserInput
+    patientProfile?: PatientCreateNestedOneWithoutUserInput
+    partnerProfile?: PartnerCreateNestedOneWithoutUserInput
+    staffCredentials?: StaffCredentialsCreateNestedOneWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutAppointmentsInput = {
+    id?: string
+    email: string
+    password: string
+    firstName: string
+    lastName: string
+    middleName?: string | null
+    phone?: string | null
+    role?: $Enums.UserRole
+    status?: $Enums.UserStatus
+    isEmailVerified?: boolean
+    emailVerifiedAt?: Date | string | null
+    avatar?: string | null
+    dateOfBirth?: Date | string | null
+    gender?: $Enums.Gender | null
+    address?: string | null
+    city?: string | null
+    province?: string | null
+    zipCode?: string | null
+    staffNumber?: string | null
+    department?: string | null
+    position?: string | null
+    hireDate?: Date | string | null
+    salary?: Decimal | DecimalJsLike | number | string | null
+    employmentType?: $Enums.EmploymentType | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    lastLoginAt?: Date | string | null
+    createdBy?: string | null
+    updatedBy?: string | null
+    refreshTokens?: RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+    patientProfile?: PatientUncheckedCreateNestedOneWithoutUserInput
+    partnerProfile?: PartnerUncheckedCreateNestedOneWithoutUserInput
+    staffCredentials?: StaffCredentialsUncheckedCreateNestedOneWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutAppointmentsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutAppointmentsInput, UserUncheckedCreateWithoutAppointmentsInput>
+  }
+
+  export type UserUpsertWithoutAppointmentsInput = {
+    update: XOR<UserUpdateWithoutAppointmentsInput, UserUncheckedUpdateWithoutAppointmentsInput>
+    create: XOR<UserCreateWithoutAppointmentsInput, UserUncheckedCreateWithoutAppointmentsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutAppointmentsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutAppointmentsInput, UserUncheckedUpdateWithoutAppointmentsInput>
+  }
+
+  export type UserUpdateWithoutAppointmentsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    middleName?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    status?: EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+    isEmailVerified?: BoolFieldUpdateOperationsInput | boolean
+    emailVerifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    dateOfBirth?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    gender?: NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    province?: NullableStringFieldUpdateOperationsInput | string | null
+    zipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    staffNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    department?: NullableStringFieldUpdateOperationsInput | string | null
+    position?: NullableStringFieldUpdateOperationsInput | string | null
+    hireDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    salary?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    employmentType?: NullableEnumEmploymentTypeFieldUpdateOperationsInput | $Enums.EmploymentType | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdBy?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    refreshTokens?: RefreshTokenUpdateManyWithoutUserNestedInput
+    patientProfile?: PatientUpdateOneWithoutUserNestedInput
+    partnerProfile?: PartnerUpdateOneWithoutUserNestedInput
+    staffCredentials?: StaffCredentialsUpdateOneWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutAppointmentsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    middleName?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    status?: EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+    isEmailVerified?: BoolFieldUpdateOperationsInput | boolean
+    emailVerifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    dateOfBirth?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    gender?: NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    province?: NullableStringFieldUpdateOperationsInput | string | null
+    zipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    staffNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    department?: NullableStringFieldUpdateOperationsInput | string | null
+    position?: NullableStringFieldUpdateOperationsInput | string | null
+    hireDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    salary?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    employmentType?: NullableEnumEmploymentTypeFieldUpdateOperationsInput | $Enums.EmploymentType | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdBy?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    refreshTokens?: RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+    patientProfile?: PatientUncheckedUpdateOneWithoutUserNestedInput
+    partnerProfile?: PartnerUncheckedUpdateOneWithoutUserNestedInput
+    staffCredentials?: StaffCredentialsUncheckedUpdateOneWithoutUserNestedInput
   }
 
   export type RefreshTokenCreateManyUserInput = {
@@ -14124,6 +13160,19 @@ export namespace Prisma {
     expiresAt: Date | string
     createdAt?: Date | string
     isRevoked?: boolean
+  }
+
+  export type AppointmentCreateManyDoctorInput = {
+    id?: string
+    patientId: string
+    scheduledAt: Date | string
+    duration: number
+    type: $Enums.AppointmentType
+    status?: $Enums.AppointmentStatus
+    reason?: string | null
+    notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type RefreshTokenUpdateWithoutUserInput = {
@@ -14148,6 +13197,45 @@ export namespace Prisma {
     expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     isRevoked?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type AppointmentUpdateWithoutDoctorInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    patientId?: StringFieldUpdateOperationsInput | string
+    scheduledAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    duration?: IntFieldUpdateOperationsInput | number
+    type?: EnumAppointmentTypeFieldUpdateOperationsInput | $Enums.AppointmentType
+    status?: EnumAppointmentStatusFieldUpdateOperationsInput | $Enums.AppointmentStatus
+    reason?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AppointmentUncheckedUpdateWithoutDoctorInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    patientId?: StringFieldUpdateOperationsInput | string
+    scheduledAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    duration?: IntFieldUpdateOperationsInput | number
+    type?: EnumAppointmentTypeFieldUpdateOperationsInput | $Enums.AppointmentType
+    status?: EnumAppointmentStatusFieldUpdateOperationsInput | $Enums.AppointmentStatus
+    reason?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AppointmentUncheckedUpdateManyWithoutDoctorInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    patientId?: StringFieldUpdateOperationsInput | string
+    scheduledAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    duration?: IntFieldUpdateOperationsInput | number
+    type?: EnumAppointmentTypeFieldUpdateOperationsInput | $Enums.AppointmentType
+    status?: EnumAppointmentStatusFieldUpdateOperationsInput | $Enums.AppointmentStatus
+    reason?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
 
