@@ -8,13 +8,14 @@ datasource db {
   url      = env("INSTANCE_DATABASE_URL")
 }
 
-// User Authentication Model
+// Enhanced User Model - Single table for all users
 model User {
   id              String     @id @default(cuid())
   email           String     @unique
   password        String // Hashed password
   firstName       String
   lastName        String
+  middleName      String?
   phone           String?
   role            UserRole   @default(PATIENT)
   status          UserStatus @default(ACTIVE)
@@ -30,17 +31,25 @@ model User {
   province    String?
   zipCode     String?
 
+  // Staff-specific fields (only used when role = STAFF)
+  staffNumber    String?         @unique // Auto-generated for staff
+  department     String? // Department they work in
+  position       String? // Job position
+  hireDate       DateTime? // When they were hired
+  salary         Decimal? // Salary information
+  employmentType EmploymentType? // Full-time, part-time, contract
+
   // System fields
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
   lastLoginAt DateTime?
 
   // Relationships
-  refreshTokens  RefreshToken[]
-  patientProfile Patient?
-  staffProfile   Staff?
-  partnerProfile Partner?
-  doctorProfile  Doctor?
+  refreshTokens    RefreshToken[]
+  patientProfile   Patient?
+  partnerProfile   Partner?
+  staffCredentials StaffCredentials? // Professional credentials for staff
+  appointments     Appointment[]
 
   // Audit fields
   createdBy String?
@@ -49,24 +58,46 @@ model User {
   @@map("users")
 }
 
-// Refresh Tokens for JWT
-model RefreshToken {
-  id        String   @id @default(cuid())
-  token     String   @unique
-  userId    String
-  expiresAt DateTime
+// Staff Credentials - For doctors, nurses, and other medical staff
+model StaffCredentials {
+  id     String @id @default(cuid())
+  userId String @unique
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  // Professional Type
+  staffType StaffType // DOCTOR, NURSE, TECHNICIAN, etc.
+
+  // License and Certifications
+  licenseNumber      String?
+  licenseExpiryDate  DateTime?
+  specialization     String?
+  subSpecialization  String?
+  boardCertification String[] // Array of certifications
+
+  // Education and Experience
+  education         String?
+  yearsOfExperience Int?
+
+  // Medical staff specific fields
+  consultationFee Decimal? // For doctors
+  isAvailable     Boolean  @default(true)
+  workingHours    Json? // Flexible schedule data
+
+  // Hospital/Institution info
+  hospitalAffiliation String?
+
+  // System fields
   createdAt DateTime @default(now())
-  isRevoked Boolean  @default(false)
+  updatedAt DateTime @updatedAt
 
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@map("refresh_tokens")
+  @@map("staff_credentials")
 }
 
-// Extended Patient Profile
+// Patient Profile (simplified)
 model Patient {
   id            String @id @default(cuid())
   userId        String @unique
+  user          User   @relation(fields: [userId], references: [id], onDelete: Cascade)
   patientNumber String @unique
 
   // Medical Information
@@ -84,73 +115,14 @@ model Patient {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  // Relationships
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-
   @@map("patients")
-}
-
-// Staff Profile
-model Staff {
-  id          String  @id @default(cuid())
-  userId      String  @unique
-  staffNumber String  @unique
-  department  String?
-  position    String?
-
-  // Employment details
-  hireDate DateTime?
-  salary   Decimal?
-
-  // System fields
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  // Relationships
-  user          User    @relation(fields: [userId], references: [id], onDelete: Cascade)
-  doctorProfile Doctor?
-
-  @@map("staff")
-}
-
-// Doctor Profile (extends Staff)
-model Doctor {
-  id           String @id @default(cuid())
-  userId       String @unique
-  staffId      String @unique
-  doctorNumber String @unique
-
-  // Medical credentials
-  medicalLicense     String
-  specialization     String
-  subSpecialization  String?
-  boardCertification String?
-
-  // Professional details
-  yearsOfExperience   Int?
-  education           String?
-  hospitalAffiliation String?
-  consultationFee     Decimal?
-
-  // Availability
-  isAvailable  Boolean @default(true)
-  workingHours String? // JSON string for schedule
-
-  // System fields
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  // Relationships
-  user  User  @relation(fields: [userId], references: [id], onDelete: Cascade)
-  staff Staff @relation(fields: [staffId], references: [id], onDelete: Cascade)
-
-  @@map("doctors")
 }
 
 // Partner Profile (Hospital/Clinic)
 model Partner {
   id              String      @id @default(cuid())
   userId          String      @unique
+  user            User        @relation(fields: [userId], references: [id], onDelete: Cascade)
   institutionName String
   institutionType PartnerType
   licenseNumber   String?
@@ -163,17 +135,29 @@ model Partner {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  // Relationships
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-
   @@map("partners")
 }
 
-// Appointments Model
+// Refresh Tokens for JWT
+model RefreshToken {
+  id        String   @id @default(cuid())
+  token     String   @unique
+  userId    String
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+  isRevoked Boolean  @default(false)
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("refresh_tokens")
+}
+
+// Appointments Model (simplified)
 model Appointment {
   id        String @id @default(cuid())
   patientId String
-  doctorId  String
+  doctorId  String // References User.id where role = STAFF and staffType = DOCTOR
+  doctor    User   @relation(fields: [doctorId], references: [id])
 
   // Appointment details
   scheduledAt DateTime
@@ -190,12 +174,37 @@ model Appointment {
   @@map("appointments")
 }
 
+// ENUMS
+
 // User Roles
 enum UserRole {
   ADMIN
-  STAFF
+  STAFF // Covers doctors, nurses, technicians, etc.
   PATIENT
   PARTNER
+}
+
+// Staff Types (for detailed classification)
+enum StaffType {
+  DOCTOR
+  NURSE
+  TECHNICIAN
+  PHARMACIST
+  RADIOLOGIST
+  THERAPIST
+  ADMINISTRATOR
+  SECURITY
+  MAINTENANCE
+  OTHER
+}
+
+// Employment Types
+enum EmploymentType {
+  FULL_TIME
+  PART_TIME
+  CONTRACT
+  CONSULTANT
+  INTERN
 }
 
 // User Status
