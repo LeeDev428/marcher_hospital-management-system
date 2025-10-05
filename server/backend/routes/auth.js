@@ -157,7 +157,7 @@ router.post('/login', async (req, res) => {
       where: { email },
       include: {
         patientProfile: true,
-        staffProfile: true,
+        staffCredentials: true,
         partnerProfile: true
       }
     });
@@ -313,7 +313,7 @@ router.get('/me', authMiddleware, async (req, res) => {
       where: { id: req.user.userId },
       include: {
         patientProfile: true,
-        staffProfile: true,
+        staffCredentials: true,
         partnerProfile: true
       }
     });
