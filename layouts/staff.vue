@@ -63,6 +63,15 @@ const handleLogout = async () => {
           </NuxtLink>
           
           <NuxtLink 
+            to="/staff/schedule" 
+            class="flex items-center px-3 py-2 text-sm font-medium rounded-lg"
+            :class="$route.path.startsWith('/staff/schedule') ? 'bg-blue-50 text-blue-700 border-r-2 border-blue-600' : 'text-gray-600 hover:bg-gray-50'"
+          >
+            <Icon name="lucide:clock" class="w-5 h-5 mr-3" />
+            Schedule
+          </NuxtLink>
+          
+          <NuxtLink 
             to="/staff/billing" 
             class="flex items-center px-3 py-2 text-sm font-medium rounded-lg"
             :class="$route.path.startsWith('/staff/billing') ? 'bg-blue-50 text-blue-700 border-r-2 border-blue-600' : 'text-gray-600 hover:bg-gray-50'"

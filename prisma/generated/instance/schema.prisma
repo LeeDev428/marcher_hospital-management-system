@@ -262,3 +262,30 @@ enum AppointmentStatus {
   CANCELLED
   NO_SHOW
 }
+
+// Day of Week for schedule
+enum DayOfWeek {
+  MONDAY
+  TUESDAY
+  WEDNESDAY
+  THURSDAY
+  FRIDAY
+  SATURDAY
+  SUNDAY
+}
+
+// Staff Schedule - Weekly availability
+model StaffSchedule {
+  id          String    @id @default(cuid())
+  staffId     String // User ID of the staff member
+  day         DayOfWeek
+  isAvailable Boolean   @default(false)
+  startTime   String? // HH:mm format
+  endTime     String? // HH:mm format
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([staffId, day])
+  @@map("staff_schedules")
+}

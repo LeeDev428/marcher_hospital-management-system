@@ -283,7 +283,6 @@ interface _GlobalComponents {
     'NuxtPicture': typeof import("../../node_modules/@nuxt/image/dist/runtime/components/NuxtPicture.vue")['default']
     'Icon': typeof import("../../node_modules/@nuxt/icon/dist/runtime/components/index")['default']
     'UiBadge': typeof import("../../components/ui/badge/index")['Badge']
-    'UiButton': typeof import("../../components/ui/button/index")['Button']
     'UiBreadcrumb': typeof import("../../components/ui/breadcrumb/index")['Breadcrumb']
     'UiBreadcrumbEllipsis': typeof import("../../components/ui/breadcrumb/index")['BreadcrumbEllipsis']
     'UiBreadcrumbItem': typeof import("../../components/ui/breadcrumb/index")['BreadcrumbItem']
@@ -291,6 +290,7 @@ interface _GlobalComponents {
     'UiBreadcrumbList': typeof import("../../components/ui/breadcrumb/index")['BreadcrumbList']
     'UiBreadcrumbPage': typeof import("../../components/ui/breadcrumb/index")['BreadcrumbPage']
     'UiBreadcrumbSeparator': typeof import("../../components/ui/breadcrumb/index")['BreadcrumbSeparator']
+    'UiButton': typeof import("../../components/ui/button/index")['Button']
     'UiCalendar': typeof import("../../components/ui/calendar/index")['Calendar']
     'UiCalendarCell': typeof import("../../components/ui/calendar/index")['CalendarCell']
     'UiCalendarCellTrigger': typeof import("../../components/ui/calendar/index")['CalendarCellTrigger']
@@ -685,7 +685,6 @@ interface _GlobalComponents {
     'LazyNuxtPicture': LazyComponent<typeof import("../../node_modules/@nuxt/image/dist/runtime/components/NuxtPicture.vue")['default']>
     'LazyIcon': LazyComponent<typeof import("../../node_modules/@nuxt/icon/dist/runtime/components/index")['default']>
     'LazyUiBadge': LazyComponent<typeof import("../../components/ui/badge/index")['Badge']>
-    'LazyUiButton': LazyComponent<typeof import("../../components/ui/button/index")['Button']>
     'LazyUiBreadcrumb': LazyComponent<typeof import("../../components/ui/breadcrumb/index")['Breadcrumb']>
     'LazyUiBreadcrumbEllipsis': LazyComponent<typeof import("../../components/ui/breadcrumb/index")['BreadcrumbEllipsis']>
     'LazyUiBreadcrumbItem': LazyComponent<typeof import("../../components/ui/breadcrumb/index")['BreadcrumbItem']>
@@ -693,6 +692,7 @@ interface _GlobalComponents {
     'LazyUiBreadcrumbList': LazyComponent<typeof import("../../components/ui/breadcrumb/index")['BreadcrumbList']>
     'LazyUiBreadcrumbPage': LazyComponent<typeof import("../../components/ui/breadcrumb/index")['BreadcrumbPage']>
     'LazyUiBreadcrumbSeparator': LazyComponent<typeof import("../../components/ui/breadcrumb/index")['BreadcrumbSeparator']>
+    'LazyUiButton': LazyComponent<typeof import("../../components/ui/button/index")['Button']>
     'LazyUiCalendar': LazyComponent<typeof import("../../components/ui/calendar/index")['Calendar']>
     'LazyUiCalendarCell': LazyComponent<typeof import("../../components/ui/calendar/index")['CalendarCell']>
     'LazyUiCalendarCellTrigger': LazyComponent<typeof import("../../components/ui/calendar/index")['CalendarCellTrigger']>

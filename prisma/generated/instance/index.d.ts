@@ -43,6 +43,11 @@ export type RefreshToken = $Result.DefaultSelection<Prisma.$RefreshTokenPayload>
  * 
  */
 export type Appointment = $Result.DefaultSelection<Prisma.$AppointmentPayload>
+/**
+ * Model StaffSchedule
+ * 
+ */
+export type StaffSchedule = $Result.DefaultSelection<Prisma.$StaffSchedulePayload>
 
 /**
  * Enums
@@ -152,6 +157,19 @@ export const AppointmentStatus: {
 
 export type AppointmentStatus = (typeof AppointmentStatus)[keyof typeof AppointmentStatus]
 
+
+export const DayOfWeek: {
+  MONDAY: 'MONDAY',
+  TUESDAY: 'TUESDAY',
+  WEDNESDAY: 'WEDNESDAY',
+  THURSDAY: 'THURSDAY',
+  FRIDAY: 'FRIDAY',
+  SATURDAY: 'SATURDAY',
+  SUNDAY: 'SUNDAY'
+};
+
+export type DayOfWeek = (typeof DayOfWeek)[keyof typeof DayOfWeek]
+
 }
 
 export type UserRole = $Enums.UserRole
@@ -189,6 +207,10 @@ export const AppointmentType: typeof $Enums.AppointmentType
 export type AppointmentStatus = $Enums.AppointmentStatus
 
 export const AppointmentStatus: typeof $Enums.AppointmentStatus
+
+export type DayOfWeek = $Enums.DayOfWeek
+
+export const DayOfWeek: typeof $Enums.DayOfWeek
 
 /**
  * ##  Prisma Client ʲˢ
@@ -367,6 +389,16 @@ export class PrismaClient<
     * ```
     */
   get appointment(): Prisma.AppointmentDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.staffSchedule`: Exposes CRUD operations for the **StaffSchedule** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more StaffSchedules
+    * const staffSchedules = await prisma.staffSchedule.findMany()
+    * ```
+    */
+  get staffSchedule(): Prisma.StaffScheduleDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -812,7 +844,8 @@ export namespace Prisma {
     Patient: 'Patient',
     Partner: 'Partner',
     RefreshToken: 'RefreshToken',
-    Appointment: 'Appointment'
+    Appointment: 'Appointment',
+    StaffSchedule: 'StaffSchedule'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -831,7 +864,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "staffCredentials" | "patient" | "partner" | "refreshToken" | "appointment"
+      modelProps: "user" | "staffCredentials" | "patient" | "partner" | "refreshToken" | "appointment" | "staffSchedule"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1279,6 +1312,80 @@ export namespace Prisma {
           }
         }
       }
+      StaffSchedule: {
+        payload: Prisma.$StaffSchedulePayload<ExtArgs>
+        fields: Prisma.StaffScheduleFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.StaffScheduleFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StaffSchedulePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.StaffScheduleFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StaffSchedulePayload>
+          }
+          findFirst: {
+            args: Prisma.StaffScheduleFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StaffSchedulePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.StaffScheduleFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StaffSchedulePayload>
+          }
+          findMany: {
+            args: Prisma.StaffScheduleFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StaffSchedulePayload>[]
+          }
+          create: {
+            args: Prisma.StaffScheduleCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StaffSchedulePayload>
+          }
+          createMany: {
+            args: Prisma.StaffScheduleCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.StaffScheduleCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StaffSchedulePayload>[]
+          }
+          delete: {
+            args: Prisma.StaffScheduleDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StaffSchedulePayload>
+          }
+          update: {
+            args: Prisma.StaffScheduleUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StaffSchedulePayload>
+          }
+          deleteMany: {
+            args: Prisma.StaffScheduleDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.StaffScheduleUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.StaffScheduleUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StaffSchedulePayload>[]
+          }
+          upsert: {
+            args: Prisma.StaffScheduleUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StaffSchedulePayload>
+          }
+          aggregate: {
+            args: Prisma.StaffScheduleAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateStaffSchedule>
+          }
+          groupBy: {
+            args: Prisma.StaffScheduleGroupByArgs<ExtArgs>
+            result: $Utils.Optional<StaffScheduleGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.StaffScheduleCountArgs<ExtArgs>
+            result: $Utils.Optional<StaffScheduleCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1381,6 +1488,7 @@ export namespace Prisma {
     partner?: PartnerOmit
     refreshToken?: RefreshTokenOmit
     appointment?: AppointmentOmit
+    staffSchedule?: StaffScheduleOmit
   }
 
   /* Types for Logging */
@@ -8745,6 +8853,1040 @@ export namespace Prisma {
 
 
   /**
+   * Model StaffSchedule
+   */
+
+  export type AggregateStaffSchedule = {
+    _count: StaffScheduleCountAggregateOutputType | null
+    _min: StaffScheduleMinAggregateOutputType | null
+    _max: StaffScheduleMaxAggregateOutputType | null
+  }
+
+  export type StaffScheduleMinAggregateOutputType = {
+    id: string | null
+    staffId: string | null
+    day: $Enums.DayOfWeek | null
+    isAvailable: boolean | null
+    startTime: string | null
+    endTime: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type StaffScheduleMaxAggregateOutputType = {
+    id: string | null
+    staffId: string | null
+    day: $Enums.DayOfWeek | null
+    isAvailable: boolean | null
+    startTime: string | null
+    endTime: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type StaffScheduleCountAggregateOutputType = {
+    id: number
+    staffId: number
+    day: number
+    isAvailable: number
+    startTime: number
+    endTime: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type StaffScheduleMinAggregateInputType = {
+    id?: true
+    staffId?: true
+    day?: true
+    isAvailable?: true
+    startTime?: true
+    endTime?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type StaffScheduleMaxAggregateInputType = {
+    id?: true
+    staffId?: true
+    day?: true
+    isAvailable?: true
+    startTime?: true
+    endTime?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type StaffScheduleCountAggregateInputType = {
+    id?: true
+    staffId?: true
+    day?: true
+    isAvailable?: true
+    startTime?: true
+    endTime?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type StaffScheduleAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which StaffSchedule to aggregate.
+     */
+    where?: StaffScheduleWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of StaffSchedules to fetch.
+     */
+    orderBy?: StaffScheduleOrderByWithRelationInput | StaffScheduleOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: StaffScheduleWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` StaffSchedules from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` StaffSchedules.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned StaffSchedules
+    **/
+    _count?: true | StaffScheduleCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: StaffScheduleMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: StaffScheduleMaxAggregateInputType
+  }
+
+  export type GetStaffScheduleAggregateType<T extends StaffScheduleAggregateArgs> = {
+        [P in keyof T & keyof AggregateStaffSchedule]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateStaffSchedule[P]>
+      : GetScalarType<T[P], AggregateStaffSchedule[P]>
+  }
+
+
+
+
+  export type StaffScheduleGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: StaffScheduleWhereInput
+    orderBy?: StaffScheduleOrderByWithAggregationInput | StaffScheduleOrderByWithAggregationInput[]
+    by: StaffScheduleScalarFieldEnum[] | StaffScheduleScalarFieldEnum
+    having?: StaffScheduleScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: StaffScheduleCountAggregateInputType | true
+    _min?: StaffScheduleMinAggregateInputType
+    _max?: StaffScheduleMaxAggregateInputType
+  }
+
+  export type StaffScheduleGroupByOutputType = {
+    id: string
+    staffId: string
+    day: $Enums.DayOfWeek
+    isAvailable: boolean
+    startTime: string | null
+    endTime: string | null
+    createdAt: Date
+    updatedAt: Date
+    _count: StaffScheduleCountAggregateOutputType | null
+    _min: StaffScheduleMinAggregateOutputType | null
+    _max: StaffScheduleMaxAggregateOutputType | null
+  }
+
+  type GetStaffScheduleGroupByPayload<T extends StaffScheduleGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<StaffScheduleGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof StaffScheduleGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], StaffScheduleGroupByOutputType[P]>
+            : GetScalarType<T[P], StaffScheduleGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type StaffScheduleSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    staffId?: boolean
+    day?: boolean
+    isAvailable?: boolean
+    startTime?: boolean
+    endTime?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["staffSchedule"]>
+
+  export type StaffScheduleSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    staffId?: boolean
+    day?: boolean
+    isAvailable?: boolean
+    startTime?: boolean
+    endTime?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["staffSchedule"]>
+
+  export type StaffScheduleSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    staffId?: boolean
+    day?: boolean
+    isAvailable?: boolean
+    startTime?: boolean
+    endTime?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["staffSchedule"]>
+
+  export type StaffScheduleSelectScalar = {
+    id?: boolean
+    staffId?: boolean
+    day?: boolean
+    isAvailable?: boolean
+    startTime?: boolean
+    endTime?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type StaffScheduleOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "staffId" | "day" | "isAvailable" | "startTime" | "endTime" | "createdAt" | "updatedAt", ExtArgs["result"]["staffSchedule"]>
+
+  export type $StaffSchedulePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "StaffSchedule"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      staffId: string
+      day: $Enums.DayOfWeek
+      isAvailable: boolean
+      startTime: string | null
+      endTime: string | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["staffSchedule"]>
+    composites: {}
+  }
+
+  type StaffScheduleGetPayload<S extends boolean | null | undefined | StaffScheduleDefaultArgs> = $Result.GetResult<Prisma.$StaffSchedulePayload, S>
+
+  type StaffScheduleCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<StaffScheduleFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: StaffScheduleCountAggregateInputType | true
+    }
+
+  export interface StaffScheduleDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['StaffSchedule'], meta: { name: 'StaffSchedule' } }
+    /**
+     * Find zero or one StaffSchedule that matches the filter.
+     * @param {StaffScheduleFindUniqueArgs} args - Arguments to find a StaffSchedule
+     * @example
+     * // Get one StaffSchedule
+     * const staffSchedule = await prisma.staffSchedule.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends StaffScheduleFindUniqueArgs>(args: SelectSubset<T, StaffScheduleFindUniqueArgs<ExtArgs>>): Prisma__StaffScheduleClient<$Result.GetResult<Prisma.$StaffSchedulePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one StaffSchedule that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {StaffScheduleFindUniqueOrThrowArgs} args - Arguments to find a StaffSchedule
+     * @example
+     * // Get one StaffSchedule
+     * const staffSchedule = await prisma.staffSchedule.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends StaffScheduleFindUniqueOrThrowArgs>(args: SelectSubset<T, StaffScheduleFindUniqueOrThrowArgs<ExtArgs>>): Prisma__StaffScheduleClient<$Result.GetResult<Prisma.$StaffSchedulePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first StaffSchedule that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StaffScheduleFindFirstArgs} args - Arguments to find a StaffSchedule
+     * @example
+     * // Get one StaffSchedule
+     * const staffSchedule = await prisma.staffSchedule.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends StaffScheduleFindFirstArgs>(args?: SelectSubset<T, StaffScheduleFindFirstArgs<ExtArgs>>): Prisma__StaffScheduleClient<$Result.GetResult<Prisma.$StaffSchedulePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first StaffSchedule that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StaffScheduleFindFirstOrThrowArgs} args - Arguments to find a StaffSchedule
+     * @example
+     * // Get one StaffSchedule
+     * const staffSchedule = await prisma.staffSchedule.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends StaffScheduleFindFirstOrThrowArgs>(args?: SelectSubset<T, StaffScheduleFindFirstOrThrowArgs<ExtArgs>>): Prisma__StaffScheduleClient<$Result.GetResult<Prisma.$StaffSchedulePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more StaffSchedules that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StaffScheduleFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all StaffSchedules
+     * const staffSchedules = await prisma.staffSchedule.findMany()
+     * 
+     * // Get first 10 StaffSchedules
+     * const staffSchedules = await prisma.staffSchedule.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const staffScheduleWithIdOnly = await prisma.staffSchedule.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends StaffScheduleFindManyArgs>(args?: SelectSubset<T, StaffScheduleFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StaffSchedulePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a StaffSchedule.
+     * @param {StaffScheduleCreateArgs} args - Arguments to create a StaffSchedule.
+     * @example
+     * // Create one StaffSchedule
+     * const StaffSchedule = await prisma.staffSchedule.create({
+     *   data: {
+     *     // ... data to create a StaffSchedule
+     *   }
+     * })
+     * 
+     */
+    create<T extends StaffScheduleCreateArgs>(args: SelectSubset<T, StaffScheduleCreateArgs<ExtArgs>>): Prisma__StaffScheduleClient<$Result.GetResult<Prisma.$StaffSchedulePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many StaffSchedules.
+     * @param {StaffScheduleCreateManyArgs} args - Arguments to create many StaffSchedules.
+     * @example
+     * // Create many StaffSchedules
+     * const staffSchedule = await prisma.staffSchedule.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends StaffScheduleCreateManyArgs>(args?: SelectSubset<T, StaffScheduleCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many StaffSchedules and returns the data saved in the database.
+     * @param {StaffScheduleCreateManyAndReturnArgs} args - Arguments to create many StaffSchedules.
+     * @example
+     * // Create many StaffSchedules
+     * const staffSchedule = await prisma.staffSchedule.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many StaffSchedules and only return the `id`
+     * const staffScheduleWithIdOnly = await prisma.staffSchedule.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends StaffScheduleCreateManyAndReturnArgs>(args?: SelectSubset<T, StaffScheduleCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StaffSchedulePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a StaffSchedule.
+     * @param {StaffScheduleDeleteArgs} args - Arguments to delete one StaffSchedule.
+     * @example
+     * // Delete one StaffSchedule
+     * const StaffSchedule = await prisma.staffSchedule.delete({
+     *   where: {
+     *     // ... filter to delete one StaffSchedule
+     *   }
+     * })
+     * 
+     */
+    delete<T extends StaffScheduleDeleteArgs>(args: SelectSubset<T, StaffScheduleDeleteArgs<ExtArgs>>): Prisma__StaffScheduleClient<$Result.GetResult<Prisma.$StaffSchedulePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one StaffSchedule.
+     * @param {StaffScheduleUpdateArgs} args - Arguments to update one StaffSchedule.
+     * @example
+     * // Update one StaffSchedule
+     * const staffSchedule = await prisma.staffSchedule.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends StaffScheduleUpdateArgs>(args: SelectSubset<T, StaffScheduleUpdateArgs<ExtArgs>>): Prisma__StaffScheduleClient<$Result.GetResult<Prisma.$StaffSchedulePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more StaffSchedules.
+     * @param {StaffScheduleDeleteManyArgs} args - Arguments to filter StaffSchedules to delete.
+     * @example
+     * // Delete a few StaffSchedules
+     * const { count } = await prisma.staffSchedule.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends StaffScheduleDeleteManyArgs>(args?: SelectSubset<T, StaffScheduleDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more StaffSchedules.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StaffScheduleUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many StaffSchedules
+     * const staffSchedule = await prisma.staffSchedule.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends StaffScheduleUpdateManyArgs>(args: SelectSubset<T, StaffScheduleUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more StaffSchedules and returns the data updated in the database.
+     * @param {StaffScheduleUpdateManyAndReturnArgs} args - Arguments to update many StaffSchedules.
+     * @example
+     * // Update many StaffSchedules
+     * const staffSchedule = await prisma.staffSchedule.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more StaffSchedules and only return the `id`
+     * const staffScheduleWithIdOnly = await prisma.staffSchedule.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends StaffScheduleUpdateManyAndReturnArgs>(args: SelectSubset<T, StaffScheduleUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StaffSchedulePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one StaffSchedule.
+     * @param {StaffScheduleUpsertArgs} args - Arguments to update or create a StaffSchedule.
+     * @example
+     * // Update or create a StaffSchedule
+     * const staffSchedule = await prisma.staffSchedule.upsert({
+     *   create: {
+     *     // ... data to create a StaffSchedule
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the StaffSchedule we want to update
+     *   }
+     * })
+     */
+    upsert<T extends StaffScheduleUpsertArgs>(args: SelectSubset<T, StaffScheduleUpsertArgs<ExtArgs>>): Prisma__StaffScheduleClient<$Result.GetResult<Prisma.$StaffSchedulePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of StaffSchedules.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StaffScheduleCountArgs} args - Arguments to filter StaffSchedules to count.
+     * @example
+     * // Count the number of StaffSchedules
+     * const count = await prisma.staffSchedule.count({
+     *   where: {
+     *     // ... the filter for the StaffSchedules we want to count
+     *   }
+     * })
+    **/
+    count<T extends StaffScheduleCountArgs>(
+      args?: Subset<T, StaffScheduleCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], StaffScheduleCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a StaffSchedule.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StaffScheduleAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends StaffScheduleAggregateArgs>(args: Subset<T, StaffScheduleAggregateArgs>): Prisma.PrismaPromise<GetStaffScheduleAggregateType<T>>
+
+    /**
+     * Group by StaffSchedule.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StaffScheduleGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends StaffScheduleGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: StaffScheduleGroupByArgs['orderBy'] }
+        : { orderBy?: StaffScheduleGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, StaffScheduleGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetStaffScheduleGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the StaffSchedule model
+   */
+  readonly fields: StaffScheduleFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for StaffSchedule.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__StaffScheduleClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the StaffSchedule model
+   */
+  interface StaffScheduleFieldRefs {
+    readonly id: FieldRef<"StaffSchedule", 'String'>
+    readonly staffId: FieldRef<"StaffSchedule", 'String'>
+    readonly day: FieldRef<"StaffSchedule", 'DayOfWeek'>
+    readonly isAvailable: FieldRef<"StaffSchedule", 'Boolean'>
+    readonly startTime: FieldRef<"StaffSchedule", 'String'>
+    readonly endTime: FieldRef<"StaffSchedule", 'String'>
+    readonly createdAt: FieldRef<"StaffSchedule", 'DateTime'>
+    readonly updatedAt: FieldRef<"StaffSchedule", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * StaffSchedule findUnique
+   */
+  export type StaffScheduleFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StaffSchedule
+     */
+    select?: StaffScheduleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StaffSchedule
+     */
+    omit?: StaffScheduleOmit<ExtArgs> | null
+    /**
+     * Filter, which StaffSchedule to fetch.
+     */
+    where: StaffScheduleWhereUniqueInput
+  }
+
+  /**
+   * StaffSchedule findUniqueOrThrow
+   */
+  export type StaffScheduleFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StaffSchedule
+     */
+    select?: StaffScheduleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StaffSchedule
+     */
+    omit?: StaffScheduleOmit<ExtArgs> | null
+    /**
+     * Filter, which StaffSchedule to fetch.
+     */
+    where: StaffScheduleWhereUniqueInput
+  }
+
+  /**
+   * StaffSchedule findFirst
+   */
+  export type StaffScheduleFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StaffSchedule
+     */
+    select?: StaffScheduleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StaffSchedule
+     */
+    omit?: StaffScheduleOmit<ExtArgs> | null
+    /**
+     * Filter, which StaffSchedule to fetch.
+     */
+    where?: StaffScheduleWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of StaffSchedules to fetch.
+     */
+    orderBy?: StaffScheduleOrderByWithRelationInput | StaffScheduleOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for StaffSchedules.
+     */
+    cursor?: StaffScheduleWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` StaffSchedules from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` StaffSchedules.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of StaffSchedules.
+     */
+    distinct?: StaffScheduleScalarFieldEnum | StaffScheduleScalarFieldEnum[]
+  }
+
+  /**
+   * StaffSchedule findFirstOrThrow
+   */
+  export type StaffScheduleFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StaffSchedule
+     */
+    select?: StaffScheduleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StaffSchedule
+     */
+    omit?: StaffScheduleOmit<ExtArgs> | null
+    /**
+     * Filter, which StaffSchedule to fetch.
+     */
+    where?: StaffScheduleWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of StaffSchedules to fetch.
+     */
+    orderBy?: StaffScheduleOrderByWithRelationInput | StaffScheduleOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for StaffSchedules.
+     */
+    cursor?: StaffScheduleWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` StaffSchedules from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` StaffSchedules.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of StaffSchedules.
+     */
+    distinct?: StaffScheduleScalarFieldEnum | StaffScheduleScalarFieldEnum[]
+  }
+
+  /**
+   * StaffSchedule findMany
+   */
+  export type StaffScheduleFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StaffSchedule
+     */
+    select?: StaffScheduleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StaffSchedule
+     */
+    omit?: StaffScheduleOmit<ExtArgs> | null
+    /**
+     * Filter, which StaffSchedules to fetch.
+     */
+    where?: StaffScheduleWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of StaffSchedules to fetch.
+     */
+    orderBy?: StaffScheduleOrderByWithRelationInput | StaffScheduleOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing StaffSchedules.
+     */
+    cursor?: StaffScheduleWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` StaffSchedules from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` StaffSchedules.
+     */
+    skip?: number
+    distinct?: StaffScheduleScalarFieldEnum | StaffScheduleScalarFieldEnum[]
+  }
+
+  /**
+   * StaffSchedule create
+   */
+  export type StaffScheduleCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StaffSchedule
+     */
+    select?: StaffScheduleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StaffSchedule
+     */
+    omit?: StaffScheduleOmit<ExtArgs> | null
+    /**
+     * The data needed to create a StaffSchedule.
+     */
+    data: XOR<StaffScheduleCreateInput, StaffScheduleUncheckedCreateInput>
+  }
+
+  /**
+   * StaffSchedule createMany
+   */
+  export type StaffScheduleCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many StaffSchedules.
+     */
+    data: StaffScheduleCreateManyInput | StaffScheduleCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * StaffSchedule createManyAndReturn
+   */
+  export type StaffScheduleCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StaffSchedule
+     */
+    select?: StaffScheduleSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the StaffSchedule
+     */
+    omit?: StaffScheduleOmit<ExtArgs> | null
+    /**
+     * The data used to create many StaffSchedules.
+     */
+    data: StaffScheduleCreateManyInput | StaffScheduleCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * StaffSchedule update
+   */
+  export type StaffScheduleUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StaffSchedule
+     */
+    select?: StaffScheduleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StaffSchedule
+     */
+    omit?: StaffScheduleOmit<ExtArgs> | null
+    /**
+     * The data needed to update a StaffSchedule.
+     */
+    data: XOR<StaffScheduleUpdateInput, StaffScheduleUncheckedUpdateInput>
+    /**
+     * Choose, which StaffSchedule to update.
+     */
+    where: StaffScheduleWhereUniqueInput
+  }
+
+  /**
+   * StaffSchedule updateMany
+   */
+  export type StaffScheduleUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update StaffSchedules.
+     */
+    data: XOR<StaffScheduleUpdateManyMutationInput, StaffScheduleUncheckedUpdateManyInput>
+    /**
+     * Filter which StaffSchedules to update
+     */
+    where?: StaffScheduleWhereInput
+    /**
+     * Limit how many StaffSchedules to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * StaffSchedule updateManyAndReturn
+   */
+  export type StaffScheduleUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StaffSchedule
+     */
+    select?: StaffScheduleSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the StaffSchedule
+     */
+    omit?: StaffScheduleOmit<ExtArgs> | null
+    /**
+     * The data used to update StaffSchedules.
+     */
+    data: XOR<StaffScheduleUpdateManyMutationInput, StaffScheduleUncheckedUpdateManyInput>
+    /**
+     * Filter which StaffSchedules to update
+     */
+    where?: StaffScheduleWhereInput
+    /**
+     * Limit how many StaffSchedules to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * StaffSchedule upsert
+   */
+  export type StaffScheduleUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StaffSchedule
+     */
+    select?: StaffScheduleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StaffSchedule
+     */
+    omit?: StaffScheduleOmit<ExtArgs> | null
+    /**
+     * The filter to search for the StaffSchedule to update in case it exists.
+     */
+    where: StaffScheduleWhereUniqueInput
+    /**
+     * In case the StaffSchedule found by the `where` argument doesn't exist, create a new StaffSchedule with this data.
+     */
+    create: XOR<StaffScheduleCreateInput, StaffScheduleUncheckedCreateInput>
+    /**
+     * In case the StaffSchedule was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<StaffScheduleUpdateInput, StaffScheduleUncheckedUpdateInput>
+  }
+
+  /**
+   * StaffSchedule delete
+   */
+  export type StaffScheduleDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StaffSchedule
+     */
+    select?: StaffScheduleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StaffSchedule
+     */
+    omit?: StaffScheduleOmit<ExtArgs> | null
+    /**
+     * Filter which StaffSchedule to delete.
+     */
+    where: StaffScheduleWhereUniqueInput
+  }
+
+  /**
+   * StaffSchedule deleteMany
+   */
+  export type StaffScheduleDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which StaffSchedules to delete
+     */
+    where?: StaffScheduleWhereInput
+    /**
+     * Limit how many StaffSchedules to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * StaffSchedule without action
+   */
+  export type StaffScheduleDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StaffSchedule
+     */
+    select?: StaffScheduleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StaffSchedule
+     */
+    omit?: StaffScheduleOmit<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -8875,6 +10017,20 @@ export namespace Prisma {
   };
 
   export type AppointmentScalarFieldEnum = (typeof AppointmentScalarFieldEnum)[keyof typeof AppointmentScalarFieldEnum]
+
+
+  export const StaffScheduleScalarFieldEnum: {
+    id: 'id',
+    staffId: 'staffId',
+    day: 'day',
+    isAvailable: 'isAvailable',
+    startTime: 'startTime',
+    endTime: 'endTime',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type StaffScheduleScalarFieldEnum = (typeof StaffScheduleScalarFieldEnum)[keyof typeof StaffScheduleScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -9123,6 +10279,20 @@ export namespace Prisma {
    * Reference to a field of type 'AppointmentStatus[]'
    */
   export type ListEnumAppointmentStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'AppointmentStatus[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'DayOfWeek'
+   */
+  export type EnumDayOfWeekFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DayOfWeek'>
+    
+
+
+  /**
+   * Reference to a field of type 'DayOfWeek[]'
+   */
+  export type ListEnumDayOfWeekFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DayOfWeek[]'>
     
 
 
@@ -9754,6 +10924,74 @@ export namespace Prisma {
     notes?: StringNullableWithAggregatesFilter<"Appointment"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"Appointment"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Appointment"> | Date | string
+  }
+
+  export type StaffScheduleWhereInput = {
+    AND?: StaffScheduleWhereInput | StaffScheduleWhereInput[]
+    OR?: StaffScheduleWhereInput[]
+    NOT?: StaffScheduleWhereInput | StaffScheduleWhereInput[]
+    id?: StringFilter<"StaffSchedule"> | string
+    staffId?: StringFilter<"StaffSchedule"> | string
+    day?: EnumDayOfWeekFilter<"StaffSchedule"> | $Enums.DayOfWeek
+    isAvailable?: BoolFilter<"StaffSchedule"> | boolean
+    startTime?: StringNullableFilter<"StaffSchedule"> | string | null
+    endTime?: StringNullableFilter<"StaffSchedule"> | string | null
+    createdAt?: DateTimeFilter<"StaffSchedule"> | Date | string
+    updatedAt?: DateTimeFilter<"StaffSchedule"> | Date | string
+  }
+
+  export type StaffScheduleOrderByWithRelationInput = {
+    id?: SortOrder
+    staffId?: SortOrder
+    day?: SortOrder
+    isAvailable?: SortOrder
+    startTime?: SortOrderInput | SortOrder
+    endTime?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type StaffScheduleWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    staffId_day?: StaffScheduleStaffIdDayCompoundUniqueInput
+    AND?: StaffScheduleWhereInput | StaffScheduleWhereInput[]
+    OR?: StaffScheduleWhereInput[]
+    NOT?: StaffScheduleWhereInput | StaffScheduleWhereInput[]
+    staffId?: StringFilter<"StaffSchedule"> | string
+    day?: EnumDayOfWeekFilter<"StaffSchedule"> | $Enums.DayOfWeek
+    isAvailable?: BoolFilter<"StaffSchedule"> | boolean
+    startTime?: StringNullableFilter<"StaffSchedule"> | string | null
+    endTime?: StringNullableFilter<"StaffSchedule"> | string | null
+    createdAt?: DateTimeFilter<"StaffSchedule"> | Date | string
+    updatedAt?: DateTimeFilter<"StaffSchedule"> | Date | string
+  }, "id" | "staffId_day">
+
+  export type StaffScheduleOrderByWithAggregationInput = {
+    id?: SortOrder
+    staffId?: SortOrder
+    day?: SortOrder
+    isAvailable?: SortOrder
+    startTime?: SortOrderInput | SortOrder
+    endTime?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: StaffScheduleCountOrderByAggregateInput
+    _max?: StaffScheduleMaxOrderByAggregateInput
+    _min?: StaffScheduleMinOrderByAggregateInput
+  }
+
+  export type StaffScheduleScalarWhereWithAggregatesInput = {
+    AND?: StaffScheduleScalarWhereWithAggregatesInput | StaffScheduleScalarWhereWithAggregatesInput[]
+    OR?: StaffScheduleScalarWhereWithAggregatesInput[]
+    NOT?: StaffScheduleScalarWhereWithAggregatesInput | StaffScheduleScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"StaffSchedule"> | string
+    staffId?: StringWithAggregatesFilter<"StaffSchedule"> | string
+    day?: EnumDayOfWeekWithAggregatesFilter<"StaffSchedule"> | $Enums.DayOfWeek
+    isAvailable?: BoolWithAggregatesFilter<"StaffSchedule"> | boolean
+    startTime?: StringNullableWithAggregatesFilter<"StaffSchedule"> | string | null
+    endTime?: StringNullableWithAggregatesFilter<"StaffSchedule"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"StaffSchedule"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"StaffSchedule"> | Date | string
   }
 
   export type UserCreateInput = {
@@ -10474,6 +11712,83 @@ export namespace Prisma {
     status?: EnumAppointmentStatusFieldUpdateOperationsInput | $Enums.AppointmentStatus
     reason?: NullableStringFieldUpdateOperationsInput | string | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type StaffScheduleCreateInput = {
+    id?: string
+    staffId: string
+    day: $Enums.DayOfWeek
+    isAvailable?: boolean
+    startTime?: string | null
+    endTime?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type StaffScheduleUncheckedCreateInput = {
+    id?: string
+    staffId: string
+    day: $Enums.DayOfWeek
+    isAvailable?: boolean
+    startTime?: string | null
+    endTime?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type StaffScheduleUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    staffId?: StringFieldUpdateOperationsInput | string
+    day?: EnumDayOfWeekFieldUpdateOperationsInput | $Enums.DayOfWeek
+    isAvailable?: BoolFieldUpdateOperationsInput | boolean
+    startTime?: NullableStringFieldUpdateOperationsInput | string | null
+    endTime?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type StaffScheduleUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    staffId?: StringFieldUpdateOperationsInput | string
+    day?: EnumDayOfWeekFieldUpdateOperationsInput | $Enums.DayOfWeek
+    isAvailable?: BoolFieldUpdateOperationsInput | boolean
+    startTime?: NullableStringFieldUpdateOperationsInput | string | null
+    endTime?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type StaffScheduleCreateManyInput = {
+    id?: string
+    staffId: string
+    day: $Enums.DayOfWeek
+    isAvailable?: boolean
+    startTime?: string | null
+    endTime?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type StaffScheduleUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    staffId?: StringFieldUpdateOperationsInput | string
+    day?: EnumDayOfWeekFieldUpdateOperationsInput | $Enums.DayOfWeek
+    isAvailable?: BoolFieldUpdateOperationsInput | boolean
+    startTime?: NullableStringFieldUpdateOperationsInput | string | null
+    endTime?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type StaffScheduleUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    staffId?: StringFieldUpdateOperationsInput | string
+    day?: EnumDayOfWeekFieldUpdateOperationsInput | $Enums.DayOfWeek
+    isAvailable?: BoolFieldUpdateOperationsInput | boolean
+    startTime?: NullableStringFieldUpdateOperationsInput | string | null
+    endTime?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -11268,6 +12583,61 @@ export namespace Prisma {
     _max?: NestedEnumAppointmentStatusFilter<$PrismaModel>
   }
 
+  export type EnumDayOfWeekFilter<$PrismaModel = never> = {
+    equals?: $Enums.DayOfWeek | EnumDayOfWeekFieldRefInput<$PrismaModel>
+    in?: $Enums.DayOfWeek[] | ListEnumDayOfWeekFieldRefInput<$PrismaModel>
+    notIn?: $Enums.DayOfWeek[] | ListEnumDayOfWeekFieldRefInput<$PrismaModel>
+    not?: NestedEnumDayOfWeekFilter<$PrismaModel> | $Enums.DayOfWeek
+  }
+
+  export type StaffScheduleStaffIdDayCompoundUniqueInput = {
+    staffId: string
+    day: $Enums.DayOfWeek
+  }
+
+  export type StaffScheduleCountOrderByAggregateInput = {
+    id?: SortOrder
+    staffId?: SortOrder
+    day?: SortOrder
+    isAvailable?: SortOrder
+    startTime?: SortOrder
+    endTime?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type StaffScheduleMaxOrderByAggregateInput = {
+    id?: SortOrder
+    staffId?: SortOrder
+    day?: SortOrder
+    isAvailable?: SortOrder
+    startTime?: SortOrder
+    endTime?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type StaffScheduleMinOrderByAggregateInput = {
+    id?: SortOrder
+    staffId?: SortOrder
+    day?: SortOrder
+    isAvailable?: SortOrder
+    startTime?: SortOrder
+    endTime?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type EnumDayOfWeekWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.DayOfWeek | EnumDayOfWeekFieldRefInput<$PrismaModel>
+    in?: $Enums.DayOfWeek[] | ListEnumDayOfWeekFieldRefInput<$PrismaModel>
+    notIn?: $Enums.DayOfWeek[] | ListEnumDayOfWeekFieldRefInput<$PrismaModel>
+    not?: NestedEnumDayOfWeekWithAggregatesFilter<$PrismaModel> | $Enums.DayOfWeek
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumDayOfWeekFilter<$PrismaModel>
+    _max?: NestedEnumDayOfWeekFilter<$PrismaModel>
+  }
+
   export type RefreshTokenCreateNestedManyWithoutUserInput = {
     create?: XOR<RefreshTokenCreateWithoutUserInput, RefreshTokenUncheckedCreateWithoutUserInput> | RefreshTokenCreateWithoutUserInput[] | RefreshTokenUncheckedCreateWithoutUserInput[]
     connectOrCreate?: RefreshTokenCreateOrConnectWithoutUserInput | RefreshTokenCreateOrConnectWithoutUserInput[]
@@ -11605,6 +12975,10 @@ export namespace Prisma {
     upsert?: UserUpsertWithoutAppointmentsInput
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutAppointmentsInput, UserUpdateWithoutAppointmentsInput>, UserUncheckedUpdateWithoutAppointmentsInput>
+  }
+
+  export type EnumDayOfWeekFieldUpdateOperationsInput = {
+    set?: $Enums.DayOfWeek
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -12009,6 +13383,23 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumAppointmentStatusFilter<$PrismaModel>
     _max?: NestedEnumAppointmentStatusFilter<$PrismaModel>
+  }
+
+  export type NestedEnumDayOfWeekFilter<$PrismaModel = never> = {
+    equals?: $Enums.DayOfWeek | EnumDayOfWeekFieldRefInput<$PrismaModel>
+    in?: $Enums.DayOfWeek[] | ListEnumDayOfWeekFieldRefInput<$PrismaModel>
+    notIn?: $Enums.DayOfWeek[] | ListEnumDayOfWeekFieldRefInput<$PrismaModel>
+    not?: NestedEnumDayOfWeekFilter<$PrismaModel> | $Enums.DayOfWeek
+  }
+
+  export type NestedEnumDayOfWeekWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.DayOfWeek | EnumDayOfWeekFieldRefInput<$PrismaModel>
+    in?: $Enums.DayOfWeek[] | ListEnumDayOfWeekFieldRefInput<$PrismaModel>
+    notIn?: $Enums.DayOfWeek[] | ListEnumDayOfWeekFieldRefInput<$PrismaModel>
+    not?: NestedEnumDayOfWeekWithAggregatesFilter<$PrismaModel> | $Enums.DayOfWeek
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumDayOfWeekFilter<$PrismaModel>
+    _max?: NestedEnumDayOfWeekFilter<$PrismaModel>
   }
 
   export type RefreshTokenCreateWithoutUserInput = {

@@ -9,6 +9,7 @@ import { billingRouter } from "./billing"
 import { healthRouter } from "./health"
 import { dashboardRouter } from "./dashboard"
 import { usersRouter } from "./users"
+import { scheduleRouter } from "./schedule"
 
 // Main application router that combines all feature routers
 export const appRouter = createTRPCRouter({
@@ -22,6 +23,7 @@ export const appRouter = createTRPCRouter({
 	billing: billingRouter,
 	dashboard: dashboardRouter,
 	users: usersRouter,
+	schedule: scheduleRouter,
 })
 
 export type AppRouter = typeof appRouter

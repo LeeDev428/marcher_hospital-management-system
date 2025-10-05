@@ -221,6 +221,17 @@ exports.Prisma.AppointmentScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.StaffScheduleScalarFieldEnum = {
+  id: 'id',
+  staffId: 'staffId',
+  day: 'day',
+  isAvailable: 'isAvailable',
+  startTime: 'startTime',
+  endTime: 'endTime',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -324,13 +335,24 @@ exports.AppointmentStatus = exports.$Enums.AppointmentStatus = {
   NO_SHOW: 'NO_SHOW'
 };
 
+exports.DayOfWeek = exports.$Enums.DayOfWeek = {
+  MONDAY: 'MONDAY',
+  TUESDAY: 'TUESDAY',
+  WEDNESDAY: 'WEDNESDAY',
+  THURSDAY: 'THURSDAY',
+  FRIDAY: 'FRIDAY',
+  SATURDAY: 'SATURDAY',
+  SUNDAY: 'SUNDAY'
+};
+
 exports.Prisma.ModelName = {
   User: 'User',
   StaffCredentials: 'StaffCredentials',
   Patient: 'Patient',
   Partner: 'Partner',
   RefreshToken: 'RefreshToken',
-  Appointment: 'Appointment'
+  Appointment: 'Appointment',
+  StaffSchedule: 'StaffSchedule'
 };
 
 /**
