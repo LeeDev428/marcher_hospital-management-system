@@ -69,12 +69,17 @@ export const appointmentStatusOptions = appointmentStatusSchema.options.map((sta
   value: status,
 }))
 
+/* ---------- ID Validation ---------- */
+
+// CUID validation schema (for Prisma default IDs)
+const cuidSchema = z.string().regex(/^c[a-z0-9]{24}$/, "Invalid ID format.")
+
 /* ---------- Core Schemas ---------- */
 
 // Base appointment schema
 export const appointmentSchema = z.object({
-  patientId: z.string().uuid("Invalid patient ID."),
-  doctorId: z.string().uuid("Invalid doctor ID."),
+  patientId: cuidSchema,
+  doctorId: cuidSchema,
   facilityId: z.string().uuid("Invalid facility ID.").optional(), // Optional for patients initially
   date: dateString,
   time: timeString,
@@ -87,7 +92,7 @@ export const getAppointmentSchema = z.object({
 
 // Staff get appointments schema (full access)
 export const getAppointmentsSchema = z.object({
-  doctorId: z.string().uuid("Invalid doctor ID.").optional(),
+  doctorId: cuidSchema.optional(),
   facilityId: z.string().uuid("Invalid facility ID.").optional(),
   date: dateString.optional(),
   status: appointmentStatusSchema.optional(),
@@ -97,7 +102,7 @@ export const getAppointmentsSchema = z.object({
 
 // Patient get appointments schema (filtered by current patient)
 export const getPatientAppointmentsSchema = z.object({
-  doctorId: z.string().uuid("Invalid doctor ID.").optional(),
+  doctorId: cuidSchema.optional(),
   date: dateString.optional(),
   status: appointmentStatusSchema.optional(),
   page: z.number().min(1).optional().default(1),
@@ -105,7 +110,7 @@ export const getPatientAppointmentsSchema = z.object({
 })
 
 export const appointmentFiltersSchema = z.object({
-  doctorId: z.string().uuid("Invalid doctor ID.").optional(),
+  doctorId: cuidSchema.optional(),
   facilityId: z.string().uuid("Invalid facility ID.").optional(),
   date: dateString.optional(),
   status: appointmentStatusSchema.optional(),
@@ -113,21 +118,21 @@ export const appointmentFiltersSchema = z.object({
 
 // Patient appointment filters (no facility filter)
 export const patientAppointmentFiltersSchema = z.object({
-  doctorId: z.string().uuid("Invalid doctor ID.").optional(),
+  doctorId: cuidSchema.optional(),
   date: dateString.optional(),
   status: appointmentStatusSchema.optional(),
 })
 
 // Availability check supports excluding current appointment while editing
 export const checkAvailabilitySchema = z.object({
-  doctorId: z.string().uuid("Invalid doctor ID."),
+  doctorId: cuidSchema,
   date: dateString,
   time: timeString,
   excludeAppointmentId: z.string().uuid().optional(),
 })
 
 export const getAvailableTimeSlotsSchema = z.object({
-  doctorId: z.string().uuid("Invalid doctor ID."),
+  doctorId: cuidSchema,
   date: dateString,
 })
 
@@ -179,7 +184,7 @@ export const updateAppointmentSchema = appointmentSchema.extend({
 // Patient create/cancel
 export const createPatientAppointmentSchema = z.object({
   name: z.string().min(1).max(120).optional(),
-  doctorId: z.string().uuid("Invalid doctor ID."),
+  doctorId: cuidSchema,
   date: dateString,
   time: timeString,
 })
