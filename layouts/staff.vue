@@ -87,8 +87,17 @@ const handleLogout = async () => {
           >
             <Icon name="lucide:file-text" class="w-5 h-5 mr-3" />
             Reports
-          </NuxtLink>
-          
+            </NuxtLink>
+            
+             <NuxtLink 
+            to="/staff/medical-services" 
+            class="flex items-center px-3 py-2 text-sm font-medium rounded-lg"
+            :class="$route.path.startsWith('/staff/medical-services') ? 'bg-blue-50 text-blue-700 border-r-2 border-blue-600' : 'text-gray-600 hover:bg-gray-50'"
+            >
+            <Icon name="lucide:stethoscope" class="w-5 h-5 mr-3" />
+            Services
+            </NuxtLink>
+
           <NuxtLink 
             to="/staff/staff" 
             class="flex items-center px-3 py-2 text-sm font-medium rounded-lg"
