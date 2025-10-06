@@ -211,12 +211,14 @@ exports.Prisma.AppointmentScalarFieldEnum = {
   id: 'id',
   patientId: 'patientId',
   doctorId: 'doctorId',
-  scheduledAt: 'scheduledAt',
+  date: 'date',
+  time: 'time',
   duration: 'duration',
   type: 'type',
   status: 'status',
   reason: 'reason',
   notes: 'notes',
+  facilityId: 'facilityId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -228,6 +230,22 @@ exports.Prisma.StaffScheduleScalarFieldEnum = {
   isAvailable: 'isAvailable',
   startTime: 'startTime',
   endTime: 'endTime',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.MedicalServiceScalarFieldEnum = {
+  id: 'id',
+  staffId: 'staffId',
+  name: 'name',
+  type: 'type',
+  category: 'category',
+  description: 'description',
+  price: 'price',
+  duration: 'duration',
+  isActive: 'isActive',
+  requirements: 'requirements',
+  notes: 'notes',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -345,6 +363,42 @@ exports.DayOfWeek = exports.$Enums.DayOfWeek = {
   SUNDAY: 'SUNDAY'
 };
 
+exports.ServiceType = exports.$Enums.ServiceType = {
+  CONSULTATION: 'CONSULTATION',
+  FOLLOW_UP: 'FOLLOW_UP',
+  MINOR_PROCEDURE: 'MINOR_PROCEDURE',
+  MAJOR_PROCEDURE: 'MAJOR_PROCEDURE',
+  DIAGNOSTIC_TEST: 'DIAGNOSTIC_TEST',
+  VACCINATION: 'VACCINATION',
+  HEALTH_CHECKUP: 'HEALTH_CHECKUP',
+  SPECIALIZED_CONSULTATION: 'SPECIALIZED_CONSULTATION',
+  EMERGENCY_CARE: 'EMERGENCY_CARE',
+  PREVENTIVE_CARE: 'PREVENTIVE_CARE',
+  THERAPY: 'THERAPY',
+  COUNSELING: 'COUNSELING',
+  OTHER: 'OTHER'
+};
+
+exports.ServiceCategory = exports.$Enums.ServiceCategory = {
+  GENERAL_MEDICINE: 'GENERAL_MEDICINE',
+  SURGERY: 'SURGERY',
+  PEDIATRICS: 'PEDIATRICS',
+  OBSTETRICS_GYNECOLOGY: 'OBSTETRICS_GYNECOLOGY',
+  ORTHOPEDICS: 'ORTHOPEDICS',
+  CARDIOLOGY: 'CARDIOLOGY',
+  NEUROLOGY: 'NEUROLOGY',
+  DERMATOLOGY: 'DERMATOLOGY',
+  OPHTHALMOLOGY: 'OPHTHALMOLOGY',
+  ENT: 'ENT',
+  PSYCHIATRY: 'PSYCHIATRY',
+  RADIOLOGY: 'RADIOLOGY',
+  LABORATORY: 'LABORATORY',
+  NURSING: 'NURSING',
+  THERAPY: 'THERAPY',
+  EMERGENCY: 'EMERGENCY',
+  OTHER: 'OTHER'
+};
+
 exports.Prisma.ModelName = {
   User: 'User',
   StaffCredentials: 'StaffCredentials',
@@ -352,7 +406,8 @@ exports.Prisma.ModelName = {
   Partner: 'Partner',
   RefreshToken: 'RefreshToken',
   Appointment: 'Appointment',
-  StaffSchedule: 'StaffSchedule'
+  StaffSchedule: 'StaffSchedule',
+  MedicalService: 'MedicalService'
 };
 
 /**
