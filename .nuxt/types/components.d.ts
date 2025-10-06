@@ -209,6 +209,7 @@ interface _GlobalComponents {
     'PatientAppointmentsAvailability': typeof import("../../pages/patient/appointments/components/PatientAppointmentsAvailability.vue")['default']
     'PatientAppointmentsTable': typeof import("../../pages/patient/appointments/components/PatientAppointmentsTable.vue")['default']
     'PatientsBillingTable': typeof import("../../pages/patient/billing/components/PatientsBillingTable.vue")['default']
+    'PatientPagination': typeof import("../../pages/patient/components/PatientPagination.vue")['default']
     'DoctorTable': typeof import("../../pages/patient/doctor/components/DoctorTable.vue")['default']
     'MedicalRecordForm': typeof import("../../pages/patient/medical-records/components/MedicalRecordForm.vue")['default']
     'MedicalRecordsTable': typeof import("../../pages/patient/medical-records/components/MedicalRecordsTable.vue")['default']
@@ -242,6 +243,7 @@ interface _GlobalComponents {
     'InsuranceClaimsTable': typeof import("../../pages/staff/insurance/components/InsuranceClaimsTable.vue")['default']
     'InsuranceProviderForm': typeof import("../../pages/staff/insurance/components/InsuranceProviderForm.vue")['default']
     'InsuranceProviderTable': typeof import("../../pages/staff/insurance/components/InsuranceProviderTable.vue")['default']
+    'MedicalServiceForm': typeof import("../../pages/staff/medical-services/components/MedicalServiceForm.vue")['default']
     'EncountersModule': typeof import("../../pages/staff/patients/[patientProfileId]/encounters/components/EncountersModule.vue")['default']
     'InpatientForm': typeof import("../../pages/staff/patients/[patientProfileId]/encounters/components/InpatientForm.vue")['default']
     'OutpatientForm': typeof import("../../pages/staff/patients/[patientProfileId]/encounters/components/OutpatientForm.vue")['default']
@@ -611,6 +613,7 @@ interface _GlobalComponents {
     'LazyPatientAppointmentsAvailability': LazyComponent<typeof import("../../pages/patient/appointments/components/PatientAppointmentsAvailability.vue")['default']>
     'LazyPatientAppointmentsTable': LazyComponent<typeof import("../../pages/patient/appointments/components/PatientAppointmentsTable.vue")['default']>
     'LazyPatientsBillingTable': LazyComponent<typeof import("../../pages/patient/billing/components/PatientsBillingTable.vue")['default']>
+    'LazyPatientPagination': LazyComponent<typeof import("../../pages/patient/components/PatientPagination.vue")['default']>
     'LazyDoctorTable': LazyComponent<typeof import("../../pages/patient/doctor/components/DoctorTable.vue")['default']>
     'LazyMedicalRecordForm': LazyComponent<typeof import("../../pages/patient/medical-records/components/MedicalRecordForm.vue")['default']>
     'LazyMedicalRecordsTable': LazyComponent<typeof import("../../pages/patient/medical-records/components/MedicalRecordsTable.vue")['default']>
@@ -644,6 +647,7 @@ interface _GlobalComponents {
     'LazyInsuranceClaimsTable': LazyComponent<typeof import("../../pages/staff/insurance/components/InsuranceClaimsTable.vue")['default']>
     'LazyInsuranceProviderForm': LazyComponent<typeof import("../../pages/staff/insurance/components/InsuranceProviderForm.vue")['default']>
     'LazyInsuranceProviderTable': LazyComponent<typeof import("../../pages/staff/insurance/components/InsuranceProviderTable.vue")['default']>
+    'LazyMedicalServiceForm': LazyComponent<typeof import("../../pages/staff/medical-services/components/MedicalServiceForm.vue")['default']>
     'LazyEncountersModule': LazyComponent<typeof import("../../pages/staff/patients/[patientProfileId]/encounters/components/EncountersModule.vue")['default']>
     'LazyInpatientForm': LazyComponent<typeof import("../../pages/staff/patients/[patientProfileId]/encounters/components/InpatientForm.vue")['default']>
     'LazyOutpatientForm': LazyComponent<typeof import("../../pages/staff/patients/[patientProfileId]/encounters/components/OutpatientForm.vue")['default']>
