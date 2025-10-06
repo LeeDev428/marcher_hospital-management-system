@@ -50,6 +50,7 @@ model User {
   partnerProfile Partner?
   staffCredentials StaffCredentials?  // Professional credentials for staff
   appointments Appointment[]
+  medicalServices MedicalService[]   // Services offered by this staff member
   
   // Audit fields
   createdBy String?
@@ -152,7 +153,7 @@ model RefreshToken {
   @@map("refresh_tokens")
 }
 
-// Appointments Model (simplified)
+// Appointments Model
 model Appointment {
   id          String   @id @default(cuid())
   patientId   String
@@ -160,18 +161,24 @@ model Appointment {
   doctor      User     @relation(fields: [doctorId], references: [id])
   
   // Appointment details
-  scheduledAt DateTime
-  duration    Int      // Duration in minutes
-  type        AppointmentType
+  date        String   // Date in YYYY-MM-DD format
+  time        String   // Time in HH:MM format (24-hour)
+  duration    Int?     // Duration in minutes
+  type        AppointmentType?
   status      AppointmentStatus @default(SCHEDULED)
   reason      String?
   notes       String?
+  facilityId  String?  // Room assignment
   
   // System fields
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   
   @@map("appointments")
+  @@index([doctorId])
+  @@index([patientId])
+  @@index([date])
+  @@index([status])
 }
 
 // ENUMS
@@ -290,71 +297,66 @@ model StaffSchedule {
   @@map("staff_schedules")
 }
 
-// Medical Services - Services offered by staff (consultations, procedures, etc.)
+// Medical Services - Services offered by staff
 model MedicalService {
   id          String   @id @default(cuid())
   staffId     String   // User ID of the staff member offering this service
-  
-  // Service Details
-  name        String   // e.g., "General Consultation", "X-Ray", "Blood Test"
-  description String?  // Detailed description
-  type        ServiceType
-  category    ServiceCategory
-  
-  // Pricing and Duration
+  staff       User     @relation(fields: [staffId], references: [id], onDelete: Cascade)
+  name        String   // Service name (e.g., "General Consultation", "Blood Pressure Check")
+  type        ServiceType // Type of service
+  category    ServiceCategory? // Optional category for grouping
+  description String?  // Detailed description of the service
   price       Decimal  @db.Decimal(10, 2) // Price in currency
   duration    Int      // Duration in minutes
+  isActive    Boolean  @default(true) // Can be disabled without deleting
   
-  // Availability
-  isActive    Boolean  @default(true)
+  // Additional fields
+  requirements String?  // Any requirements/preparations needed
+  notes        String?  // Internal notes
   
-  // Requirements and Notes
-  requirements String? // e.g., "Fasting required", "Bring previous records"
-  notes       String?  // Internal notes for staff
-  
-  // System fields
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  createdBy String?
-  updatedBy String?
   
   @@index([staffId])
   @@index([type])
-  @@index([category])
   @@index([isActive])
   @@map("medical_services")
 }
 
 // Service Type Enum
 enum ServiceType {
-  CONSULTATION        // General doctor consultation
-  MINOR_PROCEDURE     // Small procedures (wound care, injection, etc.)
-  MAJOR_PROCEDURE     // Surgical procedures
-  DIAGNOSTIC          // Lab tests, X-rays, scans
-  THERAPY             // Physical therapy, occupational therapy
-  VACCINATION         // Immunizations
-  CHECKUP             // Regular health checkup
-  EMERGENCY           // Emergency services
-  FOLLOW_UP           // Follow-up consultation
-  OTHER
+  CONSULTATION           // General consultation
+  FOLLOW_UP             // Follow-up consultation
+  MINOR_PROCEDURE       // Minor procedures (injections, wound care, etc.)
+  MAJOR_PROCEDURE       // Major procedures (surgery, etc.)
+  DIAGNOSTIC_TEST       // Diagnostic tests
+  VACCINATION           // Vaccination services
+  HEALTH_CHECKUP        // General health checkup
+  SPECIALIZED_CONSULTATION // Specialized consultation
+  EMERGENCY_CARE        // Emergency care
+  PREVENTIVE_CARE       // Preventive care
+  THERAPY               // Physical therapy, occupational therapy, etc.
+  COUNSELING            // Mental health counseling
+  OTHER                 // Other services
 }
 
-// Service Category Enum
+// Service Category Enum (for better organization)
 enum ServiceCategory {
   GENERAL_MEDICINE
-  PEDIATRICS
   SURGERY
+  PEDIATRICS
   OBSTETRICS_GYNECOLOGY
   ORTHOPEDICS
   CARDIOLOGY
+  NEUROLOGY
   DERMATOLOGY
   OPHTHALMOLOGY
   ENT
   PSYCHIATRY
   RADIOLOGY
   LABORATORY
-  PHARMACY
   NURSING
+  THERAPY
   EMERGENCY
   OTHER
 }
