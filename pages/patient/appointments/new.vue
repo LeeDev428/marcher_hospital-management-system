@@ -24,10 +24,7 @@ onMounted(() => {
         </div>
       </div>
 
-      <!-- Doctor Availability Sidebar -->
-      <div class="w-80 bg-white rounded-lg shadow-sm border border-gray-200 p-6 max-h-[calc(100vh-200px)] overflow-y-auto">
-        <PatientAppointmentsAvailability />
-      </div>
+   
     </div>
   </NuxtLayout>
 </template>
