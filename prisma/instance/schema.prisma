@@ -289,3 +289,72 @@ model StaffSchedule {
   @@unique([staffId, day])
   @@map("staff_schedules")
 }
+
+// Medical Services - Services offered by staff (consultations, procedures, etc.)
+model MedicalService {
+  id          String   @id @default(cuid())
+  staffId     String   // User ID of the staff member offering this service
+  
+  // Service Details
+  name        String   // e.g., "General Consultation", "X-Ray", "Blood Test"
+  description String?  // Detailed description
+  type        ServiceType
+  category    ServiceCategory
+  
+  // Pricing and Duration
+  price       Decimal  @db.Decimal(10, 2) // Price in currency
+  duration    Int      // Duration in minutes
+  
+  // Availability
+  isActive    Boolean  @default(true)
+  
+  // Requirements and Notes
+  requirements String? // e.g., "Fasting required", "Bring previous records"
+  notes       String?  // Internal notes for staff
+  
+  // System fields
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  createdBy String?
+  updatedBy String?
+  
+  @@index([staffId])
+  @@index([type])
+  @@index([category])
+  @@index([isActive])
+  @@map("medical_services")
+}
+
+// Service Type Enum
+enum ServiceType {
+  CONSULTATION        // General doctor consultation
+  MINOR_PROCEDURE     // Small procedures (wound care, injection, etc.)
+  MAJOR_PROCEDURE     // Surgical procedures
+  DIAGNOSTIC          // Lab tests, X-rays, scans
+  THERAPY             // Physical therapy, occupational therapy
+  VACCINATION         // Immunizations
+  CHECKUP             // Regular health checkup
+  EMERGENCY           // Emergency services
+  FOLLOW_UP           // Follow-up consultation
+  OTHER
+}
+
+// Service Category Enum
+enum ServiceCategory {
+  GENERAL_MEDICINE
+  PEDIATRICS
+  SURGERY
+  OBSTETRICS_GYNECOLOGY
+  ORTHOPEDICS
+  CARDIOLOGY
+  DERMATOLOGY
+  OPHTHALMOLOGY
+  ENT
+  PSYCHIATRY
+  RADIOLOGY
+  LABORATORY
+  PHARMACY
+  NURSING
+  EMERGENCY
+  OTHER
+}

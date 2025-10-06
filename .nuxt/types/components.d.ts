@@ -283,6 +283,13 @@ interface _GlobalComponents {
     'NuxtPicture': typeof import("../../node_modules/@nuxt/image/dist/runtime/components/NuxtPicture.vue")['default']
     'Icon': typeof import("../../node_modules/@nuxt/icon/dist/runtime/components/index")['default']
     'UiBadge': typeof import("../../components/ui/badge/index")['Badge']
+    'UiBreadcrumb': typeof import("../../components/ui/breadcrumb/index")['Breadcrumb']
+    'UiBreadcrumbEllipsis': typeof import("../../components/ui/breadcrumb/index")['BreadcrumbEllipsis']
+    'UiBreadcrumbItem': typeof import("../../components/ui/breadcrumb/index")['BreadcrumbItem']
+    'UiBreadcrumbLink': typeof import("../../components/ui/breadcrumb/index")['BreadcrumbLink']
+    'UiBreadcrumbList': typeof import("../../components/ui/breadcrumb/index")['BreadcrumbList']
+    'UiBreadcrumbPage': typeof import("../../components/ui/breadcrumb/index")['BreadcrumbPage']
+    'UiBreadcrumbSeparator': typeof import("../../components/ui/breadcrumb/index")['BreadcrumbSeparator']
     'UiButton': typeof import("../../components/ui/button/index")['Button']
     'UiCalendar': typeof import("../../components/ui/calendar/index")['Calendar']
     'UiCalendarCell': typeof import("../../components/ui/calendar/index")['CalendarCell']
@@ -296,13 +303,6 @@ interface _GlobalComponents {
     'UiCalendarHeading': typeof import("../../components/ui/calendar/index")['CalendarHeading']
     'UiCalendarNextButton': typeof import("../../components/ui/calendar/index")['CalendarNextButton']
     'UiCalendarPrevButton': typeof import("../../components/ui/calendar/index")['CalendarPrevButton']
-    'UiBreadcrumb': typeof import("../../components/ui/breadcrumb/index")['Breadcrumb']
-    'UiBreadcrumbEllipsis': typeof import("../../components/ui/breadcrumb/index")['BreadcrumbEllipsis']
-    'UiBreadcrumbItem': typeof import("../../components/ui/breadcrumb/index")['BreadcrumbItem']
-    'UiBreadcrumbLink': typeof import("../../components/ui/breadcrumb/index")['BreadcrumbLink']
-    'UiBreadcrumbList': typeof import("../../components/ui/breadcrumb/index")['BreadcrumbList']
-    'UiBreadcrumbPage': typeof import("../../components/ui/breadcrumb/index")['BreadcrumbPage']
-    'UiBreadcrumbSeparator': typeof import("../../components/ui/breadcrumb/index")['BreadcrumbSeparator']
     'UiCard': typeof import("../../components/ui/card/index")['Card']
     'UiCardAction': typeof import("../../components/ui/card/index")['CardAction']
     'UiCardContent': typeof import("../../components/ui/card/index")['CardContent']
@@ -311,6 +311,18 @@ interface _GlobalComponents {
     'UiCardHeader': typeof import("../../components/ui/card/index")['CardHeader']
     'UiCardTitle': typeof import("../../components/ui/card/index")['CardTitle']
     'UiCheckbox': typeof import("../../components/ui/checkbox/index")['Checkbox']
+    'UiCombobox': typeof import("../../components/ui/combobox/index")['Combobox']
+    'UiComboboxAnchor': typeof import("../../components/ui/combobox/index")['ComboboxAnchor']
+    'UiComboboxEmpty': typeof import("../../components/ui/combobox/index")['ComboboxEmpty']
+    'UiComboboxGroup': typeof import("../../components/ui/combobox/index")['ComboboxGroup']
+    'UiComboboxInput': typeof import("../../components/ui/combobox/index")['ComboboxInput']
+    'UiComboboxItem': typeof import("../../components/ui/combobox/index")['ComboboxItem']
+    'UiComboboxItemIndicator': typeof import("../../components/ui/combobox/index")['ComboboxItemIndicator']
+    'UiComboboxList': typeof import("../../components/ui/combobox/index")['ComboboxList']
+    'UiComboboxSeparator': typeof import("../../components/ui/combobox/index")['ComboboxSeparator']
+    'UiComboboxTrigger': typeof import("../../components/ui/combobox/index")['ComboboxTrigger']
+    'UiComboboxViewport': typeof import("../../components/ui/combobox/index")['ComboboxViewport']
+    'UiComboboxCancel': typeof import("../../components/ui/combobox/index")['ComboboxCancel']
     'UiCommand': typeof import("../../components/ui/command/index")['Command']
     'UiCommandDialog': typeof import("../../components/ui/command/index")['CommandDialog']
     'UiCommandEmpty': typeof import("../../components/ui/command/index")['CommandEmpty']
@@ -372,18 +384,6 @@ interface _GlobalComponents {
     'UiSelectTrigger': typeof import("../../components/ui/select/index")['SelectTrigger']
     'UiSelectValue': typeof import("../../components/ui/select/index")['SelectValue']
     'UiSkeleton': typeof import("../../components/ui/skeleton/index")['Skeleton']
-    'UiCombobox': typeof import("../../components/ui/combobox/index")['Combobox']
-    'UiComboboxAnchor': typeof import("../../components/ui/combobox/index")['ComboboxAnchor']
-    'UiComboboxEmpty': typeof import("../../components/ui/combobox/index")['ComboboxEmpty']
-    'UiComboboxGroup': typeof import("../../components/ui/combobox/index")['ComboboxGroup']
-    'UiComboboxInput': typeof import("../../components/ui/combobox/index")['ComboboxInput']
-    'UiComboboxItem': typeof import("../../components/ui/combobox/index")['ComboboxItem']
-    'UiComboboxItemIndicator': typeof import("../../components/ui/combobox/index")['ComboboxItemIndicator']
-    'UiComboboxList': typeof import("../../components/ui/combobox/index")['ComboboxList']
-    'UiComboboxSeparator': typeof import("../../components/ui/combobox/index")['ComboboxSeparator']
-    'UiComboboxTrigger': typeof import("../../components/ui/combobox/index")['ComboboxTrigger']
-    'UiComboboxViewport': typeof import("../../components/ui/combobox/index")['ComboboxViewport']
-    'UiComboboxCancel': typeof import("../../components/ui/combobox/index")['ComboboxCancel']
     'UiToaster': typeof import("../../components/ui/sonner/index")['Toaster']
     'UiTable': typeof import("../../components/ui/table/index")['Table']
     'UiTableBody': typeof import("../../components/ui/table/index")['TableBody']
@@ -685,6 +685,13 @@ interface _GlobalComponents {
     'LazyNuxtPicture': LazyComponent<typeof import("../../node_modules/@nuxt/image/dist/runtime/components/NuxtPicture.vue")['default']>
     'LazyIcon': LazyComponent<typeof import("../../node_modules/@nuxt/icon/dist/runtime/components/index")['default']>
     'LazyUiBadge': LazyComponent<typeof import("../../components/ui/badge/index")['Badge']>
+    'LazyUiBreadcrumb': LazyComponent<typeof import("../../components/ui/breadcrumb/index")['Breadcrumb']>
+    'LazyUiBreadcrumbEllipsis': LazyComponent<typeof import("../../components/ui/breadcrumb/index")['BreadcrumbEllipsis']>
+    'LazyUiBreadcrumbItem': LazyComponent<typeof import("../../components/ui/breadcrumb/index")['BreadcrumbItem']>
+    'LazyUiBreadcrumbLink': LazyComponent<typeof import("../../components/ui/breadcrumb/index")['BreadcrumbLink']>
+    'LazyUiBreadcrumbList': LazyComponent<typeof import("../../components/ui/breadcrumb/index")['BreadcrumbList']>
+    'LazyUiBreadcrumbPage': LazyComponent<typeof import("../../components/ui/breadcrumb/index")['BreadcrumbPage']>
+    'LazyUiBreadcrumbSeparator': LazyComponent<typeof import("../../components/ui/breadcrumb/index")['BreadcrumbSeparator']>
     'LazyUiButton': LazyComponent<typeof import("../../components/ui/button/index")['Button']>
     'LazyUiCalendar': LazyComponent<typeof import("../../components/ui/calendar/index")['Calendar']>
     'LazyUiCalendarCell': LazyComponent<typeof import("../../components/ui/calendar/index")['CalendarCell']>
@@ -698,13 +705,6 @@ interface _GlobalComponents {
     'LazyUiCalendarHeading': LazyComponent<typeof import("../../components/ui/calendar/index")['CalendarHeading']>
     'LazyUiCalendarNextButton': LazyComponent<typeof import("../../components/ui/calendar/index")['CalendarNextButton']>
     'LazyUiCalendarPrevButton': LazyComponent<typeof import("../../components/ui/calendar/index")['CalendarPrevButton']>
-    'LazyUiBreadcrumb': LazyComponent<typeof import("../../components/ui/breadcrumb/index")['Breadcrumb']>
-    'LazyUiBreadcrumbEllipsis': LazyComponent<typeof import("../../components/ui/breadcrumb/index")['BreadcrumbEllipsis']>
-    'LazyUiBreadcrumbItem': LazyComponent<typeof import("../../components/ui/breadcrumb/index")['BreadcrumbItem']>
-    'LazyUiBreadcrumbLink': LazyComponent<typeof import("../../components/ui/breadcrumb/index")['BreadcrumbLink']>
-    'LazyUiBreadcrumbList': LazyComponent<typeof import("../../components/ui/breadcrumb/index")['BreadcrumbList']>
-    'LazyUiBreadcrumbPage': LazyComponent<typeof import("../../components/ui/breadcrumb/index")['BreadcrumbPage']>
-    'LazyUiBreadcrumbSeparator': LazyComponent<typeof import("../../components/ui/breadcrumb/index")['BreadcrumbSeparator']>
     'LazyUiCard': LazyComponent<typeof import("../../components/ui/card/index")['Card']>
     'LazyUiCardAction': LazyComponent<typeof import("../../components/ui/card/index")['CardAction']>
     'LazyUiCardContent': LazyComponent<typeof import("../../components/ui/card/index")['CardContent']>
@@ -713,6 +713,18 @@ interface _GlobalComponents {
     'LazyUiCardHeader': LazyComponent<typeof import("../../components/ui/card/index")['CardHeader']>
     'LazyUiCardTitle': LazyComponent<typeof import("../../components/ui/card/index")['CardTitle']>
     'LazyUiCheckbox': LazyComponent<typeof import("../../components/ui/checkbox/index")['Checkbox']>
+    'LazyUiCombobox': LazyComponent<typeof import("../../components/ui/combobox/index")['Combobox']>
+    'LazyUiComboboxAnchor': LazyComponent<typeof import("../../components/ui/combobox/index")['ComboboxAnchor']>
+    'LazyUiComboboxEmpty': LazyComponent<typeof import("../../components/ui/combobox/index")['ComboboxEmpty']>
+    'LazyUiComboboxGroup': LazyComponent<typeof import("../../components/ui/combobox/index")['ComboboxGroup']>
+    'LazyUiComboboxInput': LazyComponent<typeof import("../../components/ui/combobox/index")['ComboboxInput']>
+    'LazyUiComboboxItem': LazyComponent<typeof import("../../components/ui/combobox/index")['ComboboxItem']>
+    'LazyUiComboboxItemIndicator': LazyComponent<typeof import("../../components/ui/combobox/index")['ComboboxItemIndicator']>
+    'LazyUiComboboxList': LazyComponent<typeof import("../../components/ui/combobox/index")['ComboboxList']>
+    'LazyUiComboboxSeparator': LazyComponent<typeof import("../../components/ui/combobox/index")['ComboboxSeparator']>
+    'LazyUiComboboxTrigger': LazyComponent<typeof import("../../components/ui/combobox/index")['ComboboxTrigger']>
+    'LazyUiComboboxViewport': LazyComponent<typeof import("../../components/ui/combobox/index")['ComboboxViewport']>
+    'LazyUiComboboxCancel': LazyComponent<typeof import("../../components/ui/combobox/index")['ComboboxCancel']>
     'LazyUiCommand': LazyComponent<typeof import("../../components/ui/command/index")['Command']>
     'LazyUiCommandDialog': LazyComponent<typeof import("../../components/ui/command/index")['CommandDialog']>
     'LazyUiCommandEmpty': LazyComponent<typeof import("../../components/ui/command/index")['CommandEmpty']>
@@ -774,18 +786,6 @@ interface _GlobalComponents {
     'LazyUiSelectTrigger': LazyComponent<typeof import("../../components/ui/select/index")['SelectTrigger']>
     'LazyUiSelectValue': LazyComponent<typeof import("../../components/ui/select/index")['SelectValue']>
     'LazyUiSkeleton': LazyComponent<typeof import("../../components/ui/skeleton/index")['Skeleton']>
-    'LazyUiCombobox': LazyComponent<typeof import("../../components/ui/combobox/index")['Combobox']>
-    'LazyUiComboboxAnchor': LazyComponent<typeof import("../../components/ui/combobox/index")['ComboboxAnchor']>
-    'LazyUiComboboxEmpty': LazyComponent<typeof import("../../components/ui/combobox/index")['ComboboxEmpty']>
-    'LazyUiComboboxGroup': LazyComponent<typeof import("../../components/ui/combobox/index")['ComboboxGroup']>
-    'LazyUiComboboxInput': LazyComponent<typeof import("../../components/ui/combobox/index")['ComboboxInput']>
-    'LazyUiComboboxItem': LazyComponent<typeof import("../../components/ui/combobox/index")['ComboboxItem']>
-    'LazyUiComboboxItemIndicator': LazyComponent<typeof import("../../components/ui/combobox/index")['ComboboxItemIndicator']>
-    'LazyUiComboboxList': LazyComponent<typeof import("../../components/ui/combobox/index")['ComboboxList']>
-    'LazyUiComboboxSeparator': LazyComponent<typeof import("../../components/ui/combobox/index")['ComboboxSeparator']>
-    'LazyUiComboboxTrigger': LazyComponent<typeof import("../../components/ui/combobox/index")['ComboboxTrigger']>
-    'LazyUiComboboxViewport': LazyComponent<typeof import("../../components/ui/combobox/index")['ComboboxViewport']>
-    'LazyUiComboboxCancel': LazyComponent<typeof import("../../components/ui/combobox/index")['ComboboxCancel']>
     'LazyUiToaster': LazyComponent<typeof import("../../components/ui/sonner/index")['Toaster']>
     'LazyUiTable': LazyComponent<typeof import("../../components/ui/table/index")['Table']>
     'LazyUiTableBody': LazyComponent<typeof import("../../components/ui/table/index")['TableBody']>
