@@ -284,6 +284,7 @@ interface _GlobalComponents {
     'NuxtImg': typeof import("../../node_modules/@nuxt/image/dist/runtime/components/NuxtImg.vue")['default']
     'NuxtPicture': typeof import("../../node_modules/@nuxt/image/dist/runtime/components/NuxtPicture.vue")['default']
     'Icon': typeof import("../../node_modules/@nuxt/icon/dist/runtime/components/index")['default']
+    'UiBadge': typeof import("../../components/ui/badge/index")['Badge']
     'UiBreadcrumb': typeof import("../../components/ui/breadcrumb/index")['Breadcrumb']
     'UiBreadcrumbEllipsis': typeof import("../../components/ui/breadcrumb/index")['BreadcrumbEllipsis']
     'UiBreadcrumbItem': typeof import("../../components/ui/breadcrumb/index")['BreadcrumbItem']
@@ -291,7 +292,6 @@ interface _GlobalComponents {
     'UiBreadcrumbList': typeof import("../../components/ui/breadcrumb/index")['BreadcrumbList']
     'UiBreadcrumbPage': typeof import("../../components/ui/breadcrumb/index")['BreadcrumbPage']
     'UiBreadcrumbSeparator': typeof import("../../components/ui/breadcrumb/index")['BreadcrumbSeparator']
-    'UiBadge': typeof import("../../components/ui/badge/index")['Badge']
     'UiButton': typeof import("../../components/ui/button/index")['Button']
     'UiCalendar': typeof import("../../components/ui/calendar/index")['Calendar']
     'UiCalendarCell': typeof import("../../components/ui/calendar/index")['CalendarCell']
@@ -359,7 +359,6 @@ interface _GlobalComponents {
     'UiDropdownMenuSubTrigger': typeof import("../../components/ui/dropdown-menu/index")['DropdownMenuSubTrigger']
     'UiDropdownMenuTrigger': typeof import("../../components/ui/dropdown-menu/index")['DropdownMenuTrigger']
     'UiDropdownMenuPortal': typeof import("../../components/ui/dropdown-menu/index")['DropdownMenuPortal']
-    'UiInput': typeof import("../../components/ui/input/index")['Input']
     'UiFormControl': typeof import("../../components/ui/form/index")['FormControl']
     'UiFormDescription': typeof import("../../components/ui/form/index")['FormDescription']
     'UiFormItem': typeof import("../../components/ui/form/index")['FormItem']
@@ -369,6 +368,7 @@ interface _GlobalComponents {
     'UiForm': typeof import("../../components/ui/form/index")['Form']
     'UiFormField': typeof import("../../components/ui/form/index")['FormField']
     'UiFormFieldArray': typeof import("../../components/ui/form/index")['FormFieldArray']
+    'UiInput': typeof import("../../components/ui/input/index")['Input']
     'UiLabel': typeof import("../../components/ui/label/index")['Label']
     'UiPopover': typeof import("../../components/ui/popover/index")['Popover']
     'UiPopoverAnchor': typeof import("../../components/ui/popover/index")['PopoverAnchor']
@@ -688,6 +688,7 @@ interface _GlobalComponents {
     'LazyNuxtImg': LazyComponent<typeof import("../../node_modules/@nuxt/image/dist/runtime/components/NuxtImg.vue")['default']>
     'LazyNuxtPicture': LazyComponent<typeof import("../../node_modules/@nuxt/image/dist/runtime/components/NuxtPicture.vue")['default']>
     'LazyIcon': LazyComponent<typeof import("../../node_modules/@nuxt/icon/dist/runtime/components/index")['default']>
+    'LazyUiBadge': LazyComponent<typeof import("../../components/ui/badge/index")['Badge']>
     'LazyUiBreadcrumb': LazyComponent<typeof import("../../components/ui/breadcrumb/index")['Breadcrumb']>
     'LazyUiBreadcrumbEllipsis': LazyComponent<typeof import("../../components/ui/breadcrumb/index")['BreadcrumbEllipsis']>
     'LazyUiBreadcrumbItem': LazyComponent<typeof import("../../components/ui/breadcrumb/index")['BreadcrumbItem']>
@@ -695,7 +696,6 @@ interface _GlobalComponents {
     'LazyUiBreadcrumbList': LazyComponent<typeof import("../../components/ui/breadcrumb/index")['BreadcrumbList']>
     'LazyUiBreadcrumbPage': LazyComponent<typeof import("../../components/ui/breadcrumb/index")['BreadcrumbPage']>
     'LazyUiBreadcrumbSeparator': LazyComponent<typeof import("../../components/ui/breadcrumb/index")['BreadcrumbSeparator']>
-    'LazyUiBadge': LazyComponent<typeof import("../../components/ui/badge/index")['Badge']>
     'LazyUiButton': LazyComponent<typeof import("../../components/ui/button/index")['Button']>
     'LazyUiCalendar': LazyComponent<typeof import("../../components/ui/calendar/index")['Calendar']>
     'LazyUiCalendarCell': LazyComponent<typeof import("../../components/ui/calendar/index")['CalendarCell']>
@@ -763,7 +763,6 @@ interface _GlobalComponents {
     'LazyUiDropdownMenuSubTrigger': LazyComponent<typeof import("../../components/ui/dropdown-menu/index")['DropdownMenuSubTrigger']>
     'LazyUiDropdownMenuTrigger': LazyComponent<typeof import("../../components/ui/dropdown-menu/index")['DropdownMenuTrigger']>
     'LazyUiDropdownMenuPortal': LazyComponent<typeof import("../../components/ui/dropdown-menu/index")['DropdownMenuPortal']>
-    'LazyUiInput': LazyComponent<typeof import("../../components/ui/input/index")['Input']>
     'LazyUiFormControl': LazyComponent<typeof import("../../components/ui/form/index")['FormControl']>
     'LazyUiFormDescription': LazyComponent<typeof import("../../components/ui/form/index")['FormDescription']>
     'LazyUiFormItem': LazyComponent<typeof import("../../components/ui/form/index")['FormItem']>
@@ -773,6 +772,7 @@ interface _GlobalComponents {
     'LazyUiForm': LazyComponent<typeof import("../../components/ui/form/index")['Form']>
     'LazyUiFormField': LazyComponent<typeof import("../../components/ui/form/index")['FormField']>
     'LazyUiFormFieldArray': LazyComponent<typeof import("../../components/ui/form/index")['FormFieldArray']>
+    'LazyUiInput': LazyComponent<typeof import("../../components/ui/input/index")['Input']>
     'LazyUiLabel': LazyComponent<typeof import("../../components/ui/label/index")['Label']>
     'LazyUiPopover': LazyComponent<typeof import("../../components/ui/popover/index")['Popover']>
     'LazyUiPopoverAnchor': LazyComponent<typeof import("../../components/ui/popover/index")['PopoverAnchor']>

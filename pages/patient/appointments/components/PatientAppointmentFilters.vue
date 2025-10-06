@@ -199,7 +199,7 @@ onMounted(async () => {
           size="sm" 
           class="w-full justify-start"
           @click="() => {
-            localFilters.status = 'PENDING'
+            localFilters.status = 'SCHEDULED'
             applyFilters()
           }"
         >

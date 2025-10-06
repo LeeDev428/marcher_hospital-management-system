@@ -284,6 +284,7 @@ export const NuxtRouteAnnouncer: typeof import("../node_modules/nuxt/dist/app/co
 export const NuxtImg: typeof import("../node_modules/@nuxt/image/dist/runtime/components/NuxtImg.vue")['default']
 export const NuxtPicture: typeof import("../node_modules/@nuxt/image/dist/runtime/components/NuxtPicture.vue")['default']
 export const Icon: typeof import("../node_modules/@nuxt/icon/dist/runtime/components/index")['default']
+export const UiBadge: typeof import("../components/ui/badge/index")['Badge']
 export const UiBreadcrumb: typeof import("../components/ui/breadcrumb/index")['Breadcrumb']
 export const UiBreadcrumbEllipsis: typeof import("../components/ui/breadcrumb/index")['BreadcrumbEllipsis']
 export const UiBreadcrumbItem: typeof import("../components/ui/breadcrumb/index")['BreadcrumbItem']
@@ -291,7 +292,6 @@ export const UiBreadcrumbLink: typeof import("../components/ui/breadcrumb/index"
 export const UiBreadcrumbList: typeof import("../components/ui/breadcrumb/index")['BreadcrumbList']
 export const UiBreadcrumbPage: typeof import("../components/ui/breadcrumb/index")['BreadcrumbPage']
 export const UiBreadcrumbSeparator: typeof import("../components/ui/breadcrumb/index")['BreadcrumbSeparator']
-export const UiBadge: typeof import("../components/ui/badge/index")['Badge']
 export const UiButton: typeof import("../components/ui/button/index")['Button']
 export const UiCalendar: typeof import("../components/ui/calendar/index")['Calendar']
 export const UiCalendarCell: typeof import("../components/ui/calendar/index")['CalendarCell']
@@ -359,7 +359,6 @@ export const UiDropdownMenuSubContent: typeof import("../components/ui/dropdown-
 export const UiDropdownMenuSubTrigger: typeof import("../components/ui/dropdown-menu/index")['DropdownMenuSubTrigger']
 export const UiDropdownMenuTrigger: typeof import("../components/ui/dropdown-menu/index")['DropdownMenuTrigger']
 export const UiDropdownMenuPortal: typeof import("../components/ui/dropdown-menu/index")['DropdownMenuPortal']
-export const UiInput: typeof import("../components/ui/input/index")['Input']
 export const UiFormControl: typeof import("../components/ui/form/index")['FormControl']
 export const UiFormDescription: typeof import("../components/ui/form/index")['FormDescription']
 export const UiFormItem: typeof import("../components/ui/form/index")['FormItem']
@@ -369,6 +368,7 @@ export const UiFORMITEMINJECTIONKEY: typeof import("../components/ui/form/index"
 export const UiForm: typeof import("../components/ui/form/index")['Form']
 export const UiFormField: typeof import("../components/ui/form/index")['FormField']
 export const UiFormFieldArray: typeof import("../components/ui/form/index")['FormFieldArray']
+export const UiInput: typeof import("../components/ui/input/index")['Input']
 export const UiLabel: typeof import("../components/ui/label/index")['Label']
 export const UiPopover: typeof import("../components/ui/popover/index")['Popover']
 export const UiPopoverAnchor: typeof import("../components/ui/popover/index")['PopoverAnchor']
@@ -688,6 +688,7 @@ export const LazyNuxtRouteAnnouncer: LazyComponent<typeof import("../node_module
 export const LazyNuxtImg: LazyComponent<typeof import("../node_modules/@nuxt/image/dist/runtime/components/NuxtImg.vue")['default']>
 export const LazyNuxtPicture: LazyComponent<typeof import("../node_modules/@nuxt/image/dist/runtime/components/NuxtPicture.vue")['default']>
 export const LazyIcon: LazyComponent<typeof import("../node_modules/@nuxt/icon/dist/runtime/components/index")['default']>
+export const LazyUiBadge: LazyComponent<typeof import("../components/ui/badge/index")['Badge']>
 export const LazyUiBreadcrumb: LazyComponent<typeof import("../components/ui/breadcrumb/index")['Breadcrumb']>
 export const LazyUiBreadcrumbEllipsis: LazyComponent<typeof import("../components/ui/breadcrumb/index")['BreadcrumbEllipsis']>
 export const LazyUiBreadcrumbItem: LazyComponent<typeof import("../components/ui/breadcrumb/index")['BreadcrumbItem']>
@@ -695,7 +696,6 @@ export const LazyUiBreadcrumbLink: LazyComponent<typeof import("../components/ui
 export const LazyUiBreadcrumbList: LazyComponent<typeof import("../components/ui/breadcrumb/index")['BreadcrumbList']>
 export const LazyUiBreadcrumbPage: LazyComponent<typeof import("../components/ui/breadcrumb/index")['BreadcrumbPage']>
 export const LazyUiBreadcrumbSeparator: LazyComponent<typeof import("../components/ui/breadcrumb/index")['BreadcrumbSeparator']>
-export const LazyUiBadge: LazyComponent<typeof import("../components/ui/badge/index")['Badge']>
 export const LazyUiButton: LazyComponent<typeof import("../components/ui/button/index")['Button']>
 export const LazyUiCalendar: LazyComponent<typeof import("../components/ui/calendar/index")['Calendar']>
 export const LazyUiCalendarCell: LazyComponent<typeof import("../components/ui/calendar/index")['CalendarCell']>
@@ -763,7 +763,6 @@ export const LazyUiDropdownMenuSubContent: LazyComponent<typeof import("../compo
 export const LazyUiDropdownMenuSubTrigger: LazyComponent<typeof import("../components/ui/dropdown-menu/index")['DropdownMenuSubTrigger']>
 export const LazyUiDropdownMenuTrigger: LazyComponent<typeof import("../components/ui/dropdown-menu/index")['DropdownMenuTrigger']>
 export const LazyUiDropdownMenuPortal: LazyComponent<typeof import("../components/ui/dropdown-menu/index")['DropdownMenuPortal']>
-export const LazyUiInput: LazyComponent<typeof import("../components/ui/input/index")['Input']>
 export const LazyUiFormControl: LazyComponent<typeof import("../components/ui/form/index")['FormControl']>
 export const LazyUiFormDescription: LazyComponent<typeof import("../components/ui/form/index")['FormDescription']>
 export const LazyUiFormItem: LazyComponent<typeof import("../components/ui/form/index")['FormItem']>
@@ -773,6 +772,7 @@ export const LazyUiFORMITEMINJECTIONKEY: LazyComponent<typeof import("../compone
 export const LazyUiForm: LazyComponent<typeof import("../components/ui/form/index")['Form']>
 export const LazyUiFormField: LazyComponent<typeof import("../components/ui/form/index")['FormField']>
 export const LazyUiFormFieldArray: LazyComponent<typeof import("../components/ui/form/index")['FormFieldArray']>
+export const LazyUiInput: LazyComponent<typeof import("../components/ui/input/index")['Input']>
 export const LazyUiLabel: LazyComponent<typeof import("../components/ui/label/index")['Label']>
 export const LazyUiPopover: LazyComponent<typeof import("../components/ui/popover/index")['Popover']>
 export const LazyUiPopoverAnchor: LazyComponent<typeof import("../components/ui/popover/index")['PopoverAnchor']>

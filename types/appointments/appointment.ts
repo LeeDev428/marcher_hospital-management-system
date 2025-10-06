@@ -58,10 +58,12 @@ const timeString = z.preprocess(
 /* ---------- Status ---------- */
 
 export const appointmentStatusSchema = z.enum([
-  "PENDING",
   "SCHEDULED",
-  "CANCELLED",
+  "CONFIRMED",
+  "IN_PROGRESS",
   "COMPLETED",
+  "CANCELLED",
+  "NO_SHOW",
 ])
 
 export const appointmentStatusOptions = appointmentStatusSchema.options.map((status) => ({

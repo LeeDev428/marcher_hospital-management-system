@@ -1,5 +1,6 @@
 import { z } from "zod"
 import { createTRPCRouter, protectedProcedure, publicProcedure } from "../../init"
+import { AppointmentStatus } from "@/prisma/generated/instance/client"
 import {
   createAppointmentSchema,
   deleteAppointmentSchema,
@@ -63,15 +64,28 @@ function pickName(user: any) {
 
 async function ensurePatientProfile(prisma: any, user: any) {
   if (!user?.id) return null
-  const { firstName, lastName } = pickName(user)
 
-  // requires PatientProfile.userId @unique
-  const profile = await prisma.patientProfile.upsert({
-    where: { id: "005f0894-b05f-4c9a-a094-63e0d2fbc439" },
-    update: {}, // nothing to update for now
-    create: { id: "005f0894-b05f-4c9a-a094-63e0d2fbc439", firstName, lastName },
+  // Find or create patient profile based on userId
+  let patient = await prisma.patient.findUnique({
+    where: { userId: user.id },
   })
-  return profile
+  
+  // Auto-create patient profile if it doesn't exist
+  if (!patient) {
+    // Generate unique patient number (format: P + timestamp + random)
+    const patientNumber = `P${Date.now()}${Math.random().toString(36).substr(2, 4).toUpperCase()}`
+    
+    patient = await prisma.patient.create({
+      data: {
+        userId: user.id,
+        patientNumber,
+      },
+    })
+    
+    console.log('✅ Auto-created patient profile:', patientNumber)
+  }
+  
+  return patient
 }
 
 // === STAFF ===
@@ -161,7 +175,7 @@ const createAppointment = protectedProcedure
         }
       }
       const existing = await instancePrisma.appointment.findFirst({
-        where: { doctorId, date, time, status: { in: ["PENDING", "SCHEDULED"] } },
+        where: { doctorId, date, time, status: { in: ["SCHEDULED", "CONFIRMED"] } },
       })
       if (existing) return { success: false, message: "Already booked. This time slot is not available.", data: null }
 
@@ -196,7 +210,7 @@ const updateAppointment = protectedProcedure
           date,
           time,
           id: { not: id },
-          status: { in: ["PENDING", "SCHEDULED"] },
+          status: { in: ["SCHEDULED", "CONFIRMED"] },
         },
       })
       if (conflict) {
@@ -256,7 +270,7 @@ const assignRoom = protectedProcedure
           date: base.date,
           time: base.time,
           id: { not: id },
-          status: { in: ["PENDING", "SCHEDULED"] },
+          status: { in: ["SCHEDULED", "CONFIRMED"] },
         },
       })
       if (conflict) return { success: false, message: "Room is not available at this time slot.", data: null }
@@ -365,71 +379,55 @@ const getPatientAppointment = protectedProcedure
     }
   })
 
-const createPatientAppointment = publicProcedure
+const createPatientAppointment = protectedProcedure
   .input(createPatientAppointmentSchema)
   .mutation(async ({ ctx, input }) => {
     const { instancePrisma, user } = ctx
     const { doctorId, date, time, name } = input
 
     try {
-      // 👇 auto-create profile if missing (returns the profile either way)
-      const currentPatient = await ensurePatientProfile(instancePrisma, user)
-      if (!currentPatient) {
-        return { success: false, message: "Not authenticated.", data: null }
+      console.log('� Creating appointment:', { doctorId, date, time, name })
+
+      // Validate input
+      if (!doctorId || !date || !time || !name) {
+        return { success: false, message: "Missing required fields.", data: null }
       }
 
-      // office hours + conflict checks (unchanged)
-      const [h, m] = time.split(":").map(Number)
-      const t = h * 60 + m
-      const inHours = (t >= 480 && t < 720) || (t >= 780 && t < 1080)
-      if (!inHours) {
-        return { success: false, message: "Appointment time must be within office hours (8:00–18:00, excluding 12:00–13:00).", data: null }
-      }
-
+      // Check if time slot is already booked
       const exists = await instancePrisma.appointment.findFirst({
-        where: { doctorId, date, time, status: { in: ["PENDING", "SCHEDULED"] } },
+        where: { 
+          doctorId, 
+          date, 
+          time, 
+          status: { in: [AppointmentStatus.SCHEDULED, AppointmentStatus.CONFIRMED] } 
+        },
       })
-      if (exists) return { success: false, message: "Already booked. This time slot is not available.", data: null }
+      
+      if (exists) {
+        return { success: false, message: "This time slot is already booked.", data: null }
+      }
 
-      // save (atomically create both, if you keep a PatientAppointment mirror)
-      const appointment = await instancePrisma.$transaction(async (tx: any) => {
-        const apt = await tx.appointment.create({
-          data: {
-            patientId: currentPatient.id,
-            doctorId,
-            date,
-            time,
-            status: "SCHEDULED",
-            facilityId: null, // assign later by staff
-          },
-        })
-
-        // if you have PatientAppointment table, keep this; otherwise remove this block
-        if (tx.patientAppointment) {
-          await tx.patientAppointment.create({
-            data: {
-              patientId: currentPatient.id,
-              doctorId,
-              date,
-              time,
-              status: "SCHEDULED",
-              name: name ?? null,
-              appointmentId: apt.id,
-            },
-          })
-        }
-
-        return apt
+      // Create appointment with SCHEDULED status using the real patient ID
+      const appointment = await instancePrisma.appointment.create({
+        data: {
+          patientId: patient.id,
+          doctorId,
+          date,
+          time,
+          status: AppointmentStatus.SCHEDULED,
+        },
       })
+
+      console.log('✅ Appointment created successfully:', appointment.id)
 
       return {
         success: true,
-        message: "Appointment booked successfully. Status is PENDING until staff confirm.",
+        message: "Appointment booked successfully! Your appointment has been SCHEDULED.",
         data: appointment,
       }
     } catch (error) {
-      console.error(error)
-      return { success: false, message: "Failed to book appointment.", data: null }
+      console.error('❌ Error creating appointment:', error)
+      return { success: false, message: "Failed to book appointment. Please try again.", data: null }
     }
   })
 
@@ -446,7 +444,7 @@ const cancelPatientAppointment = protectedProcedure
       if (!existing || existing.patientId !== currentPatient.id) {
         return { success: false, message: "Appointment not found or access denied.", data: null }
       }
-      if (!["PENDING", "SCHEDULED"].includes(existing.status)) {
+      if (!["SCHEDULED", "CONFIRMED"].includes(existing.status)) {
         return { success: false, message: "This appointment cannot be cancelled.", data: null }
       }
 
@@ -515,7 +513,7 @@ const checkAvailability = publicProcedure
           date,
           time,
           ...(excludeAppointmentId ? { id: { not: excludeAppointmentId } } : {}),
-          status: { in: ["PENDING", "SCHEDULED"] },
+          status: { in: ["SCHEDULED", "CONFIRMED"] },
         },
       })
       if (existing) {
@@ -535,7 +533,7 @@ const getAvailableTimeSlots = publicProcedure
     const { doctorId, date } = input
     try {
       const existing = await instancePrisma.appointment.findMany({
-        where: { doctorId, date, status: { in: ["PENDING", "SCHEDULED"] } },
+        where: { doctorId, date, status: { in: ["SCHEDULED", "CONFIRMED"] } },
         select: { time: true },
       })
       const booked = new Set(existing.map((a: any) => a.time))

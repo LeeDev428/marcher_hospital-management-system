@@ -52,8 +52,8 @@ export const useAppointmentStore = defineStore("appointment", {
     filteredAppointments: (s) => s.appointments,
     hasFilters: (s) => !!(s.filters.doctorId || s.filters.facilityId || s.filters.date || s.filters.status),
     hasPatientFilters: (s) => !!(s.patientFilters.doctorId || s.patientFilters.date || s.patientFilters.status),
-    upcomingAppointments: (s) => s.appointments.filter(a => a.status === "PENDING" || a.status === "SCHEDULED"),
-    cancellableAppointments: (s) => s.appointments.filter(a => a.status === "PENDING" || a.status === "SCHEDULED"),
+    upcomingAppointments: (s) => s.appointments.filter(a => a.status === "SCHEDULED" || a.status === "CONFIRMED"),
+    cancellableAppointments: (s) => s.appointments.filter(a => a.status === "SCHEDULED" || a.status === "CONFIRMED"),
   },
 
   actions: {
