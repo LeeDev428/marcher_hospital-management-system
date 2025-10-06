@@ -209,6 +209,7 @@ export const PatientAppointmentForm: typeof import("../pages/patient/appointment
 export const PatientAppointmentsAvailability: typeof import("../pages/patient/appointments/components/PatientAppointmentsAvailability.vue")['default']
 export const PatientAppointmentsTable: typeof import("../pages/patient/appointments/components/PatientAppointmentsTable.vue")['default']
 export const PatientsBillingTable: typeof import("../pages/patient/billing/components/PatientsBillingTable.vue")['default']
+export const PatientPagination: typeof import("../pages/patient/components/PatientPagination.vue")['default']
 export const DoctorTable: typeof import("../pages/patient/doctor/components/DoctorTable.vue")['default']
 export const MedicalRecordForm: typeof import("../pages/patient/medical-records/components/MedicalRecordForm.vue")['default']
 export const MedicalRecordsTable: typeof import("../pages/patient/medical-records/components/MedicalRecordsTable.vue")['default']
@@ -242,6 +243,7 @@ export const InsuranceClaimItemsTable: typeof import("../pages/staff/insurance/c
 export const InsuranceClaimsTable: typeof import("../pages/staff/insurance/components/InsuranceClaimsTable.vue")['default']
 export const InsuranceProviderForm: typeof import("../pages/staff/insurance/components/InsuranceProviderForm.vue")['default']
 export const InsuranceProviderTable: typeof import("../pages/staff/insurance/components/InsuranceProviderTable.vue")['default']
+export const MedicalServiceForm: typeof import("../pages/staff/medical-services/components/MedicalServiceForm.vue")['default']
 export const EncountersModule: typeof import("../pages/staff/patients/[patientProfileId]/encounters/components/EncountersModule.vue")['default']
 export const InpatientForm: typeof import("../pages/staff/patients/[patientProfileId]/encounters/components/InpatientForm.vue")['default']
 export const OutpatientForm: typeof import("../pages/staff/patients/[patientProfileId]/encounters/components/OutpatientForm.vue")['default']
@@ -611,6 +613,7 @@ export const LazyPatientAppointmentForm: LazyComponent<typeof import("../pages/p
 export const LazyPatientAppointmentsAvailability: LazyComponent<typeof import("../pages/patient/appointments/components/PatientAppointmentsAvailability.vue")['default']>
 export const LazyPatientAppointmentsTable: LazyComponent<typeof import("../pages/patient/appointments/components/PatientAppointmentsTable.vue")['default']>
 export const LazyPatientsBillingTable: LazyComponent<typeof import("../pages/patient/billing/components/PatientsBillingTable.vue")['default']>
+export const LazyPatientPagination: LazyComponent<typeof import("../pages/patient/components/PatientPagination.vue")['default']>
 export const LazyDoctorTable: LazyComponent<typeof import("../pages/patient/doctor/components/DoctorTable.vue")['default']>
 export const LazyMedicalRecordForm: LazyComponent<typeof import("../pages/patient/medical-records/components/MedicalRecordForm.vue")['default']>
 export const LazyMedicalRecordsTable: LazyComponent<typeof import("../pages/patient/medical-records/components/MedicalRecordsTable.vue")['default']>
@@ -644,6 +647,7 @@ export const LazyInsuranceClaimItemsTable: LazyComponent<typeof import("../pages
 export const LazyInsuranceClaimsTable: LazyComponent<typeof import("../pages/staff/insurance/components/InsuranceClaimsTable.vue")['default']>
 export const LazyInsuranceProviderForm: LazyComponent<typeof import("../pages/staff/insurance/components/InsuranceProviderForm.vue")['default']>
 export const LazyInsuranceProviderTable: LazyComponent<typeof import("../pages/staff/insurance/components/InsuranceProviderTable.vue")['default']>
+export const LazyMedicalServiceForm: LazyComponent<typeof import("../pages/staff/medical-services/components/MedicalServiceForm.vue")['default']>
 export const LazyEncountersModule: LazyComponent<typeof import("../pages/staff/patients/[patientProfileId]/encounters/components/EncountersModule.vue")['default']>
 export const LazyInpatientForm: LazyComponent<typeof import("../pages/staff/patients/[patientProfileId]/encounters/components/InpatientForm.vue")['default']>
 export const LazyOutpatientForm: LazyComponent<typeof import("../pages/staff/patients/[patientProfileId]/encounters/components/OutpatientForm.vue")['default']>
