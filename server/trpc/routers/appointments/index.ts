@@ -399,7 +399,7 @@ const createPatientAppointment = publicProcedure
             doctorId,
             date,
             time,
-            status: "PENDING",
+            status: "SCHEDULED",
             facilityId: null, // assign later by staff
           },
         })
@@ -412,7 +412,7 @@ const createPatientAppointment = publicProcedure
               doctorId,
               date,
               time,
-              status: "PENDING",
+              status: "SCHEDULED",
               name: name ?? null,
               appointmentId: apt.id,
             },
