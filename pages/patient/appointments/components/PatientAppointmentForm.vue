@@ -1,20 +1,23 @@
 <script setup lang="ts">
 import { useAppointmentStore } from "@/stores/appointments"
 import { useStaffStore } from "@/stores/staff"
+import { useMedicalServiceStore } from "@/stores/medical-services/useMedicalServiceStore"
 import { createPatientAppointmentSchema } from "@/types/appointments"
-import type { CreatePatientAppointment, GetAvailableTimeSlots } from "@/types/appointments"
+import type { CreatePatientAppointment } from "@/types/appointments"
+import type { TableMedicalService } from "@/types/medical-services"
 import {
   TypedForm,
-  TypedSelect,
-  TypedDate,
-  TypedTime,
   TypedInput,
 } from "@/components/app/form"
 import { Button } from "@/components/ui/button"
+import { Badge } from "@/components/ui/badge"
+import { Input } from "@/components/ui/input"
+import PatientPagination from "@/pages/patient/components/PatientPagination.vue"
 import { useToast } from "@/composables/useToast"
 
 const staffStore = useStaffStore()
 const appointmentStore = useAppointmentStore()
+const medicalServiceStore = useMedicalServiceStore()
 
 defineProps<{ appointmentId?: string }>()
 
@@ -53,29 +56,102 @@ const toHHMM = (val: string) => {
 
 /* ---------------- Local state ---------------- */
 
+const selectedServiceId = ref<string>("")
 const selectedDoctorId = ref("")
 const selectedDate = ref("")
 const selectedTime = ref("")
-const checkingAvailability = ref(false)
-const availabilityMessage = ref("")
-const isAvailable = ref(true)
 const doctorSchedule = ref<any[]>([])
 const loadingSchedule = ref(false)
 const selectedScheduleSlot = ref<any>(null)
 const selectedDay = ref<any>(null)
 const availableTimeSlots = ref<string[]>([])
 
-/* ---------------- Derived options ---------------- */
+// Filter states
+const doctorSearchQuery = ref("")
+const serviceSearchQuery = ref("")
+const currentPage = ref(1)
+const itemsPerPage = 20
 
-const doctorOptions = computed(() =>
-  staffStore.staffProfiles.map((s) => ({
-    label: `Dr. ${s.firstName} ${s.lastName}${s.middleName ? ` ${s.middleName}` : ""}${s.suffix ? ` ${s.suffix}` : ""}`,
-    value: s.id,
-  })),
+// Form data
+const patientName = ref("")
+
+/* ---------------- Computed ---------------- */
+
+const allServices = computed(() => medicalServiceStore.medicalServices.filter(s => s.isActive))
+const loadingServices = computed(() => medicalServiceStore.loading)
+
+const selectedService = computed(() => 
+  allServices.value.find(s => s.id === selectedServiceId.value)
 )
 
-const formatDayName = (day: string) => {
-  return day.charAt(0) + day.slice(1).toLowerCase()
+const allDoctors = computed(() => staffStore.staffProfiles)
+
+// Filtered services based on search
+const filteredServices = computed(() => {
+  let filtered = allServices.value
+
+  // Filter by doctor name
+  if (doctorSearchQuery.value.trim()) {
+    const query = doctorSearchQuery.value.toLowerCase()
+    filtered = filtered.filter(s => {
+      if (!s.staff) return false
+      const fullName = `${s.staff.firstName} ${s.staff.lastName} ${s.staff.middleName || ''}`.toLowerCase()
+      return fullName.includes(query)
+    })
+  }
+
+  // Filter by service name
+  if (serviceSearchQuery.value.trim()) {
+    const query = serviceSearchQuery.value.toLowerCase()
+    filtered = filtered.filter(s => s.name.toLowerCase().includes(query))
+  }
+
+  return filtered
+})
+
+// Paginated services
+const paginatedServices = computed(() => {
+  const start = (currentPage.value - 1) * itemsPerPage
+  const end = start + itemsPerPage
+  return filteredServices.value.slice(start, end)
+})
+
+const totalPages = computed(() => Math.ceil(filteredServices.value.length / itemsPerPage))
+
+const handlePageChange = (page: number) => {
+  currentPage.value = page
+}
+
+/* ---------------- Format helpers ---------------- */
+
+const formatPrice = (price: string) => {
+  return `₱${parseFloat(price).toLocaleString('en-PH', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`
+}
+
+const formatDuration = (duration: number) => {
+  if (duration < 60) return `${duration} mins`
+  const hours = Math.floor(duration / 60)
+  const mins = duration % 60
+  return mins > 0 ? `${hours}h ${mins}m` : `${hours}h`
+}
+
+const formatServiceType = (type: string) => {
+  return type.split('_').map(word => 
+    word.charAt(0) + word.slice(1).toLowerCase()
+  ).join(' ')
+}
+
+/* ---------------- Service Selection ---------------- */
+
+const selectService = async (service: TableMedicalService) => {
+  selectedServiceId.value = service.id
+  selectedDoctorId.value = service.staffId
+  selectedScheduleSlot.value = null
+  selectedDay.value = null
+  selectedDate.value = ''
+  selectedTime.value = ''
+  availableTimeSlots.value = []
+  await fetchDoctorSchedule()
 }
 
 /* ---------------- Doctor Schedule ---------------- */
@@ -170,69 +246,15 @@ const selectTimeSlot = (time: string) => {
   console.log(`✅ Selected time: ${time} on ${selectedDate.value}`)
 }
 
-/* ---------------- Availability ---------------- */
+/* ---------------- Form submit ---------------- */
 
-const triggerAvailabilityCheck = async () => {
-  if (selectedDoctorId.value && selectedDate.value) {
-    const params: GetAvailableTimeSlots = {
-      doctorId: selectedDoctorId.value,
-      date: selectedDate.value,
-    }
-    await appointmentStore.getAvailableTimeSlots(params)
-  } else {
-    appointmentStore.clearAvailabilityData()
-  }
-}
-
-const checkAppointmentAvailability = async () => {
-  // Clear previous messages
-  availabilityMessage.value = ""
-  isAvailable.value = true
-
-  if (!selectedDoctorId.value || !selectedDate.value || !selectedTime.value) {
+const onSubmit = async () => {
+  // Validate service selection
+  if (!selectedServiceId.value) {
+    useToast("error", "Appointment", "Please select a medical service")
     return
   }
 
-  try {
-    checkingAvailability.value = true
-
-    // Check if appointment is in the past
-    const now = new Date()
-    const sel = new Date(`${selectedDate.value}T${selectedTime.value}`)
-    if (sel.getTime() <= now.getTime()) {
-      availabilityMessage.value = "Cannot book appointments in the past"
-      isAvailable.value = false
-      checkingAvailability.value = false
-      return
-    }
-
-    // Check availability via API
-    const res = await appointmentStore.checkAvailability({
-      doctorId: selectedDoctorId.value,
-      date: selectedDate.value,
-      time: selectedTime.value,
-    })
-
-    if (res?.success && res.data) {
-      isAvailable.value = res.data.available
-      if (!res.data.available) {
-        availabilityMessage.value = res.data.reason || "Time slot is not available"
-      }
-    } else {
-      // Don't fail silently - but don't block booking if check fails
-      console.warn("Could not verify availability")
-    }
-  } catch (e) {
-    console.error("Availability check error:", e)
-    // Don't block booking if availability check fails
-  } finally {
-    checkingAvailability.value = false
-  }
-}
-
-/* ---------------- Form submit ---------------- */
-
-const onSubmit = async (data: CreatePatientAppointment) => {
   // Validate schedule slot selection
   if (!selectedScheduleSlot.value) {
     useToast("error", "Appointment", "Please select an available time slot from the doctor's schedule")
@@ -244,13 +266,20 @@ const onSubmit = async (data: CreatePatientAppointment) => {
     return
   }
 
-  // Ensure normalized values are submitted
+  if (!patientName.value.trim()) {
+    useToast("error", "Appointment", "Please enter your name")
+    return
+  }
+
+  // Build the payload matching the schema exactly
   const payload: CreatePatientAppointment = {
-    name: data.name?.trim() || undefined,
+    name: patientName.value.trim(),
     doctorId: selectedDoctorId.value,
     date: selectedDate.value,
     time: selectedTime.value,
   }
+
+  console.log("📤 Submitting appointment:", payload)
 
   const res = await appointmentStore.bookAppointment(payload)
   if (res?.success) {
@@ -261,94 +290,198 @@ const onSubmit = async (data: CreatePatientAppointment) => {
   }
 }
 
-/* ---------------- Field handlers ---------------- */
-
-const handleDoctorChange = async (v: string | number) => {
-  selectedDoctorId.value = String(v)
-  selectedScheduleSlot.value = null
-  selectedDay.value = null
-  selectedDate.value = ''
-  selectedTime.value = ''
-  availableTimeSlots.value = []
-  await fetchDoctorSchedule()
-}
-
-const handleDateChange = (v: string | number) => {
-  selectedDate.value = toISODate(String(v))
-}
-
-const handleTimeChange = (v: string | number) => {
-  selectedTime.value = toHHMM(String(v))
-}
-
-/* ---------------- Watches ---------------- */
-
-// Only check availability after user selects a complete time slot
-watch([selectedDoctorId, selectedDate, selectedTime], () => {
-  // Only check if all fields are filled
-  if (selectedDoctorId.value && selectedDate.value && selectedTime.value) {
-    checkAppointmentAvailability()
-  }
-})
-
-// Trigger availability check for time slot display
-watch([selectedDoctorId, selectedDate], () => {
-  if (selectedDoctorId.value && selectedDate.value) {
-    triggerAvailabilityCheck()
-  }
-})
+/* ---------------- Lifecycle ---------------- */
 
 onMounted(async () => {
   await staffStore.getStaffProfiles("DOCTOR")
+  await medicalServiceStore.getMedicalServices({ page: 1, limit: 100, isActive: true })
 })
 </script>
 
 <template>
-  <div class="space-y-4">
+  <div class="space-y-6">
     <div class="mb-6">
-      <h2 class="text-xl font-semibold text-gray-900">Book New Appointment</h2>
+      <h2 class="text-2xl font-bold text-gray-900">Book New Appointment</h2>
       <p class="text-sm text-gray-600 mt-1">
-        Select your preferred doctor, date, and time. Hospital staff will assign a room and confirm your appointment.
+        Select a medical service, then choose your preferred date and time. Hospital staff will assign a room and confirm your appointment.
       </p>
     </div>
 
-    <TypedForm
-      :schema="createPatientAppointmentSchema"
-      @submit="onSubmit"
-      class="space-y-6"
-    >
-      <TypedInput
-        name="name"
-        label="Name"
-        placeholder="Enter Surname, Firstname"
-        type="text"
-      />
+    <!-- Main Layout: Full Width / Landscape -->
+    <div class="space-y-6">
+      
+      <!-- Step 1: Select Medical Service -->
+      <div class="bg-white rounded-lg border-2 border-gray-200 p-4">
+        <div class="flex items-center gap-2 mb-3">
+          <div class="w-7 h-7 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold text-sm">1</div>
+          <h3 class="text-base font-bold text-gray-900">Select Medical Service</h3>
+        </div>
+        <p class="text-xs text-gray-600 mb-4">Choose the service you need</p>
 
-      <TypedSelect
-        name="doctorId"
-        label="Doctor"
-        :options="doctorOptions"
-        placeholder="Select Doctor"
-        @update:model-value="handleDoctorChange"
-      />
+        <!-- Search Filters -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mb-4">
+          <div>
+            <label class="text-xs font-medium text-gray-700 mb-1 block">Search by Doctor Name</label>
+            <Input
+              v-model="doctorSearchQuery"
+              placeholder="e.g., Dr. Smith"
+              class="h-9 text-sm"
+            />
+          </div>
+          <div>
+            <label class="text-xs font-medium text-gray-700 mb-1 block">Search by Service Name</label>
+            <Input
+              v-model="serviceSearchQuery"
+              placeholder="e.g., Consultation"
+              class="h-9 text-sm"
+            />
+          </div>
+        </div>
 
-      <!-- Loading Schedule -->
-      <div v-if="loadingSchedule" class="p-4 bg-blue-50 rounded-lg border border-blue-200">
-        <div class="flex items-center gap-2 text-blue-700">
-          <Icon name="mdi:loading" class="animate-spin" />
-          <span class="text-sm">Loading doctor's schedule...</span>
+        <!-- Loading Services -->
+        <div v-if="loadingServices" class="p-8 text-center">
+          <Icon name="mdi:loading" class="animate-spin text-4xl text-blue-600 mx-auto mb-4" />
+          <p class="text-sm text-gray-600">Loading medical services...</p>
+        </div>
+
+        <!-- Services Grid -->
+        <div v-else-if="paginatedServices.length > 0" class="space-y-3">
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
+            <button
+              v-for="service in paginatedServices"
+              :key="service.id"
+              type="button"
+              @click="selectService(service)"
+              :class="[
+                'p-3 rounded-md border-2 transition-all text-left hover:shadow-md',
+                selectedServiceId === service.id
+                  ? 'border-blue-600 bg-blue-50 shadow-md'
+                  : 'border-gray-200 bg-white hover:border-blue-300'
+              ]"
+            >
+              <div class="space-y-2">
+                <!-- Service Name & Icon -->
+                <div>
+                  <div class="flex items-start justify-between gap-2 mb-1">
+                    <h4 :class="[
+                      'font-semibold text-sm',
+                      selectedServiceId === service.id ? 'text-blue-900' : 'text-gray-900'
+                    ]">
+                      {{ service.name }}
+                    </h4>
+                    <Icon 
+                      v-if="selectedServiceId === service.id" 
+                      name="mdi:check-circle" 
+                      class="text-blue-600 w-5 h-5 flex-shrink-0" 
+                    />
+                  </div>
+                  <Badge variant="outline" class="text-xs py-0 px-2 h-5">
+                    {{ formatServiceType(service.type) }}
+                  </Badge>
+                </div>
+
+                <!-- Description -->
+                <p v-if="service.description" class="text-xs text-gray-600 line-clamp-1">
+                  {{ service.description }}
+                </p>
+
+                <!-- Doctor -->
+                <div class="flex items-center gap-1 text-xs text-gray-700">
+                  <Icon name="mdi:doctor" class="w-3.5 h-3.5" />
+                  <span v-if="service.staff" class="truncate">
+                    Dr. {{ service.staff.firstName }} {{ service.staff.lastName }}
+                  </span>
+                </div>
+
+                <!-- Price & Duration -->
+                <div class="flex items-center justify-between pt-1.5 border-t border-gray-200">
+                  <div class="flex items-center gap-1 text-green-700 font-semibold text-xs">
+                    <Icon name="mdi:cash" class="w-3.5 h-3.5" />
+                    {{ formatPrice(service.price) }}
+                  </div>
+                  <div class="flex items-center gap-1 text-gray-600 text-xs">
+                    <Icon name="mdi:clock-outline" class="w-3.5 h-3.5" />
+                    {{ formatDuration(service.duration) }}
+                  </div>
+                </div>
+              </div>
+            </button>
+          </div>
+
+          <!-- Pagination -->
+          <PatientPagination
+            :current-page="currentPage"
+            :total-pages="totalPages"
+            :total-items="filteredServices.length"
+            :items-per-page="itemsPerPage"
+            @page-change="handlePageChange"
+          />
+        </div>
+
+        <!-- No Services -->
+        <div v-else class="p-8 text-center">
+          <Icon name="mdi:alert-circle-outline" class="text-4xl text-gray-300 mx-auto mb-3" />
+          <p class="text-sm text-gray-600">
+            {{ doctorSearchQuery || serviceSearchQuery ? 'No services match your search' : 'No active medical services available at the moment.' }}
+          </p>
         </div>
       </div>
 
-      <!-- Doctor's Available Schedule -->
-      <div v-else-if="selectedDoctorId && doctorSchedule.length > 0" class="space-y-4">
-        <!-- Step 1: Select Day -->
-        <div>
-          <div class="flex items-center gap-2 mb-2">
-            <Icon name="mdi:calendar-check" class="text-green-600" />
-            <h3 class="text-sm font-semibold text-gray-900">Step 1: Choose Available Day</h3>
+      <!-- Step 2: Select Date & Time (Only show if service is selected) -->
+      <div v-if="selectedServiceId" class="bg-white rounded-lg border-2 border-gray-200 p-4">
+        <form @submit.prevent="onSubmit" class="space-y-4">
+          <!-- Patient Name -->
+          <div>
+            <div class="flex items-center gap-2 mb-3">
+              <div class="w-7 h-7 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold text-sm">2</div>
+              <h3 class="text-base font-bold text-gray-900">Enter Your Details</h3>
+            </div>
+
+            <div class="space-y-1.5">
+              <label for="patientName" class="text-sm font-medium text-gray-700">Full Name</label>
+              <Input
+                id="patientName"
+                v-model="patientName"
+                placeholder="Enter Surname, Firstname"
+                required
+                class="h-9 text-sm"
+              />
+              <p class="text-xs text-gray-500">Enter your full name as it appears on your ID</p>
+            </div>
           </div>
-          <p class="text-xs text-gray-600 mb-3">Select a day when the doctor is available</p>
+
+          <!-- Doctor Auto-Selected -->
+          <div v-if="selectedService" class="p-4 bg-blue-50 rounded-lg border border-blue-200">
+            <div class="flex items-center gap-3">
+              <Icon name="mdi:doctor" class="text-blue-600 w-6 h-6" />
+              <div>
+                <p class="text-sm font-medium text-blue-900">Assigned Doctor</p>
+                <p class="text-sm text-blue-700">
+                  <span v-if="selectedService.staff">
+                    Dr. {{ selectedService.staff.firstName }} {{ selectedService.staff.lastName }}
+                  </span>
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Loading Schedule -->
+          <div v-if="loadingSchedule" class="p-4 bg-blue-50 rounded-lg border border-blue-200">
+            <div class="flex items-center gap-2 text-blue-700">
+              <Icon name="mdi:loading" class="animate-spin" />
+              <span class="text-sm">Loading doctor's schedule...</span>
+            </div>
+          </div>
+
+          <!-- Step 3: Doctor's Available Schedule -->
+          <div v-else-if="selectedDoctorId && doctorSchedule.length > 0" class="space-y-6">
+            <!-- Step 3A: Select Day -->
+            <div>
+              <div class="flex items-center gap-2 mb-3">
+                <div class="w-7 h-7 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold text-sm">3</div>
+                <h3 class="text-base font-bold text-gray-900">Choose Available Day</h3>
+              </div>
+              <p class="text-xs text-gray-600 mb-3">Select a day when the doctor is available</p>
           
           <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
             <button
@@ -377,16 +510,16 @@ onMounted(async () => {
                 <span>{{ schedule.startTime }} - {{ schedule.endTime }}</span>
               </div>
             </button>
-          </div>
-        </div>
+              </div>
+            </div>
 
-        <!-- Step 2: Select Time Slot (20-minute intervals) -->
-        <div v-if="selectedDay" class="space-y-3">
-          <div class="flex items-center gap-2">
-            <Icon name="mdi:clock-time-four" class="text-blue-600" />
-            <h3 class="text-sm font-semibold text-gray-900">Step 2: Choose Time (20-min intervals)</h3>
-          </div>
-          <p class="text-xs text-gray-600">Available times on {{ selectedDay.day.charAt(0) + selectedDay.day.slice(1).toLowerCase() }}, {{ selectedDate }}</p>
+            <!-- Step 3B: Select Time Slot (20-minute intervals) -->
+            <div v-if="selectedDay" class="space-y-3">
+              <div class="flex items-center gap-2 mb-3">
+                <div class="w-7 h-7 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold text-sm">4</div>
+                <h3 class="text-base font-bold text-gray-900">Choose Time (20-min intervals)</h3>
+              </div>
+              <p class="text-xs text-gray-600 mb-3">Available times on {{ selectedDay.day.charAt(0) + selectedDay.day.slice(1).toLowerCase() }}, {{ selectedDate }}</p>
           
           <div class="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2">
             <button
@@ -402,76 +535,80 @@ onMounted(async () => {
               ]"
             >
               {{ timeSlot }}
-            </button>
-          </div>
-        </div>
+                </button>
+              </div>
+            </div>
 
-        <!-- Selected Appointment Summary -->
-        <div v-if="selectedScheduleSlot" class="p-4 bg-green-50 rounded-lg border border-green-200">
-          <div class="flex items-start gap-3">
-            <Icon name="mdi:check-circle" class="text-green-600 mt-0.5 flex-shrink-0 w-6 h-6" />
-            <div>
-              <p class="font-semibold text-green-900 mb-1">✓ Appointment Selected</p>
-              <div class="text-sm text-green-800 space-y-1">
-                <p><strong>Day:</strong> {{ selectedDay.day.charAt(0) + selectedDay.day.slice(1).toLowerCase() }}</p>
-                <p><strong>Date:</strong> {{ selectedDate }}</p>
-                <p><strong>Time:</strong> {{ selectedTime }}</p>
+            <!-- Selected Appointment Summary -->
+            <div v-if="selectedScheduleSlot" class="p-4 bg-green-50 rounded-lg border-2 border-green-500">
+              <div class="flex items-start gap-3">
+                <Icon name="mdi:check-circle" class="text-green-600 mt-0.5 flex-shrink-0 w-6 h-6" />
+                <div class="flex-1">
+                  <p class="font-bold text-green-900 mb-3 text-lg">✓ Appointment Ready to Book</p>
+                  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                      <p class="text-xs text-green-700 font-medium mb-1">SERVICE</p>
+                      <p class="text-sm text-green-900 font-semibold">{{ selectedService?.name }}</p>
+                      <p class="text-xs text-green-700">{{ formatPrice(selectedService?.price || '0') }} • {{ formatDuration(selectedService?.duration || 0) }}</p>
+                    </div>
+                    <div>
+                      <p class="text-xs text-green-700 font-medium mb-1">APPOINTMENT</p>
+                      <p class="text-sm text-green-900 font-semibold">{{ selectedDay.day.charAt(0) + selectedDay.day.slice(1).toLowerCase() }}, {{ selectedDate }}</p>
+                      <p class="text-xs text-green-700">{{ selectedTime }}</p>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </div>
 
-      <!-- No Schedule Available -->
-      <div v-else-if="selectedDoctorId && doctorSchedule.length === 0 && !loadingSchedule" class="p-4 bg-amber-50 rounded-lg border border-amber-200">
-        <div class="flex items-start gap-3">
-          <Icon name="mdi:alert" class="text-amber-600 mt-1 flex-shrink-0" />
-          <div>
-            <p class="font-medium text-amber-900">No Schedule Available</p>
-            <p class="text-sm text-amber-700 mt-1">This doctor has not set their availability yet. Please contact the hospital or select another doctor.</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="space-y-2" v-if="selectedScheduleSlot">
-
-        <!-- Appointment Guidelines -->
-        <div class="text-xs text-gray-600 p-3 bg-blue-50 rounded-md border border-blue-200">
-          <div class="flex items-start gap-2">
-            <Icon name="mdi:information-outline" class="text-blue-600 mt-0.5 flex-shrink-0" />
-            <div>
-              <p class="font-medium text-blue-900 mb-1">Appointment Booking</p>
-              <p><strong>Note:</strong> Your appointment status will be "PENDING" until hospital staff assigns a room and confirms it.</p>
-              <p class="mt-1">You will be notified once your appointment is confirmed.</p>
+          <!-- No Schedule Available -->
+          <div v-else-if="selectedDoctorId && doctorSchedule.length === 0 && !loadingSchedule" class="p-4 bg-amber-50 rounded-lg border border-amber-200">
+            <div class="flex items-start gap-3">
+              <Icon name="mdi:alert" class="text-amber-600 mt-1 flex-shrink-0" />
+              <div>
+                <p class="font-medium text-amber-900">No Schedule Available</p>
+                <p class="text-sm text-amber-700 mt-1">This doctor has not set their availability yet. Please contact the hospital or select another service.</p>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
 
-      <!-- What happens after booking -->
-      <div class="p-4 bg-gray-50 rounded-lg border border-gray-200">
-        <div class="flex items-start gap-3">
-          <Icon name="mdi:calendar-clock" class="text-gray-600 mt-1 flex-shrink-0" />
-          <div class="text-sm text-gray-700">
-            <p class="font-medium mb-2">What happens after booking:</p>
-            <ul class="space-y-1 text-sm">
-              <li>• Your appointment will be marked as <span class="font-medium text-orange-600">PENDING</span></li>
-              <li>• Hospital staff will assign a clinic room</li>
-              <li>• You'll be notified when your appointment is <span class="font-medium text-green-600">SCHEDULED</span></li>
-              <li>• You can cancel your appointment anytime before it's completed</li>
-            </ul>
+          <!-- Important Notes -->
+          <div v-if="selectedScheduleSlot" class="space-y-4">
+            <!-- Appointment Guidelines -->
+            <div class="text-sm text-gray-700 p-4 bg-blue-50 rounded-lg border border-blue-200">
+              <div class="flex items-start gap-3">
+                <Icon name="mdi:information-outline" class="text-blue-600 mt-0.5 flex-shrink-0 w-5 h-5" />
+                <div>
+                  <p class="font-semibold text-blue-900 mb-2">Appointment Booking Process</p>
+                  <ul class="space-y-1 text-sm">
+                    <li>• Your appointment will be marked as <span class="font-medium text-orange-600">PENDING</span></li>
+                    <li>• Hospital staff will assign a clinic room</li>
+                    <li>• You'll be notified when your appointment is <span class="font-medium text-green-600">SCHEDULED</span></li>
+                    <li>• You can cancel your appointment anytime before it's completed</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
           </div>
-        </div>
+
+          <!-- Action Buttons -->
+          <div class="flex gap-3 pt-4 border-t border-gray-200">
+            <Button type="submit" :disabled="!selectedScheduleSlot || !patientName.trim()" class="flex-1 md:flex-none">
+              <Icon name="mdi:calendar-check" class="mr-2" /> Book Appointment
+            </Button>
+            <Button type="button" variant="outline" @click="navigateTo('/patient/appointments')">
+              <Icon name="mdi:arrow-left" class="mr-2" /> Cancel
+            </Button>
+          </div>
+        </form>
       </div>
 
-      <div class="flex gap-3 pt-4">
-        <Button type="submit" variant="outline" :disabled="!selectedScheduleSlot">
-          <Icon name="mdi:floppy" class="mr-2" /> Book Appointment
-        </Button>
-        <Button type="button" variant="outline" @click="navigateTo('/patient/appointments')">
-          <Icon name="mdi:arrow-left" class="mr-2" /> Back to My Appointments
-        </Button>
+      <!-- Select Service First Message -->
+      <div v-else class="bg-gray-50 rounded-lg border-2 border-dashed border-gray-300 p-8 text-center">
+        <Icon name="mdi:arrow-up" class="text-4xl text-gray-400 mx-auto mb-4" />
+        <p class="text-gray-600 font-medium">Please select a medical service above to continue</p>
       </div>
-    </TypedForm>
+    </div>
   </div>
 </template>
