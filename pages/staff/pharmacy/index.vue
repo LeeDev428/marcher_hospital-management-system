@@ -7,7 +7,7 @@ import PharmacyItemsTable from "./components/PharmacyItemsTable.vue"
 const breadcrumbsStore = useBreadcrumbsStore()
 
 useHead({
-  title: 'Staff Pharmacy'
+  title: 'Staff Pharmacy		'
 })
 
 onMounted(() => {
