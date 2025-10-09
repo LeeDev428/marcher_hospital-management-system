@@ -7,6 +7,10 @@ import { onMounted } from "vue"
 
 const breadcrumbsStore = useBreadcrumbsStore()
 
+useHead({
+  title: 'Staff Billing'
+})
+
 onMounted(() => {
   breadcrumbsStore.setBreadcrumbs([
     { label: "Billing", link: "/billing" },

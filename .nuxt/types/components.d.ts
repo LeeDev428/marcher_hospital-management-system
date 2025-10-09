@@ -207,7 +207,6 @@ interface _GlobalComponents {
     'PatientAppointmentFilters': typeof import("../../pages/patient/appointments/components/PatientAppointmentFilters.vue")['default']
     'PatientAppointmentForm': typeof import("../../pages/patient/appointments/components/PatientAppointmentForm.vue")['default']
     'PatientAppointmentsAvailability': typeof import("../../pages/patient/appointments/components/PatientAppointmentsAvailability.vue")['default']
-    'PatientAppointmentsTable': typeof import("../../pages/patient/appointments/components/PatientAppointmentsTable.vue")['default']
     'PatientsBillingTable': typeof import("../../pages/patient/billing/components/PatientsBillingTable.vue")['default']
     'PatientPagination': typeof import("../../pages/patient/components/PatientPagination.vue")['default']
     'DoctorTable': typeof import("../../pages/patient/doctor/components/DoctorTable.vue")['default']
@@ -334,16 +333,6 @@ interface _GlobalComponents {
     'UiCommandList': typeof import("../../components/ui/command/index")['CommandList']
     'UiCommandSeparator': typeof import("../../components/ui/command/index")['CommandSeparator']
     'UiCommandShortcut': typeof import("../../components/ui/command/index")['CommandShortcut']
-    'UiDialog': typeof import("../../components/ui/dialog/index")['Dialog']
-    'UiDialogClose': typeof import("../../components/ui/dialog/index")['DialogClose']
-    'UiDialogContent': typeof import("../../components/ui/dialog/index")['DialogContent']
-    'UiDialogDescription': typeof import("../../components/ui/dialog/index")['DialogDescription']
-    'UiDialogFooter': typeof import("../../components/ui/dialog/index")['DialogFooter']
-    'UiDialogHeader': typeof import("../../components/ui/dialog/index")['DialogHeader']
-    'UiDialogOverlay': typeof import("../../components/ui/dialog/index")['DialogOverlay']
-    'UiDialogScrollContent': typeof import("../../components/ui/dialog/index")['DialogScrollContent']
-    'UiDialogTitle': typeof import("../../components/ui/dialog/index")['DialogTitle']
-    'UiDialogTrigger': typeof import("../../components/ui/dialog/index")['DialogTrigger']
     'UiDropdownMenu': typeof import("../../components/ui/dropdown-menu/index")['DropdownMenu']
     'UiDropdownMenuCheckboxItem': typeof import("../../components/ui/dropdown-menu/index")['DropdownMenuCheckboxItem']
     'UiDropdownMenuContent': typeof import("../../components/ui/dropdown-menu/index")['DropdownMenuContent']
@@ -359,6 +348,16 @@ interface _GlobalComponents {
     'UiDropdownMenuSubTrigger': typeof import("../../components/ui/dropdown-menu/index")['DropdownMenuSubTrigger']
     'UiDropdownMenuTrigger': typeof import("../../components/ui/dropdown-menu/index")['DropdownMenuTrigger']
     'UiDropdownMenuPortal': typeof import("../../components/ui/dropdown-menu/index")['DropdownMenuPortal']
+    'UiDialog': typeof import("../../components/ui/dialog/index")['Dialog']
+    'UiDialogClose': typeof import("../../components/ui/dialog/index")['DialogClose']
+    'UiDialogContent': typeof import("../../components/ui/dialog/index")['DialogContent']
+    'UiDialogDescription': typeof import("../../components/ui/dialog/index")['DialogDescription']
+    'UiDialogFooter': typeof import("../../components/ui/dialog/index")['DialogFooter']
+    'UiDialogHeader': typeof import("../../components/ui/dialog/index")['DialogHeader']
+    'UiDialogOverlay': typeof import("../../components/ui/dialog/index")['DialogOverlay']
+    'UiDialogScrollContent': typeof import("../../components/ui/dialog/index")['DialogScrollContent']
+    'UiDialogTitle': typeof import("../../components/ui/dialog/index")['DialogTitle']
+    'UiDialogTrigger': typeof import("../../components/ui/dialog/index")['DialogTrigger']
     'UiFormControl': typeof import("../../components/ui/form/index")['FormControl']
     'UiFormDescription': typeof import("../../components/ui/form/index")['FormDescription']
     'UiFormItem': typeof import("../../components/ui/form/index")['FormItem']
@@ -611,7 +610,6 @@ interface _GlobalComponents {
     'LazyPatientAppointmentFilters': LazyComponent<typeof import("../../pages/patient/appointments/components/PatientAppointmentFilters.vue")['default']>
     'LazyPatientAppointmentForm': LazyComponent<typeof import("../../pages/patient/appointments/components/PatientAppointmentForm.vue")['default']>
     'LazyPatientAppointmentsAvailability': LazyComponent<typeof import("../../pages/patient/appointments/components/PatientAppointmentsAvailability.vue")['default']>
-    'LazyPatientAppointmentsTable': LazyComponent<typeof import("../../pages/patient/appointments/components/PatientAppointmentsTable.vue")['default']>
     'LazyPatientsBillingTable': LazyComponent<typeof import("../../pages/patient/billing/components/PatientsBillingTable.vue")['default']>
     'LazyPatientPagination': LazyComponent<typeof import("../../pages/patient/components/PatientPagination.vue")['default']>
     'LazyDoctorTable': LazyComponent<typeof import("../../pages/patient/doctor/components/DoctorTable.vue")['default']>
@@ -738,16 +736,6 @@ interface _GlobalComponents {
     'LazyUiCommandList': LazyComponent<typeof import("../../components/ui/command/index")['CommandList']>
     'LazyUiCommandSeparator': LazyComponent<typeof import("../../components/ui/command/index")['CommandSeparator']>
     'LazyUiCommandShortcut': LazyComponent<typeof import("../../components/ui/command/index")['CommandShortcut']>
-    'LazyUiDialog': LazyComponent<typeof import("../../components/ui/dialog/index")['Dialog']>
-    'LazyUiDialogClose': LazyComponent<typeof import("../../components/ui/dialog/index")['DialogClose']>
-    'LazyUiDialogContent': LazyComponent<typeof import("../../components/ui/dialog/index")['DialogContent']>
-    'LazyUiDialogDescription': LazyComponent<typeof import("../../components/ui/dialog/index")['DialogDescription']>
-    'LazyUiDialogFooter': LazyComponent<typeof import("../../components/ui/dialog/index")['DialogFooter']>
-    'LazyUiDialogHeader': LazyComponent<typeof import("../../components/ui/dialog/index")['DialogHeader']>
-    'LazyUiDialogOverlay': LazyComponent<typeof import("../../components/ui/dialog/index")['DialogOverlay']>
-    'LazyUiDialogScrollContent': LazyComponent<typeof import("../../components/ui/dialog/index")['DialogScrollContent']>
-    'LazyUiDialogTitle': LazyComponent<typeof import("../../components/ui/dialog/index")['DialogTitle']>
-    'LazyUiDialogTrigger': LazyComponent<typeof import("../../components/ui/dialog/index")['DialogTrigger']>
     'LazyUiDropdownMenu': LazyComponent<typeof import("../../components/ui/dropdown-menu/index")['DropdownMenu']>
     'LazyUiDropdownMenuCheckboxItem': LazyComponent<typeof import("../../components/ui/dropdown-menu/index")['DropdownMenuCheckboxItem']>
     'LazyUiDropdownMenuContent': LazyComponent<typeof import("../../components/ui/dropdown-menu/index")['DropdownMenuContent']>
@@ -763,6 +751,16 @@ interface _GlobalComponents {
     'LazyUiDropdownMenuSubTrigger': LazyComponent<typeof import("../../components/ui/dropdown-menu/index")['DropdownMenuSubTrigger']>
     'LazyUiDropdownMenuTrigger': LazyComponent<typeof import("../../components/ui/dropdown-menu/index")['DropdownMenuTrigger']>
     'LazyUiDropdownMenuPortal': LazyComponent<typeof import("../../components/ui/dropdown-menu/index")['DropdownMenuPortal']>
+    'LazyUiDialog': LazyComponent<typeof import("../../components/ui/dialog/index")['Dialog']>
+    'LazyUiDialogClose': LazyComponent<typeof import("../../components/ui/dialog/index")['DialogClose']>
+    'LazyUiDialogContent': LazyComponent<typeof import("../../components/ui/dialog/index")['DialogContent']>
+    'LazyUiDialogDescription': LazyComponent<typeof import("../../components/ui/dialog/index")['DialogDescription']>
+    'LazyUiDialogFooter': LazyComponent<typeof import("../../components/ui/dialog/index")['DialogFooter']>
+    'LazyUiDialogHeader': LazyComponent<typeof import("../../components/ui/dialog/index")['DialogHeader']>
+    'LazyUiDialogOverlay': LazyComponent<typeof import("../../components/ui/dialog/index")['DialogOverlay']>
+    'LazyUiDialogScrollContent': LazyComponent<typeof import("../../components/ui/dialog/index")['DialogScrollContent']>
+    'LazyUiDialogTitle': LazyComponent<typeof import("../../components/ui/dialog/index")['DialogTitle']>
+    'LazyUiDialogTrigger': LazyComponent<typeof import("../../components/ui/dialog/index")['DialogTrigger']>
     'LazyUiFormControl': LazyComponent<typeof import("../../components/ui/form/index")['FormControl']>
     'LazyUiFormDescription': LazyComponent<typeof import("../../components/ui/form/index")['FormDescription']>
     'LazyUiFormItem': LazyComponent<typeof import("../../components/ui/form/index")['FormItem']>

@@ -207,9 +207,18 @@ exports.Prisma.RefreshTokenScalarFieldEnum = {
   isRevoked: 'isRevoked'
 };
 
+exports.Prisma.PasswordResetTokenScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  token: 'token',
+  expiresAt: 'expiresAt',
+  used: 'used',
+  createdAt: 'createdAt'
+};
+
 exports.Prisma.AppointmentScalarFieldEnum = {
   id: 'id',
-  patientId: 'patientId',
+  userId: 'userId',
   doctorId: 'doctorId',
   date: 'date',
   time: 'time',
@@ -405,6 +414,7 @@ exports.Prisma.ModelName = {
   Patient: 'Patient',
   Partner: 'Partner',
   RefreshToken: 'RefreshToken',
+  PasswordResetToken: 'PasswordResetToken',
   Appointment: 'Appointment',
   StaffSchedule: 'StaffSchedule',
   MedicalService: 'MedicalService'

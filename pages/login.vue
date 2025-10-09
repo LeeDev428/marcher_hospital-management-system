@@ -73,9 +73,9 @@
                 Remember me
               </label>
             </div>
-            <a href="#" class="text-sm text-teal-600 hover:text-teal-500">
+            <NuxtLink to="/forgot-password" class="text-sm text-teal-600 hover:text-teal-500">
               Forgot your password?
-            </a>
+            </NuxtLink>
           </div>
 
           <!-- Submit Button -->

@@ -13,7 +13,7 @@ definePageMeta({
 
 // Set page title
 useHead({
-  title: 'Staff Dashboard - MediFlow'
+  title: 'Staff Dashboard'
 })
 
 // Staff dashboard statistics - matching the provided image

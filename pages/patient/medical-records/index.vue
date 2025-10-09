@@ -23,6 +23,11 @@ const search = computed({
 function clearSearch() {
   recordsTableRef.value?.clearSearch()
 }
+
+useHead({
+  title: 'Patient Medical Records'
+})
+
 </script>
 
 <template>

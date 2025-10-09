@@ -23,10 +23,16 @@ const search = computed({
 	}
 })
 
+useHead({
+  title: 'Staff Facilities'
+})
+
+
 function clearSearch() {
 	facilitiesTableRef.value?.clearSearch()
 }
 </script>
+
 
 <template>
 	<NuxtLayout name="staff" title="Facilities">

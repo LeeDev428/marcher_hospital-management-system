@@ -206,13 +206,10 @@ const generateTimeSlots = (startTime: string, endTime: string): string[] => {
 }
 
 // Select a day and generate time slots
-const selectDay = (schedule: any) => {
+const selectDay = async (schedule: any) => {
   selectedDay.value = schedule
   selectedScheduleSlot.value = null // Reset time selection
   selectedTime.value = ''
-  
-  // Generate 20-minute interval slots
-  availableTimeSlots.value = generateTimeSlots(schedule.startTime, schedule.endTime)
   
   // Calculate next occurrence of this day
   const dayMap: Record<string, number> = {
@@ -232,8 +229,31 @@ const selectDay = (schedule: any) => {
   
   selectedDate.value = appointmentDate.toISOString().split('T')[0]
   
-  console.log(`📅 Selected ${schedule.day} on ${selectedDate.value}`)
-  console.log(`⏰ Generated ${availableTimeSlots.value.length} time slots`)
+  // Fetch available time slots for this doctor and date
+  try {
+    const { $trpc } = useNuxtApp()
+    const response = await $trpc.appointments.getAvailableTimeSlots.query({
+      doctorId: selectedDoctorId.value,
+      date: selectedDate.value
+    })
+    
+    if (response.success && response.data) {
+      // Get only available time slots
+      availableTimeSlots.value = response.data.timeSlots
+        .filter((slot: any) => slot.available)
+        .map((slot: any) => slot.time)
+      
+      console.log(`📅 Selected ${schedule.day} on ${selectedDate.value}`)
+      console.log(`⏰ Found ${availableTimeSlots.value.length} available time slots`)
+    } else {
+      // Fallback to generating all slots if API fails
+      availableTimeSlots.value = generateTimeSlots(schedule.startTime, schedule.endTime)
+    }
+  } catch (error) {
+    console.error('Error fetching available time slots:', error)
+    // Fallback to generating all slots
+    availableTimeSlots.value = generateTimeSlots(schedule.startTime, schedule.endTime)
+  }
 }
 
 // Select a specific time slot
@@ -271,15 +291,21 @@ const onSubmit = async () => {
     return
   }
 
+  // Get user ID from auth store
+  const { useAuthStore } = await import('@/stores/app/useAuthStore')
+  const authStore = useAuthStore()
+  
   // Build the payload matching the schema exactly
   const payload: CreatePatientAppointment = {
     name: patientName.value.trim(),
     doctorId: selectedDoctorId.value,
     date: selectedDate.value,
     time: selectedTime.value,
+    userId: authStore.user?.id, // Include user ID from auth store
   }
 
   console.log("📤 Submitting appointment:", payload)
+  console.log("📤 User from auth store:", authStore.user)
 
   const res = await appointmentStore.bookAppointment(payload)
   if (res?.success) {

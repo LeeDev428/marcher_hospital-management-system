@@ -79,11 +79,40 @@ onMounted(() => { appointmentStore.getAppointments() })
 
             <TableCell>{{ appointment.date.split("T")[0] }}</TableCell>
             <TableCell>{{ new Date(`2000-01-01T${appointment.time}`).toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit',hour12:true}) }}</TableCell>
-            <TableCell>{{ appointment.status }}</TableCell>
+            <TableCell>
+              <span 
+                :class="{
+                  'px-2 py-1 rounded-md text-xs font-medium': true,
+                  'bg-orange-100 text-orange-800': appointment.status === 'SCHEDULED',
+                  'bg-blue-100 text-blue-800': appointment.status === 'CONFIRMED',
+                  'bg-yellow-100 text-yellow-800': appointment.status === 'IN_PROGRESS',
+                  'bg-green-100 text-green-800': appointment.status === 'COMPLETED',
+                  'bg-red-100 text-red-800': appointment.status === 'CANCELLED',
+                  'bg-gray-100 text-gray-800': appointment.status === 'NO_SHOW'
+                }"
+              >
+                {{ appointment.status }}
+              </span>
+            </TableCell>
 
             <TableCell class="flex gap-2">
-              <Button variant="outline" size="icon" @click="onEdit(appointment.id)"><Icon name="mdi:pencil" /></Button>
-              <Button variant="outline" size="icon" @click="appointmentStore.deleteAppointment(appointment.id)"><Icon name="mdi:trash" /></Button>
+              <!-- Approve/Confirm Button for SCHEDULED appointments -->
+              <Button 
+                v-if="appointment.status === 'SCHEDULED'" 
+                variant="default"
+                size="sm"
+                class="bg-green-600 hover:bg-green-700 text-white"
+                @click="appointmentStore.updateAppointmentStatus({ id: appointment.id, status: 'CONFIRMED' })"
+              >
+                <Icon name="mdi:check-circle" class="mr-1" /> Approve
+              </Button>
+              
+              <Button variant="outline" size="icon" @click="onEdit(appointment.id)">
+                <Icon name="mdi:pencil" />
+              </Button>
+              <Button variant="outline" size="icon" @click="appointmentStore.deleteAppointment(appointment.id)">
+                <Icon name="mdi:trash" />
+              </Button>
             </TableCell>
           </TableRow>
         </TableBody>

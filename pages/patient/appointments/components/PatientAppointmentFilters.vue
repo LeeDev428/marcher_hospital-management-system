@@ -10,7 +10,17 @@ import { Combobox, ComboboxItem, ComboboxTrigger } from "@/components/ui/combobo
 const appointmentStore = useAppointmentStore()
 const staffStore = useStaffStore()
 
-// Local reactive filters (using patient filters)
+// Get current date in Manila timezone (Asia/Manila)
+const getManilaDate = () => {
+  const now = new Date()
+  const manilaDate = new Date(now.toLocaleString('en-US', { timeZone: 'Asia/Manila' }))
+  const year = manilaDate.getFullYear()
+  const month = String(manilaDate.getMonth() + 1).padStart(2, '0')
+  const day = String(manilaDate.getDate()).padStart(2, '0')
+  return `${year}-${month}-${day}`
+}
+
+// Local reactive filters (NO default date - show ALL appointments initially)
 const localFilters = ref<PatientAppointmentFilters>({
   doctorId: appointmentStore.patientFilters.doctorId,
   date: appointmentStore.patientFilters.date,
@@ -67,6 +77,25 @@ const clearFilters = async () => {
   doctorSearch.value = ''
   appointmentStore.clearPatientFilters()
   await appointmentStore.getPatientAppointments()
+}
+
+// Quick filter functions
+const filterByToday = async () => {
+  localFilters.value.date = getManilaDate()
+  localFilters.value.status = undefined
+  await applyFilters()
+}
+
+const filterByPending = async () => {
+  localFilters.value.status = 'PENDING'
+  localFilters.value.date = undefined
+  await applyFilters()
+}
+
+const filterByScheduled = async () => {
+  localFilters.value.status = 'SCHEDULED'
+  localFilters.value.date = undefined
+  await applyFilters()
 }
 
 // Watch for changes in store filters to update local filters
@@ -198,10 +227,7 @@ onMounted(async () => {
           variant="outline" 
           size="sm" 
           class="w-full justify-start"
-          @click="() => {
-            localFilters.status = 'SCHEDULED'
-            applyFilters()
-          }"
+          @click="filterByPending"
         >
           <Icon name="mdi:clock-outline" class="mr-2 w-4 h-4 text-orange-500" />
           Pending Appointments
@@ -210,10 +236,7 @@ onMounted(async () => {
           variant="outline" 
           size="sm" 
           class="w-full justify-start"
-          @click="() => {
-            localFilters.status = 'SCHEDULED'
-            applyFilters()
-          }"
+          @click="filterByScheduled"
         >
           <Icon name="mdi:calendar-check" class="mr-2 w-4 h-4 text-blue-500" />
           Scheduled Appointments
@@ -222,11 +245,7 @@ onMounted(async () => {
           variant="outline" 
           size="sm" 
           class="w-full justify-start"
-          @click="() => {
-            const today = new Date().toISOString().split('T')[0]
-            localFilters.date = today
-            applyFilters()
-          }"
+          @click="filterByToday"
         >
           <Icon name="mdi:calendar-today" class="mr-2 w-4 h-4 text-green-500" />
           Today's Appointments

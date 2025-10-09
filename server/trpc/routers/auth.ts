@@ -1,5 +1,10 @@
 import { z } from 'zod';
 import { publicProcedure, createTRPCRouter } from '../init';
+import { 
+  requestPasswordReset, 
+  resetPassword, 
+  verifyResetToken 
+} from './auth/passwordReset';
 
 const BACKEND_URL = process.env.BACKEND_URL || 'http://localhost:5000';
 
@@ -183,5 +188,10 @@ export const authRouter = createTRPCRouter({
         }
         throw new Error('Network error occurred');
       }
-    })
+    }),
+
+  // Password Reset Routes
+  requestPasswordReset: requestPasswordReset,
+  resetPassword: resetPassword,
+  verifyResetToken: verifyResetToken
 });

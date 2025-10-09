@@ -189,6 +189,7 @@ export const createPatientAppointmentSchema = z.object({
   doctorId: cuidSchema,
   date: dateString,
   time: timeString,
+  userId: z.string().optional(), // Optional user ID from frontend
 })
 
 export const updatePatientAppointmentSchema = z.object({

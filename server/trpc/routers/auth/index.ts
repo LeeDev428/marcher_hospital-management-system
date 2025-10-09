@@ -1,9 +1,12 @@
 import { z } from "zod"
 import { publicProcedure, protectedProcedure, createTRPCRouter } from "../../init"
 import { loginSchema } from "@/types/app"
+import { passwordResetRouter } from "./passwordReset"
 
 // Auth router that communicates with Express backend
 export const authRouter = createTRPCRouter({
+	// Password reset routes
+	passwordReset: passwordResetRouter,
 	// Login procedure - calls Express backend
 	login: publicProcedure
 		.input(loginSchema)

@@ -237,10 +237,11 @@ export const useAppointmentStore = defineStore("appointment", {
         }
         this.loading = false
         return { success, message, data }
-      } catch (error) {
+      } catch (error: any) {
         this.loading = false
-        console.log(error)
-        useToast("error", "Appointments", "Failed to fetch appointments.")
+        console.error('❌ Error fetching patient appointments:', error)
+        const errorMessage = error?.message || "Failed to fetch patient appointments."
+        useToast("error", "Appointments", errorMessage)
       }
     },
 

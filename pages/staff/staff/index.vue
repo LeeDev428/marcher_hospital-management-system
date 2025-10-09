@@ -13,6 +13,10 @@ onMounted(() => {
 	])
 })
 
+useHead({
+  title: 'Staff Management'
+})
+
 // Connect the search input to the table's search functionality
 const search = computed({
 	get: () => staffTableRef.value?.search || '',

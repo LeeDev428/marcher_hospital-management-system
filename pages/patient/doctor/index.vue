@@ -13,6 +13,10 @@ onMounted(() => {
   ])
 })
 
+useHead({
+  title: 'Patient Doctor'
+})
+
 // Connect the search input to the table's search functionality
 
 </script>

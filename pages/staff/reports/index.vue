@@ -6,6 +6,10 @@ import {
 	LineChartTile,
 } from "@/components/app/reports"
 
+useHead({
+  title: 'Staff Reports'
+})
+
 const breadcrumbsStore = useBreadcrumbsStore()
 const samplePieData = {
 	labels: ["Total Users", "Total Users", "Total Users"],

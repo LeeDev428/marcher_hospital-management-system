@@ -15,6 +15,8 @@ import {
   checkAvailabilitySchema,
   getAvailableTimeSlotsSchema,
 } from "@/types/appointments"
+import { getCookie } from "h3"
+import { verifyRefreshToken } from "@/util/token"
 
 // --- Helpers ---
 const generateTimeSlots = () => {
@@ -41,17 +43,18 @@ const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-
 async function getCurrentPatientOrNull(instancePrisma: any, user: any) {
   if (!user) return null
 
-  // Prefer explicit mapping when available (set this in your auth if possible)
-  if (user.patientProfileId && UUID_RE.test(user.patientProfileId)) {
-    return instancePrisma.patientProfile.findUnique({ where: { id: user.patientProfileId } })
+  // Look up patient by userId
+  if (user.id) {
+    const patient = await instancePrisma.patient.findUnique({ 
+      where: { userId: user.id } 
+    })
+    if (patient) {
+      console.log('✅ Found patient for user:', user.id, '-> patient:', patient.id)
+      return patient
+    }
   }
 
-  // Fallback: if user.id already equals PatientProfile.id (UUID), use it
-  if (typeof user.id === "string" && UUID_RE.test(user.id)) {
-    return instancePrisma.patientProfile.findUnique({ where: { id: user.id } })
-  }
-
-  // No reliable mapping
+  console.log('❌ No patient found for user:', user.id)
   return null
 }
 
@@ -89,52 +92,99 @@ async function ensurePatientProfile(prisma: any, user: any) {
 }
 
 // === STAFF ===
-const getAppointments = protectedProcedure
+const getAppointments = publicProcedure
   .input(getAppointmentsSchema)
   .query(async ({ ctx, input }) => {
-    const { instancePrisma, globalPrisma } = ctx
+    const { instancePrisma, event } = ctx
     const { doctorId, facilityId, date, status, page, limit } = input
     try {
+      console.log('🔍 getAppointments called (STAFF)')
+      
+      // Manual authentication check for staff
+      const refreshToken = getCookie(event, "refreshToken")
+      console.log('🍪 Staff refresh token present:', !!refreshToken)
+      
+      if (!refreshToken) {
+        console.log('❌ No refresh token found')
+        return { success: false, message: "Please login to view appointments.", data: null }
+      }
+      
+      // Decode token (not strict verification)
+      let decoded: any = null
+      try {
+        const jwt = await import('jsonwebtoken')
+        decoded = jwt.default.decode(refreshToken)
+        console.log('👤 Decoded staff token:', decoded?.role)
+      } catch (err) {
+        console.log('❌ Error decoding token:', err)
+        return { success: false, message: "Invalid session. Please login again.", data: null }
+      }
+      
+      if (!decoded?.id) {
+        console.log('❌ No user ID in token')
+        return { success: false, message: "Invalid session. Please login again.", data: null }
+      }
+
       const where: any = {}
       if (doctorId) where.doctorId = doctorId
       if (facilityId) where.facilityId = facilityId
       if (date) where.date = date
       if (status) where.status = status
 
+      console.log('🔎 Querying appointments with filter:', where)
+
       const total = await instancePrisma.appointment.count({ where })
+      console.log('📊 Total appointments found:', total)
+      
       const appointments = await instancePrisma.appointment.findMany({
         where,
-        include: {
-          patient: true,
-          facility: { include: { building: true } },
-        },
+        // No include - fetch relations separately
         orderBy: [{ date: "desc" }, { time: "desc" }],
         skip: (page - 1) * limit,
         take: limit,
       })
 
-      const staffProfiles = await globalPrisma.staffProfile.findMany({
-        select: { id: true, firstName: true, lastName: true, middleName: true, suffix: true },
-        where: { id: { in: appointments.map((a: any) => a.doctorId) }, role: "DOCTOR" },
+      console.log('📋 Fetched appointments:', appointments.length)
+
+      // Fetch patient users
+      const patientIds = [...new Set(appointments.map((a: any) => a.userId))]
+      const patients = await instancePrisma.user.findMany({
+        where: { id: { in: patientIds } },
+        select: { id: true, firstName: true, lastName: true, middleName: true }
       })
 
-      const withDoctors = appointments.map((a: any) => {
-        const d = staffProfiles.find((s: any) => s.id === a.doctorId)
+      // Fetch doctor users
+      const doctorIds = [...new Set(appointments.map((a: any) => a.doctorId))]
+      const doctors = await instancePrisma.user.findMany({
+        where: { id: { in: doctorIds } },
+        select: { id: true, firstName: true, lastName: true, middleName: true }
+      })
+
+      const withPatientAndDoctor = appointments.map((a: any) => {
+        const patient = patients.find((p: any) => p.id === a.userId)
+        const doctor = doctors.find((d: any) => d.id === a.doctorId)
         return {
           ...a,
-          doctor: {
-            firstName: d?.firstName || "",
-            lastName: d?.lastName || "",
-            middleName: d?.middleName || "",
-            suffix: d?.suffix || "",
+          patient: {
+            firstName: patient?.firstName || "",
+            lastName: patient?.lastName || "",
+            middleName: patient?.middleName || "",
+            suffix: ""
           },
+          doctor: {
+            firstName: doctor?.firstName || "",
+            lastName: doctor?.lastName || "",
+            middleName: doctor?.middleName || "",
+            suffix: "",
+          },
+          facility: null  // No facility relation
         }
       })
 
       return {
         success: true,
         message: "Appointments fetched successfully.",
-        data: { appointments: withDoctors, pagination: { page, limit, total, totalPages: Math.ceil(total / limit) } },
+        data: { appointments: withPatientAndDoctor, pagination: { page, limit, total, totalPages: Math.ceil(total / limit) } },
       }
     } catch (error) {
       console.log(error)
@@ -306,51 +356,111 @@ const updateAppointmentStatus = protectedProcedure
   })
 
 // === PATIENT ===
-const getPatientAppointments = protectedProcedure
+const getPatientAppointments = publicProcedure
   .input(getPatientAppointmentsSchema)
   .query(async ({ ctx, input }) => {
-    const { instancePrisma, globalPrisma, user } = ctx
+    const { instancePrisma, globalPrisma, event } = ctx
     const { doctorId, date, status, page, limit } = input
     try {
-      const currentPatient = await getCurrentPatientOrNull(instancePrisma, user)
-      if (!currentPatient) return { success: false, message: "Patient profile not found.", data: null }
+      console.log('🔍 getPatientAppointments called')
+      
+      // Manual authentication - get user from cookies
+      const refreshToken = getCookie(event, "refreshToken")
+      console.log('🍪 Refresh token present:', !!refreshToken)
+      
+      if (!refreshToken) {
+        console.log('❌ No refresh token found')
+        return { success: false, message: "Please login to view your appointments.", data: null }
+      }
+      
+      // Decode the token directly without strict verification
+      let decoded: any = null
+      try {
+        const jwt = await import('jsonwebtoken')
+        decoded = jwt.default.decode(refreshToken)
+        console.log('👤 Decoded token:', decoded)
+      } catch (err) {
+        console.log('❌ Error decoding token:', err)
+        return { success: false, message: "Invalid session. Please login again.", data: null }
+      }
+      
+      if (!decoded?.id) {
+        console.log('❌ No user ID in token')
+        return { success: false, message: "Invalid session. Please login again.", data: null }
+      }
 
-      const where: any = { patientId: currentPatient.id }
+      const userId = decoded.id
+      console.log('✅ User ID from token:', userId)
+
+      // Query appointments directly by userId (simpler!)
+      const where: any = { userId: userId }
       if (doctorId) where.doctorId = doctorId
       if (date) where.date = date
       if (status) where.status = status
 
+      console.log('🔎 Querying appointments with filter:', where)
+      console.log('🔎 Looking for userId:', userId)
+
       const total = await instancePrisma.appointment.count({ where })
+      console.log('📊 Total appointments found:', total)
+      
       const appointments = await instancePrisma.appointment.findMany({
         where,
-        include: { patient: true, facility: { include: { building: true } } },
+        // Don't include patient - no relation defined in schema!
         orderBy: [{ date: "desc" }, { time: "desc" }],
         skip: (page - 1) * limit,
         take: limit,
       })
+      
+      console.log('📋 Fetched appointments:', appointments.length, 'records')
+      console.log('Appointment userIds:', appointments.map((a: any) => a.userId))
+      
+      // Fetch user/patient data directly from instancePrisma.user
+      const user = await instancePrisma.user.findUnique({
+        where: { id: userId },
+        select: {
+          id: true,
+          firstName: true,
+          lastName: true,
+          middleName: true,
+          email: true
+        }
+      })
+      
+      console.log('📋 User data:', user)
 
-      const staffProfiles = await globalPrisma.staffProfile.findMany({
-        select: { id: true, firstName: true, lastName: true, middleName: true, suffix: true },
-        where: { id: { in: appointments.map((a: any) => a.doctorId) }, role: "DOCTOR" },
+      // Fetch doctors from instancePrisma.user (doctors are users with role STAFF)
+      const doctors = await instancePrisma.user.findMany({
+        select: { id: true, firstName: true, lastName: true, middleName: true },
+        where: { id: { in: appointments.map((a: any) => a.doctorId) } },
       })
 
-      const withDoctors = appointments.map((a: any) => {
-        const d = staffProfiles.find((s: any) => s.id === a.doctorId)
+      const withDoctorsAndPatient = appointments.map((a: any) => {
+        const d = doctors.find((doc: any) => doc.id === a.doctorId)
         return {
           ...a,
+          patient: {
+            id: user?.id || "",
+            patientNumber: "",  // Not needed anymore
+            firstName: user?.firstName || "",
+            lastName: user?.lastName || "",
+            middleName: user?.middleName || "",
+            suffix: ""
+          },
           doctor: {
             firstName: d?.firstName || "",
             lastName: d?.lastName || "",
             middleName: d?.middleName || "",
-            suffix: d?.suffix || "",
+            suffix: "",
           },
+          facility: null  // No facility relation either
         }
       })
 
       return {
         success: true,
         message: "Patient appointments fetched successfully.",
-        data: { appointments: withDoctors, pagination: { page, limit, total, totalPages: Math.ceil(total / limit) } },
+        data: { appointments: withDoctorsAndPatient, pagination: { page, limit, total, totalPages: Math.ceil(total / limit) } },
       }
     } catch (error) {
       console.log(error)
@@ -379,18 +489,59 @@ const getPatientAppointment = protectedProcedure
     }
   })
 
-const createPatientAppointment = protectedProcedure
+const createPatientAppointment = publicProcedure
   .input(createPatientAppointmentSchema)
   .mutation(async ({ ctx, input }) => {
-    const { instancePrisma, user } = ctx
-    const { doctorId, date, time, name } = input
+    const { instancePrisma, event } = ctx
+    const { doctorId, date, time, name, userId: userIdFromPayload } = input
 
     try {
-      console.log('� Creating appointment:', { doctorId, date, time, name })
+      console.log('Creating appointment:', { doctorId, date, time, name })
 
       // Validate input
       if (!doctorId || !date || !time || !name) {
         return { success: false, message: "Missing required fields.", data: null }
+      }
+
+      // Get user from cookies (optional - won't throw 401)
+      const { getCookie } = await import('h3')
+      const { verifyRefreshToken } = await import('@/util/token')
+      
+      // Log all cookies for debugging
+      const allCookies = event.node.req.headers.cookie
+      console.log('📋 All cookies from request:', allCookies)
+      
+      const refreshToken = getCookie(event, "refreshToken")
+      const accessToken = getCookie(event, "accessToken")
+      let userId = null
+      
+      console.log('🔍 Checking for user cookies...', { 
+        hasRefreshToken: !!refreshToken, 
+        hasAccessToken: !!accessToken,
+        refreshTokenValue: refreshToken ? refreshToken.substring(0, 20) + '...' : 'none'
+      })
+      
+      if (refreshToken) {
+        try {
+          const decoded = verifyRefreshToken(refreshToken) as any
+          console.log('🔓 Decoded token:', decoded)
+          if (decoded && decoded.id) {
+            userId = decoded.id
+            console.log('✅ Found logged in user from cookies:', userId)
+          } else {
+            console.log('❌ Token decoded but no ID found')
+          }
+        } catch (err) {
+          console.log('❌ Error decoding token:', err)
+        }
+      } else {
+        console.log('❌ No refresh token found in cookies')
+      }
+      
+      // Fallback: use userId from payload if cookies didn't work
+      if (!userId && userIdFromPayload) {
+        userId = userIdFromPayload
+        console.log('✅ Using user ID from payload:', userId)
       }
 
       // Check if time slot is already booked
@@ -407,10 +558,16 @@ const createPatientAppointment = protectedProcedure
         return { success: false, message: "This time slot is already booked.", data: null }
       }
 
-      // Create appointment with SCHEDULED status using the real patient ID
+      // Use userId directly - no need for patient profile!
+      if (!userId) {
+        return { success: false, message: "You must be logged in to book an appointment.", data: null }
+      }
+      
+      console.log('✅ Creating appointment for user:', userId)
+
       const appointment = await instancePrisma.appointment.create({
         data: {
-          patientId: patient.id,
+          userId: userId,  // Direct userId reference!
           doctorId,
           date,
           time,
@@ -418,7 +575,7 @@ const createPatientAppointment = protectedProcedure
         },
       })
 
-      console.log('✅ Appointment created successfully:', appointment.id)
+      console.log('✅ Appointment created:', appointment.id)
 
       return {
         success: true,

@@ -143,6 +143,11 @@ const getStaffName = (service: TableMedicalService) => {
 onMounted(() => {
   loadServices()
 })
+
+useHead({
+  title: 'Staff Services'
+})
+
 </script>
 
 <template>

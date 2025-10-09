@@ -16,7 +16,7 @@ definePageMeta({
 })
 
 useHead({
-  title: 'My Schedule - Staff Portal'
+  title: 'Staff Schedule'
 })
 
 const authStore = useAuthStore()

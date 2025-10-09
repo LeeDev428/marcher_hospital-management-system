@@ -18,6 +18,10 @@ watch(debouncedSearch, () => {
   // For now, we'll focus on the filters
 })
 
+useHead({
+  title: 'Staff Appointments'
+})
+
 onMounted(() => {
   breadcrumbsStore.setBreadcrumbs([
     { label: "Appointments", link: "/appointments" },

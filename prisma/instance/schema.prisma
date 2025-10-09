@@ -46,6 +46,7 @@ model User {
   
   // Relationships
   refreshTokens RefreshToken[]
+  passwordResets PasswordResetToken[]
   patientProfile Patient?
   partnerProfile Partner?
   staffCredentials StaffCredentials?  // Professional credentials for staff
@@ -153,12 +154,26 @@ model RefreshToken {
   @@map("refresh_tokens")
 }
 
+// Password Reset Tokens
+model PasswordResetToken {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  token     String   @unique
+  expiresAt DateTime
+  used      Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  @@index([token, expiresAt, used])
+  @@map("password_reset_tokens")
+}
+
 // Appointments Model
 model Appointment {
   id          String   @id @default(cuid())
-  patientId   String
+  userId      String   // Patient's user ID - references User.id
+  user        User     @relation(fields: [userId], references: [id])
   doctorId    String   // References User.id where role = STAFF and staffType = DOCTOR
-  doctor      User     @relation(fields: [doctorId], references: [id])
   
   // Appointment details
   date        String   // Date in YYYY-MM-DD format
@@ -175,8 +190,8 @@ model Appointment {
   updatedAt DateTime @updatedAt
   
   @@map("appointments")
+  @@index([userId])
   @@index([doctorId])
-  @@index([patientId])
   @@index([date])
   @@index([status])
 }

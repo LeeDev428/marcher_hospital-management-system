@@ -11,9 +11,8 @@ definePageMeta({
   layout: 'patient'
 })
 
-// Set page title
 useHead({
-  title: 'Patient Dashboard - Marcher'
+  title: 'Patient Dashboard'
 })
 
 // Patient dashboard statistics

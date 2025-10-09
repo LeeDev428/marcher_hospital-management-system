@@ -6,12 +6,17 @@ import PharmacyItemsTable from "./components/PharmacyItemsTable.vue"
 
 const breadcrumbsStore = useBreadcrumbsStore()
 
+useHead({
+  title: 'Staff Pharmacy'
+})
+
 onMounted(() => {
 	breadcrumbsStore.setBreadcrumbs([
 		{ label: "Pharmacy", link: "/pharmacy" },
 	])
 })
 </script>
+
 
 <template>
 	<NuxtLayout name="staff" title="Pharmacy">

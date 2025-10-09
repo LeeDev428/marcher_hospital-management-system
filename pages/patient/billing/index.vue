@@ -11,6 +11,10 @@ onMounted(async () => {
 		{ label: "Patient Billing", link: "/billing" },
 	])
 })
+
+useHead({
+  title: 'Patient Billing'
+})
 </script>
 
 <template>

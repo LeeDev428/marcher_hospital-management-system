@@ -6,6 +6,9 @@ import { Button } from "@/components/ui/button"
 import PatientProfileTable from "./components/PatientProfileTable.vue"
 
 const breadcrumbsStore = useBreadcrumbsStore()
+useHead({
+  title: 'Staff Patients'
+})
 
 onMounted(async () => {
 	breadcrumbsStore.setBreadcrumbs([{ label: "Patients", link: "/patients" }])
