@@ -259,6 +259,86 @@ exports.Prisma.MedicalServiceScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.PharmacySupplierScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  email: 'email',
+  contact: 'contact',
+  address: 'address',
+  notes: 'notes',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.PharmacyBrandScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.PharmacyItemCategoryScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.PharmacyItemScalarFieldEnum = {
+  id: 'id',
+  brandId: 'brandId',
+  categoryId: 'categoryId',
+  name: 'name',
+  form: 'form',
+  route: 'route',
+  strength: 'strength',
+  stock: 'stock',
+  unit: 'unit',
+  price: 'price',
+  sku: 'sku',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.PharmacySaleScalarFieldEnum = {
+  id: 'id',
+  invoiceNumber: 'invoiceNumber',
+  customerName: 'customerName',
+  customerPhone: 'customerPhone',
+  staffId: 'staffId',
+  subtotal: 'subtotal',
+  discount: 'discount',
+  tax: 'tax',
+  total: 'total',
+  paymentMethod: 'paymentMethod',
+  paymentStatus: 'paymentStatus',
+  notes: 'notes',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.PharmacySaleItemScalarFieldEnum = {
+  id: 'id',
+  saleId: 'saleId',
+  pharmacyItemId: 'pharmacyItemId',
+  quantity: 'quantity',
+  unitPrice: 'unitPrice',
+  subtotal: 'subtotal',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.PharmacyPaymentScalarFieldEnum = {
+  id: 'id',
+  saleId: 'saleId',
+  amount: 'amount',
+  method: 'method',
+  transactionId: 'transactionId',
+  paidAt: 'paidAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -408,6 +488,48 @@ exports.ServiceCategory = exports.$Enums.ServiceCategory = {
   OTHER: 'OTHER'
 };
 
+exports.PharmacyItemForm = exports.$Enums.PharmacyItemForm = {
+  TABLET: 'TABLET',
+  CAPSULE: 'CAPSULE',
+  SYRUP: 'SYRUP',
+  OINTMENT: 'OINTMENT',
+  CREAM: 'CREAM',
+  INJECTION: 'INJECTION',
+  DROPS: 'DROPS',
+  INHALER: 'INHALER',
+  MEDICAL_DEVICE: 'MEDICAL_DEVICE',
+  SUPPLEMENTS: 'SUPPLEMENTS',
+  COSMETICS: 'COSMETICS',
+  MISCELLANEOUS: 'MISCELLANEOUS'
+};
+
+exports.PharmacyItemRoute = exports.$Enums.PharmacyItemRoute = {
+  INJECTION: 'INJECTION',
+  TOPICAL: 'TOPICAL',
+  TRANSDERMAL: 'TRANSDERMAL',
+  OCULAR: 'OCULAR',
+  OTIC: 'OTIC',
+  NASAL: 'NASAL',
+  ORAL: 'ORAL',
+  INHALATIONAL: 'INHALATIONAL',
+  RECTAL: 'RECTAL',
+  VAGINAL: 'VAGINAL'
+};
+
+exports.PaymentMethod = exports.$Enums.PaymentMethod = {
+  CASH: 'CASH',
+  CARD: 'CARD',
+  ONLINE: 'ONLINE',
+  INSURANCE: 'INSURANCE'
+};
+
+exports.PaymentStatus = exports.$Enums.PaymentStatus = {
+  PENDING: 'PENDING',
+  COMPLETED: 'COMPLETED',
+  CANCELLED: 'CANCELLED',
+  REFUNDED: 'REFUNDED'
+};
+
 exports.Prisma.ModelName = {
   User: 'User',
   StaffCredentials: 'StaffCredentials',
@@ -417,7 +539,14 @@ exports.Prisma.ModelName = {
   PasswordResetToken: 'PasswordResetToken',
   Appointment: 'Appointment',
   StaffSchedule: 'StaffSchedule',
-  MedicalService: 'MedicalService'
+  MedicalService: 'MedicalService',
+  PharmacySupplier: 'PharmacySupplier',
+  PharmacyBrand: 'PharmacyBrand',
+  PharmacyItemCategory: 'PharmacyItemCategory',
+  PharmacyItem: 'PharmacyItem',
+  PharmacySale: 'PharmacySale',
+  PharmacySaleItem: 'PharmacySaleItem',
+  PharmacyPayment: 'PharmacyPayment'
 };
 
 /**
