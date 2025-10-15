@@ -87,7 +87,7 @@ useHead({
               <div class="flex gap-3">
                 <Input
                   :model-value="searchQuery"
-                  @update:model-value="handleSearch"
+                  @update:model-value="(val: any) => handleSearch(String(val))"
                   placeholder="Search by name, strength, or SKU..."
                   class="flex-1"
                 />
@@ -240,12 +240,14 @@ useHead({
               <div class="w-full space-y-2">
                 <Label class="text-xs text-gray-600">Customer Info (Optional)</Label>
                 <Input
-                  v-model="posStore.customerName"
+                  :model-value="posStore.customerName || ''"
+                  @update:model-value="(val) => posStore.customerName = String(val)"
                   placeholder="Customer Name"
                   class="h-9 text-sm"
                 />
                 <Input
-                  v-model="posStore.customerPhone"
+                  :model-value="posStore.customerPhone || ''"
+                  @update:model-value="(val) => posStore.customerPhone = String(val)"
                   placeholder="Phone Number"
                   class="h-9 text-sm"
                 />
@@ -295,7 +297,8 @@ useHead({
               <div class="w-full space-y-1">
                 <Label class="text-xs text-gray-600">Notes</Label>
                 <Textarea
-                  v-model="posStore.notes"
+                  :model-value="posStore.notes || ''"
+                  @update:model-value="(val) => posStore.notes = String(val)"
                   placeholder="Add notes..."
                   class="h-16 text-sm resize-none"
                 />
