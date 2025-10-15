@@ -67,7 +67,7 @@ export const usePharmacyCategoryStore = defineStore("pharmacyCategory", {
 						"Pharmacy Category",
 						"Pharmacy category created successfully."
 					)
-					await navigateTo(`/pharmacy/categories`)
+					// Don't navigate - stay on current page
 				}
 			} catch (error) {
 				this.loading = false
@@ -94,7 +94,7 @@ export const usePharmacyCategoryStore = defineStore("pharmacyCategory", {
 						"Pharmacy Category",
 						"Pharmacy category updated successfully."
 					)
-					await navigateTo(`/pharmacy/categories`)
+					// Don't navigate - stay on current page
 				}
 			} catch (error) {
 				this.loading = false
