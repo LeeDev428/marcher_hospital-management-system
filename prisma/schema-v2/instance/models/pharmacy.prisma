@@ -77,9 +77,83 @@ model PharmacyItem {
     strength   String
     stock      Int
     unit       String
+    price      Decimal              @default(0) @db.Decimal(10, 2) // Unit price for POS
     sku        String?
+    saleItems  PharmacySaleItem[]   // Relation to sales
     createdAt  DateTime             @default(now())
     updatedAt  DateTime             @updatedAt
 
     @@index([name])
+}
+
+// Pharmacy Sales (POS) - Direct sales not tied to patient encounters
+model PharmacySale {
+    id              String             @id @default(uuid()) @db.Uuid
+    invoiceNumber   String             @unique // Auto-generated invoice number
+    customerName    String?            // Optional customer name
+    customerPhone   String?            // Optional customer phone
+    staffId         String?            // Staff who processed the sale
+    subtotal        Decimal            @db.Decimal(10, 2)
+    discount        Decimal            @default(0) @db.Decimal(10, 2)
+    tax             Decimal            @default(0) @db.Decimal(10, 2)
+    total           Decimal            @db.Decimal(10, 2)
+    paymentMethod   PaymentMethod      @default(CASH)
+    paymentStatus   PaymentStatus      @default(COMPLETED)
+    notes           String?
+    items           PharmacySaleItem[]
+    payments        PharmacyPayment[]
+    createdAt       DateTime           @default(now())
+    updatedAt       DateTime           @updatedAt
+
+    @@index([invoiceNumber])
+    @@index([createdAt])
+    @@index([staffId])
+}
+
+// Pharmacy Sale Items - Individual items in a sale
+model PharmacySaleItem {
+    id              String        @id @default(uuid()) @db.Uuid
+    saleId          String        @db.Uuid
+    sale            PharmacySale  @relation(fields: [saleId], references: [id], onDelete: Cascade)
+    pharmacyItemId  String        @db.Uuid
+    pharmacyItem    PharmacyItem  @relation(fields: [pharmacyItemId], references: [id], onDelete: Restrict)
+    quantity        Int           // Quantity sold
+    unitPrice       Decimal       @db.Decimal(10, 2) // Price at time of sale
+    subtotal        Decimal       @db.Decimal(10, 2) // quantity * unitPrice
+    createdAt       DateTime      @default(now())
+    updatedAt       DateTime      @updatedAt
+
+    @@index([saleId])
+    @@index([pharmacyItemId])
+}
+
+// Pharmacy Payments - Track payments for sales
+model PharmacyPayment {
+    id              String        @id @default(uuid()) @db.Uuid
+    saleId          String        @db.Uuid
+    sale            PharmacySale  @relation(fields: [saleId], references: [id], onDelete: Cascade)
+    amount          Decimal       @db.Decimal(10, 2)
+    method          PaymentMethod @default(CASH)
+    transactionId   String?       // For card/online payments
+    paidAt          DateTime      @default(now())
+    createdAt       DateTime      @default(now())
+    updatedAt       DateTime      @updatedAt
+
+    @@index([saleId])
+}
+
+// Payment Methods
+enum PaymentMethod {
+    CASH
+    CARD
+    ONLINE
+    INSURANCE
+}
+
+// Payment Status
+enum PaymentStatus {
+    PENDING
+    COMPLETED
+    CANCELLED
+    REFUNDED
 }
