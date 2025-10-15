@@ -160,10 +160,10 @@ useHead({
         <!-- Right Panel: Cart -->
         <div class="lg:col-span-1">
           <Card class="sticky top-6">
-            <CardHeader class="bg-gradient-to-r from-blue-500 to-blue-600 text-white">
+            <CardHeader class="bg-gradient-to-r  text-white">
               <CardTitle class="flex items-center justify-between">
-                <span>Shopping Cart</span>
-                <Badge class="bg-white text-blue-600 text-sm">{{ posStore.cartItemCount }} items</Badge>
+                <span class ="text-sm bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-blue-600">Shopping Cart</span>
+                <Badge class="bg-white text-blue-600 text-xs">{{ posStore.cartItemCount }} items</Badge>
               </CardTitle>
             </CardHeader>
             
@@ -359,6 +359,8 @@ useHead({
                 >
                   <span v-if="posStore.loading">Processing...</span>
                   <span v-else>Checkout</span>
+                  <br>
+                  <br>
                 </Button>
               </div>
             </CardFooter>
