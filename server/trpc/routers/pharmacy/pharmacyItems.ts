@@ -56,7 +56,7 @@ const createPharmacyItem = publicProcedure
 	.input(createPharmacyItemSchema)
 	.mutation(async ({ ctx, input }) => {
 		const { instancePrisma } = ctx
-		const { brandId, categoryId, name, form, route, strength, stock, unit, sku } = input
+		const { brandId, categoryId, name, form, route, strength, stock, unit, price, sku } = input
 
 		try {
 			const pharmacyItem = await instancePrisma.pharmacyItem.create({
@@ -69,6 +69,7 @@ const createPharmacyItem = publicProcedure
 					strength,
 					stock,
 					unit,
+					price,
 					sku,
 				}
 			})
@@ -92,7 +93,7 @@ const updatePharmacyItem = publicProcedure
 	.input(updatePharmacyItemSchema)
 	.mutation(async ({ ctx, input }) => {
 		const { instancePrisma } = ctx
-		const { id, brandId, categoryId, name, form, route, strength, stock, unit, sku } = input
+		const { id, brandId, categoryId, name, form, route, strength, stock, unit, price, sku } = input
 
 		try {
 			const pharmacyItem = await instancePrisma.pharmacyItem.update({
@@ -106,6 +107,7 @@ const updatePharmacyItem = publicProcedure
 					strength,
 					stock,
 					unit,
+					price,
 					sku,
 				}
 			})
