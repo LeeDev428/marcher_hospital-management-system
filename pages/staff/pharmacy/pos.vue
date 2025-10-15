@@ -57,6 +57,10 @@ const handleCheckout = async () => {
     await navigateTo(`/staff/pharmacy/sales/${sale.id}`)
   }
 }
+
+useHead({
+  title: 'Staff POS'
+})
 </script>
 
 <template>
@@ -291,6 +295,19 @@ const handleCheckout = async () => {
               />
             </div>
 
+            <!-- Payment Amount -->
+            <div class="w-full space-y-1">
+              <Label class="text-xs text-gray-600">Amount Paid</Label>
+              <Input
+                v-model.number="posStore.amountPaid"
+                type="number"
+                min="0"
+                step="0.01"
+                placeholder="Enter amount paid"
+                class="h-10 text-base font-semibold"
+              />
+            </div>
+
             <!-- Totals -->
             <div class="w-full space-y-2 pt-2 border-t">
               <div class="flex justify-between text-sm text-gray-600">
@@ -309,6 +326,10 @@ const handleCheckout = async () => {
                 <span>Total:</span>
                 <span class="text-blue-600">{{ formatCurrency(posStore.cartTotal) }}</span>
               </div>
+              <div v-if="posStore.amountPaid > 0" class="flex justify-between text-base font-semibold pt-1" :class="posStore.change >= 0 ? 'text-green-600' : 'text-red-600'">
+                <span>Change:</span>
+                <span>{{ formatCurrency(posStore.change) }}</span>
+              </div>
             </div>
 
             <!-- Action Buttons -->
@@ -324,7 +345,8 @@ const handleCheckout = async () => {
               <Button
                 class="flex-1 bg-blue-600 hover:bg-blue-700"
                 @click="handleCheckout"
-                :disabled="!posStore.hasItems || posStore.loading"
+                :disabled="!posStore.hasItems || posStore.loading || posStore.amountPaid < posStore.cartTotal"
+                :title="posStore.amountPaid < posStore.cartTotal ? 'Payment amount is insufficient' : ''"
               >
                 <span v-if="posStore.loading">Processing...</span>
                 <span v-else>Checkout</span>
