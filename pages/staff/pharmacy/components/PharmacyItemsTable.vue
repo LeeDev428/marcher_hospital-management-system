@@ -14,7 +14,7 @@ import { Skeleton } from "@/components/ui/skeleton"
 const pharmacyItemStore = usePharmacyItemStore()
 
 const onEdit = async (id: string) => {
-	await navigateTo(`/pharmacy/${id}`)
+	await navigateTo(`/staff/pharmacy/${id}`)
 }
 
 onMounted(async () => {
