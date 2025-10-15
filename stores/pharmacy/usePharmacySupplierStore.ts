@@ -67,7 +67,7 @@ export const usePharmacySupplierStore = defineStore("pharmacySupplier", {
 						"Pharmacy Supplier",
 						"Pharmacy supplier created successfully."
 					)
-					await navigateTo(`/pharmacy/suppliers`)
+					await navigateTo(`/staff/pharmacy/suppliers`)
 				}
 			} catch (error) {
 				this.loading = false
@@ -94,7 +94,7 @@ export const usePharmacySupplierStore = defineStore("pharmacySupplier", {
 						"Pharmacy Supplier",
 						"Pharmacy supplier updated successfully."
 					)
-					await navigateTo(`/pharmacy/suppliers`)
+					await navigateTo(`/staff/pharmacy/suppliers`)
 				}
 			} catch (error) {
 				this.loading = false
