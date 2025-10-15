@@ -7,8 +7,8 @@ const { pharmacyItemId } = useRoute().params as { pharmacyItemId: string }
 
 onMounted(() => {
 	breadcrumbsStore.setBreadcrumbs([
-		{ label: "Pharmacy", link: "/pharmacy" },
-		{ label: "Pharmacy Item", link: `/pharmacy/${pharmacyItemId}` },
+		{ label: "Pharmacy", link: "/staff/pharmacy" },
+		{ label: "Pharmacy Item", link: `/staff/pharmacy/${pharmacyItemId}` },
 	])
 })
 </script>
