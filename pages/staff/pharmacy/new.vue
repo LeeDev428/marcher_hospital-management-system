@@ -6,10 +6,15 @@ const breadcrumbsStore = useBreadcrumbsStore()
 
 onMounted(() => {
 	breadcrumbsStore.setBreadcrumbs([
-		{ label: "Pharmacy", link: "/pharmacy" },
-		{ label: "New Pharmacy Item", link: "/pharmacy/new" },
+		{ label: "Pharmacy", link: "/staff/pharmacy" },
+		{ label: "New Pharmacy Item", link: "/staff/pharmacy/new" },
 	])
 })
+
+useHead({
+  title: 'Staff Pharmacy'
+})
+
 </script>
 
 <template>
