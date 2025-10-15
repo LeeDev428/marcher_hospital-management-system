@@ -375,3 +375,174 @@ enum ServiceCategory {
   EMERGENCY
   OTHER
 }
+
+// ==================== PHARMACY MODELS ====================
+
+// Pharmacy Supplier
+model PharmacySupplier {
+  id        String   @id @default(uuid()) @db.Uuid
+  name      String
+  email     String?
+  contact   String?
+  address   String?
+  notes     String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([name])
+  @@index([email])
+  @@index([contact])
+  @@map("pharmacy_suppliers")
+}
+
+// Pharmacy Brand
+model PharmacyBrand {
+  id        String         @id @default(uuid()) @db.Uuid
+  name      String
+  items     PharmacyItem[]
+  createdAt DateTime       @default(now())
+  updatedAt DateTime       @updatedAt
+
+  @@index([name])
+  @@map("pharmacy_brands")
+}
+
+// Pharmacy Item Category
+model PharmacyItemCategory {
+  id        String         @id @default(uuid()) @db.Uuid
+  name      String
+  items     PharmacyItem[]
+  createdAt DateTime       @default(now())
+  updatedAt DateTime       @updatedAt
+
+  @@index([name])
+  @@map("pharmacy_item_categories")
+}
+
+// Pharmacy Item Forms
+enum PharmacyItemForm {
+  TABLET
+  CAPSULE
+  SYRUP
+  OINTMENT
+  CREAM
+  INJECTION
+  DROPS
+  INHALER
+  MEDICAL_DEVICE
+  SUPPLEMENTS
+  COSMETICS
+  MISCELLANEOUS
+}
+
+// Pharmacy Item Routes
+enum PharmacyItemRoute {
+  INJECTION
+  TOPICAL
+  TRANSDERMAL
+  OCULAR
+  OTIC
+  NASAL
+  ORAL
+  INHALATIONAL
+  RECTAL
+  VAGINAL
+}
+
+// Pharmacy Item
+model PharmacyItem {
+  id         String               @id @default(uuid()) @db.Uuid
+  brandId    String               @db.Uuid
+  brand      PharmacyBrand        @relation(fields: [brandId], references: [id], onDelete: Restrict)
+  categoryId String               @db.Uuid
+  category   PharmacyItemCategory @relation(fields: [categoryId], references: [id], onDelete: Restrict)
+  name       String
+  form       PharmacyItemForm
+  route      PharmacyItemRoute
+  strength   String
+  stock      Int
+  unit       String
+  price      Decimal              @default(0) @db.Decimal(10, 2)
+  sku        String?
+  saleItems  PharmacySaleItem[]
+  createdAt  DateTime             @default(now())
+  updatedAt  DateTime             @updatedAt
+
+  @@index([name])
+  @@map("pharmacy_items")
+}
+
+// Payment Methods
+enum PaymentMethod {
+  CASH
+  CARD
+  ONLINE
+  INSURANCE
+}
+
+// Payment Status
+enum PaymentStatus {
+  PENDING
+  COMPLETED
+  CANCELLED
+  REFUNDED
+}
+
+// Pharmacy Sale (POS)
+model PharmacySale {
+  id              String             @id @default(uuid()) @db.Uuid
+  invoiceNumber   String             @unique
+  customerName    String?
+  customerPhone   String?
+  staffId         String?
+  subtotal        Decimal            @db.Decimal(10, 2)
+  discount        Decimal            @default(0) @db.Decimal(10, 2)
+  tax             Decimal            @default(0) @db.Decimal(10, 2)
+  total           Decimal            @db.Decimal(10, 2)
+  paymentMethod   PaymentMethod      @default(CASH)
+  paymentStatus   PaymentStatus      @default(COMPLETED)
+  notes           String?
+  items           PharmacySaleItem[]
+  payments        PharmacyPayment[]
+  createdAt       DateTime           @default(now())
+  updatedAt       DateTime           @updatedAt
+
+  @@index([invoiceNumber])
+  @@index([createdAt])
+  @@index([staffId])
+  @@map("pharmacy_sales")
+}
+
+// Pharmacy Sale Item
+model PharmacySaleItem {
+  id              String        @id @default(uuid()) @db.Uuid
+  saleId          String        @db.Uuid
+  sale            PharmacySale  @relation(fields: [saleId], references: [id], onDelete: Cascade)
+  pharmacyItemId  String        @db.Uuid
+  pharmacyItem    PharmacyItem  @relation(fields: [pharmacyItemId], references: [id], onDelete: Restrict)
+  quantity        Int
+  unitPrice       Decimal       @db.Decimal(10, 2)
+  subtotal        Decimal       @db.Decimal(10, 2)
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+
+  @@index([saleId])
+  @@index([pharmacyItemId])
+  @@map("pharmacy_sale_items")
+}
+
+// Pharmacy Payment
+model PharmacyPayment {
+  id              String        @id @default(uuid()) @db.Uuid
+  saleId          String        @db.Uuid
+  sale            PharmacySale  @relation(fields: [saleId], references: [id], onDelete: Cascade)
+  amount          Decimal       @db.Decimal(10, 2)
+  method          PaymentMethod @default(CASH)
+  transactionId   String?
+  paidAt          DateTime      @default(now())
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+
+  @@index([saleId])
+  @@map("pharmacy_payments")
+}
