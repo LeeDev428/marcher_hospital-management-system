@@ -5,7 +5,7 @@ import {
   updateSaleStatusSchema,
   deletePharmacySaleSchema,
 } from "~/types/pharmacy"
-import { createTRPCRouter, protectedProcedure } from "../../init"
+import { createTRPCRouter, publicProcedure } from "../../init"
 
 // Generate invoice number (format: INV-YYYYMMDD-XXXX)
 function generateInvoiceNumber(): string {
@@ -18,7 +18,7 @@ function generateInvoiceNumber(): string {
 }
 
 // Get available pharmacy items for POS (with stock > 0)
-const getAvailableItems = protectedProcedure
+const getAvailableItems = publicProcedure
   .input(getAvailableItemsSchema)
   .query(async ({ ctx, input }) => {
     const { instancePrisma } = ctx
@@ -73,7 +73,7 @@ const getAvailableItems = protectedProcedure
   })
 
 // Get all pharmacy sales
-const getPharmacySales = protectedProcedure.query(async ({ ctx }) => {
+const getPharmacySales = publicProcedure.query(async ({ ctx }) => {
   const { instancePrisma } = ctx
 
   try {
@@ -124,7 +124,7 @@ const getPharmacySales = protectedProcedure.query(async ({ ctx }) => {
 })
 
 // Get single pharmacy sale with items
-const getPharmacySale = protectedProcedure
+const getPharmacySale = publicProcedure
   .input(getPharmacySaleSchema)
   .query(async ({ ctx, input }) => {
     const { instancePrisma } = ctx
@@ -217,7 +217,7 @@ const getPharmacySale = protectedProcedure
   })
 
 // Create pharmacy sale (POS checkout)
-const createPharmacySale = protectedProcedure
+const createPharmacySale = publicProcedure
   .input(createPharmacySaleSchema)
   .mutation(async ({ ctx, input }) => {
     const { instancePrisma } = ctx
@@ -348,7 +348,7 @@ const createPharmacySale = protectedProcedure
   })
 
 // Update sale status
-const updateSaleStatus = protectedProcedure
+const updateSaleStatus = publicProcedure
   .input(updateSaleStatusSchema)
   .mutation(async ({ ctx, input }) => {
     const { instancePrisma } = ctx
@@ -378,7 +378,7 @@ const updateSaleStatus = protectedProcedure
   })
 
 // Delete pharmacy sale (soft delete/cancel)
-const deletePharmacySale = protectedProcedure
+const deletePharmacySale = publicProcedure
   .input(deletePharmacySaleSchema)
   .mutation(async ({ ctx, input }) => {
     const { instancePrisma } = ctx
