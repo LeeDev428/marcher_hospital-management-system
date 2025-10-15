@@ -67,7 +67,7 @@ export const usePharmacyBrandStore = defineStore("pharmacyBrand", {
 						"Pharmacy Brand",
 						"Pharmacy brand created successfully."
 					)
-					await navigateTo(`/pharmacy/brands`)
+					// Don't navigate - stay on current page
 				}
 			} catch (error) {
 				this.loading = false
@@ -94,7 +94,7 @@ export const usePharmacyBrandStore = defineStore("pharmacyBrand", {
 						"Pharmacy Brand",
 						"Pharmacy brand updated successfully."
 					)
-					await navigateTo(`/pharmacy/brands`)
+					// Don't navigate - stay on current page
 				}
 			} catch (error) {
 				this.loading = false
