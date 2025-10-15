@@ -1,7 +1,7 @@
-import { createTRPCRouter, protectedProcedure } from "../../init"
+import { createTRPCRouter, publicProcedure } from "../../init"
 import { createPharmacySupplierSchema, deletePharmacySupplierSchema, getPharmacySupplierSchema, updatePharmacySupplierSchema } from "~/types/pharmacy"
 
-const getPharmacySuppliers = protectedProcedure.query(async ({ ctx }) => {
+const getPharmacySuppliers = publicProcedure.query(async ({ ctx }) => {
 	const { instancePrisma } = ctx
 
 	try {
@@ -22,7 +22,7 @@ const getPharmacySuppliers = protectedProcedure.query(async ({ ctx }) => {
 	}
 })
 
-const getPharmacySupplier = protectedProcedure
+const getPharmacySupplier = publicProcedure
 	.input(getPharmacySupplierSchema)
 	.query(async ({ ctx, input }) => {
 		const { instancePrisma } = ctx
@@ -48,7 +48,7 @@ const getPharmacySupplier = protectedProcedure
 		}
 	})
 
-const createPharmacySupplier = protectedProcedure
+const createPharmacySupplier = publicProcedure
 	.input(createPharmacySupplierSchema)
 	.mutation(async ({ ctx, input }) => {
 		const { instancePrisma } = ctx
@@ -79,7 +79,7 @@ const createPharmacySupplier = protectedProcedure
 		}
 	})
 
-const updatePharmacySupplier = protectedProcedure
+const updatePharmacySupplier = publicProcedure
 	.input(updatePharmacySupplierSchema)
 	.mutation(async ({ ctx, input }) => {
 		const { instancePrisma } = ctx
@@ -112,7 +112,7 @@ const updatePharmacySupplier = protectedProcedure
 		}
 	})
 
-const deletePharmacySupplier = protectedProcedure
+const deletePharmacySupplier = publicProcedure
 	.input(deletePharmacySupplierSchema)
 	.mutation(async ({ ctx, input }) => {
 		const { instancePrisma } = ctx
