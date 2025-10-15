@@ -15,7 +15,7 @@ export const appointmentsRouter = createTRPCRouter({
 				const { instancePrisma } = ctx
 
 				// Check if doctor has schedule for this day
-				const appointmentDate = new Date(date)
+				const appointmentDate = new Date(date) 
 				const dayOfWeek = appointmentDate.toLocaleDateString('en-US', { weekday: 'long' }).toUpperCase()
 
 				const doctorSchedule = await instancePrisma.staffSchedule.findFirst({
