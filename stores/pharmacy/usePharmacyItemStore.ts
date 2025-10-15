@@ -67,7 +67,7 @@ export const usePharmacyItemStore = defineStore("pharmacyItem", {
 						"Pharmacy Item",
 						"Pharmacy item created successfully."
 					)
-					await navigateTo(`/pharmacy`)
+					await navigateTo(`/staff/pharmacy`)
 				}
 			} catch (error) {
 				this.loading = false
