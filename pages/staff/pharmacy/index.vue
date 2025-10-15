@@ -12,7 +12,7 @@ useHead({
 
 onMounted(() => {
 	breadcrumbsStore.setBreadcrumbs([
-		{ label: "Pharmacy", link: "/pharmacy" },
+		{ label: "Pharmacy", link: "/staff/pharmacy" },
 	])
 })
 </script>
@@ -26,25 +26,37 @@ onMounted(() => {
 					<Input type="text" placeholder="Search" class="bg-white max-w-xs" />
 				</div>
 				<div class="flex gap-2">
-					<NuxtLink to="/pharmacy/suppliers">
+					<NuxtLink to="/staff/pharmacy/pos">
+						<Button variant="default" class="bg-blue-600 hover:bg-blue-700">
+							<Icon name="mdi:cash-register" class="mr-2" />
+							POS
+						</Button>
+					</NuxtLink>
+					<NuxtLink to="/staff/pharmacy/sales">
+						<Button variant="outline">
+							<Icon name="mdi:receipt" class="mr-2" />
+							Sales
+						</Button>
+					</NuxtLink>
+					<NuxtLink to="/staff/pharmacy/suppliers">
 						<Button variant="outline">
 							<Icon name="mdi:package" />
 							Suppliers
 						</Button>
 					</NuxtLink>
-					<NuxtLink to="/pharmacy/brands">
+					<NuxtLink to="/staff/pharmacy/brands">
 						<Button variant="outline">
 							<Icon name="mdi:octagram" />
 							Brands
 						</Button>
 					</NuxtLink>
-					<NuxtLink to="/pharmacy/categories">
+					<NuxtLink to="/staff/pharmacy/categories">
 						<Button variant="outline">
 							<Icon name="mdi:tag" />
 							Categories
 						</Button>
 					</NuxtLink>
-					<NuxtLink to="/pharmacy/new">
+					<NuxtLink to="/staff/pharmacy/new">
 						<Button variant="outline" size="icon">
 							<Icon name="mdi:plus" />
 						</Button>
