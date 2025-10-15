@@ -58,6 +58,41 @@ export type StaffSchedule = $Result.DefaultSelection<Prisma.$StaffSchedulePayloa
  * 
  */
 export type MedicalService = $Result.DefaultSelection<Prisma.$MedicalServicePayload>
+/**
+ * Model PharmacySupplier
+ * 
+ */
+export type PharmacySupplier = $Result.DefaultSelection<Prisma.$PharmacySupplierPayload>
+/**
+ * Model PharmacyBrand
+ * 
+ */
+export type PharmacyBrand = $Result.DefaultSelection<Prisma.$PharmacyBrandPayload>
+/**
+ * Model PharmacyItemCategory
+ * 
+ */
+export type PharmacyItemCategory = $Result.DefaultSelection<Prisma.$PharmacyItemCategoryPayload>
+/**
+ * Model PharmacyItem
+ * 
+ */
+export type PharmacyItem = $Result.DefaultSelection<Prisma.$PharmacyItemPayload>
+/**
+ * Model PharmacySale
+ * 
+ */
+export type PharmacySale = $Result.DefaultSelection<Prisma.$PharmacySalePayload>
+/**
+ * Model PharmacySaleItem
+ * 
+ */
+export type PharmacySaleItem = $Result.DefaultSelection<Prisma.$PharmacySaleItemPayload>
+/**
+ * Model PharmacyPayment
+ * 
+ */
+export type PharmacyPayment = $Result.DefaultSelection<Prisma.$PharmacyPaymentPayload>
 
 /**
  * Enums
@@ -222,6 +257,60 @@ export const ServiceCategory: {
 
 export type ServiceCategory = (typeof ServiceCategory)[keyof typeof ServiceCategory]
 
+
+export const PharmacyItemForm: {
+  TABLET: 'TABLET',
+  CAPSULE: 'CAPSULE',
+  SYRUP: 'SYRUP',
+  OINTMENT: 'OINTMENT',
+  CREAM: 'CREAM',
+  INJECTION: 'INJECTION',
+  DROPS: 'DROPS',
+  INHALER: 'INHALER',
+  MEDICAL_DEVICE: 'MEDICAL_DEVICE',
+  SUPPLEMENTS: 'SUPPLEMENTS',
+  COSMETICS: 'COSMETICS',
+  MISCELLANEOUS: 'MISCELLANEOUS'
+};
+
+export type PharmacyItemForm = (typeof PharmacyItemForm)[keyof typeof PharmacyItemForm]
+
+
+export const PharmacyItemRoute: {
+  INJECTION: 'INJECTION',
+  TOPICAL: 'TOPICAL',
+  TRANSDERMAL: 'TRANSDERMAL',
+  OCULAR: 'OCULAR',
+  OTIC: 'OTIC',
+  NASAL: 'NASAL',
+  ORAL: 'ORAL',
+  INHALATIONAL: 'INHALATIONAL',
+  RECTAL: 'RECTAL',
+  VAGINAL: 'VAGINAL'
+};
+
+export type PharmacyItemRoute = (typeof PharmacyItemRoute)[keyof typeof PharmacyItemRoute]
+
+
+export const PaymentMethod: {
+  CASH: 'CASH',
+  CARD: 'CARD',
+  ONLINE: 'ONLINE',
+  INSURANCE: 'INSURANCE'
+};
+
+export type PaymentMethod = (typeof PaymentMethod)[keyof typeof PaymentMethod]
+
+
+export const PaymentStatus: {
+  PENDING: 'PENDING',
+  COMPLETED: 'COMPLETED',
+  CANCELLED: 'CANCELLED',
+  REFUNDED: 'REFUNDED'
+};
+
+export type PaymentStatus = (typeof PaymentStatus)[keyof typeof PaymentStatus]
+
 }
 
 export type UserRole = $Enums.UserRole
@@ -271,6 +360,22 @@ export const ServiceType: typeof $Enums.ServiceType
 export type ServiceCategory = $Enums.ServiceCategory
 
 export const ServiceCategory: typeof $Enums.ServiceCategory
+
+export type PharmacyItemForm = $Enums.PharmacyItemForm
+
+export const PharmacyItemForm: typeof $Enums.PharmacyItemForm
+
+export type PharmacyItemRoute = $Enums.PharmacyItemRoute
+
+export const PharmacyItemRoute: typeof $Enums.PharmacyItemRoute
+
+export type PaymentMethod = $Enums.PaymentMethod
+
+export const PaymentMethod: typeof $Enums.PaymentMethod
+
+export type PaymentStatus = $Enums.PaymentStatus
+
+export const PaymentStatus: typeof $Enums.PaymentStatus
 
 /**
  * ##  Prisma Client ʲˢ
@@ -479,6 +584,76 @@ export class PrismaClient<
     * ```
     */
   get medicalService(): Prisma.MedicalServiceDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.pharmacySupplier`: Exposes CRUD operations for the **PharmacySupplier** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more PharmacySuppliers
+    * const pharmacySuppliers = await prisma.pharmacySupplier.findMany()
+    * ```
+    */
+  get pharmacySupplier(): Prisma.PharmacySupplierDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.pharmacyBrand`: Exposes CRUD operations for the **PharmacyBrand** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more PharmacyBrands
+    * const pharmacyBrands = await prisma.pharmacyBrand.findMany()
+    * ```
+    */
+  get pharmacyBrand(): Prisma.PharmacyBrandDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.pharmacyItemCategory`: Exposes CRUD operations for the **PharmacyItemCategory** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more PharmacyItemCategories
+    * const pharmacyItemCategories = await prisma.pharmacyItemCategory.findMany()
+    * ```
+    */
+  get pharmacyItemCategory(): Prisma.PharmacyItemCategoryDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.pharmacyItem`: Exposes CRUD operations for the **PharmacyItem** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more PharmacyItems
+    * const pharmacyItems = await prisma.pharmacyItem.findMany()
+    * ```
+    */
+  get pharmacyItem(): Prisma.PharmacyItemDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.pharmacySale`: Exposes CRUD operations for the **PharmacySale** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more PharmacySales
+    * const pharmacySales = await prisma.pharmacySale.findMany()
+    * ```
+    */
+  get pharmacySale(): Prisma.PharmacySaleDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.pharmacySaleItem`: Exposes CRUD operations for the **PharmacySaleItem** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more PharmacySaleItems
+    * const pharmacySaleItems = await prisma.pharmacySaleItem.findMany()
+    * ```
+    */
+  get pharmacySaleItem(): Prisma.PharmacySaleItemDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.pharmacyPayment`: Exposes CRUD operations for the **PharmacyPayment** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more PharmacyPayments
+    * const pharmacyPayments = await prisma.pharmacyPayment.findMany()
+    * ```
+    */
+  get pharmacyPayment(): Prisma.PharmacyPaymentDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -927,7 +1102,14 @@ export namespace Prisma {
     PasswordResetToken: 'PasswordResetToken',
     Appointment: 'Appointment',
     StaffSchedule: 'StaffSchedule',
-    MedicalService: 'MedicalService'
+    MedicalService: 'MedicalService',
+    PharmacySupplier: 'PharmacySupplier',
+    PharmacyBrand: 'PharmacyBrand',
+    PharmacyItemCategory: 'PharmacyItemCategory',
+    PharmacyItem: 'PharmacyItem',
+    PharmacySale: 'PharmacySale',
+    PharmacySaleItem: 'PharmacySaleItem',
+    PharmacyPayment: 'PharmacyPayment'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -946,7 +1128,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "staffCredentials" | "patient" | "partner" | "refreshToken" | "passwordResetToken" | "appointment" | "staffSchedule" | "medicalService"
+      modelProps: "user" | "staffCredentials" | "patient" | "partner" | "refreshToken" | "passwordResetToken" | "appointment" | "staffSchedule" | "medicalService" | "pharmacySupplier" | "pharmacyBrand" | "pharmacyItemCategory" | "pharmacyItem" | "pharmacySale" | "pharmacySaleItem" | "pharmacyPayment"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1616,6 +1798,524 @@ export namespace Prisma {
           }
         }
       }
+      PharmacySupplier: {
+        payload: Prisma.$PharmacySupplierPayload<ExtArgs>
+        fields: Prisma.PharmacySupplierFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.PharmacySupplierFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PharmacySupplierPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.PharmacySupplierFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PharmacySupplierPayload>
+          }
+          findFirst: {
+            args: Prisma.PharmacySupplierFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PharmacySupplierPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.PharmacySupplierFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PharmacySupplierPayload>
+          }
+          findMany: {
+            args: Prisma.PharmacySupplierFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PharmacySupplierPayload>[]
+          }
+          create: {
+            args: Prisma.PharmacySupplierCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PharmacySupplierPayload>
+          }
+          createMany: {
+            args: Prisma.PharmacySupplierCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.PharmacySupplierCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PharmacySupplierPayload>[]
+          }
+          delete: {
+            args: Prisma.PharmacySupplierDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PharmacySupplierPayload>
+          }
+          update: {
+            args: Prisma.PharmacySupplierUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PharmacySupplierPayload>
+          }
+          deleteMany: {
+            args: Prisma.PharmacySupplierDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.PharmacySupplierUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.PharmacySupplierUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PharmacySupplierPayload>[]
+          }
+          upsert: {
+            args: Prisma.PharmacySupplierUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PharmacySupplierPayload>
+          }
+          aggregate: {
+            args: Prisma.PharmacySupplierAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregatePharmacySupplier>
+          }
+          groupBy: {
+            args: Prisma.PharmacySupplierGroupByArgs<ExtArgs>
+            result: $Utils.Optional<PharmacySupplierGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.PharmacySupplierCountArgs<ExtArgs>
+            result: $Utils.Optional<PharmacySupplierCountAggregateOutputType> | number
+          }
+        }
+      }
+      PharmacyBrand: {
+        payload: Prisma.$PharmacyBrandPayload<ExtArgs>
+        fields: Prisma.PharmacyBrandFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.PharmacyBrandFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PharmacyBrandPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.PharmacyBrandFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PharmacyBrandPayload>
+          }
+          findFirst: {
+            args: Prisma.PharmacyBrandFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PharmacyBrandPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.PharmacyBrandFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PharmacyBrandPayload>
+          }
+          findMany: {
+            args: Prisma.PharmacyBrandFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PharmacyBrandPayload>[]
+          }
+          create: {
+            args: Prisma.PharmacyBrandCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PharmacyBrandPayload>
+          }
+          createMany: {
+            args: Prisma.PharmacyBrandCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.PharmacyBrandCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PharmacyBrandPayload>[]
+          }
+          delete: {
+            args: Prisma.PharmacyBrandDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PharmacyBrandPayload>
+          }
+          update: {
+            args: Prisma.PharmacyBrandUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PharmacyBrandPayload>
+          }
+          deleteMany: {
+            args: Prisma.PharmacyBrandDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.PharmacyBrandUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.PharmacyBrandUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PharmacyBrandPayload>[]
+          }
+          upsert: {
+            args: Prisma.PharmacyBrandUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PharmacyBrandPayload>
+          }
+          aggregate: {
+            args: Prisma.PharmacyBrandAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregatePharmacyBrand>
+          }
+          groupBy: {
+            args: Prisma.PharmacyBrandGroupByArgs<ExtArgs>
+            result: $Utils.Optional<PharmacyBrandGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.PharmacyBrandCountArgs<ExtArgs>
+            result: $Utils.Optional<PharmacyBrandCountAggregateOutputType> | number
+          }
+        }
+      }
+      PharmacyItemCategory: {
+        payload: Prisma.$PharmacyItemCategoryPayload<ExtArgs>
+        fields: Prisma.PharmacyItemCategoryFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.PharmacyItemCategoryFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PharmacyItemCategoryPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.PharmacyItemCategoryFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PharmacyItemCategoryPayload>
+          }
+          findFirst: {
+            args: Prisma.PharmacyItemCategoryFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PharmacyItemCategoryPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.PharmacyItemCategoryFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PharmacyItemCategoryPayload>
+          }
+          findMany: {
+            args: Prisma.PharmacyItemCategoryFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PharmacyItemCategoryPayload>[]
+          }
+          create: {
+            args: Prisma.PharmacyItemCategoryCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PharmacyItemCategoryPayload>
+          }
+          createMany: {
+            args: Prisma.PharmacyItemCategoryCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.PharmacyItemCategoryCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PharmacyItemCategoryPayload>[]
+          }
+          delete: {
+            args: Prisma.PharmacyItemCategoryDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PharmacyItemCategoryPayload>
+          }
+          update: {
+            args: Prisma.PharmacyItemCategoryUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PharmacyItemCategoryPayload>
+          }
+          deleteMany: {
+            args: Prisma.PharmacyItemCategoryDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.PharmacyItemCategoryUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.PharmacyItemCategoryUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PharmacyItemCategoryPayload>[]
+          }
+          upsert: {
+            args: Prisma.PharmacyItemCategoryUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PharmacyItemCategoryPayload>
+          }
+          aggregate: {
+            args: Prisma.PharmacyItemCategoryAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregatePharmacyItemCategory>
+          }
+          groupBy: {
+            args: Prisma.PharmacyItemCategoryGroupByArgs<ExtArgs>
+            result: $Utils.Optional<PharmacyItemCategoryGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.PharmacyItemCategoryCountArgs<ExtArgs>
+            result: $Utils.Optional<PharmacyItemCategoryCountAggregateOutputType> | number
+          }
+        }
+      }
+      PharmacyItem: {
+        payload: Prisma.$PharmacyItemPayload<ExtArgs>
+        fields: Prisma.PharmacyItemFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.PharmacyItemFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PharmacyItemPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.PharmacyItemFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PharmacyItemPayload>
+          }
+          findFirst: {
+            args: Prisma.PharmacyItemFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PharmacyItemPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.PharmacyItemFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PharmacyItemPayload>
+          }
+          findMany: {
+            args: Prisma.PharmacyItemFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PharmacyItemPayload>[]
+          }
+          create: {
+            args: Prisma.PharmacyItemCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PharmacyItemPayload>
+          }
+          createMany: {
+            args: Prisma.PharmacyItemCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.PharmacyItemCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PharmacyItemPayload>[]
+          }
+          delete: {
+            args: Prisma.PharmacyItemDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PharmacyItemPayload>
+          }
+          update: {
+            args: Prisma.PharmacyItemUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PharmacyItemPayload>
+          }
+          deleteMany: {
+            args: Prisma.PharmacyItemDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.PharmacyItemUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.PharmacyItemUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PharmacyItemPayload>[]
+          }
+          upsert: {
+            args: Prisma.PharmacyItemUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PharmacyItemPayload>
+          }
+          aggregate: {
+            args: Prisma.PharmacyItemAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregatePharmacyItem>
+          }
+          groupBy: {
+            args: Prisma.PharmacyItemGroupByArgs<ExtArgs>
+            result: $Utils.Optional<PharmacyItemGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.PharmacyItemCountArgs<ExtArgs>
+            result: $Utils.Optional<PharmacyItemCountAggregateOutputType> | number
+          }
+        }
+      }
+      PharmacySale: {
+        payload: Prisma.$PharmacySalePayload<ExtArgs>
+        fields: Prisma.PharmacySaleFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.PharmacySaleFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PharmacySalePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.PharmacySaleFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PharmacySalePayload>
+          }
+          findFirst: {
+            args: Prisma.PharmacySaleFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PharmacySalePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.PharmacySaleFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PharmacySalePayload>
+          }
+          findMany: {
+            args: Prisma.PharmacySaleFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PharmacySalePayload>[]
+          }
+          create: {
+            args: Prisma.PharmacySaleCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PharmacySalePayload>
+          }
+          createMany: {
+            args: Prisma.PharmacySaleCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.PharmacySaleCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PharmacySalePayload>[]
+          }
+          delete: {
+            args: Prisma.PharmacySaleDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PharmacySalePayload>
+          }
+          update: {
+            args: Prisma.PharmacySaleUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PharmacySalePayload>
+          }
+          deleteMany: {
+            args: Prisma.PharmacySaleDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.PharmacySaleUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.PharmacySaleUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PharmacySalePayload>[]
+          }
+          upsert: {
+            args: Prisma.PharmacySaleUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PharmacySalePayload>
+          }
+          aggregate: {
+            args: Prisma.PharmacySaleAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregatePharmacySale>
+          }
+          groupBy: {
+            args: Prisma.PharmacySaleGroupByArgs<ExtArgs>
+            result: $Utils.Optional<PharmacySaleGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.PharmacySaleCountArgs<ExtArgs>
+            result: $Utils.Optional<PharmacySaleCountAggregateOutputType> | number
+          }
+        }
+      }
+      PharmacySaleItem: {
+        payload: Prisma.$PharmacySaleItemPayload<ExtArgs>
+        fields: Prisma.PharmacySaleItemFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.PharmacySaleItemFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PharmacySaleItemPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.PharmacySaleItemFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PharmacySaleItemPayload>
+          }
+          findFirst: {
+            args: Prisma.PharmacySaleItemFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PharmacySaleItemPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.PharmacySaleItemFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PharmacySaleItemPayload>
+          }
+          findMany: {
+            args: Prisma.PharmacySaleItemFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PharmacySaleItemPayload>[]
+          }
+          create: {
+            args: Prisma.PharmacySaleItemCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PharmacySaleItemPayload>
+          }
+          createMany: {
+            args: Prisma.PharmacySaleItemCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.PharmacySaleItemCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PharmacySaleItemPayload>[]
+          }
+          delete: {
+            args: Prisma.PharmacySaleItemDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PharmacySaleItemPayload>
+          }
+          update: {
+            args: Prisma.PharmacySaleItemUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PharmacySaleItemPayload>
+          }
+          deleteMany: {
+            args: Prisma.PharmacySaleItemDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.PharmacySaleItemUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.PharmacySaleItemUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PharmacySaleItemPayload>[]
+          }
+          upsert: {
+            args: Prisma.PharmacySaleItemUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PharmacySaleItemPayload>
+          }
+          aggregate: {
+            args: Prisma.PharmacySaleItemAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregatePharmacySaleItem>
+          }
+          groupBy: {
+            args: Prisma.PharmacySaleItemGroupByArgs<ExtArgs>
+            result: $Utils.Optional<PharmacySaleItemGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.PharmacySaleItemCountArgs<ExtArgs>
+            result: $Utils.Optional<PharmacySaleItemCountAggregateOutputType> | number
+          }
+        }
+      }
+      PharmacyPayment: {
+        payload: Prisma.$PharmacyPaymentPayload<ExtArgs>
+        fields: Prisma.PharmacyPaymentFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.PharmacyPaymentFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PharmacyPaymentPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.PharmacyPaymentFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PharmacyPaymentPayload>
+          }
+          findFirst: {
+            args: Prisma.PharmacyPaymentFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PharmacyPaymentPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.PharmacyPaymentFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PharmacyPaymentPayload>
+          }
+          findMany: {
+            args: Prisma.PharmacyPaymentFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PharmacyPaymentPayload>[]
+          }
+          create: {
+            args: Prisma.PharmacyPaymentCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PharmacyPaymentPayload>
+          }
+          createMany: {
+            args: Prisma.PharmacyPaymentCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.PharmacyPaymentCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PharmacyPaymentPayload>[]
+          }
+          delete: {
+            args: Prisma.PharmacyPaymentDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PharmacyPaymentPayload>
+          }
+          update: {
+            args: Prisma.PharmacyPaymentUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PharmacyPaymentPayload>
+          }
+          deleteMany: {
+            args: Prisma.PharmacyPaymentDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.PharmacyPaymentUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.PharmacyPaymentUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PharmacyPaymentPayload>[]
+          }
+          upsert: {
+            args: Prisma.PharmacyPaymentUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PharmacyPaymentPayload>
+          }
+          aggregate: {
+            args: Prisma.PharmacyPaymentAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregatePharmacyPayment>
+          }
+          groupBy: {
+            args: Prisma.PharmacyPaymentGroupByArgs<ExtArgs>
+            result: $Utils.Optional<PharmacyPaymentGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.PharmacyPaymentCountArgs<ExtArgs>
+            result: $Utils.Optional<PharmacyPaymentCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1721,6 +2421,13 @@ export namespace Prisma {
     appointment?: AppointmentOmit
     staffSchedule?: StaffScheduleOmit
     medicalService?: MedicalServiceOmit
+    pharmacySupplier?: PharmacySupplierOmit
+    pharmacyBrand?: PharmacyBrandOmit
+    pharmacyItemCategory?: PharmacyItemCategoryOmit
+    pharmacyItem?: PharmacyItemOmit
+    pharmacySale?: PharmacySaleOmit
+    pharmacySaleItem?: PharmacySaleItemOmit
+    pharmacyPayment?: PharmacyPaymentOmit
   }
 
   /* Types for Logging */
@@ -1851,6 +2558,139 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountMedicalServicesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: MedicalServiceWhereInput
+  }
+
+
+  /**
+   * Count Type PharmacyBrandCountOutputType
+   */
+
+  export type PharmacyBrandCountOutputType = {
+    items: number
+  }
+
+  export type PharmacyBrandCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    items?: boolean | PharmacyBrandCountOutputTypeCountItemsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * PharmacyBrandCountOutputType without action
+   */
+  export type PharmacyBrandCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PharmacyBrandCountOutputType
+     */
+    select?: PharmacyBrandCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * PharmacyBrandCountOutputType without action
+   */
+  export type PharmacyBrandCountOutputTypeCountItemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PharmacyItemWhereInput
+  }
+
+
+  /**
+   * Count Type PharmacyItemCategoryCountOutputType
+   */
+
+  export type PharmacyItemCategoryCountOutputType = {
+    items: number
+  }
+
+  export type PharmacyItemCategoryCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    items?: boolean | PharmacyItemCategoryCountOutputTypeCountItemsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * PharmacyItemCategoryCountOutputType without action
+   */
+  export type PharmacyItemCategoryCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PharmacyItemCategoryCountOutputType
+     */
+    select?: PharmacyItemCategoryCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * PharmacyItemCategoryCountOutputType without action
+   */
+  export type PharmacyItemCategoryCountOutputTypeCountItemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PharmacyItemWhereInput
+  }
+
+
+  /**
+   * Count Type PharmacyItemCountOutputType
+   */
+
+  export type PharmacyItemCountOutputType = {
+    saleItems: number
+  }
+
+  export type PharmacyItemCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    saleItems?: boolean | PharmacyItemCountOutputTypeCountSaleItemsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * PharmacyItemCountOutputType without action
+   */
+  export type PharmacyItemCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PharmacyItemCountOutputType
+     */
+    select?: PharmacyItemCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * PharmacyItemCountOutputType without action
+   */
+  export type PharmacyItemCountOutputTypeCountSaleItemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PharmacySaleItemWhereInput
+  }
+
+
+  /**
+   * Count Type PharmacySaleCountOutputType
+   */
+
+  export type PharmacySaleCountOutputType = {
+    items: number
+    payments: number
+  }
+
+  export type PharmacySaleCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    items?: boolean | PharmacySaleCountOutputTypeCountItemsArgs
+    payments?: boolean | PharmacySaleCountOutputTypeCountPaymentsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * PharmacySaleCountOutputType without action
+   */
+  export type PharmacySaleCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PharmacySaleCountOutputType
+     */
+    select?: PharmacySaleCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * PharmacySaleCountOutputType without action
+   */
+  export type PharmacySaleCountOutputTypeCountItemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PharmacySaleItemWhereInput
+  }
+
+  /**
+   * PharmacySaleCountOutputType without action
+   */
+  export type PharmacySaleCountOutputTypeCountPaymentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PharmacyPaymentWhereInput
   }
 
 
@@ -12490,6 +13330,7931 @@ export namespace Prisma {
 
 
   /**
+   * Model PharmacySupplier
+   */
+
+  export type AggregatePharmacySupplier = {
+    _count: PharmacySupplierCountAggregateOutputType | null
+    _min: PharmacySupplierMinAggregateOutputType | null
+    _max: PharmacySupplierMaxAggregateOutputType | null
+  }
+
+  export type PharmacySupplierMinAggregateOutputType = {
+    id: string | null
+    name: string | null
+    email: string | null
+    contact: string | null
+    address: string | null
+    notes: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type PharmacySupplierMaxAggregateOutputType = {
+    id: string | null
+    name: string | null
+    email: string | null
+    contact: string | null
+    address: string | null
+    notes: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type PharmacySupplierCountAggregateOutputType = {
+    id: number
+    name: number
+    email: number
+    contact: number
+    address: number
+    notes: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type PharmacySupplierMinAggregateInputType = {
+    id?: true
+    name?: true
+    email?: true
+    contact?: true
+    address?: true
+    notes?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type PharmacySupplierMaxAggregateInputType = {
+    id?: true
+    name?: true
+    email?: true
+    contact?: true
+    address?: true
+    notes?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type PharmacySupplierCountAggregateInputType = {
+    id?: true
+    name?: true
+    email?: true
+    contact?: true
+    address?: true
+    notes?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type PharmacySupplierAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which PharmacySupplier to aggregate.
+     */
+    where?: PharmacySupplierWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PharmacySuppliers to fetch.
+     */
+    orderBy?: PharmacySupplierOrderByWithRelationInput | PharmacySupplierOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: PharmacySupplierWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PharmacySuppliers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PharmacySuppliers.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned PharmacySuppliers
+    **/
+    _count?: true | PharmacySupplierCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: PharmacySupplierMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: PharmacySupplierMaxAggregateInputType
+  }
+
+  export type GetPharmacySupplierAggregateType<T extends PharmacySupplierAggregateArgs> = {
+        [P in keyof T & keyof AggregatePharmacySupplier]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregatePharmacySupplier[P]>
+      : GetScalarType<T[P], AggregatePharmacySupplier[P]>
+  }
+
+
+
+
+  export type PharmacySupplierGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PharmacySupplierWhereInput
+    orderBy?: PharmacySupplierOrderByWithAggregationInput | PharmacySupplierOrderByWithAggregationInput[]
+    by: PharmacySupplierScalarFieldEnum[] | PharmacySupplierScalarFieldEnum
+    having?: PharmacySupplierScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: PharmacySupplierCountAggregateInputType | true
+    _min?: PharmacySupplierMinAggregateInputType
+    _max?: PharmacySupplierMaxAggregateInputType
+  }
+
+  export type PharmacySupplierGroupByOutputType = {
+    id: string
+    name: string
+    email: string | null
+    contact: string | null
+    address: string | null
+    notes: string | null
+    createdAt: Date
+    updatedAt: Date
+    _count: PharmacySupplierCountAggregateOutputType | null
+    _min: PharmacySupplierMinAggregateOutputType | null
+    _max: PharmacySupplierMaxAggregateOutputType | null
+  }
+
+  type GetPharmacySupplierGroupByPayload<T extends PharmacySupplierGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<PharmacySupplierGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof PharmacySupplierGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], PharmacySupplierGroupByOutputType[P]>
+            : GetScalarType<T[P], PharmacySupplierGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type PharmacySupplierSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    email?: boolean
+    contact?: boolean
+    address?: boolean
+    notes?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["pharmacySupplier"]>
+
+  export type PharmacySupplierSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    email?: boolean
+    contact?: boolean
+    address?: boolean
+    notes?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["pharmacySupplier"]>
+
+  export type PharmacySupplierSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    email?: boolean
+    contact?: boolean
+    address?: boolean
+    notes?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["pharmacySupplier"]>
+
+  export type PharmacySupplierSelectScalar = {
+    id?: boolean
+    name?: boolean
+    email?: boolean
+    contact?: boolean
+    address?: boolean
+    notes?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type PharmacySupplierOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email" | "contact" | "address" | "notes" | "createdAt" | "updatedAt", ExtArgs["result"]["pharmacySupplier"]>
+
+  export type $PharmacySupplierPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "PharmacySupplier"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      name: string
+      email: string | null
+      contact: string | null
+      address: string | null
+      notes: string | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["pharmacySupplier"]>
+    composites: {}
+  }
+
+  type PharmacySupplierGetPayload<S extends boolean | null | undefined | PharmacySupplierDefaultArgs> = $Result.GetResult<Prisma.$PharmacySupplierPayload, S>
+
+  type PharmacySupplierCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<PharmacySupplierFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: PharmacySupplierCountAggregateInputType | true
+    }
+
+  export interface PharmacySupplierDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['PharmacySupplier'], meta: { name: 'PharmacySupplier' } }
+    /**
+     * Find zero or one PharmacySupplier that matches the filter.
+     * @param {PharmacySupplierFindUniqueArgs} args - Arguments to find a PharmacySupplier
+     * @example
+     * // Get one PharmacySupplier
+     * const pharmacySupplier = await prisma.pharmacySupplier.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends PharmacySupplierFindUniqueArgs>(args: SelectSubset<T, PharmacySupplierFindUniqueArgs<ExtArgs>>): Prisma__PharmacySupplierClient<$Result.GetResult<Prisma.$PharmacySupplierPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one PharmacySupplier that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {PharmacySupplierFindUniqueOrThrowArgs} args - Arguments to find a PharmacySupplier
+     * @example
+     * // Get one PharmacySupplier
+     * const pharmacySupplier = await prisma.pharmacySupplier.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends PharmacySupplierFindUniqueOrThrowArgs>(args: SelectSubset<T, PharmacySupplierFindUniqueOrThrowArgs<ExtArgs>>): Prisma__PharmacySupplierClient<$Result.GetResult<Prisma.$PharmacySupplierPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first PharmacySupplier that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PharmacySupplierFindFirstArgs} args - Arguments to find a PharmacySupplier
+     * @example
+     * // Get one PharmacySupplier
+     * const pharmacySupplier = await prisma.pharmacySupplier.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends PharmacySupplierFindFirstArgs>(args?: SelectSubset<T, PharmacySupplierFindFirstArgs<ExtArgs>>): Prisma__PharmacySupplierClient<$Result.GetResult<Prisma.$PharmacySupplierPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first PharmacySupplier that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PharmacySupplierFindFirstOrThrowArgs} args - Arguments to find a PharmacySupplier
+     * @example
+     * // Get one PharmacySupplier
+     * const pharmacySupplier = await prisma.pharmacySupplier.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends PharmacySupplierFindFirstOrThrowArgs>(args?: SelectSubset<T, PharmacySupplierFindFirstOrThrowArgs<ExtArgs>>): Prisma__PharmacySupplierClient<$Result.GetResult<Prisma.$PharmacySupplierPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more PharmacySuppliers that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PharmacySupplierFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all PharmacySuppliers
+     * const pharmacySuppliers = await prisma.pharmacySupplier.findMany()
+     * 
+     * // Get first 10 PharmacySuppliers
+     * const pharmacySuppliers = await prisma.pharmacySupplier.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const pharmacySupplierWithIdOnly = await prisma.pharmacySupplier.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends PharmacySupplierFindManyArgs>(args?: SelectSubset<T, PharmacySupplierFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PharmacySupplierPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a PharmacySupplier.
+     * @param {PharmacySupplierCreateArgs} args - Arguments to create a PharmacySupplier.
+     * @example
+     * // Create one PharmacySupplier
+     * const PharmacySupplier = await prisma.pharmacySupplier.create({
+     *   data: {
+     *     // ... data to create a PharmacySupplier
+     *   }
+     * })
+     * 
+     */
+    create<T extends PharmacySupplierCreateArgs>(args: SelectSubset<T, PharmacySupplierCreateArgs<ExtArgs>>): Prisma__PharmacySupplierClient<$Result.GetResult<Prisma.$PharmacySupplierPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many PharmacySuppliers.
+     * @param {PharmacySupplierCreateManyArgs} args - Arguments to create many PharmacySuppliers.
+     * @example
+     * // Create many PharmacySuppliers
+     * const pharmacySupplier = await prisma.pharmacySupplier.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends PharmacySupplierCreateManyArgs>(args?: SelectSubset<T, PharmacySupplierCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many PharmacySuppliers and returns the data saved in the database.
+     * @param {PharmacySupplierCreateManyAndReturnArgs} args - Arguments to create many PharmacySuppliers.
+     * @example
+     * // Create many PharmacySuppliers
+     * const pharmacySupplier = await prisma.pharmacySupplier.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many PharmacySuppliers and only return the `id`
+     * const pharmacySupplierWithIdOnly = await prisma.pharmacySupplier.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends PharmacySupplierCreateManyAndReturnArgs>(args?: SelectSubset<T, PharmacySupplierCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PharmacySupplierPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a PharmacySupplier.
+     * @param {PharmacySupplierDeleteArgs} args - Arguments to delete one PharmacySupplier.
+     * @example
+     * // Delete one PharmacySupplier
+     * const PharmacySupplier = await prisma.pharmacySupplier.delete({
+     *   where: {
+     *     // ... filter to delete one PharmacySupplier
+     *   }
+     * })
+     * 
+     */
+    delete<T extends PharmacySupplierDeleteArgs>(args: SelectSubset<T, PharmacySupplierDeleteArgs<ExtArgs>>): Prisma__PharmacySupplierClient<$Result.GetResult<Prisma.$PharmacySupplierPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one PharmacySupplier.
+     * @param {PharmacySupplierUpdateArgs} args - Arguments to update one PharmacySupplier.
+     * @example
+     * // Update one PharmacySupplier
+     * const pharmacySupplier = await prisma.pharmacySupplier.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends PharmacySupplierUpdateArgs>(args: SelectSubset<T, PharmacySupplierUpdateArgs<ExtArgs>>): Prisma__PharmacySupplierClient<$Result.GetResult<Prisma.$PharmacySupplierPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more PharmacySuppliers.
+     * @param {PharmacySupplierDeleteManyArgs} args - Arguments to filter PharmacySuppliers to delete.
+     * @example
+     * // Delete a few PharmacySuppliers
+     * const { count } = await prisma.pharmacySupplier.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends PharmacySupplierDeleteManyArgs>(args?: SelectSubset<T, PharmacySupplierDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more PharmacySuppliers.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PharmacySupplierUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many PharmacySuppliers
+     * const pharmacySupplier = await prisma.pharmacySupplier.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends PharmacySupplierUpdateManyArgs>(args: SelectSubset<T, PharmacySupplierUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more PharmacySuppliers and returns the data updated in the database.
+     * @param {PharmacySupplierUpdateManyAndReturnArgs} args - Arguments to update many PharmacySuppliers.
+     * @example
+     * // Update many PharmacySuppliers
+     * const pharmacySupplier = await prisma.pharmacySupplier.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more PharmacySuppliers and only return the `id`
+     * const pharmacySupplierWithIdOnly = await prisma.pharmacySupplier.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends PharmacySupplierUpdateManyAndReturnArgs>(args: SelectSubset<T, PharmacySupplierUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PharmacySupplierPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one PharmacySupplier.
+     * @param {PharmacySupplierUpsertArgs} args - Arguments to update or create a PharmacySupplier.
+     * @example
+     * // Update or create a PharmacySupplier
+     * const pharmacySupplier = await prisma.pharmacySupplier.upsert({
+     *   create: {
+     *     // ... data to create a PharmacySupplier
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the PharmacySupplier we want to update
+     *   }
+     * })
+     */
+    upsert<T extends PharmacySupplierUpsertArgs>(args: SelectSubset<T, PharmacySupplierUpsertArgs<ExtArgs>>): Prisma__PharmacySupplierClient<$Result.GetResult<Prisma.$PharmacySupplierPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of PharmacySuppliers.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PharmacySupplierCountArgs} args - Arguments to filter PharmacySuppliers to count.
+     * @example
+     * // Count the number of PharmacySuppliers
+     * const count = await prisma.pharmacySupplier.count({
+     *   where: {
+     *     // ... the filter for the PharmacySuppliers we want to count
+     *   }
+     * })
+    **/
+    count<T extends PharmacySupplierCountArgs>(
+      args?: Subset<T, PharmacySupplierCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], PharmacySupplierCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a PharmacySupplier.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PharmacySupplierAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends PharmacySupplierAggregateArgs>(args: Subset<T, PharmacySupplierAggregateArgs>): Prisma.PrismaPromise<GetPharmacySupplierAggregateType<T>>
+
+    /**
+     * Group by PharmacySupplier.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PharmacySupplierGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends PharmacySupplierGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: PharmacySupplierGroupByArgs['orderBy'] }
+        : { orderBy?: PharmacySupplierGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, PharmacySupplierGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetPharmacySupplierGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the PharmacySupplier model
+   */
+  readonly fields: PharmacySupplierFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for PharmacySupplier.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__PharmacySupplierClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the PharmacySupplier model
+   */
+  interface PharmacySupplierFieldRefs {
+    readonly id: FieldRef<"PharmacySupplier", 'String'>
+    readonly name: FieldRef<"PharmacySupplier", 'String'>
+    readonly email: FieldRef<"PharmacySupplier", 'String'>
+    readonly contact: FieldRef<"PharmacySupplier", 'String'>
+    readonly address: FieldRef<"PharmacySupplier", 'String'>
+    readonly notes: FieldRef<"PharmacySupplier", 'String'>
+    readonly createdAt: FieldRef<"PharmacySupplier", 'DateTime'>
+    readonly updatedAt: FieldRef<"PharmacySupplier", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * PharmacySupplier findUnique
+   */
+  export type PharmacySupplierFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PharmacySupplier
+     */
+    select?: PharmacySupplierSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PharmacySupplier
+     */
+    omit?: PharmacySupplierOmit<ExtArgs> | null
+    /**
+     * Filter, which PharmacySupplier to fetch.
+     */
+    where: PharmacySupplierWhereUniqueInput
+  }
+
+  /**
+   * PharmacySupplier findUniqueOrThrow
+   */
+  export type PharmacySupplierFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PharmacySupplier
+     */
+    select?: PharmacySupplierSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PharmacySupplier
+     */
+    omit?: PharmacySupplierOmit<ExtArgs> | null
+    /**
+     * Filter, which PharmacySupplier to fetch.
+     */
+    where: PharmacySupplierWhereUniqueInput
+  }
+
+  /**
+   * PharmacySupplier findFirst
+   */
+  export type PharmacySupplierFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PharmacySupplier
+     */
+    select?: PharmacySupplierSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PharmacySupplier
+     */
+    omit?: PharmacySupplierOmit<ExtArgs> | null
+    /**
+     * Filter, which PharmacySupplier to fetch.
+     */
+    where?: PharmacySupplierWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PharmacySuppliers to fetch.
+     */
+    orderBy?: PharmacySupplierOrderByWithRelationInput | PharmacySupplierOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for PharmacySuppliers.
+     */
+    cursor?: PharmacySupplierWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PharmacySuppliers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PharmacySuppliers.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of PharmacySuppliers.
+     */
+    distinct?: PharmacySupplierScalarFieldEnum | PharmacySupplierScalarFieldEnum[]
+  }
+
+  /**
+   * PharmacySupplier findFirstOrThrow
+   */
+  export type PharmacySupplierFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PharmacySupplier
+     */
+    select?: PharmacySupplierSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PharmacySupplier
+     */
+    omit?: PharmacySupplierOmit<ExtArgs> | null
+    /**
+     * Filter, which PharmacySupplier to fetch.
+     */
+    where?: PharmacySupplierWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PharmacySuppliers to fetch.
+     */
+    orderBy?: PharmacySupplierOrderByWithRelationInput | PharmacySupplierOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for PharmacySuppliers.
+     */
+    cursor?: PharmacySupplierWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PharmacySuppliers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PharmacySuppliers.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of PharmacySuppliers.
+     */
+    distinct?: PharmacySupplierScalarFieldEnum | PharmacySupplierScalarFieldEnum[]
+  }
+
+  /**
+   * PharmacySupplier findMany
+   */
+  export type PharmacySupplierFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PharmacySupplier
+     */
+    select?: PharmacySupplierSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PharmacySupplier
+     */
+    omit?: PharmacySupplierOmit<ExtArgs> | null
+    /**
+     * Filter, which PharmacySuppliers to fetch.
+     */
+    where?: PharmacySupplierWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PharmacySuppliers to fetch.
+     */
+    orderBy?: PharmacySupplierOrderByWithRelationInput | PharmacySupplierOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing PharmacySuppliers.
+     */
+    cursor?: PharmacySupplierWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PharmacySuppliers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PharmacySuppliers.
+     */
+    skip?: number
+    distinct?: PharmacySupplierScalarFieldEnum | PharmacySupplierScalarFieldEnum[]
+  }
+
+  /**
+   * PharmacySupplier create
+   */
+  export type PharmacySupplierCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PharmacySupplier
+     */
+    select?: PharmacySupplierSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PharmacySupplier
+     */
+    omit?: PharmacySupplierOmit<ExtArgs> | null
+    /**
+     * The data needed to create a PharmacySupplier.
+     */
+    data: XOR<PharmacySupplierCreateInput, PharmacySupplierUncheckedCreateInput>
+  }
+
+  /**
+   * PharmacySupplier createMany
+   */
+  export type PharmacySupplierCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many PharmacySuppliers.
+     */
+    data: PharmacySupplierCreateManyInput | PharmacySupplierCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * PharmacySupplier createManyAndReturn
+   */
+  export type PharmacySupplierCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PharmacySupplier
+     */
+    select?: PharmacySupplierSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the PharmacySupplier
+     */
+    omit?: PharmacySupplierOmit<ExtArgs> | null
+    /**
+     * The data used to create many PharmacySuppliers.
+     */
+    data: PharmacySupplierCreateManyInput | PharmacySupplierCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * PharmacySupplier update
+   */
+  export type PharmacySupplierUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PharmacySupplier
+     */
+    select?: PharmacySupplierSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PharmacySupplier
+     */
+    omit?: PharmacySupplierOmit<ExtArgs> | null
+    /**
+     * The data needed to update a PharmacySupplier.
+     */
+    data: XOR<PharmacySupplierUpdateInput, PharmacySupplierUncheckedUpdateInput>
+    /**
+     * Choose, which PharmacySupplier to update.
+     */
+    where: PharmacySupplierWhereUniqueInput
+  }
+
+  /**
+   * PharmacySupplier updateMany
+   */
+  export type PharmacySupplierUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update PharmacySuppliers.
+     */
+    data: XOR<PharmacySupplierUpdateManyMutationInput, PharmacySupplierUncheckedUpdateManyInput>
+    /**
+     * Filter which PharmacySuppliers to update
+     */
+    where?: PharmacySupplierWhereInput
+    /**
+     * Limit how many PharmacySuppliers to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * PharmacySupplier updateManyAndReturn
+   */
+  export type PharmacySupplierUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PharmacySupplier
+     */
+    select?: PharmacySupplierSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the PharmacySupplier
+     */
+    omit?: PharmacySupplierOmit<ExtArgs> | null
+    /**
+     * The data used to update PharmacySuppliers.
+     */
+    data: XOR<PharmacySupplierUpdateManyMutationInput, PharmacySupplierUncheckedUpdateManyInput>
+    /**
+     * Filter which PharmacySuppliers to update
+     */
+    where?: PharmacySupplierWhereInput
+    /**
+     * Limit how many PharmacySuppliers to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * PharmacySupplier upsert
+   */
+  export type PharmacySupplierUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PharmacySupplier
+     */
+    select?: PharmacySupplierSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PharmacySupplier
+     */
+    omit?: PharmacySupplierOmit<ExtArgs> | null
+    /**
+     * The filter to search for the PharmacySupplier to update in case it exists.
+     */
+    where: PharmacySupplierWhereUniqueInput
+    /**
+     * In case the PharmacySupplier found by the `where` argument doesn't exist, create a new PharmacySupplier with this data.
+     */
+    create: XOR<PharmacySupplierCreateInput, PharmacySupplierUncheckedCreateInput>
+    /**
+     * In case the PharmacySupplier was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<PharmacySupplierUpdateInput, PharmacySupplierUncheckedUpdateInput>
+  }
+
+  /**
+   * PharmacySupplier delete
+   */
+  export type PharmacySupplierDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PharmacySupplier
+     */
+    select?: PharmacySupplierSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PharmacySupplier
+     */
+    omit?: PharmacySupplierOmit<ExtArgs> | null
+    /**
+     * Filter which PharmacySupplier to delete.
+     */
+    where: PharmacySupplierWhereUniqueInput
+  }
+
+  /**
+   * PharmacySupplier deleteMany
+   */
+  export type PharmacySupplierDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which PharmacySuppliers to delete
+     */
+    where?: PharmacySupplierWhereInput
+    /**
+     * Limit how many PharmacySuppliers to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * PharmacySupplier without action
+   */
+  export type PharmacySupplierDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PharmacySupplier
+     */
+    select?: PharmacySupplierSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PharmacySupplier
+     */
+    omit?: PharmacySupplierOmit<ExtArgs> | null
+  }
+
+
+  /**
+   * Model PharmacyBrand
+   */
+
+  export type AggregatePharmacyBrand = {
+    _count: PharmacyBrandCountAggregateOutputType | null
+    _min: PharmacyBrandMinAggregateOutputType | null
+    _max: PharmacyBrandMaxAggregateOutputType | null
+  }
+
+  export type PharmacyBrandMinAggregateOutputType = {
+    id: string | null
+    name: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type PharmacyBrandMaxAggregateOutputType = {
+    id: string | null
+    name: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type PharmacyBrandCountAggregateOutputType = {
+    id: number
+    name: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type PharmacyBrandMinAggregateInputType = {
+    id?: true
+    name?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type PharmacyBrandMaxAggregateInputType = {
+    id?: true
+    name?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type PharmacyBrandCountAggregateInputType = {
+    id?: true
+    name?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type PharmacyBrandAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which PharmacyBrand to aggregate.
+     */
+    where?: PharmacyBrandWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PharmacyBrands to fetch.
+     */
+    orderBy?: PharmacyBrandOrderByWithRelationInput | PharmacyBrandOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: PharmacyBrandWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PharmacyBrands from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PharmacyBrands.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned PharmacyBrands
+    **/
+    _count?: true | PharmacyBrandCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: PharmacyBrandMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: PharmacyBrandMaxAggregateInputType
+  }
+
+  export type GetPharmacyBrandAggregateType<T extends PharmacyBrandAggregateArgs> = {
+        [P in keyof T & keyof AggregatePharmacyBrand]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregatePharmacyBrand[P]>
+      : GetScalarType<T[P], AggregatePharmacyBrand[P]>
+  }
+
+
+
+
+  export type PharmacyBrandGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PharmacyBrandWhereInput
+    orderBy?: PharmacyBrandOrderByWithAggregationInput | PharmacyBrandOrderByWithAggregationInput[]
+    by: PharmacyBrandScalarFieldEnum[] | PharmacyBrandScalarFieldEnum
+    having?: PharmacyBrandScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: PharmacyBrandCountAggregateInputType | true
+    _min?: PharmacyBrandMinAggregateInputType
+    _max?: PharmacyBrandMaxAggregateInputType
+  }
+
+  export type PharmacyBrandGroupByOutputType = {
+    id: string
+    name: string
+    createdAt: Date
+    updatedAt: Date
+    _count: PharmacyBrandCountAggregateOutputType | null
+    _min: PharmacyBrandMinAggregateOutputType | null
+    _max: PharmacyBrandMaxAggregateOutputType | null
+  }
+
+  type GetPharmacyBrandGroupByPayload<T extends PharmacyBrandGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<PharmacyBrandGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof PharmacyBrandGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], PharmacyBrandGroupByOutputType[P]>
+            : GetScalarType<T[P], PharmacyBrandGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type PharmacyBrandSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    items?: boolean | PharmacyBrand$itemsArgs<ExtArgs>
+    _count?: boolean | PharmacyBrandCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["pharmacyBrand"]>
+
+  export type PharmacyBrandSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["pharmacyBrand"]>
+
+  export type PharmacyBrandSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["pharmacyBrand"]>
+
+  export type PharmacyBrandSelectScalar = {
+    id?: boolean
+    name?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type PharmacyBrandOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "createdAt" | "updatedAt", ExtArgs["result"]["pharmacyBrand"]>
+  export type PharmacyBrandInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    items?: boolean | PharmacyBrand$itemsArgs<ExtArgs>
+    _count?: boolean | PharmacyBrandCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type PharmacyBrandIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type PharmacyBrandIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+
+  export type $PharmacyBrandPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "PharmacyBrand"
+    objects: {
+      items: Prisma.$PharmacyItemPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      name: string
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["pharmacyBrand"]>
+    composites: {}
+  }
+
+  type PharmacyBrandGetPayload<S extends boolean | null | undefined | PharmacyBrandDefaultArgs> = $Result.GetResult<Prisma.$PharmacyBrandPayload, S>
+
+  type PharmacyBrandCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<PharmacyBrandFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: PharmacyBrandCountAggregateInputType | true
+    }
+
+  export interface PharmacyBrandDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['PharmacyBrand'], meta: { name: 'PharmacyBrand' } }
+    /**
+     * Find zero or one PharmacyBrand that matches the filter.
+     * @param {PharmacyBrandFindUniqueArgs} args - Arguments to find a PharmacyBrand
+     * @example
+     * // Get one PharmacyBrand
+     * const pharmacyBrand = await prisma.pharmacyBrand.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends PharmacyBrandFindUniqueArgs>(args: SelectSubset<T, PharmacyBrandFindUniqueArgs<ExtArgs>>): Prisma__PharmacyBrandClient<$Result.GetResult<Prisma.$PharmacyBrandPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one PharmacyBrand that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {PharmacyBrandFindUniqueOrThrowArgs} args - Arguments to find a PharmacyBrand
+     * @example
+     * // Get one PharmacyBrand
+     * const pharmacyBrand = await prisma.pharmacyBrand.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends PharmacyBrandFindUniqueOrThrowArgs>(args: SelectSubset<T, PharmacyBrandFindUniqueOrThrowArgs<ExtArgs>>): Prisma__PharmacyBrandClient<$Result.GetResult<Prisma.$PharmacyBrandPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first PharmacyBrand that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PharmacyBrandFindFirstArgs} args - Arguments to find a PharmacyBrand
+     * @example
+     * // Get one PharmacyBrand
+     * const pharmacyBrand = await prisma.pharmacyBrand.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends PharmacyBrandFindFirstArgs>(args?: SelectSubset<T, PharmacyBrandFindFirstArgs<ExtArgs>>): Prisma__PharmacyBrandClient<$Result.GetResult<Prisma.$PharmacyBrandPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first PharmacyBrand that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PharmacyBrandFindFirstOrThrowArgs} args - Arguments to find a PharmacyBrand
+     * @example
+     * // Get one PharmacyBrand
+     * const pharmacyBrand = await prisma.pharmacyBrand.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends PharmacyBrandFindFirstOrThrowArgs>(args?: SelectSubset<T, PharmacyBrandFindFirstOrThrowArgs<ExtArgs>>): Prisma__PharmacyBrandClient<$Result.GetResult<Prisma.$PharmacyBrandPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more PharmacyBrands that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PharmacyBrandFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all PharmacyBrands
+     * const pharmacyBrands = await prisma.pharmacyBrand.findMany()
+     * 
+     * // Get first 10 PharmacyBrands
+     * const pharmacyBrands = await prisma.pharmacyBrand.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const pharmacyBrandWithIdOnly = await prisma.pharmacyBrand.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends PharmacyBrandFindManyArgs>(args?: SelectSubset<T, PharmacyBrandFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PharmacyBrandPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a PharmacyBrand.
+     * @param {PharmacyBrandCreateArgs} args - Arguments to create a PharmacyBrand.
+     * @example
+     * // Create one PharmacyBrand
+     * const PharmacyBrand = await prisma.pharmacyBrand.create({
+     *   data: {
+     *     // ... data to create a PharmacyBrand
+     *   }
+     * })
+     * 
+     */
+    create<T extends PharmacyBrandCreateArgs>(args: SelectSubset<T, PharmacyBrandCreateArgs<ExtArgs>>): Prisma__PharmacyBrandClient<$Result.GetResult<Prisma.$PharmacyBrandPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many PharmacyBrands.
+     * @param {PharmacyBrandCreateManyArgs} args - Arguments to create many PharmacyBrands.
+     * @example
+     * // Create many PharmacyBrands
+     * const pharmacyBrand = await prisma.pharmacyBrand.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends PharmacyBrandCreateManyArgs>(args?: SelectSubset<T, PharmacyBrandCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many PharmacyBrands and returns the data saved in the database.
+     * @param {PharmacyBrandCreateManyAndReturnArgs} args - Arguments to create many PharmacyBrands.
+     * @example
+     * // Create many PharmacyBrands
+     * const pharmacyBrand = await prisma.pharmacyBrand.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many PharmacyBrands and only return the `id`
+     * const pharmacyBrandWithIdOnly = await prisma.pharmacyBrand.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends PharmacyBrandCreateManyAndReturnArgs>(args?: SelectSubset<T, PharmacyBrandCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PharmacyBrandPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a PharmacyBrand.
+     * @param {PharmacyBrandDeleteArgs} args - Arguments to delete one PharmacyBrand.
+     * @example
+     * // Delete one PharmacyBrand
+     * const PharmacyBrand = await prisma.pharmacyBrand.delete({
+     *   where: {
+     *     // ... filter to delete one PharmacyBrand
+     *   }
+     * })
+     * 
+     */
+    delete<T extends PharmacyBrandDeleteArgs>(args: SelectSubset<T, PharmacyBrandDeleteArgs<ExtArgs>>): Prisma__PharmacyBrandClient<$Result.GetResult<Prisma.$PharmacyBrandPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one PharmacyBrand.
+     * @param {PharmacyBrandUpdateArgs} args - Arguments to update one PharmacyBrand.
+     * @example
+     * // Update one PharmacyBrand
+     * const pharmacyBrand = await prisma.pharmacyBrand.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends PharmacyBrandUpdateArgs>(args: SelectSubset<T, PharmacyBrandUpdateArgs<ExtArgs>>): Prisma__PharmacyBrandClient<$Result.GetResult<Prisma.$PharmacyBrandPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more PharmacyBrands.
+     * @param {PharmacyBrandDeleteManyArgs} args - Arguments to filter PharmacyBrands to delete.
+     * @example
+     * // Delete a few PharmacyBrands
+     * const { count } = await prisma.pharmacyBrand.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends PharmacyBrandDeleteManyArgs>(args?: SelectSubset<T, PharmacyBrandDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more PharmacyBrands.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PharmacyBrandUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many PharmacyBrands
+     * const pharmacyBrand = await prisma.pharmacyBrand.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends PharmacyBrandUpdateManyArgs>(args: SelectSubset<T, PharmacyBrandUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more PharmacyBrands and returns the data updated in the database.
+     * @param {PharmacyBrandUpdateManyAndReturnArgs} args - Arguments to update many PharmacyBrands.
+     * @example
+     * // Update many PharmacyBrands
+     * const pharmacyBrand = await prisma.pharmacyBrand.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more PharmacyBrands and only return the `id`
+     * const pharmacyBrandWithIdOnly = await prisma.pharmacyBrand.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends PharmacyBrandUpdateManyAndReturnArgs>(args: SelectSubset<T, PharmacyBrandUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PharmacyBrandPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one PharmacyBrand.
+     * @param {PharmacyBrandUpsertArgs} args - Arguments to update or create a PharmacyBrand.
+     * @example
+     * // Update or create a PharmacyBrand
+     * const pharmacyBrand = await prisma.pharmacyBrand.upsert({
+     *   create: {
+     *     // ... data to create a PharmacyBrand
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the PharmacyBrand we want to update
+     *   }
+     * })
+     */
+    upsert<T extends PharmacyBrandUpsertArgs>(args: SelectSubset<T, PharmacyBrandUpsertArgs<ExtArgs>>): Prisma__PharmacyBrandClient<$Result.GetResult<Prisma.$PharmacyBrandPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of PharmacyBrands.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PharmacyBrandCountArgs} args - Arguments to filter PharmacyBrands to count.
+     * @example
+     * // Count the number of PharmacyBrands
+     * const count = await prisma.pharmacyBrand.count({
+     *   where: {
+     *     // ... the filter for the PharmacyBrands we want to count
+     *   }
+     * })
+    **/
+    count<T extends PharmacyBrandCountArgs>(
+      args?: Subset<T, PharmacyBrandCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], PharmacyBrandCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a PharmacyBrand.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PharmacyBrandAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends PharmacyBrandAggregateArgs>(args: Subset<T, PharmacyBrandAggregateArgs>): Prisma.PrismaPromise<GetPharmacyBrandAggregateType<T>>
+
+    /**
+     * Group by PharmacyBrand.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PharmacyBrandGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends PharmacyBrandGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: PharmacyBrandGroupByArgs['orderBy'] }
+        : { orderBy?: PharmacyBrandGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, PharmacyBrandGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetPharmacyBrandGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the PharmacyBrand model
+   */
+  readonly fields: PharmacyBrandFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for PharmacyBrand.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__PharmacyBrandClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    items<T extends PharmacyBrand$itemsArgs<ExtArgs> = {}>(args?: Subset<T, PharmacyBrand$itemsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PharmacyItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the PharmacyBrand model
+   */
+  interface PharmacyBrandFieldRefs {
+    readonly id: FieldRef<"PharmacyBrand", 'String'>
+    readonly name: FieldRef<"PharmacyBrand", 'String'>
+    readonly createdAt: FieldRef<"PharmacyBrand", 'DateTime'>
+    readonly updatedAt: FieldRef<"PharmacyBrand", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * PharmacyBrand findUnique
+   */
+  export type PharmacyBrandFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PharmacyBrand
+     */
+    select?: PharmacyBrandSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PharmacyBrand
+     */
+    omit?: PharmacyBrandOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PharmacyBrandInclude<ExtArgs> | null
+    /**
+     * Filter, which PharmacyBrand to fetch.
+     */
+    where: PharmacyBrandWhereUniqueInput
+  }
+
+  /**
+   * PharmacyBrand findUniqueOrThrow
+   */
+  export type PharmacyBrandFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PharmacyBrand
+     */
+    select?: PharmacyBrandSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PharmacyBrand
+     */
+    omit?: PharmacyBrandOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PharmacyBrandInclude<ExtArgs> | null
+    /**
+     * Filter, which PharmacyBrand to fetch.
+     */
+    where: PharmacyBrandWhereUniqueInput
+  }
+
+  /**
+   * PharmacyBrand findFirst
+   */
+  export type PharmacyBrandFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PharmacyBrand
+     */
+    select?: PharmacyBrandSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PharmacyBrand
+     */
+    omit?: PharmacyBrandOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PharmacyBrandInclude<ExtArgs> | null
+    /**
+     * Filter, which PharmacyBrand to fetch.
+     */
+    where?: PharmacyBrandWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PharmacyBrands to fetch.
+     */
+    orderBy?: PharmacyBrandOrderByWithRelationInput | PharmacyBrandOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for PharmacyBrands.
+     */
+    cursor?: PharmacyBrandWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PharmacyBrands from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PharmacyBrands.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of PharmacyBrands.
+     */
+    distinct?: PharmacyBrandScalarFieldEnum | PharmacyBrandScalarFieldEnum[]
+  }
+
+  /**
+   * PharmacyBrand findFirstOrThrow
+   */
+  export type PharmacyBrandFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PharmacyBrand
+     */
+    select?: PharmacyBrandSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PharmacyBrand
+     */
+    omit?: PharmacyBrandOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PharmacyBrandInclude<ExtArgs> | null
+    /**
+     * Filter, which PharmacyBrand to fetch.
+     */
+    where?: PharmacyBrandWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PharmacyBrands to fetch.
+     */
+    orderBy?: PharmacyBrandOrderByWithRelationInput | PharmacyBrandOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for PharmacyBrands.
+     */
+    cursor?: PharmacyBrandWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PharmacyBrands from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PharmacyBrands.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of PharmacyBrands.
+     */
+    distinct?: PharmacyBrandScalarFieldEnum | PharmacyBrandScalarFieldEnum[]
+  }
+
+  /**
+   * PharmacyBrand findMany
+   */
+  export type PharmacyBrandFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PharmacyBrand
+     */
+    select?: PharmacyBrandSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PharmacyBrand
+     */
+    omit?: PharmacyBrandOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PharmacyBrandInclude<ExtArgs> | null
+    /**
+     * Filter, which PharmacyBrands to fetch.
+     */
+    where?: PharmacyBrandWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PharmacyBrands to fetch.
+     */
+    orderBy?: PharmacyBrandOrderByWithRelationInput | PharmacyBrandOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing PharmacyBrands.
+     */
+    cursor?: PharmacyBrandWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PharmacyBrands from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PharmacyBrands.
+     */
+    skip?: number
+    distinct?: PharmacyBrandScalarFieldEnum | PharmacyBrandScalarFieldEnum[]
+  }
+
+  /**
+   * PharmacyBrand create
+   */
+  export type PharmacyBrandCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PharmacyBrand
+     */
+    select?: PharmacyBrandSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PharmacyBrand
+     */
+    omit?: PharmacyBrandOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PharmacyBrandInclude<ExtArgs> | null
+    /**
+     * The data needed to create a PharmacyBrand.
+     */
+    data: XOR<PharmacyBrandCreateInput, PharmacyBrandUncheckedCreateInput>
+  }
+
+  /**
+   * PharmacyBrand createMany
+   */
+  export type PharmacyBrandCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many PharmacyBrands.
+     */
+    data: PharmacyBrandCreateManyInput | PharmacyBrandCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * PharmacyBrand createManyAndReturn
+   */
+  export type PharmacyBrandCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PharmacyBrand
+     */
+    select?: PharmacyBrandSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the PharmacyBrand
+     */
+    omit?: PharmacyBrandOmit<ExtArgs> | null
+    /**
+     * The data used to create many PharmacyBrands.
+     */
+    data: PharmacyBrandCreateManyInput | PharmacyBrandCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * PharmacyBrand update
+   */
+  export type PharmacyBrandUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PharmacyBrand
+     */
+    select?: PharmacyBrandSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PharmacyBrand
+     */
+    omit?: PharmacyBrandOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PharmacyBrandInclude<ExtArgs> | null
+    /**
+     * The data needed to update a PharmacyBrand.
+     */
+    data: XOR<PharmacyBrandUpdateInput, PharmacyBrandUncheckedUpdateInput>
+    /**
+     * Choose, which PharmacyBrand to update.
+     */
+    where: PharmacyBrandWhereUniqueInput
+  }
+
+  /**
+   * PharmacyBrand updateMany
+   */
+  export type PharmacyBrandUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update PharmacyBrands.
+     */
+    data: XOR<PharmacyBrandUpdateManyMutationInput, PharmacyBrandUncheckedUpdateManyInput>
+    /**
+     * Filter which PharmacyBrands to update
+     */
+    where?: PharmacyBrandWhereInput
+    /**
+     * Limit how many PharmacyBrands to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * PharmacyBrand updateManyAndReturn
+   */
+  export type PharmacyBrandUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PharmacyBrand
+     */
+    select?: PharmacyBrandSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the PharmacyBrand
+     */
+    omit?: PharmacyBrandOmit<ExtArgs> | null
+    /**
+     * The data used to update PharmacyBrands.
+     */
+    data: XOR<PharmacyBrandUpdateManyMutationInput, PharmacyBrandUncheckedUpdateManyInput>
+    /**
+     * Filter which PharmacyBrands to update
+     */
+    where?: PharmacyBrandWhereInput
+    /**
+     * Limit how many PharmacyBrands to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * PharmacyBrand upsert
+   */
+  export type PharmacyBrandUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PharmacyBrand
+     */
+    select?: PharmacyBrandSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PharmacyBrand
+     */
+    omit?: PharmacyBrandOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PharmacyBrandInclude<ExtArgs> | null
+    /**
+     * The filter to search for the PharmacyBrand to update in case it exists.
+     */
+    where: PharmacyBrandWhereUniqueInput
+    /**
+     * In case the PharmacyBrand found by the `where` argument doesn't exist, create a new PharmacyBrand with this data.
+     */
+    create: XOR<PharmacyBrandCreateInput, PharmacyBrandUncheckedCreateInput>
+    /**
+     * In case the PharmacyBrand was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<PharmacyBrandUpdateInput, PharmacyBrandUncheckedUpdateInput>
+  }
+
+  /**
+   * PharmacyBrand delete
+   */
+  export type PharmacyBrandDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PharmacyBrand
+     */
+    select?: PharmacyBrandSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PharmacyBrand
+     */
+    omit?: PharmacyBrandOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PharmacyBrandInclude<ExtArgs> | null
+    /**
+     * Filter which PharmacyBrand to delete.
+     */
+    where: PharmacyBrandWhereUniqueInput
+  }
+
+  /**
+   * PharmacyBrand deleteMany
+   */
+  export type PharmacyBrandDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which PharmacyBrands to delete
+     */
+    where?: PharmacyBrandWhereInput
+    /**
+     * Limit how many PharmacyBrands to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * PharmacyBrand.items
+   */
+  export type PharmacyBrand$itemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PharmacyItem
+     */
+    select?: PharmacyItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PharmacyItem
+     */
+    omit?: PharmacyItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PharmacyItemInclude<ExtArgs> | null
+    where?: PharmacyItemWhereInput
+    orderBy?: PharmacyItemOrderByWithRelationInput | PharmacyItemOrderByWithRelationInput[]
+    cursor?: PharmacyItemWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: PharmacyItemScalarFieldEnum | PharmacyItemScalarFieldEnum[]
+  }
+
+  /**
+   * PharmacyBrand without action
+   */
+  export type PharmacyBrandDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PharmacyBrand
+     */
+    select?: PharmacyBrandSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PharmacyBrand
+     */
+    omit?: PharmacyBrandOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PharmacyBrandInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model PharmacyItemCategory
+   */
+
+  export type AggregatePharmacyItemCategory = {
+    _count: PharmacyItemCategoryCountAggregateOutputType | null
+    _min: PharmacyItemCategoryMinAggregateOutputType | null
+    _max: PharmacyItemCategoryMaxAggregateOutputType | null
+  }
+
+  export type PharmacyItemCategoryMinAggregateOutputType = {
+    id: string | null
+    name: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type PharmacyItemCategoryMaxAggregateOutputType = {
+    id: string | null
+    name: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type PharmacyItemCategoryCountAggregateOutputType = {
+    id: number
+    name: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type PharmacyItemCategoryMinAggregateInputType = {
+    id?: true
+    name?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type PharmacyItemCategoryMaxAggregateInputType = {
+    id?: true
+    name?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type PharmacyItemCategoryCountAggregateInputType = {
+    id?: true
+    name?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type PharmacyItemCategoryAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which PharmacyItemCategory to aggregate.
+     */
+    where?: PharmacyItemCategoryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PharmacyItemCategories to fetch.
+     */
+    orderBy?: PharmacyItemCategoryOrderByWithRelationInput | PharmacyItemCategoryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: PharmacyItemCategoryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PharmacyItemCategories from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PharmacyItemCategories.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned PharmacyItemCategories
+    **/
+    _count?: true | PharmacyItemCategoryCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: PharmacyItemCategoryMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: PharmacyItemCategoryMaxAggregateInputType
+  }
+
+  export type GetPharmacyItemCategoryAggregateType<T extends PharmacyItemCategoryAggregateArgs> = {
+        [P in keyof T & keyof AggregatePharmacyItemCategory]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregatePharmacyItemCategory[P]>
+      : GetScalarType<T[P], AggregatePharmacyItemCategory[P]>
+  }
+
+
+
+
+  export type PharmacyItemCategoryGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PharmacyItemCategoryWhereInput
+    orderBy?: PharmacyItemCategoryOrderByWithAggregationInput | PharmacyItemCategoryOrderByWithAggregationInput[]
+    by: PharmacyItemCategoryScalarFieldEnum[] | PharmacyItemCategoryScalarFieldEnum
+    having?: PharmacyItemCategoryScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: PharmacyItemCategoryCountAggregateInputType | true
+    _min?: PharmacyItemCategoryMinAggregateInputType
+    _max?: PharmacyItemCategoryMaxAggregateInputType
+  }
+
+  export type PharmacyItemCategoryGroupByOutputType = {
+    id: string
+    name: string
+    createdAt: Date
+    updatedAt: Date
+    _count: PharmacyItemCategoryCountAggregateOutputType | null
+    _min: PharmacyItemCategoryMinAggregateOutputType | null
+    _max: PharmacyItemCategoryMaxAggregateOutputType | null
+  }
+
+  type GetPharmacyItemCategoryGroupByPayload<T extends PharmacyItemCategoryGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<PharmacyItemCategoryGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof PharmacyItemCategoryGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], PharmacyItemCategoryGroupByOutputType[P]>
+            : GetScalarType<T[P], PharmacyItemCategoryGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type PharmacyItemCategorySelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    items?: boolean | PharmacyItemCategory$itemsArgs<ExtArgs>
+    _count?: boolean | PharmacyItemCategoryCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["pharmacyItemCategory"]>
+
+  export type PharmacyItemCategorySelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["pharmacyItemCategory"]>
+
+  export type PharmacyItemCategorySelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["pharmacyItemCategory"]>
+
+  export type PharmacyItemCategorySelectScalar = {
+    id?: boolean
+    name?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type PharmacyItemCategoryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "createdAt" | "updatedAt", ExtArgs["result"]["pharmacyItemCategory"]>
+  export type PharmacyItemCategoryInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    items?: boolean | PharmacyItemCategory$itemsArgs<ExtArgs>
+    _count?: boolean | PharmacyItemCategoryCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type PharmacyItemCategoryIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type PharmacyItemCategoryIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+
+  export type $PharmacyItemCategoryPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "PharmacyItemCategory"
+    objects: {
+      items: Prisma.$PharmacyItemPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      name: string
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["pharmacyItemCategory"]>
+    composites: {}
+  }
+
+  type PharmacyItemCategoryGetPayload<S extends boolean | null | undefined | PharmacyItemCategoryDefaultArgs> = $Result.GetResult<Prisma.$PharmacyItemCategoryPayload, S>
+
+  type PharmacyItemCategoryCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<PharmacyItemCategoryFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: PharmacyItemCategoryCountAggregateInputType | true
+    }
+
+  export interface PharmacyItemCategoryDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['PharmacyItemCategory'], meta: { name: 'PharmacyItemCategory' } }
+    /**
+     * Find zero or one PharmacyItemCategory that matches the filter.
+     * @param {PharmacyItemCategoryFindUniqueArgs} args - Arguments to find a PharmacyItemCategory
+     * @example
+     * // Get one PharmacyItemCategory
+     * const pharmacyItemCategory = await prisma.pharmacyItemCategory.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends PharmacyItemCategoryFindUniqueArgs>(args: SelectSubset<T, PharmacyItemCategoryFindUniqueArgs<ExtArgs>>): Prisma__PharmacyItemCategoryClient<$Result.GetResult<Prisma.$PharmacyItemCategoryPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one PharmacyItemCategory that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {PharmacyItemCategoryFindUniqueOrThrowArgs} args - Arguments to find a PharmacyItemCategory
+     * @example
+     * // Get one PharmacyItemCategory
+     * const pharmacyItemCategory = await prisma.pharmacyItemCategory.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends PharmacyItemCategoryFindUniqueOrThrowArgs>(args: SelectSubset<T, PharmacyItemCategoryFindUniqueOrThrowArgs<ExtArgs>>): Prisma__PharmacyItemCategoryClient<$Result.GetResult<Prisma.$PharmacyItemCategoryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first PharmacyItemCategory that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PharmacyItemCategoryFindFirstArgs} args - Arguments to find a PharmacyItemCategory
+     * @example
+     * // Get one PharmacyItemCategory
+     * const pharmacyItemCategory = await prisma.pharmacyItemCategory.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends PharmacyItemCategoryFindFirstArgs>(args?: SelectSubset<T, PharmacyItemCategoryFindFirstArgs<ExtArgs>>): Prisma__PharmacyItemCategoryClient<$Result.GetResult<Prisma.$PharmacyItemCategoryPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first PharmacyItemCategory that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PharmacyItemCategoryFindFirstOrThrowArgs} args - Arguments to find a PharmacyItemCategory
+     * @example
+     * // Get one PharmacyItemCategory
+     * const pharmacyItemCategory = await prisma.pharmacyItemCategory.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends PharmacyItemCategoryFindFirstOrThrowArgs>(args?: SelectSubset<T, PharmacyItemCategoryFindFirstOrThrowArgs<ExtArgs>>): Prisma__PharmacyItemCategoryClient<$Result.GetResult<Prisma.$PharmacyItemCategoryPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more PharmacyItemCategories that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PharmacyItemCategoryFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all PharmacyItemCategories
+     * const pharmacyItemCategories = await prisma.pharmacyItemCategory.findMany()
+     * 
+     * // Get first 10 PharmacyItemCategories
+     * const pharmacyItemCategories = await prisma.pharmacyItemCategory.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const pharmacyItemCategoryWithIdOnly = await prisma.pharmacyItemCategory.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends PharmacyItemCategoryFindManyArgs>(args?: SelectSubset<T, PharmacyItemCategoryFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PharmacyItemCategoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a PharmacyItemCategory.
+     * @param {PharmacyItemCategoryCreateArgs} args - Arguments to create a PharmacyItemCategory.
+     * @example
+     * // Create one PharmacyItemCategory
+     * const PharmacyItemCategory = await prisma.pharmacyItemCategory.create({
+     *   data: {
+     *     // ... data to create a PharmacyItemCategory
+     *   }
+     * })
+     * 
+     */
+    create<T extends PharmacyItemCategoryCreateArgs>(args: SelectSubset<T, PharmacyItemCategoryCreateArgs<ExtArgs>>): Prisma__PharmacyItemCategoryClient<$Result.GetResult<Prisma.$PharmacyItemCategoryPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many PharmacyItemCategories.
+     * @param {PharmacyItemCategoryCreateManyArgs} args - Arguments to create many PharmacyItemCategories.
+     * @example
+     * // Create many PharmacyItemCategories
+     * const pharmacyItemCategory = await prisma.pharmacyItemCategory.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends PharmacyItemCategoryCreateManyArgs>(args?: SelectSubset<T, PharmacyItemCategoryCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many PharmacyItemCategories and returns the data saved in the database.
+     * @param {PharmacyItemCategoryCreateManyAndReturnArgs} args - Arguments to create many PharmacyItemCategories.
+     * @example
+     * // Create many PharmacyItemCategories
+     * const pharmacyItemCategory = await prisma.pharmacyItemCategory.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many PharmacyItemCategories and only return the `id`
+     * const pharmacyItemCategoryWithIdOnly = await prisma.pharmacyItemCategory.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends PharmacyItemCategoryCreateManyAndReturnArgs>(args?: SelectSubset<T, PharmacyItemCategoryCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PharmacyItemCategoryPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a PharmacyItemCategory.
+     * @param {PharmacyItemCategoryDeleteArgs} args - Arguments to delete one PharmacyItemCategory.
+     * @example
+     * // Delete one PharmacyItemCategory
+     * const PharmacyItemCategory = await prisma.pharmacyItemCategory.delete({
+     *   where: {
+     *     // ... filter to delete one PharmacyItemCategory
+     *   }
+     * })
+     * 
+     */
+    delete<T extends PharmacyItemCategoryDeleteArgs>(args: SelectSubset<T, PharmacyItemCategoryDeleteArgs<ExtArgs>>): Prisma__PharmacyItemCategoryClient<$Result.GetResult<Prisma.$PharmacyItemCategoryPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one PharmacyItemCategory.
+     * @param {PharmacyItemCategoryUpdateArgs} args - Arguments to update one PharmacyItemCategory.
+     * @example
+     * // Update one PharmacyItemCategory
+     * const pharmacyItemCategory = await prisma.pharmacyItemCategory.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends PharmacyItemCategoryUpdateArgs>(args: SelectSubset<T, PharmacyItemCategoryUpdateArgs<ExtArgs>>): Prisma__PharmacyItemCategoryClient<$Result.GetResult<Prisma.$PharmacyItemCategoryPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more PharmacyItemCategories.
+     * @param {PharmacyItemCategoryDeleteManyArgs} args - Arguments to filter PharmacyItemCategories to delete.
+     * @example
+     * // Delete a few PharmacyItemCategories
+     * const { count } = await prisma.pharmacyItemCategory.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends PharmacyItemCategoryDeleteManyArgs>(args?: SelectSubset<T, PharmacyItemCategoryDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more PharmacyItemCategories.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PharmacyItemCategoryUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many PharmacyItemCategories
+     * const pharmacyItemCategory = await prisma.pharmacyItemCategory.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends PharmacyItemCategoryUpdateManyArgs>(args: SelectSubset<T, PharmacyItemCategoryUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more PharmacyItemCategories and returns the data updated in the database.
+     * @param {PharmacyItemCategoryUpdateManyAndReturnArgs} args - Arguments to update many PharmacyItemCategories.
+     * @example
+     * // Update many PharmacyItemCategories
+     * const pharmacyItemCategory = await prisma.pharmacyItemCategory.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more PharmacyItemCategories and only return the `id`
+     * const pharmacyItemCategoryWithIdOnly = await prisma.pharmacyItemCategory.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends PharmacyItemCategoryUpdateManyAndReturnArgs>(args: SelectSubset<T, PharmacyItemCategoryUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PharmacyItemCategoryPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one PharmacyItemCategory.
+     * @param {PharmacyItemCategoryUpsertArgs} args - Arguments to update or create a PharmacyItemCategory.
+     * @example
+     * // Update or create a PharmacyItemCategory
+     * const pharmacyItemCategory = await prisma.pharmacyItemCategory.upsert({
+     *   create: {
+     *     // ... data to create a PharmacyItemCategory
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the PharmacyItemCategory we want to update
+     *   }
+     * })
+     */
+    upsert<T extends PharmacyItemCategoryUpsertArgs>(args: SelectSubset<T, PharmacyItemCategoryUpsertArgs<ExtArgs>>): Prisma__PharmacyItemCategoryClient<$Result.GetResult<Prisma.$PharmacyItemCategoryPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of PharmacyItemCategories.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PharmacyItemCategoryCountArgs} args - Arguments to filter PharmacyItemCategories to count.
+     * @example
+     * // Count the number of PharmacyItemCategories
+     * const count = await prisma.pharmacyItemCategory.count({
+     *   where: {
+     *     // ... the filter for the PharmacyItemCategories we want to count
+     *   }
+     * })
+    **/
+    count<T extends PharmacyItemCategoryCountArgs>(
+      args?: Subset<T, PharmacyItemCategoryCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], PharmacyItemCategoryCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a PharmacyItemCategory.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PharmacyItemCategoryAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends PharmacyItemCategoryAggregateArgs>(args: Subset<T, PharmacyItemCategoryAggregateArgs>): Prisma.PrismaPromise<GetPharmacyItemCategoryAggregateType<T>>
+
+    /**
+     * Group by PharmacyItemCategory.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PharmacyItemCategoryGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends PharmacyItemCategoryGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: PharmacyItemCategoryGroupByArgs['orderBy'] }
+        : { orderBy?: PharmacyItemCategoryGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, PharmacyItemCategoryGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetPharmacyItemCategoryGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the PharmacyItemCategory model
+   */
+  readonly fields: PharmacyItemCategoryFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for PharmacyItemCategory.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__PharmacyItemCategoryClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    items<T extends PharmacyItemCategory$itemsArgs<ExtArgs> = {}>(args?: Subset<T, PharmacyItemCategory$itemsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PharmacyItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the PharmacyItemCategory model
+   */
+  interface PharmacyItemCategoryFieldRefs {
+    readonly id: FieldRef<"PharmacyItemCategory", 'String'>
+    readonly name: FieldRef<"PharmacyItemCategory", 'String'>
+    readonly createdAt: FieldRef<"PharmacyItemCategory", 'DateTime'>
+    readonly updatedAt: FieldRef<"PharmacyItemCategory", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * PharmacyItemCategory findUnique
+   */
+  export type PharmacyItemCategoryFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PharmacyItemCategory
+     */
+    select?: PharmacyItemCategorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PharmacyItemCategory
+     */
+    omit?: PharmacyItemCategoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PharmacyItemCategoryInclude<ExtArgs> | null
+    /**
+     * Filter, which PharmacyItemCategory to fetch.
+     */
+    where: PharmacyItemCategoryWhereUniqueInput
+  }
+
+  /**
+   * PharmacyItemCategory findUniqueOrThrow
+   */
+  export type PharmacyItemCategoryFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PharmacyItemCategory
+     */
+    select?: PharmacyItemCategorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PharmacyItemCategory
+     */
+    omit?: PharmacyItemCategoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PharmacyItemCategoryInclude<ExtArgs> | null
+    /**
+     * Filter, which PharmacyItemCategory to fetch.
+     */
+    where: PharmacyItemCategoryWhereUniqueInput
+  }
+
+  /**
+   * PharmacyItemCategory findFirst
+   */
+  export type PharmacyItemCategoryFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PharmacyItemCategory
+     */
+    select?: PharmacyItemCategorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PharmacyItemCategory
+     */
+    omit?: PharmacyItemCategoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PharmacyItemCategoryInclude<ExtArgs> | null
+    /**
+     * Filter, which PharmacyItemCategory to fetch.
+     */
+    where?: PharmacyItemCategoryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PharmacyItemCategories to fetch.
+     */
+    orderBy?: PharmacyItemCategoryOrderByWithRelationInput | PharmacyItemCategoryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for PharmacyItemCategories.
+     */
+    cursor?: PharmacyItemCategoryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PharmacyItemCategories from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PharmacyItemCategories.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of PharmacyItemCategories.
+     */
+    distinct?: PharmacyItemCategoryScalarFieldEnum | PharmacyItemCategoryScalarFieldEnum[]
+  }
+
+  /**
+   * PharmacyItemCategory findFirstOrThrow
+   */
+  export type PharmacyItemCategoryFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PharmacyItemCategory
+     */
+    select?: PharmacyItemCategorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PharmacyItemCategory
+     */
+    omit?: PharmacyItemCategoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PharmacyItemCategoryInclude<ExtArgs> | null
+    /**
+     * Filter, which PharmacyItemCategory to fetch.
+     */
+    where?: PharmacyItemCategoryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PharmacyItemCategories to fetch.
+     */
+    orderBy?: PharmacyItemCategoryOrderByWithRelationInput | PharmacyItemCategoryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for PharmacyItemCategories.
+     */
+    cursor?: PharmacyItemCategoryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PharmacyItemCategories from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PharmacyItemCategories.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of PharmacyItemCategories.
+     */
+    distinct?: PharmacyItemCategoryScalarFieldEnum | PharmacyItemCategoryScalarFieldEnum[]
+  }
+
+  /**
+   * PharmacyItemCategory findMany
+   */
+  export type PharmacyItemCategoryFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PharmacyItemCategory
+     */
+    select?: PharmacyItemCategorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PharmacyItemCategory
+     */
+    omit?: PharmacyItemCategoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PharmacyItemCategoryInclude<ExtArgs> | null
+    /**
+     * Filter, which PharmacyItemCategories to fetch.
+     */
+    where?: PharmacyItemCategoryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PharmacyItemCategories to fetch.
+     */
+    orderBy?: PharmacyItemCategoryOrderByWithRelationInput | PharmacyItemCategoryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing PharmacyItemCategories.
+     */
+    cursor?: PharmacyItemCategoryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PharmacyItemCategories from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PharmacyItemCategories.
+     */
+    skip?: number
+    distinct?: PharmacyItemCategoryScalarFieldEnum | PharmacyItemCategoryScalarFieldEnum[]
+  }
+
+  /**
+   * PharmacyItemCategory create
+   */
+  export type PharmacyItemCategoryCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PharmacyItemCategory
+     */
+    select?: PharmacyItemCategorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PharmacyItemCategory
+     */
+    omit?: PharmacyItemCategoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PharmacyItemCategoryInclude<ExtArgs> | null
+    /**
+     * The data needed to create a PharmacyItemCategory.
+     */
+    data: XOR<PharmacyItemCategoryCreateInput, PharmacyItemCategoryUncheckedCreateInput>
+  }
+
+  /**
+   * PharmacyItemCategory createMany
+   */
+  export type PharmacyItemCategoryCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many PharmacyItemCategories.
+     */
+    data: PharmacyItemCategoryCreateManyInput | PharmacyItemCategoryCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * PharmacyItemCategory createManyAndReturn
+   */
+  export type PharmacyItemCategoryCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PharmacyItemCategory
+     */
+    select?: PharmacyItemCategorySelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the PharmacyItemCategory
+     */
+    omit?: PharmacyItemCategoryOmit<ExtArgs> | null
+    /**
+     * The data used to create many PharmacyItemCategories.
+     */
+    data: PharmacyItemCategoryCreateManyInput | PharmacyItemCategoryCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * PharmacyItemCategory update
+   */
+  export type PharmacyItemCategoryUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PharmacyItemCategory
+     */
+    select?: PharmacyItemCategorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PharmacyItemCategory
+     */
+    omit?: PharmacyItemCategoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PharmacyItemCategoryInclude<ExtArgs> | null
+    /**
+     * The data needed to update a PharmacyItemCategory.
+     */
+    data: XOR<PharmacyItemCategoryUpdateInput, PharmacyItemCategoryUncheckedUpdateInput>
+    /**
+     * Choose, which PharmacyItemCategory to update.
+     */
+    where: PharmacyItemCategoryWhereUniqueInput
+  }
+
+  /**
+   * PharmacyItemCategory updateMany
+   */
+  export type PharmacyItemCategoryUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update PharmacyItemCategories.
+     */
+    data: XOR<PharmacyItemCategoryUpdateManyMutationInput, PharmacyItemCategoryUncheckedUpdateManyInput>
+    /**
+     * Filter which PharmacyItemCategories to update
+     */
+    where?: PharmacyItemCategoryWhereInput
+    /**
+     * Limit how many PharmacyItemCategories to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * PharmacyItemCategory updateManyAndReturn
+   */
+  export type PharmacyItemCategoryUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PharmacyItemCategory
+     */
+    select?: PharmacyItemCategorySelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the PharmacyItemCategory
+     */
+    omit?: PharmacyItemCategoryOmit<ExtArgs> | null
+    /**
+     * The data used to update PharmacyItemCategories.
+     */
+    data: XOR<PharmacyItemCategoryUpdateManyMutationInput, PharmacyItemCategoryUncheckedUpdateManyInput>
+    /**
+     * Filter which PharmacyItemCategories to update
+     */
+    where?: PharmacyItemCategoryWhereInput
+    /**
+     * Limit how many PharmacyItemCategories to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * PharmacyItemCategory upsert
+   */
+  export type PharmacyItemCategoryUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PharmacyItemCategory
+     */
+    select?: PharmacyItemCategorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PharmacyItemCategory
+     */
+    omit?: PharmacyItemCategoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PharmacyItemCategoryInclude<ExtArgs> | null
+    /**
+     * The filter to search for the PharmacyItemCategory to update in case it exists.
+     */
+    where: PharmacyItemCategoryWhereUniqueInput
+    /**
+     * In case the PharmacyItemCategory found by the `where` argument doesn't exist, create a new PharmacyItemCategory with this data.
+     */
+    create: XOR<PharmacyItemCategoryCreateInput, PharmacyItemCategoryUncheckedCreateInput>
+    /**
+     * In case the PharmacyItemCategory was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<PharmacyItemCategoryUpdateInput, PharmacyItemCategoryUncheckedUpdateInput>
+  }
+
+  /**
+   * PharmacyItemCategory delete
+   */
+  export type PharmacyItemCategoryDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PharmacyItemCategory
+     */
+    select?: PharmacyItemCategorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PharmacyItemCategory
+     */
+    omit?: PharmacyItemCategoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PharmacyItemCategoryInclude<ExtArgs> | null
+    /**
+     * Filter which PharmacyItemCategory to delete.
+     */
+    where: PharmacyItemCategoryWhereUniqueInput
+  }
+
+  /**
+   * PharmacyItemCategory deleteMany
+   */
+  export type PharmacyItemCategoryDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which PharmacyItemCategories to delete
+     */
+    where?: PharmacyItemCategoryWhereInput
+    /**
+     * Limit how many PharmacyItemCategories to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * PharmacyItemCategory.items
+   */
+  export type PharmacyItemCategory$itemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PharmacyItem
+     */
+    select?: PharmacyItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PharmacyItem
+     */
+    omit?: PharmacyItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PharmacyItemInclude<ExtArgs> | null
+    where?: PharmacyItemWhereInput
+    orderBy?: PharmacyItemOrderByWithRelationInput | PharmacyItemOrderByWithRelationInput[]
+    cursor?: PharmacyItemWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: PharmacyItemScalarFieldEnum | PharmacyItemScalarFieldEnum[]
+  }
+
+  /**
+   * PharmacyItemCategory without action
+   */
+  export type PharmacyItemCategoryDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PharmacyItemCategory
+     */
+    select?: PharmacyItemCategorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PharmacyItemCategory
+     */
+    omit?: PharmacyItemCategoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PharmacyItemCategoryInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model PharmacyItem
+   */
+
+  export type AggregatePharmacyItem = {
+    _count: PharmacyItemCountAggregateOutputType | null
+    _avg: PharmacyItemAvgAggregateOutputType | null
+    _sum: PharmacyItemSumAggregateOutputType | null
+    _min: PharmacyItemMinAggregateOutputType | null
+    _max: PharmacyItemMaxAggregateOutputType | null
+  }
+
+  export type PharmacyItemAvgAggregateOutputType = {
+    stock: number | null
+    price: Decimal | null
+  }
+
+  export type PharmacyItemSumAggregateOutputType = {
+    stock: number | null
+    price: Decimal | null
+  }
+
+  export type PharmacyItemMinAggregateOutputType = {
+    id: string | null
+    brandId: string | null
+    categoryId: string | null
+    name: string | null
+    form: $Enums.PharmacyItemForm | null
+    route: $Enums.PharmacyItemRoute | null
+    strength: string | null
+    stock: number | null
+    unit: string | null
+    price: Decimal | null
+    sku: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type PharmacyItemMaxAggregateOutputType = {
+    id: string | null
+    brandId: string | null
+    categoryId: string | null
+    name: string | null
+    form: $Enums.PharmacyItemForm | null
+    route: $Enums.PharmacyItemRoute | null
+    strength: string | null
+    stock: number | null
+    unit: string | null
+    price: Decimal | null
+    sku: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type PharmacyItemCountAggregateOutputType = {
+    id: number
+    brandId: number
+    categoryId: number
+    name: number
+    form: number
+    route: number
+    strength: number
+    stock: number
+    unit: number
+    price: number
+    sku: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type PharmacyItemAvgAggregateInputType = {
+    stock?: true
+    price?: true
+  }
+
+  export type PharmacyItemSumAggregateInputType = {
+    stock?: true
+    price?: true
+  }
+
+  export type PharmacyItemMinAggregateInputType = {
+    id?: true
+    brandId?: true
+    categoryId?: true
+    name?: true
+    form?: true
+    route?: true
+    strength?: true
+    stock?: true
+    unit?: true
+    price?: true
+    sku?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type PharmacyItemMaxAggregateInputType = {
+    id?: true
+    brandId?: true
+    categoryId?: true
+    name?: true
+    form?: true
+    route?: true
+    strength?: true
+    stock?: true
+    unit?: true
+    price?: true
+    sku?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type PharmacyItemCountAggregateInputType = {
+    id?: true
+    brandId?: true
+    categoryId?: true
+    name?: true
+    form?: true
+    route?: true
+    strength?: true
+    stock?: true
+    unit?: true
+    price?: true
+    sku?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type PharmacyItemAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which PharmacyItem to aggregate.
+     */
+    where?: PharmacyItemWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PharmacyItems to fetch.
+     */
+    orderBy?: PharmacyItemOrderByWithRelationInput | PharmacyItemOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: PharmacyItemWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PharmacyItems from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PharmacyItems.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned PharmacyItems
+    **/
+    _count?: true | PharmacyItemCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: PharmacyItemAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: PharmacyItemSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: PharmacyItemMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: PharmacyItemMaxAggregateInputType
+  }
+
+  export type GetPharmacyItemAggregateType<T extends PharmacyItemAggregateArgs> = {
+        [P in keyof T & keyof AggregatePharmacyItem]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregatePharmacyItem[P]>
+      : GetScalarType<T[P], AggregatePharmacyItem[P]>
+  }
+
+
+
+
+  export type PharmacyItemGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PharmacyItemWhereInput
+    orderBy?: PharmacyItemOrderByWithAggregationInput | PharmacyItemOrderByWithAggregationInput[]
+    by: PharmacyItemScalarFieldEnum[] | PharmacyItemScalarFieldEnum
+    having?: PharmacyItemScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: PharmacyItemCountAggregateInputType | true
+    _avg?: PharmacyItemAvgAggregateInputType
+    _sum?: PharmacyItemSumAggregateInputType
+    _min?: PharmacyItemMinAggregateInputType
+    _max?: PharmacyItemMaxAggregateInputType
+  }
+
+  export type PharmacyItemGroupByOutputType = {
+    id: string
+    brandId: string
+    categoryId: string
+    name: string
+    form: $Enums.PharmacyItemForm
+    route: $Enums.PharmacyItemRoute
+    strength: string
+    stock: number
+    unit: string
+    price: Decimal
+    sku: string | null
+    createdAt: Date
+    updatedAt: Date
+    _count: PharmacyItemCountAggregateOutputType | null
+    _avg: PharmacyItemAvgAggregateOutputType | null
+    _sum: PharmacyItemSumAggregateOutputType | null
+    _min: PharmacyItemMinAggregateOutputType | null
+    _max: PharmacyItemMaxAggregateOutputType | null
+  }
+
+  type GetPharmacyItemGroupByPayload<T extends PharmacyItemGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<PharmacyItemGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof PharmacyItemGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], PharmacyItemGroupByOutputType[P]>
+            : GetScalarType<T[P], PharmacyItemGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type PharmacyItemSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    brandId?: boolean
+    categoryId?: boolean
+    name?: boolean
+    form?: boolean
+    route?: boolean
+    strength?: boolean
+    stock?: boolean
+    unit?: boolean
+    price?: boolean
+    sku?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    brand?: boolean | PharmacyBrandDefaultArgs<ExtArgs>
+    category?: boolean | PharmacyItemCategoryDefaultArgs<ExtArgs>
+    saleItems?: boolean | PharmacyItem$saleItemsArgs<ExtArgs>
+    _count?: boolean | PharmacyItemCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["pharmacyItem"]>
+
+  export type PharmacyItemSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    brandId?: boolean
+    categoryId?: boolean
+    name?: boolean
+    form?: boolean
+    route?: boolean
+    strength?: boolean
+    stock?: boolean
+    unit?: boolean
+    price?: boolean
+    sku?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    brand?: boolean | PharmacyBrandDefaultArgs<ExtArgs>
+    category?: boolean | PharmacyItemCategoryDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["pharmacyItem"]>
+
+  export type PharmacyItemSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    brandId?: boolean
+    categoryId?: boolean
+    name?: boolean
+    form?: boolean
+    route?: boolean
+    strength?: boolean
+    stock?: boolean
+    unit?: boolean
+    price?: boolean
+    sku?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    brand?: boolean | PharmacyBrandDefaultArgs<ExtArgs>
+    category?: boolean | PharmacyItemCategoryDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["pharmacyItem"]>
+
+  export type PharmacyItemSelectScalar = {
+    id?: boolean
+    brandId?: boolean
+    categoryId?: boolean
+    name?: boolean
+    form?: boolean
+    route?: boolean
+    strength?: boolean
+    stock?: boolean
+    unit?: boolean
+    price?: boolean
+    sku?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type PharmacyItemOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "brandId" | "categoryId" | "name" | "form" | "route" | "strength" | "stock" | "unit" | "price" | "sku" | "createdAt" | "updatedAt", ExtArgs["result"]["pharmacyItem"]>
+  export type PharmacyItemInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    brand?: boolean | PharmacyBrandDefaultArgs<ExtArgs>
+    category?: boolean | PharmacyItemCategoryDefaultArgs<ExtArgs>
+    saleItems?: boolean | PharmacyItem$saleItemsArgs<ExtArgs>
+    _count?: boolean | PharmacyItemCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type PharmacyItemIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    brand?: boolean | PharmacyBrandDefaultArgs<ExtArgs>
+    category?: boolean | PharmacyItemCategoryDefaultArgs<ExtArgs>
+  }
+  export type PharmacyItemIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    brand?: boolean | PharmacyBrandDefaultArgs<ExtArgs>
+    category?: boolean | PharmacyItemCategoryDefaultArgs<ExtArgs>
+  }
+
+  export type $PharmacyItemPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "PharmacyItem"
+    objects: {
+      brand: Prisma.$PharmacyBrandPayload<ExtArgs>
+      category: Prisma.$PharmacyItemCategoryPayload<ExtArgs>
+      saleItems: Prisma.$PharmacySaleItemPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      brandId: string
+      categoryId: string
+      name: string
+      form: $Enums.PharmacyItemForm
+      route: $Enums.PharmacyItemRoute
+      strength: string
+      stock: number
+      unit: string
+      price: Prisma.Decimal
+      sku: string | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["pharmacyItem"]>
+    composites: {}
+  }
+
+  type PharmacyItemGetPayload<S extends boolean | null | undefined | PharmacyItemDefaultArgs> = $Result.GetResult<Prisma.$PharmacyItemPayload, S>
+
+  type PharmacyItemCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<PharmacyItemFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: PharmacyItemCountAggregateInputType | true
+    }
+
+  export interface PharmacyItemDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['PharmacyItem'], meta: { name: 'PharmacyItem' } }
+    /**
+     * Find zero or one PharmacyItem that matches the filter.
+     * @param {PharmacyItemFindUniqueArgs} args - Arguments to find a PharmacyItem
+     * @example
+     * // Get one PharmacyItem
+     * const pharmacyItem = await prisma.pharmacyItem.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends PharmacyItemFindUniqueArgs>(args: SelectSubset<T, PharmacyItemFindUniqueArgs<ExtArgs>>): Prisma__PharmacyItemClient<$Result.GetResult<Prisma.$PharmacyItemPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one PharmacyItem that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {PharmacyItemFindUniqueOrThrowArgs} args - Arguments to find a PharmacyItem
+     * @example
+     * // Get one PharmacyItem
+     * const pharmacyItem = await prisma.pharmacyItem.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends PharmacyItemFindUniqueOrThrowArgs>(args: SelectSubset<T, PharmacyItemFindUniqueOrThrowArgs<ExtArgs>>): Prisma__PharmacyItemClient<$Result.GetResult<Prisma.$PharmacyItemPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first PharmacyItem that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PharmacyItemFindFirstArgs} args - Arguments to find a PharmacyItem
+     * @example
+     * // Get one PharmacyItem
+     * const pharmacyItem = await prisma.pharmacyItem.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends PharmacyItemFindFirstArgs>(args?: SelectSubset<T, PharmacyItemFindFirstArgs<ExtArgs>>): Prisma__PharmacyItemClient<$Result.GetResult<Prisma.$PharmacyItemPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first PharmacyItem that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PharmacyItemFindFirstOrThrowArgs} args - Arguments to find a PharmacyItem
+     * @example
+     * // Get one PharmacyItem
+     * const pharmacyItem = await prisma.pharmacyItem.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends PharmacyItemFindFirstOrThrowArgs>(args?: SelectSubset<T, PharmacyItemFindFirstOrThrowArgs<ExtArgs>>): Prisma__PharmacyItemClient<$Result.GetResult<Prisma.$PharmacyItemPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more PharmacyItems that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PharmacyItemFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all PharmacyItems
+     * const pharmacyItems = await prisma.pharmacyItem.findMany()
+     * 
+     * // Get first 10 PharmacyItems
+     * const pharmacyItems = await prisma.pharmacyItem.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const pharmacyItemWithIdOnly = await prisma.pharmacyItem.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends PharmacyItemFindManyArgs>(args?: SelectSubset<T, PharmacyItemFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PharmacyItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a PharmacyItem.
+     * @param {PharmacyItemCreateArgs} args - Arguments to create a PharmacyItem.
+     * @example
+     * // Create one PharmacyItem
+     * const PharmacyItem = await prisma.pharmacyItem.create({
+     *   data: {
+     *     // ... data to create a PharmacyItem
+     *   }
+     * })
+     * 
+     */
+    create<T extends PharmacyItemCreateArgs>(args: SelectSubset<T, PharmacyItemCreateArgs<ExtArgs>>): Prisma__PharmacyItemClient<$Result.GetResult<Prisma.$PharmacyItemPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many PharmacyItems.
+     * @param {PharmacyItemCreateManyArgs} args - Arguments to create many PharmacyItems.
+     * @example
+     * // Create many PharmacyItems
+     * const pharmacyItem = await prisma.pharmacyItem.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends PharmacyItemCreateManyArgs>(args?: SelectSubset<T, PharmacyItemCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many PharmacyItems and returns the data saved in the database.
+     * @param {PharmacyItemCreateManyAndReturnArgs} args - Arguments to create many PharmacyItems.
+     * @example
+     * // Create many PharmacyItems
+     * const pharmacyItem = await prisma.pharmacyItem.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many PharmacyItems and only return the `id`
+     * const pharmacyItemWithIdOnly = await prisma.pharmacyItem.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends PharmacyItemCreateManyAndReturnArgs>(args?: SelectSubset<T, PharmacyItemCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PharmacyItemPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a PharmacyItem.
+     * @param {PharmacyItemDeleteArgs} args - Arguments to delete one PharmacyItem.
+     * @example
+     * // Delete one PharmacyItem
+     * const PharmacyItem = await prisma.pharmacyItem.delete({
+     *   where: {
+     *     // ... filter to delete one PharmacyItem
+     *   }
+     * })
+     * 
+     */
+    delete<T extends PharmacyItemDeleteArgs>(args: SelectSubset<T, PharmacyItemDeleteArgs<ExtArgs>>): Prisma__PharmacyItemClient<$Result.GetResult<Prisma.$PharmacyItemPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one PharmacyItem.
+     * @param {PharmacyItemUpdateArgs} args - Arguments to update one PharmacyItem.
+     * @example
+     * // Update one PharmacyItem
+     * const pharmacyItem = await prisma.pharmacyItem.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends PharmacyItemUpdateArgs>(args: SelectSubset<T, PharmacyItemUpdateArgs<ExtArgs>>): Prisma__PharmacyItemClient<$Result.GetResult<Prisma.$PharmacyItemPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more PharmacyItems.
+     * @param {PharmacyItemDeleteManyArgs} args - Arguments to filter PharmacyItems to delete.
+     * @example
+     * // Delete a few PharmacyItems
+     * const { count } = await prisma.pharmacyItem.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends PharmacyItemDeleteManyArgs>(args?: SelectSubset<T, PharmacyItemDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more PharmacyItems.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PharmacyItemUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many PharmacyItems
+     * const pharmacyItem = await prisma.pharmacyItem.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends PharmacyItemUpdateManyArgs>(args: SelectSubset<T, PharmacyItemUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more PharmacyItems and returns the data updated in the database.
+     * @param {PharmacyItemUpdateManyAndReturnArgs} args - Arguments to update many PharmacyItems.
+     * @example
+     * // Update many PharmacyItems
+     * const pharmacyItem = await prisma.pharmacyItem.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more PharmacyItems and only return the `id`
+     * const pharmacyItemWithIdOnly = await prisma.pharmacyItem.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends PharmacyItemUpdateManyAndReturnArgs>(args: SelectSubset<T, PharmacyItemUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PharmacyItemPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one PharmacyItem.
+     * @param {PharmacyItemUpsertArgs} args - Arguments to update or create a PharmacyItem.
+     * @example
+     * // Update or create a PharmacyItem
+     * const pharmacyItem = await prisma.pharmacyItem.upsert({
+     *   create: {
+     *     // ... data to create a PharmacyItem
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the PharmacyItem we want to update
+     *   }
+     * })
+     */
+    upsert<T extends PharmacyItemUpsertArgs>(args: SelectSubset<T, PharmacyItemUpsertArgs<ExtArgs>>): Prisma__PharmacyItemClient<$Result.GetResult<Prisma.$PharmacyItemPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of PharmacyItems.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PharmacyItemCountArgs} args - Arguments to filter PharmacyItems to count.
+     * @example
+     * // Count the number of PharmacyItems
+     * const count = await prisma.pharmacyItem.count({
+     *   where: {
+     *     // ... the filter for the PharmacyItems we want to count
+     *   }
+     * })
+    **/
+    count<T extends PharmacyItemCountArgs>(
+      args?: Subset<T, PharmacyItemCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], PharmacyItemCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a PharmacyItem.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PharmacyItemAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends PharmacyItemAggregateArgs>(args: Subset<T, PharmacyItemAggregateArgs>): Prisma.PrismaPromise<GetPharmacyItemAggregateType<T>>
+
+    /**
+     * Group by PharmacyItem.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PharmacyItemGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends PharmacyItemGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: PharmacyItemGroupByArgs['orderBy'] }
+        : { orderBy?: PharmacyItemGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, PharmacyItemGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetPharmacyItemGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the PharmacyItem model
+   */
+  readonly fields: PharmacyItemFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for PharmacyItem.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__PharmacyItemClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    brand<T extends PharmacyBrandDefaultArgs<ExtArgs> = {}>(args?: Subset<T, PharmacyBrandDefaultArgs<ExtArgs>>): Prisma__PharmacyBrandClient<$Result.GetResult<Prisma.$PharmacyBrandPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    category<T extends PharmacyItemCategoryDefaultArgs<ExtArgs> = {}>(args?: Subset<T, PharmacyItemCategoryDefaultArgs<ExtArgs>>): Prisma__PharmacyItemCategoryClient<$Result.GetResult<Prisma.$PharmacyItemCategoryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    saleItems<T extends PharmacyItem$saleItemsArgs<ExtArgs> = {}>(args?: Subset<T, PharmacyItem$saleItemsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PharmacySaleItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the PharmacyItem model
+   */
+  interface PharmacyItemFieldRefs {
+    readonly id: FieldRef<"PharmacyItem", 'String'>
+    readonly brandId: FieldRef<"PharmacyItem", 'String'>
+    readonly categoryId: FieldRef<"PharmacyItem", 'String'>
+    readonly name: FieldRef<"PharmacyItem", 'String'>
+    readonly form: FieldRef<"PharmacyItem", 'PharmacyItemForm'>
+    readonly route: FieldRef<"PharmacyItem", 'PharmacyItemRoute'>
+    readonly strength: FieldRef<"PharmacyItem", 'String'>
+    readonly stock: FieldRef<"PharmacyItem", 'Int'>
+    readonly unit: FieldRef<"PharmacyItem", 'String'>
+    readonly price: FieldRef<"PharmacyItem", 'Decimal'>
+    readonly sku: FieldRef<"PharmacyItem", 'String'>
+    readonly createdAt: FieldRef<"PharmacyItem", 'DateTime'>
+    readonly updatedAt: FieldRef<"PharmacyItem", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * PharmacyItem findUnique
+   */
+  export type PharmacyItemFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PharmacyItem
+     */
+    select?: PharmacyItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PharmacyItem
+     */
+    omit?: PharmacyItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PharmacyItemInclude<ExtArgs> | null
+    /**
+     * Filter, which PharmacyItem to fetch.
+     */
+    where: PharmacyItemWhereUniqueInput
+  }
+
+  /**
+   * PharmacyItem findUniqueOrThrow
+   */
+  export type PharmacyItemFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PharmacyItem
+     */
+    select?: PharmacyItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PharmacyItem
+     */
+    omit?: PharmacyItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PharmacyItemInclude<ExtArgs> | null
+    /**
+     * Filter, which PharmacyItem to fetch.
+     */
+    where: PharmacyItemWhereUniqueInput
+  }
+
+  /**
+   * PharmacyItem findFirst
+   */
+  export type PharmacyItemFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PharmacyItem
+     */
+    select?: PharmacyItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PharmacyItem
+     */
+    omit?: PharmacyItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PharmacyItemInclude<ExtArgs> | null
+    /**
+     * Filter, which PharmacyItem to fetch.
+     */
+    where?: PharmacyItemWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PharmacyItems to fetch.
+     */
+    orderBy?: PharmacyItemOrderByWithRelationInput | PharmacyItemOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for PharmacyItems.
+     */
+    cursor?: PharmacyItemWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PharmacyItems from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PharmacyItems.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of PharmacyItems.
+     */
+    distinct?: PharmacyItemScalarFieldEnum | PharmacyItemScalarFieldEnum[]
+  }
+
+  /**
+   * PharmacyItem findFirstOrThrow
+   */
+  export type PharmacyItemFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PharmacyItem
+     */
+    select?: PharmacyItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PharmacyItem
+     */
+    omit?: PharmacyItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PharmacyItemInclude<ExtArgs> | null
+    /**
+     * Filter, which PharmacyItem to fetch.
+     */
+    where?: PharmacyItemWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PharmacyItems to fetch.
+     */
+    orderBy?: PharmacyItemOrderByWithRelationInput | PharmacyItemOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for PharmacyItems.
+     */
+    cursor?: PharmacyItemWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PharmacyItems from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PharmacyItems.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of PharmacyItems.
+     */
+    distinct?: PharmacyItemScalarFieldEnum | PharmacyItemScalarFieldEnum[]
+  }
+
+  /**
+   * PharmacyItem findMany
+   */
+  export type PharmacyItemFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PharmacyItem
+     */
+    select?: PharmacyItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PharmacyItem
+     */
+    omit?: PharmacyItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PharmacyItemInclude<ExtArgs> | null
+    /**
+     * Filter, which PharmacyItems to fetch.
+     */
+    where?: PharmacyItemWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PharmacyItems to fetch.
+     */
+    orderBy?: PharmacyItemOrderByWithRelationInput | PharmacyItemOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing PharmacyItems.
+     */
+    cursor?: PharmacyItemWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PharmacyItems from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PharmacyItems.
+     */
+    skip?: number
+    distinct?: PharmacyItemScalarFieldEnum | PharmacyItemScalarFieldEnum[]
+  }
+
+  /**
+   * PharmacyItem create
+   */
+  export type PharmacyItemCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PharmacyItem
+     */
+    select?: PharmacyItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PharmacyItem
+     */
+    omit?: PharmacyItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PharmacyItemInclude<ExtArgs> | null
+    /**
+     * The data needed to create a PharmacyItem.
+     */
+    data: XOR<PharmacyItemCreateInput, PharmacyItemUncheckedCreateInput>
+  }
+
+  /**
+   * PharmacyItem createMany
+   */
+  export type PharmacyItemCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many PharmacyItems.
+     */
+    data: PharmacyItemCreateManyInput | PharmacyItemCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * PharmacyItem createManyAndReturn
+   */
+  export type PharmacyItemCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PharmacyItem
+     */
+    select?: PharmacyItemSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the PharmacyItem
+     */
+    omit?: PharmacyItemOmit<ExtArgs> | null
+    /**
+     * The data used to create many PharmacyItems.
+     */
+    data: PharmacyItemCreateManyInput | PharmacyItemCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PharmacyItemIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * PharmacyItem update
+   */
+  export type PharmacyItemUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PharmacyItem
+     */
+    select?: PharmacyItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PharmacyItem
+     */
+    omit?: PharmacyItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PharmacyItemInclude<ExtArgs> | null
+    /**
+     * The data needed to update a PharmacyItem.
+     */
+    data: XOR<PharmacyItemUpdateInput, PharmacyItemUncheckedUpdateInput>
+    /**
+     * Choose, which PharmacyItem to update.
+     */
+    where: PharmacyItemWhereUniqueInput
+  }
+
+  /**
+   * PharmacyItem updateMany
+   */
+  export type PharmacyItemUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update PharmacyItems.
+     */
+    data: XOR<PharmacyItemUpdateManyMutationInput, PharmacyItemUncheckedUpdateManyInput>
+    /**
+     * Filter which PharmacyItems to update
+     */
+    where?: PharmacyItemWhereInput
+    /**
+     * Limit how many PharmacyItems to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * PharmacyItem updateManyAndReturn
+   */
+  export type PharmacyItemUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PharmacyItem
+     */
+    select?: PharmacyItemSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the PharmacyItem
+     */
+    omit?: PharmacyItemOmit<ExtArgs> | null
+    /**
+     * The data used to update PharmacyItems.
+     */
+    data: XOR<PharmacyItemUpdateManyMutationInput, PharmacyItemUncheckedUpdateManyInput>
+    /**
+     * Filter which PharmacyItems to update
+     */
+    where?: PharmacyItemWhereInput
+    /**
+     * Limit how many PharmacyItems to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PharmacyItemIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * PharmacyItem upsert
+   */
+  export type PharmacyItemUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PharmacyItem
+     */
+    select?: PharmacyItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PharmacyItem
+     */
+    omit?: PharmacyItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PharmacyItemInclude<ExtArgs> | null
+    /**
+     * The filter to search for the PharmacyItem to update in case it exists.
+     */
+    where: PharmacyItemWhereUniqueInput
+    /**
+     * In case the PharmacyItem found by the `where` argument doesn't exist, create a new PharmacyItem with this data.
+     */
+    create: XOR<PharmacyItemCreateInput, PharmacyItemUncheckedCreateInput>
+    /**
+     * In case the PharmacyItem was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<PharmacyItemUpdateInput, PharmacyItemUncheckedUpdateInput>
+  }
+
+  /**
+   * PharmacyItem delete
+   */
+  export type PharmacyItemDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PharmacyItem
+     */
+    select?: PharmacyItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PharmacyItem
+     */
+    omit?: PharmacyItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PharmacyItemInclude<ExtArgs> | null
+    /**
+     * Filter which PharmacyItem to delete.
+     */
+    where: PharmacyItemWhereUniqueInput
+  }
+
+  /**
+   * PharmacyItem deleteMany
+   */
+  export type PharmacyItemDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which PharmacyItems to delete
+     */
+    where?: PharmacyItemWhereInput
+    /**
+     * Limit how many PharmacyItems to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * PharmacyItem.saleItems
+   */
+  export type PharmacyItem$saleItemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PharmacySaleItem
+     */
+    select?: PharmacySaleItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PharmacySaleItem
+     */
+    omit?: PharmacySaleItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PharmacySaleItemInclude<ExtArgs> | null
+    where?: PharmacySaleItemWhereInput
+    orderBy?: PharmacySaleItemOrderByWithRelationInput | PharmacySaleItemOrderByWithRelationInput[]
+    cursor?: PharmacySaleItemWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: PharmacySaleItemScalarFieldEnum | PharmacySaleItemScalarFieldEnum[]
+  }
+
+  /**
+   * PharmacyItem without action
+   */
+  export type PharmacyItemDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PharmacyItem
+     */
+    select?: PharmacyItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PharmacyItem
+     */
+    omit?: PharmacyItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PharmacyItemInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model PharmacySale
+   */
+
+  export type AggregatePharmacySale = {
+    _count: PharmacySaleCountAggregateOutputType | null
+    _avg: PharmacySaleAvgAggregateOutputType | null
+    _sum: PharmacySaleSumAggregateOutputType | null
+    _min: PharmacySaleMinAggregateOutputType | null
+    _max: PharmacySaleMaxAggregateOutputType | null
+  }
+
+  export type PharmacySaleAvgAggregateOutputType = {
+    subtotal: Decimal | null
+    discount: Decimal | null
+    tax: Decimal | null
+    total: Decimal | null
+  }
+
+  export type PharmacySaleSumAggregateOutputType = {
+    subtotal: Decimal | null
+    discount: Decimal | null
+    tax: Decimal | null
+    total: Decimal | null
+  }
+
+  export type PharmacySaleMinAggregateOutputType = {
+    id: string | null
+    invoiceNumber: string | null
+    customerName: string | null
+    customerPhone: string | null
+    staffId: string | null
+    subtotal: Decimal | null
+    discount: Decimal | null
+    tax: Decimal | null
+    total: Decimal | null
+    paymentMethod: $Enums.PaymentMethod | null
+    paymentStatus: $Enums.PaymentStatus | null
+    notes: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type PharmacySaleMaxAggregateOutputType = {
+    id: string | null
+    invoiceNumber: string | null
+    customerName: string | null
+    customerPhone: string | null
+    staffId: string | null
+    subtotal: Decimal | null
+    discount: Decimal | null
+    tax: Decimal | null
+    total: Decimal | null
+    paymentMethod: $Enums.PaymentMethod | null
+    paymentStatus: $Enums.PaymentStatus | null
+    notes: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type PharmacySaleCountAggregateOutputType = {
+    id: number
+    invoiceNumber: number
+    customerName: number
+    customerPhone: number
+    staffId: number
+    subtotal: number
+    discount: number
+    tax: number
+    total: number
+    paymentMethod: number
+    paymentStatus: number
+    notes: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type PharmacySaleAvgAggregateInputType = {
+    subtotal?: true
+    discount?: true
+    tax?: true
+    total?: true
+  }
+
+  export type PharmacySaleSumAggregateInputType = {
+    subtotal?: true
+    discount?: true
+    tax?: true
+    total?: true
+  }
+
+  export type PharmacySaleMinAggregateInputType = {
+    id?: true
+    invoiceNumber?: true
+    customerName?: true
+    customerPhone?: true
+    staffId?: true
+    subtotal?: true
+    discount?: true
+    tax?: true
+    total?: true
+    paymentMethod?: true
+    paymentStatus?: true
+    notes?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type PharmacySaleMaxAggregateInputType = {
+    id?: true
+    invoiceNumber?: true
+    customerName?: true
+    customerPhone?: true
+    staffId?: true
+    subtotal?: true
+    discount?: true
+    tax?: true
+    total?: true
+    paymentMethod?: true
+    paymentStatus?: true
+    notes?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type PharmacySaleCountAggregateInputType = {
+    id?: true
+    invoiceNumber?: true
+    customerName?: true
+    customerPhone?: true
+    staffId?: true
+    subtotal?: true
+    discount?: true
+    tax?: true
+    total?: true
+    paymentMethod?: true
+    paymentStatus?: true
+    notes?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type PharmacySaleAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which PharmacySale to aggregate.
+     */
+    where?: PharmacySaleWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PharmacySales to fetch.
+     */
+    orderBy?: PharmacySaleOrderByWithRelationInput | PharmacySaleOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: PharmacySaleWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PharmacySales from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PharmacySales.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned PharmacySales
+    **/
+    _count?: true | PharmacySaleCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: PharmacySaleAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: PharmacySaleSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: PharmacySaleMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: PharmacySaleMaxAggregateInputType
+  }
+
+  export type GetPharmacySaleAggregateType<T extends PharmacySaleAggregateArgs> = {
+        [P in keyof T & keyof AggregatePharmacySale]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregatePharmacySale[P]>
+      : GetScalarType<T[P], AggregatePharmacySale[P]>
+  }
+
+
+
+
+  export type PharmacySaleGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PharmacySaleWhereInput
+    orderBy?: PharmacySaleOrderByWithAggregationInput | PharmacySaleOrderByWithAggregationInput[]
+    by: PharmacySaleScalarFieldEnum[] | PharmacySaleScalarFieldEnum
+    having?: PharmacySaleScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: PharmacySaleCountAggregateInputType | true
+    _avg?: PharmacySaleAvgAggregateInputType
+    _sum?: PharmacySaleSumAggregateInputType
+    _min?: PharmacySaleMinAggregateInputType
+    _max?: PharmacySaleMaxAggregateInputType
+  }
+
+  export type PharmacySaleGroupByOutputType = {
+    id: string
+    invoiceNumber: string
+    customerName: string | null
+    customerPhone: string | null
+    staffId: string | null
+    subtotal: Decimal
+    discount: Decimal
+    tax: Decimal
+    total: Decimal
+    paymentMethod: $Enums.PaymentMethod
+    paymentStatus: $Enums.PaymentStatus
+    notes: string | null
+    createdAt: Date
+    updatedAt: Date
+    _count: PharmacySaleCountAggregateOutputType | null
+    _avg: PharmacySaleAvgAggregateOutputType | null
+    _sum: PharmacySaleSumAggregateOutputType | null
+    _min: PharmacySaleMinAggregateOutputType | null
+    _max: PharmacySaleMaxAggregateOutputType | null
+  }
+
+  type GetPharmacySaleGroupByPayload<T extends PharmacySaleGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<PharmacySaleGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof PharmacySaleGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], PharmacySaleGroupByOutputType[P]>
+            : GetScalarType<T[P], PharmacySaleGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type PharmacySaleSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    invoiceNumber?: boolean
+    customerName?: boolean
+    customerPhone?: boolean
+    staffId?: boolean
+    subtotal?: boolean
+    discount?: boolean
+    tax?: boolean
+    total?: boolean
+    paymentMethod?: boolean
+    paymentStatus?: boolean
+    notes?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    items?: boolean | PharmacySale$itemsArgs<ExtArgs>
+    payments?: boolean | PharmacySale$paymentsArgs<ExtArgs>
+    _count?: boolean | PharmacySaleCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["pharmacySale"]>
+
+  export type PharmacySaleSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    invoiceNumber?: boolean
+    customerName?: boolean
+    customerPhone?: boolean
+    staffId?: boolean
+    subtotal?: boolean
+    discount?: boolean
+    tax?: boolean
+    total?: boolean
+    paymentMethod?: boolean
+    paymentStatus?: boolean
+    notes?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["pharmacySale"]>
+
+  export type PharmacySaleSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    invoiceNumber?: boolean
+    customerName?: boolean
+    customerPhone?: boolean
+    staffId?: boolean
+    subtotal?: boolean
+    discount?: boolean
+    tax?: boolean
+    total?: boolean
+    paymentMethod?: boolean
+    paymentStatus?: boolean
+    notes?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["pharmacySale"]>
+
+  export type PharmacySaleSelectScalar = {
+    id?: boolean
+    invoiceNumber?: boolean
+    customerName?: boolean
+    customerPhone?: boolean
+    staffId?: boolean
+    subtotal?: boolean
+    discount?: boolean
+    tax?: boolean
+    total?: boolean
+    paymentMethod?: boolean
+    paymentStatus?: boolean
+    notes?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type PharmacySaleOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "invoiceNumber" | "customerName" | "customerPhone" | "staffId" | "subtotal" | "discount" | "tax" | "total" | "paymentMethod" | "paymentStatus" | "notes" | "createdAt" | "updatedAt", ExtArgs["result"]["pharmacySale"]>
+  export type PharmacySaleInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    items?: boolean | PharmacySale$itemsArgs<ExtArgs>
+    payments?: boolean | PharmacySale$paymentsArgs<ExtArgs>
+    _count?: boolean | PharmacySaleCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type PharmacySaleIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type PharmacySaleIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+
+  export type $PharmacySalePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "PharmacySale"
+    objects: {
+      items: Prisma.$PharmacySaleItemPayload<ExtArgs>[]
+      payments: Prisma.$PharmacyPaymentPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      invoiceNumber: string
+      customerName: string | null
+      customerPhone: string | null
+      staffId: string | null
+      subtotal: Prisma.Decimal
+      discount: Prisma.Decimal
+      tax: Prisma.Decimal
+      total: Prisma.Decimal
+      paymentMethod: $Enums.PaymentMethod
+      paymentStatus: $Enums.PaymentStatus
+      notes: string | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["pharmacySale"]>
+    composites: {}
+  }
+
+  type PharmacySaleGetPayload<S extends boolean | null | undefined | PharmacySaleDefaultArgs> = $Result.GetResult<Prisma.$PharmacySalePayload, S>
+
+  type PharmacySaleCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<PharmacySaleFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: PharmacySaleCountAggregateInputType | true
+    }
+
+  export interface PharmacySaleDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['PharmacySale'], meta: { name: 'PharmacySale' } }
+    /**
+     * Find zero or one PharmacySale that matches the filter.
+     * @param {PharmacySaleFindUniqueArgs} args - Arguments to find a PharmacySale
+     * @example
+     * // Get one PharmacySale
+     * const pharmacySale = await prisma.pharmacySale.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends PharmacySaleFindUniqueArgs>(args: SelectSubset<T, PharmacySaleFindUniqueArgs<ExtArgs>>): Prisma__PharmacySaleClient<$Result.GetResult<Prisma.$PharmacySalePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one PharmacySale that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {PharmacySaleFindUniqueOrThrowArgs} args - Arguments to find a PharmacySale
+     * @example
+     * // Get one PharmacySale
+     * const pharmacySale = await prisma.pharmacySale.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends PharmacySaleFindUniqueOrThrowArgs>(args: SelectSubset<T, PharmacySaleFindUniqueOrThrowArgs<ExtArgs>>): Prisma__PharmacySaleClient<$Result.GetResult<Prisma.$PharmacySalePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first PharmacySale that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PharmacySaleFindFirstArgs} args - Arguments to find a PharmacySale
+     * @example
+     * // Get one PharmacySale
+     * const pharmacySale = await prisma.pharmacySale.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends PharmacySaleFindFirstArgs>(args?: SelectSubset<T, PharmacySaleFindFirstArgs<ExtArgs>>): Prisma__PharmacySaleClient<$Result.GetResult<Prisma.$PharmacySalePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first PharmacySale that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PharmacySaleFindFirstOrThrowArgs} args - Arguments to find a PharmacySale
+     * @example
+     * // Get one PharmacySale
+     * const pharmacySale = await prisma.pharmacySale.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends PharmacySaleFindFirstOrThrowArgs>(args?: SelectSubset<T, PharmacySaleFindFirstOrThrowArgs<ExtArgs>>): Prisma__PharmacySaleClient<$Result.GetResult<Prisma.$PharmacySalePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more PharmacySales that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PharmacySaleFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all PharmacySales
+     * const pharmacySales = await prisma.pharmacySale.findMany()
+     * 
+     * // Get first 10 PharmacySales
+     * const pharmacySales = await prisma.pharmacySale.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const pharmacySaleWithIdOnly = await prisma.pharmacySale.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends PharmacySaleFindManyArgs>(args?: SelectSubset<T, PharmacySaleFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PharmacySalePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a PharmacySale.
+     * @param {PharmacySaleCreateArgs} args - Arguments to create a PharmacySale.
+     * @example
+     * // Create one PharmacySale
+     * const PharmacySale = await prisma.pharmacySale.create({
+     *   data: {
+     *     // ... data to create a PharmacySale
+     *   }
+     * })
+     * 
+     */
+    create<T extends PharmacySaleCreateArgs>(args: SelectSubset<T, PharmacySaleCreateArgs<ExtArgs>>): Prisma__PharmacySaleClient<$Result.GetResult<Prisma.$PharmacySalePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many PharmacySales.
+     * @param {PharmacySaleCreateManyArgs} args - Arguments to create many PharmacySales.
+     * @example
+     * // Create many PharmacySales
+     * const pharmacySale = await prisma.pharmacySale.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends PharmacySaleCreateManyArgs>(args?: SelectSubset<T, PharmacySaleCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many PharmacySales and returns the data saved in the database.
+     * @param {PharmacySaleCreateManyAndReturnArgs} args - Arguments to create many PharmacySales.
+     * @example
+     * // Create many PharmacySales
+     * const pharmacySale = await prisma.pharmacySale.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many PharmacySales and only return the `id`
+     * const pharmacySaleWithIdOnly = await prisma.pharmacySale.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends PharmacySaleCreateManyAndReturnArgs>(args?: SelectSubset<T, PharmacySaleCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PharmacySalePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a PharmacySale.
+     * @param {PharmacySaleDeleteArgs} args - Arguments to delete one PharmacySale.
+     * @example
+     * // Delete one PharmacySale
+     * const PharmacySale = await prisma.pharmacySale.delete({
+     *   where: {
+     *     // ... filter to delete one PharmacySale
+     *   }
+     * })
+     * 
+     */
+    delete<T extends PharmacySaleDeleteArgs>(args: SelectSubset<T, PharmacySaleDeleteArgs<ExtArgs>>): Prisma__PharmacySaleClient<$Result.GetResult<Prisma.$PharmacySalePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one PharmacySale.
+     * @param {PharmacySaleUpdateArgs} args - Arguments to update one PharmacySale.
+     * @example
+     * // Update one PharmacySale
+     * const pharmacySale = await prisma.pharmacySale.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends PharmacySaleUpdateArgs>(args: SelectSubset<T, PharmacySaleUpdateArgs<ExtArgs>>): Prisma__PharmacySaleClient<$Result.GetResult<Prisma.$PharmacySalePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more PharmacySales.
+     * @param {PharmacySaleDeleteManyArgs} args - Arguments to filter PharmacySales to delete.
+     * @example
+     * // Delete a few PharmacySales
+     * const { count } = await prisma.pharmacySale.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends PharmacySaleDeleteManyArgs>(args?: SelectSubset<T, PharmacySaleDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more PharmacySales.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PharmacySaleUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many PharmacySales
+     * const pharmacySale = await prisma.pharmacySale.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends PharmacySaleUpdateManyArgs>(args: SelectSubset<T, PharmacySaleUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more PharmacySales and returns the data updated in the database.
+     * @param {PharmacySaleUpdateManyAndReturnArgs} args - Arguments to update many PharmacySales.
+     * @example
+     * // Update many PharmacySales
+     * const pharmacySale = await prisma.pharmacySale.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more PharmacySales and only return the `id`
+     * const pharmacySaleWithIdOnly = await prisma.pharmacySale.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends PharmacySaleUpdateManyAndReturnArgs>(args: SelectSubset<T, PharmacySaleUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PharmacySalePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one PharmacySale.
+     * @param {PharmacySaleUpsertArgs} args - Arguments to update or create a PharmacySale.
+     * @example
+     * // Update or create a PharmacySale
+     * const pharmacySale = await prisma.pharmacySale.upsert({
+     *   create: {
+     *     // ... data to create a PharmacySale
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the PharmacySale we want to update
+     *   }
+     * })
+     */
+    upsert<T extends PharmacySaleUpsertArgs>(args: SelectSubset<T, PharmacySaleUpsertArgs<ExtArgs>>): Prisma__PharmacySaleClient<$Result.GetResult<Prisma.$PharmacySalePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of PharmacySales.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PharmacySaleCountArgs} args - Arguments to filter PharmacySales to count.
+     * @example
+     * // Count the number of PharmacySales
+     * const count = await prisma.pharmacySale.count({
+     *   where: {
+     *     // ... the filter for the PharmacySales we want to count
+     *   }
+     * })
+    **/
+    count<T extends PharmacySaleCountArgs>(
+      args?: Subset<T, PharmacySaleCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], PharmacySaleCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a PharmacySale.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PharmacySaleAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends PharmacySaleAggregateArgs>(args: Subset<T, PharmacySaleAggregateArgs>): Prisma.PrismaPromise<GetPharmacySaleAggregateType<T>>
+
+    /**
+     * Group by PharmacySale.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PharmacySaleGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends PharmacySaleGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: PharmacySaleGroupByArgs['orderBy'] }
+        : { orderBy?: PharmacySaleGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, PharmacySaleGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetPharmacySaleGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the PharmacySale model
+   */
+  readonly fields: PharmacySaleFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for PharmacySale.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__PharmacySaleClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    items<T extends PharmacySale$itemsArgs<ExtArgs> = {}>(args?: Subset<T, PharmacySale$itemsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PharmacySaleItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    payments<T extends PharmacySale$paymentsArgs<ExtArgs> = {}>(args?: Subset<T, PharmacySale$paymentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PharmacyPaymentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the PharmacySale model
+   */
+  interface PharmacySaleFieldRefs {
+    readonly id: FieldRef<"PharmacySale", 'String'>
+    readonly invoiceNumber: FieldRef<"PharmacySale", 'String'>
+    readonly customerName: FieldRef<"PharmacySale", 'String'>
+    readonly customerPhone: FieldRef<"PharmacySale", 'String'>
+    readonly staffId: FieldRef<"PharmacySale", 'String'>
+    readonly subtotal: FieldRef<"PharmacySale", 'Decimal'>
+    readonly discount: FieldRef<"PharmacySale", 'Decimal'>
+    readonly tax: FieldRef<"PharmacySale", 'Decimal'>
+    readonly total: FieldRef<"PharmacySale", 'Decimal'>
+    readonly paymentMethod: FieldRef<"PharmacySale", 'PaymentMethod'>
+    readonly paymentStatus: FieldRef<"PharmacySale", 'PaymentStatus'>
+    readonly notes: FieldRef<"PharmacySale", 'String'>
+    readonly createdAt: FieldRef<"PharmacySale", 'DateTime'>
+    readonly updatedAt: FieldRef<"PharmacySale", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * PharmacySale findUnique
+   */
+  export type PharmacySaleFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PharmacySale
+     */
+    select?: PharmacySaleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PharmacySale
+     */
+    omit?: PharmacySaleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PharmacySaleInclude<ExtArgs> | null
+    /**
+     * Filter, which PharmacySale to fetch.
+     */
+    where: PharmacySaleWhereUniqueInput
+  }
+
+  /**
+   * PharmacySale findUniqueOrThrow
+   */
+  export type PharmacySaleFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PharmacySale
+     */
+    select?: PharmacySaleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PharmacySale
+     */
+    omit?: PharmacySaleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PharmacySaleInclude<ExtArgs> | null
+    /**
+     * Filter, which PharmacySale to fetch.
+     */
+    where: PharmacySaleWhereUniqueInput
+  }
+
+  /**
+   * PharmacySale findFirst
+   */
+  export type PharmacySaleFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PharmacySale
+     */
+    select?: PharmacySaleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PharmacySale
+     */
+    omit?: PharmacySaleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PharmacySaleInclude<ExtArgs> | null
+    /**
+     * Filter, which PharmacySale to fetch.
+     */
+    where?: PharmacySaleWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PharmacySales to fetch.
+     */
+    orderBy?: PharmacySaleOrderByWithRelationInput | PharmacySaleOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for PharmacySales.
+     */
+    cursor?: PharmacySaleWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PharmacySales from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PharmacySales.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of PharmacySales.
+     */
+    distinct?: PharmacySaleScalarFieldEnum | PharmacySaleScalarFieldEnum[]
+  }
+
+  /**
+   * PharmacySale findFirstOrThrow
+   */
+  export type PharmacySaleFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PharmacySale
+     */
+    select?: PharmacySaleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PharmacySale
+     */
+    omit?: PharmacySaleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PharmacySaleInclude<ExtArgs> | null
+    /**
+     * Filter, which PharmacySale to fetch.
+     */
+    where?: PharmacySaleWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PharmacySales to fetch.
+     */
+    orderBy?: PharmacySaleOrderByWithRelationInput | PharmacySaleOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for PharmacySales.
+     */
+    cursor?: PharmacySaleWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PharmacySales from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PharmacySales.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of PharmacySales.
+     */
+    distinct?: PharmacySaleScalarFieldEnum | PharmacySaleScalarFieldEnum[]
+  }
+
+  /**
+   * PharmacySale findMany
+   */
+  export type PharmacySaleFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PharmacySale
+     */
+    select?: PharmacySaleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PharmacySale
+     */
+    omit?: PharmacySaleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PharmacySaleInclude<ExtArgs> | null
+    /**
+     * Filter, which PharmacySales to fetch.
+     */
+    where?: PharmacySaleWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PharmacySales to fetch.
+     */
+    orderBy?: PharmacySaleOrderByWithRelationInput | PharmacySaleOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing PharmacySales.
+     */
+    cursor?: PharmacySaleWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PharmacySales from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PharmacySales.
+     */
+    skip?: number
+    distinct?: PharmacySaleScalarFieldEnum | PharmacySaleScalarFieldEnum[]
+  }
+
+  /**
+   * PharmacySale create
+   */
+  export type PharmacySaleCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PharmacySale
+     */
+    select?: PharmacySaleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PharmacySale
+     */
+    omit?: PharmacySaleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PharmacySaleInclude<ExtArgs> | null
+    /**
+     * The data needed to create a PharmacySale.
+     */
+    data: XOR<PharmacySaleCreateInput, PharmacySaleUncheckedCreateInput>
+  }
+
+  /**
+   * PharmacySale createMany
+   */
+  export type PharmacySaleCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many PharmacySales.
+     */
+    data: PharmacySaleCreateManyInput | PharmacySaleCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * PharmacySale createManyAndReturn
+   */
+  export type PharmacySaleCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PharmacySale
+     */
+    select?: PharmacySaleSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the PharmacySale
+     */
+    omit?: PharmacySaleOmit<ExtArgs> | null
+    /**
+     * The data used to create many PharmacySales.
+     */
+    data: PharmacySaleCreateManyInput | PharmacySaleCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * PharmacySale update
+   */
+  export type PharmacySaleUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PharmacySale
+     */
+    select?: PharmacySaleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PharmacySale
+     */
+    omit?: PharmacySaleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PharmacySaleInclude<ExtArgs> | null
+    /**
+     * The data needed to update a PharmacySale.
+     */
+    data: XOR<PharmacySaleUpdateInput, PharmacySaleUncheckedUpdateInput>
+    /**
+     * Choose, which PharmacySale to update.
+     */
+    where: PharmacySaleWhereUniqueInput
+  }
+
+  /**
+   * PharmacySale updateMany
+   */
+  export type PharmacySaleUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update PharmacySales.
+     */
+    data: XOR<PharmacySaleUpdateManyMutationInput, PharmacySaleUncheckedUpdateManyInput>
+    /**
+     * Filter which PharmacySales to update
+     */
+    where?: PharmacySaleWhereInput
+    /**
+     * Limit how many PharmacySales to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * PharmacySale updateManyAndReturn
+   */
+  export type PharmacySaleUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PharmacySale
+     */
+    select?: PharmacySaleSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the PharmacySale
+     */
+    omit?: PharmacySaleOmit<ExtArgs> | null
+    /**
+     * The data used to update PharmacySales.
+     */
+    data: XOR<PharmacySaleUpdateManyMutationInput, PharmacySaleUncheckedUpdateManyInput>
+    /**
+     * Filter which PharmacySales to update
+     */
+    where?: PharmacySaleWhereInput
+    /**
+     * Limit how many PharmacySales to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * PharmacySale upsert
+   */
+  export type PharmacySaleUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PharmacySale
+     */
+    select?: PharmacySaleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PharmacySale
+     */
+    omit?: PharmacySaleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PharmacySaleInclude<ExtArgs> | null
+    /**
+     * The filter to search for the PharmacySale to update in case it exists.
+     */
+    where: PharmacySaleWhereUniqueInput
+    /**
+     * In case the PharmacySale found by the `where` argument doesn't exist, create a new PharmacySale with this data.
+     */
+    create: XOR<PharmacySaleCreateInput, PharmacySaleUncheckedCreateInput>
+    /**
+     * In case the PharmacySale was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<PharmacySaleUpdateInput, PharmacySaleUncheckedUpdateInput>
+  }
+
+  /**
+   * PharmacySale delete
+   */
+  export type PharmacySaleDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PharmacySale
+     */
+    select?: PharmacySaleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PharmacySale
+     */
+    omit?: PharmacySaleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PharmacySaleInclude<ExtArgs> | null
+    /**
+     * Filter which PharmacySale to delete.
+     */
+    where: PharmacySaleWhereUniqueInput
+  }
+
+  /**
+   * PharmacySale deleteMany
+   */
+  export type PharmacySaleDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which PharmacySales to delete
+     */
+    where?: PharmacySaleWhereInput
+    /**
+     * Limit how many PharmacySales to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * PharmacySale.items
+   */
+  export type PharmacySale$itemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PharmacySaleItem
+     */
+    select?: PharmacySaleItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PharmacySaleItem
+     */
+    omit?: PharmacySaleItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PharmacySaleItemInclude<ExtArgs> | null
+    where?: PharmacySaleItemWhereInput
+    orderBy?: PharmacySaleItemOrderByWithRelationInput | PharmacySaleItemOrderByWithRelationInput[]
+    cursor?: PharmacySaleItemWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: PharmacySaleItemScalarFieldEnum | PharmacySaleItemScalarFieldEnum[]
+  }
+
+  /**
+   * PharmacySale.payments
+   */
+  export type PharmacySale$paymentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PharmacyPayment
+     */
+    select?: PharmacyPaymentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PharmacyPayment
+     */
+    omit?: PharmacyPaymentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PharmacyPaymentInclude<ExtArgs> | null
+    where?: PharmacyPaymentWhereInput
+    orderBy?: PharmacyPaymentOrderByWithRelationInput | PharmacyPaymentOrderByWithRelationInput[]
+    cursor?: PharmacyPaymentWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: PharmacyPaymentScalarFieldEnum | PharmacyPaymentScalarFieldEnum[]
+  }
+
+  /**
+   * PharmacySale without action
+   */
+  export type PharmacySaleDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PharmacySale
+     */
+    select?: PharmacySaleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PharmacySale
+     */
+    omit?: PharmacySaleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PharmacySaleInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model PharmacySaleItem
+   */
+
+  export type AggregatePharmacySaleItem = {
+    _count: PharmacySaleItemCountAggregateOutputType | null
+    _avg: PharmacySaleItemAvgAggregateOutputType | null
+    _sum: PharmacySaleItemSumAggregateOutputType | null
+    _min: PharmacySaleItemMinAggregateOutputType | null
+    _max: PharmacySaleItemMaxAggregateOutputType | null
+  }
+
+  export type PharmacySaleItemAvgAggregateOutputType = {
+    quantity: number | null
+    unitPrice: Decimal | null
+    subtotal: Decimal | null
+  }
+
+  export type PharmacySaleItemSumAggregateOutputType = {
+    quantity: number | null
+    unitPrice: Decimal | null
+    subtotal: Decimal | null
+  }
+
+  export type PharmacySaleItemMinAggregateOutputType = {
+    id: string | null
+    saleId: string | null
+    pharmacyItemId: string | null
+    quantity: number | null
+    unitPrice: Decimal | null
+    subtotal: Decimal | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type PharmacySaleItemMaxAggregateOutputType = {
+    id: string | null
+    saleId: string | null
+    pharmacyItemId: string | null
+    quantity: number | null
+    unitPrice: Decimal | null
+    subtotal: Decimal | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type PharmacySaleItemCountAggregateOutputType = {
+    id: number
+    saleId: number
+    pharmacyItemId: number
+    quantity: number
+    unitPrice: number
+    subtotal: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type PharmacySaleItemAvgAggregateInputType = {
+    quantity?: true
+    unitPrice?: true
+    subtotal?: true
+  }
+
+  export type PharmacySaleItemSumAggregateInputType = {
+    quantity?: true
+    unitPrice?: true
+    subtotal?: true
+  }
+
+  export type PharmacySaleItemMinAggregateInputType = {
+    id?: true
+    saleId?: true
+    pharmacyItemId?: true
+    quantity?: true
+    unitPrice?: true
+    subtotal?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type PharmacySaleItemMaxAggregateInputType = {
+    id?: true
+    saleId?: true
+    pharmacyItemId?: true
+    quantity?: true
+    unitPrice?: true
+    subtotal?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type PharmacySaleItemCountAggregateInputType = {
+    id?: true
+    saleId?: true
+    pharmacyItemId?: true
+    quantity?: true
+    unitPrice?: true
+    subtotal?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type PharmacySaleItemAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which PharmacySaleItem to aggregate.
+     */
+    where?: PharmacySaleItemWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PharmacySaleItems to fetch.
+     */
+    orderBy?: PharmacySaleItemOrderByWithRelationInput | PharmacySaleItemOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: PharmacySaleItemWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PharmacySaleItems from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PharmacySaleItems.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned PharmacySaleItems
+    **/
+    _count?: true | PharmacySaleItemCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: PharmacySaleItemAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: PharmacySaleItemSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: PharmacySaleItemMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: PharmacySaleItemMaxAggregateInputType
+  }
+
+  export type GetPharmacySaleItemAggregateType<T extends PharmacySaleItemAggregateArgs> = {
+        [P in keyof T & keyof AggregatePharmacySaleItem]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregatePharmacySaleItem[P]>
+      : GetScalarType<T[P], AggregatePharmacySaleItem[P]>
+  }
+
+
+
+
+  export type PharmacySaleItemGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PharmacySaleItemWhereInput
+    orderBy?: PharmacySaleItemOrderByWithAggregationInput | PharmacySaleItemOrderByWithAggregationInput[]
+    by: PharmacySaleItemScalarFieldEnum[] | PharmacySaleItemScalarFieldEnum
+    having?: PharmacySaleItemScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: PharmacySaleItemCountAggregateInputType | true
+    _avg?: PharmacySaleItemAvgAggregateInputType
+    _sum?: PharmacySaleItemSumAggregateInputType
+    _min?: PharmacySaleItemMinAggregateInputType
+    _max?: PharmacySaleItemMaxAggregateInputType
+  }
+
+  export type PharmacySaleItemGroupByOutputType = {
+    id: string
+    saleId: string
+    pharmacyItemId: string
+    quantity: number
+    unitPrice: Decimal
+    subtotal: Decimal
+    createdAt: Date
+    updatedAt: Date
+    _count: PharmacySaleItemCountAggregateOutputType | null
+    _avg: PharmacySaleItemAvgAggregateOutputType | null
+    _sum: PharmacySaleItemSumAggregateOutputType | null
+    _min: PharmacySaleItemMinAggregateOutputType | null
+    _max: PharmacySaleItemMaxAggregateOutputType | null
+  }
+
+  type GetPharmacySaleItemGroupByPayload<T extends PharmacySaleItemGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<PharmacySaleItemGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof PharmacySaleItemGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], PharmacySaleItemGroupByOutputType[P]>
+            : GetScalarType<T[P], PharmacySaleItemGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type PharmacySaleItemSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    saleId?: boolean
+    pharmacyItemId?: boolean
+    quantity?: boolean
+    unitPrice?: boolean
+    subtotal?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    sale?: boolean | PharmacySaleDefaultArgs<ExtArgs>
+    pharmacyItem?: boolean | PharmacyItemDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["pharmacySaleItem"]>
+
+  export type PharmacySaleItemSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    saleId?: boolean
+    pharmacyItemId?: boolean
+    quantity?: boolean
+    unitPrice?: boolean
+    subtotal?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    sale?: boolean | PharmacySaleDefaultArgs<ExtArgs>
+    pharmacyItem?: boolean | PharmacyItemDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["pharmacySaleItem"]>
+
+  export type PharmacySaleItemSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    saleId?: boolean
+    pharmacyItemId?: boolean
+    quantity?: boolean
+    unitPrice?: boolean
+    subtotal?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    sale?: boolean | PharmacySaleDefaultArgs<ExtArgs>
+    pharmacyItem?: boolean | PharmacyItemDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["pharmacySaleItem"]>
+
+  export type PharmacySaleItemSelectScalar = {
+    id?: boolean
+    saleId?: boolean
+    pharmacyItemId?: boolean
+    quantity?: boolean
+    unitPrice?: boolean
+    subtotal?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type PharmacySaleItemOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "saleId" | "pharmacyItemId" | "quantity" | "unitPrice" | "subtotal" | "createdAt" | "updatedAt", ExtArgs["result"]["pharmacySaleItem"]>
+  export type PharmacySaleItemInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    sale?: boolean | PharmacySaleDefaultArgs<ExtArgs>
+    pharmacyItem?: boolean | PharmacyItemDefaultArgs<ExtArgs>
+  }
+  export type PharmacySaleItemIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    sale?: boolean | PharmacySaleDefaultArgs<ExtArgs>
+    pharmacyItem?: boolean | PharmacyItemDefaultArgs<ExtArgs>
+  }
+  export type PharmacySaleItemIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    sale?: boolean | PharmacySaleDefaultArgs<ExtArgs>
+    pharmacyItem?: boolean | PharmacyItemDefaultArgs<ExtArgs>
+  }
+
+  export type $PharmacySaleItemPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "PharmacySaleItem"
+    objects: {
+      sale: Prisma.$PharmacySalePayload<ExtArgs>
+      pharmacyItem: Prisma.$PharmacyItemPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      saleId: string
+      pharmacyItemId: string
+      quantity: number
+      unitPrice: Prisma.Decimal
+      subtotal: Prisma.Decimal
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["pharmacySaleItem"]>
+    composites: {}
+  }
+
+  type PharmacySaleItemGetPayload<S extends boolean | null | undefined | PharmacySaleItemDefaultArgs> = $Result.GetResult<Prisma.$PharmacySaleItemPayload, S>
+
+  type PharmacySaleItemCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<PharmacySaleItemFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: PharmacySaleItemCountAggregateInputType | true
+    }
+
+  export interface PharmacySaleItemDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['PharmacySaleItem'], meta: { name: 'PharmacySaleItem' } }
+    /**
+     * Find zero or one PharmacySaleItem that matches the filter.
+     * @param {PharmacySaleItemFindUniqueArgs} args - Arguments to find a PharmacySaleItem
+     * @example
+     * // Get one PharmacySaleItem
+     * const pharmacySaleItem = await prisma.pharmacySaleItem.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends PharmacySaleItemFindUniqueArgs>(args: SelectSubset<T, PharmacySaleItemFindUniqueArgs<ExtArgs>>): Prisma__PharmacySaleItemClient<$Result.GetResult<Prisma.$PharmacySaleItemPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one PharmacySaleItem that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {PharmacySaleItemFindUniqueOrThrowArgs} args - Arguments to find a PharmacySaleItem
+     * @example
+     * // Get one PharmacySaleItem
+     * const pharmacySaleItem = await prisma.pharmacySaleItem.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends PharmacySaleItemFindUniqueOrThrowArgs>(args: SelectSubset<T, PharmacySaleItemFindUniqueOrThrowArgs<ExtArgs>>): Prisma__PharmacySaleItemClient<$Result.GetResult<Prisma.$PharmacySaleItemPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first PharmacySaleItem that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PharmacySaleItemFindFirstArgs} args - Arguments to find a PharmacySaleItem
+     * @example
+     * // Get one PharmacySaleItem
+     * const pharmacySaleItem = await prisma.pharmacySaleItem.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends PharmacySaleItemFindFirstArgs>(args?: SelectSubset<T, PharmacySaleItemFindFirstArgs<ExtArgs>>): Prisma__PharmacySaleItemClient<$Result.GetResult<Prisma.$PharmacySaleItemPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first PharmacySaleItem that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PharmacySaleItemFindFirstOrThrowArgs} args - Arguments to find a PharmacySaleItem
+     * @example
+     * // Get one PharmacySaleItem
+     * const pharmacySaleItem = await prisma.pharmacySaleItem.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends PharmacySaleItemFindFirstOrThrowArgs>(args?: SelectSubset<T, PharmacySaleItemFindFirstOrThrowArgs<ExtArgs>>): Prisma__PharmacySaleItemClient<$Result.GetResult<Prisma.$PharmacySaleItemPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more PharmacySaleItems that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PharmacySaleItemFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all PharmacySaleItems
+     * const pharmacySaleItems = await prisma.pharmacySaleItem.findMany()
+     * 
+     * // Get first 10 PharmacySaleItems
+     * const pharmacySaleItems = await prisma.pharmacySaleItem.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const pharmacySaleItemWithIdOnly = await prisma.pharmacySaleItem.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends PharmacySaleItemFindManyArgs>(args?: SelectSubset<T, PharmacySaleItemFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PharmacySaleItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a PharmacySaleItem.
+     * @param {PharmacySaleItemCreateArgs} args - Arguments to create a PharmacySaleItem.
+     * @example
+     * // Create one PharmacySaleItem
+     * const PharmacySaleItem = await prisma.pharmacySaleItem.create({
+     *   data: {
+     *     // ... data to create a PharmacySaleItem
+     *   }
+     * })
+     * 
+     */
+    create<T extends PharmacySaleItemCreateArgs>(args: SelectSubset<T, PharmacySaleItemCreateArgs<ExtArgs>>): Prisma__PharmacySaleItemClient<$Result.GetResult<Prisma.$PharmacySaleItemPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many PharmacySaleItems.
+     * @param {PharmacySaleItemCreateManyArgs} args - Arguments to create many PharmacySaleItems.
+     * @example
+     * // Create many PharmacySaleItems
+     * const pharmacySaleItem = await prisma.pharmacySaleItem.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends PharmacySaleItemCreateManyArgs>(args?: SelectSubset<T, PharmacySaleItemCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many PharmacySaleItems and returns the data saved in the database.
+     * @param {PharmacySaleItemCreateManyAndReturnArgs} args - Arguments to create many PharmacySaleItems.
+     * @example
+     * // Create many PharmacySaleItems
+     * const pharmacySaleItem = await prisma.pharmacySaleItem.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many PharmacySaleItems and only return the `id`
+     * const pharmacySaleItemWithIdOnly = await prisma.pharmacySaleItem.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends PharmacySaleItemCreateManyAndReturnArgs>(args?: SelectSubset<T, PharmacySaleItemCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PharmacySaleItemPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a PharmacySaleItem.
+     * @param {PharmacySaleItemDeleteArgs} args - Arguments to delete one PharmacySaleItem.
+     * @example
+     * // Delete one PharmacySaleItem
+     * const PharmacySaleItem = await prisma.pharmacySaleItem.delete({
+     *   where: {
+     *     // ... filter to delete one PharmacySaleItem
+     *   }
+     * })
+     * 
+     */
+    delete<T extends PharmacySaleItemDeleteArgs>(args: SelectSubset<T, PharmacySaleItemDeleteArgs<ExtArgs>>): Prisma__PharmacySaleItemClient<$Result.GetResult<Prisma.$PharmacySaleItemPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one PharmacySaleItem.
+     * @param {PharmacySaleItemUpdateArgs} args - Arguments to update one PharmacySaleItem.
+     * @example
+     * // Update one PharmacySaleItem
+     * const pharmacySaleItem = await prisma.pharmacySaleItem.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends PharmacySaleItemUpdateArgs>(args: SelectSubset<T, PharmacySaleItemUpdateArgs<ExtArgs>>): Prisma__PharmacySaleItemClient<$Result.GetResult<Prisma.$PharmacySaleItemPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more PharmacySaleItems.
+     * @param {PharmacySaleItemDeleteManyArgs} args - Arguments to filter PharmacySaleItems to delete.
+     * @example
+     * // Delete a few PharmacySaleItems
+     * const { count } = await prisma.pharmacySaleItem.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends PharmacySaleItemDeleteManyArgs>(args?: SelectSubset<T, PharmacySaleItemDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more PharmacySaleItems.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PharmacySaleItemUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many PharmacySaleItems
+     * const pharmacySaleItem = await prisma.pharmacySaleItem.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends PharmacySaleItemUpdateManyArgs>(args: SelectSubset<T, PharmacySaleItemUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more PharmacySaleItems and returns the data updated in the database.
+     * @param {PharmacySaleItemUpdateManyAndReturnArgs} args - Arguments to update many PharmacySaleItems.
+     * @example
+     * // Update many PharmacySaleItems
+     * const pharmacySaleItem = await prisma.pharmacySaleItem.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more PharmacySaleItems and only return the `id`
+     * const pharmacySaleItemWithIdOnly = await prisma.pharmacySaleItem.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends PharmacySaleItemUpdateManyAndReturnArgs>(args: SelectSubset<T, PharmacySaleItemUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PharmacySaleItemPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one PharmacySaleItem.
+     * @param {PharmacySaleItemUpsertArgs} args - Arguments to update or create a PharmacySaleItem.
+     * @example
+     * // Update or create a PharmacySaleItem
+     * const pharmacySaleItem = await prisma.pharmacySaleItem.upsert({
+     *   create: {
+     *     // ... data to create a PharmacySaleItem
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the PharmacySaleItem we want to update
+     *   }
+     * })
+     */
+    upsert<T extends PharmacySaleItemUpsertArgs>(args: SelectSubset<T, PharmacySaleItemUpsertArgs<ExtArgs>>): Prisma__PharmacySaleItemClient<$Result.GetResult<Prisma.$PharmacySaleItemPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of PharmacySaleItems.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PharmacySaleItemCountArgs} args - Arguments to filter PharmacySaleItems to count.
+     * @example
+     * // Count the number of PharmacySaleItems
+     * const count = await prisma.pharmacySaleItem.count({
+     *   where: {
+     *     // ... the filter for the PharmacySaleItems we want to count
+     *   }
+     * })
+    **/
+    count<T extends PharmacySaleItemCountArgs>(
+      args?: Subset<T, PharmacySaleItemCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], PharmacySaleItemCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a PharmacySaleItem.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PharmacySaleItemAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends PharmacySaleItemAggregateArgs>(args: Subset<T, PharmacySaleItemAggregateArgs>): Prisma.PrismaPromise<GetPharmacySaleItemAggregateType<T>>
+
+    /**
+     * Group by PharmacySaleItem.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PharmacySaleItemGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends PharmacySaleItemGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: PharmacySaleItemGroupByArgs['orderBy'] }
+        : { orderBy?: PharmacySaleItemGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, PharmacySaleItemGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetPharmacySaleItemGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the PharmacySaleItem model
+   */
+  readonly fields: PharmacySaleItemFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for PharmacySaleItem.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__PharmacySaleItemClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    sale<T extends PharmacySaleDefaultArgs<ExtArgs> = {}>(args?: Subset<T, PharmacySaleDefaultArgs<ExtArgs>>): Prisma__PharmacySaleClient<$Result.GetResult<Prisma.$PharmacySalePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    pharmacyItem<T extends PharmacyItemDefaultArgs<ExtArgs> = {}>(args?: Subset<T, PharmacyItemDefaultArgs<ExtArgs>>): Prisma__PharmacyItemClient<$Result.GetResult<Prisma.$PharmacyItemPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the PharmacySaleItem model
+   */
+  interface PharmacySaleItemFieldRefs {
+    readonly id: FieldRef<"PharmacySaleItem", 'String'>
+    readonly saleId: FieldRef<"PharmacySaleItem", 'String'>
+    readonly pharmacyItemId: FieldRef<"PharmacySaleItem", 'String'>
+    readonly quantity: FieldRef<"PharmacySaleItem", 'Int'>
+    readonly unitPrice: FieldRef<"PharmacySaleItem", 'Decimal'>
+    readonly subtotal: FieldRef<"PharmacySaleItem", 'Decimal'>
+    readonly createdAt: FieldRef<"PharmacySaleItem", 'DateTime'>
+    readonly updatedAt: FieldRef<"PharmacySaleItem", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * PharmacySaleItem findUnique
+   */
+  export type PharmacySaleItemFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PharmacySaleItem
+     */
+    select?: PharmacySaleItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PharmacySaleItem
+     */
+    omit?: PharmacySaleItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PharmacySaleItemInclude<ExtArgs> | null
+    /**
+     * Filter, which PharmacySaleItem to fetch.
+     */
+    where: PharmacySaleItemWhereUniqueInput
+  }
+
+  /**
+   * PharmacySaleItem findUniqueOrThrow
+   */
+  export type PharmacySaleItemFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PharmacySaleItem
+     */
+    select?: PharmacySaleItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PharmacySaleItem
+     */
+    omit?: PharmacySaleItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PharmacySaleItemInclude<ExtArgs> | null
+    /**
+     * Filter, which PharmacySaleItem to fetch.
+     */
+    where: PharmacySaleItemWhereUniqueInput
+  }
+
+  /**
+   * PharmacySaleItem findFirst
+   */
+  export type PharmacySaleItemFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PharmacySaleItem
+     */
+    select?: PharmacySaleItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PharmacySaleItem
+     */
+    omit?: PharmacySaleItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PharmacySaleItemInclude<ExtArgs> | null
+    /**
+     * Filter, which PharmacySaleItem to fetch.
+     */
+    where?: PharmacySaleItemWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PharmacySaleItems to fetch.
+     */
+    orderBy?: PharmacySaleItemOrderByWithRelationInput | PharmacySaleItemOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for PharmacySaleItems.
+     */
+    cursor?: PharmacySaleItemWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PharmacySaleItems from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PharmacySaleItems.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of PharmacySaleItems.
+     */
+    distinct?: PharmacySaleItemScalarFieldEnum | PharmacySaleItemScalarFieldEnum[]
+  }
+
+  /**
+   * PharmacySaleItem findFirstOrThrow
+   */
+  export type PharmacySaleItemFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PharmacySaleItem
+     */
+    select?: PharmacySaleItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PharmacySaleItem
+     */
+    omit?: PharmacySaleItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PharmacySaleItemInclude<ExtArgs> | null
+    /**
+     * Filter, which PharmacySaleItem to fetch.
+     */
+    where?: PharmacySaleItemWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PharmacySaleItems to fetch.
+     */
+    orderBy?: PharmacySaleItemOrderByWithRelationInput | PharmacySaleItemOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for PharmacySaleItems.
+     */
+    cursor?: PharmacySaleItemWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PharmacySaleItems from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PharmacySaleItems.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of PharmacySaleItems.
+     */
+    distinct?: PharmacySaleItemScalarFieldEnum | PharmacySaleItemScalarFieldEnum[]
+  }
+
+  /**
+   * PharmacySaleItem findMany
+   */
+  export type PharmacySaleItemFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PharmacySaleItem
+     */
+    select?: PharmacySaleItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PharmacySaleItem
+     */
+    omit?: PharmacySaleItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PharmacySaleItemInclude<ExtArgs> | null
+    /**
+     * Filter, which PharmacySaleItems to fetch.
+     */
+    where?: PharmacySaleItemWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PharmacySaleItems to fetch.
+     */
+    orderBy?: PharmacySaleItemOrderByWithRelationInput | PharmacySaleItemOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing PharmacySaleItems.
+     */
+    cursor?: PharmacySaleItemWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PharmacySaleItems from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PharmacySaleItems.
+     */
+    skip?: number
+    distinct?: PharmacySaleItemScalarFieldEnum | PharmacySaleItemScalarFieldEnum[]
+  }
+
+  /**
+   * PharmacySaleItem create
+   */
+  export type PharmacySaleItemCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PharmacySaleItem
+     */
+    select?: PharmacySaleItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PharmacySaleItem
+     */
+    omit?: PharmacySaleItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PharmacySaleItemInclude<ExtArgs> | null
+    /**
+     * The data needed to create a PharmacySaleItem.
+     */
+    data: XOR<PharmacySaleItemCreateInput, PharmacySaleItemUncheckedCreateInput>
+  }
+
+  /**
+   * PharmacySaleItem createMany
+   */
+  export type PharmacySaleItemCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many PharmacySaleItems.
+     */
+    data: PharmacySaleItemCreateManyInput | PharmacySaleItemCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * PharmacySaleItem createManyAndReturn
+   */
+  export type PharmacySaleItemCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PharmacySaleItem
+     */
+    select?: PharmacySaleItemSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the PharmacySaleItem
+     */
+    omit?: PharmacySaleItemOmit<ExtArgs> | null
+    /**
+     * The data used to create many PharmacySaleItems.
+     */
+    data: PharmacySaleItemCreateManyInput | PharmacySaleItemCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PharmacySaleItemIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * PharmacySaleItem update
+   */
+  export type PharmacySaleItemUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PharmacySaleItem
+     */
+    select?: PharmacySaleItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PharmacySaleItem
+     */
+    omit?: PharmacySaleItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PharmacySaleItemInclude<ExtArgs> | null
+    /**
+     * The data needed to update a PharmacySaleItem.
+     */
+    data: XOR<PharmacySaleItemUpdateInput, PharmacySaleItemUncheckedUpdateInput>
+    /**
+     * Choose, which PharmacySaleItem to update.
+     */
+    where: PharmacySaleItemWhereUniqueInput
+  }
+
+  /**
+   * PharmacySaleItem updateMany
+   */
+  export type PharmacySaleItemUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update PharmacySaleItems.
+     */
+    data: XOR<PharmacySaleItemUpdateManyMutationInput, PharmacySaleItemUncheckedUpdateManyInput>
+    /**
+     * Filter which PharmacySaleItems to update
+     */
+    where?: PharmacySaleItemWhereInput
+    /**
+     * Limit how many PharmacySaleItems to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * PharmacySaleItem updateManyAndReturn
+   */
+  export type PharmacySaleItemUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PharmacySaleItem
+     */
+    select?: PharmacySaleItemSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the PharmacySaleItem
+     */
+    omit?: PharmacySaleItemOmit<ExtArgs> | null
+    /**
+     * The data used to update PharmacySaleItems.
+     */
+    data: XOR<PharmacySaleItemUpdateManyMutationInput, PharmacySaleItemUncheckedUpdateManyInput>
+    /**
+     * Filter which PharmacySaleItems to update
+     */
+    where?: PharmacySaleItemWhereInput
+    /**
+     * Limit how many PharmacySaleItems to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PharmacySaleItemIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * PharmacySaleItem upsert
+   */
+  export type PharmacySaleItemUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PharmacySaleItem
+     */
+    select?: PharmacySaleItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PharmacySaleItem
+     */
+    omit?: PharmacySaleItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PharmacySaleItemInclude<ExtArgs> | null
+    /**
+     * The filter to search for the PharmacySaleItem to update in case it exists.
+     */
+    where: PharmacySaleItemWhereUniqueInput
+    /**
+     * In case the PharmacySaleItem found by the `where` argument doesn't exist, create a new PharmacySaleItem with this data.
+     */
+    create: XOR<PharmacySaleItemCreateInput, PharmacySaleItemUncheckedCreateInput>
+    /**
+     * In case the PharmacySaleItem was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<PharmacySaleItemUpdateInput, PharmacySaleItemUncheckedUpdateInput>
+  }
+
+  /**
+   * PharmacySaleItem delete
+   */
+  export type PharmacySaleItemDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PharmacySaleItem
+     */
+    select?: PharmacySaleItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PharmacySaleItem
+     */
+    omit?: PharmacySaleItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PharmacySaleItemInclude<ExtArgs> | null
+    /**
+     * Filter which PharmacySaleItem to delete.
+     */
+    where: PharmacySaleItemWhereUniqueInput
+  }
+
+  /**
+   * PharmacySaleItem deleteMany
+   */
+  export type PharmacySaleItemDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which PharmacySaleItems to delete
+     */
+    where?: PharmacySaleItemWhereInput
+    /**
+     * Limit how many PharmacySaleItems to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * PharmacySaleItem without action
+   */
+  export type PharmacySaleItemDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PharmacySaleItem
+     */
+    select?: PharmacySaleItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PharmacySaleItem
+     */
+    omit?: PharmacySaleItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PharmacySaleItemInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model PharmacyPayment
+   */
+
+  export type AggregatePharmacyPayment = {
+    _count: PharmacyPaymentCountAggregateOutputType | null
+    _avg: PharmacyPaymentAvgAggregateOutputType | null
+    _sum: PharmacyPaymentSumAggregateOutputType | null
+    _min: PharmacyPaymentMinAggregateOutputType | null
+    _max: PharmacyPaymentMaxAggregateOutputType | null
+  }
+
+  export type PharmacyPaymentAvgAggregateOutputType = {
+    amount: Decimal | null
+  }
+
+  export type PharmacyPaymentSumAggregateOutputType = {
+    amount: Decimal | null
+  }
+
+  export type PharmacyPaymentMinAggregateOutputType = {
+    id: string | null
+    saleId: string | null
+    amount: Decimal | null
+    method: $Enums.PaymentMethod | null
+    transactionId: string | null
+    paidAt: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type PharmacyPaymentMaxAggregateOutputType = {
+    id: string | null
+    saleId: string | null
+    amount: Decimal | null
+    method: $Enums.PaymentMethod | null
+    transactionId: string | null
+    paidAt: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type PharmacyPaymentCountAggregateOutputType = {
+    id: number
+    saleId: number
+    amount: number
+    method: number
+    transactionId: number
+    paidAt: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type PharmacyPaymentAvgAggregateInputType = {
+    amount?: true
+  }
+
+  export type PharmacyPaymentSumAggregateInputType = {
+    amount?: true
+  }
+
+  export type PharmacyPaymentMinAggregateInputType = {
+    id?: true
+    saleId?: true
+    amount?: true
+    method?: true
+    transactionId?: true
+    paidAt?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type PharmacyPaymentMaxAggregateInputType = {
+    id?: true
+    saleId?: true
+    amount?: true
+    method?: true
+    transactionId?: true
+    paidAt?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type PharmacyPaymentCountAggregateInputType = {
+    id?: true
+    saleId?: true
+    amount?: true
+    method?: true
+    transactionId?: true
+    paidAt?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type PharmacyPaymentAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which PharmacyPayment to aggregate.
+     */
+    where?: PharmacyPaymentWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PharmacyPayments to fetch.
+     */
+    orderBy?: PharmacyPaymentOrderByWithRelationInput | PharmacyPaymentOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: PharmacyPaymentWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PharmacyPayments from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PharmacyPayments.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned PharmacyPayments
+    **/
+    _count?: true | PharmacyPaymentCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: PharmacyPaymentAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: PharmacyPaymentSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: PharmacyPaymentMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: PharmacyPaymentMaxAggregateInputType
+  }
+
+  export type GetPharmacyPaymentAggregateType<T extends PharmacyPaymentAggregateArgs> = {
+        [P in keyof T & keyof AggregatePharmacyPayment]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregatePharmacyPayment[P]>
+      : GetScalarType<T[P], AggregatePharmacyPayment[P]>
+  }
+
+
+
+
+  export type PharmacyPaymentGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PharmacyPaymentWhereInput
+    orderBy?: PharmacyPaymentOrderByWithAggregationInput | PharmacyPaymentOrderByWithAggregationInput[]
+    by: PharmacyPaymentScalarFieldEnum[] | PharmacyPaymentScalarFieldEnum
+    having?: PharmacyPaymentScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: PharmacyPaymentCountAggregateInputType | true
+    _avg?: PharmacyPaymentAvgAggregateInputType
+    _sum?: PharmacyPaymentSumAggregateInputType
+    _min?: PharmacyPaymentMinAggregateInputType
+    _max?: PharmacyPaymentMaxAggregateInputType
+  }
+
+  export type PharmacyPaymentGroupByOutputType = {
+    id: string
+    saleId: string
+    amount: Decimal
+    method: $Enums.PaymentMethod
+    transactionId: string | null
+    paidAt: Date
+    createdAt: Date
+    updatedAt: Date
+    _count: PharmacyPaymentCountAggregateOutputType | null
+    _avg: PharmacyPaymentAvgAggregateOutputType | null
+    _sum: PharmacyPaymentSumAggregateOutputType | null
+    _min: PharmacyPaymentMinAggregateOutputType | null
+    _max: PharmacyPaymentMaxAggregateOutputType | null
+  }
+
+  type GetPharmacyPaymentGroupByPayload<T extends PharmacyPaymentGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<PharmacyPaymentGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof PharmacyPaymentGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], PharmacyPaymentGroupByOutputType[P]>
+            : GetScalarType<T[P], PharmacyPaymentGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type PharmacyPaymentSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    saleId?: boolean
+    amount?: boolean
+    method?: boolean
+    transactionId?: boolean
+    paidAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    sale?: boolean | PharmacySaleDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["pharmacyPayment"]>
+
+  export type PharmacyPaymentSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    saleId?: boolean
+    amount?: boolean
+    method?: boolean
+    transactionId?: boolean
+    paidAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    sale?: boolean | PharmacySaleDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["pharmacyPayment"]>
+
+  export type PharmacyPaymentSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    saleId?: boolean
+    amount?: boolean
+    method?: boolean
+    transactionId?: boolean
+    paidAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    sale?: boolean | PharmacySaleDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["pharmacyPayment"]>
+
+  export type PharmacyPaymentSelectScalar = {
+    id?: boolean
+    saleId?: boolean
+    amount?: boolean
+    method?: boolean
+    transactionId?: boolean
+    paidAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type PharmacyPaymentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "saleId" | "amount" | "method" | "transactionId" | "paidAt" | "createdAt" | "updatedAt", ExtArgs["result"]["pharmacyPayment"]>
+  export type PharmacyPaymentInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    sale?: boolean | PharmacySaleDefaultArgs<ExtArgs>
+  }
+  export type PharmacyPaymentIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    sale?: boolean | PharmacySaleDefaultArgs<ExtArgs>
+  }
+  export type PharmacyPaymentIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    sale?: boolean | PharmacySaleDefaultArgs<ExtArgs>
+  }
+
+  export type $PharmacyPaymentPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "PharmacyPayment"
+    objects: {
+      sale: Prisma.$PharmacySalePayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      saleId: string
+      amount: Prisma.Decimal
+      method: $Enums.PaymentMethod
+      transactionId: string | null
+      paidAt: Date
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["pharmacyPayment"]>
+    composites: {}
+  }
+
+  type PharmacyPaymentGetPayload<S extends boolean | null | undefined | PharmacyPaymentDefaultArgs> = $Result.GetResult<Prisma.$PharmacyPaymentPayload, S>
+
+  type PharmacyPaymentCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<PharmacyPaymentFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: PharmacyPaymentCountAggregateInputType | true
+    }
+
+  export interface PharmacyPaymentDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['PharmacyPayment'], meta: { name: 'PharmacyPayment' } }
+    /**
+     * Find zero or one PharmacyPayment that matches the filter.
+     * @param {PharmacyPaymentFindUniqueArgs} args - Arguments to find a PharmacyPayment
+     * @example
+     * // Get one PharmacyPayment
+     * const pharmacyPayment = await prisma.pharmacyPayment.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends PharmacyPaymentFindUniqueArgs>(args: SelectSubset<T, PharmacyPaymentFindUniqueArgs<ExtArgs>>): Prisma__PharmacyPaymentClient<$Result.GetResult<Prisma.$PharmacyPaymentPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one PharmacyPayment that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {PharmacyPaymentFindUniqueOrThrowArgs} args - Arguments to find a PharmacyPayment
+     * @example
+     * // Get one PharmacyPayment
+     * const pharmacyPayment = await prisma.pharmacyPayment.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends PharmacyPaymentFindUniqueOrThrowArgs>(args: SelectSubset<T, PharmacyPaymentFindUniqueOrThrowArgs<ExtArgs>>): Prisma__PharmacyPaymentClient<$Result.GetResult<Prisma.$PharmacyPaymentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first PharmacyPayment that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PharmacyPaymentFindFirstArgs} args - Arguments to find a PharmacyPayment
+     * @example
+     * // Get one PharmacyPayment
+     * const pharmacyPayment = await prisma.pharmacyPayment.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends PharmacyPaymentFindFirstArgs>(args?: SelectSubset<T, PharmacyPaymentFindFirstArgs<ExtArgs>>): Prisma__PharmacyPaymentClient<$Result.GetResult<Prisma.$PharmacyPaymentPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first PharmacyPayment that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PharmacyPaymentFindFirstOrThrowArgs} args - Arguments to find a PharmacyPayment
+     * @example
+     * // Get one PharmacyPayment
+     * const pharmacyPayment = await prisma.pharmacyPayment.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends PharmacyPaymentFindFirstOrThrowArgs>(args?: SelectSubset<T, PharmacyPaymentFindFirstOrThrowArgs<ExtArgs>>): Prisma__PharmacyPaymentClient<$Result.GetResult<Prisma.$PharmacyPaymentPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more PharmacyPayments that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PharmacyPaymentFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all PharmacyPayments
+     * const pharmacyPayments = await prisma.pharmacyPayment.findMany()
+     * 
+     * // Get first 10 PharmacyPayments
+     * const pharmacyPayments = await prisma.pharmacyPayment.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const pharmacyPaymentWithIdOnly = await prisma.pharmacyPayment.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends PharmacyPaymentFindManyArgs>(args?: SelectSubset<T, PharmacyPaymentFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PharmacyPaymentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a PharmacyPayment.
+     * @param {PharmacyPaymentCreateArgs} args - Arguments to create a PharmacyPayment.
+     * @example
+     * // Create one PharmacyPayment
+     * const PharmacyPayment = await prisma.pharmacyPayment.create({
+     *   data: {
+     *     // ... data to create a PharmacyPayment
+     *   }
+     * })
+     * 
+     */
+    create<T extends PharmacyPaymentCreateArgs>(args: SelectSubset<T, PharmacyPaymentCreateArgs<ExtArgs>>): Prisma__PharmacyPaymentClient<$Result.GetResult<Prisma.$PharmacyPaymentPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many PharmacyPayments.
+     * @param {PharmacyPaymentCreateManyArgs} args - Arguments to create many PharmacyPayments.
+     * @example
+     * // Create many PharmacyPayments
+     * const pharmacyPayment = await prisma.pharmacyPayment.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends PharmacyPaymentCreateManyArgs>(args?: SelectSubset<T, PharmacyPaymentCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many PharmacyPayments and returns the data saved in the database.
+     * @param {PharmacyPaymentCreateManyAndReturnArgs} args - Arguments to create many PharmacyPayments.
+     * @example
+     * // Create many PharmacyPayments
+     * const pharmacyPayment = await prisma.pharmacyPayment.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many PharmacyPayments and only return the `id`
+     * const pharmacyPaymentWithIdOnly = await prisma.pharmacyPayment.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends PharmacyPaymentCreateManyAndReturnArgs>(args?: SelectSubset<T, PharmacyPaymentCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PharmacyPaymentPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a PharmacyPayment.
+     * @param {PharmacyPaymentDeleteArgs} args - Arguments to delete one PharmacyPayment.
+     * @example
+     * // Delete one PharmacyPayment
+     * const PharmacyPayment = await prisma.pharmacyPayment.delete({
+     *   where: {
+     *     // ... filter to delete one PharmacyPayment
+     *   }
+     * })
+     * 
+     */
+    delete<T extends PharmacyPaymentDeleteArgs>(args: SelectSubset<T, PharmacyPaymentDeleteArgs<ExtArgs>>): Prisma__PharmacyPaymentClient<$Result.GetResult<Prisma.$PharmacyPaymentPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one PharmacyPayment.
+     * @param {PharmacyPaymentUpdateArgs} args - Arguments to update one PharmacyPayment.
+     * @example
+     * // Update one PharmacyPayment
+     * const pharmacyPayment = await prisma.pharmacyPayment.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends PharmacyPaymentUpdateArgs>(args: SelectSubset<T, PharmacyPaymentUpdateArgs<ExtArgs>>): Prisma__PharmacyPaymentClient<$Result.GetResult<Prisma.$PharmacyPaymentPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more PharmacyPayments.
+     * @param {PharmacyPaymentDeleteManyArgs} args - Arguments to filter PharmacyPayments to delete.
+     * @example
+     * // Delete a few PharmacyPayments
+     * const { count } = await prisma.pharmacyPayment.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends PharmacyPaymentDeleteManyArgs>(args?: SelectSubset<T, PharmacyPaymentDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more PharmacyPayments.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PharmacyPaymentUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many PharmacyPayments
+     * const pharmacyPayment = await prisma.pharmacyPayment.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends PharmacyPaymentUpdateManyArgs>(args: SelectSubset<T, PharmacyPaymentUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more PharmacyPayments and returns the data updated in the database.
+     * @param {PharmacyPaymentUpdateManyAndReturnArgs} args - Arguments to update many PharmacyPayments.
+     * @example
+     * // Update many PharmacyPayments
+     * const pharmacyPayment = await prisma.pharmacyPayment.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more PharmacyPayments and only return the `id`
+     * const pharmacyPaymentWithIdOnly = await prisma.pharmacyPayment.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends PharmacyPaymentUpdateManyAndReturnArgs>(args: SelectSubset<T, PharmacyPaymentUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PharmacyPaymentPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one PharmacyPayment.
+     * @param {PharmacyPaymentUpsertArgs} args - Arguments to update or create a PharmacyPayment.
+     * @example
+     * // Update or create a PharmacyPayment
+     * const pharmacyPayment = await prisma.pharmacyPayment.upsert({
+     *   create: {
+     *     // ... data to create a PharmacyPayment
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the PharmacyPayment we want to update
+     *   }
+     * })
+     */
+    upsert<T extends PharmacyPaymentUpsertArgs>(args: SelectSubset<T, PharmacyPaymentUpsertArgs<ExtArgs>>): Prisma__PharmacyPaymentClient<$Result.GetResult<Prisma.$PharmacyPaymentPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of PharmacyPayments.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PharmacyPaymentCountArgs} args - Arguments to filter PharmacyPayments to count.
+     * @example
+     * // Count the number of PharmacyPayments
+     * const count = await prisma.pharmacyPayment.count({
+     *   where: {
+     *     // ... the filter for the PharmacyPayments we want to count
+     *   }
+     * })
+    **/
+    count<T extends PharmacyPaymentCountArgs>(
+      args?: Subset<T, PharmacyPaymentCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], PharmacyPaymentCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a PharmacyPayment.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PharmacyPaymentAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends PharmacyPaymentAggregateArgs>(args: Subset<T, PharmacyPaymentAggregateArgs>): Prisma.PrismaPromise<GetPharmacyPaymentAggregateType<T>>
+
+    /**
+     * Group by PharmacyPayment.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PharmacyPaymentGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends PharmacyPaymentGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: PharmacyPaymentGroupByArgs['orderBy'] }
+        : { orderBy?: PharmacyPaymentGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, PharmacyPaymentGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetPharmacyPaymentGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the PharmacyPayment model
+   */
+  readonly fields: PharmacyPaymentFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for PharmacyPayment.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__PharmacyPaymentClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    sale<T extends PharmacySaleDefaultArgs<ExtArgs> = {}>(args?: Subset<T, PharmacySaleDefaultArgs<ExtArgs>>): Prisma__PharmacySaleClient<$Result.GetResult<Prisma.$PharmacySalePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the PharmacyPayment model
+   */
+  interface PharmacyPaymentFieldRefs {
+    readonly id: FieldRef<"PharmacyPayment", 'String'>
+    readonly saleId: FieldRef<"PharmacyPayment", 'String'>
+    readonly amount: FieldRef<"PharmacyPayment", 'Decimal'>
+    readonly method: FieldRef<"PharmacyPayment", 'PaymentMethod'>
+    readonly transactionId: FieldRef<"PharmacyPayment", 'String'>
+    readonly paidAt: FieldRef<"PharmacyPayment", 'DateTime'>
+    readonly createdAt: FieldRef<"PharmacyPayment", 'DateTime'>
+    readonly updatedAt: FieldRef<"PharmacyPayment", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * PharmacyPayment findUnique
+   */
+  export type PharmacyPaymentFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PharmacyPayment
+     */
+    select?: PharmacyPaymentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PharmacyPayment
+     */
+    omit?: PharmacyPaymentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PharmacyPaymentInclude<ExtArgs> | null
+    /**
+     * Filter, which PharmacyPayment to fetch.
+     */
+    where: PharmacyPaymentWhereUniqueInput
+  }
+
+  /**
+   * PharmacyPayment findUniqueOrThrow
+   */
+  export type PharmacyPaymentFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PharmacyPayment
+     */
+    select?: PharmacyPaymentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PharmacyPayment
+     */
+    omit?: PharmacyPaymentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PharmacyPaymentInclude<ExtArgs> | null
+    /**
+     * Filter, which PharmacyPayment to fetch.
+     */
+    where: PharmacyPaymentWhereUniqueInput
+  }
+
+  /**
+   * PharmacyPayment findFirst
+   */
+  export type PharmacyPaymentFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PharmacyPayment
+     */
+    select?: PharmacyPaymentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PharmacyPayment
+     */
+    omit?: PharmacyPaymentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PharmacyPaymentInclude<ExtArgs> | null
+    /**
+     * Filter, which PharmacyPayment to fetch.
+     */
+    where?: PharmacyPaymentWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PharmacyPayments to fetch.
+     */
+    orderBy?: PharmacyPaymentOrderByWithRelationInput | PharmacyPaymentOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for PharmacyPayments.
+     */
+    cursor?: PharmacyPaymentWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PharmacyPayments from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PharmacyPayments.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of PharmacyPayments.
+     */
+    distinct?: PharmacyPaymentScalarFieldEnum | PharmacyPaymentScalarFieldEnum[]
+  }
+
+  /**
+   * PharmacyPayment findFirstOrThrow
+   */
+  export type PharmacyPaymentFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PharmacyPayment
+     */
+    select?: PharmacyPaymentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PharmacyPayment
+     */
+    omit?: PharmacyPaymentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PharmacyPaymentInclude<ExtArgs> | null
+    /**
+     * Filter, which PharmacyPayment to fetch.
+     */
+    where?: PharmacyPaymentWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PharmacyPayments to fetch.
+     */
+    orderBy?: PharmacyPaymentOrderByWithRelationInput | PharmacyPaymentOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for PharmacyPayments.
+     */
+    cursor?: PharmacyPaymentWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PharmacyPayments from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PharmacyPayments.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of PharmacyPayments.
+     */
+    distinct?: PharmacyPaymentScalarFieldEnum | PharmacyPaymentScalarFieldEnum[]
+  }
+
+  /**
+   * PharmacyPayment findMany
+   */
+  export type PharmacyPaymentFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PharmacyPayment
+     */
+    select?: PharmacyPaymentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PharmacyPayment
+     */
+    omit?: PharmacyPaymentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PharmacyPaymentInclude<ExtArgs> | null
+    /**
+     * Filter, which PharmacyPayments to fetch.
+     */
+    where?: PharmacyPaymentWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PharmacyPayments to fetch.
+     */
+    orderBy?: PharmacyPaymentOrderByWithRelationInput | PharmacyPaymentOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing PharmacyPayments.
+     */
+    cursor?: PharmacyPaymentWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PharmacyPayments from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PharmacyPayments.
+     */
+    skip?: number
+    distinct?: PharmacyPaymentScalarFieldEnum | PharmacyPaymentScalarFieldEnum[]
+  }
+
+  /**
+   * PharmacyPayment create
+   */
+  export type PharmacyPaymentCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PharmacyPayment
+     */
+    select?: PharmacyPaymentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PharmacyPayment
+     */
+    omit?: PharmacyPaymentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PharmacyPaymentInclude<ExtArgs> | null
+    /**
+     * The data needed to create a PharmacyPayment.
+     */
+    data: XOR<PharmacyPaymentCreateInput, PharmacyPaymentUncheckedCreateInput>
+  }
+
+  /**
+   * PharmacyPayment createMany
+   */
+  export type PharmacyPaymentCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many PharmacyPayments.
+     */
+    data: PharmacyPaymentCreateManyInput | PharmacyPaymentCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * PharmacyPayment createManyAndReturn
+   */
+  export type PharmacyPaymentCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PharmacyPayment
+     */
+    select?: PharmacyPaymentSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the PharmacyPayment
+     */
+    omit?: PharmacyPaymentOmit<ExtArgs> | null
+    /**
+     * The data used to create many PharmacyPayments.
+     */
+    data: PharmacyPaymentCreateManyInput | PharmacyPaymentCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PharmacyPaymentIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * PharmacyPayment update
+   */
+  export type PharmacyPaymentUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PharmacyPayment
+     */
+    select?: PharmacyPaymentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PharmacyPayment
+     */
+    omit?: PharmacyPaymentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PharmacyPaymentInclude<ExtArgs> | null
+    /**
+     * The data needed to update a PharmacyPayment.
+     */
+    data: XOR<PharmacyPaymentUpdateInput, PharmacyPaymentUncheckedUpdateInput>
+    /**
+     * Choose, which PharmacyPayment to update.
+     */
+    where: PharmacyPaymentWhereUniqueInput
+  }
+
+  /**
+   * PharmacyPayment updateMany
+   */
+  export type PharmacyPaymentUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update PharmacyPayments.
+     */
+    data: XOR<PharmacyPaymentUpdateManyMutationInput, PharmacyPaymentUncheckedUpdateManyInput>
+    /**
+     * Filter which PharmacyPayments to update
+     */
+    where?: PharmacyPaymentWhereInput
+    /**
+     * Limit how many PharmacyPayments to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * PharmacyPayment updateManyAndReturn
+   */
+  export type PharmacyPaymentUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PharmacyPayment
+     */
+    select?: PharmacyPaymentSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the PharmacyPayment
+     */
+    omit?: PharmacyPaymentOmit<ExtArgs> | null
+    /**
+     * The data used to update PharmacyPayments.
+     */
+    data: XOR<PharmacyPaymentUpdateManyMutationInput, PharmacyPaymentUncheckedUpdateManyInput>
+    /**
+     * Filter which PharmacyPayments to update
+     */
+    where?: PharmacyPaymentWhereInput
+    /**
+     * Limit how many PharmacyPayments to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PharmacyPaymentIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * PharmacyPayment upsert
+   */
+  export type PharmacyPaymentUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PharmacyPayment
+     */
+    select?: PharmacyPaymentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PharmacyPayment
+     */
+    omit?: PharmacyPaymentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PharmacyPaymentInclude<ExtArgs> | null
+    /**
+     * The filter to search for the PharmacyPayment to update in case it exists.
+     */
+    where: PharmacyPaymentWhereUniqueInput
+    /**
+     * In case the PharmacyPayment found by the `where` argument doesn't exist, create a new PharmacyPayment with this data.
+     */
+    create: XOR<PharmacyPaymentCreateInput, PharmacyPaymentUncheckedCreateInput>
+    /**
+     * In case the PharmacyPayment was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<PharmacyPaymentUpdateInput, PharmacyPaymentUncheckedUpdateInput>
+  }
+
+  /**
+   * PharmacyPayment delete
+   */
+  export type PharmacyPaymentDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PharmacyPayment
+     */
+    select?: PharmacyPaymentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PharmacyPayment
+     */
+    omit?: PharmacyPaymentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PharmacyPaymentInclude<ExtArgs> | null
+    /**
+     * Filter which PharmacyPayment to delete.
+     */
+    where: PharmacyPaymentWhereUniqueInput
+  }
+
+  /**
+   * PharmacyPayment deleteMany
+   */
+  export type PharmacyPaymentDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which PharmacyPayments to delete
+     */
+    where?: PharmacyPaymentWhereInput
+    /**
+     * Limit how many PharmacyPayments to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * PharmacyPayment without action
+   */
+  export type PharmacyPaymentDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PharmacyPayment
+     */
+    select?: PharmacyPaymentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PharmacyPayment
+     */
+    omit?: PharmacyPaymentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PharmacyPaymentInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -12667,6 +21432,107 @@ export namespace Prisma {
   };
 
   export type MedicalServiceScalarFieldEnum = (typeof MedicalServiceScalarFieldEnum)[keyof typeof MedicalServiceScalarFieldEnum]
+
+
+  export const PharmacySupplierScalarFieldEnum: {
+    id: 'id',
+    name: 'name',
+    email: 'email',
+    contact: 'contact',
+    address: 'address',
+    notes: 'notes',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type PharmacySupplierScalarFieldEnum = (typeof PharmacySupplierScalarFieldEnum)[keyof typeof PharmacySupplierScalarFieldEnum]
+
+
+  export const PharmacyBrandScalarFieldEnum: {
+    id: 'id',
+    name: 'name',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type PharmacyBrandScalarFieldEnum = (typeof PharmacyBrandScalarFieldEnum)[keyof typeof PharmacyBrandScalarFieldEnum]
+
+
+  export const PharmacyItemCategoryScalarFieldEnum: {
+    id: 'id',
+    name: 'name',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type PharmacyItemCategoryScalarFieldEnum = (typeof PharmacyItemCategoryScalarFieldEnum)[keyof typeof PharmacyItemCategoryScalarFieldEnum]
+
+
+  export const PharmacyItemScalarFieldEnum: {
+    id: 'id',
+    brandId: 'brandId',
+    categoryId: 'categoryId',
+    name: 'name',
+    form: 'form',
+    route: 'route',
+    strength: 'strength',
+    stock: 'stock',
+    unit: 'unit',
+    price: 'price',
+    sku: 'sku',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type PharmacyItemScalarFieldEnum = (typeof PharmacyItemScalarFieldEnum)[keyof typeof PharmacyItemScalarFieldEnum]
+
+
+  export const PharmacySaleScalarFieldEnum: {
+    id: 'id',
+    invoiceNumber: 'invoiceNumber',
+    customerName: 'customerName',
+    customerPhone: 'customerPhone',
+    staffId: 'staffId',
+    subtotal: 'subtotal',
+    discount: 'discount',
+    tax: 'tax',
+    total: 'total',
+    paymentMethod: 'paymentMethod',
+    paymentStatus: 'paymentStatus',
+    notes: 'notes',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type PharmacySaleScalarFieldEnum = (typeof PharmacySaleScalarFieldEnum)[keyof typeof PharmacySaleScalarFieldEnum]
+
+
+  export const PharmacySaleItemScalarFieldEnum: {
+    id: 'id',
+    saleId: 'saleId',
+    pharmacyItemId: 'pharmacyItemId',
+    quantity: 'quantity',
+    unitPrice: 'unitPrice',
+    subtotal: 'subtotal',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type PharmacySaleItemScalarFieldEnum = (typeof PharmacySaleItemScalarFieldEnum)[keyof typeof PharmacySaleItemScalarFieldEnum]
+
+
+  export const PharmacyPaymentScalarFieldEnum: {
+    id: 'id',
+    saleId: 'saleId',
+    amount: 'amount',
+    method: 'method',
+    transactionId: 'transactionId',
+    paidAt: 'paidAt',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type PharmacyPaymentScalarFieldEnum = (typeof PharmacyPaymentScalarFieldEnum)[keyof typeof PharmacyPaymentScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -12957,6 +21823,62 @@ export namespace Prisma {
    * Reference to a field of type 'ServiceCategory[]'
    */
   export type ListEnumServiceCategoryFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ServiceCategory[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'PharmacyItemForm'
+   */
+  export type EnumPharmacyItemFormFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PharmacyItemForm'>
+    
+
+
+  /**
+   * Reference to a field of type 'PharmacyItemForm[]'
+   */
+  export type ListEnumPharmacyItemFormFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PharmacyItemForm[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'PharmacyItemRoute'
+   */
+  export type EnumPharmacyItemRouteFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PharmacyItemRoute'>
+    
+
+
+  /**
+   * Reference to a field of type 'PharmacyItemRoute[]'
+   */
+  export type ListEnumPharmacyItemRouteFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PharmacyItemRoute[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'PaymentMethod'
+   */
+  export type EnumPaymentMethodFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PaymentMethod'>
+    
+
+
+  /**
+   * Reference to a field of type 'PaymentMethod[]'
+   */
+  export type ListEnumPaymentMethodFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PaymentMethod[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'PaymentStatus'
+   */
+  export type EnumPaymentStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PaymentStatus'>
+    
+
+
+  /**
+   * Reference to a field of type 'PaymentStatus[]'
+   */
+  export type ListEnumPaymentStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PaymentStatus[]'>
     
 
 
@@ -13829,6 +22751,528 @@ export namespace Prisma {
     notes?: StringNullableWithAggregatesFilter<"MedicalService"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"MedicalService"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"MedicalService"> | Date | string
+  }
+
+  export type PharmacySupplierWhereInput = {
+    AND?: PharmacySupplierWhereInput | PharmacySupplierWhereInput[]
+    OR?: PharmacySupplierWhereInput[]
+    NOT?: PharmacySupplierWhereInput | PharmacySupplierWhereInput[]
+    id?: UuidFilter<"PharmacySupplier"> | string
+    name?: StringFilter<"PharmacySupplier"> | string
+    email?: StringNullableFilter<"PharmacySupplier"> | string | null
+    contact?: StringNullableFilter<"PharmacySupplier"> | string | null
+    address?: StringNullableFilter<"PharmacySupplier"> | string | null
+    notes?: StringNullableFilter<"PharmacySupplier"> | string | null
+    createdAt?: DateTimeFilter<"PharmacySupplier"> | Date | string
+    updatedAt?: DateTimeFilter<"PharmacySupplier"> | Date | string
+  }
+
+  export type PharmacySupplierOrderByWithRelationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    email?: SortOrderInput | SortOrder
+    contact?: SortOrderInput | SortOrder
+    address?: SortOrderInput | SortOrder
+    notes?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type PharmacySupplierWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: PharmacySupplierWhereInput | PharmacySupplierWhereInput[]
+    OR?: PharmacySupplierWhereInput[]
+    NOT?: PharmacySupplierWhereInput | PharmacySupplierWhereInput[]
+    name?: StringFilter<"PharmacySupplier"> | string
+    email?: StringNullableFilter<"PharmacySupplier"> | string | null
+    contact?: StringNullableFilter<"PharmacySupplier"> | string | null
+    address?: StringNullableFilter<"PharmacySupplier"> | string | null
+    notes?: StringNullableFilter<"PharmacySupplier"> | string | null
+    createdAt?: DateTimeFilter<"PharmacySupplier"> | Date | string
+    updatedAt?: DateTimeFilter<"PharmacySupplier"> | Date | string
+  }, "id">
+
+  export type PharmacySupplierOrderByWithAggregationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    email?: SortOrderInput | SortOrder
+    contact?: SortOrderInput | SortOrder
+    address?: SortOrderInput | SortOrder
+    notes?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: PharmacySupplierCountOrderByAggregateInput
+    _max?: PharmacySupplierMaxOrderByAggregateInput
+    _min?: PharmacySupplierMinOrderByAggregateInput
+  }
+
+  export type PharmacySupplierScalarWhereWithAggregatesInput = {
+    AND?: PharmacySupplierScalarWhereWithAggregatesInput | PharmacySupplierScalarWhereWithAggregatesInput[]
+    OR?: PharmacySupplierScalarWhereWithAggregatesInput[]
+    NOT?: PharmacySupplierScalarWhereWithAggregatesInput | PharmacySupplierScalarWhereWithAggregatesInput[]
+    id?: UuidWithAggregatesFilter<"PharmacySupplier"> | string
+    name?: StringWithAggregatesFilter<"PharmacySupplier"> | string
+    email?: StringNullableWithAggregatesFilter<"PharmacySupplier"> | string | null
+    contact?: StringNullableWithAggregatesFilter<"PharmacySupplier"> | string | null
+    address?: StringNullableWithAggregatesFilter<"PharmacySupplier"> | string | null
+    notes?: StringNullableWithAggregatesFilter<"PharmacySupplier"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"PharmacySupplier"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"PharmacySupplier"> | Date | string
+  }
+
+  export type PharmacyBrandWhereInput = {
+    AND?: PharmacyBrandWhereInput | PharmacyBrandWhereInput[]
+    OR?: PharmacyBrandWhereInput[]
+    NOT?: PharmacyBrandWhereInput | PharmacyBrandWhereInput[]
+    id?: UuidFilter<"PharmacyBrand"> | string
+    name?: StringFilter<"PharmacyBrand"> | string
+    createdAt?: DateTimeFilter<"PharmacyBrand"> | Date | string
+    updatedAt?: DateTimeFilter<"PharmacyBrand"> | Date | string
+    items?: PharmacyItemListRelationFilter
+  }
+
+  export type PharmacyBrandOrderByWithRelationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    items?: PharmacyItemOrderByRelationAggregateInput
+  }
+
+  export type PharmacyBrandWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: PharmacyBrandWhereInput | PharmacyBrandWhereInput[]
+    OR?: PharmacyBrandWhereInput[]
+    NOT?: PharmacyBrandWhereInput | PharmacyBrandWhereInput[]
+    name?: StringFilter<"PharmacyBrand"> | string
+    createdAt?: DateTimeFilter<"PharmacyBrand"> | Date | string
+    updatedAt?: DateTimeFilter<"PharmacyBrand"> | Date | string
+    items?: PharmacyItemListRelationFilter
+  }, "id">
+
+  export type PharmacyBrandOrderByWithAggregationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: PharmacyBrandCountOrderByAggregateInput
+    _max?: PharmacyBrandMaxOrderByAggregateInput
+    _min?: PharmacyBrandMinOrderByAggregateInput
+  }
+
+  export type PharmacyBrandScalarWhereWithAggregatesInput = {
+    AND?: PharmacyBrandScalarWhereWithAggregatesInput | PharmacyBrandScalarWhereWithAggregatesInput[]
+    OR?: PharmacyBrandScalarWhereWithAggregatesInput[]
+    NOT?: PharmacyBrandScalarWhereWithAggregatesInput | PharmacyBrandScalarWhereWithAggregatesInput[]
+    id?: UuidWithAggregatesFilter<"PharmacyBrand"> | string
+    name?: StringWithAggregatesFilter<"PharmacyBrand"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"PharmacyBrand"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"PharmacyBrand"> | Date | string
+  }
+
+  export type PharmacyItemCategoryWhereInput = {
+    AND?: PharmacyItemCategoryWhereInput | PharmacyItemCategoryWhereInput[]
+    OR?: PharmacyItemCategoryWhereInput[]
+    NOT?: PharmacyItemCategoryWhereInput | PharmacyItemCategoryWhereInput[]
+    id?: UuidFilter<"PharmacyItemCategory"> | string
+    name?: StringFilter<"PharmacyItemCategory"> | string
+    createdAt?: DateTimeFilter<"PharmacyItemCategory"> | Date | string
+    updatedAt?: DateTimeFilter<"PharmacyItemCategory"> | Date | string
+    items?: PharmacyItemListRelationFilter
+  }
+
+  export type PharmacyItemCategoryOrderByWithRelationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    items?: PharmacyItemOrderByRelationAggregateInput
+  }
+
+  export type PharmacyItemCategoryWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: PharmacyItemCategoryWhereInput | PharmacyItemCategoryWhereInput[]
+    OR?: PharmacyItemCategoryWhereInput[]
+    NOT?: PharmacyItemCategoryWhereInput | PharmacyItemCategoryWhereInput[]
+    name?: StringFilter<"PharmacyItemCategory"> | string
+    createdAt?: DateTimeFilter<"PharmacyItemCategory"> | Date | string
+    updatedAt?: DateTimeFilter<"PharmacyItemCategory"> | Date | string
+    items?: PharmacyItemListRelationFilter
+  }, "id">
+
+  export type PharmacyItemCategoryOrderByWithAggregationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: PharmacyItemCategoryCountOrderByAggregateInput
+    _max?: PharmacyItemCategoryMaxOrderByAggregateInput
+    _min?: PharmacyItemCategoryMinOrderByAggregateInput
+  }
+
+  export type PharmacyItemCategoryScalarWhereWithAggregatesInput = {
+    AND?: PharmacyItemCategoryScalarWhereWithAggregatesInput | PharmacyItemCategoryScalarWhereWithAggregatesInput[]
+    OR?: PharmacyItemCategoryScalarWhereWithAggregatesInput[]
+    NOT?: PharmacyItemCategoryScalarWhereWithAggregatesInput | PharmacyItemCategoryScalarWhereWithAggregatesInput[]
+    id?: UuidWithAggregatesFilter<"PharmacyItemCategory"> | string
+    name?: StringWithAggregatesFilter<"PharmacyItemCategory"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"PharmacyItemCategory"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"PharmacyItemCategory"> | Date | string
+  }
+
+  export type PharmacyItemWhereInput = {
+    AND?: PharmacyItemWhereInput | PharmacyItemWhereInput[]
+    OR?: PharmacyItemWhereInput[]
+    NOT?: PharmacyItemWhereInput | PharmacyItemWhereInput[]
+    id?: UuidFilter<"PharmacyItem"> | string
+    brandId?: UuidFilter<"PharmacyItem"> | string
+    categoryId?: UuidFilter<"PharmacyItem"> | string
+    name?: StringFilter<"PharmacyItem"> | string
+    form?: EnumPharmacyItemFormFilter<"PharmacyItem"> | $Enums.PharmacyItemForm
+    route?: EnumPharmacyItemRouteFilter<"PharmacyItem"> | $Enums.PharmacyItemRoute
+    strength?: StringFilter<"PharmacyItem"> | string
+    stock?: IntFilter<"PharmacyItem"> | number
+    unit?: StringFilter<"PharmacyItem"> | string
+    price?: DecimalFilter<"PharmacyItem"> | Decimal | DecimalJsLike | number | string
+    sku?: StringNullableFilter<"PharmacyItem"> | string | null
+    createdAt?: DateTimeFilter<"PharmacyItem"> | Date | string
+    updatedAt?: DateTimeFilter<"PharmacyItem"> | Date | string
+    brand?: XOR<PharmacyBrandScalarRelationFilter, PharmacyBrandWhereInput>
+    category?: XOR<PharmacyItemCategoryScalarRelationFilter, PharmacyItemCategoryWhereInput>
+    saleItems?: PharmacySaleItemListRelationFilter
+  }
+
+  export type PharmacyItemOrderByWithRelationInput = {
+    id?: SortOrder
+    brandId?: SortOrder
+    categoryId?: SortOrder
+    name?: SortOrder
+    form?: SortOrder
+    route?: SortOrder
+    strength?: SortOrder
+    stock?: SortOrder
+    unit?: SortOrder
+    price?: SortOrder
+    sku?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    brand?: PharmacyBrandOrderByWithRelationInput
+    category?: PharmacyItemCategoryOrderByWithRelationInput
+    saleItems?: PharmacySaleItemOrderByRelationAggregateInput
+  }
+
+  export type PharmacyItemWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: PharmacyItemWhereInput | PharmacyItemWhereInput[]
+    OR?: PharmacyItemWhereInput[]
+    NOT?: PharmacyItemWhereInput | PharmacyItemWhereInput[]
+    brandId?: UuidFilter<"PharmacyItem"> | string
+    categoryId?: UuidFilter<"PharmacyItem"> | string
+    name?: StringFilter<"PharmacyItem"> | string
+    form?: EnumPharmacyItemFormFilter<"PharmacyItem"> | $Enums.PharmacyItemForm
+    route?: EnumPharmacyItemRouteFilter<"PharmacyItem"> | $Enums.PharmacyItemRoute
+    strength?: StringFilter<"PharmacyItem"> | string
+    stock?: IntFilter<"PharmacyItem"> | number
+    unit?: StringFilter<"PharmacyItem"> | string
+    price?: DecimalFilter<"PharmacyItem"> | Decimal | DecimalJsLike | number | string
+    sku?: StringNullableFilter<"PharmacyItem"> | string | null
+    createdAt?: DateTimeFilter<"PharmacyItem"> | Date | string
+    updatedAt?: DateTimeFilter<"PharmacyItem"> | Date | string
+    brand?: XOR<PharmacyBrandScalarRelationFilter, PharmacyBrandWhereInput>
+    category?: XOR<PharmacyItemCategoryScalarRelationFilter, PharmacyItemCategoryWhereInput>
+    saleItems?: PharmacySaleItemListRelationFilter
+  }, "id">
+
+  export type PharmacyItemOrderByWithAggregationInput = {
+    id?: SortOrder
+    brandId?: SortOrder
+    categoryId?: SortOrder
+    name?: SortOrder
+    form?: SortOrder
+    route?: SortOrder
+    strength?: SortOrder
+    stock?: SortOrder
+    unit?: SortOrder
+    price?: SortOrder
+    sku?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: PharmacyItemCountOrderByAggregateInput
+    _avg?: PharmacyItemAvgOrderByAggregateInput
+    _max?: PharmacyItemMaxOrderByAggregateInput
+    _min?: PharmacyItemMinOrderByAggregateInput
+    _sum?: PharmacyItemSumOrderByAggregateInput
+  }
+
+  export type PharmacyItemScalarWhereWithAggregatesInput = {
+    AND?: PharmacyItemScalarWhereWithAggregatesInput | PharmacyItemScalarWhereWithAggregatesInput[]
+    OR?: PharmacyItemScalarWhereWithAggregatesInput[]
+    NOT?: PharmacyItemScalarWhereWithAggregatesInput | PharmacyItemScalarWhereWithAggregatesInput[]
+    id?: UuidWithAggregatesFilter<"PharmacyItem"> | string
+    brandId?: UuidWithAggregatesFilter<"PharmacyItem"> | string
+    categoryId?: UuidWithAggregatesFilter<"PharmacyItem"> | string
+    name?: StringWithAggregatesFilter<"PharmacyItem"> | string
+    form?: EnumPharmacyItemFormWithAggregatesFilter<"PharmacyItem"> | $Enums.PharmacyItemForm
+    route?: EnumPharmacyItemRouteWithAggregatesFilter<"PharmacyItem"> | $Enums.PharmacyItemRoute
+    strength?: StringWithAggregatesFilter<"PharmacyItem"> | string
+    stock?: IntWithAggregatesFilter<"PharmacyItem"> | number
+    unit?: StringWithAggregatesFilter<"PharmacyItem"> | string
+    price?: DecimalWithAggregatesFilter<"PharmacyItem"> | Decimal | DecimalJsLike | number | string
+    sku?: StringNullableWithAggregatesFilter<"PharmacyItem"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"PharmacyItem"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"PharmacyItem"> | Date | string
+  }
+
+  export type PharmacySaleWhereInput = {
+    AND?: PharmacySaleWhereInput | PharmacySaleWhereInput[]
+    OR?: PharmacySaleWhereInput[]
+    NOT?: PharmacySaleWhereInput | PharmacySaleWhereInput[]
+    id?: UuidFilter<"PharmacySale"> | string
+    invoiceNumber?: StringFilter<"PharmacySale"> | string
+    customerName?: StringNullableFilter<"PharmacySale"> | string | null
+    customerPhone?: StringNullableFilter<"PharmacySale"> | string | null
+    staffId?: StringNullableFilter<"PharmacySale"> | string | null
+    subtotal?: DecimalFilter<"PharmacySale"> | Decimal | DecimalJsLike | number | string
+    discount?: DecimalFilter<"PharmacySale"> | Decimal | DecimalJsLike | number | string
+    tax?: DecimalFilter<"PharmacySale"> | Decimal | DecimalJsLike | number | string
+    total?: DecimalFilter<"PharmacySale"> | Decimal | DecimalJsLike | number | string
+    paymentMethod?: EnumPaymentMethodFilter<"PharmacySale"> | $Enums.PaymentMethod
+    paymentStatus?: EnumPaymentStatusFilter<"PharmacySale"> | $Enums.PaymentStatus
+    notes?: StringNullableFilter<"PharmacySale"> | string | null
+    createdAt?: DateTimeFilter<"PharmacySale"> | Date | string
+    updatedAt?: DateTimeFilter<"PharmacySale"> | Date | string
+    items?: PharmacySaleItemListRelationFilter
+    payments?: PharmacyPaymentListRelationFilter
+  }
+
+  export type PharmacySaleOrderByWithRelationInput = {
+    id?: SortOrder
+    invoiceNumber?: SortOrder
+    customerName?: SortOrderInput | SortOrder
+    customerPhone?: SortOrderInput | SortOrder
+    staffId?: SortOrderInput | SortOrder
+    subtotal?: SortOrder
+    discount?: SortOrder
+    tax?: SortOrder
+    total?: SortOrder
+    paymentMethod?: SortOrder
+    paymentStatus?: SortOrder
+    notes?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    items?: PharmacySaleItemOrderByRelationAggregateInput
+    payments?: PharmacyPaymentOrderByRelationAggregateInput
+  }
+
+  export type PharmacySaleWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    invoiceNumber?: string
+    AND?: PharmacySaleWhereInput | PharmacySaleWhereInput[]
+    OR?: PharmacySaleWhereInput[]
+    NOT?: PharmacySaleWhereInput | PharmacySaleWhereInput[]
+    customerName?: StringNullableFilter<"PharmacySale"> | string | null
+    customerPhone?: StringNullableFilter<"PharmacySale"> | string | null
+    staffId?: StringNullableFilter<"PharmacySale"> | string | null
+    subtotal?: DecimalFilter<"PharmacySale"> | Decimal | DecimalJsLike | number | string
+    discount?: DecimalFilter<"PharmacySale"> | Decimal | DecimalJsLike | number | string
+    tax?: DecimalFilter<"PharmacySale"> | Decimal | DecimalJsLike | number | string
+    total?: DecimalFilter<"PharmacySale"> | Decimal | DecimalJsLike | number | string
+    paymentMethod?: EnumPaymentMethodFilter<"PharmacySale"> | $Enums.PaymentMethod
+    paymentStatus?: EnumPaymentStatusFilter<"PharmacySale"> | $Enums.PaymentStatus
+    notes?: StringNullableFilter<"PharmacySale"> | string | null
+    createdAt?: DateTimeFilter<"PharmacySale"> | Date | string
+    updatedAt?: DateTimeFilter<"PharmacySale"> | Date | string
+    items?: PharmacySaleItemListRelationFilter
+    payments?: PharmacyPaymentListRelationFilter
+  }, "id" | "invoiceNumber">
+
+  export type PharmacySaleOrderByWithAggregationInput = {
+    id?: SortOrder
+    invoiceNumber?: SortOrder
+    customerName?: SortOrderInput | SortOrder
+    customerPhone?: SortOrderInput | SortOrder
+    staffId?: SortOrderInput | SortOrder
+    subtotal?: SortOrder
+    discount?: SortOrder
+    tax?: SortOrder
+    total?: SortOrder
+    paymentMethod?: SortOrder
+    paymentStatus?: SortOrder
+    notes?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: PharmacySaleCountOrderByAggregateInput
+    _avg?: PharmacySaleAvgOrderByAggregateInput
+    _max?: PharmacySaleMaxOrderByAggregateInput
+    _min?: PharmacySaleMinOrderByAggregateInput
+    _sum?: PharmacySaleSumOrderByAggregateInput
+  }
+
+  export type PharmacySaleScalarWhereWithAggregatesInput = {
+    AND?: PharmacySaleScalarWhereWithAggregatesInput | PharmacySaleScalarWhereWithAggregatesInput[]
+    OR?: PharmacySaleScalarWhereWithAggregatesInput[]
+    NOT?: PharmacySaleScalarWhereWithAggregatesInput | PharmacySaleScalarWhereWithAggregatesInput[]
+    id?: UuidWithAggregatesFilter<"PharmacySale"> | string
+    invoiceNumber?: StringWithAggregatesFilter<"PharmacySale"> | string
+    customerName?: StringNullableWithAggregatesFilter<"PharmacySale"> | string | null
+    customerPhone?: StringNullableWithAggregatesFilter<"PharmacySale"> | string | null
+    staffId?: StringNullableWithAggregatesFilter<"PharmacySale"> | string | null
+    subtotal?: DecimalWithAggregatesFilter<"PharmacySale"> | Decimal | DecimalJsLike | number | string
+    discount?: DecimalWithAggregatesFilter<"PharmacySale"> | Decimal | DecimalJsLike | number | string
+    tax?: DecimalWithAggregatesFilter<"PharmacySale"> | Decimal | DecimalJsLike | number | string
+    total?: DecimalWithAggregatesFilter<"PharmacySale"> | Decimal | DecimalJsLike | number | string
+    paymentMethod?: EnumPaymentMethodWithAggregatesFilter<"PharmacySale"> | $Enums.PaymentMethod
+    paymentStatus?: EnumPaymentStatusWithAggregatesFilter<"PharmacySale"> | $Enums.PaymentStatus
+    notes?: StringNullableWithAggregatesFilter<"PharmacySale"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"PharmacySale"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"PharmacySale"> | Date | string
+  }
+
+  export type PharmacySaleItemWhereInput = {
+    AND?: PharmacySaleItemWhereInput | PharmacySaleItemWhereInput[]
+    OR?: PharmacySaleItemWhereInput[]
+    NOT?: PharmacySaleItemWhereInput | PharmacySaleItemWhereInput[]
+    id?: UuidFilter<"PharmacySaleItem"> | string
+    saleId?: UuidFilter<"PharmacySaleItem"> | string
+    pharmacyItemId?: UuidFilter<"PharmacySaleItem"> | string
+    quantity?: IntFilter<"PharmacySaleItem"> | number
+    unitPrice?: DecimalFilter<"PharmacySaleItem"> | Decimal | DecimalJsLike | number | string
+    subtotal?: DecimalFilter<"PharmacySaleItem"> | Decimal | DecimalJsLike | number | string
+    createdAt?: DateTimeFilter<"PharmacySaleItem"> | Date | string
+    updatedAt?: DateTimeFilter<"PharmacySaleItem"> | Date | string
+    sale?: XOR<PharmacySaleScalarRelationFilter, PharmacySaleWhereInput>
+    pharmacyItem?: XOR<PharmacyItemScalarRelationFilter, PharmacyItemWhereInput>
+  }
+
+  export type PharmacySaleItemOrderByWithRelationInput = {
+    id?: SortOrder
+    saleId?: SortOrder
+    pharmacyItemId?: SortOrder
+    quantity?: SortOrder
+    unitPrice?: SortOrder
+    subtotal?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    sale?: PharmacySaleOrderByWithRelationInput
+    pharmacyItem?: PharmacyItemOrderByWithRelationInput
+  }
+
+  export type PharmacySaleItemWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: PharmacySaleItemWhereInput | PharmacySaleItemWhereInput[]
+    OR?: PharmacySaleItemWhereInput[]
+    NOT?: PharmacySaleItemWhereInput | PharmacySaleItemWhereInput[]
+    saleId?: UuidFilter<"PharmacySaleItem"> | string
+    pharmacyItemId?: UuidFilter<"PharmacySaleItem"> | string
+    quantity?: IntFilter<"PharmacySaleItem"> | number
+    unitPrice?: DecimalFilter<"PharmacySaleItem"> | Decimal | DecimalJsLike | number | string
+    subtotal?: DecimalFilter<"PharmacySaleItem"> | Decimal | DecimalJsLike | number | string
+    createdAt?: DateTimeFilter<"PharmacySaleItem"> | Date | string
+    updatedAt?: DateTimeFilter<"PharmacySaleItem"> | Date | string
+    sale?: XOR<PharmacySaleScalarRelationFilter, PharmacySaleWhereInput>
+    pharmacyItem?: XOR<PharmacyItemScalarRelationFilter, PharmacyItemWhereInput>
+  }, "id">
+
+  export type PharmacySaleItemOrderByWithAggregationInput = {
+    id?: SortOrder
+    saleId?: SortOrder
+    pharmacyItemId?: SortOrder
+    quantity?: SortOrder
+    unitPrice?: SortOrder
+    subtotal?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: PharmacySaleItemCountOrderByAggregateInput
+    _avg?: PharmacySaleItemAvgOrderByAggregateInput
+    _max?: PharmacySaleItemMaxOrderByAggregateInput
+    _min?: PharmacySaleItemMinOrderByAggregateInput
+    _sum?: PharmacySaleItemSumOrderByAggregateInput
+  }
+
+  export type PharmacySaleItemScalarWhereWithAggregatesInput = {
+    AND?: PharmacySaleItemScalarWhereWithAggregatesInput | PharmacySaleItemScalarWhereWithAggregatesInput[]
+    OR?: PharmacySaleItemScalarWhereWithAggregatesInput[]
+    NOT?: PharmacySaleItemScalarWhereWithAggregatesInput | PharmacySaleItemScalarWhereWithAggregatesInput[]
+    id?: UuidWithAggregatesFilter<"PharmacySaleItem"> | string
+    saleId?: UuidWithAggregatesFilter<"PharmacySaleItem"> | string
+    pharmacyItemId?: UuidWithAggregatesFilter<"PharmacySaleItem"> | string
+    quantity?: IntWithAggregatesFilter<"PharmacySaleItem"> | number
+    unitPrice?: DecimalWithAggregatesFilter<"PharmacySaleItem"> | Decimal | DecimalJsLike | number | string
+    subtotal?: DecimalWithAggregatesFilter<"PharmacySaleItem"> | Decimal | DecimalJsLike | number | string
+    createdAt?: DateTimeWithAggregatesFilter<"PharmacySaleItem"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"PharmacySaleItem"> | Date | string
+  }
+
+  export type PharmacyPaymentWhereInput = {
+    AND?: PharmacyPaymentWhereInput | PharmacyPaymentWhereInput[]
+    OR?: PharmacyPaymentWhereInput[]
+    NOT?: PharmacyPaymentWhereInput | PharmacyPaymentWhereInput[]
+    id?: UuidFilter<"PharmacyPayment"> | string
+    saleId?: UuidFilter<"PharmacyPayment"> | string
+    amount?: DecimalFilter<"PharmacyPayment"> | Decimal | DecimalJsLike | number | string
+    method?: EnumPaymentMethodFilter<"PharmacyPayment"> | $Enums.PaymentMethod
+    transactionId?: StringNullableFilter<"PharmacyPayment"> | string | null
+    paidAt?: DateTimeFilter<"PharmacyPayment"> | Date | string
+    createdAt?: DateTimeFilter<"PharmacyPayment"> | Date | string
+    updatedAt?: DateTimeFilter<"PharmacyPayment"> | Date | string
+    sale?: XOR<PharmacySaleScalarRelationFilter, PharmacySaleWhereInput>
+  }
+
+  export type PharmacyPaymentOrderByWithRelationInput = {
+    id?: SortOrder
+    saleId?: SortOrder
+    amount?: SortOrder
+    method?: SortOrder
+    transactionId?: SortOrderInput | SortOrder
+    paidAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    sale?: PharmacySaleOrderByWithRelationInput
+  }
+
+  export type PharmacyPaymentWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: PharmacyPaymentWhereInput | PharmacyPaymentWhereInput[]
+    OR?: PharmacyPaymentWhereInput[]
+    NOT?: PharmacyPaymentWhereInput | PharmacyPaymentWhereInput[]
+    saleId?: UuidFilter<"PharmacyPayment"> | string
+    amount?: DecimalFilter<"PharmacyPayment"> | Decimal | DecimalJsLike | number | string
+    method?: EnumPaymentMethodFilter<"PharmacyPayment"> | $Enums.PaymentMethod
+    transactionId?: StringNullableFilter<"PharmacyPayment"> | string | null
+    paidAt?: DateTimeFilter<"PharmacyPayment"> | Date | string
+    createdAt?: DateTimeFilter<"PharmacyPayment"> | Date | string
+    updatedAt?: DateTimeFilter<"PharmacyPayment"> | Date | string
+    sale?: XOR<PharmacySaleScalarRelationFilter, PharmacySaleWhereInput>
+  }, "id">
+
+  export type PharmacyPaymentOrderByWithAggregationInput = {
+    id?: SortOrder
+    saleId?: SortOrder
+    amount?: SortOrder
+    method?: SortOrder
+    transactionId?: SortOrderInput | SortOrder
+    paidAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: PharmacyPaymentCountOrderByAggregateInput
+    _avg?: PharmacyPaymentAvgOrderByAggregateInput
+    _max?: PharmacyPaymentMaxOrderByAggregateInput
+    _min?: PharmacyPaymentMinOrderByAggregateInput
+    _sum?: PharmacyPaymentSumOrderByAggregateInput
+  }
+
+  export type PharmacyPaymentScalarWhereWithAggregatesInput = {
+    AND?: PharmacyPaymentScalarWhereWithAggregatesInput | PharmacyPaymentScalarWhereWithAggregatesInput[]
+    OR?: PharmacyPaymentScalarWhereWithAggregatesInput[]
+    NOT?: PharmacyPaymentScalarWhereWithAggregatesInput | PharmacyPaymentScalarWhereWithAggregatesInput[]
+    id?: UuidWithAggregatesFilter<"PharmacyPayment"> | string
+    saleId?: UuidWithAggregatesFilter<"PharmacyPayment"> | string
+    amount?: DecimalWithAggregatesFilter<"PharmacyPayment"> | Decimal | DecimalJsLike | number | string
+    method?: EnumPaymentMethodWithAggregatesFilter<"PharmacyPayment"> | $Enums.PaymentMethod
+    transactionId?: StringNullableWithAggregatesFilter<"PharmacyPayment"> | string | null
+    paidAt?: DateTimeWithAggregatesFilter<"PharmacyPayment"> | Date | string
+    createdAt?: DateTimeWithAggregatesFilter<"PharmacyPayment"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"PharmacyPayment"> | Date | string
   }
 
   export type UserCreateInput = {
@@ -14821,6 +24265,581 @@ export namespace Prisma {
     isActive?: BoolFieldUpdateOperationsInput | boolean
     requirements?: NullableStringFieldUpdateOperationsInput | string | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PharmacySupplierCreateInput = {
+    id?: string
+    name: string
+    email?: string | null
+    contact?: string | null
+    address?: string | null
+    notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type PharmacySupplierUncheckedCreateInput = {
+    id?: string
+    name: string
+    email?: string | null
+    contact?: string | null
+    address?: string | null
+    notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type PharmacySupplierUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    contact?: NullableStringFieldUpdateOperationsInput | string | null
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PharmacySupplierUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    contact?: NullableStringFieldUpdateOperationsInput | string | null
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PharmacySupplierCreateManyInput = {
+    id?: string
+    name: string
+    email?: string | null
+    contact?: string | null
+    address?: string | null
+    notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type PharmacySupplierUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    contact?: NullableStringFieldUpdateOperationsInput | string | null
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PharmacySupplierUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    contact?: NullableStringFieldUpdateOperationsInput | string | null
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PharmacyBrandCreateInput = {
+    id?: string
+    name: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    items?: PharmacyItemCreateNestedManyWithoutBrandInput
+  }
+
+  export type PharmacyBrandUncheckedCreateInput = {
+    id?: string
+    name: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    items?: PharmacyItemUncheckedCreateNestedManyWithoutBrandInput
+  }
+
+  export type PharmacyBrandUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    items?: PharmacyItemUpdateManyWithoutBrandNestedInput
+  }
+
+  export type PharmacyBrandUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    items?: PharmacyItemUncheckedUpdateManyWithoutBrandNestedInput
+  }
+
+  export type PharmacyBrandCreateManyInput = {
+    id?: string
+    name: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type PharmacyBrandUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PharmacyBrandUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PharmacyItemCategoryCreateInput = {
+    id?: string
+    name: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    items?: PharmacyItemCreateNestedManyWithoutCategoryInput
+  }
+
+  export type PharmacyItemCategoryUncheckedCreateInput = {
+    id?: string
+    name: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    items?: PharmacyItemUncheckedCreateNestedManyWithoutCategoryInput
+  }
+
+  export type PharmacyItemCategoryUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    items?: PharmacyItemUpdateManyWithoutCategoryNestedInput
+  }
+
+  export type PharmacyItemCategoryUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    items?: PharmacyItemUncheckedUpdateManyWithoutCategoryNestedInput
+  }
+
+  export type PharmacyItemCategoryCreateManyInput = {
+    id?: string
+    name: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type PharmacyItemCategoryUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PharmacyItemCategoryUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PharmacyItemCreateInput = {
+    id?: string
+    name: string
+    form: $Enums.PharmacyItemForm
+    route: $Enums.PharmacyItemRoute
+    strength: string
+    stock: number
+    unit: string
+    price?: Decimal | DecimalJsLike | number | string
+    sku?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    brand: PharmacyBrandCreateNestedOneWithoutItemsInput
+    category: PharmacyItemCategoryCreateNestedOneWithoutItemsInput
+    saleItems?: PharmacySaleItemCreateNestedManyWithoutPharmacyItemInput
+  }
+
+  export type PharmacyItemUncheckedCreateInput = {
+    id?: string
+    brandId: string
+    categoryId: string
+    name: string
+    form: $Enums.PharmacyItemForm
+    route: $Enums.PharmacyItemRoute
+    strength: string
+    stock: number
+    unit: string
+    price?: Decimal | DecimalJsLike | number | string
+    sku?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    saleItems?: PharmacySaleItemUncheckedCreateNestedManyWithoutPharmacyItemInput
+  }
+
+  export type PharmacyItemUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    form?: EnumPharmacyItemFormFieldUpdateOperationsInput | $Enums.PharmacyItemForm
+    route?: EnumPharmacyItemRouteFieldUpdateOperationsInput | $Enums.PharmacyItemRoute
+    strength?: StringFieldUpdateOperationsInput | string
+    stock?: IntFieldUpdateOperationsInput | number
+    unit?: StringFieldUpdateOperationsInput | string
+    price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    sku?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    brand?: PharmacyBrandUpdateOneRequiredWithoutItemsNestedInput
+    category?: PharmacyItemCategoryUpdateOneRequiredWithoutItemsNestedInput
+    saleItems?: PharmacySaleItemUpdateManyWithoutPharmacyItemNestedInput
+  }
+
+  export type PharmacyItemUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    brandId?: StringFieldUpdateOperationsInput | string
+    categoryId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    form?: EnumPharmacyItemFormFieldUpdateOperationsInput | $Enums.PharmacyItemForm
+    route?: EnumPharmacyItemRouteFieldUpdateOperationsInput | $Enums.PharmacyItemRoute
+    strength?: StringFieldUpdateOperationsInput | string
+    stock?: IntFieldUpdateOperationsInput | number
+    unit?: StringFieldUpdateOperationsInput | string
+    price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    sku?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    saleItems?: PharmacySaleItemUncheckedUpdateManyWithoutPharmacyItemNestedInput
+  }
+
+  export type PharmacyItemCreateManyInput = {
+    id?: string
+    brandId: string
+    categoryId: string
+    name: string
+    form: $Enums.PharmacyItemForm
+    route: $Enums.PharmacyItemRoute
+    strength: string
+    stock: number
+    unit: string
+    price?: Decimal | DecimalJsLike | number | string
+    sku?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type PharmacyItemUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    form?: EnumPharmacyItemFormFieldUpdateOperationsInput | $Enums.PharmacyItemForm
+    route?: EnumPharmacyItemRouteFieldUpdateOperationsInput | $Enums.PharmacyItemRoute
+    strength?: StringFieldUpdateOperationsInput | string
+    stock?: IntFieldUpdateOperationsInput | number
+    unit?: StringFieldUpdateOperationsInput | string
+    price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    sku?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PharmacyItemUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    brandId?: StringFieldUpdateOperationsInput | string
+    categoryId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    form?: EnumPharmacyItemFormFieldUpdateOperationsInput | $Enums.PharmacyItemForm
+    route?: EnumPharmacyItemRouteFieldUpdateOperationsInput | $Enums.PharmacyItemRoute
+    strength?: StringFieldUpdateOperationsInput | string
+    stock?: IntFieldUpdateOperationsInput | number
+    unit?: StringFieldUpdateOperationsInput | string
+    price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    sku?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PharmacySaleCreateInput = {
+    id?: string
+    invoiceNumber: string
+    customerName?: string | null
+    customerPhone?: string | null
+    staffId?: string | null
+    subtotal: Decimal | DecimalJsLike | number | string
+    discount?: Decimal | DecimalJsLike | number | string
+    tax?: Decimal | DecimalJsLike | number | string
+    total: Decimal | DecimalJsLike | number | string
+    paymentMethod?: $Enums.PaymentMethod
+    paymentStatus?: $Enums.PaymentStatus
+    notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    items?: PharmacySaleItemCreateNestedManyWithoutSaleInput
+    payments?: PharmacyPaymentCreateNestedManyWithoutSaleInput
+  }
+
+  export type PharmacySaleUncheckedCreateInput = {
+    id?: string
+    invoiceNumber: string
+    customerName?: string | null
+    customerPhone?: string | null
+    staffId?: string | null
+    subtotal: Decimal | DecimalJsLike | number | string
+    discount?: Decimal | DecimalJsLike | number | string
+    tax?: Decimal | DecimalJsLike | number | string
+    total: Decimal | DecimalJsLike | number | string
+    paymentMethod?: $Enums.PaymentMethod
+    paymentStatus?: $Enums.PaymentStatus
+    notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    items?: PharmacySaleItemUncheckedCreateNestedManyWithoutSaleInput
+    payments?: PharmacyPaymentUncheckedCreateNestedManyWithoutSaleInput
+  }
+
+  export type PharmacySaleUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    invoiceNumber?: StringFieldUpdateOperationsInput | string
+    customerName?: NullableStringFieldUpdateOperationsInput | string | null
+    customerPhone?: NullableStringFieldUpdateOperationsInput | string | null
+    staffId?: NullableStringFieldUpdateOperationsInput | string | null
+    subtotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    discount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    tax?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    total?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    paymentMethod?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
+    paymentStatus?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    items?: PharmacySaleItemUpdateManyWithoutSaleNestedInput
+    payments?: PharmacyPaymentUpdateManyWithoutSaleNestedInput
+  }
+
+  export type PharmacySaleUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    invoiceNumber?: StringFieldUpdateOperationsInput | string
+    customerName?: NullableStringFieldUpdateOperationsInput | string | null
+    customerPhone?: NullableStringFieldUpdateOperationsInput | string | null
+    staffId?: NullableStringFieldUpdateOperationsInput | string | null
+    subtotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    discount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    tax?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    total?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    paymentMethod?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
+    paymentStatus?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    items?: PharmacySaleItemUncheckedUpdateManyWithoutSaleNestedInput
+    payments?: PharmacyPaymentUncheckedUpdateManyWithoutSaleNestedInput
+  }
+
+  export type PharmacySaleCreateManyInput = {
+    id?: string
+    invoiceNumber: string
+    customerName?: string | null
+    customerPhone?: string | null
+    staffId?: string | null
+    subtotal: Decimal | DecimalJsLike | number | string
+    discount?: Decimal | DecimalJsLike | number | string
+    tax?: Decimal | DecimalJsLike | number | string
+    total: Decimal | DecimalJsLike | number | string
+    paymentMethod?: $Enums.PaymentMethod
+    paymentStatus?: $Enums.PaymentStatus
+    notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type PharmacySaleUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    invoiceNumber?: StringFieldUpdateOperationsInput | string
+    customerName?: NullableStringFieldUpdateOperationsInput | string | null
+    customerPhone?: NullableStringFieldUpdateOperationsInput | string | null
+    staffId?: NullableStringFieldUpdateOperationsInput | string | null
+    subtotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    discount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    tax?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    total?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    paymentMethod?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
+    paymentStatus?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PharmacySaleUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    invoiceNumber?: StringFieldUpdateOperationsInput | string
+    customerName?: NullableStringFieldUpdateOperationsInput | string | null
+    customerPhone?: NullableStringFieldUpdateOperationsInput | string | null
+    staffId?: NullableStringFieldUpdateOperationsInput | string | null
+    subtotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    discount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    tax?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    total?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    paymentMethod?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
+    paymentStatus?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PharmacySaleItemCreateInput = {
+    id?: string
+    quantity: number
+    unitPrice: Decimal | DecimalJsLike | number | string
+    subtotal: Decimal | DecimalJsLike | number | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    sale: PharmacySaleCreateNestedOneWithoutItemsInput
+    pharmacyItem: PharmacyItemCreateNestedOneWithoutSaleItemsInput
+  }
+
+  export type PharmacySaleItemUncheckedCreateInput = {
+    id?: string
+    saleId: string
+    pharmacyItemId: string
+    quantity: number
+    unitPrice: Decimal | DecimalJsLike | number | string
+    subtotal: Decimal | DecimalJsLike | number | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type PharmacySaleItemUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    quantity?: IntFieldUpdateOperationsInput | number
+    unitPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    subtotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    sale?: PharmacySaleUpdateOneRequiredWithoutItemsNestedInput
+    pharmacyItem?: PharmacyItemUpdateOneRequiredWithoutSaleItemsNestedInput
+  }
+
+  export type PharmacySaleItemUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    saleId?: StringFieldUpdateOperationsInput | string
+    pharmacyItemId?: StringFieldUpdateOperationsInput | string
+    quantity?: IntFieldUpdateOperationsInput | number
+    unitPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    subtotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PharmacySaleItemCreateManyInput = {
+    id?: string
+    saleId: string
+    pharmacyItemId: string
+    quantity: number
+    unitPrice: Decimal | DecimalJsLike | number | string
+    subtotal: Decimal | DecimalJsLike | number | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type PharmacySaleItemUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    quantity?: IntFieldUpdateOperationsInput | number
+    unitPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    subtotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PharmacySaleItemUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    saleId?: StringFieldUpdateOperationsInput | string
+    pharmacyItemId?: StringFieldUpdateOperationsInput | string
+    quantity?: IntFieldUpdateOperationsInput | number
+    unitPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    subtotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PharmacyPaymentCreateInput = {
+    id?: string
+    amount: Decimal | DecimalJsLike | number | string
+    method?: $Enums.PaymentMethod
+    transactionId?: string | null
+    paidAt?: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    sale: PharmacySaleCreateNestedOneWithoutPaymentsInput
+  }
+
+  export type PharmacyPaymentUncheckedCreateInput = {
+    id?: string
+    saleId: string
+    amount: Decimal | DecimalJsLike | number | string
+    method?: $Enums.PaymentMethod
+    transactionId?: string | null
+    paidAt?: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type PharmacyPaymentUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    method?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
+    transactionId?: NullableStringFieldUpdateOperationsInput | string | null
+    paidAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    sale?: PharmacySaleUpdateOneRequiredWithoutPaymentsNestedInput
+  }
+
+  export type PharmacyPaymentUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    saleId?: StringFieldUpdateOperationsInput | string
+    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    method?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
+    transactionId?: NullableStringFieldUpdateOperationsInput | string | null
+    paidAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PharmacyPaymentCreateManyInput = {
+    id?: string
+    saleId: string
+    amount: Decimal | DecimalJsLike | number | string
+    method?: $Enums.PaymentMethod
+    transactionId?: string | null
+    paidAt?: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type PharmacyPaymentUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    method?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
+    transactionId?: NullableStringFieldUpdateOperationsInput | string | null
+    paidAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PharmacyPaymentUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    saleId?: StringFieldUpdateOperationsInput | string
+    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    method?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
+    transactionId?: NullableStringFieldUpdateOperationsInput | string | null
+    paidAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -15842,6 +25861,435 @@ export namespace Prisma {
     _max?: NestedIntFilter<$PrismaModel>
   }
 
+  export type UuidFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel>
+    in?: string[] | ListStringFieldRefInput<$PrismaModel>
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel>
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedUuidFilter<$PrismaModel> | string
+  }
+
+  export type PharmacySupplierCountOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    email?: SortOrder
+    contact?: SortOrder
+    address?: SortOrder
+    notes?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type PharmacySupplierMaxOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    email?: SortOrder
+    contact?: SortOrder
+    address?: SortOrder
+    notes?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type PharmacySupplierMinOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    email?: SortOrder
+    contact?: SortOrder
+    address?: SortOrder
+    notes?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type UuidWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel>
+    in?: string[] | ListStringFieldRefInput<$PrismaModel>
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel>
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedUuidWithAggregatesFilter<$PrismaModel> | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedStringFilter<$PrismaModel>
+    _max?: NestedStringFilter<$PrismaModel>
+  }
+
+  export type PharmacyItemListRelationFilter = {
+    every?: PharmacyItemWhereInput
+    some?: PharmacyItemWhereInput
+    none?: PharmacyItemWhereInput
+  }
+
+  export type PharmacyItemOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type PharmacyBrandCountOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type PharmacyBrandMaxOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type PharmacyBrandMinOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type PharmacyItemCategoryCountOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type PharmacyItemCategoryMaxOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type PharmacyItemCategoryMinOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type EnumPharmacyItemFormFilter<$PrismaModel = never> = {
+    equals?: $Enums.PharmacyItemForm | EnumPharmacyItemFormFieldRefInput<$PrismaModel>
+    in?: $Enums.PharmacyItemForm[] | ListEnumPharmacyItemFormFieldRefInput<$PrismaModel>
+    notIn?: $Enums.PharmacyItemForm[] | ListEnumPharmacyItemFormFieldRefInput<$PrismaModel>
+    not?: NestedEnumPharmacyItemFormFilter<$PrismaModel> | $Enums.PharmacyItemForm
+  }
+
+  export type EnumPharmacyItemRouteFilter<$PrismaModel = never> = {
+    equals?: $Enums.PharmacyItemRoute | EnumPharmacyItemRouteFieldRefInput<$PrismaModel>
+    in?: $Enums.PharmacyItemRoute[] | ListEnumPharmacyItemRouteFieldRefInput<$PrismaModel>
+    notIn?: $Enums.PharmacyItemRoute[] | ListEnumPharmacyItemRouteFieldRefInput<$PrismaModel>
+    not?: NestedEnumPharmacyItemRouteFilter<$PrismaModel> | $Enums.PharmacyItemRoute
+  }
+
+  export type PharmacyBrandScalarRelationFilter = {
+    is?: PharmacyBrandWhereInput
+    isNot?: PharmacyBrandWhereInput
+  }
+
+  export type PharmacyItemCategoryScalarRelationFilter = {
+    is?: PharmacyItemCategoryWhereInput
+    isNot?: PharmacyItemCategoryWhereInput
+  }
+
+  export type PharmacySaleItemListRelationFilter = {
+    every?: PharmacySaleItemWhereInput
+    some?: PharmacySaleItemWhereInput
+    none?: PharmacySaleItemWhereInput
+  }
+
+  export type PharmacySaleItemOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type PharmacyItemCountOrderByAggregateInput = {
+    id?: SortOrder
+    brandId?: SortOrder
+    categoryId?: SortOrder
+    name?: SortOrder
+    form?: SortOrder
+    route?: SortOrder
+    strength?: SortOrder
+    stock?: SortOrder
+    unit?: SortOrder
+    price?: SortOrder
+    sku?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type PharmacyItemAvgOrderByAggregateInput = {
+    stock?: SortOrder
+    price?: SortOrder
+  }
+
+  export type PharmacyItemMaxOrderByAggregateInput = {
+    id?: SortOrder
+    brandId?: SortOrder
+    categoryId?: SortOrder
+    name?: SortOrder
+    form?: SortOrder
+    route?: SortOrder
+    strength?: SortOrder
+    stock?: SortOrder
+    unit?: SortOrder
+    price?: SortOrder
+    sku?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type PharmacyItemMinOrderByAggregateInput = {
+    id?: SortOrder
+    brandId?: SortOrder
+    categoryId?: SortOrder
+    name?: SortOrder
+    form?: SortOrder
+    route?: SortOrder
+    strength?: SortOrder
+    stock?: SortOrder
+    unit?: SortOrder
+    price?: SortOrder
+    sku?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type PharmacyItemSumOrderByAggregateInput = {
+    stock?: SortOrder
+    price?: SortOrder
+  }
+
+  export type EnumPharmacyItemFormWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.PharmacyItemForm | EnumPharmacyItemFormFieldRefInput<$PrismaModel>
+    in?: $Enums.PharmacyItemForm[] | ListEnumPharmacyItemFormFieldRefInput<$PrismaModel>
+    notIn?: $Enums.PharmacyItemForm[] | ListEnumPharmacyItemFormFieldRefInput<$PrismaModel>
+    not?: NestedEnumPharmacyItemFormWithAggregatesFilter<$PrismaModel> | $Enums.PharmacyItemForm
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumPharmacyItemFormFilter<$PrismaModel>
+    _max?: NestedEnumPharmacyItemFormFilter<$PrismaModel>
+  }
+
+  export type EnumPharmacyItemRouteWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.PharmacyItemRoute | EnumPharmacyItemRouteFieldRefInput<$PrismaModel>
+    in?: $Enums.PharmacyItemRoute[] | ListEnumPharmacyItemRouteFieldRefInput<$PrismaModel>
+    notIn?: $Enums.PharmacyItemRoute[] | ListEnumPharmacyItemRouteFieldRefInput<$PrismaModel>
+    not?: NestedEnumPharmacyItemRouteWithAggregatesFilter<$PrismaModel> | $Enums.PharmacyItemRoute
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumPharmacyItemRouteFilter<$PrismaModel>
+    _max?: NestedEnumPharmacyItemRouteFilter<$PrismaModel>
+  }
+
+  export type EnumPaymentMethodFilter<$PrismaModel = never> = {
+    equals?: $Enums.PaymentMethod | EnumPaymentMethodFieldRefInput<$PrismaModel>
+    in?: $Enums.PaymentMethod[] | ListEnumPaymentMethodFieldRefInput<$PrismaModel>
+    notIn?: $Enums.PaymentMethod[] | ListEnumPaymentMethodFieldRefInput<$PrismaModel>
+    not?: NestedEnumPaymentMethodFilter<$PrismaModel> | $Enums.PaymentMethod
+  }
+
+  export type EnumPaymentStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.PaymentStatus | EnumPaymentStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.PaymentStatus[] | ListEnumPaymentStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.PaymentStatus[] | ListEnumPaymentStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumPaymentStatusFilter<$PrismaModel> | $Enums.PaymentStatus
+  }
+
+  export type PharmacyPaymentListRelationFilter = {
+    every?: PharmacyPaymentWhereInput
+    some?: PharmacyPaymentWhereInput
+    none?: PharmacyPaymentWhereInput
+  }
+
+  export type PharmacyPaymentOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type PharmacySaleCountOrderByAggregateInput = {
+    id?: SortOrder
+    invoiceNumber?: SortOrder
+    customerName?: SortOrder
+    customerPhone?: SortOrder
+    staffId?: SortOrder
+    subtotal?: SortOrder
+    discount?: SortOrder
+    tax?: SortOrder
+    total?: SortOrder
+    paymentMethod?: SortOrder
+    paymentStatus?: SortOrder
+    notes?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type PharmacySaleAvgOrderByAggregateInput = {
+    subtotal?: SortOrder
+    discount?: SortOrder
+    tax?: SortOrder
+    total?: SortOrder
+  }
+
+  export type PharmacySaleMaxOrderByAggregateInput = {
+    id?: SortOrder
+    invoiceNumber?: SortOrder
+    customerName?: SortOrder
+    customerPhone?: SortOrder
+    staffId?: SortOrder
+    subtotal?: SortOrder
+    discount?: SortOrder
+    tax?: SortOrder
+    total?: SortOrder
+    paymentMethod?: SortOrder
+    paymentStatus?: SortOrder
+    notes?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type PharmacySaleMinOrderByAggregateInput = {
+    id?: SortOrder
+    invoiceNumber?: SortOrder
+    customerName?: SortOrder
+    customerPhone?: SortOrder
+    staffId?: SortOrder
+    subtotal?: SortOrder
+    discount?: SortOrder
+    tax?: SortOrder
+    total?: SortOrder
+    paymentMethod?: SortOrder
+    paymentStatus?: SortOrder
+    notes?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type PharmacySaleSumOrderByAggregateInput = {
+    subtotal?: SortOrder
+    discount?: SortOrder
+    tax?: SortOrder
+    total?: SortOrder
+  }
+
+  export type EnumPaymentMethodWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.PaymentMethod | EnumPaymentMethodFieldRefInput<$PrismaModel>
+    in?: $Enums.PaymentMethod[] | ListEnumPaymentMethodFieldRefInput<$PrismaModel>
+    notIn?: $Enums.PaymentMethod[] | ListEnumPaymentMethodFieldRefInput<$PrismaModel>
+    not?: NestedEnumPaymentMethodWithAggregatesFilter<$PrismaModel> | $Enums.PaymentMethod
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumPaymentMethodFilter<$PrismaModel>
+    _max?: NestedEnumPaymentMethodFilter<$PrismaModel>
+  }
+
+  export type EnumPaymentStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.PaymentStatus | EnumPaymentStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.PaymentStatus[] | ListEnumPaymentStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.PaymentStatus[] | ListEnumPaymentStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumPaymentStatusWithAggregatesFilter<$PrismaModel> | $Enums.PaymentStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumPaymentStatusFilter<$PrismaModel>
+    _max?: NestedEnumPaymentStatusFilter<$PrismaModel>
+  }
+
+  export type PharmacySaleScalarRelationFilter = {
+    is?: PharmacySaleWhereInput
+    isNot?: PharmacySaleWhereInput
+  }
+
+  export type PharmacyItemScalarRelationFilter = {
+    is?: PharmacyItemWhereInput
+    isNot?: PharmacyItemWhereInput
+  }
+
+  export type PharmacySaleItemCountOrderByAggregateInput = {
+    id?: SortOrder
+    saleId?: SortOrder
+    pharmacyItemId?: SortOrder
+    quantity?: SortOrder
+    unitPrice?: SortOrder
+    subtotal?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type PharmacySaleItemAvgOrderByAggregateInput = {
+    quantity?: SortOrder
+    unitPrice?: SortOrder
+    subtotal?: SortOrder
+  }
+
+  export type PharmacySaleItemMaxOrderByAggregateInput = {
+    id?: SortOrder
+    saleId?: SortOrder
+    pharmacyItemId?: SortOrder
+    quantity?: SortOrder
+    unitPrice?: SortOrder
+    subtotal?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type PharmacySaleItemMinOrderByAggregateInput = {
+    id?: SortOrder
+    saleId?: SortOrder
+    pharmacyItemId?: SortOrder
+    quantity?: SortOrder
+    unitPrice?: SortOrder
+    subtotal?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type PharmacySaleItemSumOrderByAggregateInput = {
+    quantity?: SortOrder
+    unitPrice?: SortOrder
+    subtotal?: SortOrder
+  }
+
+  export type PharmacyPaymentCountOrderByAggregateInput = {
+    id?: SortOrder
+    saleId?: SortOrder
+    amount?: SortOrder
+    method?: SortOrder
+    transactionId?: SortOrder
+    paidAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type PharmacyPaymentAvgOrderByAggregateInput = {
+    amount?: SortOrder
+  }
+
+  export type PharmacyPaymentMaxOrderByAggregateInput = {
+    id?: SortOrder
+    saleId?: SortOrder
+    amount?: SortOrder
+    method?: SortOrder
+    transactionId?: SortOrder
+    paidAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type PharmacyPaymentMinOrderByAggregateInput = {
+    id?: SortOrder
+    saleId?: SortOrder
+    amount?: SortOrder
+    method?: SortOrder
+    transactionId?: SortOrder
+    paidAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type PharmacyPaymentSumOrderByAggregateInput = {
+    amount?: SortOrder
+  }
+
   export type RefreshTokenCreateNestedManyWithoutUserInput = {
     create?: XOR<RefreshTokenCreateWithoutUserInput, RefreshTokenUncheckedCreateWithoutUserInput> | RefreshTokenCreateWithoutUserInput[] | RefreshTokenUncheckedCreateWithoutUserInput[]
     connectOrCreate?: RefreshTokenCreateOrConnectWithoutUserInput | RefreshTokenCreateOrConnectWithoutUserInput[]
@@ -16311,6 +26759,302 @@ export namespace Prisma {
     upsert?: UserUpsertWithoutMedicalServicesInput
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutMedicalServicesInput, UserUpdateWithoutMedicalServicesInput>, UserUncheckedUpdateWithoutMedicalServicesInput>
+  }
+
+  export type PharmacyItemCreateNestedManyWithoutBrandInput = {
+    create?: XOR<PharmacyItemCreateWithoutBrandInput, PharmacyItemUncheckedCreateWithoutBrandInput> | PharmacyItemCreateWithoutBrandInput[] | PharmacyItemUncheckedCreateWithoutBrandInput[]
+    connectOrCreate?: PharmacyItemCreateOrConnectWithoutBrandInput | PharmacyItemCreateOrConnectWithoutBrandInput[]
+    createMany?: PharmacyItemCreateManyBrandInputEnvelope
+    connect?: PharmacyItemWhereUniqueInput | PharmacyItemWhereUniqueInput[]
+  }
+
+  export type PharmacyItemUncheckedCreateNestedManyWithoutBrandInput = {
+    create?: XOR<PharmacyItemCreateWithoutBrandInput, PharmacyItemUncheckedCreateWithoutBrandInput> | PharmacyItemCreateWithoutBrandInput[] | PharmacyItemUncheckedCreateWithoutBrandInput[]
+    connectOrCreate?: PharmacyItemCreateOrConnectWithoutBrandInput | PharmacyItemCreateOrConnectWithoutBrandInput[]
+    createMany?: PharmacyItemCreateManyBrandInputEnvelope
+    connect?: PharmacyItemWhereUniqueInput | PharmacyItemWhereUniqueInput[]
+  }
+
+  export type PharmacyItemUpdateManyWithoutBrandNestedInput = {
+    create?: XOR<PharmacyItemCreateWithoutBrandInput, PharmacyItemUncheckedCreateWithoutBrandInput> | PharmacyItemCreateWithoutBrandInput[] | PharmacyItemUncheckedCreateWithoutBrandInput[]
+    connectOrCreate?: PharmacyItemCreateOrConnectWithoutBrandInput | PharmacyItemCreateOrConnectWithoutBrandInput[]
+    upsert?: PharmacyItemUpsertWithWhereUniqueWithoutBrandInput | PharmacyItemUpsertWithWhereUniqueWithoutBrandInput[]
+    createMany?: PharmacyItemCreateManyBrandInputEnvelope
+    set?: PharmacyItemWhereUniqueInput | PharmacyItemWhereUniqueInput[]
+    disconnect?: PharmacyItemWhereUniqueInput | PharmacyItemWhereUniqueInput[]
+    delete?: PharmacyItemWhereUniqueInput | PharmacyItemWhereUniqueInput[]
+    connect?: PharmacyItemWhereUniqueInput | PharmacyItemWhereUniqueInput[]
+    update?: PharmacyItemUpdateWithWhereUniqueWithoutBrandInput | PharmacyItemUpdateWithWhereUniqueWithoutBrandInput[]
+    updateMany?: PharmacyItemUpdateManyWithWhereWithoutBrandInput | PharmacyItemUpdateManyWithWhereWithoutBrandInput[]
+    deleteMany?: PharmacyItemScalarWhereInput | PharmacyItemScalarWhereInput[]
+  }
+
+  export type PharmacyItemUncheckedUpdateManyWithoutBrandNestedInput = {
+    create?: XOR<PharmacyItemCreateWithoutBrandInput, PharmacyItemUncheckedCreateWithoutBrandInput> | PharmacyItemCreateWithoutBrandInput[] | PharmacyItemUncheckedCreateWithoutBrandInput[]
+    connectOrCreate?: PharmacyItemCreateOrConnectWithoutBrandInput | PharmacyItemCreateOrConnectWithoutBrandInput[]
+    upsert?: PharmacyItemUpsertWithWhereUniqueWithoutBrandInput | PharmacyItemUpsertWithWhereUniqueWithoutBrandInput[]
+    createMany?: PharmacyItemCreateManyBrandInputEnvelope
+    set?: PharmacyItemWhereUniqueInput | PharmacyItemWhereUniqueInput[]
+    disconnect?: PharmacyItemWhereUniqueInput | PharmacyItemWhereUniqueInput[]
+    delete?: PharmacyItemWhereUniqueInput | PharmacyItemWhereUniqueInput[]
+    connect?: PharmacyItemWhereUniqueInput | PharmacyItemWhereUniqueInput[]
+    update?: PharmacyItemUpdateWithWhereUniqueWithoutBrandInput | PharmacyItemUpdateWithWhereUniqueWithoutBrandInput[]
+    updateMany?: PharmacyItemUpdateManyWithWhereWithoutBrandInput | PharmacyItemUpdateManyWithWhereWithoutBrandInput[]
+    deleteMany?: PharmacyItemScalarWhereInput | PharmacyItemScalarWhereInput[]
+  }
+
+  export type PharmacyItemCreateNestedManyWithoutCategoryInput = {
+    create?: XOR<PharmacyItemCreateWithoutCategoryInput, PharmacyItemUncheckedCreateWithoutCategoryInput> | PharmacyItemCreateWithoutCategoryInput[] | PharmacyItemUncheckedCreateWithoutCategoryInput[]
+    connectOrCreate?: PharmacyItemCreateOrConnectWithoutCategoryInput | PharmacyItemCreateOrConnectWithoutCategoryInput[]
+    createMany?: PharmacyItemCreateManyCategoryInputEnvelope
+    connect?: PharmacyItemWhereUniqueInput | PharmacyItemWhereUniqueInput[]
+  }
+
+  export type PharmacyItemUncheckedCreateNestedManyWithoutCategoryInput = {
+    create?: XOR<PharmacyItemCreateWithoutCategoryInput, PharmacyItemUncheckedCreateWithoutCategoryInput> | PharmacyItemCreateWithoutCategoryInput[] | PharmacyItemUncheckedCreateWithoutCategoryInput[]
+    connectOrCreate?: PharmacyItemCreateOrConnectWithoutCategoryInput | PharmacyItemCreateOrConnectWithoutCategoryInput[]
+    createMany?: PharmacyItemCreateManyCategoryInputEnvelope
+    connect?: PharmacyItemWhereUniqueInput | PharmacyItemWhereUniqueInput[]
+  }
+
+  export type PharmacyItemUpdateManyWithoutCategoryNestedInput = {
+    create?: XOR<PharmacyItemCreateWithoutCategoryInput, PharmacyItemUncheckedCreateWithoutCategoryInput> | PharmacyItemCreateWithoutCategoryInput[] | PharmacyItemUncheckedCreateWithoutCategoryInput[]
+    connectOrCreate?: PharmacyItemCreateOrConnectWithoutCategoryInput | PharmacyItemCreateOrConnectWithoutCategoryInput[]
+    upsert?: PharmacyItemUpsertWithWhereUniqueWithoutCategoryInput | PharmacyItemUpsertWithWhereUniqueWithoutCategoryInput[]
+    createMany?: PharmacyItemCreateManyCategoryInputEnvelope
+    set?: PharmacyItemWhereUniqueInput | PharmacyItemWhereUniqueInput[]
+    disconnect?: PharmacyItemWhereUniqueInput | PharmacyItemWhereUniqueInput[]
+    delete?: PharmacyItemWhereUniqueInput | PharmacyItemWhereUniqueInput[]
+    connect?: PharmacyItemWhereUniqueInput | PharmacyItemWhereUniqueInput[]
+    update?: PharmacyItemUpdateWithWhereUniqueWithoutCategoryInput | PharmacyItemUpdateWithWhereUniqueWithoutCategoryInput[]
+    updateMany?: PharmacyItemUpdateManyWithWhereWithoutCategoryInput | PharmacyItemUpdateManyWithWhereWithoutCategoryInput[]
+    deleteMany?: PharmacyItemScalarWhereInput | PharmacyItemScalarWhereInput[]
+  }
+
+  export type PharmacyItemUncheckedUpdateManyWithoutCategoryNestedInput = {
+    create?: XOR<PharmacyItemCreateWithoutCategoryInput, PharmacyItemUncheckedCreateWithoutCategoryInput> | PharmacyItemCreateWithoutCategoryInput[] | PharmacyItemUncheckedCreateWithoutCategoryInput[]
+    connectOrCreate?: PharmacyItemCreateOrConnectWithoutCategoryInput | PharmacyItemCreateOrConnectWithoutCategoryInput[]
+    upsert?: PharmacyItemUpsertWithWhereUniqueWithoutCategoryInput | PharmacyItemUpsertWithWhereUniqueWithoutCategoryInput[]
+    createMany?: PharmacyItemCreateManyCategoryInputEnvelope
+    set?: PharmacyItemWhereUniqueInput | PharmacyItemWhereUniqueInput[]
+    disconnect?: PharmacyItemWhereUniqueInput | PharmacyItemWhereUniqueInput[]
+    delete?: PharmacyItemWhereUniqueInput | PharmacyItemWhereUniqueInput[]
+    connect?: PharmacyItemWhereUniqueInput | PharmacyItemWhereUniqueInput[]
+    update?: PharmacyItemUpdateWithWhereUniqueWithoutCategoryInput | PharmacyItemUpdateWithWhereUniqueWithoutCategoryInput[]
+    updateMany?: PharmacyItemUpdateManyWithWhereWithoutCategoryInput | PharmacyItemUpdateManyWithWhereWithoutCategoryInput[]
+    deleteMany?: PharmacyItemScalarWhereInput | PharmacyItemScalarWhereInput[]
+  }
+
+  export type PharmacyBrandCreateNestedOneWithoutItemsInput = {
+    create?: XOR<PharmacyBrandCreateWithoutItemsInput, PharmacyBrandUncheckedCreateWithoutItemsInput>
+    connectOrCreate?: PharmacyBrandCreateOrConnectWithoutItemsInput
+    connect?: PharmacyBrandWhereUniqueInput
+  }
+
+  export type PharmacyItemCategoryCreateNestedOneWithoutItemsInput = {
+    create?: XOR<PharmacyItemCategoryCreateWithoutItemsInput, PharmacyItemCategoryUncheckedCreateWithoutItemsInput>
+    connectOrCreate?: PharmacyItemCategoryCreateOrConnectWithoutItemsInput
+    connect?: PharmacyItemCategoryWhereUniqueInput
+  }
+
+  export type PharmacySaleItemCreateNestedManyWithoutPharmacyItemInput = {
+    create?: XOR<PharmacySaleItemCreateWithoutPharmacyItemInput, PharmacySaleItemUncheckedCreateWithoutPharmacyItemInput> | PharmacySaleItemCreateWithoutPharmacyItemInput[] | PharmacySaleItemUncheckedCreateWithoutPharmacyItemInput[]
+    connectOrCreate?: PharmacySaleItemCreateOrConnectWithoutPharmacyItemInput | PharmacySaleItemCreateOrConnectWithoutPharmacyItemInput[]
+    createMany?: PharmacySaleItemCreateManyPharmacyItemInputEnvelope
+    connect?: PharmacySaleItemWhereUniqueInput | PharmacySaleItemWhereUniqueInput[]
+  }
+
+  export type PharmacySaleItemUncheckedCreateNestedManyWithoutPharmacyItemInput = {
+    create?: XOR<PharmacySaleItemCreateWithoutPharmacyItemInput, PharmacySaleItemUncheckedCreateWithoutPharmacyItemInput> | PharmacySaleItemCreateWithoutPharmacyItemInput[] | PharmacySaleItemUncheckedCreateWithoutPharmacyItemInput[]
+    connectOrCreate?: PharmacySaleItemCreateOrConnectWithoutPharmacyItemInput | PharmacySaleItemCreateOrConnectWithoutPharmacyItemInput[]
+    createMany?: PharmacySaleItemCreateManyPharmacyItemInputEnvelope
+    connect?: PharmacySaleItemWhereUniqueInput | PharmacySaleItemWhereUniqueInput[]
+  }
+
+  export type EnumPharmacyItemFormFieldUpdateOperationsInput = {
+    set?: $Enums.PharmacyItemForm
+  }
+
+  export type EnumPharmacyItemRouteFieldUpdateOperationsInput = {
+    set?: $Enums.PharmacyItemRoute
+  }
+
+  export type PharmacyBrandUpdateOneRequiredWithoutItemsNestedInput = {
+    create?: XOR<PharmacyBrandCreateWithoutItemsInput, PharmacyBrandUncheckedCreateWithoutItemsInput>
+    connectOrCreate?: PharmacyBrandCreateOrConnectWithoutItemsInput
+    upsert?: PharmacyBrandUpsertWithoutItemsInput
+    connect?: PharmacyBrandWhereUniqueInput
+    update?: XOR<XOR<PharmacyBrandUpdateToOneWithWhereWithoutItemsInput, PharmacyBrandUpdateWithoutItemsInput>, PharmacyBrandUncheckedUpdateWithoutItemsInput>
+  }
+
+  export type PharmacyItemCategoryUpdateOneRequiredWithoutItemsNestedInput = {
+    create?: XOR<PharmacyItemCategoryCreateWithoutItemsInput, PharmacyItemCategoryUncheckedCreateWithoutItemsInput>
+    connectOrCreate?: PharmacyItemCategoryCreateOrConnectWithoutItemsInput
+    upsert?: PharmacyItemCategoryUpsertWithoutItemsInput
+    connect?: PharmacyItemCategoryWhereUniqueInput
+    update?: XOR<XOR<PharmacyItemCategoryUpdateToOneWithWhereWithoutItemsInput, PharmacyItemCategoryUpdateWithoutItemsInput>, PharmacyItemCategoryUncheckedUpdateWithoutItemsInput>
+  }
+
+  export type PharmacySaleItemUpdateManyWithoutPharmacyItemNestedInput = {
+    create?: XOR<PharmacySaleItemCreateWithoutPharmacyItemInput, PharmacySaleItemUncheckedCreateWithoutPharmacyItemInput> | PharmacySaleItemCreateWithoutPharmacyItemInput[] | PharmacySaleItemUncheckedCreateWithoutPharmacyItemInput[]
+    connectOrCreate?: PharmacySaleItemCreateOrConnectWithoutPharmacyItemInput | PharmacySaleItemCreateOrConnectWithoutPharmacyItemInput[]
+    upsert?: PharmacySaleItemUpsertWithWhereUniqueWithoutPharmacyItemInput | PharmacySaleItemUpsertWithWhereUniqueWithoutPharmacyItemInput[]
+    createMany?: PharmacySaleItemCreateManyPharmacyItemInputEnvelope
+    set?: PharmacySaleItemWhereUniqueInput | PharmacySaleItemWhereUniqueInput[]
+    disconnect?: PharmacySaleItemWhereUniqueInput | PharmacySaleItemWhereUniqueInput[]
+    delete?: PharmacySaleItemWhereUniqueInput | PharmacySaleItemWhereUniqueInput[]
+    connect?: PharmacySaleItemWhereUniqueInput | PharmacySaleItemWhereUniqueInput[]
+    update?: PharmacySaleItemUpdateWithWhereUniqueWithoutPharmacyItemInput | PharmacySaleItemUpdateWithWhereUniqueWithoutPharmacyItemInput[]
+    updateMany?: PharmacySaleItemUpdateManyWithWhereWithoutPharmacyItemInput | PharmacySaleItemUpdateManyWithWhereWithoutPharmacyItemInput[]
+    deleteMany?: PharmacySaleItemScalarWhereInput | PharmacySaleItemScalarWhereInput[]
+  }
+
+  export type PharmacySaleItemUncheckedUpdateManyWithoutPharmacyItemNestedInput = {
+    create?: XOR<PharmacySaleItemCreateWithoutPharmacyItemInput, PharmacySaleItemUncheckedCreateWithoutPharmacyItemInput> | PharmacySaleItemCreateWithoutPharmacyItemInput[] | PharmacySaleItemUncheckedCreateWithoutPharmacyItemInput[]
+    connectOrCreate?: PharmacySaleItemCreateOrConnectWithoutPharmacyItemInput | PharmacySaleItemCreateOrConnectWithoutPharmacyItemInput[]
+    upsert?: PharmacySaleItemUpsertWithWhereUniqueWithoutPharmacyItemInput | PharmacySaleItemUpsertWithWhereUniqueWithoutPharmacyItemInput[]
+    createMany?: PharmacySaleItemCreateManyPharmacyItemInputEnvelope
+    set?: PharmacySaleItemWhereUniqueInput | PharmacySaleItemWhereUniqueInput[]
+    disconnect?: PharmacySaleItemWhereUniqueInput | PharmacySaleItemWhereUniqueInput[]
+    delete?: PharmacySaleItemWhereUniqueInput | PharmacySaleItemWhereUniqueInput[]
+    connect?: PharmacySaleItemWhereUniqueInput | PharmacySaleItemWhereUniqueInput[]
+    update?: PharmacySaleItemUpdateWithWhereUniqueWithoutPharmacyItemInput | PharmacySaleItemUpdateWithWhereUniqueWithoutPharmacyItemInput[]
+    updateMany?: PharmacySaleItemUpdateManyWithWhereWithoutPharmacyItemInput | PharmacySaleItemUpdateManyWithWhereWithoutPharmacyItemInput[]
+    deleteMany?: PharmacySaleItemScalarWhereInput | PharmacySaleItemScalarWhereInput[]
+  }
+
+  export type PharmacySaleItemCreateNestedManyWithoutSaleInput = {
+    create?: XOR<PharmacySaleItemCreateWithoutSaleInput, PharmacySaleItemUncheckedCreateWithoutSaleInput> | PharmacySaleItemCreateWithoutSaleInput[] | PharmacySaleItemUncheckedCreateWithoutSaleInput[]
+    connectOrCreate?: PharmacySaleItemCreateOrConnectWithoutSaleInput | PharmacySaleItemCreateOrConnectWithoutSaleInput[]
+    createMany?: PharmacySaleItemCreateManySaleInputEnvelope
+    connect?: PharmacySaleItemWhereUniqueInput | PharmacySaleItemWhereUniqueInput[]
+  }
+
+  export type PharmacyPaymentCreateNestedManyWithoutSaleInput = {
+    create?: XOR<PharmacyPaymentCreateWithoutSaleInput, PharmacyPaymentUncheckedCreateWithoutSaleInput> | PharmacyPaymentCreateWithoutSaleInput[] | PharmacyPaymentUncheckedCreateWithoutSaleInput[]
+    connectOrCreate?: PharmacyPaymentCreateOrConnectWithoutSaleInput | PharmacyPaymentCreateOrConnectWithoutSaleInput[]
+    createMany?: PharmacyPaymentCreateManySaleInputEnvelope
+    connect?: PharmacyPaymentWhereUniqueInput | PharmacyPaymentWhereUniqueInput[]
+  }
+
+  export type PharmacySaleItemUncheckedCreateNestedManyWithoutSaleInput = {
+    create?: XOR<PharmacySaleItemCreateWithoutSaleInput, PharmacySaleItemUncheckedCreateWithoutSaleInput> | PharmacySaleItemCreateWithoutSaleInput[] | PharmacySaleItemUncheckedCreateWithoutSaleInput[]
+    connectOrCreate?: PharmacySaleItemCreateOrConnectWithoutSaleInput | PharmacySaleItemCreateOrConnectWithoutSaleInput[]
+    createMany?: PharmacySaleItemCreateManySaleInputEnvelope
+    connect?: PharmacySaleItemWhereUniqueInput | PharmacySaleItemWhereUniqueInput[]
+  }
+
+  export type PharmacyPaymentUncheckedCreateNestedManyWithoutSaleInput = {
+    create?: XOR<PharmacyPaymentCreateWithoutSaleInput, PharmacyPaymentUncheckedCreateWithoutSaleInput> | PharmacyPaymentCreateWithoutSaleInput[] | PharmacyPaymentUncheckedCreateWithoutSaleInput[]
+    connectOrCreate?: PharmacyPaymentCreateOrConnectWithoutSaleInput | PharmacyPaymentCreateOrConnectWithoutSaleInput[]
+    createMany?: PharmacyPaymentCreateManySaleInputEnvelope
+    connect?: PharmacyPaymentWhereUniqueInput | PharmacyPaymentWhereUniqueInput[]
+  }
+
+  export type EnumPaymentMethodFieldUpdateOperationsInput = {
+    set?: $Enums.PaymentMethod
+  }
+
+  export type EnumPaymentStatusFieldUpdateOperationsInput = {
+    set?: $Enums.PaymentStatus
+  }
+
+  export type PharmacySaleItemUpdateManyWithoutSaleNestedInput = {
+    create?: XOR<PharmacySaleItemCreateWithoutSaleInput, PharmacySaleItemUncheckedCreateWithoutSaleInput> | PharmacySaleItemCreateWithoutSaleInput[] | PharmacySaleItemUncheckedCreateWithoutSaleInput[]
+    connectOrCreate?: PharmacySaleItemCreateOrConnectWithoutSaleInput | PharmacySaleItemCreateOrConnectWithoutSaleInput[]
+    upsert?: PharmacySaleItemUpsertWithWhereUniqueWithoutSaleInput | PharmacySaleItemUpsertWithWhereUniqueWithoutSaleInput[]
+    createMany?: PharmacySaleItemCreateManySaleInputEnvelope
+    set?: PharmacySaleItemWhereUniqueInput | PharmacySaleItemWhereUniqueInput[]
+    disconnect?: PharmacySaleItemWhereUniqueInput | PharmacySaleItemWhereUniqueInput[]
+    delete?: PharmacySaleItemWhereUniqueInput | PharmacySaleItemWhereUniqueInput[]
+    connect?: PharmacySaleItemWhereUniqueInput | PharmacySaleItemWhereUniqueInput[]
+    update?: PharmacySaleItemUpdateWithWhereUniqueWithoutSaleInput | PharmacySaleItemUpdateWithWhereUniqueWithoutSaleInput[]
+    updateMany?: PharmacySaleItemUpdateManyWithWhereWithoutSaleInput | PharmacySaleItemUpdateManyWithWhereWithoutSaleInput[]
+    deleteMany?: PharmacySaleItemScalarWhereInput | PharmacySaleItemScalarWhereInput[]
+  }
+
+  export type PharmacyPaymentUpdateManyWithoutSaleNestedInput = {
+    create?: XOR<PharmacyPaymentCreateWithoutSaleInput, PharmacyPaymentUncheckedCreateWithoutSaleInput> | PharmacyPaymentCreateWithoutSaleInput[] | PharmacyPaymentUncheckedCreateWithoutSaleInput[]
+    connectOrCreate?: PharmacyPaymentCreateOrConnectWithoutSaleInput | PharmacyPaymentCreateOrConnectWithoutSaleInput[]
+    upsert?: PharmacyPaymentUpsertWithWhereUniqueWithoutSaleInput | PharmacyPaymentUpsertWithWhereUniqueWithoutSaleInput[]
+    createMany?: PharmacyPaymentCreateManySaleInputEnvelope
+    set?: PharmacyPaymentWhereUniqueInput | PharmacyPaymentWhereUniqueInput[]
+    disconnect?: PharmacyPaymentWhereUniqueInput | PharmacyPaymentWhereUniqueInput[]
+    delete?: PharmacyPaymentWhereUniqueInput | PharmacyPaymentWhereUniqueInput[]
+    connect?: PharmacyPaymentWhereUniqueInput | PharmacyPaymentWhereUniqueInput[]
+    update?: PharmacyPaymentUpdateWithWhereUniqueWithoutSaleInput | PharmacyPaymentUpdateWithWhereUniqueWithoutSaleInput[]
+    updateMany?: PharmacyPaymentUpdateManyWithWhereWithoutSaleInput | PharmacyPaymentUpdateManyWithWhereWithoutSaleInput[]
+    deleteMany?: PharmacyPaymentScalarWhereInput | PharmacyPaymentScalarWhereInput[]
+  }
+
+  export type PharmacySaleItemUncheckedUpdateManyWithoutSaleNestedInput = {
+    create?: XOR<PharmacySaleItemCreateWithoutSaleInput, PharmacySaleItemUncheckedCreateWithoutSaleInput> | PharmacySaleItemCreateWithoutSaleInput[] | PharmacySaleItemUncheckedCreateWithoutSaleInput[]
+    connectOrCreate?: PharmacySaleItemCreateOrConnectWithoutSaleInput | PharmacySaleItemCreateOrConnectWithoutSaleInput[]
+    upsert?: PharmacySaleItemUpsertWithWhereUniqueWithoutSaleInput | PharmacySaleItemUpsertWithWhereUniqueWithoutSaleInput[]
+    createMany?: PharmacySaleItemCreateManySaleInputEnvelope
+    set?: PharmacySaleItemWhereUniqueInput | PharmacySaleItemWhereUniqueInput[]
+    disconnect?: PharmacySaleItemWhereUniqueInput | PharmacySaleItemWhereUniqueInput[]
+    delete?: PharmacySaleItemWhereUniqueInput | PharmacySaleItemWhereUniqueInput[]
+    connect?: PharmacySaleItemWhereUniqueInput | PharmacySaleItemWhereUniqueInput[]
+    update?: PharmacySaleItemUpdateWithWhereUniqueWithoutSaleInput | PharmacySaleItemUpdateWithWhereUniqueWithoutSaleInput[]
+    updateMany?: PharmacySaleItemUpdateManyWithWhereWithoutSaleInput | PharmacySaleItemUpdateManyWithWhereWithoutSaleInput[]
+    deleteMany?: PharmacySaleItemScalarWhereInput | PharmacySaleItemScalarWhereInput[]
+  }
+
+  export type PharmacyPaymentUncheckedUpdateManyWithoutSaleNestedInput = {
+    create?: XOR<PharmacyPaymentCreateWithoutSaleInput, PharmacyPaymentUncheckedCreateWithoutSaleInput> | PharmacyPaymentCreateWithoutSaleInput[] | PharmacyPaymentUncheckedCreateWithoutSaleInput[]
+    connectOrCreate?: PharmacyPaymentCreateOrConnectWithoutSaleInput | PharmacyPaymentCreateOrConnectWithoutSaleInput[]
+    upsert?: PharmacyPaymentUpsertWithWhereUniqueWithoutSaleInput | PharmacyPaymentUpsertWithWhereUniqueWithoutSaleInput[]
+    createMany?: PharmacyPaymentCreateManySaleInputEnvelope
+    set?: PharmacyPaymentWhereUniqueInput | PharmacyPaymentWhereUniqueInput[]
+    disconnect?: PharmacyPaymentWhereUniqueInput | PharmacyPaymentWhereUniqueInput[]
+    delete?: PharmacyPaymentWhereUniqueInput | PharmacyPaymentWhereUniqueInput[]
+    connect?: PharmacyPaymentWhereUniqueInput | PharmacyPaymentWhereUniqueInput[]
+    update?: PharmacyPaymentUpdateWithWhereUniqueWithoutSaleInput | PharmacyPaymentUpdateWithWhereUniqueWithoutSaleInput[]
+    updateMany?: PharmacyPaymentUpdateManyWithWhereWithoutSaleInput | PharmacyPaymentUpdateManyWithWhereWithoutSaleInput[]
+    deleteMany?: PharmacyPaymentScalarWhereInput | PharmacyPaymentScalarWhereInput[]
+  }
+
+  export type PharmacySaleCreateNestedOneWithoutItemsInput = {
+    create?: XOR<PharmacySaleCreateWithoutItemsInput, PharmacySaleUncheckedCreateWithoutItemsInput>
+    connectOrCreate?: PharmacySaleCreateOrConnectWithoutItemsInput
+    connect?: PharmacySaleWhereUniqueInput
+  }
+
+  export type PharmacyItemCreateNestedOneWithoutSaleItemsInput = {
+    create?: XOR<PharmacyItemCreateWithoutSaleItemsInput, PharmacyItemUncheckedCreateWithoutSaleItemsInput>
+    connectOrCreate?: PharmacyItemCreateOrConnectWithoutSaleItemsInput
+    connect?: PharmacyItemWhereUniqueInput
+  }
+
+  export type PharmacySaleUpdateOneRequiredWithoutItemsNestedInput = {
+    create?: XOR<PharmacySaleCreateWithoutItemsInput, PharmacySaleUncheckedCreateWithoutItemsInput>
+    connectOrCreate?: PharmacySaleCreateOrConnectWithoutItemsInput
+    upsert?: PharmacySaleUpsertWithoutItemsInput
+    connect?: PharmacySaleWhereUniqueInput
+    update?: XOR<XOR<PharmacySaleUpdateToOneWithWhereWithoutItemsInput, PharmacySaleUpdateWithoutItemsInput>, PharmacySaleUncheckedUpdateWithoutItemsInput>
+  }
+
+  export type PharmacyItemUpdateOneRequiredWithoutSaleItemsNestedInput = {
+    create?: XOR<PharmacyItemCreateWithoutSaleItemsInput, PharmacyItemUncheckedCreateWithoutSaleItemsInput>
+    connectOrCreate?: PharmacyItemCreateOrConnectWithoutSaleItemsInput
+    upsert?: PharmacyItemUpsertWithoutSaleItemsInput
+    connect?: PharmacyItemWhereUniqueInput
+    update?: XOR<XOR<PharmacyItemUpdateToOneWithWhereWithoutSaleItemsInput, PharmacyItemUpdateWithoutSaleItemsInput>, PharmacyItemUncheckedUpdateWithoutSaleItemsInput>
+  }
+
+  export type PharmacySaleCreateNestedOneWithoutPaymentsInput = {
+    create?: XOR<PharmacySaleCreateWithoutPaymentsInput, PharmacySaleUncheckedCreateWithoutPaymentsInput>
+    connectOrCreate?: PharmacySaleCreateOrConnectWithoutPaymentsInput
+    connect?: PharmacySaleWhereUniqueInput
+  }
+
+  export type PharmacySaleUpdateOneRequiredWithoutPaymentsNestedInput = {
+    create?: XOR<PharmacySaleCreateWithoutPaymentsInput, PharmacySaleUncheckedCreateWithoutPaymentsInput>
+    connectOrCreate?: PharmacySaleCreateOrConnectWithoutPaymentsInput
+    upsert?: PharmacySaleUpsertWithoutPaymentsInput
+    connect?: PharmacySaleWhereUniqueInput
+    update?: XOR<XOR<PharmacySaleUpdateToOneWithWhereWithoutPaymentsInput, PharmacySaleUpdateWithoutPaymentsInput>, PharmacySaleUncheckedUpdateWithoutPaymentsInput>
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -16793,6 +27537,99 @@ export namespace Prisma {
     gt?: number | FloatFieldRefInput<$PrismaModel>
     gte?: number | FloatFieldRefInput<$PrismaModel>
     not?: NestedFloatFilter<$PrismaModel> | number
+  }
+
+  export type NestedUuidFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel>
+    in?: string[] | ListStringFieldRefInput<$PrismaModel>
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel>
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedUuidFilter<$PrismaModel> | string
+  }
+
+  export type NestedUuidWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel>
+    in?: string[] | ListStringFieldRefInput<$PrismaModel>
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel>
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedUuidWithAggregatesFilter<$PrismaModel> | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedStringFilter<$PrismaModel>
+    _max?: NestedStringFilter<$PrismaModel>
+  }
+
+  export type NestedEnumPharmacyItemFormFilter<$PrismaModel = never> = {
+    equals?: $Enums.PharmacyItemForm | EnumPharmacyItemFormFieldRefInput<$PrismaModel>
+    in?: $Enums.PharmacyItemForm[] | ListEnumPharmacyItemFormFieldRefInput<$PrismaModel>
+    notIn?: $Enums.PharmacyItemForm[] | ListEnumPharmacyItemFormFieldRefInput<$PrismaModel>
+    not?: NestedEnumPharmacyItemFormFilter<$PrismaModel> | $Enums.PharmacyItemForm
+  }
+
+  export type NestedEnumPharmacyItemRouteFilter<$PrismaModel = never> = {
+    equals?: $Enums.PharmacyItemRoute | EnumPharmacyItemRouteFieldRefInput<$PrismaModel>
+    in?: $Enums.PharmacyItemRoute[] | ListEnumPharmacyItemRouteFieldRefInput<$PrismaModel>
+    notIn?: $Enums.PharmacyItemRoute[] | ListEnumPharmacyItemRouteFieldRefInput<$PrismaModel>
+    not?: NestedEnumPharmacyItemRouteFilter<$PrismaModel> | $Enums.PharmacyItemRoute
+  }
+
+  export type NestedEnumPharmacyItemFormWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.PharmacyItemForm | EnumPharmacyItemFormFieldRefInput<$PrismaModel>
+    in?: $Enums.PharmacyItemForm[] | ListEnumPharmacyItemFormFieldRefInput<$PrismaModel>
+    notIn?: $Enums.PharmacyItemForm[] | ListEnumPharmacyItemFormFieldRefInput<$PrismaModel>
+    not?: NestedEnumPharmacyItemFormWithAggregatesFilter<$PrismaModel> | $Enums.PharmacyItemForm
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumPharmacyItemFormFilter<$PrismaModel>
+    _max?: NestedEnumPharmacyItemFormFilter<$PrismaModel>
+  }
+
+  export type NestedEnumPharmacyItemRouteWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.PharmacyItemRoute | EnumPharmacyItemRouteFieldRefInput<$PrismaModel>
+    in?: $Enums.PharmacyItemRoute[] | ListEnumPharmacyItemRouteFieldRefInput<$PrismaModel>
+    notIn?: $Enums.PharmacyItemRoute[] | ListEnumPharmacyItemRouteFieldRefInput<$PrismaModel>
+    not?: NestedEnumPharmacyItemRouteWithAggregatesFilter<$PrismaModel> | $Enums.PharmacyItemRoute
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumPharmacyItemRouteFilter<$PrismaModel>
+    _max?: NestedEnumPharmacyItemRouteFilter<$PrismaModel>
+  }
+
+  export type NestedEnumPaymentMethodFilter<$PrismaModel = never> = {
+    equals?: $Enums.PaymentMethod | EnumPaymentMethodFieldRefInput<$PrismaModel>
+    in?: $Enums.PaymentMethod[] | ListEnumPaymentMethodFieldRefInput<$PrismaModel>
+    notIn?: $Enums.PaymentMethod[] | ListEnumPaymentMethodFieldRefInput<$PrismaModel>
+    not?: NestedEnumPaymentMethodFilter<$PrismaModel> | $Enums.PaymentMethod
+  }
+
+  export type NestedEnumPaymentStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.PaymentStatus | EnumPaymentStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.PaymentStatus[] | ListEnumPaymentStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.PaymentStatus[] | ListEnumPaymentStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumPaymentStatusFilter<$PrismaModel> | $Enums.PaymentStatus
+  }
+
+  export type NestedEnumPaymentMethodWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.PaymentMethod | EnumPaymentMethodFieldRefInput<$PrismaModel>
+    in?: $Enums.PaymentMethod[] | ListEnumPaymentMethodFieldRefInput<$PrismaModel>
+    notIn?: $Enums.PaymentMethod[] | ListEnumPaymentMethodFieldRefInput<$PrismaModel>
+    not?: NestedEnumPaymentMethodWithAggregatesFilter<$PrismaModel> | $Enums.PaymentMethod
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumPaymentMethodFilter<$PrismaModel>
+    _max?: NestedEnumPaymentMethodFilter<$PrismaModel>
+  }
+
+  export type NestedEnumPaymentStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.PaymentStatus | EnumPaymentStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.PaymentStatus[] | ListEnumPaymentStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.PaymentStatus[] | ListEnumPaymentStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumPaymentStatusWithAggregatesFilter<$PrismaModel> | $Enums.PaymentStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumPaymentStatusFilter<$PrismaModel>
+    _max?: NestedEnumPaymentStatusFilter<$PrismaModel>
   }
 
   export type RefreshTokenCreateWithoutUserInput = {
@@ -18449,6 +29286,651 @@ export namespace Prisma {
     appointments?: AppointmentUncheckedUpdateManyWithoutUserNestedInput
   }
 
+  export type PharmacyItemCreateWithoutBrandInput = {
+    id?: string
+    name: string
+    form: $Enums.PharmacyItemForm
+    route: $Enums.PharmacyItemRoute
+    strength: string
+    stock: number
+    unit: string
+    price?: Decimal | DecimalJsLike | number | string
+    sku?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    category: PharmacyItemCategoryCreateNestedOneWithoutItemsInput
+    saleItems?: PharmacySaleItemCreateNestedManyWithoutPharmacyItemInput
+  }
+
+  export type PharmacyItemUncheckedCreateWithoutBrandInput = {
+    id?: string
+    categoryId: string
+    name: string
+    form: $Enums.PharmacyItemForm
+    route: $Enums.PharmacyItemRoute
+    strength: string
+    stock: number
+    unit: string
+    price?: Decimal | DecimalJsLike | number | string
+    sku?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    saleItems?: PharmacySaleItemUncheckedCreateNestedManyWithoutPharmacyItemInput
+  }
+
+  export type PharmacyItemCreateOrConnectWithoutBrandInput = {
+    where: PharmacyItemWhereUniqueInput
+    create: XOR<PharmacyItemCreateWithoutBrandInput, PharmacyItemUncheckedCreateWithoutBrandInput>
+  }
+
+  export type PharmacyItemCreateManyBrandInputEnvelope = {
+    data: PharmacyItemCreateManyBrandInput | PharmacyItemCreateManyBrandInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type PharmacyItemUpsertWithWhereUniqueWithoutBrandInput = {
+    where: PharmacyItemWhereUniqueInput
+    update: XOR<PharmacyItemUpdateWithoutBrandInput, PharmacyItemUncheckedUpdateWithoutBrandInput>
+    create: XOR<PharmacyItemCreateWithoutBrandInput, PharmacyItemUncheckedCreateWithoutBrandInput>
+  }
+
+  export type PharmacyItemUpdateWithWhereUniqueWithoutBrandInput = {
+    where: PharmacyItemWhereUniqueInput
+    data: XOR<PharmacyItemUpdateWithoutBrandInput, PharmacyItemUncheckedUpdateWithoutBrandInput>
+  }
+
+  export type PharmacyItemUpdateManyWithWhereWithoutBrandInput = {
+    where: PharmacyItemScalarWhereInput
+    data: XOR<PharmacyItemUpdateManyMutationInput, PharmacyItemUncheckedUpdateManyWithoutBrandInput>
+  }
+
+  export type PharmacyItemScalarWhereInput = {
+    AND?: PharmacyItemScalarWhereInput | PharmacyItemScalarWhereInput[]
+    OR?: PharmacyItemScalarWhereInput[]
+    NOT?: PharmacyItemScalarWhereInput | PharmacyItemScalarWhereInput[]
+    id?: UuidFilter<"PharmacyItem"> | string
+    brandId?: UuidFilter<"PharmacyItem"> | string
+    categoryId?: UuidFilter<"PharmacyItem"> | string
+    name?: StringFilter<"PharmacyItem"> | string
+    form?: EnumPharmacyItemFormFilter<"PharmacyItem"> | $Enums.PharmacyItemForm
+    route?: EnumPharmacyItemRouteFilter<"PharmacyItem"> | $Enums.PharmacyItemRoute
+    strength?: StringFilter<"PharmacyItem"> | string
+    stock?: IntFilter<"PharmacyItem"> | number
+    unit?: StringFilter<"PharmacyItem"> | string
+    price?: DecimalFilter<"PharmacyItem"> | Decimal | DecimalJsLike | number | string
+    sku?: StringNullableFilter<"PharmacyItem"> | string | null
+    createdAt?: DateTimeFilter<"PharmacyItem"> | Date | string
+    updatedAt?: DateTimeFilter<"PharmacyItem"> | Date | string
+  }
+
+  export type PharmacyItemCreateWithoutCategoryInput = {
+    id?: string
+    name: string
+    form: $Enums.PharmacyItemForm
+    route: $Enums.PharmacyItemRoute
+    strength: string
+    stock: number
+    unit: string
+    price?: Decimal | DecimalJsLike | number | string
+    sku?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    brand: PharmacyBrandCreateNestedOneWithoutItemsInput
+    saleItems?: PharmacySaleItemCreateNestedManyWithoutPharmacyItemInput
+  }
+
+  export type PharmacyItemUncheckedCreateWithoutCategoryInput = {
+    id?: string
+    brandId: string
+    name: string
+    form: $Enums.PharmacyItemForm
+    route: $Enums.PharmacyItemRoute
+    strength: string
+    stock: number
+    unit: string
+    price?: Decimal | DecimalJsLike | number | string
+    sku?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    saleItems?: PharmacySaleItemUncheckedCreateNestedManyWithoutPharmacyItemInput
+  }
+
+  export type PharmacyItemCreateOrConnectWithoutCategoryInput = {
+    where: PharmacyItemWhereUniqueInput
+    create: XOR<PharmacyItemCreateWithoutCategoryInput, PharmacyItemUncheckedCreateWithoutCategoryInput>
+  }
+
+  export type PharmacyItemCreateManyCategoryInputEnvelope = {
+    data: PharmacyItemCreateManyCategoryInput | PharmacyItemCreateManyCategoryInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type PharmacyItemUpsertWithWhereUniqueWithoutCategoryInput = {
+    where: PharmacyItemWhereUniqueInput
+    update: XOR<PharmacyItemUpdateWithoutCategoryInput, PharmacyItemUncheckedUpdateWithoutCategoryInput>
+    create: XOR<PharmacyItemCreateWithoutCategoryInput, PharmacyItemUncheckedCreateWithoutCategoryInput>
+  }
+
+  export type PharmacyItemUpdateWithWhereUniqueWithoutCategoryInput = {
+    where: PharmacyItemWhereUniqueInput
+    data: XOR<PharmacyItemUpdateWithoutCategoryInput, PharmacyItemUncheckedUpdateWithoutCategoryInput>
+  }
+
+  export type PharmacyItemUpdateManyWithWhereWithoutCategoryInput = {
+    where: PharmacyItemScalarWhereInput
+    data: XOR<PharmacyItemUpdateManyMutationInput, PharmacyItemUncheckedUpdateManyWithoutCategoryInput>
+  }
+
+  export type PharmacyBrandCreateWithoutItemsInput = {
+    id?: string
+    name: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type PharmacyBrandUncheckedCreateWithoutItemsInput = {
+    id?: string
+    name: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type PharmacyBrandCreateOrConnectWithoutItemsInput = {
+    where: PharmacyBrandWhereUniqueInput
+    create: XOR<PharmacyBrandCreateWithoutItemsInput, PharmacyBrandUncheckedCreateWithoutItemsInput>
+  }
+
+  export type PharmacyItemCategoryCreateWithoutItemsInput = {
+    id?: string
+    name: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type PharmacyItemCategoryUncheckedCreateWithoutItemsInput = {
+    id?: string
+    name: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type PharmacyItemCategoryCreateOrConnectWithoutItemsInput = {
+    where: PharmacyItemCategoryWhereUniqueInput
+    create: XOR<PharmacyItemCategoryCreateWithoutItemsInput, PharmacyItemCategoryUncheckedCreateWithoutItemsInput>
+  }
+
+  export type PharmacySaleItemCreateWithoutPharmacyItemInput = {
+    id?: string
+    quantity: number
+    unitPrice: Decimal | DecimalJsLike | number | string
+    subtotal: Decimal | DecimalJsLike | number | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    sale: PharmacySaleCreateNestedOneWithoutItemsInput
+  }
+
+  export type PharmacySaleItemUncheckedCreateWithoutPharmacyItemInput = {
+    id?: string
+    saleId: string
+    quantity: number
+    unitPrice: Decimal | DecimalJsLike | number | string
+    subtotal: Decimal | DecimalJsLike | number | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type PharmacySaleItemCreateOrConnectWithoutPharmacyItemInput = {
+    where: PharmacySaleItemWhereUniqueInput
+    create: XOR<PharmacySaleItemCreateWithoutPharmacyItemInput, PharmacySaleItemUncheckedCreateWithoutPharmacyItemInput>
+  }
+
+  export type PharmacySaleItemCreateManyPharmacyItemInputEnvelope = {
+    data: PharmacySaleItemCreateManyPharmacyItemInput | PharmacySaleItemCreateManyPharmacyItemInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type PharmacyBrandUpsertWithoutItemsInput = {
+    update: XOR<PharmacyBrandUpdateWithoutItemsInput, PharmacyBrandUncheckedUpdateWithoutItemsInput>
+    create: XOR<PharmacyBrandCreateWithoutItemsInput, PharmacyBrandUncheckedCreateWithoutItemsInput>
+    where?: PharmacyBrandWhereInput
+  }
+
+  export type PharmacyBrandUpdateToOneWithWhereWithoutItemsInput = {
+    where?: PharmacyBrandWhereInput
+    data: XOR<PharmacyBrandUpdateWithoutItemsInput, PharmacyBrandUncheckedUpdateWithoutItemsInput>
+  }
+
+  export type PharmacyBrandUpdateWithoutItemsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PharmacyBrandUncheckedUpdateWithoutItemsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PharmacyItemCategoryUpsertWithoutItemsInput = {
+    update: XOR<PharmacyItemCategoryUpdateWithoutItemsInput, PharmacyItemCategoryUncheckedUpdateWithoutItemsInput>
+    create: XOR<PharmacyItemCategoryCreateWithoutItemsInput, PharmacyItemCategoryUncheckedCreateWithoutItemsInput>
+    where?: PharmacyItemCategoryWhereInput
+  }
+
+  export type PharmacyItemCategoryUpdateToOneWithWhereWithoutItemsInput = {
+    where?: PharmacyItemCategoryWhereInput
+    data: XOR<PharmacyItemCategoryUpdateWithoutItemsInput, PharmacyItemCategoryUncheckedUpdateWithoutItemsInput>
+  }
+
+  export type PharmacyItemCategoryUpdateWithoutItemsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PharmacyItemCategoryUncheckedUpdateWithoutItemsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PharmacySaleItemUpsertWithWhereUniqueWithoutPharmacyItemInput = {
+    where: PharmacySaleItemWhereUniqueInput
+    update: XOR<PharmacySaleItemUpdateWithoutPharmacyItemInput, PharmacySaleItemUncheckedUpdateWithoutPharmacyItemInput>
+    create: XOR<PharmacySaleItemCreateWithoutPharmacyItemInput, PharmacySaleItemUncheckedCreateWithoutPharmacyItemInput>
+  }
+
+  export type PharmacySaleItemUpdateWithWhereUniqueWithoutPharmacyItemInput = {
+    where: PharmacySaleItemWhereUniqueInput
+    data: XOR<PharmacySaleItemUpdateWithoutPharmacyItemInput, PharmacySaleItemUncheckedUpdateWithoutPharmacyItemInput>
+  }
+
+  export type PharmacySaleItemUpdateManyWithWhereWithoutPharmacyItemInput = {
+    where: PharmacySaleItemScalarWhereInput
+    data: XOR<PharmacySaleItemUpdateManyMutationInput, PharmacySaleItemUncheckedUpdateManyWithoutPharmacyItemInput>
+  }
+
+  export type PharmacySaleItemScalarWhereInput = {
+    AND?: PharmacySaleItemScalarWhereInput | PharmacySaleItemScalarWhereInput[]
+    OR?: PharmacySaleItemScalarWhereInput[]
+    NOT?: PharmacySaleItemScalarWhereInput | PharmacySaleItemScalarWhereInput[]
+    id?: UuidFilter<"PharmacySaleItem"> | string
+    saleId?: UuidFilter<"PharmacySaleItem"> | string
+    pharmacyItemId?: UuidFilter<"PharmacySaleItem"> | string
+    quantity?: IntFilter<"PharmacySaleItem"> | number
+    unitPrice?: DecimalFilter<"PharmacySaleItem"> | Decimal | DecimalJsLike | number | string
+    subtotal?: DecimalFilter<"PharmacySaleItem"> | Decimal | DecimalJsLike | number | string
+    createdAt?: DateTimeFilter<"PharmacySaleItem"> | Date | string
+    updatedAt?: DateTimeFilter<"PharmacySaleItem"> | Date | string
+  }
+
+  export type PharmacySaleItemCreateWithoutSaleInput = {
+    id?: string
+    quantity: number
+    unitPrice: Decimal | DecimalJsLike | number | string
+    subtotal: Decimal | DecimalJsLike | number | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    pharmacyItem: PharmacyItemCreateNestedOneWithoutSaleItemsInput
+  }
+
+  export type PharmacySaleItemUncheckedCreateWithoutSaleInput = {
+    id?: string
+    pharmacyItemId: string
+    quantity: number
+    unitPrice: Decimal | DecimalJsLike | number | string
+    subtotal: Decimal | DecimalJsLike | number | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type PharmacySaleItemCreateOrConnectWithoutSaleInput = {
+    where: PharmacySaleItemWhereUniqueInput
+    create: XOR<PharmacySaleItemCreateWithoutSaleInput, PharmacySaleItemUncheckedCreateWithoutSaleInput>
+  }
+
+  export type PharmacySaleItemCreateManySaleInputEnvelope = {
+    data: PharmacySaleItemCreateManySaleInput | PharmacySaleItemCreateManySaleInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type PharmacyPaymentCreateWithoutSaleInput = {
+    id?: string
+    amount: Decimal | DecimalJsLike | number | string
+    method?: $Enums.PaymentMethod
+    transactionId?: string | null
+    paidAt?: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type PharmacyPaymentUncheckedCreateWithoutSaleInput = {
+    id?: string
+    amount: Decimal | DecimalJsLike | number | string
+    method?: $Enums.PaymentMethod
+    transactionId?: string | null
+    paidAt?: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type PharmacyPaymentCreateOrConnectWithoutSaleInput = {
+    where: PharmacyPaymentWhereUniqueInput
+    create: XOR<PharmacyPaymentCreateWithoutSaleInput, PharmacyPaymentUncheckedCreateWithoutSaleInput>
+  }
+
+  export type PharmacyPaymentCreateManySaleInputEnvelope = {
+    data: PharmacyPaymentCreateManySaleInput | PharmacyPaymentCreateManySaleInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type PharmacySaleItemUpsertWithWhereUniqueWithoutSaleInput = {
+    where: PharmacySaleItemWhereUniqueInput
+    update: XOR<PharmacySaleItemUpdateWithoutSaleInput, PharmacySaleItemUncheckedUpdateWithoutSaleInput>
+    create: XOR<PharmacySaleItemCreateWithoutSaleInput, PharmacySaleItemUncheckedCreateWithoutSaleInput>
+  }
+
+  export type PharmacySaleItemUpdateWithWhereUniqueWithoutSaleInput = {
+    where: PharmacySaleItemWhereUniqueInput
+    data: XOR<PharmacySaleItemUpdateWithoutSaleInput, PharmacySaleItemUncheckedUpdateWithoutSaleInput>
+  }
+
+  export type PharmacySaleItemUpdateManyWithWhereWithoutSaleInput = {
+    where: PharmacySaleItemScalarWhereInput
+    data: XOR<PharmacySaleItemUpdateManyMutationInput, PharmacySaleItemUncheckedUpdateManyWithoutSaleInput>
+  }
+
+  export type PharmacyPaymentUpsertWithWhereUniqueWithoutSaleInput = {
+    where: PharmacyPaymentWhereUniqueInput
+    update: XOR<PharmacyPaymentUpdateWithoutSaleInput, PharmacyPaymentUncheckedUpdateWithoutSaleInput>
+    create: XOR<PharmacyPaymentCreateWithoutSaleInput, PharmacyPaymentUncheckedCreateWithoutSaleInput>
+  }
+
+  export type PharmacyPaymentUpdateWithWhereUniqueWithoutSaleInput = {
+    where: PharmacyPaymentWhereUniqueInput
+    data: XOR<PharmacyPaymentUpdateWithoutSaleInput, PharmacyPaymentUncheckedUpdateWithoutSaleInput>
+  }
+
+  export type PharmacyPaymentUpdateManyWithWhereWithoutSaleInput = {
+    where: PharmacyPaymentScalarWhereInput
+    data: XOR<PharmacyPaymentUpdateManyMutationInput, PharmacyPaymentUncheckedUpdateManyWithoutSaleInput>
+  }
+
+  export type PharmacyPaymentScalarWhereInput = {
+    AND?: PharmacyPaymentScalarWhereInput | PharmacyPaymentScalarWhereInput[]
+    OR?: PharmacyPaymentScalarWhereInput[]
+    NOT?: PharmacyPaymentScalarWhereInput | PharmacyPaymentScalarWhereInput[]
+    id?: UuidFilter<"PharmacyPayment"> | string
+    saleId?: UuidFilter<"PharmacyPayment"> | string
+    amount?: DecimalFilter<"PharmacyPayment"> | Decimal | DecimalJsLike | number | string
+    method?: EnumPaymentMethodFilter<"PharmacyPayment"> | $Enums.PaymentMethod
+    transactionId?: StringNullableFilter<"PharmacyPayment"> | string | null
+    paidAt?: DateTimeFilter<"PharmacyPayment"> | Date | string
+    createdAt?: DateTimeFilter<"PharmacyPayment"> | Date | string
+    updatedAt?: DateTimeFilter<"PharmacyPayment"> | Date | string
+  }
+
+  export type PharmacySaleCreateWithoutItemsInput = {
+    id?: string
+    invoiceNumber: string
+    customerName?: string | null
+    customerPhone?: string | null
+    staffId?: string | null
+    subtotal: Decimal | DecimalJsLike | number | string
+    discount?: Decimal | DecimalJsLike | number | string
+    tax?: Decimal | DecimalJsLike | number | string
+    total: Decimal | DecimalJsLike | number | string
+    paymentMethod?: $Enums.PaymentMethod
+    paymentStatus?: $Enums.PaymentStatus
+    notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    payments?: PharmacyPaymentCreateNestedManyWithoutSaleInput
+  }
+
+  export type PharmacySaleUncheckedCreateWithoutItemsInput = {
+    id?: string
+    invoiceNumber: string
+    customerName?: string | null
+    customerPhone?: string | null
+    staffId?: string | null
+    subtotal: Decimal | DecimalJsLike | number | string
+    discount?: Decimal | DecimalJsLike | number | string
+    tax?: Decimal | DecimalJsLike | number | string
+    total: Decimal | DecimalJsLike | number | string
+    paymentMethod?: $Enums.PaymentMethod
+    paymentStatus?: $Enums.PaymentStatus
+    notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    payments?: PharmacyPaymentUncheckedCreateNestedManyWithoutSaleInput
+  }
+
+  export type PharmacySaleCreateOrConnectWithoutItemsInput = {
+    where: PharmacySaleWhereUniqueInput
+    create: XOR<PharmacySaleCreateWithoutItemsInput, PharmacySaleUncheckedCreateWithoutItemsInput>
+  }
+
+  export type PharmacyItemCreateWithoutSaleItemsInput = {
+    id?: string
+    name: string
+    form: $Enums.PharmacyItemForm
+    route: $Enums.PharmacyItemRoute
+    strength: string
+    stock: number
+    unit: string
+    price?: Decimal | DecimalJsLike | number | string
+    sku?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    brand: PharmacyBrandCreateNestedOneWithoutItemsInput
+    category: PharmacyItemCategoryCreateNestedOneWithoutItemsInput
+  }
+
+  export type PharmacyItemUncheckedCreateWithoutSaleItemsInput = {
+    id?: string
+    brandId: string
+    categoryId: string
+    name: string
+    form: $Enums.PharmacyItemForm
+    route: $Enums.PharmacyItemRoute
+    strength: string
+    stock: number
+    unit: string
+    price?: Decimal | DecimalJsLike | number | string
+    sku?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type PharmacyItemCreateOrConnectWithoutSaleItemsInput = {
+    where: PharmacyItemWhereUniqueInput
+    create: XOR<PharmacyItemCreateWithoutSaleItemsInput, PharmacyItemUncheckedCreateWithoutSaleItemsInput>
+  }
+
+  export type PharmacySaleUpsertWithoutItemsInput = {
+    update: XOR<PharmacySaleUpdateWithoutItemsInput, PharmacySaleUncheckedUpdateWithoutItemsInput>
+    create: XOR<PharmacySaleCreateWithoutItemsInput, PharmacySaleUncheckedCreateWithoutItemsInput>
+    where?: PharmacySaleWhereInput
+  }
+
+  export type PharmacySaleUpdateToOneWithWhereWithoutItemsInput = {
+    where?: PharmacySaleWhereInput
+    data: XOR<PharmacySaleUpdateWithoutItemsInput, PharmacySaleUncheckedUpdateWithoutItemsInput>
+  }
+
+  export type PharmacySaleUpdateWithoutItemsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    invoiceNumber?: StringFieldUpdateOperationsInput | string
+    customerName?: NullableStringFieldUpdateOperationsInput | string | null
+    customerPhone?: NullableStringFieldUpdateOperationsInput | string | null
+    staffId?: NullableStringFieldUpdateOperationsInput | string | null
+    subtotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    discount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    tax?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    total?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    paymentMethod?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
+    paymentStatus?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    payments?: PharmacyPaymentUpdateManyWithoutSaleNestedInput
+  }
+
+  export type PharmacySaleUncheckedUpdateWithoutItemsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    invoiceNumber?: StringFieldUpdateOperationsInput | string
+    customerName?: NullableStringFieldUpdateOperationsInput | string | null
+    customerPhone?: NullableStringFieldUpdateOperationsInput | string | null
+    staffId?: NullableStringFieldUpdateOperationsInput | string | null
+    subtotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    discount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    tax?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    total?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    paymentMethod?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
+    paymentStatus?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    payments?: PharmacyPaymentUncheckedUpdateManyWithoutSaleNestedInput
+  }
+
+  export type PharmacyItemUpsertWithoutSaleItemsInput = {
+    update: XOR<PharmacyItemUpdateWithoutSaleItemsInput, PharmacyItemUncheckedUpdateWithoutSaleItemsInput>
+    create: XOR<PharmacyItemCreateWithoutSaleItemsInput, PharmacyItemUncheckedCreateWithoutSaleItemsInput>
+    where?: PharmacyItemWhereInput
+  }
+
+  export type PharmacyItemUpdateToOneWithWhereWithoutSaleItemsInput = {
+    where?: PharmacyItemWhereInput
+    data: XOR<PharmacyItemUpdateWithoutSaleItemsInput, PharmacyItemUncheckedUpdateWithoutSaleItemsInput>
+  }
+
+  export type PharmacyItemUpdateWithoutSaleItemsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    form?: EnumPharmacyItemFormFieldUpdateOperationsInput | $Enums.PharmacyItemForm
+    route?: EnumPharmacyItemRouteFieldUpdateOperationsInput | $Enums.PharmacyItemRoute
+    strength?: StringFieldUpdateOperationsInput | string
+    stock?: IntFieldUpdateOperationsInput | number
+    unit?: StringFieldUpdateOperationsInput | string
+    price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    sku?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    brand?: PharmacyBrandUpdateOneRequiredWithoutItemsNestedInput
+    category?: PharmacyItemCategoryUpdateOneRequiredWithoutItemsNestedInput
+  }
+
+  export type PharmacyItemUncheckedUpdateWithoutSaleItemsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    brandId?: StringFieldUpdateOperationsInput | string
+    categoryId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    form?: EnumPharmacyItemFormFieldUpdateOperationsInput | $Enums.PharmacyItemForm
+    route?: EnumPharmacyItemRouteFieldUpdateOperationsInput | $Enums.PharmacyItemRoute
+    strength?: StringFieldUpdateOperationsInput | string
+    stock?: IntFieldUpdateOperationsInput | number
+    unit?: StringFieldUpdateOperationsInput | string
+    price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    sku?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PharmacySaleCreateWithoutPaymentsInput = {
+    id?: string
+    invoiceNumber: string
+    customerName?: string | null
+    customerPhone?: string | null
+    staffId?: string | null
+    subtotal: Decimal | DecimalJsLike | number | string
+    discount?: Decimal | DecimalJsLike | number | string
+    tax?: Decimal | DecimalJsLike | number | string
+    total: Decimal | DecimalJsLike | number | string
+    paymentMethod?: $Enums.PaymentMethod
+    paymentStatus?: $Enums.PaymentStatus
+    notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    items?: PharmacySaleItemCreateNestedManyWithoutSaleInput
+  }
+
+  export type PharmacySaleUncheckedCreateWithoutPaymentsInput = {
+    id?: string
+    invoiceNumber: string
+    customerName?: string | null
+    customerPhone?: string | null
+    staffId?: string | null
+    subtotal: Decimal | DecimalJsLike | number | string
+    discount?: Decimal | DecimalJsLike | number | string
+    tax?: Decimal | DecimalJsLike | number | string
+    total: Decimal | DecimalJsLike | number | string
+    paymentMethod?: $Enums.PaymentMethod
+    paymentStatus?: $Enums.PaymentStatus
+    notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    items?: PharmacySaleItemUncheckedCreateNestedManyWithoutSaleInput
+  }
+
+  export type PharmacySaleCreateOrConnectWithoutPaymentsInput = {
+    where: PharmacySaleWhereUniqueInput
+    create: XOR<PharmacySaleCreateWithoutPaymentsInput, PharmacySaleUncheckedCreateWithoutPaymentsInput>
+  }
+
+  export type PharmacySaleUpsertWithoutPaymentsInput = {
+    update: XOR<PharmacySaleUpdateWithoutPaymentsInput, PharmacySaleUncheckedUpdateWithoutPaymentsInput>
+    create: XOR<PharmacySaleCreateWithoutPaymentsInput, PharmacySaleUncheckedCreateWithoutPaymentsInput>
+    where?: PharmacySaleWhereInput
+  }
+
+  export type PharmacySaleUpdateToOneWithWhereWithoutPaymentsInput = {
+    where?: PharmacySaleWhereInput
+    data: XOR<PharmacySaleUpdateWithoutPaymentsInput, PharmacySaleUncheckedUpdateWithoutPaymentsInput>
+  }
+
+  export type PharmacySaleUpdateWithoutPaymentsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    invoiceNumber?: StringFieldUpdateOperationsInput | string
+    customerName?: NullableStringFieldUpdateOperationsInput | string | null
+    customerPhone?: NullableStringFieldUpdateOperationsInput | string | null
+    staffId?: NullableStringFieldUpdateOperationsInput | string | null
+    subtotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    discount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    tax?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    total?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    paymentMethod?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
+    paymentStatus?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    items?: PharmacySaleItemUpdateManyWithoutSaleNestedInput
+  }
+
+  export type PharmacySaleUncheckedUpdateWithoutPaymentsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    invoiceNumber?: StringFieldUpdateOperationsInput | string
+    customerName?: NullableStringFieldUpdateOperationsInput | string | null
+    customerPhone?: NullableStringFieldUpdateOperationsInput | string | null
+    staffId?: NullableStringFieldUpdateOperationsInput | string | null
+    subtotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    discount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    tax?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    total?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    paymentMethod?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
+    paymentStatus?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    items?: PharmacySaleItemUncheckedUpdateManyWithoutSaleNestedInput
+  }
+
   export type RefreshTokenCreateManyUserInput = {
     id?: string
     token: string
@@ -18629,6 +30111,250 @@ export namespace Prisma {
     isActive?: BoolFieldUpdateOperationsInput | boolean
     requirements?: NullableStringFieldUpdateOperationsInput | string | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PharmacyItemCreateManyBrandInput = {
+    id?: string
+    categoryId: string
+    name: string
+    form: $Enums.PharmacyItemForm
+    route: $Enums.PharmacyItemRoute
+    strength: string
+    stock: number
+    unit: string
+    price?: Decimal | DecimalJsLike | number | string
+    sku?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type PharmacyItemUpdateWithoutBrandInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    form?: EnumPharmacyItemFormFieldUpdateOperationsInput | $Enums.PharmacyItemForm
+    route?: EnumPharmacyItemRouteFieldUpdateOperationsInput | $Enums.PharmacyItemRoute
+    strength?: StringFieldUpdateOperationsInput | string
+    stock?: IntFieldUpdateOperationsInput | number
+    unit?: StringFieldUpdateOperationsInput | string
+    price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    sku?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    category?: PharmacyItemCategoryUpdateOneRequiredWithoutItemsNestedInput
+    saleItems?: PharmacySaleItemUpdateManyWithoutPharmacyItemNestedInput
+  }
+
+  export type PharmacyItemUncheckedUpdateWithoutBrandInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    categoryId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    form?: EnumPharmacyItemFormFieldUpdateOperationsInput | $Enums.PharmacyItemForm
+    route?: EnumPharmacyItemRouteFieldUpdateOperationsInput | $Enums.PharmacyItemRoute
+    strength?: StringFieldUpdateOperationsInput | string
+    stock?: IntFieldUpdateOperationsInput | number
+    unit?: StringFieldUpdateOperationsInput | string
+    price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    sku?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    saleItems?: PharmacySaleItemUncheckedUpdateManyWithoutPharmacyItemNestedInput
+  }
+
+  export type PharmacyItemUncheckedUpdateManyWithoutBrandInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    categoryId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    form?: EnumPharmacyItemFormFieldUpdateOperationsInput | $Enums.PharmacyItemForm
+    route?: EnumPharmacyItemRouteFieldUpdateOperationsInput | $Enums.PharmacyItemRoute
+    strength?: StringFieldUpdateOperationsInput | string
+    stock?: IntFieldUpdateOperationsInput | number
+    unit?: StringFieldUpdateOperationsInput | string
+    price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    sku?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PharmacyItemCreateManyCategoryInput = {
+    id?: string
+    brandId: string
+    name: string
+    form: $Enums.PharmacyItemForm
+    route: $Enums.PharmacyItemRoute
+    strength: string
+    stock: number
+    unit: string
+    price?: Decimal | DecimalJsLike | number | string
+    sku?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type PharmacyItemUpdateWithoutCategoryInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    form?: EnumPharmacyItemFormFieldUpdateOperationsInput | $Enums.PharmacyItemForm
+    route?: EnumPharmacyItemRouteFieldUpdateOperationsInput | $Enums.PharmacyItemRoute
+    strength?: StringFieldUpdateOperationsInput | string
+    stock?: IntFieldUpdateOperationsInput | number
+    unit?: StringFieldUpdateOperationsInput | string
+    price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    sku?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    brand?: PharmacyBrandUpdateOneRequiredWithoutItemsNestedInput
+    saleItems?: PharmacySaleItemUpdateManyWithoutPharmacyItemNestedInput
+  }
+
+  export type PharmacyItemUncheckedUpdateWithoutCategoryInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    brandId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    form?: EnumPharmacyItemFormFieldUpdateOperationsInput | $Enums.PharmacyItemForm
+    route?: EnumPharmacyItemRouteFieldUpdateOperationsInput | $Enums.PharmacyItemRoute
+    strength?: StringFieldUpdateOperationsInput | string
+    stock?: IntFieldUpdateOperationsInput | number
+    unit?: StringFieldUpdateOperationsInput | string
+    price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    sku?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    saleItems?: PharmacySaleItemUncheckedUpdateManyWithoutPharmacyItemNestedInput
+  }
+
+  export type PharmacyItemUncheckedUpdateManyWithoutCategoryInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    brandId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    form?: EnumPharmacyItemFormFieldUpdateOperationsInput | $Enums.PharmacyItemForm
+    route?: EnumPharmacyItemRouteFieldUpdateOperationsInput | $Enums.PharmacyItemRoute
+    strength?: StringFieldUpdateOperationsInput | string
+    stock?: IntFieldUpdateOperationsInput | number
+    unit?: StringFieldUpdateOperationsInput | string
+    price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    sku?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PharmacySaleItemCreateManyPharmacyItemInput = {
+    id?: string
+    saleId: string
+    quantity: number
+    unitPrice: Decimal | DecimalJsLike | number | string
+    subtotal: Decimal | DecimalJsLike | number | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type PharmacySaleItemUpdateWithoutPharmacyItemInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    quantity?: IntFieldUpdateOperationsInput | number
+    unitPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    subtotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    sale?: PharmacySaleUpdateOneRequiredWithoutItemsNestedInput
+  }
+
+  export type PharmacySaleItemUncheckedUpdateWithoutPharmacyItemInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    saleId?: StringFieldUpdateOperationsInput | string
+    quantity?: IntFieldUpdateOperationsInput | number
+    unitPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    subtotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PharmacySaleItemUncheckedUpdateManyWithoutPharmacyItemInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    saleId?: StringFieldUpdateOperationsInput | string
+    quantity?: IntFieldUpdateOperationsInput | number
+    unitPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    subtotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PharmacySaleItemCreateManySaleInput = {
+    id?: string
+    pharmacyItemId: string
+    quantity: number
+    unitPrice: Decimal | DecimalJsLike | number | string
+    subtotal: Decimal | DecimalJsLike | number | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type PharmacyPaymentCreateManySaleInput = {
+    id?: string
+    amount: Decimal | DecimalJsLike | number | string
+    method?: $Enums.PaymentMethod
+    transactionId?: string | null
+    paidAt?: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type PharmacySaleItemUpdateWithoutSaleInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    quantity?: IntFieldUpdateOperationsInput | number
+    unitPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    subtotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    pharmacyItem?: PharmacyItemUpdateOneRequiredWithoutSaleItemsNestedInput
+  }
+
+  export type PharmacySaleItemUncheckedUpdateWithoutSaleInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    pharmacyItemId?: StringFieldUpdateOperationsInput | string
+    quantity?: IntFieldUpdateOperationsInput | number
+    unitPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    subtotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PharmacySaleItemUncheckedUpdateManyWithoutSaleInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    pharmacyItemId?: StringFieldUpdateOperationsInput | string
+    quantity?: IntFieldUpdateOperationsInput | number
+    unitPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    subtotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PharmacyPaymentUpdateWithoutSaleInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    method?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
+    transactionId?: NullableStringFieldUpdateOperationsInput | string | null
+    paidAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PharmacyPaymentUncheckedUpdateWithoutSaleInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    method?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
+    transactionId?: NullableStringFieldUpdateOperationsInput | string | null
+    paidAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PharmacyPaymentUncheckedUpdateManyWithoutSaleInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    method?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
+    transactionId?: NullableStringFieldUpdateOperationsInput | string | null
+    paidAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
