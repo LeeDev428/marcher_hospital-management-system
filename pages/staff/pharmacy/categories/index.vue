@@ -28,7 +28,7 @@ onMounted(() => {
 							Back
 						</Button>
 					</NuxtLink>
-					<NuxtLink to="/pharmacy/categories/new">
+					<NuxtLink to="/staff/pharmacy/categories/new">
 						<Button variant="outline" size="icon">
 							<Icon name="mdi:plus" />
 						</Button>
