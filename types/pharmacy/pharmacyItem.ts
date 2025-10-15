@@ -49,6 +49,7 @@ export const pharmacyItemSchema = z.object({
 	strength: z.string().min(1, "Pharmacy item strength is required.").max(255, "Pharmacy item strength must be less than 255 characters."),
 	stock: z.number().min(0, "Pharmacy item stock must be greater than 0.").max(1000000, "Pharmacy item stock must be less than 1000000."),
 	unit: z.string().min(1, "Pharmacy item unit is required.").max(255, "Pharmacy item unit must be less than 255 characters."),
+	price: z.number().min(0, "Price must be a positive number."),
 	sku: z.string().min(1, "Pharmacy item SKU is required.").max(255, "Pharmacy item SKU must be less than 255 characters.").optional().nullable(),
 })
 
@@ -74,6 +75,7 @@ export const tablePharmacyItemSchema = pharmacyItemSchema
 		strength: true,
 		stock: true,
 		unit: true,
+		price: true,
 		sku: true,
 		createdAt: true,
 		updatedAt: true,
