@@ -2,7 +2,7 @@
 import { ref, onMounted, computed } from "vue"
 import { useRoute, useRouter } from "vue-router"
 import { usePOSStore } from "@/stores/pharmacy"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell } from "@/components/ui/table"
@@ -32,14 +32,31 @@ const formatCurrency = (amount: number) => {
   }).format(amount)
 }
 
-// Format date
+// Format date and time
 const formatDate = (dateString: string) => {
+  return new Date(dateString).toLocaleDateString("en-PH", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  })
+}
+
+const formatDateTime = (dateString: string) => {
   return new Date(dateString).toLocaleString("en-PH", {
     year: "numeric",
     month: "long",
     day: "numeric",
     hour: "2-digit",
     minute: "2-digit",
+    second: "2-digit",
+  })
+}
+
+const formatTime = (dateString: string) => {
+  return new Date(dateString).toLocaleTimeString("en-PH", {
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
   })
 }
 
@@ -59,10 +76,33 @@ const getStatusBadge = (status: string) => {
   }
 }
 
+// Payment method icon
+const getPaymentIcon = (method: string) => {
+  switch (method) {
+    case "CASH":
+      return "💵"
+    case "CARD":
+      return "💳"
+    case "ONLINE":
+      return "📱"
+    case "INSURANCE":
+      return "🏥"
+    default:
+      return "💰"
+  }
+}
+
 // Print receipt
 const printReceipt = () => {
   window.print()
 }
+
+// Calculate change
+const calculateChange = computed(() => {
+  if (!sale.value || !sale.value.payments || sale.value.payments.length === 0) return 0
+  const totalPaid = sale.value.payments.reduce((sum, payment) => sum + Number(payment.amount), 0)
+  return Math.max(0, totalPaid - Number(sale.value.total))
+})
 
 const sale = computed(() => posStore.currentSale)
 </script>
@@ -102,13 +142,13 @@ const sale = computed(() => posStore.currentSale)
       <!-- Receipt Card -->
       <Card class="mb-6">
         <!-- Receipt Header -->
-        <CardHeader class="bg-gradient-to-r from-blue-500 to-blue-600 text-white print:bg-white print:text-black">
+        <CardHeader class="bg-gradient-to-r  text-white print:bg-white print:text-black">
           <div class="text-center space-y-2">
-            <h2 class="text-2xl font-bold">Marcher Hospital Pharmacy</h2>
-            <p class="text-sm opacity-90 print:text-gray-600">Hospital Management System</p>
+            <h2 class="text-2xl font-bold text-black">Marcher Hospital Pharmacy</h2>
+            <p class="text-sm opacity-90 print:text-gray-600 text-black">Hospital Management System</p>
             <div class="pt-4 border-t border-white/20 print:border-gray-300">
-              <p class="text-3xl font-bold">{{ sale.invoiceNumber }}</p>
-              <p class="text-sm opacity-90 print:text-gray-600 mt-1">{{ formatDate(sale.createdAt) }}</p>
+              <p class="text-3xl font-bold text-black">{{ sale.invoiceNumber }}</p>
+              <p class="text-sm opacity-90 print:text-gray-600 mt-1 text-black">{{ formatDate(sale.createdAt) }}</p>
             </div>
           </div>
         </CardHeader>
@@ -220,7 +260,6 @@ const sale = computed(() => posStore.currentSale)
               <TableRow>
                 <TableHead>Payment Date</TableHead>
                 <TableHead>Method</TableHead>
-                <TableHead>Transaction ID</TableHead>
                 <TableHead class="text-right">Amount</TableHead>
               </TableRow>
             </TableHeader>
@@ -229,9 +268,6 @@ const sale = computed(() => posStore.currentSale)
                 <TableCell>{{ formatDate(payment.paidAt) }}</TableCell>
                 <TableCell>
                   <Badge class="bg-blue-100 text-blue-800">{{ payment.method }}</Badge>
-                </TableCell>
-                <TableCell class="font-mono text-sm">
-                  {{ payment.transactionId || "N/A" }}
                 </TableCell>
                 <TableCell class="text-right font-semibold">
                   {{ formatCurrency(payment.amount) }}
