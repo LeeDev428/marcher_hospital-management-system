@@ -26,13 +26,13 @@ onMounted(() => {
 					<Input type="text" placeholder="Search" class="bg-white max-w-xs" />
 				</div>
 				<div class="flex gap-2">
-					<NuxtLink to="/staff/pharmacy/pos">
+					<NuxtLink to="/staff/billing">
 						<Button variant="default" class="bg-blue-600 hover:bg-blue-700">
 							<Icon name="mdi:cash-register" class="mr-2" />
 							POS
 						</Button>
 					</NuxtLink>
-					<NuxtLink to="/staff/pharmacy/sales">
+					<NuxtLink to="/staff/billing/sales">
 						<Button variant="outline">
 							<Icon name="mdi:receipt" class="mr-2" />
 							Sales
