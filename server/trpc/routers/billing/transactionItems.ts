@@ -4,9 +4,9 @@ import {
   getTransactionItemSchema, 
   updateTransactionItemSchema 
 } from "~/types/billing"
-import { createTRPCRouter, protectedProcedure } from "../../init"
+import { createTRPCRouter, publicProcedure } from "../../init"
 
-const getTransactionItems = protectedProcedure.query(async ({ ctx }) => {
+const getTransactionItems = publicProcedure.query(async ({ ctx }) => {
   const { instancePrisma } = ctx
 
   try {
@@ -35,7 +35,7 @@ const getTransactionItems = protectedProcedure.query(async ({ ctx }) => {
   }
 })
 
-const getTransactionItem = protectedProcedure
+const getTransactionItem = publicProcedure
   .input(getTransactionItemSchema)
   .query(async ({ ctx, input }) => {
     const { instancePrisma } = ctx
@@ -71,7 +71,7 @@ const getTransactionItem = protectedProcedure
     }
   })
 
-const createTransactionItem = protectedProcedure
+const createTransactionItem = publicProcedure
   .input(createTransactionItemSchema)
   .mutation(async ({ ctx, input }) => {
     const { instancePrisma } = ctx
@@ -109,7 +109,7 @@ const createTransactionItem = protectedProcedure
     }
   })
 
-const updateTransactionItem = protectedProcedure
+const updateTransactionItem = publicProcedure
   .input(updateTransactionItemSchema)
   .mutation(async ({ ctx, input }) => {
     const { instancePrisma } = ctx
@@ -148,7 +148,7 @@ const updateTransactionItem = protectedProcedure
     }
   })
 
-const deleteTransactionItem = protectedProcedure
+const deleteTransactionItem = publicProcedure
   .input(deleteTransactionItemSchema)
   .mutation(async ({ ctx, input }) => {
     const { instancePrisma } = ctx
