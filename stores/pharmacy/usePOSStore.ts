@@ -15,6 +15,7 @@ export const usePOSStore = defineStore("pos", {
     
     // Payment info
     paymentMethod: "CASH" as "CASH" | "CARD" | "ONLINE" | "INSURANCE",
+    amountPaid: 0,
     discount: 0,
     tax: 0,
     notes: "" as string | null,
@@ -34,6 +35,12 @@ export const usePOSStore = defineStore("pos", {
     cartTotal: (state) => {
       const subtotal = state.cart.reduce((total, item) => total + item.subtotal, 0)
       return subtotal - state.discount + state.tax
+    },
+    
+    // Calculate change
+    change: (state) => {
+      const total = state.cart.reduce((total, item) => total + item.subtotal, 0) - state.discount + state.tax
+      return Math.max(0, state.amountPaid - total)
     },
     
     cartItemCount: (state) => {
@@ -151,6 +158,7 @@ export const usePOSStore = defineStore("pos", {
       this.cart = []
       this.customerName = ""
       this.customerPhone = ""
+      this.amountPaid = 0
       this.discount = 0
       this.tax = 0
       this.notes = ""
@@ -163,6 +171,12 @@ export const usePOSStore = defineStore("pos", {
       
       if (this.cart.length === 0) {
         useToast("error", "Empty Cart", "Please add items to cart before checkout")
+        return null
+      }
+      
+      // Validate payment amount
+      if (this.amountPaid < this.cartTotal) {
+        useToast("error", "Insufficient Payment", `Amount paid (${this.amountPaid}) is less than total (${this.cartTotal})`)
         return null
       }
       
