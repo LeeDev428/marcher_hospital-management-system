@@ -4,6 +4,10 @@ import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import PharmacyItemsTable from "./components/PharmacyItemsTable.vue"
 
+definePageMeta({
+  middleware: ['auth', 'staff-type']
+})
+
 const breadcrumbsStore = useBreadcrumbsStore()
 
 useHead({
