@@ -48,7 +48,7 @@ const getRoleBadgeColor = (staffType: string) => {
   switch (staffType) {
     case 'DOCTOR': return 'bg-blue-100 text-blue-800'
     case 'NURSE': return 'bg-green-100 text-green-800'
-    case 'TECHNICIAN': return 'bg-purple-100 text-purple-800'
+    case 'STAFF': return 'bg-purple-100 text-purple-800'
     default: return 'bg-gray-100 text-gray-800'
   }
 }
@@ -122,19 +122,11 @@ const submitForm = async () => {
       resetForm()
       loadStaff() // Refresh the list
       // Show success message
-      useToast().add({
-        title: 'Success',
-        description: 'Staff member created successfully',
-        color: 'green'
-      })
+      useToast('success', 'Success', 'Staff member created successfully')
     }
   } catch (error) {
     console.error('Error creating staff:', error)
-    useToast().add({
-      title: 'Error',
-      description: 'Failed to create staff member',
-      color: 'red'
-    })
+    useToast('error', 'Error', 'Failed to create staff member')
   } finally {
     isSubmitting.value = false
   }
@@ -234,7 +226,7 @@ const closeModal = () => {
     <Card v-else>
       <CardHeader>
         <CardTitle>Medical Staff</CardTitle>
-        <CardDescription>Doctors, nurses, and medical technicians</CardDescription>
+        <CardDescription>Doctors, nurses, and medical staff</CardDescription>
       </CardHeader>
       <CardContent>
         <div class="overflow-x-auto">
@@ -369,8 +361,7 @@ const closeModal = () => {
                 <SelectContent>
                   <SelectItem value="DOCTOR">Doctor</SelectItem>
                   <SelectItem value="NURSE">Nurse</SelectItem>
-                  <SelectItem value="TECHNICIAN">Technician</SelectItem>
-                  <SelectItem value="PHARMACIST">Pharmacist</SelectItem>
+                  <SelectItem value="STAFF">Staff</SelectItem>
                 </SelectContent>
               </Select>
             </div>
