@@ -4,10 +4,28 @@ import type { LoginSchema } from "@/types/app"
 
 export const useAuthStore = defineStore("auth", {
 	state: () => ({
-		user: null as { id: string; role: string; email: string; firstName: string; lastName: string } | null,
+		user: null as { 
+			id: string; 
+			role: string; 
+			email: string; 
+			firstName: string; 
+			lastName: string;
+			staffCredentials?: {
+				staffType: 'DOCTOR' | 'NURSE' | 'STAFF';
+			} | null;
+		} | null,
 	}),
 	actions: {
-		setUser(user: { id: string; role: string; email: string; firstName: string; lastName: string } | null) {
+		setUser(user: { 
+			id: string; 
+			role: string; 
+			email: string; 
+			firstName: string; 
+			lastName: string;
+			staffCredentials?: {
+				staffType: 'DOCTOR' | 'NURSE' | 'STAFF';
+			} | null;
+		} | null) {
 			console.log('🔄 Setting user in store:', user)
 			this.user = user
 		},
