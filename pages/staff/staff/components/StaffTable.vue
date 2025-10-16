@@ -180,8 +180,6 @@ defineExpose({
 					<TableRow>
 						<TableHead>Last Name</TableHead>
 						<TableHead>First Name</TableHead>
-						<TableHead>Middle Name</TableHead>
-						<TableHead>Suffix</TableHead>
 						<TableHead>Role</TableHead>
 						<TableHead>Profession</TableHead>
 						<TableHead class="cursor-pointer select-none">
@@ -213,8 +211,6 @@ defineExpose({
 					>
 						<TableCell>{{ staff.lastName }}</TableCell>
 						<TableCell>{{ staff.firstName }}</TableCell>
-						<TableCell>{{ staff.middleName || '-' }}</TableCell>
-						<TableCell>{{ staff.suffix || '-' }}</TableCell>
 						<TableCell>
 							<span 
 								class="inline-flex px-2 py-1 text-xs font-medium rounded-full"
