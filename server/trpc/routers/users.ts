@@ -12,7 +12,7 @@ const createUserSchema = z.object({
   role: z.enum(['ADMIN', 'STAFF', 'PATIENT', 'PARTNER']),
   
   // Staff-specific fields (when role is STAFF)
-  staffType: z.enum(['DOCTOR', 'NURSE', 'TECHNICIAN', 'PHARMACIST', 'RADIOLOGIST', 'THERAPIST', 'ADMINISTRATOR', 'SECURITY', 'MAINTENANCE', 'OTHER']).optional(),
+  staffType: z.enum(['DOCTOR', 'NURSE', 'STAFF']).optional(),
   position: z.string().optional(),
   department: z.string().optional(),
   specialization: z.string().optional(),
