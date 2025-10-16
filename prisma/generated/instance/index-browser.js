@@ -396,14 +396,7 @@ exports.EmploymentType = exports.$Enums.EmploymentType = {
 exports.StaffType = exports.$Enums.StaffType = {
   DOCTOR: 'DOCTOR',
   NURSE: 'NURSE',
-  TECHNICIAN: 'TECHNICIAN',
-  PHARMACIST: 'PHARMACIST',
-  RADIOLOGIST: 'RADIOLOGIST',
-  THERAPIST: 'THERAPIST',
-  ADMINISTRATOR: 'ADMINISTRATOR',
-  SECURITY: 'SECURITY',
-  MAINTENANCE: 'MAINTENANCE',
-  OTHER: 'OTHER'
+  STAFF: 'STAFF'
 };
 
 exports.BloodType = exports.$Enums.BloodType = {
