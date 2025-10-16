@@ -10,7 +10,7 @@ import { Skeleton } from "@/components/ui/skeleton"
 
 definePageMeta({
   layout: "staff",
-  middleware: ["auth"],
+  middleware: ["auth", "staff-type"],
 })
 
 const router = useRouter()
