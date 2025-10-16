@@ -210,14 +210,7 @@ enum UserRole {
 enum StaffType {
   DOCTOR
   NURSE
-  TECHNICIAN
-  PHARMACIST
-  RADIOLOGIST
-  THERAPIST
-  ADMINISTRATOR
-  SECURITY
-  MAINTENANCE
-  OTHER
+  STAFF
 }
 
 // Employment Types
