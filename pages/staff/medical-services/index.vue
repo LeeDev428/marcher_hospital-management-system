@@ -28,7 +28,6 @@ import MedicalServiceForm from "./components/MedicalServiceForm.vue"
 
 definePageMeta({
   layout: "staff",
-  middleware: ["auth"],
 })
 
 const medicalServiceStore = useMedicalServiceStore()
