@@ -1,6 +1,7 @@
 <template>
-  <div class="min-h-screen bg-gradient-to-br from-teal-50 via-white to-blue-50 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-    <div class="max-w-md w-full space-y-8">
+  <ClientOnly>
+    <div class="min-h-screen bg-gradient-to-br from-teal-50 via-white to-blue-50 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+      <div class="max-w-md w-full space-y-8">
       <!-- Header -->
       <div class="text-center">
         <div class="flex justify-center mb-6">
@@ -200,11 +201,13 @@
       </div>
     </div>
   </div>
+  </ClientOnly>
 </template>
 
 <script setup lang="ts">
 definePageMeta({
-  layout: 'auth'
+  layout: false,  // No layout - use only this page's content
+  middleware: []  // Disable auth middleware on register page
 })
 
 useHead({
