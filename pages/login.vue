@@ -1,18 +1,19 @@
 <template>
-  <div class="min-h-screen bg-gradient-to-br from-teal-50 via-white to-blue-50 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-    <div class="max-w-md w-full space-y-8">
-      <!-- Header -->
-      <div class="text-center">
-        <div class="flex justify-center mb-6">
-          <img src="/img/logo/marcher-logo.png" alt="Marcher Logo" class="w-16 h-16" />
+  <ClientOnly>
+    <div class="min-h-screen bg-gradient-to-br from-teal-50 via-white to-blue-50 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+      <div class="max-w-md w-full space-y-8">
+        <!-- Header -->
+        <div class="text-center">
+          <div class="flex justify-center mb-6">
+            <img src="/img/logo/marcher-logo.png" alt="Marcher Logo" class="w-16 h-16" />
+          </div>
+          <h2 class="text-3xl font-bold text-gray-900">Welcome back</h2>
+          <p class="mt-2 text-gray-600">Sign in to your Marcher account</p>
         </div>
-        <h2 class="text-3xl font-bold text-gray-900">Welcome back</h2>
-        <p class="mt-2 text-gray-600">Sign in to your Marcher account</p>
-      </div>
 
-      <!-- Login Form -->
-      <div class="bg-white py-8 px-6 shadow-xl rounded-2xl border border-gray-100">
-        <form @submit.prevent="handleLogin" class="space-y-6">
+        <!-- Login Form -->
+        <div class="bg-white py-8 px-6 shadow-xl rounded-2xl border border-gray-100">
+          <form @submit.prevent="handleLogin" class="space-y-6">
           <!-- Email -->
           <div>
             <label for="email" class="block text-sm font-medium text-gray-700 mb-2">
@@ -148,13 +149,14 @@
       </div>
     </div>
   </div>
+  </ClientOnly>
 </template>
 
 <script setup lang="ts">
 import { useAuthStore } from '~/stores/app/useAuthStore'
 
 definePageMeta({
-  layout: 'auth',
+  layout: false,  // No layout - use only this page's content
   middleware: []  // Disable auth middleware on login page
 })
 
