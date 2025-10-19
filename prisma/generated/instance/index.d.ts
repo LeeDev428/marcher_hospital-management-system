@@ -111,7 +111,9 @@ export type UserRole = (typeof UserRole)[keyof typeof UserRole]
 export const StaffType: {
   DOCTOR: 'DOCTOR',
   NURSE: 'NURSE',
-  STAFF: 'STAFF'
+  STAFF: 'STAFF',
+  ADMISSIONS_STAFF: 'ADMISSIONS_STAFF',
+  BILLING_STAFF: 'BILLING_STAFF'
 };
 
 export type StaffType = (typeof StaffType)[keyof typeof StaffType]
