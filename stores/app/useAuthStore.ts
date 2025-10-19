@@ -14,6 +14,7 @@ export const useAuthStore = defineStore("auth", {
 				staffType: 'DOCTOR' | 'NURSE' | 'STAFF';
 			} | null;
 		} | null,
+		isHydrated: false,
 	}),
 	actions: {
 		setUser(user: { 
@@ -28,6 +29,7 @@ export const useAuthStore = defineStore("auth", {
 		} | null) {
 			console.log('🔄 Setting user in store:', user)
 			this.user = user
+			this.isHydrated = true
 		},
 
 		async login(credentials: LoginSchema) {
@@ -38,6 +40,7 @@ export const useAuthStore = defineStore("auth", {
 
 				if (response.success) {
 					this.user = response.user
+					this.isHydrated = true
 					
 					// Ensure state is persisted before redirect
 					await nextTick()
@@ -62,10 +65,20 @@ export const useAuthStore = defineStore("auth", {
 
 		getRedirectPath(role: string) {
 			const normalizedRole = role.toLowerCase()
+			const staffType = this.user?.staffCredentials?.staffType
+			
 			switch (normalizedRole) {
 				case 'admin':
 					return '/admin/dashboard'
 				case 'staff':
+					// Check staff type for specialized roles
+					if (staffType === 'ADMISSIONS_STAFF') {
+						return '/admissions_staff'
+					}
+					if (staffType === 'BILLING_STAFF') {
+						return '/billing_staff'
+					}
+					// Default staff dashboard
 					return '/staff/dashboard'
 				case 'partner':
 					return '/partner/dashboard'
@@ -93,7 +106,22 @@ export const useAuthStore = defineStore("auth", {
 
 				if (response.success) {
 					this.user = null // Clear user state
+					localStorage.removeItem('auth') // Clear localStorage
+					
+					// Clear all pinia persisted state
+					if (typeof window !== 'undefined') {
+						const keys = Object.keys(localStorage)
+						keys.forEach(key => {
+							if (key.startsWith('pinia-')) {
+								localStorage.removeItem(key)
+							}
+						})
+					}
+					
 					useToast("success", "Logout", "Logout successful")
+					
+					// Wait a bit before redirect to ensure state is cleared
+					await new Promise(resolve => setTimeout(resolve, 100))
 					await navigateTo("/login")
 					return
 				}
@@ -101,8 +129,21 @@ export const useAuthStore = defineStore("auth", {
 				useToast("error", "Logout", response.message)
 			} catch (error) {
 				useToast("error", "Logout")
-				// Clear user state even if logout fails (for UX)
+				// Clear user state and localStorage even if logout fails (for UX)
 				this.user = null
+				localStorage.removeItem('auth')
+				
+				// Clear all pinia persisted state
+				if (typeof window !== 'undefined') {
+					const keys = Object.keys(localStorage)
+					keys.forEach(key => {
+						if (key.startsWith('pinia-')) {
+							localStorage.removeItem(key)
+						}
+					})
+				}
+				
+				await new Promise(resolve => setTimeout(resolve, 100))
 				await navigateTo("/login")
 			}
 		},
@@ -123,7 +164,7 @@ export const useAuthStore = defineStore("auth", {
 
 	persist: {
 		key: 'auth',
-		pick: ['user'],
-		debug: process.env.NODE_ENV === 'development'
+		storage: typeof window !== 'undefined' ? localStorage : undefined,
+		pick: ['user']
 	}
 })
