@@ -396,7 +396,9 @@ exports.EmploymentType = exports.$Enums.EmploymentType = {
 exports.StaffType = exports.$Enums.StaffType = {
   DOCTOR: 'DOCTOR',
   NURSE: 'NURSE',
-  STAFF: 'STAFF'
+  STAFF: 'STAFF',
+  ADMISSIONS_STAFF: 'ADMISSIONS_STAFF',
+  BILLING_STAFF: 'BILLING_STAFF'
 };
 
 exports.BloodType = exports.$Enums.BloodType = {
