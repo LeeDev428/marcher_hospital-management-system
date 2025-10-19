@@ -13,7 +13,7 @@ import { Label } from "@/components/ui/label"
 
 definePageMeta({
   layout: "staff",
-  middleware: ["auth", "staff-type"],
+  middleware: ["staff-type"],
 })
 
 const breadcrumbsStore = useBreadcrumbsStore()
