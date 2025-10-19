@@ -7,7 +7,6 @@ const user = computed(() => authStore.user)
 // Page metadata
 definePageMeta({
   layout: 'admin',
-  middleware: 'auth'
 })
 
 // Set page title
