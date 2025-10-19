@@ -2,6 +2,7 @@
 import { useAppointmentStore } from "@/stores/appointments"
 import { useStaffStore } from "@/stores/staff"
 import { useMedicalServiceStore } from "@/stores/medical-services/useMedicalServiceStore"
+import { useAuthStore } from "@/stores/app/useAuthStore"
 import { createPatientAppointmentSchema } from "@/types/appointments"
 import type { CreatePatientAppointment } from "@/types/appointments"
 import type { TableMedicalService } from "@/types/medical-services"
@@ -18,6 +19,7 @@ import { useToast } from "@/composables/useToast"
 const staffStore = useStaffStore()
 const appointmentStore = useAppointmentStore()
 const medicalServiceStore = useMedicalServiceStore()
+const authStore = useAuthStore()
 
 defineProps<{ appointmentId?: string }>()
 
@@ -72,8 +74,16 @@ const serviceSearchQuery = ref("")
 const currentPage = ref(1)
 const itemsPerPage = 20
 
-// Form data
+// Form data - auto-populate from auth user (reactive)
 const patientName = ref("")
+
+// Watch for auth store changes and update patient name
+watch(() => authStore.user, (newUser) => {
+  if (newUser && typeof newUser === 'object' && 'firstName' in newUser && 'lastName' in newUser) {
+    patientName.value = `${newUser.lastName}, ${newUser.firstName}`
+    console.log('✅ Patient name auto-populated:', patientName.value)
+  }
+}, { immediate: true, deep: true })
 
 /* ---------------- Computed ---------------- */
 
@@ -319,6 +329,10 @@ const onSubmit = async () => {
 /* ---------------- Lifecycle ---------------- */
 
 onMounted(async () => {
+  console.log('🔄 PatientAppointmentForm mounted')
+  console.log('🔍 Auth user:', authStore.user)
+  console.log('🔍 Patient name:', patientName.value)
+  
   await staffStore.getStaffProfiles("DOCTOR")
   await medicalServiceStore.getMedicalServices({ page: 1, limit: 100, isActive: true })
 })
