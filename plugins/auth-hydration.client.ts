@@ -1,45 +1,37 @@
-export default defineNuxtPlugin(() => {
-  // This plugin ensures proper hydration of auth state
-  if (process.client) {
-    const nuxtApp = useNuxtApp()
-    
-    // Wait for hydration before any navigation
-    nuxtApp.hook('app:mounted', async () => {
-      console.log('🔄 App mounted, checking auth state...')
+export default defineNuxtPlugin({
+  name: 'auth-hydration',
+  enforce: 'post', // Run after Pinia is initialized
+  async setup() {
+    if (process.client) {
+      console.log('🔄 Auth hydration plugin initializing...')
       
-      // Give time for Pinia persistence to restore state
+      // Wait for Pinia to be fully initialized
       await nextTick()
+      await new Promise(resolve => setTimeout(resolve, 100))
       
       try {
         const { useAuthStore } = await import('~/stores/app/useAuthStore')
         const authStore = useAuthStore()
-        console.log('🔍 Auth state after hydration:', authStore.user)
         
-        // Force a check to ensure state is properly restored
-        if (!authStore.user) {
-          console.log('⚠️ No user in store after hydration, checking localStorage...')
-          const authData = localStorage.getItem('auth')
-          if (authData) {
-            try {
-              const parsedAuth = JSON.parse(authData)
-              const user = parsedAuth?.user || parsedAuth
-              if (user && user.role) {
-                console.log('✅ Restoring user from localStorage:', user.role)
-                authStore.setUser(user)
-              }
-            } catch (error) {
-              console.error('❌ Error parsing localStorage auth data:', error)
-            }
-          }
+        // Give pinia-plugin-persistedstate time to restore state
+        await new Promise(resolve => setTimeout(resolve, 100))
+        
+        console.log('🔍 Auth store after hydration:', {
+          hasUser: !!authStore.user,
+          user: authStore.user
+        })
+        
+        // Mark as hydrated
+        authStore.isHydrated = true
+        
+        if (authStore.user) {
+          console.log('✅ Auth store hydrated successfully with user:', authStore.user.role)
+        } else {
+          console.log('⚠️ No user found in persisted state')
         }
       } catch (error) {
-        console.error('❌ Error checking auth state:', error)
+        console.error('❌ Error in auth hydration:', error)
       }
-    })
-    
-    // Also check on route change
-    nuxtApp.hook('page:start', () => {
-      console.log('🔄 Page navigation started, checking auth state...')
-    })
+    }
   }
 })
