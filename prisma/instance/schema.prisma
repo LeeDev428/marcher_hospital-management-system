@@ -211,6 +211,8 @@ enum StaffType {
   DOCTOR
   NURSE
   STAFF
+  ADMISSIONS_STAFF
+  BILLING_STAFF
 }
 
 // Employment Types
