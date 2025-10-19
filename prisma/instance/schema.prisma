@@ -213,6 +213,7 @@ enum StaffType {
   STAFF
   ADMISSIONS_STAFF
   BILLING_STAFF
+  PHARMACIST
 }
 
 // Employment Types
