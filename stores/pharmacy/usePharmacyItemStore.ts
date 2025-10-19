@@ -16,7 +16,11 @@ export const usePharmacyItemStore = defineStore("pharmacyItem", {
 				this.loading = true
 				const { success, message, data } = await $trpc.pharmacy.items.getPharmacyItems.query()
 				if (success && data) {
-					this.items = data
+					// Convert price from string (Decimal) to number
+					this.items = data.map((item: any) => ({
+						...item,
+						price: typeof item.price === 'string' ? parseFloat(item.price) : item.price
+					}))
 					this.loading = false
 				}
 
@@ -39,7 +43,11 @@ export const usePharmacyItemStore = defineStore("pharmacyItem", {
 				const { success, message, data } = await $trpc.pharmacy.items.getPharmacyItem.query({ id })
 
 				if (success && data) {
-					this.item = data
+					// Convert price from string (Decimal) to number for form
+					this.item = {
+						...data,
+						price: typeof data.price === 'string' ? parseFloat(data.price) : data.price
+					}
 					this.loading = false
 				}
 			} catch (error) {
