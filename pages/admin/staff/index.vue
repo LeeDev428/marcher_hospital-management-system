@@ -9,7 +9,6 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 
 definePageMeta({
   layout: 'admin',
-  middleware: 'auth'
 })
 
 useHead({
@@ -361,7 +360,9 @@ const closeModal = () => {
                 <SelectContent>
                   <SelectItem value="DOCTOR">Doctor</SelectItem>
                   <SelectItem value="NURSE">Nurse</SelectItem>
-                  <SelectItem value="STAFF">Staff</SelectItem>
+                  <SelectItem value="ADMISSIONS_STAFF">Admissions Staff</SelectItem>
+                  <SelectItem value="BILLING_STAFF">Billing Staff</SelectItem>
+                  <SelectItem value="PHARMACIST">Pharmacist</SelectItem>
                 </SelectContent>
               </Select>
             </div>
