@@ -5,7 +5,6 @@ import { Badge } from '~/components/ui/badge'
 
 definePageMeta({
   layout: 'admin',
-  middleware: 'auth'
 })
 
 useHead({
