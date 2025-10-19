@@ -3,7 +3,6 @@ import { useBreadcrumbsStore } from "@/stores/app"
 
 definePageMeta({
   layout: 'admin',
-  middleware: 'auth'
 })
 
 useHead({
