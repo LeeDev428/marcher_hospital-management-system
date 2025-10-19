@@ -12,7 +12,6 @@ import type { DayOfWeek } from '@/types/schedule'
 
 definePageMeta({
   layout: 'staff',
-  middleware: 'auth'
 })
 
 useHead({
