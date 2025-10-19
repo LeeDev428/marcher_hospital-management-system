@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button"
 import PharmacyItemsTable from "./components/PharmacyItemsTable.vue"
 
 definePageMeta({
-  middleware: ['auth', 'staff-type']
+  middleware: ['staff-type']
 })
 
 const breadcrumbsStore = useBreadcrumbsStore()
