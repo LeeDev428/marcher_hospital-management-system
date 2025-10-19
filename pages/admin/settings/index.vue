@@ -9,7 +9,6 @@ import {
 
 definePageMeta({
   layout: 'admin',
-  middleware: 'auth'
 })
 
 useHead({
