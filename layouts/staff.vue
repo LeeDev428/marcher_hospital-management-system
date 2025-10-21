@@ -18,15 +18,6 @@ const handleLogout = async () => {
     console.error('Logout error:', error)
   }
 }
-
-// Check if user can access pharmacy/billing pages
-const canAccessPharmacy = computed(() => {
-  return authStore.user?.staffCredentials?.staffType === 'STAFF'
-})
-
-const staffType = computed(() => {
-  return authStore.user?.staffCredentials?.staffType || 'N/A'
-})
 </script>
 
 <template>
@@ -81,28 +72,6 @@ const staffType = computed(() => {
           </NuxtLink>
           
           <NuxtLink 
-            v-if="canAccessPharmacy"
-            to="/staff/billing" 
-            class="flex items-center px-3 py-2 text-sm font-medium rounded-lg"
-            :class="$route.path.startsWith('/staff/billing') ? 'bg-blue-50 text-blue-700 border-r-2 border-blue-600' : 'text-gray-600 hover:bg-gray-50'"
-          >
-            <Icon name="lucide:credit-card" class="w-5 h-5 mr-3" />
-            Billing
-          </NuxtLink>
-          
-          <div 
-            v-else
-            class="flex items-center justify-between px-3 py-2 text-sm font-medium rounded-lg text-gray-400 cursor-not-allowed opacity-60"
-            title="Only accessible to administrative staff"
-          >
-            <div class="flex items-center">
-              <Icon name="lucide:credit-card" class="w-5 h-5 mr-3" />
-              Billing
-            </div>
-            <Icon name="lucide:lock" class="w-4 h-4 text-gray-400" />
-          </div>
-          
-          <NuxtLink 
             to="/staff/reports" 
             class="flex items-center px-3 py-2 text-sm font-medium rounded-lg"
             :class="$route.path.startsWith('/staff/reports') ? 'bg-blue-50 text-blue-700 border-r-2 border-blue-600' : 'text-gray-600 hover:bg-gray-50'"
@@ -128,28 +97,6 @@ const staffType = computed(() => {
             <Icon name="lucide:user-check" class="w-5 h-5 mr-3" />
             Staff
           </NuxtLink>
-          
-          <NuxtLink 
-            v-if="canAccessPharmacy"
-            to="/staff/pharmacy" 
-            class="flex items-center px-3 py-2 text-sm font-medium rounded-lg"
-            :class="$route.path.startsWith('/staff/pharmacy') ? 'bg-blue-50 text-blue-700 border-r-2 border-blue-600' : 'text-gray-600 hover:bg-gray-50'"
-          >
-            <Icon name="lucide:pill" class="w-5 h-5 mr-3" />
-            Pharmacy
-          </NuxtLink>
-          
-          <div 
-            v-else
-            class="flex items-center justify-between px-3 py-2 text-sm font-medium rounded-lg text-gray-400 cursor-not-allowed opacity-60"
-            title="Only accessible to administrative staff"
-          >
-            <div class="flex items-center">
-              <Icon name="lucide:pill" class="w-5 h-5 mr-3" />
-              Pharmacy
-            </div>
-            <Icon name="lucide:lock" class="w-4 h-4 text-gray-400" />
-          </div>
           
           <NuxtLink 
             to="/staff/facilities" 
