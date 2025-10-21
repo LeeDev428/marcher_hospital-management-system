@@ -198,6 +198,8 @@ export const usePOSStore = defineStore("pos", {
           discount: this.discount,
           tax: this.tax,
           total: this.cartTotal,
+          amountPaid: this.amountPaid,
+          changeGiven: this.change,
           paymentMethod: this.paymentMethod,
           paymentStatus: "COMPLETED",
           notes: this.notes || null,
