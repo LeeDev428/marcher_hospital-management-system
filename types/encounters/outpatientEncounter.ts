@@ -9,6 +9,8 @@ export const outpatientEncounterTypeSchema = z.enum([
 	"OTHER",
 ])
 
+export const outpatientPaymentStatusEnum = z.enum(["PAID", "UNPAID"])
+
 export const outpatientEncounterTypeOptions =
 	outpatientEncounterTypeSchema.options.map((type) => ({
 		label: type.charAt(0).toUpperCase() + type.slice(1),
@@ -16,11 +18,15 @@ export const outpatientEncounterTypeOptions =
 	}))
 
 const outpatientEncounterBaseSchema = z.object({
-    date: z.string().date("Invalid date."),
-    time: z.string().time("Invalid time."),
+    patientId: z.string().min(1, "Patient ID is required."),
+    date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, "Date must be in YYYY-MM-DD format."),
+    time: z.string().regex(/^\d{2}:\d{2}$/, "Time must be in HH:MM format."),
     chiefComplaint: z.string().min(1, "Chief complaint is required."),
-    doctorDiagnosis: z.string().min(1, "Doctor diagnosis is required."),
-    type: outpatientEncounterTypeSchema,
+    doctorDiagnosis: z.string().optional(),
+    type: outpatientEncounterTypeSchema.default("CONSULTATION"),
+    consultationFee: z.number().min(0).optional(),
+    paymentStatus: outpatientPaymentStatusEnum.default("UNPAID"),
+    notes: z.string().optional(),
 })
 
 export const outpatientEncounterSchema = outpatientEncounterBaseSchema
@@ -45,14 +51,30 @@ export const tableOutpatientEncounterSchema = outpatientEncounterSchema
 		doctorDiagnosis: true,
 	})
 
-// TRPC input schemas (include patientProfileId for both create and update)
-export const createOutpatientEncounterSchema = outpatientEncounterBaseSchema.extend({
-    patientProfileId: z.string().uuid("Invalid patient profile ID."),
+// TRPC input schemas
+export const createOutpatientEncounterSchema = z.object({
+    patientId: z.string().min(1, "Patient ID is required."),
+    date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, "Date must be in YYYY-MM-DD format."),
+    time: z.string().regex(/^\d{2}:\d{2}$/, "Time must be in HH:MM format."),
+    chiefComplaint: z.string().min(1, "Chief complaint is required."),
+    doctorDiagnosis: z.string().optional(),
+    type: outpatientEncounterTypeSchema.default("CONSULTATION"),
+    consultationFee: z.number().min(0).optional(),
+    paymentStatus: outpatientPaymentStatusEnum.default("UNPAID"),
+    notes: z.string().optional(),
 })
 
-export const updateOutpatientEncounterSchema = outpatientEncounterBaseSchema.extend({
+export const updateOutpatientEncounterSchema = z.object({
     id: z.string().uuid("Invalid encounter ID."),
-    patientProfileId: z.string().uuid("Invalid patient profile ID."),
+    doctorDiagnosis: z.string().optional(),
+    consultationFee: z.number().min(0).optional(),
+    paymentStatus: outpatientPaymentStatusEnum.optional(),
+    notes: z.string().optional(),
+})
+
+// Get by patient
+export const getOutpatientEncountersByPatientSchema = z.object({
+	patientId: z.string().min(1),
 })
 
 // Form schemas (omit patientProfileId; it is injected from route)
