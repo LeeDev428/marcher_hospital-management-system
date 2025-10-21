@@ -1,7 +1,10 @@
 <script setup lang="ts">
 import { useAuthStore } from '@/stores/app'
+import { usePOSStore } from '@/stores/pharmacy'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
+import { Badge } from '@/components/ui/badge'
+import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell } from '@/components/ui/table'
 
 definePageMeta({
   layout: 'pharmacist',
@@ -12,7 +15,8 @@ useHead({
 })
 
 const authStore = useAuthStore()
-const { $client } = useNuxtApp() as any
+const posStore = usePOSStore()
+const { $trpc } = useNuxtApp()
 
 // Dashboard Statistics
 const stats = ref({
@@ -23,6 +27,7 @@ const stats = ref({
   pendingPrescriptions: 0
 })
 
+const lowStockItems = ref<any[]>([])
 const recentSales = ref<any[]>([])
 const isLoading = ref(true)
 
@@ -30,17 +35,51 @@ const isLoading = ref(true)
 const loadDashboardData = async () => {
   try {
     isLoading.value = true
-    // TODO: Add tRPC endpoints for pharmacist statistics
-    // For now, using placeholder data
-    stats.value = {
-      inventoryItems: 350,
-      lowStockItems: 12,
-      todaySales: 28,
-      todayRevenue: 18750,
-      pendingPrescriptions: 5
-    }
+    
+    // Fetch all pharmacy items for inventory count
+    const itemsResponse = await $trpc.pharmacy.items.getPharmacyItems.query({})
+    const allItems = itemsResponse.data || []
+    
+    // Calculate inventory stats
+    stats.value.inventoryItems = allItems.length
+    stats.value.lowStockItems = allItems.filter((item: any) => item.stock < 10).length
+    
+    // Get low stock items (less than 10 units)
+    lowStockItems.value = allItems
+      .filter((item: any) => item.stock < 10)
+      .sort((a: any, b: any) => a.stock - b.stock)
+      .slice(0, 5) // Show only top 5 low stock items
+    
+    // Fetch all sales
+    const salesResponse = await $trpc.pharmacy.sales.getPharmacySales.query()
+    const allSales = salesResponse.data || []
+    
+    // Calculate today's sales
+    const today = new Date()
+    today.setHours(0, 0, 0, 0)
+    
+    const todaySales = allSales.filter((sale: any) => {
+      const saleDate = new Date(sale.createdAt)
+      saleDate.setHours(0, 0, 0, 0)
+      return saleDate.getTime() === today.getTime()
+    })
+    
+    stats.value.todaySales = todaySales.length
+    stats.value.todayRevenue = todaySales.reduce((sum: number, sale: any) => 
+      sum + Number(sale.total || 0), 0
+    )
+    
+    // Get recent sales (last 5)
+    recentSales.value = allSales
+      .sort((a: any, b: any) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
+      .slice(0, 5)
+    
+    // TODO: Add prescription count when prescription module is ready
+    stats.value.pendingPrescriptions = 0
+    
   } catch (error) {
     console.error('Error loading dashboard data:', error)
+    useToast('error', 'Error', 'Failed to load dashboard data')
   } finally {
     isLoading.value = false
   }
@@ -51,6 +90,33 @@ const formatCurrency = (amount: number) => {
     style: 'currency',
     currency: 'PHP'
   }).format(amount)
+}
+
+const formatDate = (dateString: string) => {
+  return new Date(dateString).toLocaleDateString('en-PH', {
+    month: 'short',
+    day: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit'
+  })
+}
+
+const getStockBadgeColor = (stock: number) => {
+  if (stock === 0) return 'bg-red-600 text-white'
+  if (stock < 5) return 'bg-red-500 text-white'
+  if (stock < 10) return 'bg-orange-500 text-white'
+  return 'bg-green-500 text-white'
+}
+
+const getStatusBadge = (status: string) => {
+  switch (status) {
+    case "COMPLETED":
+      return { text: "Completed", class: "bg-green-100 text-green-800 border-green-300" }
+    case "PENDING":
+      return { text: "Pending", class: "bg-yellow-100 text-yellow-800 border-yellow-300" }
+    default:
+      return { text: status, class: "bg-gray-100 text-gray-800 border-gray-300" }
+  }
 }
 
 onMounted(() => {
@@ -148,30 +214,30 @@ onMounted(() => {
       <CardContent>
         <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
           <NuxtLink to="/pharmacist/billing">
-            <Button class="w-full h-24 flex flex-col items-center justify-center bg-teal-600 hover:bg-teal-700">
+            <Button class="w-full h-24 flex flex-col items-center justify-center bg-teal-600 hover:bg-teal-700 cursor-pointer">
               <Icon name="lucide:credit-card" class="w-8 h-8 mb-2" />
               <span>New Sale (POS)</span>
             </Button>
           </NuxtLink>
 
           <NuxtLink to="/pharmacist/pharmacy">
-            <Button class="w-full h-24 flex flex-col items-center justify-center bg-blue-600 hover:bg-blue-700">
+            <Button class="w-full h-24 flex flex-col items-center justify-center bg-blue-600 hover:bg-blue-700 cursor-pointer">
               <Icon name="lucide:pill" class="w-8 h-8 mb-2" />
               <span>Manage Inventory</span>
             </Button>
           </NuxtLink>
 
-          <NuxtLink to="/pharmacist/prescriptions">
-            <Button class="w-full h-24 flex flex-col items-center justify-center bg-purple-600 hover:bg-purple-700">
-              <Icon name="lucide:file-text" class="w-8 h-8 mb-2" />
-              <span>Prescriptions</span>
+          <NuxtLink to="/pharmacist/pharmacy/new">
+            <Button class="w-full h-24 flex flex-col items-center justify-center bg-purple-600 hover:bg-purple-700 cursor-pointer">
+              <Icon name="lucide:package-plus" class="w-8 h-8 mb-2" />
+              <span>Add New Item</span>
             </Button>
           </NuxtLink>
 
-          <NuxtLink to="/pharmacist/sales">
-            <Button class="w-full h-24 flex flex-col items-center justify-center bg-green-600 hover:bg-green-700">
+          <NuxtLink to="/pharmacist/sales_history">
+            <Button class="w-full h-24 flex flex-col items-center justify-center bg-green-600 hover:bg-green-700 cursor-pointer">
               <Icon name="lucide:bar-chart" class="w-8 h-8 mb-2" />
-              <span>Sales Reports</span>
+              <span>Sales History</span>
             </Button>
           </NuxtLink>
         </div>
@@ -184,7 +250,7 @@ onMounted(() => {
         <div class="flex items-center justify-between">
           <div>
             <CardTitle>Low Stock Alerts</CardTitle>
-            <CardDescription>Items that need restocking</CardDescription>
+            <CardDescription>Items that need restocking ({{ stats.lowStockItems }} items)</CardDescription>
           </div>
           <NuxtLink to="/pharmacist/pharmacy">
             <Button variant="outline" size="sm">View All</Button>
@@ -196,12 +262,36 @@ onMounted(() => {
           <Icon name="lucide:loader-2" class="w-6 h-6 animate-spin mr-2" />
           Loading...
         </div>
-        <div v-else class="space-y-4">
-          <div class="text-center py-8 text-muted-foreground">
-            <Icon name="lucide:package-check" class="w-12 h-12 mx-auto mb-4 opacity-50" />
-            <p>All items are well stocked</p>
-            <p class="text-sm">Check inventory regularly for updates</p>
+        <div v-else-if="lowStockItems.length > 0" class="space-y-3">
+          <div 
+            v-for="item in lowStockItems" 
+            :key="item.id"
+            class="flex items-center justify-between p-4 border rounded-lg hover:bg-gray-50"
+          >
+            <div class="flex-1">
+              <p class="font-semibold">{{ item.name }}</p>
+              <p class="text-sm text-gray-600">{{ item.brand.name }} - {{ item.strength }} {{ item.unit }}</p>
+              <p class="text-xs text-gray-500 mt-1">{{ item.category.name }}</p>
+            </div>
+            <div class="flex items-center gap-3">
+              <div class="text-right">
+                <p class="text-sm text-gray-600">Stock</p>
+                <Badge :class="getStockBadgeColor(item.stock)" class="font-bold">
+                  {{ item.stock }} {{ item.stock === 1 ? 'unit' : 'units' }}
+                </Badge>
+              </div>
+              <NuxtLink :to="`/pharmacist/pharmacy/${item.id}`">
+                <Button variant="outline" size="sm">
+                  <Icon name="lucide:edit" class="w-4 h-4" />
+                </Button>
+              </NuxtLink>
+            </div>
           </div>
+        </div>
+        <div v-else class="text-center py-8 text-muted-foreground">
+          <Icon name="lucide:package-check" class="w-12 h-12 mx-auto mb-4 opacity-50" />
+          <p>All items are well stocked</p>
+          <p class="text-sm">Check inventory regularly for updates</p>
         </div>
       </CardContent>
     </Card>
@@ -214,7 +304,7 @@ onMounted(() => {
             <CardTitle>Recent Sales</CardTitle>
             <CardDescription>Latest pharmacy transactions</CardDescription>
           </div>
-          <NuxtLink to="/pharmacist/sales">
+          <NuxtLink to="/pharmacist/sales_history">
             <Button variant="outline" size="sm">View All</Button>
           </NuxtLink>
         </div>
@@ -224,12 +314,49 @@ onMounted(() => {
           <Icon name="lucide:loader-2" class="w-6 h-6 animate-spin mr-2" />
           Loading...
         </div>
-        <div v-else class="space-y-4">
-          <div class="text-center py-8 text-muted-foreground">
-            <Icon name="lucide:shopping-cart" class="w-12 h-12 mx-auto mb-4 opacity-50" />
-            <p>No recent sales</p>
-            <p class="text-sm">Sales will appear here</p>
-          </div>
+        <div v-else-if="recentSales.length > 0" class="border rounded-lg overflow-hidden">
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead>Invoice</TableHead>
+                <TableHead>Customer</TableHead>
+                <TableHead>Date</TableHead>
+                <TableHead class="text-right">Total</TableHead>
+                <TableHead>Status</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              <TableRow 
+                v-for="sale in recentSales" 
+                :key="sale.id"
+                class="cursor-pointer hover:bg-gray-50"
+                @click="$router.push(`/pharmacist/sales_history/${sale.id}`)"
+              >
+                <TableCell class="font-mono font-semibold text-blue-600">
+                  {{ sale.invoiceNumber }}
+                </TableCell>
+                <TableCell>
+                  {{ sale.customerName || 'Walk-in' }}
+                </TableCell>
+                <TableCell class="text-sm text-gray-600">
+                  {{ formatDate(sale.createdAt) }}
+                </TableCell>
+                <TableCell class="text-right font-semibold">
+                  {{ formatCurrency(sale.total) }}
+                </TableCell>
+                <TableCell>
+                  <Badge :class="getStatusBadge(sale.paymentStatus).class" variant="outline">
+                    {{ getStatusBadge(sale.paymentStatus).text }}
+                  </Badge>
+                </TableCell>
+              </TableRow>
+            </TableBody>
+          </Table>
+        </div>
+        <div v-else class="text-center py-8 text-muted-foreground">
+          <Icon name="lucide:shopping-cart" class="w-12 h-12 mx-auto mb-4 opacity-50" />
+          <p>No recent sales</p>
+          <p class="text-sm">Sales will appear here</p>
         </div>
       </CardContent>
     </Card>
