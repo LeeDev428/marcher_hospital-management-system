@@ -78,7 +78,10 @@ export const useAuthStore = defineStore("auth", {
 					if (staffType === 'BILLING_STAFF') {
 						return '/billing_staff'
 					}
-					// Default staff dashboard
+					if (staffType === 'PHARMACIST') {
+						return '/pharmacist'
+					}
+					// Default staff dashboard (doctors/nurses)
 					return '/staff/dashboard'
 				case 'partner':
 					return '/partner/dashboard'
