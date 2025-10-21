@@ -55,6 +55,10 @@ export const getInpatientEncountersSchema = z.object({
 	patientProfileId: z.string().uuid("Invalid patient profile ID."),
 })
 
+export const getInpatientEncountersByPatientSchema = z.object({
+	patientId: z.string().min(1),
+})
+
 export const tableInpatientEncounterSchema = inpatientEncounterSchema
 	.extend({
 		id: z.string().uuid("Invalid encounter ID."),
