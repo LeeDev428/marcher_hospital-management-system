@@ -48,6 +48,9 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
         if (currentPath.startsWith('/billing_staff') && staffType !== 'BILLING_STAFF') {
           throw createError({ statusCode: 403, statusMessage: 'Access denied. Billing Staff privileges required.' })
         }
+        if (currentPath.startsWith('/pharmacist') && staffType !== 'PHARMACIST') {
+          throw createError({ statusCode: 403, statusMessage: 'Access denied. Pharmacist privileges required.' })
+        }
         if (currentPath.startsWith('/patient') && !['patient', 'admin'].includes(userRole)) {
           throw createError({ statusCode: 403, statusMessage: 'Access denied. Patient privileges required.' })
         }
@@ -120,6 +123,14 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
         throw createError({
           statusCode: 403,
           statusMessage: 'Access denied. Billing Staff privileges required.'
+        })
+      }
+      
+      if (currentPath.startsWith('/pharmacist') && staffType !== 'PHARMACIST') {
+        console.log('❌ Access denied - Pharmacist required')
+        throw createError({
+          statusCode: 403,
+          statusMessage: 'Access denied. Pharmacist privileges required.'
         })
       }
       
