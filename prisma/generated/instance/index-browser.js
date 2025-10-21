@@ -310,6 +310,8 @@ exports.Prisma.PharmacySaleScalarFieldEnum = {
   discount: 'discount',
   tax: 'tax',
   total: 'total',
+  amountPaid: 'amountPaid',
+  changeGiven: 'changeGiven',
   paymentMethod: 'paymentMethod',
   paymentStatus: 'paymentStatus',
   notes: 'notes',
@@ -398,7 +400,8 @@ exports.StaffType = exports.$Enums.StaffType = {
   NURSE: 'NURSE',
   STAFF: 'STAFF',
   ADMISSIONS_STAFF: 'ADMISSIONS_STAFF',
-  BILLING_STAFF: 'BILLING_STAFF'
+  BILLING_STAFF: 'BILLING_STAFF',
+  PHARMACIST: 'PHARMACIST'
 };
 
 exports.BloodType = exports.$Enums.BloodType = {
