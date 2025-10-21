@@ -341,6 +341,74 @@ exports.Prisma.PharmacyPaymentScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.OutpatientEncounterScalarFieldEnum = {
+  id: 'id',
+  patientId: 'patientId',
+  doctorId: 'doctorId',
+  date: 'date',
+  time: 'time',
+  chiefComplaint: 'chiefComplaint',
+  doctorDiagnosis: 'doctorDiagnosis',
+  type: 'type',
+  consultationFee: 'consultationFee',
+  paymentStatus: 'paymentStatus',
+  notes: 'notes',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.InpatientEncounterScalarFieldEnum = {
+  id: 'id',
+  patientId: 'patientId',
+  doctorId: 'doctorId',
+  admittedBy: 'admittedBy',
+  date: 'date',
+  time: 'time',
+  chiefComplaint: 'chiefComplaint',
+  doctorDiagnosis: 'doctorDiagnosis',
+  triage: 'triage',
+  disposition: 'disposition',
+  dispositionDate: 'dispositionDate',
+  dispositionTime: 'dispositionTime',
+  dispositionNote: 'dispositionNote',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.InpatientEncounterChartScalarFieldEnum = {
+  id: 'id',
+  encounterId: 'encounterId',
+  staffId: 'staffId',
+  chart: 'chart',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.InpatientEncounterOrderScalarFieldEnum = {
+  id: 'id',
+  encounterId: 'encounterId',
+  catalogueItemId: 'catalogueItemId',
+  type: 'type',
+  description: 'description',
+  cost: 'cost',
+  status: 'status',
+  orderedBy: 'orderedBy',
+  notes: 'notes',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.ParticularCatalogueScalarFieldEnum = {
+  id: 'id',
+  type: 'type',
+  name: 'name',
+  description: 'description',
+  cost: 'cost',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -528,6 +596,59 @@ exports.PaymentStatus = exports.$Enums.PaymentStatus = {
   REFUNDED: 'REFUNDED'
 };
 
+exports.OutpatientEncounterType = exports.$Enums.OutpatientEncounterType = {
+  CONSULTATION: 'CONSULTATION',
+  FOLLOW_UP: 'FOLLOW_UP',
+  LABORATORY: 'LABORATORY',
+  RADIOLOGY: 'RADIOLOGY',
+  OTHER: 'OTHER'
+};
+
+exports.OutpatientPaymentStatus = exports.$Enums.OutpatientPaymentStatus = {
+  PAID: 'PAID',
+  UNPAID: 'UNPAID'
+};
+
+exports.InpatientTriage = exports.$Enums.InpatientTriage = {
+  HIGH_PRIORITY: 'HIGH_PRIORITY',
+  MEDIUM_PRIORITY: 'MEDIUM_PRIORITY',
+  LOW_PRIORITY: 'LOW_PRIORITY',
+  NON_URGENT: 'NON_URGENT'
+};
+
+exports.InpatientDisposition = exports.$Enums.InpatientDisposition = {
+  ADMITTED: 'ADMITTED',
+  DISCHARGED: 'DISCHARGED',
+  DISCONTINUED: 'DISCONTINUED',
+  TRANSFERRED: 'TRANSFERRED',
+  DECEASED: 'DECEASED',
+  OTHER: 'OTHER'
+};
+
+exports.InpatientEncounterOrderType = exports.$Enums.InpatientEncounterOrderType = {
+  PRESCRIPTION: 'PRESCRIPTION',
+  LABORATORY: 'LABORATORY',
+  RADIOLOGY: 'RADIOLOGY',
+  OPERATION: 'OPERATION',
+  PROCEDURE: 'PROCEDURE',
+  OTHER: 'OTHER'
+};
+
+exports.InpatientEncounterOrderStatus = exports.$Enums.InpatientEncounterOrderStatus = {
+  PENDING: 'PENDING',
+  COMPLETED: 'COMPLETED',
+  CANCELLED: 'CANCELLED'
+};
+
+exports.ParticularType = exports.$Enums.ParticularType = {
+  PRESCRIPTION: 'PRESCRIPTION',
+  LABORATORY: 'LABORATORY',
+  RADIOLOGY: 'RADIOLOGY',
+  OPERATION: 'OPERATION',
+  PROCEDURE: 'PROCEDURE',
+  OTHER: 'OTHER'
+};
+
 exports.Prisma.ModelName = {
   User: 'User',
   StaffCredentials: 'StaffCredentials',
@@ -544,7 +665,12 @@ exports.Prisma.ModelName = {
   PharmacyItem: 'PharmacyItem',
   PharmacySale: 'PharmacySale',
   PharmacySaleItem: 'PharmacySaleItem',
-  PharmacyPayment: 'PharmacyPayment'
+  PharmacyPayment: 'PharmacyPayment',
+  OutpatientEncounter: 'OutpatientEncounter',
+  InpatientEncounter: 'InpatientEncounter',
+  InpatientEncounterChart: 'InpatientEncounterChart',
+  InpatientEncounterOrder: 'InpatientEncounterOrder',
+  ParticularCatalogue: 'ParticularCatalogue'
 };
 
 /**
