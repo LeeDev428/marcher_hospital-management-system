@@ -63,9 +63,9 @@ const handleLogout = async () => {
           </NuxtLink>
           
           <NuxtLink 
-            to="/pharmacist/sales" 
+            to="/pharmacist/sales_history" 
             class="flex items-center px-3 py-2 text-sm font-medium rounded-lg"
-            :class="$route.path.startsWith('/pharmacist/sales') ? 'bg-blue-50 text-blue-700 border-r-2 border-blue-600' : 'text-gray-600 hover:bg-gray-50'"
+            :class="$route.path.startsWith('/pharmacist/sales_history') ? 'bg-blue-50 text-blue-700 border-r-2 border-blue-600' : 'text-gray-600 hover:bg-gray-50'"
           >
             <Icon name="lucide:shopping-cart" class="w-5 h-5 mr-3" />
             Sales History
