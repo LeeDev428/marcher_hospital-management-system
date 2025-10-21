@@ -172,7 +172,7 @@ const createInpatientEncounter = protectedProcedure
 
 		// Check staff type
 		const staffUser = await instancePrisma.user.findUnique({
-			where: { id: user.userId },
+			where: { id: user.id },
 			include: { staffCredentials: true },
 		})
 
@@ -221,7 +221,7 @@ const createInpatientEncounter = protectedProcedure
 				data: {
 					patientId,
 					doctorId,
-					admittedBy: user.userId,
+					admittedBy: user.id,
 					date,
 					time,
 					chiefComplaint,
@@ -267,7 +267,7 @@ const updateInpatientEncounter = protectedProcedure
 		}
 
 		const staffUser = await instancePrisma.user.findUnique({
-			where: { id: user.userId },
+			where: { id: user.id },
 			include: { staffCredentials: true },
 		})
 
@@ -295,7 +295,7 @@ const updateInpatientEncounter = protectedProcedure
 			}
 
 			// Check if doctor is assigned to this encounter
-			if (currentEncounter.doctorId !== user.userId) {
+			if (currentEncounter.doctorId !== user.id) {
 				return {
 					success: false,
 					message: "You can only update encounters assigned to you.",
