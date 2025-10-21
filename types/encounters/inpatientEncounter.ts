@@ -114,6 +114,12 @@ export type GetInpatientEncounter = z.infer<typeof getInpatientEncounterSchema>
 export type GetInpatientEncounters = z.infer<
 	typeof getInpatientEncountersSchema
 >
+export type GetInpatientEncountersByPatient = z.infer<
+	typeof getInpatientEncountersByPatientSchema
+>
+export type CheckActiveEncounter = z.infer<
+	typeof checkActiveEncounterSchema
+>
 export type TableInpatientEncounter = z.infer<
 	typeof tableInpatientEncounterSchema
 >
