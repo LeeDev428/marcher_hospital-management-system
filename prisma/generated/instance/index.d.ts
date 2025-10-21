@@ -93,6 +93,31 @@ export type PharmacySaleItem = $Result.DefaultSelection<Prisma.$PharmacySaleItem
  * 
  */
 export type PharmacyPayment = $Result.DefaultSelection<Prisma.$PharmacyPaymentPayload>
+/**
+ * Model OutpatientEncounter
+ * 
+ */
+export type OutpatientEncounter = $Result.DefaultSelection<Prisma.$OutpatientEncounterPayload>
+/**
+ * Model InpatientEncounter
+ * 
+ */
+export type InpatientEncounter = $Result.DefaultSelection<Prisma.$InpatientEncounterPayload>
+/**
+ * Model InpatientEncounterChart
+ * 
+ */
+export type InpatientEncounterChart = $Result.DefaultSelection<Prisma.$InpatientEncounterChartPayload>
+/**
+ * Model InpatientEncounterOrder
+ * 
+ */
+export type InpatientEncounterOrder = $Result.DefaultSelection<Prisma.$InpatientEncounterOrderPayload>
+/**
+ * Model ParticularCatalogue
+ * 
+ */
+export type ParticularCatalogue = $Result.DefaultSelection<Prisma.$ParticularCataloguePayload>
 
 /**
  * Enums
@@ -307,6 +332,80 @@ export const PaymentStatus: {
 
 export type PaymentStatus = (typeof PaymentStatus)[keyof typeof PaymentStatus]
 
+
+export const OutpatientEncounterType: {
+  CONSULTATION: 'CONSULTATION',
+  FOLLOW_UP: 'FOLLOW_UP',
+  LABORATORY: 'LABORATORY',
+  RADIOLOGY: 'RADIOLOGY',
+  OTHER: 'OTHER'
+};
+
+export type OutpatientEncounterType = (typeof OutpatientEncounterType)[keyof typeof OutpatientEncounterType]
+
+
+export const OutpatientPaymentStatus: {
+  PAID: 'PAID',
+  UNPAID: 'UNPAID'
+};
+
+export type OutpatientPaymentStatus = (typeof OutpatientPaymentStatus)[keyof typeof OutpatientPaymentStatus]
+
+
+export const InpatientTriage: {
+  HIGH_PRIORITY: 'HIGH_PRIORITY',
+  MEDIUM_PRIORITY: 'MEDIUM_PRIORITY',
+  LOW_PRIORITY: 'LOW_PRIORITY',
+  NON_URGENT: 'NON_URGENT'
+};
+
+export type InpatientTriage = (typeof InpatientTriage)[keyof typeof InpatientTriage]
+
+
+export const InpatientDisposition: {
+  ADMITTED: 'ADMITTED',
+  DISCHARGED: 'DISCHARGED',
+  DISCONTINUED: 'DISCONTINUED',
+  TRANSFERRED: 'TRANSFERRED',
+  DECEASED: 'DECEASED',
+  OTHER: 'OTHER'
+};
+
+export type InpatientDisposition = (typeof InpatientDisposition)[keyof typeof InpatientDisposition]
+
+
+export const InpatientEncounterOrderType: {
+  PRESCRIPTION: 'PRESCRIPTION',
+  LABORATORY: 'LABORATORY',
+  RADIOLOGY: 'RADIOLOGY',
+  OPERATION: 'OPERATION',
+  PROCEDURE: 'PROCEDURE',
+  OTHER: 'OTHER'
+};
+
+export type InpatientEncounterOrderType = (typeof InpatientEncounterOrderType)[keyof typeof InpatientEncounterOrderType]
+
+
+export const InpatientEncounterOrderStatus: {
+  PENDING: 'PENDING',
+  COMPLETED: 'COMPLETED',
+  CANCELLED: 'CANCELLED'
+};
+
+export type InpatientEncounterOrderStatus = (typeof InpatientEncounterOrderStatus)[keyof typeof InpatientEncounterOrderStatus]
+
+
+export const ParticularType: {
+  PRESCRIPTION: 'PRESCRIPTION',
+  LABORATORY: 'LABORATORY',
+  RADIOLOGY: 'RADIOLOGY',
+  OPERATION: 'OPERATION',
+  PROCEDURE: 'PROCEDURE',
+  OTHER: 'OTHER'
+};
+
+export type ParticularType = (typeof ParticularType)[keyof typeof ParticularType]
+
 }
 
 export type UserRole = $Enums.UserRole
@@ -372,6 +471,34 @@ export const PaymentMethod: typeof $Enums.PaymentMethod
 export type PaymentStatus = $Enums.PaymentStatus
 
 export const PaymentStatus: typeof $Enums.PaymentStatus
+
+export type OutpatientEncounterType = $Enums.OutpatientEncounterType
+
+export const OutpatientEncounterType: typeof $Enums.OutpatientEncounterType
+
+export type OutpatientPaymentStatus = $Enums.OutpatientPaymentStatus
+
+export const OutpatientPaymentStatus: typeof $Enums.OutpatientPaymentStatus
+
+export type InpatientTriage = $Enums.InpatientTriage
+
+export const InpatientTriage: typeof $Enums.InpatientTriage
+
+export type InpatientDisposition = $Enums.InpatientDisposition
+
+export const InpatientDisposition: typeof $Enums.InpatientDisposition
+
+export type InpatientEncounterOrderType = $Enums.InpatientEncounterOrderType
+
+export const InpatientEncounterOrderType: typeof $Enums.InpatientEncounterOrderType
+
+export type InpatientEncounterOrderStatus = $Enums.InpatientEncounterOrderStatus
+
+export const InpatientEncounterOrderStatus: typeof $Enums.InpatientEncounterOrderStatus
+
+export type ParticularType = $Enums.ParticularType
+
+export const ParticularType: typeof $Enums.ParticularType
 
 /**
  * ##  Prisma Client ʲˢ
@@ -650,6 +777,56 @@ export class PrismaClient<
     * ```
     */
   get pharmacyPayment(): Prisma.PharmacyPaymentDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.outpatientEncounter`: Exposes CRUD operations for the **OutpatientEncounter** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more OutpatientEncounters
+    * const outpatientEncounters = await prisma.outpatientEncounter.findMany()
+    * ```
+    */
+  get outpatientEncounter(): Prisma.OutpatientEncounterDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.inpatientEncounter`: Exposes CRUD operations for the **InpatientEncounter** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more InpatientEncounters
+    * const inpatientEncounters = await prisma.inpatientEncounter.findMany()
+    * ```
+    */
+  get inpatientEncounter(): Prisma.InpatientEncounterDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.inpatientEncounterChart`: Exposes CRUD operations for the **InpatientEncounterChart** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more InpatientEncounterCharts
+    * const inpatientEncounterCharts = await prisma.inpatientEncounterChart.findMany()
+    * ```
+    */
+  get inpatientEncounterChart(): Prisma.InpatientEncounterChartDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.inpatientEncounterOrder`: Exposes CRUD operations for the **InpatientEncounterOrder** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more InpatientEncounterOrders
+    * const inpatientEncounterOrders = await prisma.inpatientEncounterOrder.findMany()
+    * ```
+    */
+  get inpatientEncounterOrder(): Prisma.InpatientEncounterOrderDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.particularCatalogue`: Exposes CRUD operations for the **ParticularCatalogue** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more ParticularCatalogues
+    * const particularCatalogues = await prisma.particularCatalogue.findMany()
+    * ```
+    */
+  get particularCatalogue(): Prisma.ParticularCatalogueDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -1105,7 +1282,12 @@ export namespace Prisma {
     PharmacyItem: 'PharmacyItem',
     PharmacySale: 'PharmacySale',
     PharmacySaleItem: 'PharmacySaleItem',
-    PharmacyPayment: 'PharmacyPayment'
+    PharmacyPayment: 'PharmacyPayment',
+    OutpatientEncounter: 'OutpatientEncounter',
+    InpatientEncounter: 'InpatientEncounter',
+    InpatientEncounterChart: 'InpatientEncounterChart',
+    InpatientEncounterOrder: 'InpatientEncounterOrder',
+    ParticularCatalogue: 'ParticularCatalogue'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -1124,7 +1306,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "staffCredentials" | "patient" | "partner" | "refreshToken" | "passwordResetToken" | "appointment" | "staffSchedule" | "medicalService" | "pharmacySupplier" | "pharmacyBrand" | "pharmacyItemCategory" | "pharmacyItem" | "pharmacySale" | "pharmacySaleItem" | "pharmacyPayment"
+      modelProps: "user" | "staffCredentials" | "patient" | "partner" | "refreshToken" | "passwordResetToken" | "appointment" | "staffSchedule" | "medicalService" | "pharmacySupplier" | "pharmacyBrand" | "pharmacyItemCategory" | "pharmacyItem" | "pharmacySale" | "pharmacySaleItem" | "pharmacyPayment" | "outpatientEncounter" | "inpatientEncounter" | "inpatientEncounterChart" | "inpatientEncounterOrder" | "particularCatalogue"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -2312,6 +2494,376 @@ export namespace Prisma {
           }
         }
       }
+      OutpatientEncounter: {
+        payload: Prisma.$OutpatientEncounterPayload<ExtArgs>
+        fields: Prisma.OutpatientEncounterFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.OutpatientEncounterFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OutpatientEncounterPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.OutpatientEncounterFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OutpatientEncounterPayload>
+          }
+          findFirst: {
+            args: Prisma.OutpatientEncounterFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OutpatientEncounterPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.OutpatientEncounterFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OutpatientEncounterPayload>
+          }
+          findMany: {
+            args: Prisma.OutpatientEncounterFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OutpatientEncounterPayload>[]
+          }
+          create: {
+            args: Prisma.OutpatientEncounterCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OutpatientEncounterPayload>
+          }
+          createMany: {
+            args: Prisma.OutpatientEncounterCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.OutpatientEncounterCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OutpatientEncounterPayload>[]
+          }
+          delete: {
+            args: Prisma.OutpatientEncounterDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OutpatientEncounterPayload>
+          }
+          update: {
+            args: Prisma.OutpatientEncounterUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OutpatientEncounterPayload>
+          }
+          deleteMany: {
+            args: Prisma.OutpatientEncounterDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.OutpatientEncounterUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.OutpatientEncounterUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OutpatientEncounterPayload>[]
+          }
+          upsert: {
+            args: Prisma.OutpatientEncounterUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OutpatientEncounterPayload>
+          }
+          aggregate: {
+            args: Prisma.OutpatientEncounterAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateOutpatientEncounter>
+          }
+          groupBy: {
+            args: Prisma.OutpatientEncounterGroupByArgs<ExtArgs>
+            result: $Utils.Optional<OutpatientEncounterGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.OutpatientEncounterCountArgs<ExtArgs>
+            result: $Utils.Optional<OutpatientEncounterCountAggregateOutputType> | number
+          }
+        }
+      }
+      InpatientEncounter: {
+        payload: Prisma.$InpatientEncounterPayload<ExtArgs>
+        fields: Prisma.InpatientEncounterFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.InpatientEncounterFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InpatientEncounterPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.InpatientEncounterFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InpatientEncounterPayload>
+          }
+          findFirst: {
+            args: Prisma.InpatientEncounterFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InpatientEncounterPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.InpatientEncounterFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InpatientEncounterPayload>
+          }
+          findMany: {
+            args: Prisma.InpatientEncounterFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InpatientEncounterPayload>[]
+          }
+          create: {
+            args: Prisma.InpatientEncounterCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InpatientEncounterPayload>
+          }
+          createMany: {
+            args: Prisma.InpatientEncounterCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.InpatientEncounterCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InpatientEncounterPayload>[]
+          }
+          delete: {
+            args: Prisma.InpatientEncounterDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InpatientEncounterPayload>
+          }
+          update: {
+            args: Prisma.InpatientEncounterUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InpatientEncounterPayload>
+          }
+          deleteMany: {
+            args: Prisma.InpatientEncounterDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.InpatientEncounterUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.InpatientEncounterUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InpatientEncounterPayload>[]
+          }
+          upsert: {
+            args: Prisma.InpatientEncounterUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InpatientEncounterPayload>
+          }
+          aggregate: {
+            args: Prisma.InpatientEncounterAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateInpatientEncounter>
+          }
+          groupBy: {
+            args: Prisma.InpatientEncounterGroupByArgs<ExtArgs>
+            result: $Utils.Optional<InpatientEncounterGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.InpatientEncounterCountArgs<ExtArgs>
+            result: $Utils.Optional<InpatientEncounterCountAggregateOutputType> | number
+          }
+        }
+      }
+      InpatientEncounterChart: {
+        payload: Prisma.$InpatientEncounterChartPayload<ExtArgs>
+        fields: Prisma.InpatientEncounterChartFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.InpatientEncounterChartFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InpatientEncounterChartPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.InpatientEncounterChartFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InpatientEncounterChartPayload>
+          }
+          findFirst: {
+            args: Prisma.InpatientEncounterChartFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InpatientEncounterChartPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.InpatientEncounterChartFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InpatientEncounterChartPayload>
+          }
+          findMany: {
+            args: Prisma.InpatientEncounterChartFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InpatientEncounterChartPayload>[]
+          }
+          create: {
+            args: Prisma.InpatientEncounterChartCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InpatientEncounterChartPayload>
+          }
+          createMany: {
+            args: Prisma.InpatientEncounterChartCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.InpatientEncounterChartCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InpatientEncounterChartPayload>[]
+          }
+          delete: {
+            args: Prisma.InpatientEncounterChartDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InpatientEncounterChartPayload>
+          }
+          update: {
+            args: Prisma.InpatientEncounterChartUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InpatientEncounterChartPayload>
+          }
+          deleteMany: {
+            args: Prisma.InpatientEncounterChartDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.InpatientEncounterChartUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.InpatientEncounterChartUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InpatientEncounterChartPayload>[]
+          }
+          upsert: {
+            args: Prisma.InpatientEncounterChartUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InpatientEncounterChartPayload>
+          }
+          aggregate: {
+            args: Prisma.InpatientEncounterChartAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateInpatientEncounterChart>
+          }
+          groupBy: {
+            args: Prisma.InpatientEncounterChartGroupByArgs<ExtArgs>
+            result: $Utils.Optional<InpatientEncounterChartGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.InpatientEncounterChartCountArgs<ExtArgs>
+            result: $Utils.Optional<InpatientEncounterChartCountAggregateOutputType> | number
+          }
+        }
+      }
+      InpatientEncounterOrder: {
+        payload: Prisma.$InpatientEncounterOrderPayload<ExtArgs>
+        fields: Prisma.InpatientEncounterOrderFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.InpatientEncounterOrderFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InpatientEncounterOrderPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.InpatientEncounterOrderFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InpatientEncounterOrderPayload>
+          }
+          findFirst: {
+            args: Prisma.InpatientEncounterOrderFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InpatientEncounterOrderPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.InpatientEncounterOrderFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InpatientEncounterOrderPayload>
+          }
+          findMany: {
+            args: Prisma.InpatientEncounterOrderFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InpatientEncounterOrderPayload>[]
+          }
+          create: {
+            args: Prisma.InpatientEncounterOrderCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InpatientEncounterOrderPayload>
+          }
+          createMany: {
+            args: Prisma.InpatientEncounterOrderCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.InpatientEncounterOrderCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InpatientEncounterOrderPayload>[]
+          }
+          delete: {
+            args: Prisma.InpatientEncounterOrderDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InpatientEncounterOrderPayload>
+          }
+          update: {
+            args: Prisma.InpatientEncounterOrderUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InpatientEncounterOrderPayload>
+          }
+          deleteMany: {
+            args: Prisma.InpatientEncounterOrderDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.InpatientEncounterOrderUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.InpatientEncounterOrderUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InpatientEncounterOrderPayload>[]
+          }
+          upsert: {
+            args: Prisma.InpatientEncounterOrderUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InpatientEncounterOrderPayload>
+          }
+          aggregate: {
+            args: Prisma.InpatientEncounterOrderAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateInpatientEncounterOrder>
+          }
+          groupBy: {
+            args: Prisma.InpatientEncounterOrderGroupByArgs<ExtArgs>
+            result: $Utils.Optional<InpatientEncounterOrderGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.InpatientEncounterOrderCountArgs<ExtArgs>
+            result: $Utils.Optional<InpatientEncounterOrderCountAggregateOutputType> | number
+          }
+        }
+      }
+      ParticularCatalogue: {
+        payload: Prisma.$ParticularCataloguePayload<ExtArgs>
+        fields: Prisma.ParticularCatalogueFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ParticularCatalogueFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ParticularCataloguePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ParticularCatalogueFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ParticularCataloguePayload>
+          }
+          findFirst: {
+            args: Prisma.ParticularCatalogueFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ParticularCataloguePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ParticularCatalogueFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ParticularCataloguePayload>
+          }
+          findMany: {
+            args: Prisma.ParticularCatalogueFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ParticularCataloguePayload>[]
+          }
+          create: {
+            args: Prisma.ParticularCatalogueCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ParticularCataloguePayload>
+          }
+          createMany: {
+            args: Prisma.ParticularCatalogueCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.ParticularCatalogueCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ParticularCataloguePayload>[]
+          }
+          delete: {
+            args: Prisma.ParticularCatalogueDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ParticularCataloguePayload>
+          }
+          update: {
+            args: Prisma.ParticularCatalogueUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ParticularCataloguePayload>
+          }
+          deleteMany: {
+            args: Prisma.ParticularCatalogueDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ParticularCatalogueUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.ParticularCatalogueUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ParticularCataloguePayload>[]
+          }
+          upsert: {
+            args: Prisma.ParticularCatalogueUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ParticularCataloguePayload>
+          }
+          aggregate: {
+            args: Prisma.ParticularCatalogueAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateParticularCatalogue>
+          }
+          groupBy: {
+            args: Prisma.ParticularCatalogueGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ParticularCatalogueGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ParticularCatalogueCountArgs<ExtArgs>
+            result: $Utils.Optional<ParticularCatalogueCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -2424,6 +2976,11 @@ export namespace Prisma {
     pharmacySale?: PharmacySaleOmit
     pharmacySaleItem?: PharmacySaleItemOmit
     pharmacyPayment?: PharmacyPaymentOmit
+    outpatientEncounter?: OutpatientEncounterOmit
+    inpatientEncounter?: InpatientEncounterOmit
+    inpatientEncounterChart?: InpatientEncounterChartOmit
+    inpatientEncounterOrder?: InpatientEncounterOrderOmit
+    particularCatalogue?: ParticularCatalogueOmit
   }
 
   /* Types for Logging */
@@ -2558,6 +3115,46 @@ export namespace Prisma {
 
 
   /**
+   * Count Type PatientCountOutputType
+   */
+
+  export type PatientCountOutputType = {
+    inpatientEncounters: number
+    outpatientEncounters: number
+  }
+
+  export type PatientCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    inpatientEncounters?: boolean | PatientCountOutputTypeCountInpatientEncountersArgs
+    outpatientEncounters?: boolean | PatientCountOutputTypeCountOutpatientEncountersArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * PatientCountOutputType without action
+   */
+  export type PatientCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PatientCountOutputType
+     */
+    select?: PatientCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * PatientCountOutputType without action
+   */
+  export type PatientCountOutputTypeCountInpatientEncountersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: InpatientEncounterWhereInput
+  }
+
+  /**
+   * PatientCountOutputType without action
+   */
+  export type PatientCountOutputTypeCountOutpatientEncountersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: OutpatientEncounterWhereInput
+  }
+
+
+  /**
    * Count Type PharmacyBrandCountOutputType
    */
 
@@ -2687,6 +3284,77 @@ export namespace Prisma {
    */
   export type PharmacySaleCountOutputTypeCountPaymentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: PharmacyPaymentWhereInput
+  }
+
+
+  /**
+   * Count Type InpatientEncounterCountOutputType
+   */
+
+  export type InpatientEncounterCountOutputType = {
+    charts: number
+    orders: number
+  }
+
+  export type InpatientEncounterCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    charts?: boolean | InpatientEncounterCountOutputTypeCountChartsArgs
+    orders?: boolean | InpatientEncounterCountOutputTypeCountOrdersArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * InpatientEncounterCountOutputType without action
+   */
+  export type InpatientEncounterCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InpatientEncounterCountOutputType
+     */
+    select?: InpatientEncounterCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * InpatientEncounterCountOutputType without action
+   */
+  export type InpatientEncounterCountOutputTypeCountChartsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: InpatientEncounterChartWhereInput
+  }
+
+  /**
+   * InpatientEncounterCountOutputType without action
+   */
+  export type InpatientEncounterCountOutputTypeCountOrdersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: InpatientEncounterOrderWhereInput
+  }
+
+
+  /**
+   * Count Type ParticularCatalogueCountOutputType
+   */
+
+  export type ParticularCatalogueCountOutputType = {
+    orders: number
+  }
+
+  export type ParticularCatalogueCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    orders?: boolean | ParticularCatalogueCountOutputTypeCountOrdersArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * ParticularCatalogueCountOutputType without action
+   */
+  export type ParticularCatalogueCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ParticularCatalogueCountOutputType
+     */
+    select?: ParticularCatalogueCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * ParticularCatalogueCountOutputType without action
+   */
+  export type ParticularCatalogueCountOutputTypeCountOrdersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: InpatientEncounterOrderWhereInput
   }
 
 
@@ -5715,6 +6383,9 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
+    inpatientEncounters?: boolean | Patient$inpatientEncountersArgs<ExtArgs>
+    outpatientEncounters?: boolean | Patient$outpatientEncountersArgs<ExtArgs>
+    _count?: boolean | PatientCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["patient"]>
 
   export type PatientSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -5767,6 +6438,9 @@ export namespace Prisma {
   export type PatientOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "patientNumber" | "bloodType" | "allergies" | "medicalHistory" | "emergencyContact" | "emergencyPhone" | "insuranceProvider" | "insuranceNumber" | "createdAt" | "updatedAt", ExtArgs["result"]["patient"]>
   export type PatientInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
+    inpatientEncounters?: boolean | Patient$inpatientEncountersArgs<ExtArgs>
+    outpatientEncounters?: boolean | Patient$outpatientEncountersArgs<ExtArgs>
+    _count?: boolean | PatientCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type PatientIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
@@ -5779,6 +6453,8 @@ export namespace Prisma {
     name: "Patient"
     objects: {
       user: Prisma.$UserPayload<ExtArgs>
+      inpatientEncounters: Prisma.$InpatientEncounterPayload<ExtArgs>[]
+      outpatientEncounters: Prisma.$OutpatientEncounterPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -6188,6 +6864,8 @@ export namespace Prisma {
   export interface Prisma__PatientClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    inpatientEncounters<T extends Patient$inpatientEncountersArgs<ExtArgs> = {}>(args?: Subset<T, Patient$inpatientEncountersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InpatientEncounterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    outpatientEncounters<T extends Patient$outpatientEncountersArgs<ExtArgs> = {}>(args?: Subset<T, Patient$outpatientEncountersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OutpatientEncounterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -6622,6 +7300,54 @@ export namespace Prisma {
      * Limit how many Patients to delete.
      */
     limit?: number
+  }
+
+  /**
+   * Patient.inpatientEncounters
+   */
+  export type Patient$inpatientEncountersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InpatientEncounter
+     */
+    select?: InpatientEncounterSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InpatientEncounter
+     */
+    omit?: InpatientEncounterOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InpatientEncounterInclude<ExtArgs> | null
+    where?: InpatientEncounterWhereInput
+    orderBy?: InpatientEncounterOrderByWithRelationInput | InpatientEncounterOrderByWithRelationInput[]
+    cursor?: InpatientEncounterWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: InpatientEncounterScalarFieldEnum | InpatientEncounterScalarFieldEnum[]
+  }
+
+  /**
+   * Patient.outpatientEncounters
+   */
+  export type Patient$outpatientEncountersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OutpatientEncounter
+     */
+    select?: OutpatientEncounterSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OutpatientEncounter
+     */
+    omit?: OutpatientEncounterOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OutpatientEncounterInclude<ExtArgs> | null
+    where?: OutpatientEncounterWhereInput
+    orderBy?: OutpatientEncounterOrderByWithRelationInput | OutpatientEncounterOrderByWithRelationInput[]
+    cursor?: OutpatientEncounterWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: OutpatientEncounterScalarFieldEnum | OutpatientEncounterScalarFieldEnum[]
   }
 
   /**
@@ -21285,6 +22011,5859 @@ export namespace Prisma {
 
 
   /**
+   * Model OutpatientEncounter
+   */
+
+  export type AggregateOutpatientEncounter = {
+    _count: OutpatientEncounterCountAggregateOutputType | null
+    _avg: OutpatientEncounterAvgAggregateOutputType | null
+    _sum: OutpatientEncounterSumAggregateOutputType | null
+    _min: OutpatientEncounterMinAggregateOutputType | null
+    _max: OutpatientEncounterMaxAggregateOutputType | null
+  }
+
+  export type OutpatientEncounterAvgAggregateOutputType = {
+    consultationFee: Decimal | null
+  }
+
+  export type OutpatientEncounterSumAggregateOutputType = {
+    consultationFee: Decimal | null
+  }
+
+  export type OutpatientEncounterMinAggregateOutputType = {
+    id: string | null
+    patientId: string | null
+    doctorId: string | null
+    date: string | null
+    time: string | null
+    chiefComplaint: string | null
+    doctorDiagnosis: string | null
+    type: $Enums.OutpatientEncounterType | null
+    consultationFee: Decimal | null
+    paymentStatus: $Enums.OutpatientPaymentStatus | null
+    notes: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type OutpatientEncounterMaxAggregateOutputType = {
+    id: string | null
+    patientId: string | null
+    doctorId: string | null
+    date: string | null
+    time: string | null
+    chiefComplaint: string | null
+    doctorDiagnosis: string | null
+    type: $Enums.OutpatientEncounterType | null
+    consultationFee: Decimal | null
+    paymentStatus: $Enums.OutpatientPaymentStatus | null
+    notes: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type OutpatientEncounterCountAggregateOutputType = {
+    id: number
+    patientId: number
+    doctorId: number
+    date: number
+    time: number
+    chiefComplaint: number
+    doctorDiagnosis: number
+    type: number
+    consultationFee: number
+    paymentStatus: number
+    notes: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type OutpatientEncounterAvgAggregateInputType = {
+    consultationFee?: true
+  }
+
+  export type OutpatientEncounterSumAggregateInputType = {
+    consultationFee?: true
+  }
+
+  export type OutpatientEncounterMinAggregateInputType = {
+    id?: true
+    patientId?: true
+    doctorId?: true
+    date?: true
+    time?: true
+    chiefComplaint?: true
+    doctorDiagnosis?: true
+    type?: true
+    consultationFee?: true
+    paymentStatus?: true
+    notes?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type OutpatientEncounterMaxAggregateInputType = {
+    id?: true
+    patientId?: true
+    doctorId?: true
+    date?: true
+    time?: true
+    chiefComplaint?: true
+    doctorDiagnosis?: true
+    type?: true
+    consultationFee?: true
+    paymentStatus?: true
+    notes?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type OutpatientEncounterCountAggregateInputType = {
+    id?: true
+    patientId?: true
+    doctorId?: true
+    date?: true
+    time?: true
+    chiefComplaint?: true
+    doctorDiagnosis?: true
+    type?: true
+    consultationFee?: true
+    paymentStatus?: true
+    notes?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type OutpatientEncounterAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which OutpatientEncounter to aggregate.
+     */
+    where?: OutpatientEncounterWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of OutpatientEncounters to fetch.
+     */
+    orderBy?: OutpatientEncounterOrderByWithRelationInput | OutpatientEncounterOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: OutpatientEncounterWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` OutpatientEncounters from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` OutpatientEncounters.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned OutpatientEncounters
+    **/
+    _count?: true | OutpatientEncounterCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: OutpatientEncounterAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: OutpatientEncounterSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: OutpatientEncounterMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: OutpatientEncounterMaxAggregateInputType
+  }
+
+  export type GetOutpatientEncounterAggregateType<T extends OutpatientEncounterAggregateArgs> = {
+        [P in keyof T & keyof AggregateOutpatientEncounter]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateOutpatientEncounter[P]>
+      : GetScalarType<T[P], AggregateOutpatientEncounter[P]>
+  }
+
+
+
+
+  export type OutpatientEncounterGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: OutpatientEncounterWhereInput
+    orderBy?: OutpatientEncounterOrderByWithAggregationInput | OutpatientEncounterOrderByWithAggregationInput[]
+    by: OutpatientEncounterScalarFieldEnum[] | OutpatientEncounterScalarFieldEnum
+    having?: OutpatientEncounterScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: OutpatientEncounterCountAggregateInputType | true
+    _avg?: OutpatientEncounterAvgAggregateInputType
+    _sum?: OutpatientEncounterSumAggregateInputType
+    _min?: OutpatientEncounterMinAggregateInputType
+    _max?: OutpatientEncounterMaxAggregateInputType
+  }
+
+  export type OutpatientEncounterGroupByOutputType = {
+    id: string
+    patientId: string
+    doctorId: string
+    date: string
+    time: string
+    chiefComplaint: string
+    doctorDiagnosis: string | null
+    type: $Enums.OutpatientEncounterType
+    consultationFee: Decimal | null
+    paymentStatus: $Enums.OutpatientPaymentStatus
+    notes: string | null
+    createdAt: Date
+    updatedAt: Date
+    _count: OutpatientEncounterCountAggregateOutputType | null
+    _avg: OutpatientEncounterAvgAggregateOutputType | null
+    _sum: OutpatientEncounterSumAggregateOutputType | null
+    _min: OutpatientEncounterMinAggregateOutputType | null
+    _max: OutpatientEncounterMaxAggregateOutputType | null
+  }
+
+  type GetOutpatientEncounterGroupByPayload<T extends OutpatientEncounterGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<OutpatientEncounterGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof OutpatientEncounterGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], OutpatientEncounterGroupByOutputType[P]>
+            : GetScalarType<T[P], OutpatientEncounterGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type OutpatientEncounterSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    patientId?: boolean
+    doctorId?: boolean
+    date?: boolean
+    time?: boolean
+    chiefComplaint?: boolean
+    doctorDiagnosis?: boolean
+    type?: boolean
+    consultationFee?: boolean
+    paymentStatus?: boolean
+    notes?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    patient?: boolean | PatientDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["outpatientEncounter"]>
+
+  export type OutpatientEncounterSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    patientId?: boolean
+    doctorId?: boolean
+    date?: boolean
+    time?: boolean
+    chiefComplaint?: boolean
+    doctorDiagnosis?: boolean
+    type?: boolean
+    consultationFee?: boolean
+    paymentStatus?: boolean
+    notes?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    patient?: boolean | PatientDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["outpatientEncounter"]>
+
+  export type OutpatientEncounterSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    patientId?: boolean
+    doctorId?: boolean
+    date?: boolean
+    time?: boolean
+    chiefComplaint?: boolean
+    doctorDiagnosis?: boolean
+    type?: boolean
+    consultationFee?: boolean
+    paymentStatus?: boolean
+    notes?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    patient?: boolean | PatientDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["outpatientEncounter"]>
+
+  export type OutpatientEncounterSelectScalar = {
+    id?: boolean
+    patientId?: boolean
+    doctorId?: boolean
+    date?: boolean
+    time?: boolean
+    chiefComplaint?: boolean
+    doctorDiagnosis?: boolean
+    type?: boolean
+    consultationFee?: boolean
+    paymentStatus?: boolean
+    notes?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type OutpatientEncounterOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "patientId" | "doctorId" | "date" | "time" | "chiefComplaint" | "doctorDiagnosis" | "type" | "consultationFee" | "paymentStatus" | "notes" | "createdAt" | "updatedAt", ExtArgs["result"]["outpatientEncounter"]>
+  export type OutpatientEncounterInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    patient?: boolean | PatientDefaultArgs<ExtArgs>
+  }
+  export type OutpatientEncounterIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    patient?: boolean | PatientDefaultArgs<ExtArgs>
+  }
+  export type OutpatientEncounterIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    patient?: boolean | PatientDefaultArgs<ExtArgs>
+  }
+
+  export type $OutpatientEncounterPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "OutpatientEncounter"
+    objects: {
+      patient: Prisma.$PatientPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      patientId: string
+      doctorId: string
+      date: string
+      time: string
+      chiefComplaint: string
+      doctorDiagnosis: string | null
+      type: $Enums.OutpatientEncounterType
+      consultationFee: Prisma.Decimal | null
+      paymentStatus: $Enums.OutpatientPaymentStatus
+      notes: string | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["outpatientEncounter"]>
+    composites: {}
+  }
+
+  type OutpatientEncounterGetPayload<S extends boolean | null | undefined | OutpatientEncounterDefaultArgs> = $Result.GetResult<Prisma.$OutpatientEncounterPayload, S>
+
+  type OutpatientEncounterCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<OutpatientEncounterFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: OutpatientEncounterCountAggregateInputType | true
+    }
+
+  export interface OutpatientEncounterDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['OutpatientEncounter'], meta: { name: 'OutpatientEncounter' } }
+    /**
+     * Find zero or one OutpatientEncounter that matches the filter.
+     * @param {OutpatientEncounterFindUniqueArgs} args - Arguments to find a OutpatientEncounter
+     * @example
+     * // Get one OutpatientEncounter
+     * const outpatientEncounter = await prisma.outpatientEncounter.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends OutpatientEncounterFindUniqueArgs>(args: SelectSubset<T, OutpatientEncounterFindUniqueArgs<ExtArgs>>): Prisma__OutpatientEncounterClient<$Result.GetResult<Prisma.$OutpatientEncounterPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one OutpatientEncounter that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {OutpatientEncounterFindUniqueOrThrowArgs} args - Arguments to find a OutpatientEncounter
+     * @example
+     * // Get one OutpatientEncounter
+     * const outpatientEncounter = await prisma.outpatientEncounter.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends OutpatientEncounterFindUniqueOrThrowArgs>(args: SelectSubset<T, OutpatientEncounterFindUniqueOrThrowArgs<ExtArgs>>): Prisma__OutpatientEncounterClient<$Result.GetResult<Prisma.$OutpatientEncounterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first OutpatientEncounter that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OutpatientEncounterFindFirstArgs} args - Arguments to find a OutpatientEncounter
+     * @example
+     * // Get one OutpatientEncounter
+     * const outpatientEncounter = await prisma.outpatientEncounter.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends OutpatientEncounterFindFirstArgs>(args?: SelectSubset<T, OutpatientEncounterFindFirstArgs<ExtArgs>>): Prisma__OutpatientEncounterClient<$Result.GetResult<Prisma.$OutpatientEncounterPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first OutpatientEncounter that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OutpatientEncounterFindFirstOrThrowArgs} args - Arguments to find a OutpatientEncounter
+     * @example
+     * // Get one OutpatientEncounter
+     * const outpatientEncounter = await prisma.outpatientEncounter.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends OutpatientEncounterFindFirstOrThrowArgs>(args?: SelectSubset<T, OutpatientEncounterFindFirstOrThrowArgs<ExtArgs>>): Prisma__OutpatientEncounterClient<$Result.GetResult<Prisma.$OutpatientEncounterPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more OutpatientEncounters that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OutpatientEncounterFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all OutpatientEncounters
+     * const outpatientEncounters = await prisma.outpatientEncounter.findMany()
+     * 
+     * // Get first 10 OutpatientEncounters
+     * const outpatientEncounters = await prisma.outpatientEncounter.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const outpatientEncounterWithIdOnly = await prisma.outpatientEncounter.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends OutpatientEncounterFindManyArgs>(args?: SelectSubset<T, OutpatientEncounterFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OutpatientEncounterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a OutpatientEncounter.
+     * @param {OutpatientEncounterCreateArgs} args - Arguments to create a OutpatientEncounter.
+     * @example
+     * // Create one OutpatientEncounter
+     * const OutpatientEncounter = await prisma.outpatientEncounter.create({
+     *   data: {
+     *     // ... data to create a OutpatientEncounter
+     *   }
+     * })
+     * 
+     */
+    create<T extends OutpatientEncounterCreateArgs>(args: SelectSubset<T, OutpatientEncounterCreateArgs<ExtArgs>>): Prisma__OutpatientEncounterClient<$Result.GetResult<Prisma.$OutpatientEncounterPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many OutpatientEncounters.
+     * @param {OutpatientEncounterCreateManyArgs} args - Arguments to create many OutpatientEncounters.
+     * @example
+     * // Create many OutpatientEncounters
+     * const outpatientEncounter = await prisma.outpatientEncounter.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends OutpatientEncounterCreateManyArgs>(args?: SelectSubset<T, OutpatientEncounterCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many OutpatientEncounters and returns the data saved in the database.
+     * @param {OutpatientEncounterCreateManyAndReturnArgs} args - Arguments to create many OutpatientEncounters.
+     * @example
+     * // Create many OutpatientEncounters
+     * const outpatientEncounter = await prisma.outpatientEncounter.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many OutpatientEncounters and only return the `id`
+     * const outpatientEncounterWithIdOnly = await prisma.outpatientEncounter.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends OutpatientEncounterCreateManyAndReturnArgs>(args?: SelectSubset<T, OutpatientEncounterCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OutpatientEncounterPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a OutpatientEncounter.
+     * @param {OutpatientEncounterDeleteArgs} args - Arguments to delete one OutpatientEncounter.
+     * @example
+     * // Delete one OutpatientEncounter
+     * const OutpatientEncounter = await prisma.outpatientEncounter.delete({
+     *   where: {
+     *     // ... filter to delete one OutpatientEncounter
+     *   }
+     * })
+     * 
+     */
+    delete<T extends OutpatientEncounterDeleteArgs>(args: SelectSubset<T, OutpatientEncounterDeleteArgs<ExtArgs>>): Prisma__OutpatientEncounterClient<$Result.GetResult<Prisma.$OutpatientEncounterPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one OutpatientEncounter.
+     * @param {OutpatientEncounterUpdateArgs} args - Arguments to update one OutpatientEncounter.
+     * @example
+     * // Update one OutpatientEncounter
+     * const outpatientEncounter = await prisma.outpatientEncounter.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends OutpatientEncounterUpdateArgs>(args: SelectSubset<T, OutpatientEncounterUpdateArgs<ExtArgs>>): Prisma__OutpatientEncounterClient<$Result.GetResult<Prisma.$OutpatientEncounterPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more OutpatientEncounters.
+     * @param {OutpatientEncounterDeleteManyArgs} args - Arguments to filter OutpatientEncounters to delete.
+     * @example
+     * // Delete a few OutpatientEncounters
+     * const { count } = await prisma.outpatientEncounter.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends OutpatientEncounterDeleteManyArgs>(args?: SelectSubset<T, OutpatientEncounterDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more OutpatientEncounters.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OutpatientEncounterUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many OutpatientEncounters
+     * const outpatientEncounter = await prisma.outpatientEncounter.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends OutpatientEncounterUpdateManyArgs>(args: SelectSubset<T, OutpatientEncounterUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more OutpatientEncounters and returns the data updated in the database.
+     * @param {OutpatientEncounterUpdateManyAndReturnArgs} args - Arguments to update many OutpatientEncounters.
+     * @example
+     * // Update many OutpatientEncounters
+     * const outpatientEncounter = await prisma.outpatientEncounter.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more OutpatientEncounters and only return the `id`
+     * const outpatientEncounterWithIdOnly = await prisma.outpatientEncounter.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends OutpatientEncounterUpdateManyAndReturnArgs>(args: SelectSubset<T, OutpatientEncounterUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OutpatientEncounterPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one OutpatientEncounter.
+     * @param {OutpatientEncounterUpsertArgs} args - Arguments to update or create a OutpatientEncounter.
+     * @example
+     * // Update or create a OutpatientEncounter
+     * const outpatientEncounter = await prisma.outpatientEncounter.upsert({
+     *   create: {
+     *     // ... data to create a OutpatientEncounter
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the OutpatientEncounter we want to update
+     *   }
+     * })
+     */
+    upsert<T extends OutpatientEncounterUpsertArgs>(args: SelectSubset<T, OutpatientEncounterUpsertArgs<ExtArgs>>): Prisma__OutpatientEncounterClient<$Result.GetResult<Prisma.$OutpatientEncounterPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of OutpatientEncounters.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OutpatientEncounterCountArgs} args - Arguments to filter OutpatientEncounters to count.
+     * @example
+     * // Count the number of OutpatientEncounters
+     * const count = await prisma.outpatientEncounter.count({
+     *   where: {
+     *     // ... the filter for the OutpatientEncounters we want to count
+     *   }
+     * })
+    **/
+    count<T extends OutpatientEncounterCountArgs>(
+      args?: Subset<T, OutpatientEncounterCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], OutpatientEncounterCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a OutpatientEncounter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OutpatientEncounterAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends OutpatientEncounterAggregateArgs>(args: Subset<T, OutpatientEncounterAggregateArgs>): Prisma.PrismaPromise<GetOutpatientEncounterAggregateType<T>>
+
+    /**
+     * Group by OutpatientEncounter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OutpatientEncounterGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends OutpatientEncounterGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: OutpatientEncounterGroupByArgs['orderBy'] }
+        : { orderBy?: OutpatientEncounterGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, OutpatientEncounterGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetOutpatientEncounterGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the OutpatientEncounter model
+   */
+  readonly fields: OutpatientEncounterFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for OutpatientEncounter.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__OutpatientEncounterClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    patient<T extends PatientDefaultArgs<ExtArgs> = {}>(args?: Subset<T, PatientDefaultArgs<ExtArgs>>): Prisma__PatientClient<$Result.GetResult<Prisma.$PatientPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the OutpatientEncounter model
+   */
+  interface OutpatientEncounterFieldRefs {
+    readonly id: FieldRef<"OutpatientEncounter", 'String'>
+    readonly patientId: FieldRef<"OutpatientEncounter", 'String'>
+    readonly doctorId: FieldRef<"OutpatientEncounter", 'String'>
+    readonly date: FieldRef<"OutpatientEncounter", 'String'>
+    readonly time: FieldRef<"OutpatientEncounter", 'String'>
+    readonly chiefComplaint: FieldRef<"OutpatientEncounter", 'String'>
+    readonly doctorDiagnosis: FieldRef<"OutpatientEncounter", 'String'>
+    readonly type: FieldRef<"OutpatientEncounter", 'OutpatientEncounterType'>
+    readonly consultationFee: FieldRef<"OutpatientEncounter", 'Decimal'>
+    readonly paymentStatus: FieldRef<"OutpatientEncounter", 'OutpatientPaymentStatus'>
+    readonly notes: FieldRef<"OutpatientEncounter", 'String'>
+    readonly createdAt: FieldRef<"OutpatientEncounter", 'DateTime'>
+    readonly updatedAt: FieldRef<"OutpatientEncounter", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * OutpatientEncounter findUnique
+   */
+  export type OutpatientEncounterFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OutpatientEncounter
+     */
+    select?: OutpatientEncounterSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OutpatientEncounter
+     */
+    omit?: OutpatientEncounterOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OutpatientEncounterInclude<ExtArgs> | null
+    /**
+     * Filter, which OutpatientEncounter to fetch.
+     */
+    where: OutpatientEncounterWhereUniqueInput
+  }
+
+  /**
+   * OutpatientEncounter findUniqueOrThrow
+   */
+  export type OutpatientEncounterFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OutpatientEncounter
+     */
+    select?: OutpatientEncounterSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OutpatientEncounter
+     */
+    omit?: OutpatientEncounterOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OutpatientEncounterInclude<ExtArgs> | null
+    /**
+     * Filter, which OutpatientEncounter to fetch.
+     */
+    where: OutpatientEncounterWhereUniqueInput
+  }
+
+  /**
+   * OutpatientEncounter findFirst
+   */
+  export type OutpatientEncounterFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OutpatientEncounter
+     */
+    select?: OutpatientEncounterSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OutpatientEncounter
+     */
+    omit?: OutpatientEncounterOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OutpatientEncounterInclude<ExtArgs> | null
+    /**
+     * Filter, which OutpatientEncounter to fetch.
+     */
+    where?: OutpatientEncounterWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of OutpatientEncounters to fetch.
+     */
+    orderBy?: OutpatientEncounterOrderByWithRelationInput | OutpatientEncounterOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for OutpatientEncounters.
+     */
+    cursor?: OutpatientEncounterWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` OutpatientEncounters from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` OutpatientEncounters.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of OutpatientEncounters.
+     */
+    distinct?: OutpatientEncounterScalarFieldEnum | OutpatientEncounterScalarFieldEnum[]
+  }
+
+  /**
+   * OutpatientEncounter findFirstOrThrow
+   */
+  export type OutpatientEncounterFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OutpatientEncounter
+     */
+    select?: OutpatientEncounterSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OutpatientEncounter
+     */
+    omit?: OutpatientEncounterOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OutpatientEncounterInclude<ExtArgs> | null
+    /**
+     * Filter, which OutpatientEncounter to fetch.
+     */
+    where?: OutpatientEncounterWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of OutpatientEncounters to fetch.
+     */
+    orderBy?: OutpatientEncounterOrderByWithRelationInput | OutpatientEncounterOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for OutpatientEncounters.
+     */
+    cursor?: OutpatientEncounterWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` OutpatientEncounters from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` OutpatientEncounters.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of OutpatientEncounters.
+     */
+    distinct?: OutpatientEncounterScalarFieldEnum | OutpatientEncounterScalarFieldEnum[]
+  }
+
+  /**
+   * OutpatientEncounter findMany
+   */
+  export type OutpatientEncounterFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OutpatientEncounter
+     */
+    select?: OutpatientEncounterSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OutpatientEncounter
+     */
+    omit?: OutpatientEncounterOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OutpatientEncounterInclude<ExtArgs> | null
+    /**
+     * Filter, which OutpatientEncounters to fetch.
+     */
+    where?: OutpatientEncounterWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of OutpatientEncounters to fetch.
+     */
+    orderBy?: OutpatientEncounterOrderByWithRelationInput | OutpatientEncounterOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing OutpatientEncounters.
+     */
+    cursor?: OutpatientEncounterWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` OutpatientEncounters from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` OutpatientEncounters.
+     */
+    skip?: number
+    distinct?: OutpatientEncounterScalarFieldEnum | OutpatientEncounterScalarFieldEnum[]
+  }
+
+  /**
+   * OutpatientEncounter create
+   */
+  export type OutpatientEncounterCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OutpatientEncounter
+     */
+    select?: OutpatientEncounterSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OutpatientEncounter
+     */
+    omit?: OutpatientEncounterOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OutpatientEncounterInclude<ExtArgs> | null
+    /**
+     * The data needed to create a OutpatientEncounter.
+     */
+    data: XOR<OutpatientEncounterCreateInput, OutpatientEncounterUncheckedCreateInput>
+  }
+
+  /**
+   * OutpatientEncounter createMany
+   */
+  export type OutpatientEncounterCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many OutpatientEncounters.
+     */
+    data: OutpatientEncounterCreateManyInput | OutpatientEncounterCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * OutpatientEncounter createManyAndReturn
+   */
+  export type OutpatientEncounterCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OutpatientEncounter
+     */
+    select?: OutpatientEncounterSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the OutpatientEncounter
+     */
+    omit?: OutpatientEncounterOmit<ExtArgs> | null
+    /**
+     * The data used to create many OutpatientEncounters.
+     */
+    data: OutpatientEncounterCreateManyInput | OutpatientEncounterCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OutpatientEncounterIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * OutpatientEncounter update
+   */
+  export type OutpatientEncounterUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OutpatientEncounter
+     */
+    select?: OutpatientEncounterSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OutpatientEncounter
+     */
+    omit?: OutpatientEncounterOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OutpatientEncounterInclude<ExtArgs> | null
+    /**
+     * The data needed to update a OutpatientEncounter.
+     */
+    data: XOR<OutpatientEncounterUpdateInput, OutpatientEncounterUncheckedUpdateInput>
+    /**
+     * Choose, which OutpatientEncounter to update.
+     */
+    where: OutpatientEncounterWhereUniqueInput
+  }
+
+  /**
+   * OutpatientEncounter updateMany
+   */
+  export type OutpatientEncounterUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update OutpatientEncounters.
+     */
+    data: XOR<OutpatientEncounterUpdateManyMutationInput, OutpatientEncounterUncheckedUpdateManyInput>
+    /**
+     * Filter which OutpatientEncounters to update
+     */
+    where?: OutpatientEncounterWhereInput
+    /**
+     * Limit how many OutpatientEncounters to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * OutpatientEncounter updateManyAndReturn
+   */
+  export type OutpatientEncounterUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OutpatientEncounter
+     */
+    select?: OutpatientEncounterSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the OutpatientEncounter
+     */
+    omit?: OutpatientEncounterOmit<ExtArgs> | null
+    /**
+     * The data used to update OutpatientEncounters.
+     */
+    data: XOR<OutpatientEncounterUpdateManyMutationInput, OutpatientEncounterUncheckedUpdateManyInput>
+    /**
+     * Filter which OutpatientEncounters to update
+     */
+    where?: OutpatientEncounterWhereInput
+    /**
+     * Limit how many OutpatientEncounters to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OutpatientEncounterIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * OutpatientEncounter upsert
+   */
+  export type OutpatientEncounterUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OutpatientEncounter
+     */
+    select?: OutpatientEncounterSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OutpatientEncounter
+     */
+    omit?: OutpatientEncounterOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OutpatientEncounterInclude<ExtArgs> | null
+    /**
+     * The filter to search for the OutpatientEncounter to update in case it exists.
+     */
+    where: OutpatientEncounterWhereUniqueInput
+    /**
+     * In case the OutpatientEncounter found by the `where` argument doesn't exist, create a new OutpatientEncounter with this data.
+     */
+    create: XOR<OutpatientEncounterCreateInput, OutpatientEncounterUncheckedCreateInput>
+    /**
+     * In case the OutpatientEncounter was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<OutpatientEncounterUpdateInput, OutpatientEncounterUncheckedUpdateInput>
+  }
+
+  /**
+   * OutpatientEncounter delete
+   */
+  export type OutpatientEncounterDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OutpatientEncounter
+     */
+    select?: OutpatientEncounterSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OutpatientEncounter
+     */
+    omit?: OutpatientEncounterOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OutpatientEncounterInclude<ExtArgs> | null
+    /**
+     * Filter which OutpatientEncounter to delete.
+     */
+    where: OutpatientEncounterWhereUniqueInput
+  }
+
+  /**
+   * OutpatientEncounter deleteMany
+   */
+  export type OutpatientEncounterDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which OutpatientEncounters to delete
+     */
+    where?: OutpatientEncounterWhereInput
+    /**
+     * Limit how many OutpatientEncounters to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * OutpatientEncounter without action
+   */
+  export type OutpatientEncounterDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OutpatientEncounter
+     */
+    select?: OutpatientEncounterSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OutpatientEncounter
+     */
+    omit?: OutpatientEncounterOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OutpatientEncounterInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model InpatientEncounter
+   */
+
+  export type AggregateInpatientEncounter = {
+    _count: InpatientEncounterCountAggregateOutputType | null
+    _min: InpatientEncounterMinAggregateOutputType | null
+    _max: InpatientEncounterMaxAggregateOutputType | null
+  }
+
+  export type InpatientEncounterMinAggregateOutputType = {
+    id: string | null
+    patientId: string | null
+    doctorId: string | null
+    admittedBy: string | null
+    date: string | null
+    time: string | null
+    chiefComplaint: string | null
+    doctorDiagnosis: string | null
+    triage: $Enums.InpatientTriage | null
+    disposition: $Enums.InpatientDisposition | null
+    dispositionDate: string | null
+    dispositionTime: string | null
+    dispositionNote: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type InpatientEncounterMaxAggregateOutputType = {
+    id: string | null
+    patientId: string | null
+    doctorId: string | null
+    admittedBy: string | null
+    date: string | null
+    time: string | null
+    chiefComplaint: string | null
+    doctorDiagnosis: string | null
+    triage: $Enums.InpatientTriage | null
+    disposition: $Enums.InpatientDisposition | null
+    dispositionDate: string | null
+    dispositionTime: string | null
+    dispositionNote: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type InpatientEncounterCountAggregateOutputType = {
+    id: number
+    patientId: number
+    doctorId: number
+    admittedBy: number
+    date: number
+    time: number
+    chiefComplaint: number
+    doctorDiagnosis: number
+    triage: number
+    disposition: number
+    dispositionDate: number
+    dispositionTime: number
+    dispositionNote: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type InpatientEncounterMinAggregateInputType = {
+    id?: true
+    patientId?: true
+    doctorId?: true
+    admittedBy?: true
+    date?: true
+    time?: true
+    chiefComplaint?: true
+    doctorDiagnosis?: true
+    triage?: true
+    disposition?: true
+    dispositionDate?: true
+    dispositionTime?: true
+    dispositionNote?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type InpatientEncounterMaxAggregateInputType = {
+    id?: true
+    patientId?: true
+    doctorId?: true
+    admittedBy?: true
+    date?: true
+    time?: true
+    chiefComplaint?: true
+    doctorDiagnosis?: true
+    triage?: true
+    disposition?: true
+    dispositionDate?: true
+    dispositionTime?: true
+    dispositionNote?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type InpatientEncounterCountAggregateInputType = {
+    id?: true
+    patientId?: true
+    doctorId?: true
+    admittedBy?: true
+    date?: true
+    time?: true
+    chiefComplaint?: true
+    doctorDiagnosis?: true
+    triage?: true
+    disposition?: true
+    dispositionDate?: true
+    dispositionTime?: true
+    dispositionNote?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type InpatientEncounterAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which InpatientEncounter to aggregate.
+     */
+    where?: InpatientEncounterWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of InpatientEncounters to fetch.
+     */
+    orderBy?: InpatientEncounterOrderByWithRelationInput | InpatientEncounterOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: InpatientEncounterWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` InpatientEncounters from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` InpatientEncounters.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned InpatientEncounters
+    **/
+    _count?: true | InpatientEncounterCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: InpatientEncounterMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: InpatientEncounterMaxAggregateInputType
+  }
+
+  export type GetInpatientEncounterAggregateType<T extends InpatientEncounterAggregateArgs> = {
+        [P in keyof T & keyof AggregateInpatientEncounter]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateInpatientEncounter[P]>
+      : GetScalarType<T[P], AggregateInpatientEncounter[P]>
+  }
+
+
+
+
+  export type InpatientEncounterGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: InpatientEncounterWhereInput
+    orderBy?: InpatientEncounterOrderByWithAggregationInput | InpatientEncounterOrderByWithAggregationInput[]
+    by: InpatientEncounterScalarFieldEnum[] | InpatientEncounterScalarFieldEnum
+    having?: InpatientEncounterScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: InpatientEncounterCountAggregateInputType | true
+    _min?: InpatientEncounterMinAggregateInputType
+    _max?: InpatientEncounterMaxAggregateInputType
+  }
+
+  export type InpatientEncounterGroupByOutputType = {
+    id: string
+    patientId: string
+    doctorId: string
+    admittedBy: string | null
+    date: string
+    time: string
+    chiefComplaint: string
+    doctorDiagnosis: string | null
+    triage: $Enums.InpatientTriage
+    disposition: $Enums.InpatientDisposition
+    dispositionDate: string | null
+    dispositionTime: string | null
+    dispositionNote: string | null
+    createdAt: Date
+    updatedAt: Date
+    _count: InpatientEncounterCountAggregateOutputType | null
+    _min: InpatientEncounterMinAggregateOutputType | null
+    _max: InpatientEncounterMaxAggregateOutputType | null
+  }
+
+  type GetInpatientEncounterGroupByPayload<T extends InpatientEncounterGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<InpatientEncounterGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof InpatientEncounterGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], InpatientEncounterGroupByOutputType[P]>
+            : GetScalarType<T[P], InpatientEncounterGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type InpatientEncounterSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    patientId?: boolean
+    doctorId?: boolean
+    admittedBy?: boolean
+    date?: boolean
+    time?: boolean
+    chiefComplaint?: boolean
+    doctorDiagnosis?: boolean
+    triage?: boolean
+    disposition?: boolean
+    dispositionDate?: boolean
+    dispositionTime?: boolean
+    dispositionNote?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    patient?: boolean | PatientDefaultArgs<ExtArgs>
+    charts?: boolean | InpatientEncounter$chartsArgs<ExtArgs>
+    orders?: boolean | InpatientEncounter$ordersArgs<ExtArgs>
+    _count?: boolean | InpatientEncounterCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["inpatientEncounter"]>
+
+  export type InpatientEncounterSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    patientId?: boolean
+    doctorId?: boolean
+    admittedBy?: boolean
+    date?: boolean
+    time?: boolean
+    chiefComplaint?: boolean
+    doctorDiagnosis?: boolean
+    triage?: boolean
+    disposition?: boolean
+    dispositionDate?: boolean
+    dispositionTime?: boolean
+    dispositionNote?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    patient?: boolean | PatientDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["inpatientEncounter"]>
+
+  export type InpatientEncounterSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    patientId?: boolean
+    doctorId?: boolean
+    admittedBy?: boolean
+    date?: boolean
+    time?: boolean
+    chiefComplaint?: boolean
+    doctorDiagnosis?: boolean
+    triage?: boolean
+    disposition?: boolean
+    dispositionDate?: boolean
+    dispositionTime?: boolean
+    dispositionNote?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    patient?: boolean | PatientDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["inpatientEncounter"]>
+
+  export type InpatientEncounterSelectScalar = {
+    id?: boolean
+    patientId?: boolean
+    doctorId?: boolean
+    admittedBy?: boolean
+    date?: boolean
+    time?: boolean
+    chiefComplaint?: boolean
+    doctorDiagnosis?: boolean
+    triage?: boolean
+    disposition?: boolean
+    dispositionDate?: boolean
+    dispositionTime?: boolean
+    dispositionNote?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type InpatientEncounterOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "patientId" | "doctorId" | "admittedBy" | "date" | "time" | "chiefComplaint" | "doctorDiagnosis" | "triage" | "disposition" | "dispositionDate" | "dispositionTime" | "dispositionNote" | "createdAt" | "updatedAt", ExtArgs["result"]["inpatientEncounter"]>
+  export type InpatientEncounterInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    patient?: boolean | PatientDefaultArgs<ExtArgs>
+    charts?: boolean | InpatientEncounter$chartsArgs<ExtArgs>
+    orders?: boolean | InpatientEncounter$ordersArgs<ExtArgs>
+    _count?: boolean | InpatientEncounterCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type InpatientEncounterIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    patient?: boolean | PatientDefaultArgs<ExtArgs>
+  }
+  export type InpatientEncounterIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    patient?: boolean | PatientDefaultArgs<ExtArgs>
+  }
+
+  export type $InpatientEncounterPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "InpatientEncounter"
+    objects: {
+      patient: Prisma.$PatientPayload<ExtArgs>
+      charts: Prisma.$InpatientEncounterChartPayload<ExtArgs>[]
+      orders: Prisma.$InpatientEncounterOrderPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      patientId: string
+      doctorId: string
+      admittedBy: string | null
+      date: string
+      time: string
+      chiefComplaint: string
+      doctorDiagnosis: string | null
+      triage: $Enums.InpatientTriage
+      disposition: $Enums.InpatientDisposition
+      dispositionDate: string | null
+      dispositionTime: string | null
+      dispositionNote: string | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["inpatientEncounter"]>
+    composites: {}
+  }
+
+  type InpatientEncounterGetPayload<S extends boolean | null | undefined | InpatientEncounterDefaultArgs> = $Result.GetResult<Prisma.$InpatientEncounterPayload, S>
+
+  type InpatientEncounterCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<InpatientEncounterFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: InpatientEncounterCountAggregateInputType | true
+    }
+
+  export interface InpatientEncounterDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['InpatientEncounter'], meta: { name: 'InpatientEncounter' } }
+    /**
+     * Find zero or one InpatientEncounter that matches the filter.
+     * @param {InpatientEncounterFindUniqueArgs} args - Arguments to find a InpatientEncounter
+     * @example
+     * // Get one InpatientEncounter
+     * const inpatientEncounter = await prisma.inpatientEncounter.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends InpatientEncounterFindUniqueArgs>(args: SelectSubset<T, InpatientEncounterFindUniqueArgs<ExtArgs>>): Prisma__InpatientEncounterClient<$Result.GetResult<Prisma.$InpatientEncounterPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one InpatientEncounter that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {InpatientEncounterFindUniqueOrThrowArgs} args - Arguments to find a InpatientEncounter
+     * @example
+     * // Get one InpatientEncounter
+     * const inpatientEncounter = await prisma.inpatientEncounter.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends InpatientEncounterFindUniqueOrThrowArgs>(args: SelectSubset<T, InpatientEncounterFindUniqueOrThrowArgs<ExtArgs>>): Prisma__InpatientEncounterClient<$Result.GetResult<Prisma.$InpatientEncounterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first InpatientEncounter that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InpatientEncounterFindFirstArgs} args - Arguments to find a InpatientEncounter
+     * @example
+     * // Get one InpatientEncounter
+     * const inpatientEncounter = await prisma.inpatientEncounter.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends InpatientEncounterFindFirstArgs>(args?: SelectSubset<T, InpatientEncounterFindFirstArgs<ExtArgs>>): Prisma__InpatientEncounterClient<$Result.GetResult<Prisma.$InpatientEncounterPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first InpatientEncounter that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InpatientEncounterFindFirstOrThrowArgs} args - Arguments to find a InpatientEncounter
+     * @example
+     * // Get one InpatientEncounter
+     * const inpatientEncounter = await prisma.inpatientEncounter.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends InpatientEncounterFindFirstOrThrowArgs>(args?: SelectSubset<T, InpatientEncounterFindFirstOrThrowArgs<ExtArgs>>): Prisma__InpatientEncounterClient<$Result.GetResult<Prisma.$InpatientEncounterPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more InpatientEncounters that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InpatientEncounterFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all InpatientEncounters
+     * const inpatientEncounters = await prisma.inpatientEncounter.findMany()
+     * 
+     * // Get first 10 InpatientEncounters
+     * const inpatientEncounters = await prisma.inpatientEncounter.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const inpatientEncounterWithIdOnly = await prisma.inpatientEncounter.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends InpatientEncounterFindManyArgs>(args?: SelectSubset<T, InpatientEncounterFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InpatientEncounterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a InpatientEncounter.
+     * @param {InpatientEncounterCreateArgs} args - Arguments to create a InpatientEncounter.
+     * @example
+     * // Create one InpatientEncounter
+     * const InpatientEncounter = await prisma.inpatientEncounter.create({
+     *   data: {
+     *     // ... data to create a InpatientEncounter
+     *   }
+     * })
+     * 
+     */
+    create<T extends InpatientEncounterCreateArgs>(args: SelectSubset<T, InpatientEncounterCreateArgs<ExtArgs>>): Prisma__InpatientEncounterClient<$Result.GetResult<Prisma.$InpatientEncounterPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many InpatientEncounters.
+     * @param {InpatientEncounterCreateManyArgs} args - Arguments to create many InpatientEncounters.
+     * @example
+     * // Create many InpatientEncounters
+     * const inpatientEncounter = await prisma.inpatientEncounter.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends InpatientEncounterCreateManyArgs>(args?: SelectSubset<T, InpatientEncounterCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many InpatientEncounters and returns the data saved in the database.
+     * @param {InpatientEncounterCreateManyAndReturnArgs} args - Arguments to create many InpatientEncounters.
+     * @example
+     * // Create many InpatientEncounters
+     * const inpatientEncounter = await prisma.inpatientEncounter.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many InpatientEncounters and only return the `id`
+     * const inpatientEncounterWithIdOnly = await prisma.inpatientEncounter.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends InpatientEncounterCreateManyAndReturnArgs>(args?: SelectSubset<T, InpatientEncounterCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InpatientEncounterPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a InpatientEncounter.
+     * @param {InpatientEncounterDeleteArgs} args - Arguments to delete one InpatientEncounter.
+     * @example
+     * // Delete one InpatientEncounter
+     * const InpatientEncounter = await prisma.inpatientEncounter.delete({
+     *   where: {
+     *     // ... filter to delete one InpatientEncounter
+     *   }
+     * })
+     * 
+     */
+    delete<T extends InpatientEncounterDeleteArgs>(args: SelectSubset<T, InpatientEncounterDeleteArgs<ExtArgs>>): Prisma__InpatientEncounterClient<$Result.GetResult<Prisma.$InpatientEncounterPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one InpatientEncounter.
+     * @param {InpatientEncounterUpdateArgs} args - Arguments to update one InpatientEncounter.
+     * @example
+     * // Update one InpatientEncounter
+     * const inpatientEncounter = await prisma.inpatientEncounter.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends InpatientEncounterUpdateArgs>(args: SelectSubset<T, InpatientEncounterUpdateArgs<ExtArgs>>): Prisma__InpatientEncounterClient<$Result.GetResult<Prisma.$InpatientEncounterPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more InpatientEncounters.
+     * @param {InpatientEncounterDeleteManyArgs} args - Arguments to filter InpatientEncounters to delete.
+     * @example
+     * // Delete a few InpatientEncounters
+     * const { count } = await prisma.inpatientEncounter.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends InpatientEncounterDeleteManyArgs>(args?: SelectSubset<T, InpatientEncounterDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more InpatientEncounters.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InpatientEncounterUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many InpatientEncounters
+     * const inpatientEncounter = await prisma.inpatientEncounter.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends InpatientEncounterUpdateManyArgs>(args: SelectSubset<T, InpatientEncounterUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more InpatientEncounters and returns the data updated in the database.
+     * @param {InpatientEncounterUpdateManyAndReturnArgs} args - Arguments to update many InpatientEncounters.
+     * @example
+     * // Update many InpatientEncounters
+     * const inpatientEncounter = await prisma.inpatientEncounter.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more InpatientEncounters and only return the `id`
+     * const inpatientEncounterWithIdOnly = await prisma.inpatientEncounter.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends InpatientEncounterUpdateManyAndReturnArgs>(args: SelectSubset<T, InpatientEncounterUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InpatientEncounterPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one InpatientEncounter.
+     * @param {InpatientEncounterUpsertArgs} args - Arguments to update or create a InpatientEncounter.
+     * @example
+     * // Update or create a InpatientEncounter
+     * const inpatientEncounter = await prisma.inpatientEncounter.upsert({
+     *   create: {
+     *     // ... data to create a InpatientEncounter
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the InpatientEncounter we want to update
+     *   }
+     * })
+     */
+    upsert<T extends InpatientEncounterUpsertArgs>(args: SelectSubset<T, InpatientEncounterUpsertArgs<ExtArgs>>): Prisma__InpatientEncounterClient<$Result.GetResult<Prisma.$InpatientEncounterPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of InpatientEncounters.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InpatientEncounterCountArgs} args - Arguments to filter InpatientEncounters to count.
+     * @example
+     * // Count the number of InpatientEncounters
+     * const count = await prisma.inpatientEncounter.count({
+     *   where: {
+     *     // ... the filter for the InpatientEncounters we want to count
+     *   }
+     * })
+    **/
+    count<T extends InpatientEncounterCountArgs>(
+      args?: Subset<T, InpatientEncounterCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], InpatientEncounterCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a InpatientEncounter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InpatientEncounterAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends InpatientEncounterAggregateArgs>(args: Subset<T, InpatientEncounterAggregateArgs>): Prisma.PrismaPromise<GetInpatientEncounterAggregateType<T>>
+
+    /**
+     * Group by InpatientEncounter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InpatientEncounterGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends InpatientEncounterGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: InpatientEncounterGroupByArgs['orderBy'] }
+        : { orderBy?: InpatientEncounterGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, InpatientEncounterGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetInpatientEncounterGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the InpatientEncounter model
+   */
+  readonly fields: InpatientEncounterFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for InpatientEncounter.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__InpatientEncounterClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    patient<T extends PatientDefaultArgs<ExtArgs> = {}>(args?: Subset<T, PatientDefaultArgs<ExtArgs>>): Prisma__PatientClient<$Result.GetResult<Prisma.$PatientPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    charts<T extends InpatientEncounter$chartsArgs<ExtArgs> = {}>(args?: Subset<T, InpatientEncounter$chartsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InpatientEncounterChartPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    orders<T extends InpatientEncounter$ordersArgs<ExtArgs> = {}>(args?: Subset<T, InpatientEncounter$ordersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InpatientEncounterOrderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the InpatientEncounter model
+   */
+  interface InpatientEncounterFieldRefs {
+    readonly id: FieldRef<"InpatientEncounter", 'String'>
+    readonly patientId: FieldRef<"InpatientEncounter", 'String'>
+    readonly doctorId: FieldRef<"InpatientEncounter", 'String'>
+    readonly admittedBy: FieldRef<"InpatientEncounter", 'String'>
+    readonly date: FieldRef<"InpatientEncounter", 'String'>
+    readonly time: FieldRef<"InpatientEncounter", 'String'>
+    readonly chiefComplaint: FieldRef<"InpatientEncounter", 'String'>
+    readonly doctorDiagnosis: FieldRef<"InpatientEncounter", 'String'>
+    readonly triage: FieldRef<"InpatientEncounter", 'InpatientTriage'>
+    readonly disposition: FieldRef<"InpatientEncounter", 'InpatientDisposition'>
+    readonly dispositionDate: FieldRef<"InpatientEncounter", 'String'>
+    readonly dispositionTime: FieldRef<"InpatientEncounter", 'String'>
+    readonly dispositionNote: FieldRef<"InpatientEncounter", 'String'>
+    readonly createdAt: FieldRef<"InpatientEncounter", 'DateTime'>
+    readonly updatedAt: FieldRef<"InpatientEncounter", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * InpatientEncounter findUnique
+   */
+  export type InpatientEncounterFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InpatientEncounter
+     */
+    select?: InpatientEncounterSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InpatientEncounter
+     */
+    omit?: InpatientEncounterOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InpatientEncounterInclude<ExtArgs> | null
+    /**
+     * Filter, which InpatientEncounter to fetch.
+     */
+    where: InpatientEncounterWhereUniqueInput
+  }
+
+  /**
+   * InpatientEncounter findUniqueOrThrow
+   */
+  export type InpatientEncounterFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InpatientEncounter
+     */
+    select?: InpatientEncounterSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InpatientEncounter
+     */
+    omit?: InpatientEncounterOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InpatientEncounterInclude<ExtArgs> | null
+    /**
+     * Filter, which InpatientEncounter to fetch.
+     */
+    where: InpatientEncounterWhereUniqueInput
+  }
+
+  /**
+   * InpatientEncounter findFirst
+   */
+  export type InpatientEncounterFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InpatientEncounter
+     */
+    select?: InpatientEncounterSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InpatientEncounter
+     */
+    omit?: InpatientEncounterOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InpatientEncounterInclude<ExtArgs> | null
+    /**
+     * Filter, which InpatientEncounter to fetch.
+     */
+    where?: InpatientEncounterWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of InpatientEncounters to fetch.
+     */
+    orderBy?: InpatientEncounterOrderByWithRelationInput | InpatientEncounterOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for InpatientEncounters.
+     */
+    cursor?: InpatientEncounterWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` InpatientEncounters from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` InpatientEncounters.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of InpatientEncounters.
+     */
+    distinct?: InpatientEncounterScalarFieldEnum | InpatientEncounterScalarFieldEnum[]
+  }
+
+  /**
+   * InpatientEncounter findFirstOrThrow
+   */
+  export type InpatientEncounterFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InpatientEncounter
+     */
+    select?: InpatientEncounterSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InpatientEncounter
+     */
+    omit?: InpatientEncounterOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InpatientEncounterInclude<ExtArgs> | null
+    /**
+     * Filter, which InpatientEncounter to fetch.
+     */
+    where?: InpatientEncounterWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of InpatientEncounters to fetch.
+     */
+    orderBy?: InpatientEncounterOrderByWithRelationInput | InpatientEncounterOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for InpatientEncounters.
+     */
+    cursor?: InpatientEncounterWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` InpatientEncounters from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` InpatientEncounters.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of InpatientEncounters.
+     */
+    distinct?: InpatientEncounterScalarFieldEnum | InpatientEncounterScalarFieldEnum[]
+  }
+
+  /**
+   * InpatientEncounter findMany
+   */
+  export type InpatientEncounterFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InpatientEncounter
+     */
+    select?: InpatientEncounterSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InpatientEncounter
+     */
+    omit?: InpatientEncounterOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InpatientEncounterInclude<ExtArgs> | null
+    /**
+     * Filter, which InpatientEncounters to fetch.
+     */
+    where?: InpatientEncounterWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of InpatientEncounters to fetch.
+     */
+    orderBy?: InpatientEncounterOrderByWithRelationInput | InpatientEncounterOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing InpatientEncounters.
+     */
+    cursor?: InpatientEncounterWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` InpatientEncounters from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` InpatientEncounters.
+     */
+    skip?: number
+    distinct?: InpatientEncounterScalarFieldEnum | InpatientEncounterScalarFieldEnum[]
+  }
+
+  /**
+   * InpatientEncounter create
+   */
+  export type InpatientEncounterCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InpatientEncounter
+     */
+    select?: InpatientEncounterSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InpatientEncounter
+     */
+    omit?: InpatientEncounterOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InpatientEncounterInclude<ExtArgs> | null
+    /**
+     * The data needed to create a InpatientEncounter.
+     */
+    data: XOR<InpatientEncounterCreateInput, InpatientEncounterUncheckedCreateInput>
+  }
+
+  /**
+   * InpatientEncounter createMany
+   */
+  export type InpatientEncounterCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many InpatientEncounters.
+     */
+    data: InpatientEncounterCreateManyInput | InpatientEncounterCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * InpatientEncounter createManyAndReturn
+   */
+  export type InpatientEncounterCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InpatientEncounter
+     */
+    select?: InpatientEncounterSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the InpatientEncounter
+     */
+    omit?: InpatientEncounterOmit<ExtArgs> | null
+    /**
+     * The data used to create many InpatientEncounters.
+     */
+    data: InpatientEncounterCreateManyInput | InpatientEncounterCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InpatientEncounterIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * InpatientEncounter update
+   */
+  export type InpatientEncounterUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InpatientEncounter
+     */
+    select?: InpatientEncounterSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InpatientEncounter
+     */
+    omit?: InpatientEncounterOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InpatientEncounterInclude<ExtArgs> | null
+    /**
+     * The data needed to update a InpatientEncounter.
+     */
+    data: XOR<InpatientEncounterUpdateInput, InpatientEncounterUncheckedUpdateInput>
+    /**
+     * Choose, which InpatientEncounter to update.
+     */
+    where: InpatientEncounterWhereUniqueInput
+  }
+
+  /**
+   * InpatientEncounter updateMany
+   */
+  export type InpatientEncounterUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update InpatientEncounters.
+     */
+    data: XOR<InpatientEncounterUpdateManyMutationInput, InpatientEncounterUncheckedUpdateManyInput>
+    /**
+     * Filter which InpatientEncounters to update
+     */
+    where?: InpatientEncounterWhereInput
+    /**
+     * Limit how many InpatientEncounters to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * InpatientEncounter updateManyAndReturn
+   */
+  export type InpatientEncounterUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InpatientEncounter
+     */
+    select?: InpatientEncounterSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the InpatientEncounter
+     */
+    omit?: InpatientEncounterOmit<ExtArgs> | null
+    /**
+     * The data used to update InpatientEncounters.
+     */
+    data: XOR<InpatientEncounterUpdateManyMutationInput, InpatientEncounterUncheckedUpdateManyInput>
+    /**
+     * Filter which InpatientEncounters to update
+     */
+    where?: InpatientEncounterWhereInput
+    /**
+     * Limit how many InpatientEncounters to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InpatientEncounterIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * InpatientEncounter upsert
+   */
+  export type InpatientEncounterUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InpatientEncounter
+     */
+    select?: InpatientEncounterSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InpatientEncounter
+     */
+    omit?: InpatientEncounterOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InpatientEncounterInclude<ExtArgs> | null
+    /**
+     * The filter to search for the InpatientEncounter to update in case it exists.
+     */
+    where: InpatientEncounterWhereUniqueInput
+    /**
+     * In case the InpatientEncounter found by the `where` argument doesn't exist, create a new InpatientEncounter with this data.
+     */
+    create: XOR<InpatientEncounterCreateInput, InpatientEncounterUncheckedCreateInput>
+    /**
+     * In case the InpatientEncounter was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<InpatientEncounterUpdateInput, InpatientEncounterUncheckedUpdateInput>
+  }
+
+  /**
+   * InpatientEncounter delete
+   */
+  export type InpatientEncounterDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InpatientEncounter
+     */
+    select?: InpatientEncounterSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InpatientEncounter
+     */
+    omit?: InpatientEncounterOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InpatientEncounterInclude<ExtArgs> | null
+    /**
+     * Filter which InpatientEncounter to delete.
+     */
+    where: InpatientEncounterWhereUniqueInput
+  }
+
+  /**
+   * InpatientEncounter deleteMany
+   */
+  export type InpatientEncounterDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which InpatientEncounters to delete
+     */
+    where?: InpatientEncounterWhereInput
+    /**
+     * Limit how many InpatientEncounters to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * InpatientEncounter.charts
+   */
+  export type InpatientEncounter$chartsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InpatientEncounterChart
+     */
+    select?: InpatientEncounterChartSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InpatientEncounterChart
+     */
+    omit?: InpatientEncounterChartOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InpatientEncounterChartInclude<ExtArgs> | null
+    where?: InpatientEncounterChartWhereInput
+    orderBy?: InpatientEncounterChartOrderByWithRelationInput | InpatientEncounterChartOrderByWithRelationInput[]
+    cursor?: InpatientEncounterChartWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: InpatientEncounterChartScalarFieldEnum | InpatientEncounterChartScalarFieldEnum[]
+  }
+
+  /**
+   * InpatientEncounter.orders
+   */
+  export type InpatientEncounter$ordersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InpatientEncounterOrder
+     */
+    select?: InpatientEncounterOrderSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InpatientEncounterOrder
+     */
+    omit?: InpatientEncounterOrderOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InpatientEncounterOrderInclude<ExtArgs> | null
+    where?: InpatientEncounterOrderWhereInput
+    orderBy?: InpatientEncounterOrderOrderByWithRelationInput | InpatientEncounterOrderOrderByWithRelationInput[]
+    cursor?: InpatientEncounterOrderWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: InpatientEncounterOrderScalarFieldEnum | InpatientEncounterOrderScalarFieldEnum[]
+  }
+
+  /**
+   * InpatientEncounter without action
+   */
+  export type InpatientEncounterDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InpatientEncounter
+     */
+    select?: InpatientEncounterSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InpatientEncounter
+     */
+    omit?: InpatientEncounterOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InpatientEncounterInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model InpatientEncounterChart
+   */
+
+  export type AggregateInpatientEncounterChart = {
+    _count: InpatientEncounterChartCountAggregateOutputType | null
+    _min: InpatientEncounterChartMinAggregateOutputType | null
+    _max: InpatientEncounterChartMaxAggregateOutputType | null
+  }
+
+  export type InpatientEncounterChartMinAggregateOutputType = {
+    id: string | null
+    encounterId: string | null
+    staffId: string | null
+    chart: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type InpatientEncounterChartMaxAggregateOutputType = {
+    id: string | null
+    encounterId: string | null
+    staffId: string | null
+    chart: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type InpatientEncounterChartCountAggregateOutputType = {
+    id: number
+    encounterId: number
+    staffId: number
+    chart: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type InpatientEncounterChartMinAggregateInputType = {
+    id?: true
+    encounterId?: true
+    staffId?: true
+    chart?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type InpatientEncounterChartMaxAggregateInputType = {
+    id?: true
+    encounterId?: true
+    staffId?: true
+    chart?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type InpatientEncounterChartCountAggregateInputType = {
+    id?: true
+    encounterId?: true
+    staffId?: true
+    chart?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type InpatientEncounterChartAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which InpatientEncounterChart to aggregate.
+     */
+    where?: InpatientEncounterChartWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of InpatientEncounterCharts to fetch.
+     */
+    orderBy?: InpatientEncounterChartOrderByWithRelationInput | InpatientEncounterChartOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: InpatientEncounterChartWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` InpatientEncounterCharts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` InpatientEncounterCharts.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned InpatientEncounterCharts
+    **/
+    _count?: true | InpatientEncounterChartCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: InpatientEncounterChartMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: InpatientEncounterChartMaxAggregateInputType
+  }
+
+  export type GetInpatientEncounterChartAggregateType<T extends InpatientEncounterChartAggregateArgs> = {
+        [P in keyof T & keyof AggregateInpatientEncounterChart]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateInpatientEncounterChart[P]>
+      : GetScalarType<T[P], AggregateInpatientEncounterChart[P]>
+  }
+
+
+
+
+  export type InpatientEncounterChartGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: InpatientEncounterChartWhereInput
+    orderBy?: InpatientEncounterChartOrderByWithAggregationInput | InpatientEncounterChartOrderByWithAggregationInput[]
+    by: InpatientEncounterChartScalarFieldEnum[] | InpatientEncounterChartScalarFieldEnum
+    having?: InpatientEncounterChartScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: InpatientEncounterChartCountAggregateInputType | true
+    _min?: InpatientEncounterChartMinAggregateInputType
+    _max?: InpatientEncounterChartMaxAggregateInputType
+  }
+
+  export type InpatientEncounterChartGroupByOutputType = {
+    id: string
+    encounterId: string
+    staffId: string
+    chart: string
+    createdAt: Date
+    updatedAt: Date
+    _count: InpatientEncounterChartCountAggregateOutputType | null
+    _min: InpatientEncounterChartMinAggregateOutputType | null
+    _max: InpatientEncounterChartMaxAggregateOutputType | null
+  }
+
+  type GetInpatientEncounterChartGroupByPayload<T extends InpatientEncounterChartGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<InpatientEncounterChartGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof InpatientEncounterChartGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], InpatientEncounterChartGroupByOutputType[P]>
+            : GetScalarType<T[P], InpatientEncounterChartGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type InpatientEncounterChartSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    encounterId?: boolean
+    staffId?: boolean
+    chart?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    encounter?: boolean | InpatientEncounterDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["inpatientEncounterChart"]>
+
+  export type InpatientEncounterChartSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    encounterId?: boolean
+    staffId?: boolean
+    chart?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    encounter?: boolean | InpatientEncounterDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["inpatientEncounterChart"]>
+
+  export type InpatientEncounterChartSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    encounterId?: boolean
+    staffId?: boolean
+    chart?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    encounter?: boolean | InpatientEncounterDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["inpatientEncounterChart"]>
+
+  export type InpatientEncounterChartSelectScalar = {
+    id?: boolean
+    encounterId?: boolean
+    staffId?: boolean
+    chart?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type InpatientEncounterChartOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "encounterId" | "staffId" | "chart" | "createdAt" | "updatedAt", ExtArgs["result"]["inpatientEncounterChart"]>
+  export type InpatientEncounterChartInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    encounter?: boolean | InpatientEncounterDefaultArgs<ExtArgs>
+  }
+  export type InpatientEncounterChartIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    encounter?: boolean | InpatientEncounterDefaultArgs<ExtArgs>
+  }
+  export type InpatientEncounterChartIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    encounter?: boolean | InpatientEncounterDefaultArgs<ExtArgs>
+  }
+
+  export type $InpatientEncounterChartPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "InpatientEncounterChart"
+    objects: {
+      encounter: Prisma.$InpatientEncounterPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      encounterId: string
+      staffId: string
+      chart: string
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["inpatientEncounterChart"]>
+    composites: {}
+  }
+
+  type InpatientEncounterChartGetPayload<S extends boolean | null | undefined | InpatientEncounterChartDefaultArgs> = $Result.GetResult<Prisma.$InpatientEncounterChartPayload, S>
+
+  type InpatientEncounterChartCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<InpatientEncounterChartFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: InpatientEncounterChartCountAggregateInputType | true
+    }
+
+  export interface InpatientEncounterChartDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['InpatientEncounterChart'], meta: { name: 'InpatientEncounterChart' } }
+    /**
+     * Find zero or one InpatientEncounterChart that matches the filter.
+     * @param {InpatientEncounterChartFindUniqueArgs} args - Arguments to find a InpatientEncounterChart
+     * @example
+     * // Get one InpatientEncounterChart
+     * const inpatientEncounterChart = await prisma.inpatientEncounterChart.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends InpatientEncounterChartFindUniqueArgs>(args: SelectSubset<T, InpatientEncounterChartFindUniqueArgs<ExtArgs>>): Prisma__InpatientEncounterChartClient<$Result.GetResult<Prisma.$InpatientEncounterChartPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one InpatientEncounterChart that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {InpatientEncounterChartFindUniqueOrThrowArgs} args - Arguments to find a InpatientEncounterChart
+     * @example
+     * // Get one InpatientEncounterChart
+     * const inpatientEncounterChart = await prisma.inpatientEncounterChart.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends InpatientEncounterChartFindUniqueOrThrowArgs>(args: SelectSubset<T, InpatientEncounterChartFindUniqueOrThrowArgs<ExtArgs>>): Prisma__InpatientEncounterChartClient<$Result.GetResult<Prisma.$InpatientEncounterChartPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first InpatientEncounterChart that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InpatientEncounterChartFindFirstArgs} args - Arguments to find a InpatientEncounterChart
+     * @example
+     * // Get one InpatientEncounterChart
+     * const inpatientEncounterChart = await prisma.inpatientEncounterChart.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends InpatientEncounterChartFindFirstArgs>(args?: SelectSubset<T, InpatientEncounterChartFindFirstArgs<ExtArgs>>): Prisma__InpatientEncounterChartClient<$Result.GetResult<Prisma.$InpatientEncounterChartPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first InpatientEncounterChart that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InpatientEncounterChartFindFirstOrThrowArgs} args - Arguments to find a InpatientEncounterChart
+     * @example
+     * // Get one InpatientEncounterChart
+     * const inpatientEncounterChart = await prisma.inpatientEncounterChart.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends InpatientEncounterChartFindFirstOrThrowArgs>(args?: SelectSubset<T, InpatientEncounterChartFindFirstOrThrowArgs<ExtArgs>>): Prisma__InpatientEncounterChartClient<$Result.GetResult<Prisma.$InpatientEncounterChartPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more InpatientEncounterCharts that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InpatientEncounterChartFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all InpatientEncounterCharts
+     * const inpatientEncounterCharts = await prisma.inpatientEncounterChart.findMany()
+     * 
+     * // Get first 10 InpatientEncounterCharts
+     * const inpatientEncounterCharts = await prisma.inpatientEncounterChart.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const inpatientEncounterChartWithIdOnly = await prisma.inpatientEncounterChart.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends InpatientEncounterChartFindManyArgs>(args?: SelectSubset<T, InpatientEncounterChartFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InpatientEncounterChartPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a InpatientEncounterChart.
+     * @param {InpatientEncounterChartCreateArgs} args - Arguments to create a InpatientEncounterChart.
+     * @example
+     * // Create one InpatientEncounterChart
+     * const InpatientEncounterChart = await prisma.inpatientEncounterChart.create({
+     *   data: {
+     *     // ... data to create a InpatientEncounterChart
+     *   }
+     * })
+     * 
+     */
+    create<T extends InpatientEncounterChartCreateArgs>(args: SelectSubset<T, InpatientEncounterChartCreateArgs<ExtArgs>>): Prisma__InpatientEncounterChartClient<$Result.GetResult<Prisma.$InpatientEncounterChartPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many InpatientEncounterCharts.
+     * @param {InpatientEncounterChartCreateManyArgs} args - Arguments to create many InpatientEncounterCharts.
+     * @example
+     * // Create many InpatientEncounterCharts
+     * const inpatientEncounterChart = await prisma.inpatientEncounterChart.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends InpatientEncounterChartCreateManyArgs>(args?: SelectSubset<T, InpatientEncounterChartCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many InpatientEncounterCharts and returns the data saved in the database.
+     * @param {InpatientEncounterChartCreateManyAndReturnArgs} args - Arguments to create many InpatientEncounterCharts.
+     * @example
+     * // Create many InpatientEncounterCharts
+     * const inpatientEncounterChart = await prisma.inpatientEncounterChart.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many InpatientEncounterCharts and only return the `id`
+     * const inpatientEncounterChartWithIdOnly = await prisma.inpatientEncounterChart.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends InpatientEncounterChartCreateManyAndReturnArgs>(args?: SelectSubset<T, InpatientEncounterChartCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InpatientEncounterChartPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a InpatientEncounterChart.
+     * @param {InpatientEncounterChartDeleteArgs} args - Arguments to delete one InpatientEncounterChart.
+     * @example
+     * // Delete one InpatientEncounterChart
+     * const InpatientEncounterChart = await prisma.inpatientEncounterChart.delete({
+     *   where: {
+     *     // ... filter to delete one InpatientEncounterChart
+     *   }
+     * })
+     * 
+     */
+    delete<T extends InpatientEncounterChartDeleteArgs>(args: SelectSubset<T, InpatientEncounterChartDeleteArgs<ExtArgs>>): Prisma__InpatientEncounterChartClient<$Result.GetResult<Prisma.$InpatientEncounterChartPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one InpatientEncounterChart.
+     * @param {InpatientEncounterChartUpdateArgs} args - Arguments to update one InpatientEncounterChart.
+     * @example
+     * // Update one InpatientEncounterChart
+     * const inpatientEncounterChart = await prisma.inpatientEncounterChart.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends InpatientEncounterChartUpdateArgs>(args: SelectSubset<T, InpatientEncounterChartUpdateArgs<ExtArgs>>): Prisma__InpatientEncounterChartClient<$Result.GetResult<Prisma.$InpatientEncounterChartPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more InpatientEncounterCharts.
+     * @param {InpatientEncounterChartDeleteManyArgs} args - Arguments to filter InpatientEncounterCharts to delete.
+     * @example
+     * // Delete a few InpatientEncounterCharts
+     * const { count } = await prisma.inpatientEncounterChart.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends InpatientEncounterChartDeleteManyArgs>(args?: SelectSubset<T, InpatientEncounterChartDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more InpatientEncounterCharts.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InpatientEncounterChartUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many InpatientEncounterCharts
+     * const inpatientEncounterChart = await prisma.inpatientEncounterChart.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends InpatientEncounterChartUpdateManyArgs>(args: SelectSubset<T, InpatientEncounterChartUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more InpatientEncounterCharts and returns the data updated in the database.
+     * @param {InpatientEncounterChartUpdateManyAndReturnArgs} args - Arguments to update many InpatientEncounterCharts.
+     * @example
+     * // Update many InpatientEncounterCharts
+     * const inpatientEncounterChart = await prisma.inpatientEncounterChart.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more InpatientEncounterCharts and only return the `id`
+     * const inpatientEncounterChartWithIdOnly = await prisma.inpatientEncounterChart.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends InpatientEncounterChartUpdateManyAndReturnArgs>(args: SelectSubset<T, InpatientEncounterChartUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InpatientEncounterChartPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one InpatientEncounterChart.
+     * @param {InpatientEncounterChartUpsertArgs} args - Arguments to update or create a InpatientEncounterChart.
+     * @example
+     * // Update or create a InpatientEncounterChart
+     * const inpatientEncounterChart = await prisma.inpatientEncounterChart.upsert({
+     *   create: {
+     *     // ... data to create a InpatientEncounterChart
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the InpatientEncounterChart we want to update
+     *   }
+     * })
+     */
+    upsert<T extends InpatientEncounterChartUpsertArgs>(args: SelectSubset<T, InpatientEncounterChartUpsertArgs<ExtArgs>>): Prisma__InpatientEncounterChartClient<$Result.GetResult<Prisma.$InpatientEncounterChartPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of InpatientEncounterCharts.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InpatientEncounterChartCountArgs} args - Arguments to filter InpatientEncounterCharts to count.
+     * @example
+     * // Count the number of InpatientEncounterCharts
+     * const count = await prisma.inpatientEncounterChart.count({
+     *   where: {
+     *     // ... the filter for the InpatientEncounterCharts we want to count
+     *   }
+     * })
+    **/
+    count<T extends InpatientEncounterChartCountArgs>(
+      args?: Subset<T, InpatientEncounterChartCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], InpatientEncounterChartCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a InpatientEncounterChart.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InpatientEncounterChartAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends InpatientEncounterChartAggregateArgs>(args: Subset<T, InpatientEncounterChartAggregateArgs>): Prisma.PrismaPromise<GetInpatientEncounterChartAggregateType<T>>
+
+    /**
+     * Group by InpatientEncounterChart.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InpatientEncounterChartGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends InpatientEncounterChartGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: InpatientEncounterChartGroupByArgs['orderBy'] }
+        : { orderBy?: InpatientEncounterChartGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, InpatientEncounterChartGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetInpatientEncounterChartGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the InpatientEncounterChart model
+   */
+  readonly fields: InpatientEncounterChartFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for InpatientEncounterChart.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__InpatientEncounterChartClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    encounter<T extends InpatientEncounterDefaultArgs<ExtArgs> = {}>(args?: Subset<T, InpatientEncounterDefaultArgs<ExtArgs>>): Prisma__InpatientEncounterClient<$Result.GetResult<Prisma.$InpatientEncounterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the InpatientEncounterChart model
+   */
+  interface InpatientEncounterChartFieldRefs {
+    readonly id: FieldRef<"InpatientEncounterChart", 'String'>
+    readonly encounterId: FieldRef<"InpatientEncounterChart", 'String'>
+    readonly staffId: FieldRef<"InpatientEncounterChart", 'String'>
+    readonly chart: FieldRef<"InpatientEncounterChart", 'String'>
+    readonly createdAt: FieldRef<"InpatientEncounterChart", 'DateTime'>
+    readonly updatedAt: FieldRef<"InpatientEncounterChart", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * InpatientEncounterChart findUnique
+   */
+  export type InpatientEncounterChartFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InpatientEncounterChart
+     */
+    select?: InpatientEncounterChartSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InpatientEncounterChart
+     */
+    omit?: InpatientEncounterChartOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InpatientEncounterChartInclude<ExtArgs> | null
+    /**
+     * Filter, which InpatientEncounterChart to fetch.
+     */
+    where: InpatientEncounterChartWhereUniqueInput
+  }
+
+  /**
+   * InpatientEncounterChart findUniqueOrThrow
+   */
+  export type InpatientEncounterChartFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InpatientEncounterChart
+     */
+    select?: InpatientEncounterChartSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InpatientEncounterChart
+     */
+    omit?: InpatientEncounterChartOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InpatientEncounterChartInclude<ExtArgs> | null
+    /**
+     * Filter, which InpatientEncounterChart to fetch.
+     */
+    where: InpatientEncounterChartWhereUniqueInput
+  }
+
+  /**
+   * InpatientEncounterChart findFirst
+   */
+  export type InpatientEncounterChartFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InpatientEncounterChart
+     */
+    select?: InpatientEncounterChartSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InpatientEncounterChart
+     */
+    omit?: InpatientEncounterChartOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InpatientEncounterChartInclude<ExtArgs> | null
+    /**
+     * Filter, which InpatientEncounterChart to fetch.
+     */
+    where?: InpatientEncounterChartWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of InpatientEncounterCharts to fetch.
+     */
+    orderBy?: InpatientEncounterChartOrderByWithRelationInput | InpatientEncounterChartOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for InpatientEncounterCharts.
+     */
+    cursor?: InpatientEncounterChartWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` InpatientEncounterCharts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` InpatientEncounterCharts.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of InpatientEncounterCharts.
+     */
+    distinct?: InpatientEncounterChartScalarFieldEnum | InpatientEncounterChartScalarFieldEnum[]
+  }
+
+  /**
+   * InpatientEncounterChart findFirstOrThrow
+   */
+  export type InpatientEncounterChartFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InpatientEncounterChart
+     */
+    select?: InpatientEncounterChartSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InpatientEncounterChart
+     */
+    omit?: InpatientEncounterChartOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InpatientEncounterChartInclude<ExtArgs> | null
+    /**
+     * Filter, which InpatientEncounterChart to fetch.
+     */
+    where?: InpatientEncounterChartWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of InpatientEncounterCharts to fetch.
+     */
+    orderBy?: InpatientEncounterChartOrderByWithRelationInput | InpatientEncounterChartOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for InpatientEncounterCharts.
+     */
+    cursor?: InpatientEncounterChartWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` InpatientEncounterCharts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` InpatientEncounterCharts.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of InpatientEncounterCharts.
+     */
+    distinct?: InpatientEncounterChartScalarFieldEnum | InpatientEncounterChartScalarFieldEnum[]
+  }
+
+  /**
+   * InpatientEncounterChart findMany
+   */
+  export type InpatientEncounterChartFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InpatientEncounterChart
+     */
+    select?: InpatientEncounterChartSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InpatientEncounterChart
+     */
+    omit?: InpatientEncounterChartOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InpatientEncounterChartInclude<ExtArgs> | null
+    /**
+     * Filter, which InpatientEncounterCharts to fetch.
+     */
+    where?: InpatientEncounterChartWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of InpatientEncounterCharts to fetch.
+     */
+    orderBy?: InpatientEncounterChartOrderByWithRelationInput | InpatientEncounterChartOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing InpatientEncounterCharts.
+     */
+    cursor?: InpatientEncounterChartWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` InpatientEncounterCharts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` InpatientEncounterCharts.
+     */
+    skip?: number
+    distinct?: InpatientEncounterChartScalarFieldEnum | InpatientEncounterChartScalarFieldEnum[]
+  }
+
+  /**
+   * InpatientEncounterChart create
+   */
+  export type InpatientEncounterChartCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InpatientEncounterChart
+     */
+    select?: InpatientEncounterChartSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InpatientEncounterChart
+     */
+    omit?: InpatientEncounterChartOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InpatientEncounterChartInclude<ExtArgs> | null
+    /**
+     * The data needed to create a InpatientEncounterChart.
+     */
+    data: XOR<InpatientEncounterChartCreateInput, InpatientEncounterChartUncheckedCreateInput>
+  }
+
+  /**
+   * InpatientEncounterChart createMany
+   */
+  export type InpatientEncounterChartCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many InpatientEncounterCharts.
+     */
+    data: InpatientEncounterChartCreateManyInput | InpatientEncounterChartCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * InpatientEncounterChart createManyAndReturn
+   */
+  export type InpatientEncounterChartCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InpatientEncounterChart
+     */
+    select?: InpatientEncounterChartSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the InpatientEncounterChart
+     */
+    omit?: InpatientEncounterChartOmit<ExtArgs> | null
+    /**
+     * The data used to create many InpatientEncounterCharts.
+     */
+    data: InpatientEncounterChartCreateManyInput | InpatientEncounterChartCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InpatientEncounterChartIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * InpatientEncounterChart update
+   */
+  export type InpatientEncounterChartUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InpatientEncounterChart
+     */
+    select?: InpatientEncounterChartSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InpatientEncounterChart
+     */
+    omit?: InpatientEncounterChartOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InpatientEncounterChartInclude<ExtArgs> | null
+    /**
+     * The data needed to update a InpatientEncounterChart.
+     */
+    data: XOR<InpatientEncounterChartUpdateInput, InpatientEncounterChartUncheckedUpdateInput>
+    /**
+     * Choose, which InpatientEncounterChart to update.
+     */
+    where: InpatientEncounterChartWhereUniqueInput
+  }
+
+  /**
+   * InpatientEncounterChart updateMany
+   */
+  export type InpatientEncounterChartUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update InpatientEncounterCharts.
+     */
+    data: XOR<InpatientEncounterChartUpdateManyMutationInput, InpatientEncounterChartUncheckedUpdateManyInput>
+    /**
+     * Filter which InpatientEncounterCharts to update
+     */
+    where?: InpatientEncounterChartWhereInput
+    /**
+     * Limit how many InpatientEncounterCharts to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * InpatientEncounterChart updateManyAndReturn
+   */
+  export type InpatientEncounterChartUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InpatientEncounterChart
+     */
+    select?: InpatientEncounterChartSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the InpatientEncounterChart
+     */
+    omit?: InpatientEncounterChartOmit<ExtArgs> | null
+    /**
+     * The data used to update InpatientEncounterCharts.
+     */
+    data: XOR<InpatientEncounterChartUpdateManyMutationInput, InpatientEncounterChartUncheckedUpdateManyInput>
+    /**
+     * Filter which InpatientEncounterCharts to update
+     */
+    where?: InpatientEncounterChartWhereInput
+    /**
+     * Limit how many InpatientEncounterCharts to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InpatientEncounterChartIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * InpatientEncounterChart upsert
+   */
+  export type InpatientEncounterChartUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InpatientEncounterChart
+     */
+    select?: InpatientEncounterChartSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InpatientEncounterChart
+     */
+    omit?: InpatientEncounterChartOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InpatientEncounterChartInclude<ExtArgs> | null
+    /**
+     * The filter to search for the InpatientEncounterChart to update in case it exists.
+     */
+    where: InpatientEncounterChartWhereUniqueInput
+    /**
+     * In case the InpatientEncounterChart found by the `where` argument doesn't exist, create a new InpatientEncounterChart with this data.
+     */
+    create: XOR<InpatientEncounterChartCreateInput, InpatientEncounterChartUncheckedCreateInput>
+    /**
+     * In case the InpatientEncounterChart was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<InpatientEncounterChartUpdateInput, InpatientEncounterChartUncheckedUpdateInput>
+  }
+
+  /**
+   * InpatientEncounterChart delete
+   */
+  export type InpatientEncounterChartDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InpatientEncounterChart
+     */
+    select?: InpatientEncounterChartSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InpatientEncounterChart
+     */
+    omit?: InpatientEncounterChartOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InpatientEncounterChartInclude<ExtArgs> | null
+    /**
+     * Filter which InpatientEncounterChart to delete.
+     */
+    where: InpatientEncounterChartWhereUniqueInput
+  }
+
+  /**
+   * InpatientEncounterChart deleteMany
+   */
+  export type InpatientEncounterChartDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which InpatientEncounterCharts to delete
+     */
+    where?: InpatientEncounterChartWhereInput
+    /**
+     * Limit how many InpatientEncounterCharts to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * InpatientEncounterChart without action
+   */
+  export type InpatientEncounterChartDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InpatientEncounterChart
+     */
+    select?: InpatientEncounterChartSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InpatientEncounterChart
+     */
+    omit?: InpatientEncounterChartOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InpatientEncounterChartInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model InpatientEncounterOrder
+   */
+
+  export type AggregateInpatientEncounterOrder = {
+    _count: InpatientEncounterOrderCountAggregateOutputType | null
+    _avg: InpatientEncounterOrderAvgAggregateOutputType | null
+    _sum: InpatientEncounterOrderSumAggregateOutputType | null
+    _min: InpatientEncounterOrderMinAggregateOutputType | null
+    _max: InpatientEncounterOrderMaxAggregateOutputType | null
+  }
+
+  export type InpatientEncounterOrderAvgAggregateOutputType = {
+    cost: Decimal | null
+  }
+
+  export type InpatientEncounterOrderSumAggregateOutputType = {
+    cost: Decimal | null
+  }
+
+  export type InpatientEncounterOrderMinAggregateOutputType = {
+    id: string | null
+    encounterId: string | null
+    catalogueItemId: string | null
+    type: $Enums.InpatientEncounterOrderType | null
+    description: string | null
+    cost: Decimal | null
+    status: $Enums.InpatientEncounterOrderStatus | null
+    orderedBy: string | null
+    notes: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type InpatientEncounterOrderMaxAggregateOutputType = {
+    id: string | null
+    encounterId: string | null
+    catalogueItemId: string | null
+    type: $Enums.InpatientEncounterOrderType | null
+    description: string | null
+    cost: Decimal | null
+    status: $Enums.InpatientEncounterOrderStatus | null
+    orderedBy: string | null
+    notes: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type InpatientEncounterOrderCountAggregateOutputType = {
+    id: number
+    encounterId: number
+    catalogueItemId: number
+    type: number
+    description: number
+    cost: number
+    status: number
+    orderedBy: number
+    notes: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type InpatientEncounterOrderAvgAggregateInputType = {
+    cost?: true
+  }
+
+  export type InpatientEncounterOrderSumAggregateInputType = {
+    cost?: true
+  }
+
+  export type InpatientEncounterOrderMinAggregateInputType = {
+    id?: true
+    encounterId?: true
+    catalogueItemId?: true
+    type?: true
+    description?: true
+    cost?: true
+    status?: true
+    orderedBy?: true
+    notes?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type InpatientEncounterOrderMaxAggregateInputType = {
+    id?: true
+    encounterId?: true
+    catalogueItemId?: true
+    type?: true
+    description?: true
+    cost?: true
+    status?: true
+    orderedBy?: true
+    notes?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type InpatientEncounterOrderCountAggregateInputType = {
+    id?: true
+    encounterId?: true
+    catalogueItemId?: true
+    type?: true
+    description?: true
+    cost?: true
+    status?: true
+    orderedBy?: true
+    notes?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type InpatientEncounterOrderAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which InpatientEncounterOrder to aggregate.
+     */
+    where?: InpatientEncounterOrderWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of InpatientEncounterOrders to fetch.
+     */
+    orderBy?: InpatientEncounterOrderOrderByWithRelationInput | InpatientEncounterOrderOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: InpatientEncounterOrderWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` InpatientEncounterOrders from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` InpatientEncounterOrders.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned InpatientEncounterOrders
+    **/
+    _count?: true | InpatientEncounterOrderCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: InpatientEncounterOrderAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: InpatientEncounterOrderSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: InpatientEncounterOrderMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: InpatientEncounterOrderMaxAggregateInputType
+  }
+
+  export type GetInpatientEncounterOrderAggregateType<T extends InpatientEncounterOrderAggregateArgs> = {
+        [P in keyof T & keyof AggregateInpatientEncounterOrder]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateInpatientEncounterOrder[P]>
+      : GetScalarType<T[P], AggregateInpatientEncounterOrder[P]>
+  }
+
+
+
+
+  export type InpatientEncounterOrderGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: InpatientEncounterOrderWhereInput
+    orderBy?: InpatientEncounterOrderOrderByWithAggregationInput | InpatientEncounterOrderOrderByWithAggregationInput[]
+    by: InpatientEncounterOrderScalarFieldEnum[] | InpatientEncounterOrderScalarFieldEnum
+    having?: InpatientEncounterOrderScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: InpatientEncounterOrderCountAggregateInputType | true
+    _avg?: InpatientEncounterOrderAvgAggregateInputType
+    _sum?: InpatientEncounterOrderSumAggregateInputType
+    _min?: InpatientEncounterOrderMinAggregateInputType
+    _max?: InpatientEncounterOrderMaxAggregateInputType
+  }
+
+  export type InpatientEncounterOrderGroupByOutputType = {
+    id: string
+    encounterId: string
+    catalogueItemId: string | null
+    type: $Enums.InpatientEncounterOrderType
+    description: string
+    cost: Decimal
+    status: $Enums.InpatientEncounterOrderStatus
+    orderedBy: string
+    notes: string | null
+    createdAt: Date
+    updatedAt: Date
+    _count: InpatientEncounterOrderCountAggregateOutputType | null
+    _avg: InpatientEncounterOrderAvgAggregateOutputType | null
+    _sum: InpatientEncounterOrderSumAggregateOutputType | null
+    _min: InpatientEncounterOrderMinAggregateOutputType | null
+    _max: InpatientEncounterOrderMaxAggregateOutputType | null
+  }
+
+  type GetInpatientEncounterOrderGroupByPayload<T extends InpatientEncounterOrderGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<InpatientEncounterOrderGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof InpatientEncounterOrderGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], InpatientEncounterOrderGroupByOutputType[P]>
+            : GetScalarType<T[P], InpatientEncounterOrderGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type InpatientEncounterOrderSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    encounterId?: boolean
+    catalogueItemId?: boolean
+    type?: boolean
+    description?: boolean
+    cost?: boolean
+    status?: boolean
+    orderedBy?: boolean
+    notes?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    encounter?: boolean | InpatientEncounterDefaultArgs<ExtArgs>
+    catalogueItem?: boolean | InpatientEncounterOrder$catalogueItemArgs<ExtArgs>
+  }, ExtArgs["result"]["inpatientEncounterOrder"]>
+
+  export type InpatientEncounterOrderSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    encounterId?: boolean
+    catalogueItemId?: boolean
+    type?: boolean
+    description?: boolean
+    cost?: boolean
+    status?: boolean
+    orderedBy?: boolean
+    notes?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    encounter?: boolean | InpatientEncounterDefaultArgs<ExtArgs>
+    catalogueItem?: boolean | InpatientEncounterOrder$catalogueItemArgs<ExtArgs>
+  }, ExtArgs["result"]["inpatientEncounterOrder"]>
+
+  export type InpatientEncounterOrderSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    encounterId?: boolean
+    catalogueItemId?: boolean
+    type?: boolean
+    description?: boolean
+    cost?: boolean
+    status?: boolean
+    orderedBy?: boolean
+    notes?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    encounter?: boolean | InpatientEncounterDefaultArgs<ExtArgs>
+    catalogueItem?: boolean | InpatientEncounterOrder$catalogueItemArgs<ExtArgs>
+  }, ExtArgs["result"]["inpatientEncounterOrder"]>
+
+  export type InpatientEncounterOrderSelectScalar = {
+    id?: boolean
+    encounterId?: boolean
+    catalogueItemId?: boolean
+    type?: boolean
+    description?: boolean
+    cost?: boolean
+    status?: boolean
+    orderedBy?: boolean
+    notes?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type InpatientEncounterOrderOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "encounterId" | "catalogueItemId" | "type" | "description" | "cost" | "status" | "orderedBy" | "notes" | "createdAt" | "updatedAt", ExtArgs["result"]["inpatientEncounterOrder"]>
+  export type InpatientEncounterOrderInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    encounter?: boolean | InpatientEncounterDefaultArgs<ExtArgs>
+    catalogueItem?: boolean | InpatientEncounterOrder$catalogueItemArgs<ExtArgs>
+  }
+  export type InpatientEncounterOrderIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    encounter?: boolean | InpatientEncounterDefaultArgs<ExtArgs>
+    catalogueItem?: boolean | InpatientEncounterOrder$catalogueItemArgs<ExtArgs>
+  }
+  export type InpatientEncounterOrderIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    encounter?: boolean | InpatientEncounterDefaultArgs<ExtArgs>
+    catalogueItem?: boolean | InpatientEncounterOrder$catalogueItemArgs<ExtArgs>
+  }
+
+  export type $InpatientEncounterOrderPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "InpatientEncounterOrder"
+    objects: {
+      encounter: Prisma.$InpatientEncounterPayload<ExtArgs>
+      catalogueItem: Prisma.$ParticularCataloguePayload<ExtArgs> | null
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      encounterId: string
+      catalogueItemId: string | null
+      type: $Enums.InpatientEncounterOrderType
+      description: string
+      cost: Prisma.Decimal
+      status: $Enums.InpatientEncounterOrderStatus
+      orderedBy: string
+      notes: string | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["inpatientEncounterOrder"]>
+    composites: {}
+  }
+
+  type InpatientEncounterOrderGetPayload<S extends boolean | null | undefined | InpatientEncounterOrderDefaultArgs> = $Result.GetResult<Prisma.$InpatientEncounterOrderPayload, S>
+
+  type InpatientEncounterOrderCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<InpatientEncounterOrderFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: InpatientEncounterOrderCountAggregateInputType | true
+    }
+
+  export interface InpatientEncounterOrderDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['InpatientEncounterOrder'], meta: { name: 'InpatientEncounterOrder' } }
+    /**
+     * Find zero or one InpatientEncounterOrder that matches the filter.
+     * @param {InpatientEncounterOrderFindUniqueArgs} args - Arguments to find a InpatientEncounterOrder
+     * @example
+     * // Get one InpatientEncounterOrder
+     * const inpatientEncounterOrder = await prisma.inpatientEncounterOrder.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends InpatientEncounterOrderFindUniqueArgs>(args: SelectSubset<T, InpatientEncounterOrderFindUniqueArgs<ExtArgs>>): Prisma__InpatientEncounterOrderClient<$Result.GetResult<Prisma.$InpatientEncounterOrderPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one InpatientEncounterOrder that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {InpatientEncounterOrderFindUniqueOrThrowArgs} args - Arguments to find a InpatientEncounterOrder
+     * @example
+     * // Get one InpatientEncounterOrder
+     * const inpatientEncounterOrder = await prisma.inpatientEncounterOrder.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends InpatientEncounterOrderFindUniqueOrThrowArgs>(args: SelectSubset<T, InpatientEncounterOrderFindUniqueOrThrowArgs<ExtArgs>>): Prisma__InpatientEncounterOrderClient<$Result.GetResult<Prisma.$InpatientEncounterOrderPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first InpatientEncounterOrder that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InpatientEncounterOrderFindFirstArgs} args - Arguments to find a InpatientEncounterOrder
+     * @example
+     * // Get one InpatientEncounterOrder
+     * const inpatientEncounterOrder = await prisma.inpatientEncounterOrder.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends InpatientEncounterOrderFindFirstArgs>(args?: SelectSubset<T, InpatientEncounterOrderFindFirstArgs<ExtArgs>>): Prisma__InpatientEncounterOrderClient<$Result.GetResult<Prisma.$InpatientEncounterOrderPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first InpatientEncounterOrder that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InpatientEncounterOrderFindFirstOrThrowArgs} args - Arguments to find a InpatientEncounterOrder
+     * @example
+     * // Get one InpatientEncounterOrder
+     * const inpatientEncounterOrder = await prisma.inpatientEncounterOrder.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends InpatientEncounterOrderFindFirstOrThrowArgs>(args?: SelectSubset<T, InpatientEncounterOrderFindFirstOrThrowArgs<ExtArgs>>): Prisma__InpatientEncounterOrderClient<$Result.GetResult<Prisma.$InpatientEncounterOrderPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more InpatientEncounterOrders that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InpatientEncounterOrderFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all InpatientEncounterOrders
+     * const inpatientEncounterOrders = await prisma.inpatientEncounterOrder.findMany()
+     * 
+     * // Get first 10 InpatientEncounterOrders
+     * const inpatientEncounterOrders = await prisma.inpatientEncounterOrder.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const inpatientEncounterOrderWithIdOnly = await prisma.inpatientEncounterOrder.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends InpatientEncounterOrderFindManyArgs>(args?: SelectSubset<T, InpatientEncounterOrderFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InpatientEncounterOrderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a InpatientEncounterOrder.
+     * @param {InpatientEncounterOrderCreateArgs} args - Arguments to create a InpatientEncounterOrder.
+     * @example
+     * // Create one InpatientEncounterOrder
+     * const InpatientEncounterOrder = await prisma.inpatientEncounterOrder.create({
+     *   data: {
+     *     // ... data to create a InpatientEncounterOrder
+     *   }
+     * })
+     * 
+     */
+    create<T extends InpatientEncounterOrderCreateArgs>(args: SelectSubset<T, InpatientEncounterOrderCreateArgs<ExtArgs>>): Prisma__InpatientEncounterOrderClient<$Result.GetResult<Prisma.$InpatientEncounterOrderPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many InpatientEncounterOrders.
+     * @param {InpatientEncounterOrderCreateManyArgs} args - Arguments to create many InpatientEncounterOrders.
+     * @example
+     * // Create many InpatientEncounterOrders
+     * const inpatientEncounterOrder = await prisma.inpatientEncounterOrder.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends InpatientEncounterOrderCreateManyArgs>(args?: SelectSubset<T, InpatientEncounterOrderCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many InpatientEncounterOrders and returns the data saved in the database.
+     * @param {InpatientEncounterOrderCreateManyAndReturnArgs} args - Arguments to create many InpatientEncounterOrders.
+     * @example
+     * // Create many InpatientEncounterOrders
+     * const inpatientEncounterOrder = await prisma.inpatientEncounterOrder.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many InpatientEncounterOrders and only return the `id`
+     * const inpatientEncounterOrderWithIdOnly = await prisma.inpatientEncounterOrder.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends InpatientEncounterOrderCreateManyAndReturnArgs>(args?: SelectSubset<T, InpatientEncounterOrderCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InpatientEncounterOrderPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a InpatientEncounterOrder.
+     * @param {InpatientEncounterOrderDeleteArgs} args - Arguments to delete one InpatientEncounterOrder.
+     * @example
+     * // Delete one InpatientEncounterOrder
+     * const InpatientEncounterOrder = await prisma.inpatientEncounterOrder.delete({
+     *   where: {
+     *     // ... filter to delete one InpatientEncounterOrder
+     *   }
+     * })
+     * 
+     */
+    delete<T extends InpatientEncounterOrderDeleteArgs>(args: SelectSubset<T, InpatientEncounterOrderDeleteArgs<ExtArgs>>): Prisma__InpatientEncounterOrderClient<$Result.GetResult<Prisma.$InpatientEncounterOrderPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one InpatientEncounterOrder.
+     * @param {InpatientEncounterOrderUpdateArgs} args - Arguments to update one InpatientEncounterOrder.
+     * @example
+     * // Update one InpatientEncounterOrder
+     * const inpatientEncounterOrder = await prisma.inpatientEncounterOrder.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends InpatientEncounterOrderUpdateArgs>(args: SelectSubset<T, InpatientEncounterOrderUpdateArgs<ExtArgs>>): Prisma__InpatientEncounterOrderClient<$Result.GetResult<Prisma.$InpatientEncounterOrderPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more InpatientEncounterOrders.
+     * @param {InpatientEncounterOrderDeleteManyArgs} args - Arguments to filter InpatientEncounterOrders to delete.
+     * @example
+     * // Delete a few InpatientEncounterOrders
+     * const { count } = await prisma.inpatientEncounterOrder.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends InpatientEncounterOrderDeleteManyArgs>(args?: SelectSubset<T, InpatientEncounterOrderDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more InpatientEncounterOrders.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InpatientEncounterOrderUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many InpatientEncounterOrders
+     * const inpatientEncounterOrder = await prisma.inpatientEncounterOrder.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends InpatientEncounterOrderUpdateManyArgs>(args: SelectSubset<T, InpatientEncounterOrderUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more InpatientEncounterOrders and returns the data updated in the database.
+     * @param {InpatientEncounterOrderUpdateManyAndReturnArgs} args - Arguments to update many InpatientEncounterOrders.
+     * @example
+     * // Update many InpatientEncounterOrders
+     * const inpatientEncounterOrder = await prisma.inpatientEncounterOrder.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more InpatientEncounterOrders and only return the `id`
+     * const inpatientEncounterOrderWithIdOnly = await prisma.inpatientEncounterOrder.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends InpatientEncounterOrderUpdateManyAndReturnArgs>(args: SelectSubset<T, InpatientEncounterOrderUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InpatientEncounterOrderPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one InpatientEncounterOrder.
+     * @param {InpatientEncounterOrderUpsertArgs} args - Arguments to update or create a InpatientEncounterOrder.
+     * @example
+     * // Update or create a InpatientEncounterOrder
+     * const inpatientEncounterOrder = await prisma.inpatientEncounterOrder.upsert({
+     *   create: {
+     *     // ... data to create a InpatientEncounterOrder
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the InpatientEncounterOrder we want to update
+     *   }
+     * })
+     */
+    upsert<T extends InpatientEncounterOrderUpsertArgs>(args: SelectSubset<T, InpatientEncounterOrderUpsertArgs<ExtArgs>>): Prisma__InpatientEncounterOrderClient<$Result.GetResult<Prisma.$InpatientEncounterOrderPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of InpatientEncounterOrders.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InpatientEncounterOrderCountArgs} args - Arguments to filter InpatientEncounterOrders to count.
+     * @example
+     * // Count the number of InpatientEncounterOrders
+     * const count = await prisma.inpatientEncounterOrder.count({
+     *   where: {
+     *     // ... the filter for the InpatientEncounterOrders we want to count
+     *   }
+     * })
+    **/
+    count<T extends InpatientEncounterOrderCountArgs>(
+      args?: Subset<T, InpatientEncounterOrderCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], InpatientEncounterOrderCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a InpatientEncounterOrder.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InpatientEncounterOrderAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends InpatientEncounterOrderAggregateArgs>(args: Subset<T, InpatientEncounterOrderAggregateArgs>): Prisma.PrismaPromise<GetInpatientEncounterOrderAggregateType<T>>
+
+    /**
+     * Group by InpatientEncounterOrder.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InpatientEncounterOrderGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends InpatientEncounterOrderGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: InpatientEncounterOrderGroupByArgs['orderBy'] }
+        : { orderBy?: InpatientEncounterOrderGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, InpatientEncounterOrderGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetInpatientEncounterOrderGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the InpatientEncounterOrder model
+   */
+  readonly fields: InpatientEncounterOrderFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for InpatientEncounterOrder.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__InpatientEncounterOrderClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    encounter<T extends InpatientEncounterDefaultArgs<ExtArgs> = {}>(args?: Subset<T, InpatientEncounterDefaultArgs<ExtArgs>>): Prisma__InpatientEncounterClient<$Result.GetResult<Prisma.$InpatientEncounterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    catalogueItem<T extends InpatientEncounterOrder$catalogueItemArgs<ExtArgs> = {}>(args?: Subset<T, InpatientEncounterOrder$catalogueItemArgs<ExtArgs>>): Prisma__ParticularCatalogueClient<$Result.GetResult<Prisma.$ParticularCataloguePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the InpatientEncounterOrder model
+   */
+  interface InpatientEncounterOrderFieldRefs {
+    readonly id: FieldRef<"InpatientEncounterOrder", 'String'>
+    readonly encounterId: FieldRef<"InpatientEncounterOrder", 'String'>
+    readonly catalogueItemId: FieldRef<"InpatientEncounterOrder", 'String'>
+    readonly type: FieldRef<"InpatientEncounterOrder", 'InpatientEncounterOrderType'>
+    readonly description: FieldRef<"InpatientEncounterOrder", 'String'>
+    readonly cost: FieldRef<"InpatientEncounterOrder", 'Decimal'>
+    readonly status: FieldRef<"InpatientEncounterOrder", 'InpatientEncounterOrderStatus'>
+    readonly orderedBy: FieldRef<"InpatientEncounterOrder", 'String'>
+    readonly notes: FieldRef<"InpatientEncounterOrder", 'String'>
+    readonly createdAt: FieldRef<"InpatientEncounterOrder", 'DateTime'>
+    readonly updatedAt: FieldRef<"InpatientEncounterOrder", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * InpatientEncounterOrder findUnique
+   */
+  export type InpatientEncounterOrderFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InpatientEncounterOrder
+     */
+    select?: InpatientEncounterOrderSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InpatientEncounterOrder
+     */
+    omit?: InpatientEncounterOrderOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InpatientEncounterOrderInclude<ExtArgs> | null
+    /**
+     * Filter, which InpatientEncounterOrder to fetch.
+     */
+    where: InpatientEncounterOrderWhereUniqueInput
+  }
+
+  /**
+   * InpatientEncounterOrder findUniqueOrThrow
+   */
+  export type InpatientEncounterOrderFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InpatientEncounterOrder
+     */
+    select?: InpatientEncounterOrderSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InpatientEncounterOrder
+     */
+    omit?: InpatientEncounterOrderOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InpatientEncounterOrderInclude<ExtArgs> | null
+    /**
+     * Filter, which InpatientEncounterOrder to fetch.
+     */
+    where: InpatientEncounterOrderWhereUniqueInput
+  }
+
+  /**
+   * InpatientEncounterOrder findFirst
+   */
+  export type InpatientEncounterOrderFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InpatientEncounterOrder
+     */
+    select?: InpatientEncounterOrderSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InpatientEncounterOrder
+     */
+    omit?: InpatientEncounterOrderOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InpatientEncounterOrderInclude<ExtArgs> | null
+    /**
+     * Filter, which InpatientEncounterOrder to fetch.
+     */
+    where?: InpatientEncounterOrderWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of InpatientEncounterOrders to fetch.
+     */
+    orderBy?: InpatientEncounterOrderOrderByWithRelationInput | InpatientEncounterOrderOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for InpatientEncounterOrders.
+     */
+    cursor?: InpatientEncounterOrderWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` InpatientEncounterOrders from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` InpatientEncounterOrders.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of InpatientEncounterOrders.
+     */
+    distinct?: InpatientEncounterOrderScalarFieldEnum | InpatientEncounterOrderScalarFieldEnum[]
+  }
+
+  /**
+   * InpatientEncounterOrder findFirstOrThrow
+   */
+  export type InpatientEncounterOrderFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InpatientEncounterOrder
+     */
+    select?: InpatientEncounterOrderSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InpatientEncounterOrder
+     */
+    omit?: InpatientEncounterOrderOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InpatientEncounterOrderInclude<ExtArgs> | null
+    /**
+     * Filter, which InpatientEncounterOrder to fetch.
+     */
+    where?: InpatientEncounterOrderWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of InpatientEncounterOrders to fetch.
+     */
+    orderBy?: InpatientEncounterOrderOrderByWithRelationInput | InpatientEncounterOrderOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for InpatientEncounterOrders.
+     */
+    cursor?: InpatientEncounterOrderWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` InpatientEncounterOrders from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` InpatientEncounterOrders.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of InpatientEncounterOrders.
+     */
+    distinct?: InpatientEncounterOrderScalarFieldEnum | InpatientEncounterOrderScalarFieldEnum[]
+  }
+
+  /**
+   * InpatientEncounterOrder findMany
+   */
+  export type InpatientEncounterOrderFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InpatientEncounterOrder
+     */
+    select?: InpatientEncounterOrderSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InpatientEncounterOrder
+     */
+    omit?: InpatientEncounterOrderOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InpatientEncounterOrderInclude<ExtArgs> | null
+    /**
+     * Filter, which InpatientEncounterOrders to fetch.
+     */
+    where?: InpatientEncounterOrderWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of InpatientEncounterOrders to fetch.
+     */
+    orderBy?: InpatientEncounterOrderOrderByWithRelationInput | InpatientEncounterOrderOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing InpatientEncounterOrders.
+     */
+    cursor?: InpatientEncounterOrderWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` InpatientEncounterOrders from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` InpatientEncounterOrders.
+     */
+    skip?: number
+    distinct?: InpatientEncounterOrderScalarFieldEnum | InpatientEncounterOrderScalarFieldEnum[]
+  }
+
+  /**
+   * InpatientEncounterOrder create
+   */
+  export type InpatientEncounterOrderCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InpatientEncounterOrder
+     */
+    select?: InpatientEncounterOrderSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InpatientEncounterOrder
+     */
+    omit?: InpatientEncounterOrderOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InpatientEncounterOrderInclude<ExtArgs> | null
+    /**
+     * The data needed to create a InpatientEncounterOrder.
+     */
+    data: XOR<InpatientEncounterOrderCreateInput, InpatientEncounterOrderUncheckedCreateInput>
+  }
+
+  /**
+   * InpatientEncounterOrder createMany
+   */
+  export type InpatientEncounterOrderCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many InpatientEncounterOrders.
+     */
+    data: InpatientEncounterOrderCreateManyInput | InpatientEncounterOrderCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * InpatientEncounterOrder createManyAndReturn
+   */
+  export type InpatientEncounterOrderCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InpatientEncounterOrder
+     */
+    select?: InpatientEncounterOrderSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the InpatientEncounterOrder
+     */
+    omit?: InpatientEncounterOrderOmit<ExtArgs> | null
+    /**
+     * The data used to create many InpatientEncounterOrders.
+     */
+    data: InpatientEncounterOrderCreateManyInput | InpatientEncounterOrderCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InpatientEncounterOrderIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * InpatientEncounterOrder update
+   */
+  export type InpatientEncounterOrderUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InpatientEncounterOrder
+     */
+    select?: InpatientEncounterOrderSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InpatientEncounterOrder
+     */
+    omit?: InpatientEncounterOrderOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InpatientEncounterOrderInclude<ExtArgs> | null
+    /**
+     * The data needed to update a InpatientEncounterOrder.
+     */
+    data: XOR<InpatientEncounterOrderUpdateInput, InpatientEncounterOrderUncheckedUpdateInput>
+    /**
+     * Choose, which InpatientEncounterOrder to update.
+     */
+    where: InpatientEncounterOrderWhereUniqueInput
+  }
+
+  /**
+   * InpatientEncounterOrder updateMany
+   */
+  export type InpatientEncounterOrderUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update InpatientEncounterOrders.
+     */
+    data: XOR<InpatientEncounterOrderUpdateManyMutationInput, InpatientEncounterOrderUncheckedUpdateManyInput>
+    /**
+     * Filter which InpatientEncounterOrders to update
+     */
+    where?: InpatientEncounterOrderWhereInput
+    /**
+     * Limit how many InpatientEncounterOrders to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * InpatientEncounterOrder updateManyAndReturn
+   */
+  export type InpatientEncounterOrderUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InpatientEncounterOrder
+     */
+    select?: InpatientEncounterOrderSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the InpatientEncounterOrder
+     */
+    omit?: InpatientEncounterOrderOmit<ExtArgs> | null
+    /**
+     * The data used to update InpatientEncounterOrders.
+     */
+    data: XOR<InpatientEncounterOrderUpdateManyMutationInput, InpatientEncounterOrderUncheckedUpdateManyInput>
+    /**
+     * Filter which InpatientEncounterOrders to update
+     */
+    where?: InpatientEncounterOrderWhereInput
+    /**
+     * Limit how many InpatientEncounterOrders to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InpatientEncounterOrderIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * InpatientEncounterOrder upsert
+   */
+  export type InpatientEncounterOrderUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InpatientEncounterOrder
+     */
+    select?: InpatientEncounterOrderSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InpatientEncounterOrder
+     */
+    omit?: InpatientEncounterOrderOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InpatientEncounterOrderInclude<ExtArgs> | null
+    /**
+     * The filter to search for the InpatientEncounterOrder to update in case it exists.
+     */
+    where: InpatientEncounterOrderWhereUniqueInput
+    /**
+     * In case the InpatientEncounterOrder found by the `where` argument doesn't exist, create a new InpatientEncounterOrder with this data.
+     */
+    create: XOR<InpatientEncounterOrderCreateInput, InpatientEncounterOrderUncheckedCreateInput>
+    /**
+     * In case the InpatientEncounterOrder was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<InpatientEncounterOrderUpdateInput, InpatientEncounterOrderUncheckedUpdateInput>
+  }
+
+  /**
+   * InpatientEncounterOrder delete
+   */
+  export type InpatientEncounterOrderDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InpatientEncounterOrder
+     */
+    select?: InpatientEncounterOrderSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InpatientEncounterOrder
+     */
+    omit?: InpatientEncounterOrderOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InpatientEncounterOrderInclude<ExtArgs> | null
+    /**
+     * Filter which InpatientEncounterOrder to delete.
+     */
+    where: InpatientEncounterOrderWhereUniqueInput
+  }
+
+  /**
+   * InpatientEncounterOrder deleteMany
+   */
+  export type InpatientEncounterOrderDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which InpatientEncounterOrders to delete
+     */
+    where?: InpatientEncounterOrderWhereInput
+    /**
+     * Limit how many InpatientEncounterOrders to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * InpatientEncounterOrder.catalogueItem
+   */
+  export type InpatientEncounterOrder$catalogueItemArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ParticularCatalogue
+     */
+    select?: ParticularCatalogueSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ParticularCatalogue
+     */
+    omit?: ParticularCatalogueOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ParticularCatalogueInclude<ExtArgs> | null
+    where?: ParticularCatalogueWhereInput
+  }
+
+  /**
+   * InpatientEncounterOrder without action
+   */
+  export type InpatientEncounterOrderDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InpatientEncounterOrder
+     */
+    select?: InpatientEncounterOrderSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InpatientEncounterOrder
+     */
+    omit?: InpatientEncounterOrderOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InpatientEncounterOrderInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model ParticularCatalogue
+   */
+
+  export type AggregateParticularCatalogue = {
+    _count: ParticularCatalogueCountAggregateOutputType | null
+    _avg: ParticularCatalogueAvgAggregateOutputType | null
+    _sum: ParticularCatalogueSumAggregateOutputType | null
+    _min: ParticularCatalogueMinAggregateOutputType | null
+    _max: ParticularCatalogueMaxAggregateOutputType | null
+  }
+
+  export type ParticularCatalogueAvgAggregateOutputType = {
+    cost: Decimal | null
+  }
+
+  export type ParticularCatalogueSumAggregateOutputType = {
+    cost: Decimal | null
+  }
+
+  export type ParticularCatalogueMinAggregateOutputType = {
+    id: string | null
+    type: $Enums.ParticularType | null
+    name: string | null
+    description: string | null
+    cost: Decimal | null
+    isActive: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type ParticularCatalogueMaxAggregateOutputType = {
+    id: string | null
+    type: $Enums.ParticularType | null
+    name: string | null
+    description: string | null
+    cost: Decimal | null
+    isActive: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type ParticularCatalogueCountAggregateOutputType = {
+    id: number
+    type: number
+    name: number
+    description: number
+    cost: number
+    isActive: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type ParticularCatalogueAvgAggregateInputType = {
+    cost?: true
+  }
+
+  export type ParticularCatalogueSumAggregateInputType = {
+    cost?: true
+  }
+
+  export type ParticularCatalogueMinAggregateInputType = {
+    id?: true
+    type?: true
+    name?: true
+    description?: true
+    cost?: true
+    isActive?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type ParticularCatalogueMaxAggregateInputType = {
+    id?: true
+    type?: true
+    name?: true
+    description?: true
+    cost?: true
+    isActive?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type ParticularCatalogueCountAggregateInputType = {
+    id?: true
+    type?: true
+    name?: true
+    description?: true
+    cost?: true
+    isActive?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type ParticularCatalogueAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ParticularCatalogue to aggregate.
+     */
+    where?: ParticularCatalogueWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ParticularCatalogues to fetch.
+     */
+    orderBy?: ParticularCatalogueOrderByWithRelationInput | ParticularCatalogueOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ParticularCatalogueWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ParticularCatalogues from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ParticularCatalogues.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned ParticularCatalogues
+    **/
+    _count?: true | ParticularCatalogueCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: ParticularCatalogueAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: ParticularCatalogueSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ParticularCatalogueMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ParticularCatalogueMaxAggregateInputType
+  }
+
+  export type GetParticularCatalogueAggregateType<T extends ParticularCatalogueAggregateArgs> = {
+        [P in keyof T & keyof AggregateParticularCatalogue]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateParticularCatalogue[P]>
+      : GetScalarType<T[P], AggregateParticularCatalogue[P]>
+  }
+
+
+
+
+  export type ParticularCatalogueGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ParticularCatalogueWhereInput
+    orderBy?: ParticularCatalogueOrderByWithAggregationInput | ParticularCatalogueOrderByWithAggregationInput[]
+    by: ParticularCatalogueScalarFieldEnum[] | ParticularCatalogueScalarFieldEnum
+    having?: ParticularCatalogueScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ParticularCatalogueCountAggregateInputType | true
+    _avg?: ParticularCatalogueAvgAggregateInputType
+    _sum?: ParticularCatalogueSumAggregateInputType
+    _min?: ParticularCatalogueMinAggregateInputType
+    _max?: ParticularCatalogueMaxAggregateInputType
+  }
+
+  export type ParticularCatalogueGroupByOutputType = {
+    id: string
+    type: $Enums.ParticularType
+    name: string
+    description: string | null
+    cost: Decimal
+    isActive: boolean
+    createdAt: Date
+    updatedAt: Date
+    _count: ParticularCatalogueCountAggregateOutputType | null
+    _avg: ParticularCatalogueAvgAggregateOutputType | null
+    _sum: ParticularCatalogueSumAggregateOutputType | null
+    _min: ParticularCatalogueMinAggregateOutputType | null
+    _max: ParticularCatalogueMaxAggregateOutputType | null
+  }
+
+  type GetParticularCatalogueGroupByPayload<T extends ParticularCatalogueGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ParticularCatalogueGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ParticularCatalogueGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ParticularCatalogueGroupByOutputType[P]>
+            : GetScalarType<T[P], ParticularCatalogueGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ParticularCatalogueSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    type?: boolean
+    name?: boolean
+    description?: boolean
+    cost?: boolean
+    isActive?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    orders?: boolean | ParticularCatalogue$ordersArgs<ExtArgs>
+    _count?: boolean | ParticularCatalogueCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["particularCatalogue"]>
+
+  export type ParticularCatalogueSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    type?: boolean
+    name?: boolean
+    description?: boolean
+    cost?: boolean
+    isActive?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["particularCatalogue"]>
+
+  export type ParticularCatalogueSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    type?: boolean
+    name?: boolean
+    description?: boolean
+    cost?: boolean
+    isActive?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["particularCatalogue"]>
+
+  export type ParticularCatalogueSelectScalar = {
+    id?: boolean
+    type?: boolean
+    name?: boolean
+    description?: boolean
+    cost?: boolean
+    isActive?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type ParticularCatalogueOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "type" | "name" | "description" | "cost" | "isActive" | "createdAt" | "updatedAt", ExtArgs["result"]["particularCatalogue"]>
+  export type ParticularCatalogueInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    orders?: boolean | ParticularCatalogue$ordersArgs<ExtArgs>
+    _count?: boolean | ParticularCatalogueCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type ParticularCatalogueIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type ParticularCatalogueIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+
+  export type $ParticularCataloguePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "ParticularCatalogue"
+    objects: {
+      orders: Prisma.$InpatientEncounterOrderPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      type: $Enums.ParticularType
+      name: string
+      description: string | null
+      cost: Prisma.Decimal
+      isActive: boolean
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["particularCatalogue"]>
+    composites: {}
+  }
+
+  type ParticularCatalogueGetPayload<S extends boolean | null | undefined | ParticularCatalogueDefaultArgs> = $Result.GetResult<Prisma.$ParticularCataloguePayload, S>
+
+  type ParticularCatalogueCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ParticularCatalogueFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ParticularCatalogueCountAggregateInputType | true
+    }
+
+  export interface ParticularCatalogueDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['ParticularCatalogue'], meta: { name: 'ParticularCatalogue' } }
+    /**
+     * Find zero or one ParticularCatalogue that matches the filter.
+     * @param {ParticularCatalogueFindUniqueArgs} args - Arguments to find a ParticularCatalogue
+     * @example
+     * // Get one ParticularCatalogue
+     * const particularCatalogue = await prisma.particularCatalogue.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends ParticularCatalogueFindUniqueArgs>(args: SelectSubset<T, ParticularCatalogueFindUniqueArgs<ExtArgs>>): Prisma__ParticularCatalogueClient<$Result.GetResult<Prisma.$ParticularCataloguePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one ParticularCatalogue that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {ParticularCatalogueFindUniqueOrThrowArgs} args - Arguments to find a ParticularCatalogue
+     * @example
+     * // Get one ParticularCatalogue
+     * const particularCatalogue = await prisma.particularCatalogue.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends ParticularCatalogueFindUniqueOrThrowArgs>(args: SelectSubset<T, ParticularCatalogueFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ParticularCatalogueClient<$Result.GetResult<Prisma.$ParticularCataloguePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ParticularCatalogue that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ParticularCatalogueFindFirstArgs} args - Arguments to find a ParticularCatalogue
+     * @example
+     * // Get one ParticularCatalogue
+     * const particularCatalogue = await prisma.particularCatalogue.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends ParticularCatalogueFindFirstArgs>(args?: SelectSubset<T, ParticularCatalogueFindFirstArgs<ExtArgs>>): Prisma__ParticularCatalogueClient<$Result.GetResult<Prisma.$ParticularCataloguePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ParticularCatalogue that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ParticularCatalogueFindFirstOrThrowArgs} args - Arguments to find a ParticularCatalogue
+     * @example
+     * // Get one ParticularCatalogue
+     * const particularCatalogue = await prisma.particularCatalogue.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends ParticularCatalogueFindFirstOrThrowArgs>(args?: SelectSubset<T, ParticularCatalogueFindFirstOrThrowArgs<ExtArgs>>): Prisma__ParticularCatalogueClient<$Result.GetResult<Prisma.$ParticularCataloguePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more ParticularCatalogues that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ParticularCatalogueFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all ParticularCatalogues
+     * const particularCatalogues = await prisma.particularCatalogue.findMany()
+     * 
+     * // Get first 10 ParticularCatalogues
+     * const particularCatalogues = await prisma.particularCatalogue.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const particularCatalogueWithIdOnly = await prisma.particularCatalogue.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends ParticularCatalogueFindManyArgs>(args?: SelectSubset<T, ParticularCatalogueFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ParticularCataloguePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a ParticularCatalogue.
+     * @param {ParticularCatalogueCreateArgs} args - Arguments to create a ParticularCatalogue.
+     * @example
+     * // Create one ParticularCatalogue
+     * const ParticularCatalogue = await prisma.particularCatalogue.create({
+     *   data: {
+     *     // ... data to create a ParticularCatalogue
+     *   }
+     * })
+     * 
+     */
+    create<T extends ParticularCatalogueCreateArgs>(args: SelectSubset<T, ParticularCatalogueCreateArgs<ExtArgs>>): Prisma__ParticularCatalogueClient<$Result.GetResult<Prisma.$ParticularCataloguePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many ParticularCatalogues.
+     * @param {ParticularCatalogueCreateManyArgs} args - Arguments to create many ParticularCatalogues.
+     * @example
+     * // Create many ParticularCatalogues
+     * const particularCatalogue = await prisma.particularCatalogue.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends ParticularCatalogueCreateManyArgs>(args?: SelectSubset<T, ParticularCatalogueCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many ParticularCatalogues and returns the data saved in the database.
+     * @param {ParticularCatalogueCreateManyAndReturnArgs} args - Arguments to create many ParticularCatalogues.
+     * @example
+     * // Create many ParticularCatalogues
+     * const particularCatalogue = await prisma.particularCatalogue.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many ParticularCatalogues and only return the `id`
+     * const particularCatalogueWithIdOnly = await prisma.particularCatalogue.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends ParticularCatalogueCreateManyAndReturnArgs>(args?: SelectSubset<T, ParticularCatalogueCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ParticularCataloguePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a ParticularCatalogue.
+     * @param {ParticularCatalogueDeleteArgs} args - Arguments to delete one ParticularCatalogue.
+     * @example
+     * // Delete one ParticularCatalogue
+     * const ParticularCatalogue = await prisma.particularCatalogue.delete({
+     *   where: {
+     *     // ... filter to delete one ParticularCatalogue
+     *   }
+     * })
+     * 
+     */
+    delete<T extends ParticularCatalogueDeleteArgs>(args: SelectSubset<T, ParticularCatalogueDeleteArgs<ExtArgs>>): Prisma__ParticularCatalogueClient<$Result.GetResult<Prisma.$ParticularCataloguePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one ParticularCatalogue.
+     * @param {ParticularCatalogueUpdateArgs} args - Arguments to update one ParticularCatalogue.
+     * @example
+     * // Update one ParticularCatalogue
+     * const particularCatalogue = await prisma.particularCatalogue.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends ParticularCatalogueUpdateArgs>(args: SelectSubset<T, ParticularCatalogueUpdateArgs<ExtArgs>>): Prisma__ParticularCatalogueClient<$Result.GetResult<Prisma.$ParticularCataloguePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more ParticularCatalogues.
+     * @param {ParticularCatalogueDeleteManyArgs} args - Arguments to filter ParticularCatalogues to delete.
+     * @example
+     * // Delete a few ParticularCatalogues
+     * const { count } = await prisma.particularCatalogue.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends ParticularCatalogueDeleteManyArgs>(args?: SelectSubset<T, ParticularCatalogueDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ParticularCatalogues.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ParticularCatalogueUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many ParticularCatalogues
+     * const particularCatalogue = await prisma.particularCatalogue.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends ParticularCatalogueUpdateManyArgs>(args: SelectSubset<T, ParticularCatalogueUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ParticularCatalogues and returns the data updated in the database.
+     * @param {ParticularCatalogueUpdateManyAndReturnArgs} args - Arguments to update many ParticularCatalogues.
+     * @example
+     * // Update many ParticularCatalogues
+     * const particularCatalogue = await prisma.particularCatalogue.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more ParticularCatalogues and only return the `id`
+     * const particularCatalogueWithIdOnly = await prisma.particularCatalogue.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends ParticularCatalogueUpdateManyAndReturnArgs>(args: SelectSubset<T, ParticularCatalogueUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ParticularCataloguePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one ParticularCatalogue.
+     * @param {ParticularCatalogueUpsertArgs} args - Arguments to update or create a ParticularCatalogue.
+     * @example
+     * // Update or create a ParticularCatalogue
+     * const particularCatalogue = await prisma.particularCatalogue.upsert({
+     *   create: {
+     *     // ... data to create a ParticularCatalogue
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the ParticularCatalogue we want to update
+     *   }
+     * })
+     */
+    upsert<T extends ParticularCatalogueUpsertArgs>(args: SelectSubset<T, ParticularCatalogueUpsertArgs<ExtArgs>>): Prisma__ParticularCatalogueClient<$Result.GetResult<Prisma.$ParticularCataloguePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of ParticularCatalogues.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ParticularCatalogueCountArgs} args - Arguments to filter ParticularCatalogues to count.
+     * @example
+     * // Count the number of ParticularCatalogues
+     * const count = await prisma.particularCatalogue.count({
+     *   where: {
+     *     // ... the filter for the ParticularCatalogues we want to count
+     *   }
+     * })
+    **/
+    count<T extends ParticularCatalogueCountArgs>(
+      args?: Subset<T, ParticularCatalogueCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ParticularCatalogueCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a ParticularCatalogue.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ParticularCatalogueAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ParticularCatalogueAggregateArgs>(args: Subset<T, ParticularCatalogueAggregateArgs>): Prisma.PrismaPromise<GetParticularCatalogueAggregateType<T>>
+
+    /**
+     * Group by ParticularCatalogue.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ParticularCatalogueGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ParticularCatalogueGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ParticularCatalogueGroupByArgs['orderBy'] }
+        : { orderBy?: ParticularCatalogueGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ParticularCatalogueGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetParticularCatalogueGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the ParticularCatalogue model
+   */
+  readonly fields: ParticularCatalogueFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for ParticularCatalogue.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ParticularCatalogueClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    orders<T extends ParticularCatalogue$ordersArgs<ExtArgs> = {}>(args?: Subset<T, ParticularCatalogue$ordersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InpatientEncounterOrderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the ParticularCatalogue model
+   */
+  interface ParticularCatalogueFieldRefs {
+    readonly id: FieldRef<"ParticularCatalogue", 'String'>
+    readonly type: FieldRef<"ParticularCatalogue", 'ParticularType'>
+    readonly name: FieldRef<"ParticularCatalogue", 'String'>
+    readonly description: FieldRef<"ParticularCatalogue", 'String'>
+    readonly cost: FieldRef<"ParticularCatalogue", 'Decimal'>
+    readonly isActive: FieldRef<"ParticularCatalogue", 'Boolean'>
+    readonly createdAt: FieldRef<"ParticularCatalogue", 'DateTime'>
+    readonly updatedAt: FieldRef<"ParticularCatalogue", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * ParticularCatalogue findUnique
+   */
+  export type ParticularCatalogueFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ParticularCatalogue
+     */
+    select?: ParticularCatalogueSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ParticularCatalogue
+     */
+    omit?: ParticularCatalogueOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ParticularCatalogueInclude<ExtArgs> | null
+    /**
+     * Filter, which ParticularCatalogue to fetch.
+     */
+    where: ParticularCatalogueWhereUniqueInput
+  }
+
+  /**
+   * ParticularCatalogue findUniqueOrThrow
+   */
+  export type ParticularCatalogueFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ParticularCatalogue
+     */
+    select?: ParticularCatalogueSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ParticularCatalogue
+     */
+    omit?: ParticularCatalogueOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ParticularCatalogueInclude<ExtArgs> | null
+    /**
+     * Filter, which ParticularCatalogue to fetch.
+     */
+    where: ParticularCatalogueWhereUniqueInput
+  }
+
+  /**
+   * ParticularCatalogue findFirst
+   */
+  export type ParticularCatalogueFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ParticularCatalogue
+     */
+    select?: ParticularCatalogueSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ParticularCatalogue
+     */
+    omit?: ParticularCatalogueOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ParticularCatalogueInclude<ExtArgs> | null
+    /**
+     * Filter, which ParticularCatalogue to fetch.
+     */
+    where?: ParticularCatalogueWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ParticularCatalogues to fetch.
+     */
+    orderBy?: ParticularCatalogueOrderByWithRelationInput | ParticularCatalogueOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ParticularCatalogues.
+     */
+    cursor?: ParticularCatalogueWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ParticularCatalogues from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ParticularCatalogues.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ParticularCatalogues.
+     */
+    distinct?: ParticularCatalogueScalarFieldEnum | ParticularCatalogueScalarFieldEnum[]
+  }
+
+  /**
+   * ParticularCatalogue findFirstOrThrow
+   */
+  export type ParticularCatalogueFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ParticularCatalogue
+     */
+    select?: ParticularCatalogueSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ParticularCatalogue
+     */
+    omit?: ParticularCatalogueOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ParticularCatalogueInclude<ExtArgs> | null
+    /**
+     * Filter, which ParticularCatalogue to fetch.
+     */
+    where?: ParticularCatalogueWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ParticularCatalogues to fetch.
+     */
+    orderBy?: ParticularCatalogueOrderByWithRelationInput | ParticularCatalogueOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ParticularCatalogues.
+     */
+    cursor?: ParticularCatalogueWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ParticularCatalogues from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ParticularCatalogues.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ParticularCatalogues.
+     */
+    distinct?: ParticularCatalogueScalarFieldEnum | ParticularCatalogueScalarFieldEnum[]
+  }
+
+  /**
+   * ParticularCatalogue findMany
+   */
+  export type ParticularCatalogueFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ParticularCatalogue
+     */
+    select?: ParticularCatalogueSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ParticularCatalogue
+     */
+    omit?: ParticularCatalogueOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ParticularCatalogueInclude<ExtArgs> | null
+    /**
+     * Filter, which ParticularCatalogues to fetch.
+     */
+    where?: ParticularCatalogueWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ParticularCatalogues to fetch.
+     */
+    orderBy?: ParticularCatalogueOrderByWithRelationInput | ParticularCatalogueOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing ParticularCatalogues.
+     */
+    cursor?: ParticularCatalogueWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ParticularCatalogues from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ParticularCatalogues.
+     */
+    skip?: number
+    distinct?: ParticularCatalogueScalarFieldEnum | ParticularCatalogueScalarFieldEnum[]
+  }
+
+  /**
+   * ParticularCatalogue create
+   */
+  export type ParticularCatalogueCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ParticularCatalogue
+     */
+    select?: ParticularCatalogueSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ParticularCatalogue
+     */
+    omit?: ParticularCatalogueOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ParticularCatalogueInclude<ExtArgs> | null
+    /**
+     * The data needed to create a ParticularCatalogue.
+     */
+    data: XOR<ParticularCatalogueCreateInput, ParticularCatalogueUncheckedCreateInput>
+  }
+
+  /**
+   * ParticularCatalogue createMany
+   */
+  export type ParticularCatalogueCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many ParticularCatalogues.
+     */
+    data: ParticularCatalogueCreateManyInput | ParticularCatalogueCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * ParticularCatalogue createManyAndReturn
+   */
+  export type ParticularCatalogueCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ParticularCatalogue
+     */
+    select?: ParticularCatalogueSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ParticularCatalogue
+     */
+    omit?: ParticularCatalogueOmit<ExtArgs> | null
+    /**
+     * The data used to create many ParticularCatalogues.
+     */
+    data: ParticularCatalogueCreateManyInput | ParticularCatalogueCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * ParticularCatalogue update
+   */
+  export type ParticularCatalogueUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ParticularCatalogue
+     */
+    select?: ParticularCatalogueSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ParticularCatalogue
+     */
+    omit?: ParticularCatalogueOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ParticularCatalogueInclude<ExtArgs> | null
+    /**
+     * The data needed to update a ParticularCatalogue.
+     */
+    data: XOR<ParticularCatalogueUpdateInput, ParticularCatalogueUncheckedUpdateInput>
+    /**
+     * Choose, which ParticularCatalogue to update.
+     */
+    where: ParticularCatalogueWhereUniqueInput
+  }
+
+  /**
+   * ParticularCatalogue updateMany
+   */
+  export type ParticularCatalogueUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update ParticularCatalogues.
+     */
+    data: XOR<ParticularCatalogueUpdateManyMutationInput, ParticularCatalogueUncheckedUpdateManyInput>
+    /**
+     * Filter which ParticularCatalogues to update
+     */
+    where?: ParticularCatalogueWhereInput
+    /**
+     * Limit how many ParticularCatalogues to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * ParticularCatalogue updateManyAndReturn
+   */
+  export type ParticularCatalogueUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ParticularCatalogue
+     */
+    select?: ParticularCatalogueSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ParticularCatalogue
+     */
+    omit?: ParticularCatalogueOmit<ExtArgs> | null
+    /**
+     * The data used to update ParticularCatalogues.
+     */
+    data: XOR<ParticularCatalogueUpdateManyMutationInput, ParticularCatalogueUncheckedUpdateManyInput>
+    /**
+     * Filter which ParticularCatalogues to update
+     */
+    where?: ParticularCatalogueWhereInput
+    /**
+     * Limit how many ParticularCatalogues to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * ParticularCatalogue upsert
+   */
+  export type ParticularCatalogueUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ParticularCatalogue
+     */
+    select?: ParticularCatalogueSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ParticularCatalogue
+     */
+    omit?: ParticularCatalogueOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ParticularCatalogueInclude<ExtArgs> | null
+    /**
+     * The filter to search for the ParticularCatalogue to update in case it exists.
+     */
+    where: ParticularCatalogueWhereUniqueInput
+    /**
+     * In case the ParticularCatalogue found by the `where` argument doesn't exist, create a new ParticularCatalogue with this data.
+     */
+    create: XOR<ParticularCatalogueCreateInput, ParticularCatalogueUncheckedCreateInput>
+    /**
+     * In case the ParticularCatalogue was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ParticularCatalogueUpdateInput, ParticularCatalogueUncheckedUpdateInput>
+  }
+
+  /**
+   * ParticularCatalogue delete
+   */
+  export type ParticularCatalogueDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ParticularCatalogue
+     */
+    select?: ParticularCatalogueSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ParticularCatalogue
+     */
+    omit?: ParticularCatalogueOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ParticularCatalogueInclude<ExtArgs> | null
+    /**
+     * Filter which ParticularCatalogue to delete.
+     */
+    where: ParticularCatalogueWhereUniqueInput
+  }
+
+  /**
+   * ParticularCatalogue deleteMany
+   */
+  export type ParticularCatalogueDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ParticularCatalogues to delete
+     */
+    where?: ParticularCatalogueWhereInput
+    /**
+     * Limit how many ParticularCatalogues to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * ParticularCatalogue.orders
+   */
+  export type ParticularCatalogue$ordersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InpatientEncounterOrder
+     */
+    select?: InpatientEncounterOrderSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InpatientEncounterOrder
+     */
+    omit?: InpatientEncounterOrderOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InpatientEncounterOrderInclude<ExtArgs> | null
+    where?: InpatientEncounterOrderWhereInput
+    orderBy?: InpatientEncounterOrderOrderByWithRelationInput | InpatientEncounterOrderOrderByWithRelationInput[]
+    cursor?: InpatientEncounterOrderWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: InpatientEncounterOrderScalarFieldEnum | InpatientEncounterOrderScalarFieldEnum[]
+  }
+
+  /**
+   * ParticularCatalogue without action
+   */
+  export type ParticularCatalogueDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ParticularCatalogue
+     */
+    select?: ParticularCatalogueSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ParticularCatalogue
+     */
+    omit?: ParticularCatalogueOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ParticularCatalogueInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -21565,6 +28144,89 @@ export namespace Prisma {
   };
 
   export type PharmacyPaymentScalarFieldEnum = (typeof PharmacyPaymentScalarFieldEnum)[keyof typeof PharmacyPaymentScalarFieldEnum]
+
+
+  export const OutpatientEncounterScalarFieldEnum: {
+    id: 'id',
+    patientId: 'patientId',
+    doctorId: 'doctorId',
+    date: 'date',
+    time: 'time',
+    chiefComplaint: 'chiefComplaint',
+    doctorDiagnosis: 'doctorDiagnosis',
+    type: 'type',
+    consultationFee: 'consultationFee',
+    paymentStatus: 'paymentStatus',
+    notes: 'notes',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type OutpatientEncounterScalarFieldEnum = (typeof OutpatientEncounterScalarFieldEnum)[keyof typeof OutpatientEncounterScalarFieldEnum]
+
+
+  export const InpatientEncounterScalarFieldEnum: {
+    id: 'id',
+    patientId: 'patientId',
+    doctorId: 'doctorId',
+    admittedBy: 'admittedBy',
+    date: 'date',
+    time: 'time',
+    chiefComplaint: 'chiefComplaint',
+    doctorDiagnosis: 'doctorDiagnosis',
+    triage: 'triage',
+    disposition: 'disposition',
+    dispositionDate: 'dispositionDate',
+    dispositionTime: 'dispositionTime',
+    dispositionNote: 'dispositionNote',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type InpatientEncounterScalarFieldEnum = (typeof InpatientEncounterScalarFieldEnum)[keyof typeof InpatientEncounterScalarFieldEnum]
+
+
+  export const InpatientEncounterChartScalarFieldEnum: {
+    id: 'id',
+    encounterId: 'encounterId',
+    staffId: 'staffId',
+    chart: 'chart',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type InpatientEncounterChartScalarFieldEnum = (typeof InpatientEncounterChartScalarFieldEnum)[keyof typeof InpatientEncounterChartScalarFieldEnum]
+
+
+  export const InpatientEncounterOrderScalarFieldEnum: {
+    id: 'id',
+    encounterId: 'encounterId',
+    catalogueItemId: 'catalogueItemId',
+    type: 'type',
+    description: 'description',
+    cost: 'cost',
+    status: 'status',
+    orderedBy: 'orderedBy',
+    notes: 'notes',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type InpatientEncounterOrderScalarFieldEnum = (typeof InpatientEncounterOrderScalarFieldEnum)[keyof typeof InpatientEncounterOrderScalarFieldEnum]
+
+
+  export const ParticularCatalogueScalarFieldEnum: {
+    id: 'id',
+    type: 'type',
+    name: 'name',
+    description: 'description',
+    cost: 'cost',
+    isActive: 'isActive',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type ParticularCatalogueScalarFieldEnum = (typeof ParticularCatalogueScalarFieldEnum)[keyof typeof ParticularCatalogueScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -21915,6 +28577,104 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'OutpatientEncounterType'
+   */
+  export type EnumOutpatientEncounterTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'OutpatientEncounterType'>
+    
+
+
+  /**
+   * Reference to a field of type 'OutpatientEncounterType[]'
+   */
+  export type ListEnumOutpatientEncounterTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'OutpatientEncounterType[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'OutpatientPaymentStatus'
+   */
+  export type EnumOutpatientPaymentStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'OutpatientPaymentStatus'>
+    
+
+
+  /**
+   * Reference to a field of type 'OutpatientPaymentStatus[]'
+   */
+  export type ListEnumOutpatientPaymentStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'OutpatientPaymentStatus[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'InpatientTriage'
+   */
+  export type EnumInpatientTriageFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'InpatientTriage'>
+    
+
+
+  /**
+   * Reference to a field of type 'InpatientTriage[]'
+   */
+  export type ListEnumInpatientTriageFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'InpatientTriage[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'InpatientDisposition'
+   */
+  export type EnumInpatientDispositionFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'InpatientDisposition'>
+    
+
+
+  /**
+   * Reference to a field of type 'InpatientDisposition[]'
+   */
+  export type ListEnumInpatientDispositionFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'InpatientDisposition[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'InpatientEncounterOrderType'
+   */
+  export type EnumInpatientEncounterOrderTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'InpatientEncounterOrderType'>
+    
+
+
+  /**
+   * Reference to a field of type 'InpatientEncounterOrderType[]'
+   */
+  export type ListEnumInpatientEncounterOrderTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'InpatientEncounterOrderType[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'InpatientEncounterOrderStatus'
+   */
+  export type EnumInpatientEncounterOrderStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'InpatientEncounterOrderStatus'>
+    
+
+
+  /**
+   * Reference to a field of type 'InpatientEncounterOrderStatus[]'
+   */
+  export type ListEnumInpatientEncounterOrderStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'InpatientEncounterOrderStatus[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'ParticularType'
+   */
+  export type EnumParticularTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ParticularType'>
+    
+
+
+  /**
+   * Reference to a field of type 'ParticularType[]'
+   */
+  export type ListEnumParticularTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ParticularType[]'>
+    
+
+
+  /**
    * Reference to a field of type 'Float'
    */
   export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
@@ -22255,6 +29015,8 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Patient"> | Date | string
     updatedAt?: DateTimeFilter<"Patient"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    inpatientEncounters?: InpatientEncounterListRelationFilter
+    outpatientEncounters?: OutpatientEncounterListRelationFilter
   }
 
   export type PatientOrderByWithRelationInput = {
@@ -22271,6 +29033,8 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     user?: UserOrderByWithRelationInput
+    inpatientEncounters?: InpatientEncounterOrderByRelationAggregateInput
+    outpatientEncounters?: OutpatientEncounterOrderByRelationAggregateInput
   }
 
   export type PatientWhereUniqueInput = Prisma.AtLeast<{
@@ -22290,6 +29054,8 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Patient"> | Date | string
     updatedAt?: DateTimeFilter<"Patient"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    inpatientEncounters?: InpatientEncounterListRelationFilter
+    outpatientEncounters?: OutpatientEncounterListRelationFilter
   }, "id" | "userId" | "patientNumber">
 
   export type PatientOrderByWithAggregationInput = {
@@ -23317,6 +30083,436 @@ export namespace Prisma {
     updatedAt?: DateTimeWithAggregatesFilter<"PharmacyPayment"> | Date | string
   }
 
+  export type OutpatientEncounterWhereInput = {
+    AND?: OutpatientEncounterWhereInput | OutpatientEncounterWhereInput[]
+    OR?: OutpatientEncounterWhereInput[]
+    NOT?: OutpatientEncounterWhereInput | OutpatientEncounterWhereInput[]
+    id?: UuidFilter<"OutpatientEncounter"> | string
+    patientId?: StringFilter<"OutpatientEncounter"> | string
+    doctorId?: StringFilter<"OutpatientEncounter"> | string
+    date?: StringFilter<"OutpatientEncounter"> | string
+    time?: StringFilter<"OutpatientEncounter"> | string
+    chiefComplaint?: StringFilter<"OutpatientEncounter"> | string
+    doctorDiagnosis?: StringNullableFilter<"OutpatientEncounter"> | string | null
+    type?: EnumOutpatientEncounterTypeFilter<"OutpatientEncounter"> | $Enums.OutpatientEncounterType
+    consultationFee?: DecimalNullableFilter<"OutpatientEncounter"> | Decimal | DecimalJsLike | number | string | null
+    paymentStatus?: EnumOutpatientPaymentStatusFilter<"OutpatientEncounter"> | $Enums.OutpatientPaymentStatus
+    notes?: StringNullableFilter<"OutpatientEncounter"> | string | null
+    createdAt?: DateTimeFilter<"OutpatientEncounter"> | Date | string
+    updatedAt?: DateTimeFilter<"OutpatientEncounter"> | Date | string
+    patient?: XOR<PatientScalarRelationFilter, PatientWhereInput>
+  }
+
+  export type OutpatientEncounterOrderByWithRelationInput = {
+    id?: SortOrder
+    patientId?: SortOrder
+    doctorId?: SortOrder
+    date?: SortOrder
+    time?: SortOrder
+    chiefComplaint?: SortOrder
+    doctorDiagnosis?: SortOrderInput | SortOrder
+    type?: SortOrder
+    consultationFee?: SortOrderInput | SortOrder
+    paymentStatus?: SortOrder
+    notes?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    patient?: PatientOrderByWithRelationInput
+  }
+
+  export type OutpatientEncounterWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: OutpatientEncounterWhereInput | OutpatientEncounterWhereInput[]
+    OR?: OutpatientEncounterWhereInput[]
+    NOT?: OutpatientEncounterWhereInput | OutpatientEncounterWhereInput[]
+    patientId?: StringFilter<"OutpatientEncounter"> | string
+    doctorId?: StringFilter<"OutpatientEncounter"> | string
+    date?: StringFilter<"OutpatientEncounter"> | string
+    time?: StringFilter<"OutpatientEncounter"> | string
+    chiefComplaint?: StringFilter<"OutpatientEncounter"> | string
+    doctorDiagnosis?: StringNullableFilter<"OutpatientEncounter"> | string | null
+    type?: EnumOutpatientEncounterTypeFilter<"OutpatientEncounter"> | $Enums.OutpatientEncounterType
+    consultationFee?: DecimalNullableFilter<"OutpatientEncounter"> | Decimal | DecimalJsLike | number | string | null
+    paymentStatus?: EnumOutpatientPaymentStatusFilter<"OutpatientEncounter"> | $Enums.OutpatientPaymentStatus
+    notes?: StringNullableFilter<"OutpatientEncounter"> | string | null
+    createdAt?: DateTimeFilter<"OutpatientEncounter"> | Date | string
+    updatedAt?: DateTimeFilter<"OutpatientEncounter"> | Date | string
+    patient?: XOR<PatientScalarRelationFilter, PatientWhereInput>
+  }, "id">
+
+  export type OutpatientEncounterOrderByWithAggregationInput = {
+    id?: SortOrder
+    patientId?: SortOrder
+    doctorId?: SortOrder
+    date?: SortOrder
+    time?: SortOrder
+    chiefComplaint?: SortOrder
+    doctorDiagnosis?: SortOrderInput | SortOrder
+    type?: SortOrder
+    consultationFee?: SortOrderInput | SortOrder
+    paymentStatus?: SortOrder
+    notes?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: OutpatientEncounterCountOrderByAggregateInput
+    _avg?: OutpatientEncounterAvgOrderByAggregateInput
+    _max?: OutpatientEncounterMaxOrderByAggregateInput
+    _min?: OutpatientEncounterMinOrderByAggregateInput
+    _sum?: OutpatientEncounterSumOrderByAggregateInput
+  }
+
+  export type OutpatientEncounterScalarWhereWithAggregatesInput = {
+    AND?: OutpatientEncounterScalarWhereWithAggregatesInput | OutpatientEncounterScalarWhereWithAggregatesInput[]
+    OR?: OutpatientEncounterScalarWhereWithAggregatesInput[]
+    NOT?: OutpatientEncounterScalarWhereWithAggregatesInput | OutpatientEncounterScalarWhereWithAggregatesInput[]
+    id?: UuidWithAggregatesFilter<"OutpatientEncounter"> | string
+    patientId?: StringWithAggregatesFilter<"OutpatientEncounter"> | string
+    doctorId?: StringWithAggregatesFilter<"OutpatientEncounter"> | string
+    date?: StringWithAggregatesFilter<"OutpatientEncounter"> | string
+    time?: StringWithAggregatesFilter<"OutpatientEncounter"> | string
+    chiefComplaint?: StringWithAggregatesFilter<"OutpatientEncounter"> | string
+    doctorDiagnosis?: StringNullableWithAggregatesFilter<"OutpatientEncounter"> | string | null
+    type?: EnumOutpatientEncounterTypeWithAggregatesFilter<"OutpatientEncounter"> | $Enums.OutpatientEncounterType
+    consultationFee?: DecimalNullableWithAggregatesFilter<"OutpatientEncounter"> | Decimal | DecimalJsLike | number | string | null
+    paymentStatus?: EnumOutpatientPaymentStatusWithAggregatesFilter<"OutpatientEncounter"> | $Enums.OutpatientPaymentStatus
+    notes?: StringNullableWithAggregatesFilter<"OutpatientEncounter"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"OutpatientEncounter"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"OutpatientEncounter"> | Date | string
+  }
+
+  export type InpatientEncounterWhereInput = {
+    AND?: InpatientEncounterWhereInput | InpatientEncounterWhereInput[]
+    OR?: InpatientEncounterWhereInput[]
+    NOT?: InpatientEncounterWhereInput | InpatientEncounterWhereInput[]
+    id?: UuidFilter<"InpatientEncounter"> | string
+    patientId?: StringFilter<"InpatientEncounter"> | string
+    doctorId?: StringFilter<"InpatientEncounter"> | string
+    admittedBy?: StringNullableFilter<"InpatientEncounter"> | string | null
+    date?: StringFilter<"InpatientEncounter"> | string
+    time?: StringFilter<"InpatientEncounter"> | string
+    chiefComplaint?: StringFilter<"InpatientEncounter"> | string
+    doctorDiagnosis?: StringNullableFilter<"InpatientEncounter"> | string | null
+    triage?: EnumInpatientTriageFilter<"InpatientEncounter"> | $Enums.InpatientTriage
+    disposition?: EnumInpatientDispositionFilter<"InpatientEncounter"> | $Enums.InpatientDisposition
+    dispositionDate?: StringNullableFilter<"InpatientEncounter"> | string | null
+    dispositionTime?: StringNullableFilter<"InpatientEncounter"> | string | null
+    dispositionNote?: StringNullableFilter<"InpatientEncounter"> | string | null
+    createdAt?: DateTimeFilter<"InpatientEncounter"> | Date | string
+    updatedAt?: DateTimeFilter<"InpatientEncounter"> | Date | string
+    patient?: XOR<PatientScalarRelationFilter, PatientWhereInput>
+    charts?: InpatientEncounterChartListRelationFilter
+    orders?: InpatientEncounterOrderListRelationFilter
+  }
+
+  export type InpatientEncounterOrderByWithRelationInput = {
+    id?: SortOrder
+    patientId?: SortOrder
+    doctorId?: SortOrder
+    admittedBy?: SortOrderInput | SortOrder
+    date?: SortOrder
+    time?: SortOrder
+    chiefComplaint?: SortOrder
+    doctorDiagnosis?: SortOrderInput | SortOrder
+    triage?: SortOrder
+    disposition?: SortOrder
+    dispositionDate?: SortOrderInput | SortOrder
+    dispositionTime?: SortOrderInput | SortOrder
+    dispositionNote?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    patient?: PatientOrderByWithRelationInput
+    charts?: InpatientEncounterChartOrderByRelationAggregateInput
+    orders?: InpatientEncounterOrderOrderByRelationAggregateInput
+  }
+
+  export type InpatientEncounterWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: InpatientEncounterWhereInput | InpatientEncounterWhereInput[]
+    OR?: InpatientEncounterWhereInput[]
+    NOT?: InpatientEncounterWhereInput | InpatientEncounterWhereInput[]
+    patientId?: StringFilter<"InpatientEncounter"> | string
+    doctorId?: StringFilter<"InpatientEncounter"> | string
+    admittedBy?: StringNullableFilter<"InpatientEncounter"> | string | null
+    date?: StringFilter<"InpatientEncounter"> | string
+    time?: StringFilter<"InpatientEncounter"> | string
+    chiefComplaint?: StringFilter<"InpatientEncounter"> | string
+    doctorDiagnosis?: StringNullableFilter<"InpatientEncounter"> | string | null
+    triage?: EnumInpatientTriageFilter<"InpatientEncounter"> | $Enums.InpatientTriage
+    disposition?: EnumInpatientDispositionFilter<"InpatientEncounter"> | $Enums.InpatientDisposition
+    dispositionDate?: StringNullableFilter<"InpatientEncounter"> | string | null
+    dispositionTime?: StringNullableFilter<"InpatientEncounter"> | string | null
+    dispositionNote?: StringNullableFilter<"InpatientEncounter"> | string | null
+    createdAt?: DateTimeFilter<"InpatientEncounter"> | Date | string
+    updatedAt?: DateTimeFilter<"InpatientEncounter"> | Date | string
+    patient?: XOR<PatientScalarRelationFilter, PatientWhereInput>
+    charts?: InpatientEncounterChartListRelationFilter
+    orders?: InpatientEncounterOrderListRelationFilter
+  }, "id">
+
+  export type InpatientEncounterOrderByWithAggregationInput = {
+    id?: SortOrder
+    patientId?: SortOrder
+    doctorId?: SortOrder
+    admittedBy?: SortOrderInput | SortOrder
+    date?: SortOrder
+    time?: SortOrder
+    chiefComplaint?: SortOrder
+    doctorDiagnosis?: SortOrderInput | SortOrder
+    triage?: SortOrder
+    disposition?: SortOrder
+    dispositionDate?: SortOrderInput | SortOrder
+    dispositionTime?: SortOrderInput | SortOrder
+    dispositionNote?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: InpatientEncounterCountOrderByAggregateInput
+    _max?: InpatientEncounterMaxOrderByAggregateInput
+    _min?: InpatientEncounterMinOrderByAggregateInput
+  }
+
+  export type InpatientEncounterScalarWhereWithAggregatesInput = {
+    AND?: InpatientEncounterScalarWhereWithAggregatesInput | InpatientEncounterScalarWhereWithAggregatesInput[]
+    OR?: InpatientEncounterScalarWhereWithAggregatesInput[]
+    NOT?: InpatientEncounterScalarWhereWithAggregatesInput | InpatientEncounterScalarWhereWithAggregatesInput[]
+    id?: UuidWithAggregatesFilter<"InpatientEncounter"> | string
+    patientId?: StringWithAggregatesFilter<"InpatientEncounter"> | string
+    doctorId?: StringWithAggregatesFilter<"InpatientEncounter"> | string
+    admittedBy?: StringNullableWithAggregatesFilter<"InpatientEncounter"> | string | null
+    date?: StringWithAggregatesFilter<"InpatientEncounter"> | string
+    time?: StringWithAggregatesFilter<"InpatientEncounter"> | string
+    chiefComplaint?: StringWithAggregatesFilter<"InpatientEncounter"> | string
+    doctorDiagnosis?: StringNullableWithAggregatesFilter<"InpatientEncounter"> | string | null
+    triage?: EnumInpatientTriageWithAggregatesFilter<"InpatientEncounter"> | $Enums.InpatientTriage
+    disposition?: EnumInpatientDispositionWithAggregatesFilter<"InpatientEncounter"> | $Enums.InpatientDisposition
+    dispositionDate?: StringNullableWithAggregatesFilter<"InpatientEncounter"> | string | null
+    dispositionTime?: StringNullableWithAggregatesFilter<"InpatientEncounter"> | string | null
+    dispositionNote?: StringNullableWithAggregatesFilter<"InpatientEncounter"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"InpatientEncounter"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"InpatientEncounter"> | Date | string
+  }
+
+  export type InpatientEncounterChartWhereInput = {
+    AND?: InpatientEncounterChartWhereInput | InpatientEncounterChartWhereInput[]
+    OR?: InpatientEncounterChartWhereInput[]
+    NOT?: InpatientEncounterChartWhereInput | InpatientEncounterChartWhereInput[]
+    id?: UuidFilter<"InpatientEncounterChart"> | string
+    encounterId?: UuidFilter<"InpatientEncounterChart"> | string
+    staffId?: StringFilter<"InpatientEncounterChart"> | string
+    chart?: StringFilter<"InpatientEncounterChart"> | string
+    createdAt?: DateTimeFilter<"InpatientEncounterChart"> | Date | string
+    updatedAt?: DateTimeFilter<"InpatientEncounterChart"> | Date | string
+    encounter?: XOR<InpatientEncounterScalarRelationFilter, InpatientEncounterWhereInput>
+  }
+
+  export type InpatientEncounterChartOrderByWithRelationInput = {
+    id?: SortOrder
+    encounterId?: SortOrder
+    staffId?: SortOrder
+    chart?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    encounter?: InpatientEncounterOrderByWithRelationInput
+  }
+
+  export type InpatientEncounterChartWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: InpatientEncounterChartWhereInput | InpatientEncounterChartWhereInput[]
+    OR?: InpatientEncounterChartWhereInput[]
+    NOT?: InpatientEncounterChartWhereInput | InpatientEncounterChartWhereInput[]
+    encounterId?: UuidFilter<"InpatientEncounterChart"> | string
+    staffId?: StringFilter<"InpatientEncounterChart"> | string
+    chart?: StringFilter<"InpatientEncounterChart"> | string
+    createdAt?: DateTimeFilter<"InpatientEncounterChart"> | Date | string
+    updatedAt?: DateTimeFilter<"InpatientEncounterChart"> | Date | string
+    encounter?: XOR<InpatientEncounterScalarRelationFilter, InpatientEncounterWhereInput>
+  }, "id">
+
+  export type InpatientEncounterChartOrderByWithAggregationInput = {
+    id?: SortOrder
+    encounterId?: SortOrder
+    staffId?: SortOrder
+    chart?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: InpatientEncounterChartCountOrderByAggregateInput
+    _max?: InpatientEncounterChartMaxOrderByAggregateInput
+    _min?: InpatientEncounterChartMinOrderByAggregateInput
+  }
+
+  export type InpatientEncounterChartScalarWhereWithAggregatesInput = {
+    AND?: InpatientEncounterChartScalarWhereWithAggregatesInput | InpatientEncounterChartScalarWhereWithAggregatesInput[]
+    OR?: InpatientEncounterChartScalarWhereWithAggregatesInput[]
+    NOT?: InpatientEncounterChartScalarWhereWithAggregatesInput | InpatientEncounterChartScalarWhereWithAggregatesInput[]
+    id?: UuidWithAggregatesFilter<"InpatientEncounterChart"> | string
+    encounterId?: UuidWithAggregatesFilter<"InpatientEncounterChart"> | string
+    staffId?: StringWithAggregatesFilter<"InpatientEncounterChart"> | string
+    chart?: StringWithAggregatesFilter<"InpatientEncounterChart"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"InpatientEncounterChart"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"InpatientEncounterChart"> | Date | string
+  }
+
+  export type InpatientEncounterOrderWhereInput = {
+    AND?: InpatientEncounterOrderWhereInput | InpatientEncounterOrderWhereInput[]
+    OR?: InpatientEncounterOrderWhereInput[]
+    NOT?: InpatientEncounterOrderWhereInput | InpatientEncounterOrderWhereInput[]
+    id?: UuidFilter<"InpatientEncounterOrder"> | string
+    encounterId?: UuidFilter<"InpatientEncounterOrder"> | string
+    catalogueItemId?: UuidNullableFilter<"InpatientEncounterOrder"> | string | null
+    type?: EnumInpatientEncounterOrderTypeFilter<"InpatientEncounterOrder"> | $Enums.InpatientEncounterOrderType
+    description?: StringFilter<"InpatientEncounterOrder"> | string
+    cost?: DecimalFilter<"InpatientEncounterOrder"> | Decimal | DecimalJsLike | number | string
+    status?: EnumInpatientEncounterOrderStatusFilter<"InpatientEncounterOrder"> | $Enums.InpatientEncounterOrderStatus
+    orderedBy?: StringFilter<"InpatientEncounterOrder"> | string
+    notes?: StringNullableFilter<"InpatientEncounterOrder"> | string | null
+    createdAt?: DateTimeFilter<"InpatientEncounterOrder"> | Date | string
+    updatedAt?: DateTimeFilter<"InpatientEncounterOrder"> | Date | string
+    encounter?: XOR<InpatientEncounterScalarRelationFilter, InpatientEncounterWhereInput>
+    catalogueItem?: XOR<ParticularCatalogueNullableScalarRelationFilter, ParticularCatalogueWhereInput> | null
+  }
+
+  export type InpatientEncounterOrderOrderByWithRelationInput = {
+    id?: SortOrder
+    encounterId?: SortOrder
+    catalogueItemId?: SortOrderInput | SortOrder
+    type?: SortOrder
+    description?: SortOrder
+    cost?: SortOrder
+    status?: SortOrder
+    orderedBy?: SortOrder
+    notes?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    encounter?: InpatientEncounterOrderByWithRelationInput
+    catalogueItem?: ParticularCatalogueOrderByWithRelationInput
+  }
+
+  export type InpatientEncounterOrderWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: InpatientEncounterOrderWhereInput | InpatientEncounterOrderWhereInput[]
+    OR?: InpatientEncounterOrderWhereInput[]
+    NOT?: InpatientEncounterOrderWhereInput | InpatientEncounterOrderWhereInput[]
+    encounterId?: UuidFilter<"InpatientEncounterOrder"> | string
+    catalogueItemId?: UuidNullableFilter<"InpatientEncounterOrder"> | string | null
+    type?: EnumInpatientEncounterOrderTypeFilter<"InpatientEncounterOrder"> | $Enums.InpatientEncounterOrderType
+    description?: StringFilter<"InpatientEncounterOrder"> | string
+    cost?: DecimalFilter<"InpatientEncounterOrder"> | Decimal | DecimalJsLike | number | string
+    status?: EnumInpatientEncounterOrderStatusFilter<"InpatientEncounterOrder"> | $Enums.InpatientEncounterOrderStatus
+    orderedBy?: StringFilter<"InpatientEncounterOrder"> | string
+    notes?: StringNullableFilter<"InpatientEncounterOrder"> | string | null
+    createdAt?: DateTimeFilter<"InpatientEncounterOrder"> | Date | string
+    updatedAt?: DateTimeFilter<"InpatientEncounterOrder"> | Date | string
+    encounter?: XOR<InpatientEncounterScalarRelationFilter, InpatientEncounterWhereInput>
+    catalogueItem?: XOR<ParticularCatalogueNullableScalarRelationFilter, ParticularCatalogueWhereInput> | null
+  }, "id">
+
+  export type InpatientEncounterOrderOrderByWithAggregationInput = {
+    id?: SortOrder
+    encounterId?: SortOrder
+    catalogueItemId?: SortOrderInput | SortOrder
+    type?: SortOrder
+    description?: SortOrder
+    cost?: SortOrder
+    status?: SortOrder
+    orderedBy?: SortOrder
+    notes?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: InpatientEncounterOrderCountOrderByAggregateInput
+    _avg?: InpatientEncounterOrderAvgOrderByAggregateInput
+    _max?: InpatientEncounterOrderMaxOrderByAggregateInput
+    _min?: InpatientEncounterOrderMinOrderByAggregateInput
+    _sum?: InpatientEncounterOrderSumOrderByAggregateInput
+  }
+
+  export type InpatientEncounterOrderScalarWhereWithAggregatesInput = {
+    AND?: InpatientEncounterOrderScalarWhereWithAggregatesInput | InpatientEncounterOrderScalarWhereWithAggregatesInput[]
+    OR?: InpatientEncounterOrderScalarWhereWithAggregatesInput[]
+    NOT?: InpatientEncounterOrderScalarWhereWithAggregatesInput | InpatientEncounterOrderScalarWhereWithAggregatesInput[]
+    id?: UuidWithAggregatesFilter<"InpatientEncounterOrder"> | string
+    encounterId?: UuidWithAggregatesFilter<"InpatientEncounterOrder"> | string
+    catalogueItemId?: UuidNullableWithAggregatesFilter<"InpatientEncounterOrder"> | string | null
+    type?: EnumInpatientEncounterOrderTypeWithAggregatesFilter<"InpatientEncounterOrder"> | $Enums.InpatientEncounterOrderType
+    description?: StringWithAggregatesFilter<"InpatientEncounterOrder"> | string
+    cost?: DecimalWithAggregatesFilter<"InpatientEncounterOrder"> | Decimal | DecimalJsLike | number | string
+    status?: EnumInpatientEncounterOrderStatusWithAggregatesFilter<"InpatientEncounterOrder"> | $Enums.InpatientEncounterOrderStatus
+    orderedBy?: StringWithAggregatesFilter<"InpatientEncounterOrder"> | string
+    notes?: StringNullableWithAggregatesFilter<"InpatientEncounterOrder"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"InpatientEncounterOrder"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"InpatientEncounterOrder"> | Date | string
+  }
+
+  export type ParticularCatalogueWhereInput = {
+    AND?: ParticularCatalogueWhereInput | ParticularCatalogueWhereInput[]
+    OR?: ParticularCatalogueWhereInput[]
+    NOT?: ParticularCatalogueWhereInput | ParticularCatalogueWhereInput[]
+    id?: UuidFilter<"ParticularCatalogue"> | string
+    type?: EnumParticularTypeFilter<"ParticularCatalogue"> | $Enums.ParticularType
+    name?: StringFilter<"ParticularCatalogue"> | string
+    description?: StringNullableFilter<"ParticularCatalogue"> | string | null
+    cost?: DecimalFilter<"ParticularCatalogue"> | Decimal | DecimalJsLike | number | string
+    isActive?: BoolFilter<"ParticularCatalogue"> | boolean
+    createdAt?: DateTimeFilter<"ParticularCatalogue"> | Date | string
+    updatedAt?: DateTimeFilter<"ParticularCatalogue"> | Date | string
+    orders?: InpatientEncounterOrderListRelationFilter
+  }
+
+  export type ParticularCatalogueOrderByWithRelationInput = {
+    id?: SortOrder
+    type?: SortOrder
+    name?: SortOrder
+    description?: SortOrderInput | SortOrder
+    cost?: SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    orders?: InpatientEncounterOrderOrderByRelationAggregateInput
+  }
+
+  export type ParticularCatalogueWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: ParticularCatalogueWhereInput | ParticularCatalogueWhereInput[]
+    OR?: ParticularCatalogueWhereInput[]
+    NOT?: ParticularCatalogueWhereInput | ParticularCatalogueWhereInput[]
+    type?: EnumParticularTypeFilter<"ParticularCatalogue"> | $Enums.ParticularType
+    name?: StringFilter<"ParticularCatalogue"> | string
+    description?: StringNullableFilter<"ParticularCatalogue"> | string | null
+    cost?: DecimalFilter<"ParticularCatalogue"> | Decimal | DecimalJsLike | number | string
+    isActive?: BoolFilter<"ParticularCatalogue"> | boolean
+    createdAt?: DateTimeFilter<"ParticularCatalogue"> | Date | string
+    updatedAt?: DateTimeFilter<"ParticularCatalogue"> | Date | string
+    orders?: InpatientEncounterOrderListRelationFilter
+  }, "id">
+
+  export type ParticularCatalogueOrderByWithAggregationInput = {
+    id?: SortOrder
+    type?: SortOrder
+    name?: SortOrder
+    description?: SortOrderInput | SortOrder
+    cost?: SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: ParticularCatalogueCountOrderByAggregateInput
+    _avg?: ParticularCatalogueAvgOrderByAggregateInput
+    _max?: ParticularCatalogueMaxOrderByAggregateInput
+    _min?: ParticularCatalogueMinOrderByAggregateInput
+    _sum?: ParticularCatalogueSumOrderByAggregateInput
+  }
+
+  export type ParticularCatalogueScalarWhereWithAggregatesInput = {
+    AND?: ParticularCatalogueScalarWhereWithAggregatesInput | ParticularCatalogueScalarWhereWithAggregatesInput[]
+    OR?: ParticularCatalogueScalarWhereWithAggregatesInput[]
+    NOT?: ParticularCatalogueScalarWhereWithAggregatesInput | ParticularCatalogueScalarWhereWithAggregatesInput[]
+    id?: UuidWithAggregatesFilter<"ParticularCatalogue"> | string
+    type?: EnumParticularTypeWithAggregatesFilter<"ParticularCatalogue"> | $Enums.ParticularType
+    name?: StringWithAggregatesFilter<"ParticularCatalogue"> | string
+    description?: StringNullableWithAggregatesFilter<"ParticularCatalogue"> | string | null
+    cost?: DecimalWithAggregatesFilter<"ParticularCatalogue"> | Decimal | DecimalJsLike | number | string
+    isActive?: BoolWithAggregatesFilter<"ParticularCatalogue"> | boolean
+    createdAt?: DateTimeWithAggregatesFilter<"ParticularCatalogue"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"ParticularCatalogue"> | Date | string
+  }
+
   export type UserCreateInput = {
     id?: string
     email: string
@@ -23714,6 +30910,8 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     user: UserCreateNestedOneWithoutPatientProfileInput
+    inpatientEncounters?: InpatientEncounterCreateNestedManyWithoutPatientInput
+    outpatientEncounters?: OutpatientEncounterCreateNestedManyWithoutPatientInput
   }
 
   export type PatientUncheckedCreateInput = {
@@ -23729,6 +30927,8 @@ export namespace Prisma {
     insuranceNumber?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    inpatientEncounters?: InpatientEncounterUncheckedCreateNestedManyWithoutPatientInput
+    outpatientEncounters?: OutpatientEncounterUncheckedCreateNestedManyWithoutPatientInput
   }
 
   export type PatientUpdateInput = {
@@ -23744,6 +30944,8 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutPatientProfileNestedInput
+    inpatientEncounters?: InpatientEncounterUpdateManyWithoutPatientNestedInput
+    outpatientEncounters?: OutpatientEncounterUpdateManyWithoutPatientNestedInput
   }
 
   export type PatientUncheckedUpdateInput = {
@@ -23759,6 +30961,8 @@ export namespace Prisma {
     insuranceNumber?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    inpatientEncounters?: InpatientEncounterUncheckedUpdateManyWithoutPatientNestedInput
+    outpatientEncounters?: OutpatientEncounterUncheckedUpdateManyWithoutPatientNestedInput
   }
 
   export type PatientCreateManyInput = {
@@ -24900,6 +32104,489 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type OutpatientEncounterCreateInput = {
+    id?: string
+    doctorId: string
+    date: string
+    time: string
+    chiefComplaint: string
+    doctorDiagnosis?: string | null
+    type?: $Enums.OutpatientEncounterType
+    consultationFee?: Decimal | DecimalJsLike | number | string | null
+    paymentStatus?: $Enums.OutpatientPaymentStatus
+    notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    patient: PatientCreateNestedOneWithoutOutpatientEncountersInput
+  }
+
+  export type OutpatientEncounterUncheckedCreateInput = {
+    id?: string
+    patientId: string
+    doctorId: string
+    date: string
+    time: string
+    chiefComplaint: string
+    doctorDiagnosis?: string | null
+    type?: $Enums.OutpatientEncounterType
+    consultationFee?: Decimal | DecimalJsLike | number | string | null
+    paymentStatus?: $Enums.OutpatientPaymentStatus
+    notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type OutpatientEncounterUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    doctorId?: StringFieldUpdateOperationsInput | string
+    date?: StringFieldUpdateOperationsInput | string
+    time?: StringFieldUpdateOperationsInput | string
+    chiefComplaint?: StringFieldUpdateOperationsInput | string
+    doctorDiagnosis?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: EnumOutpatientEncounterTypeFieldUpdateOperationsInput | $Enums.OutpatientEncounterType
+    consultationFee?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    paymentStatus?: EnumOutpatientPaymentStatusFieldUpdateOperationsInput | $Enums.OutpatientPaymentStatus
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    patient?: PatientUpdateOneRequiredWithoutOutpatientEncountersNestedInput
+  }
+
+  export type OutpatientEncounterUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    patientId?: StringFieldUpdateOperationsInput | string
+    doctorId?: StringFieldUpdateOperationsInput | string
+    date?: StringFieldUpdateOperationsInput | string
+    time?: StringFieldUpdateOperationsInput | string
+    chiefComplaint?: StringFieldUpdateOperationsInput | string
+    doctorDiagnosis?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: EnumOutpatientEncounterTypeFieldUpdateOperationsInput | $Enums.OutpatientEncounterType
+    consultationFee?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    paymentStatus?: EnumOutpatientPaymentStatusFieldUpdateOperationsInput | $Enums.OutpatientPaymentStatus
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type OutpatientEncounterCreateManyInput = {
+    id?: string
+    patientId: string
+    doctorId: string
+    date: string
+    time: string
+    chiefComplaint: string
+    doctorDiagnosis?: string | null
+    type?: $Enums.OutpatientEncounterType
+    consultationFee?: Decimal | DecimalJsLike | number | string | null
+    paymentStatus?: $Enums.OutpatientPaymentStatus
+    notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type OutpatientEncounterUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    doctorId?: StringFieldUpdateOperationsInput | string
+    date?: StringFieldUpdateOperationsInput | string
+    time?: StringFieldUpdateOperationsInput | string
+    chiefComplaint?: StringFieldUpdateOperationsInput | string
+    doctorDiagnosis?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: EnumOutpatientEncounterTypeFieldUpdateOperationsInput | $Enums.OutpatientEncounterType
+    consultationFee?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    paymentStatus?: EnumOutpatientPaymentStatusFieldUpdateOperationsInput | $Enums.OutpatientPaymentStatus
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type OutpatientEncounterUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    patientId?: StringFieldUpdateOperationsInput | string
+    doctorId?: StringFieldUpdateOperationsInput | string
+    date?: StringFieldUpdateOperationsInput | string
+    time?: StringFieldUpdateOperationsInput | string
+    chiefComplaint?: StringFieldUpdateOperationsInput | string
+    doctorDiagnosis?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: EnumOutpatientEncounterTypeFieldUpdateOperationsInput | $Enums.OutpatientEncounterType
+    consultationFee?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    paymentStatus?: EnumOutpatientPaymentStatusFieldUpdateOperationsInput | $Enums.OutpatientPaymentStatus
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type InpatientEncounterCreateInput = {
+    id?: string
+    doctorId: string
+    admittedBy?: string | null
+    date: string
+    time: string
+    chiefComplaint: string
+    doctorDiagnosis?: string | null
+    triage: $Enums.InpatientTriage
+    disposition?: $Enums.InpatientDisposition
+    dispositionDate?: string | null
+    dispositionTime?: string | null
+    dispositionNote?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    patient: PatientCreateNestedOneWithoutInpatientEncountersInput
+    charts?: InpatientEncounterChartCreateNestedManyWithoutEncounterInput
+    orders?: InpatientEncounterOrderCreateNestedManyWithoutEncounterInput
+  }
+
+  export type InpatientEncounterUncheckedCreateInput = {
+    id?: string
+    patientId: string
+    doctorId: string
+    admittedBy?: string | null
+    date: string
+    time: string
+    chiefComplaint: string
+    doctorDiagnosis?: string | null
+    triage: $Enums.InpatientTriage
+    disposition?: $Enums.InpatientDisposition
+    dispositionDate?: string | null
+    dispositionTime?: string | null
+    dispositionNote?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    charts?: InpatientEncounterChartUncheckedCreateNestedManyWithoutEncounterInput
+    orders?: InpatientEncounterOrderUncheckedCreateNestedManyWithoutEncounterInput
+  }
+
+  export type InpatientEncounterUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    doctorId?: StringFieldUpdateOperationsInput | string
+    admittedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    date?: StringFieldUpdateOperationsInput | string
+    time?: StringFieldUpdateOperationsInput | string
+    chiefComplaint?: StringFieldUpdateOperationsInput | string
+    doctorDiagnosis?: NullableStringFieldUpdateOperationsInput | string | null
+    triage?: EnumInpatientTriageFieldUpdateOperationsInput | $Enums.InpatientTriage
+    disposition?: EnumInpatientDispositionFieldUpdateOperationsInput | $Enums.InpatientDisposition
+    dispositionDate?: NullableStringFieldUpdateOperationsInput | string | null
+    dispositionTime?: NullableStringFieldUpdateOperationsInput | string | null
+    dispositionNote?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    patient?: PatientUpdateOneRequiredWithoutInpatientEncountersNestedInput
+    charts?: InpatientEncounterChartUpdateManyWithoutEncounterNestedInput
+    orders?: InpatientEncounterOrderUpdateManyWithoutEncounterNestedInput
+  }
+
+  export type InpatientEncounterUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    patientId?: StringFieldUpdateOperationsInput | string
+    doctorId?: StringFieldUpdateOperationsInput | string
+    admittedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    date?: StringFieldUpdateOperationsInput | string
+    time?: StringFieldUpdateOperationsInput | string
+    chiefComplaint?: StringFieldUpdateOperationsInput | string
+    doctorDiagnosis?: NullableStringFieldUpdateOperationsInput | string | null
+    triage?: EnumInpatientTriageFieldUpdateOperationsInput | $Enums.InpatientTriage
+    disposition?: EnumInpatientDispositionFieldUpdateOperationsInput | $Enums.InpatientDisposition
+    dispositionDate?: NullableStringFieldUpdateOperationsInput | string | null
+    dispositionTime?: NullableStringFieldUpdateOperationsInput | string | null
+    dispositionNote?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    charts?: InpatientEncounterChartUncheckedUpdateManyWithoutEncounterNestedInput
+    orders?: InpatientEncounterOrderUncheckedUpdateManyWithoutEncounterNestedInput
+  }
+
+  export type InpatientEncounterCreateManyInput = {
+    id?: string
+    patientId: string
+    doctorId: string
+    admittedBy?: string | null
+    date: string
+    time: string
+    chiefComplaint: string
+    doctorDiagnosis?: string | null
+    triage: $Enums.InpatientTriage
+    disposition?: $Enums.InpatientDisposition
+    dispositionDate?: string | null
+    dispositionTime?: string | null
+    dispositionNote?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type InpatientEncounterUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    doctorId?: StringFieldUpdateOperationsInput | string
+    admittedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    date?: StringFieldUpdateOperationsInput | string
+    time?: StringFieldUpdateOperationsInput | string
+    chiefComplaint?: StringFieldUpdateOperationsInput | string
+    doctorDiagnosis?: NullableStringFieldUpdateOperationsInput | string | null
+    triage?: EnumInpatientTriageFieldUpdateOperationsInput | $Enums.InpatientTriage
+    disposition?: EnumInpatientDispositionFieldUpdateOperationsInput | $Enums.InpatientDisposition
+    dispositionDate?: NullableStringFieldUpdateOperationsInput | string | null
+    dispositionTime?: NullableStringFieldUpdateOperationsInput | string | null
+    dispositionNote?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type InpatientEncounterUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    patientId?: StringFieldUpdateOperationsInput | string
+    doctorId?: StringFieldUpdateOperationsInput | string
+    admittedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    date?: StringFieldUpdateOperationsInput | string
+    time?: StringFieldUpdateOperationsInput | string
+    chiefComplaint?: StringFieldUpdateOperationsInput | string
+    doctorDiagnosis?: NullableStringFieldUpdateOperationsInput | string | null
+    triage?: EnumInpatientTriageFieldUpdateOperationsInput | $Enums.InpatientTriage
+    disposition?: EnumInpatientDispositionFieldUpdateOperationsInput | $Enums.InpatientDisposition
+    dispositionDate?: NullableStringFieldUpdateOperationsInput | string | null
+    dispositionTime?: NullableStringFieldUpdateOperationsInput | string | null
+    dispositionNote?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type InpatientEncounterChartCreateInput = {
+    id?: string
+    staffId: string
+    chart: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    encounter: InpatientEncounterCreateNestedOneWithoutChartsInput
+  }
+
+  export type InpatientEncounterChartUncheckedCreateInput = {
+    id?: string
+    encounterId: string
+    staffId: string
+    chart: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type InpatientEncounterChartUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    staffId?: StringFieldUpdateOperationsInput | string
+    chart?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    encounter?: InpatientEncounterUpdateOneRequiredWithoutChartsNestedInput
+  }
+
+  export type InpatientEncounterChartUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    encounterId?: StringFieldUpdateOperationsInput | string
+    staffId?: StringFieldUpdateOperationsInput | string
+    chart?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type InpatientEncounterChartCreateManyInput = {
+    id?: string
+    encounterId: string
+    staffId: string
+    chart: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type InpatientEncounterChartUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    staffId?: StringFieldUpdateOperationsInput | string
+    chart?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type InpatientEncounterChartUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    encounterId?: StringFieldUpdateOperationsInput | string
+    staffId?: StringFieldUpdateOperationsInput | string
+    chart?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type InpatientEncounterOrderCreateInput = {
+    id?: string
+    type: $Enums.InpatientEncounterOrderType
+    description: string
+    cost: Decimal | DecimalJsLike | number | string
+    status?: $Enums.InpatientEncounterOrderStatus
+    orderedBy: string
+    notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    encounter: InpatientEncounterCreateNestedOneWithoutOrdersInput
+    catalogueItem?: ParticularCatalogueCreateNestedOneWithoutOrdersInput
+  }
+
+  export type InpatientEncounterOrderUncheckedCreateInput = {
+    id?: string
+    encounterId: string
+    catalogueItemId?: string | null
+    type: $Enums.InpatientEncounterOrderType
+    description: string
+    cost: Decimal | DecimalJsLike | number | string
+    status?: $Enums.InpatientEncounterOrderStatus
+    orderedBy: string
+    notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type InpatientEncounterOrderUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: EnumInpatientEncounterOrderTypeFieldUpdateOperationsInput | $Enums.InpatientEncounterOrderType
+    description?: StringFieldUpdateOperationsInput | string
+    cost?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    status?: EnumInpatientEncounterOrderStatusFieldUpdateOperationsInput | $Enums.InpatientEncounterOrderStatus
+    orderedBy?: StringFieldUpdateOperationsInput | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    encounter?: InpatientEncounterUpdateOneRequiredWithoutOrdersNestedInput
+    catalogueItem?: ParticularCatalogueUpdateOneWithoutOrdersNestedInput
+  }
+
+  export type InpatientEncounterOrderUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    encounterId?: StringFieldUpdateOperationsInput | string
+    catalogueItemId?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: EnumInpatientEncounterOrderTypeFieldUpdateOperationsInput | $Enums.InpatientEncounterOrderType
+    description?: StringFieldUpdateOperationsInput | string
+    cost?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    status?: EnumInpatientEncounterOrderStatusFieldUpdateOperationsInput | $Enums.InpatientEncounterOrderStatus
+    orderedBy?: StringFieldUpdateOperationsInput | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type InpatientEncounterOrderCreateManyInput = {
+    id?: string
+    encounterId: string
+    catalogueItemId?: string | null
+    type: $Enums.InpatientEncounterOrderType
+    description: string
+    cost: Decimal | DecimalJsLike | number | string
+    status?: $Enums.InpatientEncounterOrderStatus
+    orderedBy: string
+    notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type InpatientEncounterOrderUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: EnumInpatientEncounterOrderTypeFieldUpdateOperationsInput | $Enums.InpatientEncounterOrderType
+    description?: StringFieldUpdateOperationsInput | string
+    cost?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    status?: EnumInpatientEncounterOrderStatusFieldUpdateOperationsInput | $Enums.InpatientEncounterOrderStatus
+    orderedBy?: StringFieldUpdateOperationsInput | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type InpatientEncounterOrderUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    encounterId?: StringFieldUpdateOperationsInput | string
+    catalogueItemId?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: EnumInpatientEncounterOrderTypeFieldUpdateOperationsInput | $Enums.InpatientEncounterOrderType
+    description?: StringFieldUpdateOperationsInput | string
+    cost?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    status?: EnumInpatientEncounterOrderStatusFieldUpdateOperationsInput | $Enums.InpatientEncounterOrderStatus
+    orderedBy?: StringFieldUpdateOperationsInput | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ParticularCatalogueCreateInput = {
+    id?: string
+    type: $Enums.ParticularType
+    name: string
+    description?: string | null
+    cost: Decimal | DecimalJsLike | number | string
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    orders?: InpatientEncounterOrderCreateNestedManyWithoutCatalogueItemInput
+  }
+
+  export type ParticularCatalogueUncheckedCreateInput = {
+    id?: string
+    type: $Enums.ParticularType
+    name: string
+    description?: string | null
+    cost: Decimal | DecimalJsLike | number | string
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    orders?: InpatientEncounterOrderUncheckedCreateNestedManyWithoutCatalogueItemInput
+  }
+
+  export type ParticularCatalogueUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: EnumParticularTypeFieldUpdateOperationsInput | $Enums.ParticularType
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    cost?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    orders?: InpatientEncounterOrderUpdateManyWithoutCatalogueItemNestedInput
+  }
+
+  export type ParticularCatalogueUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: EnumParticularTypeFieldUpdateOperationsInput | $Enums.ParticularType
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    cost?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    orders?: InpatientEncounterOrderUncheckedUpdateManyWithoutCatalogueItemNestedInput
+  }
+
+  export type ParticularCatalogueCreateManyInput = {
+    id?: string
+    type: $Enums.ParticularType
+    name: string
+    description?: string | null
+    cost: Decimal | DecimalJsLike | number | string
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ParticularCatalogueUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: EnumParticularTypeFieldUpdateOperationsInput | $Enums.ParticularType
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    cost?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ParticularCatalogueUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: EnumParticularTypeFieldUpdateOperationsInput | $Enums.ParticularType
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    cost?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -25462,6 +33149,26 @@ export namespace Prisma {
     in?: $Enums.BloodType[] | ListEnumBloodTypeFieldRefInput<$PrismaModel> | null
     notIn?: $Enums.BloodType[] | ListEnumBloodTypeFieldRefInput<$PrismaModel> | null
     not?: NestedEnumBloodTypeNullableFilter<$PrismaModel> | $Enums.BloodType | null
+  }
+
+  export type InpatientEncounterListRelationFilter = {
+    every?: InpatientEncounterWhereInput
+    some?: InpatientEncounterWhereInput
+    none?: InpatientEncounterWhereInput
+  }
+
+  export type OutpatientEncounterListRelationFilter = {
+    every?: OutpatientEncounterWhereInput
+    some?: OutpatientEncounterWhereInput
+    none?: OutpatientEncounterWhereInput
+  }
+
+  export type InpatientEncounterOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type OutpatientEncounterOrderByRelationAggregateInput = {
+    _count?: SortOrder
   }
 
   export type PatientCountOrderByAggregateInput = {
@@ -26356,6 +34063,415 @@ export namespace Prisma {
     amount?: SortOrder
   }
 
+  export type EnumOutpatientEncounterTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.OutpatientEncounterType | EnumOutpatientEncounterTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.OutpatientEncounterType[] | ListEnumOutpatientEncounterTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.OutpatientEncounterType[] | ListEnumOutpatientEncounterTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumOutpatientEncounterTypeFilter<$PrismaModel> | $Enums.OutpatientEncounterType
+  }
+
+  export type EnumOutpatientPaymentStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.OutpatientPaymentStatus | EnumOutpatientPaymentStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.OutpatientPaymentStatus[] | ListEnumOutpatientPaymentStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.OutpatientPaymentStatus[] | ListEnumOutpatientPaymentStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumOutpatientPaymentStatusFilter<$PrismaModel> | $Enums.OutpatientPaymentStatus
+  }
+
+  export type PatientScalarRelationFilter = {
+    is?: PatientWhereInput
+    isNot?: PatientWhereInput
+  }
+
+  export type OutpatientEncounterCountOrderByAggregateInput = {
+    id?: SortOrder
+    patientId?: SortOrder
+    doctorId?: SortOrder
+    date?: SortOrder
+    time?: SortOrder
+    chiefComplaint?: SortOrder
+    doctorDiagnosis?: SortOrder
+    type?: SortOrder
+    consultationFee?: SortOrder
+    paymentStatus?: SortOrder
+    notes?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type OutpatientEncounterAvgOrderByAggregateInput = {
+    consultationFee?: SortOrder
+  }
+
+  export type OutpatientEncounterMaxOrderByAggregateInput = {
+    id?: SortOrder
+    patientId?: SortOrder
+    doctorId?: SortOrder
+    date?: SortOrder
+    time?: SortOrder
+    chiefComplaint?: SortOrder
+    doctorDiagnosis?: SortOrder
+    type?: SortOrder
+    consultationFee?: SortOrder
+    paymentStatus?: SortOrder
+    notes?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type OutpatientEncounterMinOrderByAggregateInput = {
+    id?: SortOrder
+    patientId?: SortOrder
+    doctorId?: SortOrder
+    date?: SortOrder
+    time?: SortOrder
+    chiefComplaint?: SortOrder
+    doctorDiagnosis?: SortOrder
+    type?: SortOrder
+    consultationFee?: SortOrder
+    paymentStatus?: SortOrder
+    notes?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type OutpatientEncounterSumOrderByAggregateInput = {
+    consultationFee?: SortOrder
+  }
+
+  export type EnumOutpatientEncounterTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.OutpatientEncounterType | EnumOutpatientEncounterTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.OutpatientEncounterType[] | ListEnumOutpatientEncounterTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.OutpatientEncounterType[] | ListEnumOutpatientEncounterTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumOutpatientEncounterTypeWithAggregatesFilter<$PrismaModel> | $Enums.OutpatientEncounterType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumOutpatientEncounterTypeFilter<$PrismaModel>
+    _max?: NestedEnumOutpatientEncounterTypeFilter<$PrismaModel>
+  }
+
+  export type EnumOutpatientPaymentStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.OutpatientPaymentStatus | EnumOutpatientPaymentStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.OutpatientPaymentStatus[] | ListEnumOutpatientPaymentStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.OutpatientPaymentStatus[] | ListEnumOutpatientPaymentStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumOutpatientPaymentStatusWithAggregatesFilter<$PrismaModel> | $Enums.OutpatientPaymentStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumOutpatientPaymentStatusFilter<$PrismaModel>
+    _max?: NestedEnumOutpatientPaymentStatusFilter<$PrismaModel>
+  }
+
+  export type EnumInpatientTriageFilter<$PrismaModel = never> = {
+    equals?: $Enums.InpatientTriage | EnumInpatientTriageFieldRefInput<$PrismaModel>
+    in?: $Enums.InpatientTriage[] | ListEnumInpatientTriageFieldRefInput<$PrismaModel>
+    notIn?: $Enums.InpatientTriage[] | ListEnumInpatientTriageFieldRefInput<$PrismaModel>
+    not?: NestedEnumInpatientTriageFilter<$PrismaModel> | $Enums.InpatientTriage
+  }
+
+  export type EnumInpatientDispositionFilter<$PrismaModel = never> = {
+    equals?: $Enums.InpatientDisposition | EnumInpatientDispositionFieldRefInput<$PrismaModel>
+    in?: $Enums.InpatientDisposition[] | ListEnumInpatientDispositionFieldRefInput<$PrismaModel>
+    notIn?: $Enums.InpatientDisposition[] | ListEnumInpatientDispositionFieldRefInput<$PrismaModel>
+    not?: NestedEnumInpatientDispositionFilter<$PrismaModel> | $Enums.InpatientDisposition
+  }
+
+  export type InpatientEncounterChartListRelationFilter = {
+    every?: InpatientEncounterChartWhereInput
+    some?: InpatientEncounterChartWhereInput
+    none?: InpatientEncounterChartWhereInput
+  }
+
+  export type InpatientEncounterOrderListRelationFilter = {
+    every?: InpatientEncounterOrderWhereInput
+    some?: InpatientEncounterOrderWhereInput
+    none?: InpatientEncounterOrderWhereInput
+  }
+
+  export type InpatientEncounterChartOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type InpatientEncounterOrderOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type InpatientEncounterCountOrderByAggregateInput = {
+    id?: SortOrder
+    patientId?: SortOrder
+    doctorId?: SortOrder
+    admittedBy?: SortOrder
+    date?: SortOrder
+    time?: SortOrder
+    chiefComplaint?: SortOrder
+    doctorDiagnosis?: SortOrder
+    triage?: SortOrder
+    disposition?: SortOrder
+    dispositionDate?: SortOrder
+    dispositionTime?: SortOrder
+    dispositionNote?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type InpatientEncounterMaxOrderByAggregateInput = {
+    id?: SortOrder
+    patientId?: SortOrder
+    doctorId?: SortOrder
+    admittedBy?: SortOrder
+    date?: SortOrder
+    time?: SortOrder
+    chiefComplaint?: SortOrder
+    doctorDiagnosis?: SortOrder
+    triage?: SortOrder
+    disposition?: SortOrder
+    dispositionDate?: SortOrder
+    dispositionTime?: SortOrder
+    dispositionNote?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type InpatientEncounterMinOrderByAggregateInput = {
+    id?: SortOrder
+    patientId?: SortOrder
+    doctorId?: SortOrder
+    admittedBy?: SortOrder
+    date?: SortOrder
+    time?: SortOrder
+    chiefComplaint?: SortOrder
+    doctorDiagnosis?: SortOrder
+    triage?: SortOrder
+    disposition?: SortOrder
+    dispositionDate?: SortOrder
+    dispositionTime?: SortOrder
+    dispositionNote?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type EnumInpatientTriageWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.InpatientTriage | EnumInpatientTriageFieldRefInput<$PrismaModel>
+    in?: $Enums.InpatientTriage[] | ListEnumInpatientTriageFieldRefInput<$PrismaModel>
+    notIn?: $Enums.InpatientTriage[] | ListEnumInpatientTriageFieldRefInput<$PrismaModel>
+    not?: NestedEnumInpatientTriageWithAggregatesFilter<$PrismaModel> | $Enums.InpatientTriage
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumInpatientTriageFilter<$PrismaModel>
+    _max?: NestedEnumInpatientTriageFilter<$PrismaModel>
+  }
+
+  export type EnumInpatientDispositionWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.InpatientDisposition | EnumInpatientDispositionFieldRefInput<$PrismaModel>
+    in?: $Enums.InpatientDisposition[] | ListEnumInpatientDispositionFieldRefInput<$PrismaModel>
+    notIn?: $Enums.InpatientDisposition[] | ListEnumInpatientDispositionFieldRefInput<$PrismaModel>
+    not?: NestedEnumInpatientDispositionWithAggregatesFilter<$PrismaModel> | $Enums.InpatientDisposition
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumInpatientDispositionFilter<$PrismaModel>
+    _max?: NestedEnumInpatientDispositionFilter<$PrismaModel>
+  }
+
+  export type InpatientEncounterScalarRelationFilter = {
+    is?: InpatientEncounterWhereInput
+    isNot?: InpatientEncounterWhereInput
+  }
+
+  export type InpatientEncounterChartCountOrderByAggregateInput = {
+    id?: SortOrder
+    encounterId?: SortOrder
+    staffId?: SortOrder
+    chart?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type InpatientEncounterChartMaxOrderByAggregateInput = {
+    id?: SortOrder
+    encounterId?: SortOrder
+    staffId?: SortOrder
+    chart?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type InpatientEncounterChartMinOrderByAggregateInput = {
+    id?: SortOrder
+    encounterId?: SortOrder
+    staffId?: SortOrder
+    chart?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type UuidNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedUuidNullableFilter<$PrismaModel> | string | null
+  }
+
+  export type EnumInpatientEncounterOrderTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.InpatientEncounterOrderType | EnumInpatientEncounterOrderTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.InpatientEncounterOrderType[] | ListEnumInpatientEncounterOrderTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.InpatientEncounterOrderType[] | ListEnumInpatientEncounterOrderTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumInpatientEncounterOrderTypeFilter<$PrismaModel> | $Enums.InpatientEncounterOrderType
+  }
+
+  export type EnumInpatientEncounterOrderStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.InpatientEncounterOrderStatus | EnumInpatientEncounterOrderStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.InpatientEncounterOrderStatus[] | ListEnumInpatientEncounterOrderStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.InpatientEncounterOrderStatus[] | ListEnumInpatientEncounterOrderStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumInpatientEncounterOrderStatusFilter<$PrismaModel> | $Enums.InpatientEncounterOrderStatus
+  }
+
+  export type ParticularCatalogueNullableScalarRelationFilter = {
+    is?: ParticularCatalogueWhereInput | null
+    isNot?: ParticularCatalogueWhereInput | null
+  }
+
+  export type InpatientEncounterOrderCountOrderByAggregateInput = {
+    id?: SortOrder
+    encounterId?: SortOrder
+    catalogueItemId?: SortOrder
+    type?: SortOrder
+    description?: SortOrder
+    cost?: SortOrder
+    status?: SortOrder
+    orderedBy?: SortOrder
+    notes?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type InpatientEncounterOrderAvgOrderByAggregateInput = {
+    cost?: SortOrder
+  }
+
+  export type InpatientEncounterOrderMaxOrderByAggregateInput = {
+    id?: SortOrder
+    encounterId?: SortOrder
+    catalogueItemId?: SortOrder
+    type?: SortOrder
+    description?: SortOrder
+    cost?: SortOrder
+    status?: SortOrder
+    orderedBy?: SortOrder
+    notes?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type InpatientEncounterOrderMinOrderByAggregateInput = {
+    id?: SortOrder
+    encounterId?: SortOrder
+    catalogueItemId?: SortOrder
+    type?: SortOrder
+    description?: SortOrder
+    cost?: SortOrder
+    status?: SortOrder
+    orderedBy?: SortOrder
+    notes?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type InpatientEncounterOrderSumOrderByAggregateInput = {
+    cost?: SortOrder
+  }
+
+  export type UuidNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedUuidNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
+  }
+
+  export type EnumInpatientEncounterOrderTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.InpatientEncounterOrderType | EnumInpatientEncounterOrderTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.InpatientEncounterOrderType[] | ListEnumInpatientEncounterOrderTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.InpatientEncounterOrderType[] | ListEnumInpatientEncounterOrderTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumInpatientEncounterOrderTypeWithAggregatesFilter<$PrismaModel> | $Enums.InpatientEncounterOrderType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumInpatientEncounterOrderTypeFilter<$PrismaModel>
+    _max?: NestedEnumInpatientEncounterOrderTypeFilter<$PrismaModel>
+  }
+
+  export type EnumInpatientEncounterOrderStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.InpatientEncounterOrderStatus | EnumInpatientEncounterOrderStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.InpatientEncounterOrderStatus[] | ListEnumInpatientEncounterOrderStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.InpatientEncounterOrderStatus[] | ListEnumInpatientEncounterOrderStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumInpatientEncounterOrderStatusWithAggregatesFilter<$PrismaModel> | $Enums.InpatientEncounterOrderStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumInpatientEncounterOrderStatusFilter<$PrismaModel>
+    _max?: NestedEnumInpatientEncounterOrderStatusFilter<$PrismaModel>
+  }
+
+  export type EnumParticularTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.ParticularType | EnumParticularTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.ParticularType[] | ListEnumParticularTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ParticularType[] | ListEnumParticularTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumParticularTypeFilter<$PrismaModel> | $Enums.ParticularType
+  }
+
+  export type ParticularCatalogueCountOrderByAggregateInput = {
+    id?: SortOrder
+    type?: SortOrder
+    name?: SortOrder
+    description?: SortOrder
+    cost?: SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ParticularCatalogueAvgOrderByAggregateInput = {
+    cost?: SortOrder
+  }
+
+  export type ParticularCatalogueMaxOrderByAggregateInput = {
+    id?: SortOrder
+    type?: SortOrder
+    name?: SortOrder
+    description?: SortOrder
+    cost?: SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ParticularCatalogueMinOrderByAggregateInput = {
+    id?: SortOrder
+    type?: SortOrder
+    name?: SortOrder
+    description?: SortOrder
+    cost?: SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ParticularCatalogueSumOrderByAggregateInput = {
+    cost?: SortOrder
+  }
+
+  export type EnumParticularTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.ParticularType | EnumParticularTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.ParticularType[] | ListEnumParticularTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ParticularType[] | ListEnumParticularTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumParticularTypeWithAggregatesFilter<$PrismaModel> | $Enums.ParticularType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumParticularTypeFilter<$PrismaModel>
+    _max?: NestedEnumParticularTypeFilter<$PrismaModel>
+  }
+
   export type RefreshTokenCreateNestedManyWithoutUserInput = {
     create?: XOR<RefreshTokenCreateWithoutUserInput, RefreshTokenUncheckedCreateWithoutUserInput> | RefreshTokenCreateWithoutUserInput[] | RefreshTokenUncheckedCreateWithoutUserInput[]
     connectOrCreate?: RefreshTokenCreateOrConnectWithoutUserInput | RefreshTokenCreateOrConnectWithoutUserInput[]
@@ -26705,6 +34821,34 @@ export namespace Prisma {
     connect?: UserWhereUniqueInput
   }
 
+  export type InpatientEncounterCreateNestedManyWithoutPatientInput = {
+    create?: XOR<InpatientEncounterCreateWithoutPatientInput, InpatientEncounterUncheckedCreateWithoutPatientInput> | InpatientEncounterCreateWithoutPatientInput[] | InpatientEncounterUncheckedCreateWithoutPatientInput[]
+    connectOrCreate?: InpatientEncounterCreateOrConnectWithoutPatientInput | InpatientEncounterCreateOrConnectWithoutPatientInput[]
+    createMany?: InpatientEncounterCreateManyPatientInputEnvelope
+    connect?: InpatientEncounterWhereUniqueInput | InpatientEncounterWhereUniqueInput[]
+  }
+
+  export type OutpatientEncounterCreateNestedManyWithoutPatientInput = {
+    create?: XOR<OutpatientEncounterCreateWithoutPatientInput, OutpatientEncounterUncheckedCreateWithoutPatientInput> | OutpatientEncounterCreateWithoutPatientInput[] | OutpatientEncounterUncheckedCreateWithoutPatientInput[]
+    connectOrCreate?: OutpatientEncounterCreateOrConnectWithoutPatientInput | OutpatientEncounterCreateOrConnectWithoutPatientInput[]
+    createMany?: OutpatientEncounterCreateManyPatientInputEnvelope
+    connect?: OutpatientEncounterWhereUniqueInput | OutpatientEncounterWhereUniqueInput[]
+  }
+
+  export type InpatientEncounterUncheckedCreateNestedManyWithoutPatientInput = {
+    create?: XOR<InpatientEncounterCreateWithoutPatientInput, InpatientEncounterUncheckedCreateWithoutPatientInput> | InpatientEncounterCreateWithoutPatientInput[] | InpatientEncounterUncheckedCreateWithoutPatientInput[]
+    connectOrCreate?: InpatientEncounterCreateOrConnectWithoutPatientInput | InpatientEncounterCreateOrConnectWithoutPatientInput[]
+    createMany?: InpatientEncounterCreateManyPatientInputEnvelope
+    connect?: InpatientEncounterWhereUniqueInput | InpatientEncounterWhereUniqueInput[]
+  }
+
+  export type OutpatientEncounterUncheckedCreateNestedManyWithoutPatientInput = {
+    create?: XOR<OutpatientEncounterCreateWithoutPatientInput, OutpatientEncounterUncheckedCreateWithoutPatientInput> | OutpatientEncounterCreateWithoutPatientInput[] | OutpatientEncounterUncheckedCreateWithoutPatientInput[]
+    connectOrCreate?: OutpatientEncounterCreateOrConnectWithoutPatientInput | OutpatientEncounterCreateOrConnectWithoutPatientInput[]
+    createMany?: OutpatientEncounterCreateManyPatientInputEnvelope
+    connect?: OutpatientEncounterWhereUniqueInput | OutpatientEncounterWhereUniqueInput[]
+  }
+
   export type NullableEnumBloodTypeFieldUpdateOperationsInput = {
     set?: $Enums.BloodType | null
   }
@@ -26715,6 +34859,62 @@ export namespace Prisma {
     upsert?: UserUpsertWithoutPatientProfileInput
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutPatientProfileInput, UserUpdateWithoutPatientProfileInput>, UserUncheckedUpdateWithoutPatientProfileInput>
+  }
+
+  export type InpatientEncounterUpdateManyWithoutPatientNestedInput = {
+    create?: XOR<InpatientEncounterCreateWithoutPatientInput, InpatientEncounterUncheckedCreateWithoutPatientInput> | InpatientEncounterCreateWithoutPatientInput[] | InpatientEncounterUncheckedCreateWithoutPatientInput[]
+    connectOrCreate?: InpatientEncounterCreateOrConnectWithoutPatientInput | InpatientEncounterCreateOrConnectWithoutPatientInput[]
+    upsert?: InpatientEncounterUpsertWithWhereUniqueWithoutPatientInput | InpatientEncounterUpsertWithWhereUniqueWithoutPatientInput[]
+    createMany?: InpatientEncounterCreateManyPatientInputEnvelope
+    set?: InpatientEncounterWhereUniqueInput | InpatientEncounterWhereUniqueInput[]
+    disconnect?: InpatientEncounterWhereUniqueInput | InpatientEncounterWhereUniqueInput[]
+    delete?: InpatientEncounterWhereUniqueInput | InpatientEncounterWhereUniqueInput[]
+    connect?: InpatientEncounterWhereUniqueInput | InpatientEncounterWhereUniqueInput[]
+    update?: InpatientEncounterUpdateWithWhereUniqueWithoutPatientInput | InpatientEncounterUpdateWithWhereUniqueWithoutPatientInput[]
+    updateMany?: InpatientEncounterUpdateManyWithWhereWithoutPatientInput | InpatientEncounterUpdateManyWithWhereWithoutPatientInput[]
+    deleteMany?: InpatientEncounterScalarWhereInput | InpatientEncounterScalarWhereInput[]
+  }
+
+  export type OutpatientEncounterUpdateManyWithoutPatientNestedInput = {
+    create?: XOR<OutpatientEncounterCreateWithoutPatientInput, OutpatientEncounterUncheckedCreateWithoutPatientInput> | OutpatientEncounterCreateWithoutPatientInput[] | OutpatientEncounterUncheckedCreateWithoutPatientInput[]
+    connectOrCreate?: OutpatientEncounterCreateOrConnectWithoutPatientInput | OutpatientEncounterCreateOrConnectWithoutPatientInput[]
+    upsert?: OutpatientEncounterUpsertWithWhereUniqueWithoutPatientInput | OutpatientEncounterUpsertWithWhereUniqueWithoutPatientInput[]
+    createMany?: OutpatientEncounterCreateManyPatientInputEnvelope
+    set?: OutpatientEncounterWhereUniqueInput | OutpatientEncounterWhereUniqueInput[]
+    disconnect?: OutpatientEncounterWhereUniqueInput | OutpatientEncounterWhereUniqueInput[]
+    delete?: OutpatientEncounterWhereUniqueInput | OutpatientEncounterWhereUniqueInput[]
+    connect?: OutpatientEncounterWhereUniqueInput | OutpatientEncounterWhereUniqueInput[]
+    update?: OutpatientEncounterUpdateWithWhereUniqueWithoutPatientInput | OutpatientEncounterUpdateWithWhereUniqueWithoutPatientInput[]
+    updateMany?: OutpatientEncounterUpdateManyWithWhereWithoutPatientInput | OutpatientEncounterUpdateManyWithWhereWithoutPatientInput[]
+    deleteMany?: OutpatientEncounterScalarWhereInput | OutpatientEncounterScalarWhereInput[]
+  }
+
+  export type InpatientEncounterUncheckedUpdateManyWithoutPatientNestedInput = {
+    create?: XOR<InpatientEncounterCreateWithoutPatientInput, InpatientEncounterUncheckedCreateWithoutPatientInput> | InpatientEncounterCreateWithoutPatientInput[] | InpatientEncounterUncheckedCreateWithoutPatientInput[]
+    connectOrCreate?: InpatientEncounterCreateOrConnectWithoutPatientInput | InpatientEncounterCreateOrConnectWithoutPatientInput[]
+    upsert?: InpatientEncounterUpsertWithWhereUniqueWithoutPatientInput | InpatientEncounterUpsertWithWhereUniqueWithoutPatientInput[]
+    createMany?: InpatientEncounterCreateManyPatientInputEnvelope
+    set?: InpatientEncounterWhereUniqueInput | InpatientEncounterWhereUniqueInput[]
+    disconnect?: InpatientEncounterWhereUniqueInput | InpatientEncounterWhereUniqueInput[]
+    delete?: InpatientEncounterWhereUniqueInput | InpatientEncounterWhereUniqueInput[]
+    connect?: InpatientEncounterWhereUniqueInput | InpatientEncounterWhereUniqueInput[]
+    update?: InpatientEncounterUpdateWithWhereUniqueWithoutPatientInput | InpatientEncounterUpdateWithWhereUniqueWithoutPatientInput[]
+    updateMany?: InpatientEncounterUpdateManyWithWhereWithoutPatientInput | InpatientEncounterUpdateManyWithWhereWithoutPatientInput[]
+    deleteMany?: InpatientEncounterScalarWhereInput | InpatientEncounterScalarWhereInput[]
+  }
+
+  export type OutpatientEncounterUncheckedUpdateManyWithoutPatientNestedInput = {
+    create?: XOR<OutpatientEncounterCreateWithoutPatientInput, OutpatientEncounterUncheckedCreateWithoutPatientInput> | OutpatientEncounterCreateWithoutPatientInput[] | OutpatientEncounterUncheckedCreateWithoutPatientInput[]
+    connectOrCreate?: OutpatientEncounterCreateOrConnectWithoutPatientInput | OutpatientEncounterCreateOrConnectWithoutPatientInput[]
+    upsert?: OutpatientEncounterUpsertWithWhereUniqueWithoutPatientInput | OutpatientEncounterUpsertWithWhereUniqueWithoutPatientInput[]
+    createMany?: OutpatientEncounterCreateManyPatientInputEnvelope
+    set?: OutpatientEncounterWhereUniqueInput | OutpatientEncounterWhereUniqueInput[]
+    disconnect?: OutpatientEncounterWhereUniqueInput | OutpatientEncounterWhereUniqueInput[]
+    delete?: OutpatientEncounterWhereUniqueInput | OutpatientEncounterWhereUniqueInput[]
+    connect?: OutpatientEncounterWhereUniqueInput | OutpatientEncounterWhereUniqueInput[]
+    update?: OutpatientEncounterUpdateWithWhereUniqueWithoutPatientInput | OutpatientEncounterUpdateWithWhereUniqueWithoutPatientInput[]
+    updateMany?: OutpatientEncounterUpdateManyWithWhereWithoutPatientInput | OutpatientEncounterUpdateManyWithWhereWithoutPatientInput[]
+    deleteMany?: OutpatientEncounterScalarWhereInput | OutpatientEncounterScalarWhereInput[]
   }
 
   export type UserCreateNestedOneWithoutPartnerProfileInput = {
@@ -27121,6 +35321,232 @@ export namespace Prisma {
     upsert?: PharmacySaleUpsertWithoutPaymentsInput
     connect?: PharmacySaleWhereUniqueInput
     update?: XOR<XOR<PharmacySaleUpdateToOneWithWhereWithoutPaymentsInput, PharmacySaleUpdateWithoutPaymentsInput>, PharmacySaleUncheckedUpdateWithoutPaymentsInput>
+  }
+
+  export type PatientCreateNestedOneWithoutOutpatientEncountersInput = {
+    create?: XOR<PatientCreateWithoutOutpatientEncountersInput, PatientUncheckedCreateWithoutOutpatientEncountersInput>
+    connectOrCreate?: PatientCreateOrConnectWithoutOutpatientEncountersInput
+    connect?: PatientWhereUniqueInput
+  }
+
+  export type EnumOutpatientEncounterTypeFieldUpdateOperationsInput = {
+    set?: $Enums.OutpatientEncounterType
+  }
+
+  export type EnumOutpatientPaymentStatusFieldUpdateOperationsInput = {
+    set?: $Enums.OutpatientPaymentStatus
+  }
+
+  export type PatientUpdateOneRequiredWithoutOutpatientEncountersNestedInput = {
+    create?: XOR<PatientCreateWithoutOutpatientEncountersInput, PatientUncheckedCreateWithoutOutpatientEncountersInput>
+    connectOrCreate?: PatientCreateOrConnectWithoutOutpatientEncountersInput
+    upsert?: PatientUpsertWithoutOutpatientEncountersInput
+    connect?: PatientWhereUniqueInput
+    update?: XOR<XOR<PatientUpdateToOneWithWhereWithoutOutpatientEncountersInput, PatientUpdateWithoutOutpatientEncountersInput>, PatientUncheckedUpdateWithoutOutpatientEncountersInput>
+  }
+
+  export type PatientCreateNestedOneWithoutInpatientEncountersInput = {
+    create?: XOR<PatientCreateWithoutInpatientEncountersInput, PatientUncheckedCreateWithoutInpatientEncountersInput>
+    connectOrCreate?: PatientCreateOrConnectWithoutInpatientEncountersInput
+    connect?: PatientWhereUniqueInput
+  }
+
+  export type InpatientEncounterChartCreateNestedManyWithoutEncounterInput = {
+    create?: XOR<InpatientEncounterChartCreateWithoutEncounterInput, InpatientEncounterChartUncheckedCreateWithoutEncounterInput> | InpatientEncounterChartCreateWithoutEncounterInput[] | InpatientEncounterChartUncheckedCreateWithoutEncounterInput[]
+    connectOrCreate?: InpatientEncounterChartCreateOrConnectWithoutEncounterInput | InpatientEncounterChartCreateOrConnectWithoutEncounterInput[]
+    createMany?: InpatientEncounterChartCreateManyEncounterInputEnvelope
+    connect?: InpatientEncounterChartWhereUniqueInput | InpatientEncounterChartWhereUniqueInput[]
+  }
+
+  export type InpatientEncounterOrderCreateNestedManyWithoutEncounterInput = {
+    create?: XOR<InpatientEncounterOrderCreateWithoutEncounterInput, InpatientEncounterOrderUncheckedCreateWithoutEncounterInput> | InpatientEncounterOrderCreateWithoutEncounterInput[] | InpatientEncounterOrderUncheckedCreateWithoutEncounterInput[]
+    connectOrCreate?: InpatientEncounterOrderCreateOrConnectWithoutEncounterInput | InpatientEncounterOrderCreateOrConnectWithoutEncounterInput[]
+    createMany?: InpatientEncounterOrderCreateManyEncounterInputEnvelope
+    connect?: InpatientEncounterOrderWhereUniqueInput | InpatientEncounterOrderWhereUniqueInput[]
+  }
+
+  export type InpatientEncounterChartUncheckedCreateNestedManyWithoutEncounterInput = {
+    create?: XOR<InpatientEncounterChartCreateWithoutEncounterInput, InpatientEncounterChartUncheckedCreateWithoutEncounterInput> | InpatientEncounterChartCreateWithoutEncounterInput[] | InpatientEncounterChartUncheckedCreateWithoutEncounterInput[]
+    connectOrCreate?: InpatientEncounterChartCreateOrConnectWithoutEncounterInput | InpatientEncounterChartCreateOrConnectWithoutEncounterInput[]
+    createMany?: InpatientEncounterChartCreateManyEncounterInputEnvelope
+    connect?: InpatientEncounterChartWhereUniqueInput | InpatientEncounterChartWhereUniqueInput[]
+  }
+
+  export type InpatientEncounterOrderUncheckedCreateNestedManyWithoutEncounterInput = {
+    create?: XOR<InpatientEncounterOrderCreateWithoutEncounterInput, InpatientEncounterOrderUncheckedCreateWithoutEncounterInput> | InpatientEncounterOrderCreateWithoutEncounterInput[] | InpatientEncounterOrderUncheckedCreateWithoutEncounterInput[]
+    connectOrCreate?: InpatientEncounterOrderCreateOrConnectWithoutEncounterInput | InpatientEncounterOrderCreateOrConnectWithoutEncounterInput[]
+    createMany?: InpatientEncounterOrderCreateManyEncounterInputEnvelope
+    connect?: InpatientEncounterOrderWhereUniqueInput | InpatientEncounterOrderWhereUniqueInput[]
+  }
+
+  export type EnumInpatientTriageFieldUpdateOperationsInput = {
+    set?: $Enums.InpatientTriage
+  }
+
+  export type EnumInpatientDispositionFieldUpdateOperationsInput = {
+    set?: $Enums.InpatientDisposition
+  }
+
+  export type PatientUpdateOneRequiredWithoutInpatientEncountersNestedInput = {
+    create?: XOR<PatientCreateWithoutInpatientEncountersInput, PatientUncheckedCreateWithoutInpatientEncountersInput>
+    connectOrCreate?: PatientCreateOrConnectWithoutInpatientEncountersInput
+    upsert?: PatientUpsertWithoutInpatientEncountersInput
+    connect?: PatientWhereUniqueInput
+    update?: XOR<XOR<PatientUpdateToOneWithWhereWithoutInpatientEncountersInput, PatientUpdateWithoutInpatientEncountersInput>, PatientUncheckedUpdateWithoutInpatientEncountersInput>
+  }
+
+  export type InpatientEncounterChartUpdateManyWithoutEncounterNestedInput = {
+    create?: XOR<InpatientEncounterChartCreateWithoutEncounterInput, InpatientEncounterChartUncheckedCreateWithoutEncounterInput> | InpatientEncounterChartCreateWithoutEncounterInput[] | InpatientEncounterChartUncheckedCreateWithoutEncounterInput[]
+    connectOrCreate?: InpatientEncounterChartCreateOrConnectWithoutEncounterInput | InpatientEncounterChartCreateOrConnectWithoutEncounterInput[]
+    upsert?: InpatientEncounterChartUpsertWithWhereUniqueWithoutEncounterInput | InpatientEncounterChartUpsertWithWhereUniqueWithoutEncounterInput[]
+    createMany?: InpatientEncounterChartCreateManyEncounterInputEnvelope
+    set?: InpatientEncounterChartWhereUniqueInput | InpatientEncounterChartWhereUniqueInput[]
+    disconnect?: InpatientEncounterChartWhereUniqueInput | InpatientEncounterChartWhereUniqueInput[]
+    delete?: InpatientEncounterChartWhereUniqueInput | InpatientEncounterChartWhereUniqueInput[]
+    connect?: InpatientEncounterChartWhereUniqueInput | InpatientEncounterChartWhereUniqueInput[]
+    update?: InpatientEncounterChartUpdateWithWhereUniqueWithoutEncounterInput | InpatientEncounterChartUpdateWithWhereUniqueWithoutEncounterInput[]
+    updateMany?: InpatientEncounterChartUpdateManyWithWhereWithoutEncounterInput | InpatientEncounterChartUpdateManyWithWhereWithoutEncounterInput[]
+    deleteMany?: InpatientEncounterChartScalarWhereInput | InpatientEncounterChartScalarWhereInput[]
+  }
+
+  export type InpatientEncounterOrderUpdateManyWithoutEncounterNestedInput = {
+    create?: XOR<InpatientEncounterOrderCreateWithoutEncounterInput, InpatientEncounterOrderUncheckedCreateWithoutEncounterInput> | InpatientEncounterOrderCreateWithoutEncounterInput[] | InpatientEncounterOrderUncheckedCreateWithoutEncounterInput[]
+    connectOrCreate?: InpatientEncounterOrderCreateOrConnectWithoutEncounterInput | InpatientEncounterOrderCreateOrConnectWithoutEncounterInput[]
+    upsert?: InpatientEncounterOrderUpsertWithWhereUniqueWithoutEncounterInput | InpatientEncounterOrderUpsertWithWhereUniqueWithoutEncounterInput[]
+    createMany?: InpatientEncounterOrderCreateManyEncounterInputEnvelope
+    set?: InpatientEncounterOrderWhereUniqueInput | InpatientEncounterOrderWhereUniqueInput[]
+    disconnect?: InpatientEncounterOrderWhereUniqueInput | InpatientEncounterOrderWhereUniqueInput[]
+    delete?: InpatientEncounterOrderWhereUniqueInput | InpatientEncounterOrderWhereUniqueInput[]
+    connect?: InpatientEncounterOrderWhereUniqueInput | InpatientEncounterOrderWhereUniqueInput[]
+    update?: InpatientEncounterOrderUpdateWithWhereUniqueWithoutEncounterInput | InpatientEncounterOrderUpdateWithWhereUniqueWithoutEncounterInput[]
+    updateMany?: InpatientEncounterOrderUpdateManyWithWhereWithoutEncounterInput | InpatientEncounterOrderUpdateManyWithWhereWithoutEncounterInput[]
+    deleteMany?: InpatientEncounterOrderScalarWhereInput | InpatientEncounterOrderScalarWhereInput[]
+  }
+
+  export type InpatientEncounterChartUncheckedUpdateManyWithoutEncounterNestedInput = {
+    create?: XOR<InpatientEncounterChartCreateWithoutEncounterInput, InpatientEncounterChartUncheckedCreateWithoutEncounterInput> | InpatientEncounterChartCreateWithoutEncounterInput[] | InpatientEncounterChartUncheckedCreateWithoutEncounterInput[]
+    connectOrCreate?: InpatientEncounterChartCreateOrConnectWithoutEncounterInput | InpatientEncounterChartCreateOrConnectWithoutEncounterInput[]
+    upsert?: InpatientEncounterChartUpsertWithWhereUniqueWithoutEncounterInput | InpatientEncounterChartUpsertWithWhereUniqueWithoutEncounterInput[]
+    createMany?: InpatientEncounterChartCreateManyEncounterInputEnvelope
+    set?: InpatientEncounterChartWhereUniqueInput | InpatientEncounterChartWhereUniqueInput[]
+    disconnect?: InpatientEncounterChartWhereUniqueInput | InpatientEncounterChartWhereUniqueInput[]
+    delete?: InpatientEncounterChartWhereUniqueInput | InpatientEncounterChartWhereUniqueInput[]
+    connect?: InpatientEncounterChartWhereUniqueInput | InpatientEncounterChartWhereUniqueInput[]
+    update?: InpatientEncounterChartUpdateWithWhereUniqueWithoutEncounterInput | InpatientEncounterChartUpdateWithWhereUniqueWithoutEncounterInput[]
+    updateMany?: InpatientEncounterChartUpdateManyWithWhereWithoutEncounterInput | InpatientEncounterChartUpdateManyWithWhereWithoutEncounterInput[]
+    deleteMany?: InpatientEncounterChartScalarWhereInput | InpatientEncounterChartScalarWhereInput[]
+  }
+
+  export type InpatientEncounterOrderUncheckedUpdateManyWithoutEncounterNestedInput = {
+    create?: XOR<InpatientEncounterOrderCreateWithoutEncounterInput, InpatientEncounterOrderUncheckedCreateWithoutEncounterInput> | InpatientEncounterOrderCreateWithoutEncounterInput[] | InpatientEncounterOrderUncheckedCreateWithoutEncounterInput[]
+    connectOrCreate?: InpatientEncounterOrderCreateOrConnectWithoutEncounterInput | InpatientEncounterOrderCreateOrConnectWithoutEncounterInput[]
+    upsert?: InpatientEncounterOrderUpsertWithWhereUniqueWithoutEncounterInput | InpatientEncounterOrderUpsertWithWhereUniqueWithoutEncounterInput[]
+    createMany?: InpatientEncounterOrderCreateManyEncounterInputEnvelope
+    set?: InpatientEncounterOrderWhereUniqueInput | InpatientEncounterOrderWhereUniqueInput[]
+    disconnect?: InpatientEncounterOrderWhereUniqueInput | InpatientEncounterOrderWhereUniqueInput[]
+    delete?: InpatientEncounterOrderWhereUniqueInput | InpatientEncounterOrderWhereUniqueInput[]
+    connect?: InpatientEncounterOrderWhereUniqueInput | InpatientEncounterOrderWhereUniqueInput[]
+    update?: InpatientEncounterOrderUpdateWithWhereUniqueWithoutEncounterInput | InpatientEncounterOrderUpdateWithWhereUniqueWithoutEncounterInput[]
+    updateMany?: InpatientEncounterOrderUpdateManyWithWhereWithoutEncounterInput | InpatientEncounterOrderUpdateManyWithWhereWithoutEncounterInput[]
+    deleteMany?: InpatientEncounterOrderScalarWhereInput | InpatientEncounterOrderScalarWhereInput[]
+  }
+
+  export type InpatientEncounterCreateNestedOneWithoutChartsInput = {
+    create?: XOR<InpatientEncounterCreateWithoutChartsInput, InpatientEncounterUncheckedCreateWithoutChartsInput>
+    connectOrCreate?: InpatientEncounterCreateOrConnectWithoutChartsInput
+    connect?: InpatientEncounterWhereUniqueInput
+  }
+
+  export type InpatientEncounterUpdateOneRequiredWithoutChartsNestedInput = {
+    create?: XOR<InpatientEncounterCreateWithoutChartsInput, InpatientEncounterUncheckedCreateWithoutChartsInput>
+    connectOrCreate?: InpatientEncounterCreateOrConnectWithoutChartsInput
+    upsert?: InpatientEncounterUpsertWithoutChartsInput
+    connect?: InpatientEncounterWhereUniqueInput
+    update?: XOR<XOR<InpatientEncounterUpdateToOneWithWhereWithoutChartsInput, InpatientEncounterUpdateWithoutChartsInput>, InpatientEncounterUncheckedUpdateWithoutChartsInput>
+  }
+
+  export type InpatientEncounterCreateNestedOneWithoutOrdersInput = {
+    create?: XOR<InpatientEncounterCreateWithoutOrdersInput, InpatientEncounterUncheckedCreateWithoutOrdersInput>
+    connectOrCreate?: InpatientEncounterCreateOrConnectWithoutOrdersInput
+    connect?: InpatientEncounterWhereUniqueInput
+  }
+
+  export type ParticularCatalogueCreateNestedOneWithoutOrdersInput = {
+    create?: XOR<ParticularCatalogueCreateWithoutOrdersInput, ParticularCatalogueUncheckedCreateWithoutOrdersInput>
+    connectOrCreate?: ParticularCatalogueCreateOrConnectWithoutOrdersInput
+    connect?: ParticularCatalogueWhereUniqueInput
+  }
+
+  export type EnumInpatientEncounterOrderTypeFieldUpdateOperationsInput = {
+    set?: $Enums.InpatientEncounterOrderType
+  }
+
+  export type EnumInpatientEncounterOrderStatusFieldUpdateOperationsInput = {
+    set?: $Enums.InpatientEncounterOrderStatus
+  }
+
+  export type InpatientEncounterUpdateOneRequiredWithoutOrdersNestedInput = {
+    create?: XOR<InpatientEncounterCreateWithoutOrdersInput, InpatientEncounterUncheckedCreateWithoutOrdersInput>
+    connectOrCreate?: InpatientEncounterCreateOrConnectWithoutOrdersInput
+    upsert?: InpatientEncounterUpsertWithoutOrdersInput
+    connect?: InpatientEncounterWhereUniqueInput
+    update?: XOR<XOR<InpatientEncounterUpdateToOneWithWhereWithoutOrdersInput, InpatientEncounterUpdateWithoutOrdersInput>, InpatientEncounterUncheckedUpdateWithoutOrdersInput>
+  }
+
+  export type ParticularCatalogueUpdateOneWithoutOrdersNestedInput = {
+    create?: XOR<ParticularCatalogueCreateWithoutOrdersInput, ParticularCatalogueUncheckedCreateWithoutOrdersInput>
+    connectOrCreate?: ParticularCatalogueCreateOrConnectWithoutOrdersInput
+    upsert?: ParticularCatalogueUpsertWithoutOrdersInput
+    disconnect?: ParticularCatalogueWhereInput | boolean
+    delete?: ParticularCatalogueWhereInput | boolean
+    connect?: ParticularCatalogueWhereUniqueInput
+    update?: XOR<XOR<ParticularCatalogueUpdateToOneWithWhereWithoutOrdersInput, ParticularCatalogueUpdateWithoutOrdersInput>, ParticularCatalogueUncheckedUpdateWithoutOrdersInput>
+  }
+
+  export type InpatientEncounterOrderCreateNestedManyWithoutCatalogueItemInput = {
+    create?: XOR<InpatientEncounterOrderCreateWithoutCatalogueItemInput, InpatientEncounterOrderUncheckedCreateWithoutCatalogueItemInput> | InpatientEncounterOrderCreateWithoutCatalogueItemInput[] | InpatientEncounterOrderUncheckedCreateWithoutCatalogueItemInput[]
+    connectOrCreate?: InpatientEncounterOrderCreateOrConnectWithoutCatalogueItemInput | InpatientEncounterOrderCreateOrConnectWithoutCatalogueItemInput[]
+    createMany?: InpatientEncounterOrderCreateManyCatalogueItemInputEnvelope
+    connect?: InpatientEncounterOrderWhereUniqueInput | InpatientEncounterOrderWhereUniqueInput[]
+  }
+
+  export type InpatientEncounterOrderUncheckedCreateNestedManyWithoutCatalogueItemInput = {
+    create?: XOR<InpatientEncounterOrderCreateWithoutCatalogueItemInput, InpatientEncounterOrderUncheckedCreateWithoutCatalogueItemInput> | InpatientEncounterOrderCreateWithoutCatalogueItemInput[] | InpatientEncounterOrderUncheckedCreateWithoutCatalogueItemInput[]
+    connectOrCreate?: InpatientEncounterOrderCreateOrConnectWithoutCatalogueItemInput | InpatientEncounterOrderCreateOrConnectWithoutCatalogueItemInput[]
+    createMany?: InpatientEncounterOrderCreateManyCatalogueItemInputEnvelope
+    connect?: InpatientEncounterOrderWhereUniqueInput | InpatientEncounterOrderWhereUniqueInput[]
+  }
+
+  export type EnumParticularTypeFieldUpdateOperationsInput = {
+    set?: $Enums.ParticularType
+  }
+
+  export type InpatientEncounterOrderUpdateManyWithoutCatalogueItemNestedInput = {
+    create?: XOR<InpatientEncounterOrderCreateWithoutCatalogueItemInput, InpatientEncounterOrderUncheckedCreateWithoutCatalogueItemInput> | InpatientEncounterOrderCreateWithoutCatalogueItemInput[] | InpatientEncounterOrderUncheckedCreateWithoutCatalogueItemInput[]
+    connectOrCreate?: InpatientEncounterOrderCreateOrConnectWithoutCatalogueItemInput | InpatientEncounterOrderCreateOrConnectWithoutCatalogueItemInput[]
+    upsert?: InpatientEncounterOrderUpsertWithWhereUniqueWithoutCatalogueItemInput | InpatientEncounterOrderUpsertWithWhereUniqueWithoutCatalogueItemInput[]
+    createMany?: InpatientEncounterOrderCreateManyCatalogueItemInputEnvelope
+    set?: InpatientEncounterOrderWhereUniqueInput | InpatientEncounterOrderWhereUniqueInput[]
+    disconnect?: InpatientEncounterOrderWhereUniqueInput | InpatientEncounterOrderWhereUniqueInput[]
+    delete?: InpatientEncounterOrderWhereUniqueInput | InpatientEncounterOrderWhereUniqueInput[]
+    connect?: InpatientEncounterOrderWhereUniqueInput | InpatientEncounterOrderWhereUniqueInput[]
+    update?: InpatientEncounterOrderUpdateWithWhereUniqueWithoutCatalogueItemInput | InpatientEncounterOrderUpdateWithWhereUniqueWithoutCatalogueItemInput[]
+    updateMany?: InpatientEncounterOrderUpdateManyWithWhereWithoutCatalogueItemInput | InpatientEncounterOrderUpdateManyWithWhereWithoutCatalogueItemInput[]
+    deleteMany?: InpatientEncounterOrderScalarWhereInput | InpatientEncounterOrderScalarWhereInput[]
+  }
+
+  export type InpatientEncounterOrderUncheckedUpdateManyWithoutCatalogueItemNestedInput = {
+    create?: XOR<InpatientEncounterOrderCreateWithoutCatalogueItemInput, InpatientEncounterOrderUncheckedCreateWithoutCatalogueItemInput> | InpatientEncounterOrderCreateWithoutCatalogueItemInput[] | InpatientEncounterOrderUncheckedCreateWithoutCatalogueItemInput[]
+    connectOrCreate?: InpatientEncounterOrderCreateOrConnectWithoutCatalogueItemInput | InpatientEncounterOrderCreateOrConnectWithoutCatalogueItemInput[]
+    upsert?: InpatientEncounterOrderUpsertWithWhereUniqueWithoutCatalogueItemInput | InpatientEncounterOrderUpsertWithWhereUniqueWithoutCatalogueItemInput[]
+    createMany?: InpatientEncounterOrderCreateManyCatalogueItemInputEnvelope
+    set?: InpatientEncounterOrderWhereUniqueInput | InpatientEncounterOrderWhereUniqueInput[]
+    disconnect?: InpatientEncounterOrderWhereUniqueInput | InpatientEncounterOrderWhereUniqueInput[]
+    delete?: InpatientEncounterOrderWhereUniqueInput | InpatientEncounterOrderWhereUniqueInput[]
+    connect?: InpatientEncounterOrderWhereUniqueInput | InpatientEncounterOrderWhereUniqueInput[]
+    update?: InpatientEncounterOrderUpdateWithWhereUniqueWithoutCatalogueItemInput | InpatientEncounterOrderUpdateWithWhereUniqueWithoutCatalogueItemInput[]
+    updateMany?: InpatientEncounterOrderUpdateManyWithWhereWithoutCatalogueItemInput | InpatientEncounterOrderUpdateManyWithWhereWithoutCatalogueItemInput[]
+    deleteMany?: InpatientEncounterOrderScalarWhereInput | InpatientEncounterOrderScalarWhereInput[]
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -27698,6 +36124,150 @@ export namespace Prisma {
     _max?: NestedEnumPaymentStatusFilter<$PrismaModel>
   }
 
+  export type NestedEnumOutpatientEncounterTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.OutpatientEncounterType | EnumOutpatientEncounterTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.OutpatientEncounterType[] | ListEnumOutpatientEncounterTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.OutpatientEncounterType[] | ListEnumOutpatientEncounterTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumOutpatientEncounterTypeFilter<$PrismaModel> | $Enums.OutpatientEncounterType
+  }
+
+  export type NestedEnumOutpatientPaymentStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.OutpatientPaymentStatus | EnumOutpatientPaymentStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.OutpatientPaymentStatus[] | ListEnumOutpatientPaymentStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.OutpatientPaymentStatus[] | ListEnumOutpatientPaymentStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumOutpatientPaymentStatusFilter<$PrismaModel> | $Enums.OutpatientPaymentStatus
+  }
+
+  export type NestedEnumOutpatientEncounterTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.OutpatientEncounterType | EnumOutpatientEncounterTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.OutpatientEncounterType[] | ListEnumOutpatientEncounterTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.OutpatientEncounterType[] | ListEnumOutpatientEncounterTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumOutpatientEncounterTypeWithAggregatesFilter<$PrismaModel> | $Enums.OutpatientEncounterType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumOutpatientEncounterTypeFilter<$PrismaModel>
+    _max?: NestedEnumOutpatientEncounterTypeFilter<$PrismaModel>
+  }
+
+  export type NestedEnumOutpatientPaymentStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.OutpatientPaymentStatus | EnumOutpatientPaymentStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.OutpatientPaymentStatus[] | ListEnumOutpatientPaymentStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.OutpatientPaymentStatus[] | ListEnumOutpatientPaymentStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumOutpatientPaymentStatusWithAggregatesFilter<$PrismaModel> | $Enums.OutpatientPaymentStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumOutpatientPaymentStatusFilter<$PrismaModel>
+    _max?: NestedEnumOutpatientPaymentStatusFilter<$PrismaModel>
+  }
+
+  export type NestedEnumInpatientTriageFilter<$PrismaModel = never> = {
+    equals?: $Enums.InpatientTriage | EnumInpatientTriageFieldRefInput<$PrismaModel>
+    in?: $Enums.InpatientTriage[] | ListEnumInpatientTriageFieldRefInput<$PrismaModel>
+    notIn?: $Enums.InpatientTriage[] | ListEnumInpatientTriageFieldRefInput<$PrismaModel>
+    not?: NestedEnumInpatientTriageFilter<$PrismaModel> | $Enums.InpatientTriage
+  }
+
+  export type NestedEnumInpatientDispositionFilter<$PrismaModel = never> = {
+    equals?: $Enums.InpatientDisposition | EnumInpatientDispositionFieldRefInput<$PrismaModel>
+    in?: $Enums.InpatientDisposition[] | ListEnumInpatientDispositionFieldRefInput<$PrismaModel>
+    notIn?: $Enums.InpatientDisposition[] | ListEnumInpatientDispositionFieldRefInput<$PrismaModel>
+    not?: NestedEnumInpatientDispositionFilter<$PrismaModel> | $Enums.InpatientDisposition
+  }
+
+  export type NestedEnumInpatientTriageWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.InpatientTriage | EnumInpatientTriageFieldRefInput<$PrismaModel>
+    in?: $Enums.InpatientTriage[] | ListEnumInpatientTriageFieldRefInput<$PrismaModel>
+    notIn?: $Enums.InpatientTriage[] | ListEnumInpatientTriageFieldRefInput<$PrismaModel>
+    not?: NestedEnumInpatientTriageWithAggregatesFilter<$PrismaModel> | $Enums.InpatientTriage
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumInpatientTriageFilter<$PrismaModel>
+    _max?: NestedEnumInpatientTriageFilter<$PrismaModel>
+  }
+
+  export type NestedEnumInpatientDispositionWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.InpatientDisposition | EnumInpatientDispositionFieldRefInput<$PrismaModel>
+    in?: $Enums.InpatientDisposition[] | ListEnumInpatientDispositionFieldRefInput<$PrismaModel>
+    notIn?: $Enums.InpatientDisposition[] | ListEnumInpatientDispositionFieldRefInput<$PrismaModel>
+    not?: NestedEnumInpatientDispositionWithAggregatesFilter<$PrismaModel> | $Enums.InpatientDisposition
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumInpatientDispositionFilter<$PrismaModel>
+    _max?: NestedEnumInpatientDispositionFilter<$PrismaModel>
+  }
+
+  export type NestedUuidNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedUuidNullableFilter<$PrismaModel> | string | null
+  }
+
+  export type NestedEnumInpatientEncounterOrderTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.InpatientEncounterOrderType | EnumInpatientEncounterOrderTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.InpatientEncounterOrderType[] | ListEnumInpatientEncounterOrderTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.InpatientEncounterOrderType[] | ListEnumInpatientEncounterOrderTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumInpatientEncounterOrderTypeFilter<$PrismaModel> | $Enums.InpatientEncounterOrderType
+  }
+
+  export type NestedEnumInpatientEncounterOrderStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.InpatientEncounterOrderStatus | EnumInpatientEncounterOrderStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.InpatientEncounterOrderStatus[] | ListEnumInpatientEncounterOrderStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.InpatientEncounterOrderStatus[] | ListEnumInpatientEncounterOrderStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumInpatientEncounterOrderStatusFilter<$PrismaModel> | $Enums.InpatientEncounterOrderStatus
+  }
+
+  export type NestedUuidNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedUuidNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
+  }
+
+  export type NestedEnumInpatientEncounterOrderTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.InpatientEncounterOrderType | EnumInpatientEncounterOrderTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.InpatientEncounterOrderType[] | ListEnumInpatientEncounterOrderTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.InpatientEncounterOrderType[] | ListEnumInpatientEncounterOrderTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumInpatientEncounterOrderTypeWithAggregatesFilter<$PrismaModel> | $Enums.InpatientEncounterOrderType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumInpatientEncounterOrderTypeFilter<$PrismaModel>
+    _max?: NestedEnumInpatientEncounterOrderTypeFilter<$PrismaModel>
+  }
+
+  export type NestedEnumInpatientEncounterOrderStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.InpatientEncounterOrderStatus | EnumInpatientEncounterOrderStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.InpatientEncounterOrderStatus[] | ListEnumInpatientEncounterOrderStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.InpatientEncounterOrderStatus[] | ListEnumInpatientEncounterOrderStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumInpatientEncounterOrderStatusWithAggregatesFilter<$PrismaModel> | $Enums.InpatientEncounterOrderStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumInpatientEncounterOrderStatusFilter<$PrismaModel>
+    _max?: NestedEnumInpatientEncounterOrderStatusFilter<$PrismaModel>
+  }
+
+  export type NestedEnumParticularTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.ParticularType | EnumParticularTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.ParticularType[] | ListEnumParticularTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ParticularType[] | ListEnumParticularTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumParticularTypeFilter<$PrismaModel> | $Enums.ParticularType
+  }
+
+  export type NestedEnumParticularTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.ParticularType | EnumParticularTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.ParticularType[] | ListEnumParticularTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ParticularType[] | ListEnumParticularTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumParticularTypeWithAggregatesFilter<$PrismaModel> | $Enums.ParticularType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumParticularTypeFilter<$PrismaModel>
+    _max?: NestedEnumParticularTypeFilter<$PrismaModel>
+  }
+
   export type RefreshTokenCreateWithoutUserInput = {
     id?: string
     token: string
@@ -27762,6 +36332,8 @@ export namespace Prisma {
     insuranceNumber?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    inpatientEncounters?: InpatientEncounterCreateNestedManyWithoutPatientInput
+    outpatientEncounters?: OutpatientEncounterCreateNestedManyWithoutPatientInput
   }
 
   export type PatientUncheckedCreateWithoutUserInput = {
@@ -27776,6 +36348,8 @@ export namespace Prisma {
     insuranceNumber?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    inpatientEncounters?: InpatientEncounterUncheckedCreateNestedManyWithoutPatientInput
+    outpatientEncounters?: OutpatientEncounterUncheckedCreateNestedManyWithoutPatientInput
   }
 
   export type PatientCreateOrConnectWithoutUserInput = {
@@ -28010,6 +36584,8 @@ export namespace Prisma {
     insuranceNumber?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    inpatientEncounters?: InpatientEncounterUpdateManyWithoutPatientNestedInput
+    outpatientEncounters?: OutpatientEncounterUpdateManyWithoutPatientNestedInput
   }
 
   export type PatientUncheckedUpdateWithoutUserInput = {
@@ -28024,6 +36600,8 @@ export namespace Prisma {
     insuranceNumber?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    inpatientEncounters?: InpatientEncounterUncheckedUpdateManyWithoutPatientNestedInput
+    outpatientEncounters?: OutpatientEncounterUncheckedUpdateManyWithoutPatientNestedInput
   }
 
   export type PartnerUpsertWithoutUserInput = {
@@ -28425,6 +37003,94 @@ export namespace Prisma {
     create: XOR<UserCreateWithoutPatientProfileInput, UserUncheckedCreateWithoutPatientProfileInput>
   }
 
+  export type InpatientEncounterCreateWithoutPatientInput = {
+    id?: string
+    doctorId: string
+    admittedBy?: string | null
+    date: string
+    time: string
+    chiefComplaint: string
+    doctorDiagnosis?: string | null
+    triage: $Enums.InpatientTriage
+    disposition?: $Enums.InpatientDisposition
+    dispositionDate?: string | null
+    dispositionTime?: string | null
+    dispositionNote?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    charts?: InpatientEncounterChartCreateNestedManyWithoutEncounterInput
+    orders?: InpatientEncounterOrderCreateNestedManyWithoutEncounterInput
+  }
+
+  export type InpatientEncounterUncheckedCreateWithoutPatientInput = {
+    id?: string
+    doctorId: string
+    admittedBy?: string | null
+    date: string
+    time: string
+    chiefComplaint: string
+    doctorDiagnosis?: string | null
+    triage: $Enums.InpatientTriage
+    disposition?: $Enums.InpatientDisposition
+    dispositionDate?: string | null
+    dispositionTime?: string | null
+    dispositionNote?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    charts?: InpatientEncounterChartUncheckedCreateNestedManyWithoutEncounterInput
+    orders?: InpatientEncounterOrderUncheckedCreateNestedManyWithoutEncounterInput
+  }
+
+  export type InpatientEncounterCreateOrConnectWithoutPatientInput = {
+    where: InpatientEncounterWhereUniqueInput
+    create: XOR<InpatientEncounterCreateWithoutPatientInput, InpatientEncounterUncheckedCreateWithoutPatientInput>
+  }
+
+  export type InpatientEncounterCreateManyPatientInputEnvelope = {
+    data: InpatientEncounterCreateManyPatientInput | InpatientEncounterCreateManyPatientInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type OutpatientEncounterCreateWithoutPatientInput = {
+    id?: string
+    doctorId: string
+    date: string
+    time: string
+    chiefComplaint: string
+    doctorDiagnosis?: string | null
+    type?: $Enums.OutpatientEncounterType
+    consultationFee?: Decimal | DecimalJsLike | number | string | null
+    paymentStatus?: $Enums.OutpatientPaymentStatus
+    notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type OutpatientEncounterUncheckedCreateWithoutPatientInput = {
+    id?: string
+    doctorId: string
+    date: string
+    time: string
+    chiefComplaint: string
+    doctorDiagnosis?: string | null
+    type?: $Enums.OutpatientEncounterType
+    consultationFee?: Decimal | DecimalJsLike | number | string | null
+    paymentStatus?: $Enums.OutpatientPaymentStatus
+    notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type OutpatientEncounterCreateOrConnectWithoutPatientInput = {
+    where: OutpatientEncounterWhereUniqueInput
+    create: XOR<OutpatientEncounterCreateWithoutPatientInput, OutpatientEncounterUncheckedCreateWithoutPatientInput>
+  }
+
+  export type OutpatientEncounterCreateManyPatientInputEnvelope = {
+    data: OutpatientEncounterCreateManyPatientInput | OutpatientEncounterCreateManyPatientInput[]
+    skipDuplicates?: boolean
+  }
+
   export type UserUpsertWithoutPatientProfileInput = {
     update: XOR<UserUpdateWithoutPatientProfileInput, UserUncheckedUpdateWithoutPatientProfileInput>
     create: XOR<UserCreateWithoutPatientProfileInput, UserUncheckedCreateWithoutPatientProfileInput>
@@ -28510,6 +37176,78 @@ export namespace Prisma {
     staffCredentials?: StaffCredentialsUncheckedUpdateOneWithoutUserNestedInput
     appointments?: AppointmentUncheckedUpdateManyWithoutUserNestedInput
     medicalServices?: MedicalServiceUncheckedUpdateManyWithoutStaffNestedInput
+  }
+
+  export type InpatientEncounterUpsertWithWhereUniqueWithoutPatientInput = {
+    where: InpatientEncounterWhereUniqueInput
+    update: XOR<InpatientEncounterUpdateWithoutPatientInput, InpatientEncounterUncheckedUpdateWithoutPatientInput>
+    create: XOR<InpatientEncounterCreateWithoutPatientInput, InpatientEncounterUncheckedCreateWithoutPatientInput>
+  }
+
+  export type InpatientEncounterUpdateWithWhereUniqueWithoutPatientInput = {
+    where: InpatientEncounterWhereUniqueInput
+    data: XOR<InpatientEncounterUpdateWithoutPatientInput, InpatientEncounterUncheckedUpdateWithoutPatientInput>
+  }
+
+  export type InpatientEncounterUpdateManyWithWhereWithoutPatientInput = {
+    where: InpatientEncounterScalarWhereInput
+    data: XOR<InpatientEncounterUpdateManyMutationInput, InpatientEncounterUncheckedUpdateManyWithoutPatientInput>
+  }
+
+  export type InpatientEncounterScalarWhereInput = {
+    AND?: InpatientEncounterScalarWhereInput | InpatientEncounterScalarWhereInput[]
+    OR?: InpatientEncounterScalarWhereInput[]
+    NOT?: InpatientEncounterScalarWhereInput | InpatientEncounterScalarWhereInput[]
+    id?: UuidFilter<"InpatientEncounter"> | string
+    patientId?: StringFilter<"InpatientEncounter"> | string
+    doctorId?: StringFilter<"InpatientEncounter"> | string
+    admittedBy?: StringNullableFilter<"InpatientEncounter"> | string | null
+    date?: StringFilter<"InpatientEncounter"> | string
+    time?: StringFilter<"InpatientEncounter"> | string
+    chiefComplaint?: StringFilter<"InpatientEncounter"> | string
+    doctorDiagnosis?: StringNullableFilter<"InpatientEncounter"> | string | null
+    triage?: EnumInpatientTriageFilter<"InpatientEncounter"> | $Enums.InpatientTriage
+    disposition?: EnumInpatientDispositionFilter<"InpatientEncounter"> | $Enums.InpatientDisposition
+    dispositionDate?: StringNullableFilter<"InpatientEncounter"> | string | null
+    dispositionTime?: StringNullableFilter<"InpatientEncounter"> | string | null
+    dispositionNote?: StringNullableFilter<"InpatientEncounter"> | string | null
+    createdAt?: DateTimeFilter<"InpatientEncounter"> | Date | string
+    updatedAt?: DateTimeFilter<"InpatientEncounter"> | Date | string
+  }
+
+  export type OutpatientEncounterUpsertWithWhereUniqueWithoutPatientInput = {
+    where: OutpatientEncounterWhereUniqueInput
+    update: XOR<OutpatientEncounterUpdateWithoutPatientInput, OutpatientEncounterUncheckedUpdateWithoutPatientInput>
+    create: XOR<OutpatientEncounterCreateWithoutPatientInput, OutpatientEncounterUncheckedCreateWithoutPatientInput>
+  }
+
+  export type OutpatientEncounterUpdateWithWhereUniqueWithoutPatientInput = {
+    where: OutpatientEncounterWhereUniqueInput
+    data: XOR<OutpatientEncounterUpdateWithoutPatientInput, OutpatientEncounterUncheckedUpdateWithoutPatientInput>
+  }
+
+  export type OutpatientEncounterUpdateManyWithWhereWithoutPatientInput = {
+    where: OutpatientEncounterScalarWhereInput
+    data: XOR<OutpatientEncounterUpdateManyMutationInput, OutpatientEncounterUncheckedUpdateManyWithoutPatientInput>
+  }
+
+  export type OutpatientEncounterScalarWhereInput = {
+    AND?: OutpatientEncounterScalarWhereInput | OutpatientEncounterScalarWhereInput[]
+    OR?: OutpatientEncounterScalarWhereInput[]
+    NOT?: OutpatientEncounterScalarWhereInput | OutpatientEncounterScalarWhereInput[]
+    id?: UuidFilter<"OutpatientEncounter"> | string
+    patientId?: StringFilter<"OutpatientEncounter"> | string
+    doctorId?: StringFilter<"OutpatientEncounter"> | string
+    date?: StringFilter<"OutpatientEncounter"> | string
+    time?: StringFilter<"OutpatientEncounter"> | string
+    chiefComplaint?: StringFilter<"OutpatientEncounter"> | string
+    doctorDiagnosis?: StringNullableFilter<"OutpatientEncounter"> | string | null
+    type?: EnumOutpatientEncounterTypeFilter<"OutpatientEncounter"> | $Enums.OutpatientEncounterType
+    consultationFee?: DecimalNullableFilter<"OutpatientEncounter"> | Decimal | DecimalJsLike | number | string | null
+    paymentStatus?: EnumOutpatientPaymentStatusFilter<"OutpatientEncounter"> | $Enums.OutpatientPaymentStatus
+    notes?: StringNullableFilter<"OutpatientEncounter"> | string | null
+    createdAt?: DateTimeFilter<"OutpatientEncounter"> | Date | string
+    updatedAt?: DateTimeFilter<"OutpatientEncounter"> | Date | string
   }
 
   export type UserCreateWithoutPartnerProfileInput = {
@@ -30013,6 +38751,585 @@ export namespace Prisma {
     items?: PharmacySaleItemUncheckedUpdateManyWithoutSaleNestedInput
   }
 
+  export type PatientCreateWithoutOutpatientEncountersInput = {
+    id?: string
+    patientNumber: string
+    bloodType?: $Enums.BloodType | null
+    allergies?: string | null
+    medicalHistory?: string | null
+    emergencyContact?: string | null
+    emergencyPhone?: string | null
+    insuranceProvider?: string | null
+    insuranceNumber?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutPatientProfileInput
+    inpatientEncounters?: InpatientEncounterCreateNestedManyWithoutPatientInput
+  }
+
+  export type PatientUncheckedCreateWithoutOutpatientEncountersInput = {
+    id?: string
+    userId: string
+    patientNumber: string
+    bloodType?: $Enums.BloodType | null
+    allergies?: string | null
+    medicalHistory?: string | null
+    emergencyContact?: string | null
+    emergencyPhone?: string | null
+    insuranceProvider?: string | null
+    insuranceNumber?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    inpatientEncounters?: InpatientEncounterUncheckedCreateNestedManyWithoutPatientInput
+  }
+
+  export type PatientCreateOrConnectWithoutOutpatientEncountersInput = {
+    where: PatientWhereUniqueInput
+    create: XOR<PatientCreateWithoutOutpatientEncountersInput, PatientUncheckedCreateWithoutOutpatientEncountersInput>
+  }
+
+  export type PatientUpsertWithoutOutpatientEncountersInput = {
+    update: XOR<PatientUpdateWithoutOutpatientEncountersInput, PatientUncheckedUpdateWithoutOutpatientEncountersInput>
+    create: XOR<PatientCreateWithoutOutpatientEncountersInput, PatientUncheckedCreateWithoutOutpatientEncountersInput>
+    where?: PatientWhereInput
+  }
+
+  export type PatientUpdateToOneWithWhereWithoutOutpatientEncountersInput = {
+    where?: PatientWhereInput
+    data: XOR<PatientUpdateWithoutOutpatientEncountersInput, PatientUncheckedUpdateWithoutOutpatientEncountersInput>
+  }
+
+  export type PatientUpdateWithoutOutpatientEncountersInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    patientNumber?: StringFieldUpdateOperationsInput | string
+    bloodType?: NullableEnumBloodTypeFieldUpdateOperationsInput | $Enums.BloodType | null
+    allergies?: NullableStringFieldUpdateOperationsInput | string | null
+    medicalHistory?: NullableStringFieldUpdateOperationsInput | string | null
+    emergencyContact?: NullableStringFieldUpdateOperationsInput | string | null
+    emergencyPhone?: NullableStringFieldUpdateOperationsInput | string | null
+    insuranceProvider?: NullableStringFieldUpdateOperationsInput | string | null
+    insuranceNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutPatientProfileNestedInput
+    inpatientEncounters?: InpatientEncounterUpdateManyWithoutPatientNestedInput
+  }
+
+  export type PatientUncheckedUpdateWithoutOutpatientEncountersInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    patientNumber?: StringFieldUpdateOperationsInput | string
+    bloodType?: NullableEnumBloodTypeFieldUpdateOperationsInput | $Enums.BloodType | null
+    allergies?: NullableStringFieldUpdateOperationsInput | string | null
+    medicalHistory?: NullableStringFieldUpdateOperationsInput | string | null
+    emergencyContact?: NullableStringFieldUpdateOperationsInput | string | null
+    emergencyPhone?: NullableStringFieldUpdateOperationsInput | string | null
+    insuranceProvider?: NullableStringFieldUpdateOperationsInput | string | null
+    insuranceNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    inpatientEncounters?: InpatientEncounterUncheckedUpdateManyWithoutPatientNestedInput
+  }
+
+  export type PatientCreateWithoutInpatientEncountersInput = {
+    id?: string
+    patientNumber: string
+    bloodType?: $Enums.BloodType | null
+    allergies?: string | null
+    medicalHistory?: string | null
+    emergencyContact?: string | null
+    emergencyPhone?: string | null
+    insuranceProvider?: string | null
+    insuranceNumber?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutPatientProfileInput
+    outpatientEncounters?: OutpatientEncounterCreateNestedManyWithoutPatientInput
+  }
+
+  export type PatientUncheckedCreateWithoutInpatientEncountersInput = {
+    id?: string
+    userId: string
+    patientNumber: string
+    bloodType?: $Enums.BloodType | null
+    allergies?: string | null
+    medicalHistory?: string | null
+    emergencyContact?: string | null
+    emergencyPhone?: string | null
+    insuranceProvider?: string | null
+    insuranceNumber?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    outpatientEncounters?: OutpatientEncounterUncheckedCreateNestedManyWithoutPatientInput
+  }
+
+  export type PatientCreateOrConnectWithoutInpatientEncountersInput = {
+    where: PatientWhereUniqueInput
+    create: XOR<PatientCreateWithoutInpatientEncountersInput, PatientUncheckedCreateWithoutInpatientEncountersInput>
+  }
+
+  export type InpatientEncounterChartCreateWithoutEncounterInput = {
+    id?: string
+    staffId: string
+    chart: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type InpatientEncounterChartUncheckedCreateWithoutEncounterInput = {
+    id?: string
+    staffId: string
+    chart: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type InpatientEncounterChartCreateOrConnectWithoutEncounterInput = {
+    where: InpatientEncounterChartWhereUniqueInput
+    create: XOR<InpatientEncounterChartCreateWithoutEncounterInput, InpatientEncounterChartUncheckedCreateWithoutEncounterInput>
+  }
+
+  export type InpatientEncounterChartCreateManyEncounterInputEnvelope = {
+    data: InpatientEncounterChartCreateManyEncounterInput | InpatientEncounterChartCreateManyEncounterInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type InpatientEncounterOrderCreateWithoutEncounterInput = {
+    id?: string
+    type: $Enums.InpatientEncounterOrderType
+    description: string
+    cost: Decimal | DecimalJsLike | number | string
+    status?: $Enums.InpatientEncounterOrderStatus
+    orderedBy: string
+    notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    catalogueItem?: ParticularCatalogueCreateNestedOneWithoutOrdersInput
+  }
+
+  export type InpatientEncounterOrderUncheckedCreateWithoutEncounterInput = {
+    id?: string
+    catalogueItemId?: string | null
+    type: $Enums.InpatientEncounterOrderType
+    description: string
+    cost: Decimal | DecimalJsLike | number | string
+    status?: $Enums.InpatientEncounterOrderStatus
+    orderedBy: string
+    notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type InpatientEncounterOrderCreateOrConnectWithoutEncounterInput = {
+    where: InpatientEncounterOrderWhereUniqueInput
+    create: XOR<InpatientEncounterOrderCreateWithoutEncounterInput, InpatientEncounterOrderUncheckedCreateWithoutEncounterInput>
+  }
+
+  export type InpatientEncounterOrderCreateManyEncounterInputEnvelope = {
+    data: InpatientEncounterOrderCreateManyEncounterInput | InpatientEncounterOrderCreateManyEncounterInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type PatientUpsertWithoutInpatientEncountersInput = {
+    update: XOR<PatientUpdateWithoutInpatientEncountersInput, PatientUncheckedUpdateWithoutInpatientEncountersInput>
+    create: XOR<PatientCreateWithoutInpatientEncountersInput, PatientUncheckedCreateWithoutInpatientEncountersInput>
+    where?: PatientWhereInput
+  }
+
+  export type PatientUpdateToOneWithWhereWithoutInpatientEncountersInput = {
+    where?: PatientWhereInput
+    data: XOR<PatientUpdateWithoutInpatientEncountersInput, PatientUncheckedUpdateWithoutInpatientEncountersInput>
+  }
+
+  export type PatientUpdateWithoutInpatientEncountersInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    patientNumber?: StringFieldUpdateOperationsInput | string
+    bloodType?: NullableEnumBloodTypeFieldUpdateOperationsInput | $Enums.BloodType | null
+    allergies?: NullableStringFieldUpdateOperationsInput | string | null
+    medicalHistory?: NullableStringFieldUpdateOperationsInput | string | null
+    emergencyContact?: NullableStringFieldUpdateOperationsInput | string | null
+    emergencyPhone?: NullableStringFieldUpdateOperationsInput | string | null
+    insuranceProvider?: NullableStringFieldUpdateOperationsInput | string | null
+    insuranceNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutPatientProfileNestedInput
+    outpatientEncounters?: OutpatientEncounterUpdateManyWithoutPatientNestedInput
+  }
+
+  export type PatientUncheckedUpdateWithoutInpatientEncountersInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    patientNumber?: StringFieldUpdateOperationsInput | string
+    bloodType?: NullableEnumBloodTypeFieldUpdateOperationsInput | $Enums.BloodType | null
+    allergies?: NullableStringFieldUpdateOperationsInput | string | null
+    medicalHistory?: NullableStringFieldUpdateOperationsInput | string | null
+    emergencyContact?: NullableStringFieldUpdateOperationsInput | string | null
+    emergencyPhone?: NullableStringFieldUpdateOperationsInput | string | null
+    insuranceProvider?: NullableStringFieldUpdateOperationsInput | string | null
+    insuranceNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    outpatientEncounters?: OutpatientEncounterUncheckedUpdateManyWithoutPatientNestedInput
+  }
+
+  export type InpatientEncounterChartUpsertWithWhereUniqueWithoutEncounterInput = {
+    where: InpatientEncounterChartWhereUniqueInput
+    update: XOR<InpatientEncounterChartUpdateWithoutEncounterInput, InpatientEncounterChartUncheckedUpdateWithoutEncounterInput>
+    create: XOR<InpatientEncounterChartCreateWithoutEncounterInput, InpatientEncounterChartUncheckedCreateWithoutEncounterInput>
+  }
+
+  export type InpatientEncounterChartUpdateWithWhereUniqueWithoutEncounterInput = {
+    where: InpatientEncounterChartWhereUniqueInput
+    data: XOR<InpatientEncounterChartUpdateWithoutEncounterInput, InpatientEncounterChartUncheckedUpdateWithoutEncounterInput>
+  }
+
+  export type InpatientEncounterChartUpdateManyWithWhereWithoutEncounterInput = {
+    where: InpatientEncounterChartScalarWhereInput
+    data: XOR<InpatientEncounterChartUpdateManyMutationInput, InpatientEncounterChartUncheckedUpdateManyWithoutEncounterInput>
+  }
+
+  export type InpatientEncounterChartScalarWhereInput = {
+    AND?: InpatientEncounterChartScalarWhereInput | InpatientEncounterChartScalarWhereInput[]
+    OR?: InpatientEncounterChartScalarWhereInput[]
+    NOT?: InpatientEncounterChartScalarWhereInput | InpatientEncounterChartScalarWhereInput[]
+    id?: UuidFilter<"InpatientEncounterChart"> | string
+    encounterId?: UuidFilter<"InpatientEncounterChart"> | string
+    staffId?: StringFilter<"InpatientEncounterChart"> | string
+    chart?: StringFilter<"InpatientEncounterChart"> | string
+    createdAt?: DateTimeFilter<"InpatientEncounterChart"> | Date | string
+    updatedAt?: DateTimeFilter<"InpatientEncounterChart"> | Date | string
+  }
+
+  export type InpatientEncounterOrderUpsertWithWhereUniqueWithoutEncounterInput = {
+    where: InpatientEncounterOrderWhereUniqueInput
+    update: XOR<InpatientEncounterOrderUpdateWithoutEncounterInput, InpatientEncounterOrderUncheckedUpdateWithoutEncounterInput>
+    create: XOR<InpatientEncounterOrderCreateWithoutEncounterInput, InpatientEncounterOrderUncheckedCreateWithoutEncounterInput>
+  }
+
+  export type InpatientEncounterOrderUpdateWithWhereUniqueWithoutEncounterInput = {
+    where: InpatientEncounterOrderWhereUniqueInput
+    data: XOR<InpatientEncounterOrderUpdateWithoutEncounterInput, InpatientEncounterOrderUncheckedUpdateWithoutEncounterInput>
+  }
+
+  export type InpatientEncounterOrderUpdateManyWithWhereWithoutEncounterInput = {
+    where: InpatientEncounterOrderScalarWhereInput
+    data: XOR<InpatientEncounterOrderUpdateManyMutationInput, InpatientEncounterOrderUncheckedUpdateManyWithoutEncounterInput>
+  }
+
+  export type InpatientEncounterOrderScalarWhereInput = {
+    AND?: InpatientEncounterOrderScalarWhereInput | InpatientEncounterOrderScalarWhereInput[]
+    OR?: InpatientEncounterOrderScalarWhereInput[]
+    NOT?: InpatientEncounterOrderScalarWhereInput | InpatientEncounterOrderScalarWhereInput[]
+    id?: UuidFilter<"InpatientEncounterOrder"> | string
+    encounterId?: UuidFilter<"InpatientEncounterOrder"> | string
+    catalogueItemId?: UuidNullableFilter<"InpatientEncounterOrder"> | string | null
+    type?: EnumInpatientEncounterOrderTypeFilter<"InpatientEncounterOrder"> | $Enums.InpatientEncounterOrderType
+    description?: StringFilter<"InpatientEncounterOrder"> | string
+    cost?: DecimalFilter<"InpatientEncounterOrder"> | Decimal | DecimalJsLike | number | string
+    status?: EnumInpatientEncounterOrderStatusFilter<"InpatientEncounterOrder"> | $Enums.InpatientEncounterOrderStatus
+    orderedBy?: StringFilter<"InpatientEncounterOrder"> | string
+    notes?: StringNullableFilter<"InpatientEncounterOrder"> | string | null
+    createdAt?: DateTimeFilter<"InpatientEncounterOrder"> | Date | string
+    updatedAt?: DateTimeFilter<"InpatientEncounterOrder"> | Date | string
+  }
+
+  export type InpatientEncounterCreateWithoutChartsInput = {
+    id?: string
+    doctorId: string
+    admittedBy?: string | null
+    date: string
+    time: string
+    chiefComplaint: string
+    doctorDiagnosis?: string | null
+    triage: $Enums.InpatientTriage
+    disposition?: $Enums.InpatientDisposition
+    dispositionDate?: string | null
+    dispositionTime?: string | null
+    dispositionNote?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    patient: PatientCreateNestedOneWithoutInpatientEncountersInput
+    orders?: InpatientEncounterOrderCreateNestedManyWithoutEncounterInput
+  }
+
+  export type InpatientEncounterUncheckedCreateWithoutChartsInput = {
+    id?: string
+    patientId: string
+    doctorId: string
+    admittedBy?: string | null
+    date: string
+    time: string
+    chiefComplaint: string
+    doctorDiagnosis?: string | null
+    triage: $Enums.InpatientTriage
+    disposition?: $Enums.InpatientDisposition
+    dispositionDate?: string | null
+    dispositionTime?: string | null
+    dispositionNote?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    orders?: InpatientEncounterOrderUncheckedCreateNestedManyWithoutEncounterInput
+  }
+
+  export type InpatientEncounterCreateOrConnectWithoutChartsInput = {
+    where: InpatientEncounterWhereUniqueInput
+    create: XOR<InpatientEncounterCreateWithoutChartsInput, InpatientEncounterUncheckedCreateWithoutChartsInput>
+  }
+
+  export type InpatientEncounterUpsertWithoutChartsInput = {
+    update: XOR<InpatientEncounterUpdateWithoutChartsInput, InpatientEncounterUncheckedUpdateWithoutChartsInput>
+    create: XOR<InpatientEncounterCreateWithoutChartsInput, InpatientEncounterUncheckedCreateWithoutChartsInput>
+    where?: InpatientEncounterWhereInput
+  }
+
+  export type InpatientEncounterUpdateToOneWithWhereWithoutChartsInput = {
+    where?: InpatientEncounterWhereInput
+    data: XOR<InpatientEncounterUpdateWithoutChartsInput, InpatientEncounterUncheckedUpdateWithoutChartsInput>
+  }
+
+  export type InpatientEncounterUpdateWithoutChartsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    doctorId?: StringFieldUpdateOperationsInput | string
+    admittedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    date?: StringFieldUpdateOperationsInput | string
+    time?: StringFieldUpdateOperationsInput | string
+    chiefComplaint?: StringFieldUpdateOperationsInput | string
+    doctorDiagnosis?: NullableStringFieldUpdateOperationsInput | string | null
+    triage?: EnumInpatientTriageFieldUpdateOperationsInput | $Enums.InpatientTriage
+    disposition?: EnumInpatientDispositionFieldUpdateOperationsInput | $Enums.InpatientDisposition
+    dispositionDate?: NullableStringFieldUpdateOperationsInput | string | null
+    dispositionTime?: NullableStringFieldUpdateOperationsInput | string | null
+    dispositionNote?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    patient?: PatientUpdateOneRequiredWithoutInpatientEncountersNestedInput
+    orders?: InpatientEncounterOrderUpdateManyWithoutEncounterNestedInput
+  }
+
+  export type InpatientEncounterUncheckedUpdateWithoutChartsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    patientId?: StringFieldUpdateOperationsInput | string
+    doctorId?: StringFieldUpdateOperationsInput | string
+    admittedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    date?: StringFieldUpdateOperationsInput | string
+    time?: StringFieldUpdateOperationsInput | string
+    chiefComplaint?: StringFieldUpdateOperationsInput | string
+    doctorDiagnosis?: NullableStringFieldUpdateOperationsInput | string | null
+    triage?: EnumInpatientTriageFieldUpdateOperationsInput | $Enums.InpatientTriage
+    disposition?: EnumInpatientDispositionFieldUpdateOperationsInput | $Enums.InpatientDisposition
+    dispositionDate?: NullableStringFieldUpdateOperationsInput | string | null
+    dispositionTime?: NullableStringFieldUpdateOperationsInput | string | null
+    dispositionNote?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    orders?: InpatientEncounterOrderUncheckedUpdateManyWithoutEncounterNestedInput
+  }
+
+  export type InpatientEncounterCreateWithoutOrdersInput = {
+    id?: string
+    doctorId: string
+    admittedBy?: string | null
+    date: string
+    time: string
+    chiefComplaint: string
+    doctorDiagnosis?: string | null
+    triage: $Enums.InpatientTriage
+    disposition?: $Enums.InpatientDisposition
+    dispositionDate?: string | null
+    dispositionTime?: string | null
+    dispositionNote?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    patient: PatientCreateNestedOneWithoutInpatientEncountersInput
+    charts?: InpatientEncounterChartCreateNestedManyWithoutEncounterInput
+  }
+
+  export type InpatientEncounterUncheckedCreateWithoutOrdersInput = {
+    id?: string
+    patientId: string
+    doctorId: string
+    admittedBy?: string | null
+    date: string
+    time: string
+    chiefComplaint: string
+    doctorDiagnosis?: string | null
+    triage: $Enums.InpatientTriage
+    disposition?: $Enums.InpatientDisposition
+    dispositionDate?: string | null
+    dispositionTime?: string | null
+    dispositionNote?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    charts?: InpatientEncounterChartUncheckedCreateNestedManyWithoutEncounterInput
+  }
+
+  export type InpatientEncounterCreateOrConnectWithoutOrdersInput = {
+    where: InpatientEncounterWhereUniqueInput
+    create: XOR<InpatientEncounterCreateWithoutOrdersInput, InpatientEncounterUncheckedCreateWithoutOrdersInput>
+  }
+
+  export type ParticularCatalogueCreateWithoutOrdersInput = {
+    id?: string
+    type: $Enums.ParticularType
+    name: string
+    description?: string | null
+    cost: Decimal | DecimalJsLike | number | string
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ParticularCatalogueUncheckedCreateWithoutOrdersInput = {
+    id?: string
+    type: $Enums.ParticularType
+    name: string
+    description?: string | null
+    cost: Decimal | DecimalJsLike | number | string
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ParticularCatalogueCreateOrConnectWithoutOrdersInput = {
+    where: ParticularCatalogueWhereUniqueInput
+    create: XOR<ParticularCatalogueCreateWithoutOrdersInput, ParticularCatalogueUncheckedCreateWithoutOrdersInput>
+  }
+
+  export type InpatientEncounterUpsertWithoutOrdersInput = {
+    update: XOR<InpatientEncounterUpdateWithoutOrdersInput, InpatientEncounterUncheckedUpdateWithoutOrdersInput>
+    create: XOR<InpatientEncounterCreateWithoutOrdersInput, InpatientEncounterUncheckedCreateWithoutOrdersInput>
+    where?: InpatientEncounterWhereInput
+  }
+
+  export type InpatientEncounterUpdateToOneWithWhereWithoutOrdersInput = {
+    where?: InpatientEncounterWhereInput
+    data: XOR<InpatientEncounterUpdateWithoutOrdersInput, InpatientEncounterUncheckedUpdateWithoutOrdersInput>
+  }
+
+  export type InpatientEncounterUpdateWithoutOrdersInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    doctorId?: StringFieldUpdateOperationsInput | string
+    admittedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    date?: StringFieldUpdateOperationsInput | string
+    time?: StringFieldUpdateOperationsInput | string
+    chiefComplaint?: StringFieldUpdateOperationsInput | string
+    doctorDiagnosis?: NullableStringFieldUpdateOperationsInput | string | null
+    triage?: EnumInpatientTriageFieldUpdateOperationsInput | $Enums.InpatientTriage
+    disposition?: EnumInpatientDispositionFieldUpdateOperationsInput | $Enums.InpatientDisposition
+    dispositionDate?: NullableStringFieldUpdateOperationsInput | string | null
+    dispositionTime?: NullableStringFieldUpdateOperationsInput | string | null
+    dispositionNote?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    patient?: PatientUpdateOneRequiredWithoutInpatientEncountersNestedInput
+    charts?: InpatientEncounterChartUpdateManyWithoutEncounterNestedInput
+  }
+
+  export type InpatientEncounterUncheckedUpdateWithoutOrdersInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    patientId?: StringFieldUpdateOperationsInput | string
+    doctorId?: StringFieldUpdateOperationsInput | string
+    admittedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    date?: StringFieldUpdateOperationsInput | string
+    time?: StringFieldUpdateOperationsInput | string
+    chiefComplaint?: StringFieldUpdateOperationsInput | string
+    doctorDiagnosis?: NullableStringFieldUpdateOperationsInput | string | null
+    triage?: EnumInpatientTriageFieldUpdateOperationsInput | $Enums.InpatientTriage
+    disposition?: EnumInpatientDispositionFieldUpdateOperationsInput | $Enums.InpatientDisposition
+    dispositionDate?: NullableStringFieldUpdateOperationsInput | string | null
+    dispositionTime?: NullableStringFieldUpdateOperationsInput | string | null
+    dispositionNote?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    charts?: InpatientEncounterChartUncheckedUpdateManyWithoutEncounterNestedInput
+  }
+
+  export type ParticularCatalogueUpsertWithoutOrdersInput = {
+    update: XOR<ParticularCatalogueUpdateWithoutOrdersInput, ParticularCatalogueUncheckedUpdateWithoutOrdersInput>
+    create: XOR<ParticularCatalogueCreateWithoutOrdersInput, ParticularCatalogueUncheckedCreateWithoutOrdersInput>
+    where?: ParticularCatalogueWhereInput
+  }
+
+  export type ParticularCatalogueUpdateToOneWithWhereWithoutOrdersInput = {
+    where?: ParticularCatalogueWhereInput
+    data: XOR<ParticularCatalogueUpdateWithoutOrdersInput, ParticularCatalogueUncheckedUpdateWithoutOrdersInput>
+  }
+
+  export type ParticularCatalogueUpdateWithoutOrdersInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: EnumParticularTypeFieldUpdateOperationsInput | $Enums.ParticularType
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    cost?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ParticularCatalogueUncheckedUpdateWithoutOrdersInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: EnumParticularTypeFieldUpdateOperationsInput | $Enums.ParticularType
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    cost?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type InpatientEncounterOrderCreateWithoutCatalogueItemInput = {
+    id?: string
+    type: $Enums.InpatientEncounterOrderType
+    description: string
+    cost: Decimal | DecimalJsLike | number | string
+    status?: $Enums.InpatientEncounterOrderStatus
+    orderedBy: string
+    notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    encounter: InpatientEncounterCreateNestedOneWithoutOrdersInput
+  }
+
+  export type InpatientEncounterOrderUncheckedCreateWithoutCatalogueItemInput = {
+    id?: string
+    encounterId: string
+    type: $Enums.InpatientEncounterOrderType
+    description: string
+    cost: Decimal | DecimalJsLike | number | string
+    status?: $Enums.InpatientEncounterOrderStatus
+    orderedBy: string
+    notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type InpatientEncounterOrderCreateOrConnectWithoutCatalogueItemInput = {
+    where: InpatientEncounterOrderWhereUniqueInput
+    create: XOR<InpatientEncounterOrderCreateWithoutCatalogueItemInput, InpatientEncounterOrderUncheckedCreateWithoutCatalogueItemInput>
+  }
+
+  export type InpatientEncounterOrderCreateManyCatalogueItemInputEnvelope = {
+    data: InpatientEncounterOrderCreateManyCatalogueItemInput | InpatientEncounterOrderCreateManyCatalogueItemInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type InpatientEncounterOrderUpsertWithWhereUniqueWithoutCatalogueItemInput = {
+    where: InpatientEncounterOrderWhereUniqueInput
+    update: XOR<InpatientEncounterOrderUpdateWithoutCatalogueItemInput, InpatientEncounterOrderUncheckedUpdateWithoutCatalogueItemInput>
+    create: XOR<InpatientEncounterOrderCreateWithoutCatalogueItemInput, InpatientEncounterOrderUncheckedCreateWithoutCatalogueItemInput>
+  }
+
+  export type InpatientEncounterOrderUpdateWithWhereUniqueWithoutCatalogueItemInput = {
+    where: InpatientEncounterOrderWhereUniqueInput
+    data: XOR<InpatientEncounterOrderUpdateWithoutCatalogueItemInput, InpatientEncounterOrderUncheckedUpdateWithoutCatalogueItemInput>
+  }
+
+  export type InpatientEncounterOrderUpdateManyWithWhereWithoutCatalogueItemInput = {
+    where: InpatientEncounterOrderScalarWhereInput
+    data: XOR<InpatientEncounterOrderUpdateManyMutationInput, InpatientEncounterOrderUncheckedUpdateManyWithoutCatalogueItemInput>
+  }
+
   export type RefreshTokenCreateManyUserInput = {
     id?: string
     token: string
@@ -30192,6 +39509,138 @@ export namespace Prisma {
     duration?: IntFieldUpdateOperationsInput | number
     isActive?: BoolFieldUpdateOperationsInput | boolean
     requirements?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type InpatientEncounterCreateManyPatientInput = {
+    id?: string
+    doctorId: string
+    admittedBy?: string | null
+    date: string
+    time: string
+    chiefComplaint: string
+    doctorDiagnosis?: string | null
+    triage: $Enums.InpatientTriage
+    disposition?: $Enums.InpatientDisposition
+    dispositionDate?: string | null
+    dispositionTime?: string | null
+    dispositionNote?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type OutpatientEncounterCreateManyPatientInput = {
+    id?: string
+    doctorId: string
+    date: string
+    time: string
+    chiefComplaint: string
+    doctorDiagnosis?: string | null
+    type?: $Enums.OutpatientEncounterType
+    consultationFee?: Decimal | DecimalJsLike | number | string | null
+    paymentStatus?: $Enums.OutpatientPaymentStatus
+    notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type InpatientEncounterUpdateWithoutPatientInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    doctorId?: StringFieldUpdateOperationsInput | string
+    admittedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    date?: StringFieldUpdateOperationsInput | string
+    time?: StringFieldUpdateOperationsInput | string
+    chiefComplaint?: StringFieldUpdateOperationsInput | string
+    doctorDiagnosis?: NullableStringFieldUpdateOperationsInput | string | null
+    triage?: EnumInpatientTriageFieldUpdateOperationsInput | $Enums.InpatientTriage
+    disposition?: EnumInpatientDispositionFieldUpdateOperationsInput | $Enums.InpatientDisposition
+    dispositionDate?: NullableStringFieldUpdateOperationsInput | string | null
+    dispositionTime?: NullableStringFieldUpdateOperationsInput | string | null
+    dispositionNote?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    charts?: InpatientEncounterChartUpdateManyWithoutEncounterNestedInput
+    orders?: InpatientEncounterOrderUpdateManyWithoutEncounterNestedInput
+  }
+
+  export type InpatientEncounterUncheckedUpdateWithoutPatientInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    doctorId?: StringFieldUpdateOperationsInput | string
+    admittedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    date?: StringFieldUpdateOperationsInput | string
+    time?: StringFieldUpdateOperationsInput | string
+    chiefComplaint?: StringFieldUpdateOperationsInput | string
+    doctorDiagnosis?: NullableStringFieldUpdateOperationsInput | string | null
+    triage?: EnumInpatientTriageFieldUpdateOperationsInput | $Enums.InpatientTriage
+    disposition?: EnumInpatientDispositionFieldUpdateOperationsInput | $Enums.InpatientDisposition
+    dispositionDate?: NullableStringFieldUpdateOperationsInput | string | null
+    dispositionTime?: NullableStringFieldUpdateOperationsInput | string | null
+    dispositionNote?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    charts?: InpatientEncounterChartUncheckedUpdateManyWithoutEncounterNestedInput
+    orders?: InpatientEncounterOrderUncheckedUpdateManyWithoutEncounterNestedInput
+  }
+
+  export type InpatientEncounterUncheckedUpdateManyWithoutPatientInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    doctorId?: StringFieldUpdateOperationsInput | string
+    admittedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    date?: StringFieldUpdateOperationsInput | string
+    time?: StringFieldUpdateOperationsInput | string
+    chiefComplaint?: StringFieldUpdateOperationsInput | string
+    doctorDiagnosis?: NullableStringFieldUpdateOperationsInput | string | null
+    triage?: EnumInpatientTriageFieldUpdateOperationsInput | $Enums.InpatientTriage
+    disposition?: EnumInpatientDispositionFieldUpdateOperationsInput | $Enums.InpatientDisposition
+    dispositionDate?: NullableStringFieldUpdateOperationsInput | string | null
+    dispositionTime?: NullableStringFieldUpdateOperationsInput | string | null
+    dispositionNote?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type OutpatientEncounterUpdateWithoutPatientInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    doctorId?: StringFieldUpdateOperationsInput | string
+    date?: StringFieldUpdateOperationsInput | string
+    time?: StringFieldUpdateOperationsInput | string
+    chiefComplaint?: StringFieldUpdateOperationsInput | string
+    doctorDiagnosis?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: EnumOutpatientEncounterTypeFieldUpdateOperationsInput | $Enums.OutpatientEncounterType
+    consultationFee?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    paymentStatus?: EnumOutpatientPaymentStatusFieldUpdateOperationsInput | $Enums.OutpatientPaymentStatus
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type OutpatientEncounterUncheckedUpdateWithoutPatientInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    doctorId?: StringFieldUpdateOperationsInput | string
+    date?: StringFieldUpdateOperationsInput | string
+    time?: StringFieldUpdateOperationsInput | string
+    chiefComplaint?: StringFieldUpdateOperationsInput | string
+    doctorDiagnosis?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: EnumOutpatientEncounterTypeFieldUpdateOperationsInput | $Enums.OutpatientEncounterType
+    consultationFee?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    paymentStatus?: EnumOutpatientPaymentStatusFieldUpdateOperationsInput | $Enums.OutpatientPaymentStatus
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type OutpatientEncounterUncheckedUpdateManyWithoutPatientInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    doctorId?: StringFieldUpdateOperationsInput | string
+    date?: StringFieldUpdateOperationsInput | string
+    time?: StringFieldUpdateOperationsInput | string
+    chiefComplaint?: StringFieldUpdateOperationsInput | string
+    doctorDiagnosis?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: EnumOutpatientEncounterTypeFieldUpdateOperationsInput | $Enums.OutpatientEncounterType
+    consultationFee?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    paymentStatus?: EnumOutpatientPaymentStatusFieldUpdateOperationsInput | $Enums.OutpatientPaymentStatus
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -30437,6 +39886,142 @@ export namespace Prisma {
     method?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
     transactionId?: NullableStringFieldUpdateOperationsInput | string | null
     paidAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type InpatientEncounterChartCreateManyEncounterInput = {
+    id?: string
+    staffId: string
+    chart: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type InpatientEncounterOrderCreateManyEncounterInput = {
+    id?: string
+    catalogueItemId?: string | null
+    type: $Enums.InpatientEncounterOrderType
+    description: string
+    cost: Decimal | DecimalJsLike | number | string
+    status?: $Enums.InpatientEncounterOrderStatus
+    orderedBy: string
+    notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type InpatientEncounterChartUpdateWithoutEncounterInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    staffId?: StringFieldUpdateOperationsInput | string
+    chart?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type InpatientEncounterChartUncheckedUpdateWithoutEncounterInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    staffId?: StringFieldUpdateOperationsInput | string
+    chart?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type InpatientEncounterChartUncheckedUpdateManyWithoutEncounterInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    staffId?: StringFieldUpdateOperationsInput | string
+    chart?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type InpatientEncounterOrderUpdateWithoutEncounterInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: EnumInpatientEncounterOrderTypeFieldUpdateOperationsInput | $Enums.InpatientEncounterOrderType
+    description?: StringFieldUpdateOperationsInput | string
+    cost?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    status?: EnumInpatientEncounterOrderStatusFieldUpdateOperationsInput | $Enums.InpatientEncounterOrderStatus
+    orderedBy?: StringFieldUpdateOperationsInput | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    catalogueItem?: ParticularCatalogueUpdateOneWithoutOrdersNestedInput
+  }
+
+  export type InpatientEncounterOrderUncheckedUpdateWithoutEncounterInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    catalogueItemId?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: EnumInpatientEncounterOrderTypeFieldUpdateOperationsInput | $Enums.InpatientEncounterOrderType
+    description?: StringFieldUpdateOperationsInput | string
+    cost?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    status?: EnumInpatientEncounterOrderStatusFieldUpdateOperationsInput | $Enums.InpatientEncounterOrderStatus
+    orderedBy?: StringFieldUpdateOperationsInput | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type InpatientEncounterOrderUncheckedUpdateManyWithoutEncounterInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    catalogueItemId?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: EnumInpatientEncounterOrderTypeFieldUpdateOperationsInput | $Enums.InpatientEncounterOrderType
+    description?: StringFieldUpdateOperationsInput | string
+    cost?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    status?: EnumInpatientEncounterOrderStatusFieldUpdateOperationsInput | $Enums.InpatientEncounterOrderStatus
+    orderedBy?: StringFieldUpdateOperationsInput | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type InpatientEncounterOrderCreateManyCatalogueItemInput = {
+    id?: string
+    encounterId: string
+    type: $Enums.InpatientEncounterOrderType
+    description: string
+    cost: Decimal | DecimalJsLike | number | string
+    status?: $Enums.InpatientEncounterOrderStatus
+    orderedBy: string
+    notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type InpatientEncounterOrderUpdateWithoutCatalogueItemInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: EnumInpatientEncounterOrderTypeFieldUpdateOperationsInput | $Enums.InpatientEncounterOrderType
+    description?: StringFieldUpdateOperationsInput | string
+    cost?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    status?: EnumInpatientEncounterOrderStatusFieldUpdateOperationsInput | $Enums.InpatientEncounterOrderStatus
+    orderedBy?: StringFieldUpdateOperationsInput | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    encounter?: InpatientEncounterUpdateOneRequiredWithoutOrdersNestedInput
+  }
+
+  export type InpatientEncounterOrderUncheckedUpdateWithoutCatalogueItemInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    encounterId?: StringFieldUpdateOperationsInput | string
+    type?: EnumInpatientEncounterOrderTypeFieldUpdateOperationsInput | $Enums.InpatientEncounterOrderType
+    description?: StringFieldUpdateOperationsInput | string
+    cost?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    status?: EnumInpatientEncounterOrderStatusFieldUpdateOperationsInput | $Enums.InpatientEncounterOrderStatus
+    orderedBy?: StringFieldUpdateOperationsInput | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type InpatientEncounterOrderUncheckedUpdateManyWithoutCatalogueItemInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    encounterId?: StringFieldUpdateOperationsInput | string
+    type?: EnumInpatientEncounterOrderTypeFieldUpdateOperationsInput | $Enums.InpatientEncounterOrderType
+    description?: StringFieldUpdateOperationsInput | string
+    cost?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    status?: EnumInpatientEncounterOrderStatusFieldUpdateOperationsInput | $Enums.InpatientEncounterOrderStatus
+    orderedBy?: StringFieldUpdateOperationsInput | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
