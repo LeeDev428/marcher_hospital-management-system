@@ -32,19 +32,17 @@ export const inpatientDispositionOptions =
 	}))
 
 const inpatientEncounterBaseSchema = z.object({
-    date: z.string().date("Invalid date."),
-    time: z.string().time("Invalid time."),
+    patientId: z.string().min(1, "Patient ID is required."),
+    doctorId: z.string().min(1, "Doctor ID is required."),
+    date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, "Date must be in YYYY-MM-DD format."),
+    time: z.string().regex(/^\d{2}:\d{2}$/, "Time must be in HH:MM format."),
     chiefComplaint: z.string().min(1, "Chief complaint is required."),
-    doctorDiagnosis: z.string().min(1, "Doctor diagnosis is required."),
+    doctorDiagnosis: z.string().optional(),
     triage: inpatientTriageSchema,
     disposition: inpatientDispositionSchema.default("ADMITTED"),
-    dispositionDate: z.string().date("Invalid date.").optional().nullable(),
-    dispositionTime: z.string().time("Invalid time.").optional().nullable(),
-    dispositionNote: z
-        .string()
-        .min(1, "Disposition note is required.")
-        .optional()
-        .nullable(),
+    dispositionDate: z.string().regex(/^\d{4}-\d{2}-\d{2}$/).optional().nullable(),
+    dispositionTime: z.string().regex(/^\d{2}:\d{2}$/).optional().nullable(),
+    dispositionNote: z.string().optional().nullable(),
 })
 
 export const inpatientEncounterSchema = inpatientEncounterBaseSchema
@@ -72,14 +70,28 @@ export const tableInpatientEncounterSchema = inpatientEncounterSchema
 		dispositionNote: true,
 	})
 
-// TRPC input schemas (include patientProfileId for both create and update)
-export const createInpatientEncounterSchema = inpatientEncounterBaseSchema.extend({
-    patientProfileId: z.string().uuid("Invalid patient profile ID."),
+// TRPC input schemas
+export const createInpatientEncounterSchema = z.object({
+    patientId: z.string().min(1, "Patient ID is required."),
+    doctorId: z.string().min(1, "Doctor ID is required."),
+    date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, "Date must be in YYYY-MM-DD format."),
+    time: z.string().regex(/^\d{2}:\d{2}$/, "Time must be in HH:MM format."),
+    chiefComplaint: z.string().min(1, "Chief complaint is required."),
+    triage: inpatientTriageSchema,
 })
 
-export const updateInpatientEncounterSchema = inpatientEncounterBaseSchema.extend({
+export const updateInpatientEncounterSchema = z.object({
     id: z.string().uuid("Invalid encounter ID."),
-    patientProfileId: z.string().uuid("Invalid patient profile ID."),
+    doctorDiagnosis: z.string().optional(),
+    disposition: inpatientDispositionSchema.optional(),
+    dispositionDate: z.string().regex(/^\d{4}-\d{2}-\d{2}$/).optional(),
+    dispositionTime: z.string().regex(/^\d{2}:\d{2}$/).optional(),
+    dispositionNote: z.string().optional(),
+})
+
+// Check if patient has active encounter
+export const checkActiveEncounterSchema = z.object({
+	patientId: z.string().min(1),
 })
 
 // Form schemas (omit patientProfileId; it is injected from route)
