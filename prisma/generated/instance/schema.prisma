@@ -113,6 +113,10 @@ model Patient {
   insuranceProvider String?
   insuranceNumber   String?
 
+  // Relationships
+  inpatientEncounters  InpatientEncounter[]
+  outpatientEncounters OutpatientEncounter[]
+
   // System fields
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -495,6 +499,8 @@ model PharmacySale {
   discount      Decimal            @default(0) @db.Decimal(10, 2)
   tax           Decimal            @default(0) @db.Decimal(10, 2)
   total         Decimal            @db.Decimal(10, 2)
+  amountPaid    Decimal?           @db.Decimal(10, 2) // Amount customer actually paid
+  changeGiven   Decimal?           @db.Decimal(10, 2) // Change returned to customer (calculated: amountPaid - total)
   paymentMethod PaymentMethod      @default(CASH)
   paymentStatus PaymentStatus      @default(COMPLETED)
   notes         String?
@@ -541,4 +547,174 @@ model PharmacyPayment {
 
   @@index([saleId])
   @@map("pharmacy_payments")
+}
+
+// ==================== ENCOUNTERS MODULE ====================
+
+// Outpatient Encounter Types
+enum OutpatientEncounterType {
+  CONSULTATION
+  FOLLOW_UP
+  LABORATORY
+  RADIOLOGY
+  OTHER
+}
+
+// Outpatient Payment Status
+enum OutpatientPaymentStatus {
+  PAID
+  UNPAID
+}
+
+// Outpatient Encounter - Created by doctors for consultations
+model OutpatientEncounter {
+  id              String                  @id @default(uuid()) @db.Uuid
+  patientId       String
+  patient         Patient                 @relation(fields: [patientId], references: [id], onDelete: Cascade)
+  doctorId        String // User ID of the doctor
+  date            String // Date in YYYY-MM-DD format
+  time            String // Time in HH:MM format
+  chiefComplaint  String // Main reason for visit
+  doctorDiagnosis String? // Doctor's diagnosis
+  type            OutpatientEncounterType @default(CONSULTATION)
+  consultationFee Decimal?                @db.Decimal(10, 2) // Doctor sets this directly
+  paymentStatus   OutpatientPaymentStatus @default(UNPAID)
+  notes           String? // Additional notes
+  createdAt       DateTime                @default(now())
+  updatedAt       DateTime                @updatedAt
+
+  @@index([patientId])
+  @@index([doctorId])
+  @@index([date])
+  @@map("outpatient_encounters")
+}
+
+// Inpatient Triage Levels
+enum InpatientTriage {
+  HIGH_PRIORITY
+  MEDIUM_PRIORITY
+  LOW_PRIORITY
+  NON_URGENT
+}
+
+// Inpatient Disposition Status
+enum InpatientDisposition {
+  ADMITTED
+  DISCHARGED
+  DISCONTINUED
+  TRANSFERRED
+  DECEASED
+  OTHER
+}
+
+// Inpatient Encounter - Created by admissions staff
+model InpatientEncounter {
+  id              String                    @id @default(uuid()) @db.Uuid
+  patientId       String
+  patient         Patient                   @relation(fields: [patientId], references: [id], onDelete: Cascade)
+  doctorId        String // Assigned doctor (User ID)
+  admittedBy      String? // Admissions staff who created this (User ID)
+  date            String // Admission date in YYYY-MM-DD format
+  time            String // Admission time in HH:MM format
+  chiefComplaint  String // Initial complaint/reason for admission
+  doctorDiagnosis String? // Doctor's diagnosis
+  triage          InpatientTriage // Priority level
+  disposition     InpatientDisposition      @default(ADMITTED)
+  dispositionDate String? // Discharge/transfer date
+  dispositionTime String? // Discharge/transfer time
+  dispositionNote String? // Notes about disposition
+  charts          InpatientEncounterChart[] // Progress notes by doctor
+  orders          InpatientEncounterOrder[] // Orders/particulars added by doctor
+  createdAt       DateTime                  @default(now())
+  updatedAt       DateTime                  @updatedAt
+
+  @@index([patientId])
+  @@index([doctorId])
+  @@index([disposition])
+  @@index([date])
+  @@map("inpatient_encounters")
+}
+
+// Inpatient Encounter Chart - Progress notes added by doctor
+model InpatientEncounterChart {
+  id          String             @id @default(uuid()) @db.Uuid
+  encounterId String             @db.Uuid
+  encounter   InpatientEncounter @relation(fields: [encounterId], references: [id], onDelete: Cascade)
+  staffId     String // Doctor who added the chart (User ID)
+  chart       String // Chart/progress note content
+  createdAt   DateTime           @default(now())
+  updatedAt   DateTime           @updatedAt
+
+  @@index([encounterId])
+  @@index([staffId])
+  @@map("inpatient_encounter_charts")
+}
+
+// Inpatient Encounter Order Types
+enum InpatientEncounterOrderType {
+  PRESCRIPTION
+  LABORATORY
+  RADIOLOGY
+  OPERATION
+  PROCEDURE
+  OTHER
+}
+
+// Inpatient Encounter Order Status
+enum InpatientEncounterOrderStatus {
+  PENDING
+  COMPLETED
+  CANCELLED
+}
+
+// Inpatient Encounter Order - Orders/particulars added by doctor from catalogue
+model InpatientEncounterOrder {
+  id              String                        @id @default(uuid()) @db.Uuid
+  encounterId     String                        @db.Uuid
+  encounter       InpatientEncounter            @relation(fields: [encounterId], references: [id], onDelete: Cascade)
+  catalogueItemId String?                       @db.Uuid // Reference to ParticularCatalogue
+  catalogueItem   ParticularCatalogue?          @relation(fields: [catalogueItemId], references: [id], onDelete: SetNull)
+  type            InpatientEncounterOrderType
+  description     String // Order description
+  cost            Decimal                       @db.Decimal(10, 2) // Cost from catalogue or custom
+  status          InpatientEncounterOrderStatus @default(PENDING)
+  orderedBy       String // Doctor who ordered (User ID)
+  notes           String? // Additional notes
+  createdAt       DateTime                      @default(now())
+  updatedAt       DateTime                      @updatedAt
+
+  @@index([encounterId])
+  @@index([catalogueItemId])
+  @@index([status])
+  @@map("inpatient_encounter_orders")
+}
+
+// ==================== PARTICULARS CATALOGUE ====================
+
+// Particular Item Types (matches InpatientEncounterOrderType)
+enum ParticularType {
+  PRESCRIPTION
+  LABORATORY
+  RADIOLOGY
+  OPERATION
+  PROCEDURE
+  OTHER
+}
+
+// Particulars Catalogue - Managed by billing staff
+model ParticularCatalogue {
+  id          String                    @id @default(uuid()) @db.Uuid
+  type        ParticularType
+  name        String // e.g., "Hepatitis A Blood Test"
+  description String? // Detailed description
+  cost        Decimal                   @db.Decimal(10, 2) // Standard cost
+  isActive    Boolean                   @default(true) // Can be disabled
+  orders      InpatientEncounterOrder[] // Orders that used this catalogue item
+  createdAt   DateTime                  @default(now())
+  updatedAt   DateTime                  @updatedAt
+
+  @@index([type])
+  @@index([isActive])
+  @@index([name])
+  @@map("particular_catalogue")
 }
