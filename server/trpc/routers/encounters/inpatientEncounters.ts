@@ -342,17 +342,6 @@ const updateInpatientEncounter = protectedProcedure
 			}
 		}
 	})
-				message: "Inpatient encounter updated successfully.",
-				data: inpatientEncounter,
-			}
-		} catch {
-			return {
-				success: false,
-				message: "Failed to update inpatient encounter.",
-				data: null,
-			}
-		}
-	})
 
 const deleteInpatientEncounter = protectedProcedure
 	.input(deleteInpatientEncounterSchema)
@@ -370,7 +359,8 @@ const deleteInpatientEncounter = protectedProcedure
 				message: "Inpatient encounter deleted successfully.",
 				data: null,
 			}
-		} catch {
+		} catch (error) {
+			console.error("Delete inpatient encounter error:", error)
 			return {
 				success: false,
 				message: "Failed to delete inpatient encounter.",
@@ -379,10 +369,308 @@ const deleteInpatientEncounter = protectedProcedure
 		}
 	})
 
+// ==================== INPATIENT ENCOUNTER CHARTS ====================
+
+// Add chart/progress note (DOCTOR only)
+const createInpatientChart = protectedProcedure
+	.input(createInpatientChartSchema)
+	.mutation(async ({ ctx, input }) => {
+		const { instancePrisma, user } = ctx
+
+		if (!user || user.role !== 'STAFF') {
+			throw new TRPCError({
+				code: 'FORBIDDEN',
+				message: 'Only doctors can add charts',
+			})
+		}
+
+		const staffUser = await instancePrisma.user.findUnique({
+			where: { id: user.id },
+			include: { staffCredentials: true },
+		})
+
+		if (!staffUser?.staffCredentials || staffUser.staffCredentials.staffType !== 'DOCTOR') {
+			throw new TRPCError({
+				code: 'FORBIDDEN',
+				message: 'Only doctors can add charts',
+			})
+		}
+
+		const { encounterId, chart } = input
+
+		try {
+			const newChart = await instancePrisma.inpatientEncounterChart.create({
+				data: {
+					encounterId,
+					staffId: user.id,
+					chart,
+				},
+			})
+
+			return {
+				success: true,
+				message: "Chart added successfully.",
+				data: newChart,
+			}
+		} catch (error) {
+			console.error("Create chart error:", error)
+			return {
+				success: false,
+				message: "Failed to add chart.",
+				data: null,
+			}
+		}
+	})
+
+// Get charts for encounter
+const getInpatientCharts = protectedProcedure
+	.input(getInpatientChartsSchema)
+	.query(async ({ ctx, input }) => {
+		const { instancePrisma } = ctx
+		const { encounterId } = input
+
+		try {
+			const charts = await instancePrisma.inpatientEncounterChart.findMany({
+				where: { encounterId },
+				orderBy: { createdAt: 'desc' },
+			})
+
+			return {
+				success: true,
+				message: "Charts fetched successfully.",
+				data: charts,
+			}
+		} catch (error) {
+			console.error("Get charts error:", error)
+			return {
+				success: false,
+				message: "Failed to fetch charts.",
+				data: null,
+			}
+		}
+	})
+
+// Delete chart
+const deleteInpatientChart = protectedProcedure
+	.input(deleteInpatientChartSchema)
+	.mutation(async ({ ctx, input }) => {
+		const { instancePrisma, user } = ctx
+		const { id } = input
+
+		try {
+			// Check if chart belongs to current user
+			const chart = await instancePrisma.inpatientEncounterChart.findUnique({
+				where: { id },
+			})
+
+			if (!chart || chart.staffId !== user?.id) {
+				return {
+					success: false,
+					message: "You can only delete your own charts.",
+					data: null,
+				}
+			}
+
+			await instancePrisma.inpatientEncounterChart.delete({
+				where: { id },
+			})
+
+			return {
+				success: true,
+				message: "Chart deleted successfully.",
+				data: null,
+			}
+		} catch (error) {
+			console.error("Delete chart error:", error)
+			return {
+				success: false,
+				message: "Failed to delete chart.",
+				data: null,
+			}
+		}
+	})
+
+// ==================== INPATIENT ENCOUNTER ORDERS ====================
+
+// Add order/particular (DOCTOR only)
+const createInpatientOrder = protectedProcedure
+	.input(createInpatientOrderSchema)
+	.mutation(async ({ ctx, input }) => {
+		const { instancePrisma, user } = ctx
+
+		if (!user || user.role !== 'STAFF') {
+			throw new TRPCError({
+				code: 'FORBIDDEN',
+				message: 'Only doctors can add orders',
+			})
+		}
+
+		const staffUser = await instancePrisma.user.findUnique({
+			where: { id: user.id },
+			include: { staffCredentials: true },
+		})
+
+		if (!staffUser?.staffCredentials || staffUser.staffCredentials.staffType !== 'DOCTOR') {
+			throw new TRPCError({
+				code: 'FORBIDDEN',
+				message: 'Only doctors can add orders',
+			})
+		}
+
+		const { encounterId, catalogueItemId, type, description, cost, notes } = input
+
+		try {
+			const order = await instancePrisma.inpatientEncounterOrder.create({
+				data: {
+					encounterId,
+					catalogueItemId,
+					type,
+					description,
+					cost,
+					notes,
+					orderedBy: user.id,
+					status: 'PENDING',
+				},
+				include: {
+					catalogueItem: true,
+				},
+			})
+
+			return {
+				success: true,
+				message: "Order added successfully.",
+				data: order,
+			}
+		} catch (error) {
+			console.error("Create order error:", error)
+			return {
+				success: false,
+				message: "Failed to add order.",
+				data: null,
+			}
+		}
+	})
+
+// Update order status
+const updateInpatientOrder = protectedProcedure
+	.input(updateInpatientOrderSchema)
+	.mutation(async ({ ctx, input }) => {
+		const { instancePrisma } = ctx
+		const { id, status, notes } = input
+
+		try {
+			const order = await instancePrisma.inpatientEncounterOrder.update({
+				where: { id },
+				data: {
+					status,
+					...(notes !== undefined && { notes }),
+				},
+				include: {
+					catalogueItem: true,
+				},
+			})
+
+			return {
+				success: true,
+				message: "Order updated successfully.",
+				data: order,
+			}
+		} catch (error) {
+			console.error("Update order error:", error)
+			return {
+				success: false,
+				message: "Failed to update order.",
+				data: null,
+			}
+		}
+	})
+
+// Get orders for encounter
+const getInpatientOrders = protectedProcedure
+	.input(getInpatientOrdersSchema)
+	.query(async ({ ctx, input }) => {
+		const { instancePrisma } = ctx
+		const { encounterId } = input
+
+		try {
+			const orders = await instancePrisma.inpatientEncounterOrder.findMany({
+				where: { encounterId },
+				include: {
+					catalogueItem: true,
+				},
+				orderBy: { createdAt: 'desc' },
+			})
+
+			return {
+				success: true,
+				message: "Orders fetched successfully.",
+				data: orders,
+			}
+		} catch (error) {
+			console.error("Get orders error:", error)
+			return {
+				success: false,
+				message: "Failed to fetch orders.",
+				data: null,
+			}
+		}
+	})
+
+// Delete order
+const deleteInpatientOrder = protectedProcedure
+	.input(deleteInpatientOrderSchema)
+	.mutation(async ({ ctx, input }) => {
+		const { instancePrisma, user } = ctx
+		const { id } = input
+
+		try {
+			// Check if order belongs to current doctor
+			const order = await instancePrisma.inpatientEncounterOrder.findUnique({
+				where: { id },
+			})
+
+			if (!order || order.orderedBy !== user?.id) {
+				return {
+					success: false,
+					message: "You can only delete your own orders.",
+					data: null,
+				}
+			}
+
+			await instancePrisma.inpatientEncounterOrder.delete({
+				where: { id },
+			})
+
+			return {
+				success: true,
+				message: "Order deleted successfully.",
+				data: null,
+			}
+		} catch (error) {
+			console.error("Delete order error:", error)
+			return {
+				success: false,
+				message: "Failed to delete order.",
+				data: null,
+			}
+		}
+	})
+
 export const inpatientEncountersRouter = createTRPCRouter({
+	// Encounters
 	getInpatientEncounters,
 	getInpatientEncounter,
+	checkActiveEncounter,
 	createInpatientEncounter,
 	updateInpatientEncounter,
 	deleteInpatientEncounter,
+	// Charts
+	createInpatientChart,
+	getInpatientCharts,
+	deleteInpatientChart,
+	// Orders
+	createInpatientOrder,
+	updateInpatientOrder,
+	getInpatientOrders,
+	deleteInpatientOrder,
 })
