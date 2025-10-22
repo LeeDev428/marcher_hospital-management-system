@@ -93,6 +93,11 @@ export const updateInpatientEncounterSchema = z.object({
     dispositionNote: z.string().optional(),
 })
 
+export const reassignDoctorSchema = z.object({
+    id: z.string().uuid("Invalid encounter ID."),
+    doctorId: z.string().min(1, "Doctor ID is required."),
+})
+
 // Check if patient has active encounter
 export const checkActiveEncounterSchema = z.object({
 	patientId: z.string().min(1),
@@ -128,6 +133,9 @@ export type CreateInpatientEncounter = z.infer<
 >
 export type UpdateInpatientEncounter = z.infer<
 	typeof updateInpatientEncounterSchema
+>
+export type ReassignDoctor = z.infer<
+	typeof reassignDoctorSchema
 >
 export type CreateInpatientEncounterForm = z.infer<
     typeof createInpatientEncounterFormSchema
