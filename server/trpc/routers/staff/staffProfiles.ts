@@ -1,7 +1,8 @@
-import { createTRPCRouter, protectedProcedure } from "../../init"
+import { createTRPCRouter, protectedProcedure, publicProcedure } from "../../init"
 import { staffRoleSchema, getStaffProfileSchema, createStaffProfileSchema, updateStaffProfileSchema, deleteStaffProfileSchema } from "@/types/staff"
+import { z } from "zod"
 
-const getStaffProfiles = protectedProcedure
+const getStaffProfiles = publicProcedure
 	.input(staffRoleSchema.optional())
 	.query(async ({ ctx, input }) => {
 		const { globalPrisma } = ctx
@@ -154,9 +155,44 @@ const deleteStaffProfile = protectedProcedure
 		}
 	})
 
+// New endpoint to get staff by type from instance database
+const getStaffByType = publicProcedure
+	.input(z.enum(["DOCTOR", "NURSE", "STAFF", "ADMISSIONS_STAFF", "BILLING_STAFF", "PHARMACIST"]).optional())
+	.query(async ({ ctx, input }) => {
+		const { instancePrisma } = ctx
+		const staffType = input ?? undefined
+
+		try {
+			const staff = await instancePrisma.user.findMany({
+				where: {
+					staffCredentials: {
+						...(staffType && { staffType }),
+					},
+				},
+				include: {
+					staffCredentials: true,
+				},
+			})
+
+			return {
+				success: true,
+				message: "Staff fetched successfully.",
+				data: staff,
+			}
+		} catch(error) {
+			console.log(error)
+			return {
+				success: false,
+				message: "Failed to fetch staff.",
+				data: null,
+			}
+		}
+	})
+
 export const staffProfilesRouter = createTRPCRouter({
 	getStaffProfiles,
 	getStaffProfile,
+	getStaffByType,
 	createStaffProfile,
 	updateStaffProfile,
 	deleteStaffProfile,
