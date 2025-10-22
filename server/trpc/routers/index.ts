@@ -1,7 +1,7 @@
 import { createTRPCRouter } from "../init"
 import { authRouter } from "./auth"
 import { facilitiesRouter } from "./facilities"
-import { patientsRouter } from "./patients"
+import { patientsRouter } from "./patients/index"
 import { appointmentsRouter } from "./appointments/index"
 import { staffRouter } from "./staff/index"
 import { logsRouter } from "./logs"
