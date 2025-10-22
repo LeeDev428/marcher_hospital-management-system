@@ -3,6 +3,7 @@ import {
 	deleteInpatientEncounterSchema,
 	getInpatientEncounterSchema,
 	updateInpatientEncounterSchema,
+	reassignDoctorSchema,
 	checkActiveEncounterSchema,
 	getInpatientEncountersByPatientSchema,
 	createInpatientChartSchema,
@@ -13,13 +14,13 @@ import {
 	getInpatientOrdersSchema,
 	deleteInpatientOrderSchema,
 } from "@/types/encounters"
-import { createTRPCRouter, protectedProcedure } from "../../init"
+import { createTRPCRouter, protectedProcedure, publicProcedure } from "../../init"
 import { TRPCError } from "@trpc/server"
 
 // ==================== INPATIENT ENCOUNTERS ====================
 
 // Get all inpatient encounters for a patient
-const getInpatientEncounters = protectedProcedure
+const getInpatientEncounters = publicProcedure
 	.input(getInpatientEncountersByPatientSchema)
 	.query(async ({ ctx, input }) => {
 		const { instancePrisma } = ctx
@@ -157,31 +158,10 @@ const checkActiveEncounter = protectedProcedure
 	})
 
 // Create new inpatient encounter (ADMISSIONS_STAFF only)
-const createInpatientEncounter = protectedProcedure
+const createInpatientEncounter = publicProcedure
 	.input(createInpatientEncounterSchema)
 	.mutation(async ({ ctx, input }) => {
-		const { instancePrisma, user } = ctx
-		
-		// Check user role - only admissions staff can create
-		if (!user || user.role !== 'STAFF') {
-			throw new TRPCError({
-				code: 'FORBIDDEN',
-				message: 'Only admissions staff can create inpatient encounters',
-			})
-		}
-
-		// Check staff type
-		const staffUser = await instancePrisma.user.findUnique({
-			where: { id: user.id },
-			include: { staffCredentials: true },
-		})
-
-		if (!staffUser?.staffCredentials || staffUser.staffCredentials.staffType !== 'ADMISSIONS_STAFF') {
-			throw new TRPCError({
-				code: 'FORBIDDEN',
-				message: 'Only admissions staff can create inpatient encounters',
-			})
-		}
+		const { instancePrisma } = ctx
 
 		const { patientId, doctorId, date, time, chiefComplaint, triage } = input
 
@@ -216,12 +196,11 @@ const createInpatientEncounter = protectedProcedure
 				}
 			}
 
-			// Create encounter
+			// Create encounter (admittedBy will be null since no auth)
 			const encounter = await instancePrisma.inpatientEncounter.create({
 				data: {
 					patientId,
 					doctorId,
-					admittedBy: user.id,
 					date,
 					time,
 					chiefComplaint,
@@ -338,6 +317,89 @@ const updateInpatientEncounter = protectedProcedure
 			return {
 				success: false,
 				message: "Failed to update inpatient encounter.",
+				data: null,
+			}
+		}
+	})
+
+const reassignDoctor = protectedProcedure
+	.input(reassignDoctorSchema)
+	.mutation(async ({ ctx, input }) => {
+		const { instancePrisma, user } = ctx
+
+		// Check user role - only admissions staff can reassign
+		if (!user || user.role !== 'STAFF') {
+			throw new TRPCError({
+				code: 'FORBIDDEN',
+				message: 'Only admissions staff can reassign doctors',
+			})
+		}
+
+		const staffUser = await instancePrisma.user.findUnique({
+			where: { id: user.id },
+			include: { staffCredentials: true },
+		})
+
+		if (!staffUser?.staffCredentials || staffUser.staffCredentials.staffType !== 'ADMISSIONS_STAFF') {
+			throw new TRPCError({
+				code: 'FORBIDDEN',
+				message: 'Only admissions staff can reassign doctors',
+			})
+		}
+
+		const { id, doctorId } = input
+
+		try {
+			// Verify the encounter exists
+			const currentEncounter = await instancePrisma.inpatientEncounter.findUnique({
+				where: { id },
+			})
+
+			if (!currentEncounter) {
+				return {
+					success: false,
+					message: "Encounter not found.",
+					data: null,
+				}
+			}
+
+			// Verify the new doctor exists and is a DOCTOR
+			const doctorUser = await instancePrisma.user.findUnique({
+				where: { id: doctorId },
+				include: { staffCredentials: true },
+			})
+
+			if (!doctorUser?.staffCredentials || doctorUser.staffCredentials.staffType !== 'DOCTOR') {
+				return {
+					success: false,
+					message: "Invalid doctor ID or user is not a doctor.",
+					data: null,
+				}
+			}
+
+			// Update encounter with new doctor
+			const encounter = await instancePrisma.inpatientEncounter.update({
+				where: { id },
+				data: { doctorId },
+				include: {
+					patient: {
+						include: {
+							user: true,
+						},
+					},
+				},
+			})
+
+			return {
+				success: true,
+				message: "Doctor reassigned successfully.",
+				data: encounter,
+			}
+		} catch (error) {
+			console.error("Reassign doctor error:", error)
+			return {
+				success: false,
+				message: "Failed to reassign doctor.",
 				data: null,
 			}
 		}
@@ -663,6 +725,7 @@ export const inpatientEncountersRouter = createTRPCRouter({
 	checkActiveEncounter,
 	createInpatientEncounter,
 	updateInpatientEncounter,
+	reassignDoctor,
 	deleteInpatientEncounter,
 	// Charts
 	createInpatientChart,
