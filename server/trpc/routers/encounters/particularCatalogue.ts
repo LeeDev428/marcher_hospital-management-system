@@ -5,11 +5,11 @@ import {
 	getParticularCatalogueSchema,
 	getParticularCataloguesSchema,
 } from "@/types/encounters"
-import { createTRPCRouter, protectedProcedure } from "../../init"
+import { createTRPCRouter, protectedProcedure, publicProcedure } from "../../init"
 import { TRPCError } from "@trpc/server"
 
 // Get all catalogue items with filters (all staff can view)
-const getParticularCatalogues = protectedProcedure
+const getParticularCatalogues = publicProcedure
 	.input(getParticularCataloguesSchema)
 	.query(async ({ ctx, input }) => {
 		const { instancePrisma } = ctx
