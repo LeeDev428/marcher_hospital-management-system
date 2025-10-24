@@ -19,7 +19,11 @@ useHead({
 const staff = ref<any[]>([])
 const isLoading = ref(true)
 const showAddModal = ref(false)
+const showViewDialog = ref(false)
+const showEditDialog = ref(false)
+const showDeleteDialog = ref(false)
 const isSubmitting = ref(false)
+const selectedStaff = ref<any>(null)
 
 // Form state
 const form = ref({
@@ -32,6 +36,20 @@ const form = ref({
   position: '',
   staffType: 'DOCTOR',
   specialization: ''
+})
+
+// Edit form state
+const editForm = ref({
+  id: '',
+  firstName: '',
+  lastName: '',
+  email: '',
+  phone: '',
+  department: '',
+  position: '',
+  staffType: 'DOCTOR',
+  specialization: '',
+  licenseNumber: ''
 })
 
 // Statistics
@@ -82,6 +100,91 @@ const addStaffMember = () => {
   showAddModal.value = true
 }
 
+// View staff details
+const viewStaff = (staffMember: any) => {
+  selectedStaff.value = staffMember
+  showViewDialog.value = true
+}
+
+// Edit staff
+const editStaff = (staffMember: any) => {
+  selectedStaff.value = staffMember
+  editForm.value = {
+    id: staffMember.id,
+    firstName: staffMember.firstName,
+    lastName: staffMember.lastName,
+    email: staffMember.email,
+    phone: staffMember.phone || '',
+    department: staffMember.department || '',
+    position: staffMember.position || '',
+    staffType: staffMember.staffCredentials?.staffType || 'DOCTOR',
+    specialization: staffMember.staffCredentials?.specialization || '',
+    licenseNumber: staffMember.staffCredentials?.licenseNumber || ''
+  }
+  showEditDialog.value = true
+}
+
+const handleEditStaff = async () => {
+  try {
+    isSubmitting.value = true
+    const { $trpc } = useNuxtApp()
+    
+    const response = await $trpc.users.update.mutate({
+      id: editForm.value.id,
+      firstName: editForm.value.firstName,
+      lastName: editForm.value.lastName,
+      email: editForm.value.email,
+      phone: editForm.value.phone,
+      department: editForm.value.department,
+      position: editForm.value.position,
+      staffType: editForm.value.staffType as any,
+      specialization: editForm.value.specialization,
+      licenseNumber: editForm.value.licenseNumber,
+    })
+    
+    if (response.success) {
+      useToast('success', 'Staff Updated', 'Staff member updated successfully')
+      showEditDialog.value = false
+      await loadStaff()
+    } else {
+      useToast('error', 'Error', response.message || 'Failed to update staff member')
+    }
+  } catch (error) {
+    console.error('Error updating staff:', error)
+    useToast('error', 'Error', 'Failed to update staff member')
+  } finally {
+    isSubmitting.value = false
+  }
+}
+
+// Delete staff
+const confirmDelete = (staffMember: any) => {
+  selectedStaff.value = staffMember
+  showDeleteDialog.value = true
+}
+
+const handleDelete = async () => {
+  try {
+    isSubmitting.value = true
+    const { $trpc } = useNuxtApp()
+    
+    const response = await $trpc.users.delete.mutate({ id: selectedStaff.value.id })
+    
+    if (response.success) {
+      useToast('success', 'Staff Deleted', 'Staff member deleted successfully')
+      showDeleteDialog.value = false
+      await loadStaff()
+    } else {
+      useToast('error', 'Error', response.message || 'Failed to delete staff member')
+    }
+  } catch (error) {
+    console.error('Error deleting staff:', error)
+    useToast('error', 'Error', 'Failed to delete staff member')
+  } finally {
+    isSubmitting.value = false
+  }
+}
+
 // Reset form
 const resetForm = () => {
   form.value = {
@@ -109,10 +212,10 @@ const submitForm = async () => {
       email: form.value.email,
       password: form.value.password,
       phone: form.value.phone,
-      role: 'STAFF',
+      role: 'STAFF' as any,
       department: form.value.department,
       position: form.value.position,
-      staffType: form.value.staffType,
+      staffType: form.value.staffType as any,
       specialization: form.value.specialization
     })
     
@@ -267,8 +370,18 @@ const closeModal = () => {
                 </td>
                 <td class="p-3">
                   <div class="flex space-x-2">
-                    <Button variant="outline" size="sm">View</Button>
-                    <Button variant="outline" size="sm">Edit</Button>
+                    <Button variant="outline" size="sm" @click="viewStaff(member)">
+                      <Icon name="lucide:eye" class="w-4 h-4 mr-1" />
+                      View
+                    </Button>
+                    <Button variant="outline" size="sm" @click="editStaff(member)">
+                      <Icon name="lucide:pencil" class="w-4 h-4 mr-1" />
+                      Edit
+                    </Button>
+                    <Button variant="destructive" size="sm" @click="confirmDelete(member)">
+                      <Icon name="lucide:trash-2" class="w-4 h-4 mr-1" />
+                      Delete
+                    </Button>
                   </div>
                 </td>
               </tr>
@@ -403,6 +516,199 @@ const closeModal = () => {
           <Button @click="submitForm" :disabled="isSubmitting">
             <Icon v-if="isSubmitting" name="lucide:loader-2" class="w-4 h-4 mr-2 animate-spin" />
             Create Staff Member
+          </Button>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
+
+    <!-- View Staff Dialog -->
+    <Dialog v-model:open="showViewDialog">
+      <DialogContent class="max-w-2xl max-h-[80vh] overflow-y-auto">
+        <DialogHeader>
+          <DialogTitle>Staff Member Details</DialogTitle>
+          <DialogDescription>Complete information about this staff member</DialogDescription>
+        </DialogHeader>
+
+        <div v-if="selectedStaff" class="space-y-6 mt-4">
+          <!-- Basic Information -->
+          <div class="space-y-2">
+            <h3 class="font-semibold text-lg border-b pb-2">Basic Information</h3>
+            <div class="grid grid-cols-2 gap-4">
+              <div>
+                <p class="text-sm text-muted-foreground">Full Name</p>
+                <p class="font-medium">{{ selectedStaff.firstName }} {{ selectedStaff.lastName }}</p>
+              </div>
+              <div>
+                <p class="text-sm text-muted-foreground">Email</p>
+                <p class="font-medium">{{ selectedStaff.email }}</p>
+              </div>
+              <div v-if="selectedStaff.phone">
+                <p class="text-sm text-muted-foreground">Phone</p>
+                <p class="font-medium">{{ selectedStaff.phone }}</p>
+              </div>
+              <div v-if="selectedStaff.staffNumber">
+                <p class="text-sm text-muted-foreground">Staff Number</p>
+                <p class="font-medium">{{ selectedStaff.staffNumber }}</p>
+              </div>
+              <div>
+                <p class="text-sm text-muted-foreground">Status</p>
+                <Badge :class="getStatusBadgeColor(selectedStaff.status)">{{ selectedStaff.status }}</Badge>
+              </div>
+              <div>
+                <p class="text-sm text-muted-foreground">Created At</p>
+                <p class="font-medium">{{ new Date(selectedStaff.createdAt).toLocaleDateString() }}</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Staff Information -->
+          <div class="space-y-2">
+            <h3 class="font-semibold text-lg border-b pb-2">Professional Information</h3>
+            <div class="grid grid-cols-2 gap-4">
+              <div v-if="selectedStaff.staffCredentials">
+                <p class="text-sm text-muted-foreground">Staff Type</p>
+                <Badge :class="getRoleBadgeColor(selectedStaff.staffCredentials.staffType)">
+                  {{ selectedStaff.staffCredentials.staffType }}
+                </Badge>
+              </div>
+              <div v-if="selectedStaff.department">
+                <p class="text-sm text-muted-foreground">Department</p>
+                <p class="font-medium">{{ selectedStaff.department }}</p>
+              </div>
+              <div v-if="selectedStaff.position">
+                <p class="text-sm text-muted-foreground">Position</p>
+                <p class="font-medium">{{ selectedStaff.position }}</p>
+              </div>
+              <div v-if="selectedStaff.staffCredentials?.specialization">
+                <p class="text-sm text-muted-foreground">Specialization</p>
+                <p class="font-medium">{{ selectedStaff.staffCredentials.specialization }}</p>
+              </div>
+              <div v-if="selectedStaff.staffCredentials?.licenseNumber">
+                <p class="text-sm text-muted-foreground">License Number</p>
+                <p class="font-medium">{{ selectedStaff.staffCredentials.licenseNumber }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <DialogFooter>
+          <Button variant="outline" @click="showViewDialog = false">Close</Button>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
+
+    <!-- Edit Staff Dialog -->
+    <Dialog v-model:open="showEditDialog">
+      <DialogContent class="max-w-2xl max-h-[90vh] overflow-y-auto">
+        <DialogHeader>
+          <DialogTitle>Edit Staff Member</DialogTitle>
+          <DialogDescription>Update staff member information</DialogDescription>
+        </DialogHeader>
+
+        <div class="space-y-4 py-4">
+          <!-- Basic Information -->
+          <div class="space-y-2">
+            <h3 class="font-semibold text-sm">Basic Information</h3>
+            <div class="grid grid-cols-2 gap-4">
+              <div>
+                <Label for="editFirstName">First Name *</Label>
+                <Input id="editFirstName" v-model="editForm.firstName" required />
+              </div>
+              <div>
+                <Label for="editLastName">Last Name *</Label>
+                <Input id="editLastName" v-model="editForm.lastName" required />
+              </div>
+              <div class="col-span-2">
+                <Label for="editEmail">Email *</Label>
+                <Input id="editEmail" v-model="editForm.email" type="email" required />
+              </div>
+              <div class="col-span-2">
+                <Label for="editPhone">Phone</Label>
+                <Input id="editPhone" v-model="editForm.phone" placeholder="+63 123 456 7890" />
+              </div>
+            </div>
+          </div>
+
+          <!-- Professional Information -->
+          <div class="space-y-2">
+            <h3 class="font-semibold text-sm border-t pt-4">Professional Information</h3>
+            <div class="grid grid-cols-2 gap-4">
+              <div>
+                <Label for="editStaffType">Staff Type *</Label>
+                <Select v-model="editForm.staffType">
+                  <SelectTrigger>
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="DOCTOR">Doctor</SelectItem>
+                    <SelectItem value="NURSE">Nurse</SelectItem>
+                    <SelectItem value="ADMISSIONS_STAFF">Admissions Staff</SelectItem>
+                    <SelectItem value="BILLING_STAFF">Billing Staff</SelectItem>
+                    <SelectItem value="PHARMACIST">Pharmacist</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+              <div>
+                <Label for="editDepartment">Department</Label>
+                <Input id="editDepartment" v-model="editForm.department" placeholder="e.g., Cardiology" />
+              </div>
+              <div>
+                <Label for="editPosition">Position</Label>
+                <Input id="editPosition" v-model="editForm.position" placeholder="Job position" />
+              </div>
+              <div>
+                <Label for="editSpecialization">Specialization</Label>
+                <Input id="editSpecialization" v-model="editForm.specialization" placeholder="Medical specialization" />
+              </div>
+              <div class="col-span-2">
+                <Label for="editLicenseNumber">License Number</Label>
+                <Input id="editLicenseNumber" v-model="editForm.licenseNumber" placeholder="Professional license number" />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <DialogFooter>
+          <Button variant="outline" @click="showEditDialog = false" :disabled="isSubmitting">
+            Cancel
+          </Button>
+          <Button @click="handleEditStaff" :disabled="isSubmitting">
+            <Icon v-if="isSubmitting" name="lucide:loader-2" class="w-4 h-4 mr-2 animate-spin" />
+            {{ isSubmitting ? 'Updating...' : 'Update Staff' }}
+          </Button>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
+
+    <!-- Delete Confirmation Dialog -->
+    <Dialog v-model:open="showDeleteDialog">
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>Delete Staff Member</DialogTitle>
+          <DialogDescription>
+            Are you sure you want to delete this staff member? This action cannot be undone.
+          </DialogDescription>
+        </DialogHeader>
+
+        <div v-if="selectedStaff" class="py-4">
+          <p class="text-sm">
+            <strong>Name:</strong> {{ selectedStaff.firstName }} {{ selectedStaff.lastName }}
+          </p>
+          <p class="text-sm">
+            <strong>Email:</strong> {{ selectedStaff.email }}
+          </p>
+          <p class="text-sm">
+            <strong>Type:</strong> {{ selectedStaff.staffCredentials?.staffType || 'STAFF' }}
+          </p>
+        </div>
+
+        <DialogFooter>
+          <Button variant="outline" @click="showDeleteDialog = false" :disabled="isSubmitting">
+            Cancel
+          </Button>
+          <Button variant="destructive" @click="handleDelete" :disabled="isSubmitting">
+            <Icon v-if="isSubmitting" name="lucide:loader-2" class="w-4 h-4 mr-2 animate-spin" />
+            {{ isSubmitting ? 'Deleting...' : 'Delete Staff' }}
           </Button>
         </DialogFooter>
       </DialogContent>
