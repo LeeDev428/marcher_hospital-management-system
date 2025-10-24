@@ -81,7 +81,9 @@ export const serviceCategoryOptions = [
 
 /* ---------- CUID Validation ---------- */
 
-const cuidSchema = z.string().regex(/^c[a-z0-9]{24}$/, "Invalid ID format.")
+// Flexible CUID validation - just ensure non-empty string
+// Backend will handle actual validation
+const cuidSchema = z.string().min(1, "ID is required")
 
 /* ---------- Core Schemas ---------- */
 
