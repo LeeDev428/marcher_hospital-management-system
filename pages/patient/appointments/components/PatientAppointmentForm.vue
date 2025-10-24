@@ -309,12 +309,15 @@ const onSubmit = async () => {
   const payload: CreatePatientAppointment = {
     name: patientName.value.trim(),
     doctorId: selectedDoctorId.value,
+    medicalServiceId: selectedServiceId.value, // Include selected medical service
     date: selectedDate.value,
     time: selectedTime.value,
     userId: authStore.user?.id, // Include user ID from auth store
   }
 
   console.log("📤 Submitting appointment:", payload)
+  console.log("📤 selectedServiceId.value:", selectedServiceId.value)
+  console.log("📤 payload.medicalServiceId:", payload.medicalServiceId)
   console.log("📤 User from auth store:", authStore.user)
 
   const res = await appointmentStore.bookAppointment(payload)
