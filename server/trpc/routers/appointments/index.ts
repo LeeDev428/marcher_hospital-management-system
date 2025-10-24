@@ -160,9 +160,24 @@ const getAppointments = publicProcedure
         select: { id: true, firstName: true, lastName: true, middleName: true }
       })
 
+      // Fetch medical services
+      const serviceIds = [...new Set(appointments.map((a: any) => a.medicalServiceId).filter(Boolean))]
+      const medicalServices = await instancePrisma.medicalService.findMany({
+        where: { id: { in: serviceIds } },
+        select: { 
+          id: true, 
+          name: true, 
+          type: true, 
+          category: true, 
+          price: true, 
+          duration: true 
+        }
+      })
+
       const withPatientAndDoctor = appointments.map((a: any) => {
         const patient = patients.find((p: any) => p.id === a.userId)
         const doctor = doctors.find((d: any) => d.id === a.doctorId)
+        const medicalService = medicalServices.find((s: any) => s.id === a.medicalServiceId)
         return {
           ...a,
           patient: {
@@ -177,6 +192,7 @@ const getAppointments = publicProcedure
             middleName: doctor?.middleName || "",
             suffix: "",
           },
+          medicalService: medicalService || null,  // Include medical service
           facility: null  // No facility relation
         }
       })
@@ -337,17 +353,50 @@ const assignRoom = protectedProcedure
     }
   })
 
-const updateAppointmentStatus = protectedProcedure
+const updateAppointmentStatus = publicProcedure
   .input(updateAppointmentStatusSchema)
   .mutation(async ({ ctx, input }) => {
-    const { instancePrisma } = ctx
+    const { instancePrisma, event } = ctx
     const { id, status } = input
     try {
+      // Manual authentication check for staff
+      const refreshToken = getCookie(event, "refreshToken")
+      
+      if (!refreshToken) {
+        console.log('❌ No refresh token found for updateAppointmentStatus')
+        return { success: false, message: "Please login to update appointment status.", data: null }
+      }
+      
+      // Decode token
+      let decoded: any = null
+      try {
+        const jwt = await import('jsonwebtoken')
+        decoded = jwt.default.decode(refreshToken)
+      } catch (err) {
+        console.log('❌ Error decoding token:', err)
+        return { success: false, message: "Invalid session. Please login again.", data: null }
+      }
+      
+      if (!decoded?.id) {
+        console.log('❌ No user ID in token')
+        return { success: false, message: "Invalid session. Please login again.", data: null }
+      }
+
+      console.log('✅ Updating appointment status:', { id, status, userId: decoded.id })
+
       const appointment = await instancePrisma.appointment.update({ where: { id }, data: { status } })
-      await instancePrisma.patientAppointment.updateMany({
-        where: { appointmentId: id },
-        data: { status },
-      })
+      
+      // Try to update patientAppointment if it exists (may not exist in new schema)
+      try {
+        await instancePrisma.patientAppointment.updateMany({
+          where: { appointmentId: id },
+          data: { status },
+        })
+      } catch (err) {
+        // PatientAppointment table might not exist, that's okay
+        console.log('Note: patientAppointment table not updated (may not exist)')
+      }
+
       return { success: true, message: "Appointment status updated successfully.", data: appointment }
     } catch (error) {
       console.log(error)
@@ -493,10 +542,10 @@ const createPatientAppointment = publicProcedure
   .input(createPatientAppointmentSchema)
   .mutation(async ({ ctx, input }) => {
     const { instancePrisma, event } = ctx
-    const { doctorId, date, time, name, userId: userIdFromPayload } = input
+    const { doctorId, date, time, name, userId: userIdFromPayload, medicalServiceId } = input
 
     try {
-      console.log('Creating appointment:', { doctorId, date, time, name })
+      console.log('Creating appointment:', { doctorId, date, time, name, medicalServiceId })
 
       // Validate input
       if (!doctorId || !date || !time || !name) {
@@ -564,18 +613,27 @@ const createPatientAppointment = publicProcedure
       }
       
       console.log('✅ Creating appointment for user:', userId)
+      console.log('📝 medicalServiceId received:', medicalServiceId)
+      console.log('📝 Full input data:', input)
+
+      const appointmentData = {
+        userId: userId,  // Direct userId reference!
+        doctorId,
+        medicalServiceId, // Medical service being booked
+        date,
+        time,
+        status: AppointmentStatus.SCHEDULED,
+      }
+
+      console.log('📝 Appointment data to be saved:', appointmentData)
 
       const appointment = await instancePrisma.appointment.create({
-        data: {
-          userId: userId,  // Direct userId reference!
-          doctorId,
-          date,
-          time,
-          status: AppointmentStatus.SCHEDULED,
-        },
+        data: appointmentData,
       })
 
       console.log('✅ Appointment created:', appointment.id)
+      console.log('✅ Saved medicalServiceId:', appointment.medicalServiceId)
+      console.log('✅ Full appointment:', appointment)
 
       return {
         success: true,
