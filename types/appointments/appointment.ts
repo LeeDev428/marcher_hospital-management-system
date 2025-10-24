@@ -187,6 +187,7 @@ export const updateAppointmentSchema = appointmentSchema.extend({
 export const createPatientAppointmentSchema = z.object({
   name: z.string().min(1).max(120).optional(),
   doctorId: cuidSchema,
+  medicalServiceId: cuidSchema.optional(), // Medical service being booked
   date: dateString,
   time: timeString,
   userId: z.string().optional(), // Optional user ID from frontend
@@ -204,7 +205,7 @@ export const assignRoomSchema = z.object({
 })
 
 export const updateAppointmentStatusSchema = z.object({
-  id: z.string().uuid("Invalid appointment ID."),
+  id: cuidSchema, // Changed from UUID to CUID
   status: appointmentStatusSchema,
 })
 
