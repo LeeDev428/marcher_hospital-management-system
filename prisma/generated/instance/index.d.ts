@@ -3155,6 +3155,37 @@ export namespace Prisma {
 
 
   /**
+   * Count Type MedicalServiceCountOutputType
+   */
+
+  export type MedicalServiceCountOutputType = {
+    appointments: number
+  }
+
+  export type MedicalServiceCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    appointments?: boolean | MedicalServiceCountOutputTypeCountAppointmentsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * MedicalServiceCountOutputType without action
+   */
+  export type MedicalServiceCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MedicalServiceCountOutputType
+     */
+    select?: MedicalServiceCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * MedicalServiceCountOutputType without action
+   */
+  export type MedicalServiceCountOutputTypeCountAppointmentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AppointmentWhereInput
+  }
+
+
+  /**
    * Count Type PharmacyBrandCountOutputType
    */
 
@@ -10645,6 +10676,7 @@ export namespace Prisma {
     id: string | null
     userId: string | null
     doctorId: string | null
+    medicalServiceId: string | null
     date: string | null
     time: string | null
     duration: number | null
@@ -10661,6 +10693,7 @@ export namespace Prisma {
     id: string | null
     userId: string | null
     doctorId: string | null
+    medicalServiceId: string | null
     date: string | null
     time: string | null
     duration: number | null
@@ -10677,6 +10710,7 @@ export namespace Prisma {
     id: number
     userId: number
     doctorId: number
+    medicalServiceId: number
     date: number
     time: number
     duration: number
@@ -10703,6 +10737,7 @@ export namespace Prisma {
     id?: true
     userId?: true
     doctorId?: true
+    medicalServiceId?: true
     date?: true
     time?: true
     duration?: true
@@ -10719,6 +10754,7 @@ export namespace Prisma {
     id?: true
     userId?: true
     doctorId?: true
+    medicalServiceId?: true
     date?: true
     time?: true
     duration?: true
@@ -10735,6 +10771,7 @@ export namespace Prisma {
     id?: true
     userId?: true
     doctorId?: true
+    medicalServiceId?: true
     date?: true
     time?: true
     duration?: true
@@ -10838,6 +10875,7 @@ export namespace Prisma {
     id: string
     userId: string
     doctorId: string
+    medicalServiceId: string | null
     date: string
     time: string
     duration: number | null
@@ -10873,6 +10911,7 @@ export namespace Prisma {
     id?: boolean
     userId?: boolean
     doctorId?: boolean
+    medicalServiceId?: boolean
     date?: boolean
     time?: boolean
     duration?: boolean
@@ -10884,12 +10923,14 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
+    medicalService?: boolean | Appointment$medicalServiceArgs<ExtArgs>
   }, ExtArgs["result"]["appointment"]>
 
   export type AppointmentSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     userId?: boolean
     doctorId?: boolean
+    medicalServiceId?: boolean
     date?: boolean
     time?: boolean
     duration?: boolean
@@ -10901,12 +10942,14 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
+    medicalService?: boolean | Appointment$medicalServiceArgs<ExtArgs>
   }, ExtArgs["result"]["appointment"]>
 
   export type AppointmentSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     userId?: boolean
     doctorId?: boolean
+    medicalServiceId?: boolean
     date?: boolean
     time?: boolean
     duration?: boolean
@@ -10918,12 +10961,14 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
+    medicalService?: boolean | Appointment$medicalServiceArgs<ExtArgs>
   }, ExtArgs["result"]["appointment"]>
 
   export type AppointmentSelectScalar = {
     id?: boolean
     userId?: boolean
     doctorId?: boolean
+    medicalServiceId?: boolean
     date?: boolean
     time?: boolean
     duration?: boolean
@@ -10936,26 +10981,31 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type AppointmentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "doctorId" | "date" | "time" | "duration" | "type" | "status" | "reason" | "notes" | "facilityId" | "createdAt" | "updatedAt", ExtArgs["result"]["appointment"]>
+  export type AppointmentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "doctorId" | "medicalServiceId" | "date" | "time" | "duration" | "type" | "status" | "reason" | "notes" | "facilityId" | "createdAt" | "updatedAt", ExtArgs["result"]["appointment"]>
   export type AppointmentInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
+    medicalService?: boolean | Appointment$medicalServiceArgs<ExtArgs>
   }
   export type AppointmentIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
+    medicalService?: boolean | Appointment$medicalServiceArgs<ExtArgs>
   }
   export type AppointmentIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
+    medicalService?: boolean | Appointment$medicalServiceArgs<ExtArgs>
   }
 
   export type $AppointmentPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Appointment"
     objects: {
       user: Prisma.$UserPayload<ExtArgs>
+      medicalService: Prisma.$MedicalServicePayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       userId: string
       doctorId: string
+      medicalServiceId: string | null
       date: string
       time: string
       duration: number | null
@@ -11361,6 +11411,7 @@ export namespace Prisma {
   export interface Prisma__AppointmentClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    medicalService<T extends Appointment$medicalServiceArgs<ExtArgs> = {}>(args?: Subset<T, Appointment$medicalServiceArgs<ExtArgs>>): Prisma__MedicalServiceClient<$Result.GetResult<Prisma.$MedicalServicePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -11393,6 +11444,7 @@ export namespace Prisma {
     readonly id: FieldRef<"Appointment", 'String'>
     readonly userId: FieldRef<"Appointment", 'String'>
     readonly doctorId: FieldRef<"Appointment", 'String'>
+    readonly medicalServiceId: FieldRef<"Appointment", 'String'>
     readonly date: FieldRef<"Appointment", 'String'>
     readonly time: FieldRef<"Appointment", 'String'>
     readonly duration: FieldRef<"Appointment", 'Int'>
@@ -11796,6 +11848,25 @@ export namespace Prisma {
      * Limit how many Appointments to delete.
      */
     limit?: number
+  }
+
+  /**
+   * Appointment.medicalService
+   */
+  export type Appointment$medicalServiceArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MedicalService
+     */
+    select?: MedicalServiceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MedicalService
+     */
+    omit?: MedicalServiceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MedicalServiceInclude<ExtArgs> | null
+    where?: MedicalServiceWhereInput
   }
 
   /**
@@ -13118,6 +13189,8 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     staff?: boolean | UserDefaultArgs<ExtArgs>
+    appointments?: boolean | MedicalService$appointmentsArgs<ExtArgs>
+    _count?: boolean | MedicalServiceCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["medicalService"]>
 
   export type MedicalServiceSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -13173,6 +13246,8 @@ export namespace Prisma {
   export type MedicalServiceOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "staffId" | "name" | "type" | "category" | "description" | "price" | "duration" | "isActive" | "requirements" | "notes" | "createdAt" | "updatedAt", ExtArgs["result"]["medicalService"]>
   export type MedicalServiceInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     staff?: boolean | UserDefaultArgs<ExtArgs>
+    appointments?: boolean | MedicalService$appointmentsArgs<ExtArgs>
+    _count?: boolean | MedicalServiceCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type MedicalServiceIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     staff?: boolean | UserDefaultArgs<ExtArgs>
@@ -13185,6 +13260,7 @@ export namespace Prisma {
     name: "MedicalService"
     objects: {
       staff: Prisma.$UserPayload<ExtArgs>
+      appointments: Prisma.$AppointmentPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -13595,6 +13671,7 @@ export namespace Prisma {
   export interface Prisma__MedicalServiceClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     staff<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    appointments<T extends MedicalService$appointmentsArgs<ExtArgs> = {}>(args?: Subset<T, MedicalService$appointmentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AppointmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -14030,6 +14107,30 @@ export namespace Prisma {
      * Limit how many MedicalServices to delete.
      */
     limit?: number
+  }
+
+  /**
+   * MedicalService.appointments
+   */
+  export type MedicalService$appointmentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Appointment
+     */
+    select?: AppointmentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Appointment
+     */
+    omit?: AppointmentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AppointmentInclude<ExtArgs> | null
+    where?: AppointmentWhereInput
+    orderBy?: AppointmentOrderByWithRelationInput | AppointmentOrderByWithRelationInput[]
+    cursor?: AppointmentWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: AppointmentScalarFieldEnum | AppointmentScalarFieldEnum[]
   }
 
   /**
@@ -27995,6 +28096,7 @@ export namespace Prisma {
     id: 'id',
     userId: 'userId',
     doctorId: 'doctorId',
+    medicalServiceId: 'medicalServiceId',
     date: 'date',
     time: 'time',
     duration: 'duration',
@@ -29296,6 +29398,7 @@ export namespace Prisma {
     id?: StringFilter<"Appointment"> | string
     userId?: StringFilter<"Appointment"> | string
     doctorId?: StringFilter<"Appointment"> | string
+    medicalServiceId?: StringNullableFilter<"Appointment"> | string | null
     date?: StringFilter<"Appointment"> | string
     time?: StringFilter<"Appointment"> | string
     duration?: IntNullableFilter<"Appointment"> | number | null
@@ -29307,12 +29410,14 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Appointment"> | Date | string
     updatedAt?: DateTimeFilter<"Appointment"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    medicalService?: XOR<MedicalServiceNullableScalarRelationFilter, MedicalServiceWhereInput> | null
   }
 
   export type AppointmentOrderByWithRelationInput = {
     id?: SortOrder
     userId?: SortOrder
     doctorId?: SortOrder
+    medicalServiceId?: SortOrderInput | SortOrder
     date?: SortOrder
     time?: SortOrder
     duration?: SortOrderInput | SortOrder
@@ -29324,6 +29429,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     user?: UserOrderByWithRelationInput
+    medicalService?: MedicalServiceOrderByWithRelationInput
   }
 
   export type AppointmentWhereUniqueInput = Prisma.AtLeast<{
@@ -29333,6 +29439,7 @@ export namespace Prisma {
     NOT?: AppointmentWhereInput | AppointmentWhereInput[]
     userId?: StringFilter<"Appointment"> | string
     doctorId?: StringFilter<"Appointment"> | string
+    medicalServiceId?: StringNullableFilter<"Appointment"> | string | null
     date?: StringFilter<"Appointment"> | string
     time?: StringFilter<"Appointment"> | string
     duration?: IntNullableFilter<"Appointment"> | number | null
@@ -29344,12 +29451,14 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Appointment"> | Date | string
     updatedAt?: DateTimeFilter<"Appointment"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    medicalService?: XOR<MedicalServiceNullableScalarRelationFilter, MedicalServiceWhereInput> | null
   }, "id">
 
   export type AppointmentOrderByWithAggregationInput = {
     id?: SortOrder
     userId?: SortOrder
     doctorId?: SortOrder
+    medicalServiceId?: SortOrderInput | SortOrder
     date?: SortOrder
     time?: SortOrder
     duration?: SortOrderInput | SortOrder
@@ -29374,6 +29483,7 @@ export namespace Prisma {
     id?: StringWithAggregatesFilter<"Appointment"> | string
     userId?: StringWithAggregatesFilter<"Appointment"> | string
     doctorId?: StringWithAggregatesFilter<"Appointment"> | string
+    medicalServiceId?: StringNullableWithAggregatesFilter<"Appointment"> | string | null
     date?: StringWithAggregatesFilter<"Appointment"> | string
     time?: StringWithAggregatesFilter<"Appointment"> | string
     duration?: IntNullableWithAggregatesFilter<"Appointment"> | number | null
@@ -29472,6 +29582,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"MedicalService"> | Date | string
     updatedAt?: DateTimeFilter<"MedicalService"> | Date | string
     staff?: XOR<UserScalarRelationFilter, UserWhereInput>
+    appointments?: AppointmentListRelationFilter
   }
 
   export type MedicalServiceOrderByWithRelationInput = {
@@ -29489,6 +29600,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     staff?: UserOrderByWithRelationInput
+    appointments?: AppointmentOrderByRelationAggregateInput
   }
 
   export type MedicalServiceWhereUniqueInput = Prisma.AtLeast<{
@@ -29509,6 +29621,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"MedicalService"> | Date | string
     updatedAt?: DateTimeFilter<"MedicalService"> | Date | string
     staff?: XOR<UserScalarRelationFilter, UserWhereInput>
+    appointments?: AppointmentListRelationFilter
   }, "id">
 
   export type MedicalServiceOrderByWithAggregationInput = {
@@ -31230,12 +31343,14 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     user: UserCreateNestedOneWithoutAppointmentsInput
+    medicalService?: MedicalServiceCreateNestedOneWithoutAppointmentsInput
   }
 
   export type AppointmentUncheckedCreateInput = {
     id?: string
     userId: string
     doctorId: string
+    medicalServiceId?: string | null
     date: string
     time: string
     duration?: number | null
@@ -31262,12 +31377,14 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutAppointmentsNestedInput
+    medicalService?: MedicalServiceUpdateOneWithoutAppointmentsNestedInput
   }
 
   export type AppointmentUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
     doctorId?: StringFieldUpdateOperationsInput | string
+    medicalServiceId?: NullableStringFieldUpdateOperationsInput | string | null
     date?: StringFieldUpdateOperationsInput | string
     time?: StringFieldUpdateOperationsInput | string
     duration?: NullableIntFieldUpdateOperationsInput | number | null
@@ -31284,6 +31401,7 @@ export namespace Prisma {
     id?: string
     userId: string
     doctorId: string
+    medicalServiceId?: string | null
     date: string
     time: string
     duration?: number | null
@@ -31315,6 +31433,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
     doctorId?: StringFieldUpdateOperationsInput | string
+    medicalServiceId?: NullableStringFieldUpdateOperationsInput | string | null
     date?: StringFieldUpdateOperationsInput | string
     time?: StringFieldUpdateOperationsInput | string
     duration?: NullableIntFieldUpdateOperationsInput | number | null
@@ -31418,6 +31537,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     staff: UserCreateNestedOneWithoutMedicalServicesInput
+    appointments?: AppointmentCreateNestedManyWithoutMedicalServiceInput
   }
 
   export type MedicalServiceUncheckedCreateInput = {
@@ -31434,6 +31554,7 @@ export namespace Prisma {
     notes?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    appointments?: AppointmentUncheckedCreateNestedManyWithoutMedicalServiceInput
   }
 
   export type MedicalServiceUpdateInput = {
@@ -31450,6 +31571,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     staff?: UserUpdateOneRequiredWithoutMedicalServicesNestedInput
+    appointments?: AppointmentUpdateManyWithoutMedicalServiceNestedInput
   }
 
   export type MedicalServiceUncheckedUpdateInput = {
@@ -31466,6 +31588,7 @@ export namespace Prisma {
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    appointments?: AppointmentUncheckedUpdateManyWithoutMedicalServiceNestedInput
   }
 
   export type MedicalServiceCreateManyInput = {
@@ -33347,10 +33470,16 @@ export namespace Prisma {
     not?: NestedEnumAppointmentStatusFilter<$PrismaModel> | $Enums.AppointmentStatus
   }
 
+  export type MedicalServiceNullableScalarRelationFilter = {
+    is?: MedicalServiceWhereInput | null
+    isNot?: MedicalServiceWhereInput | null
+  }
+
   export type AppointmentCountOrderByAggregateInput = {
     id?: SortOrder
     userId?: SortOrder
     doctorId?: SortOrder
+    medicalServiceId?: SortOrder
     date?: SortOrder
     time?: SortOrder
     duration?: SortOrder
@@ -33371,6 +33500,7 @@ export namespace Prisma {
     id?: SortOrder
     userId?: SortOrder
     doctorId?: SortOrder
+    medicalServiceId?: SortOrder
     date?: SortOrder
     time?: SortOrder
     duration?: SortOrder
@@ -33387,6 +33517,7 @@ export namespace Prisma {
     id?: SortOrder
     userId?: SortOrder
     doctorId?: SortOrder
+    medicalServiceId?: SortOrder
     date?: SortOrder
     time?: SortOrder
     duration?: SortOrder
@@ -34969,6 +35100,12 @@ export namespace Prisma {
     connect?: UserWhereUniqueInput
   }
 
+  export type MedicalServiceCreateNestedOneWithoutAppointmentsInput = {
+    create?: XOR<MedicalServiceCreateWithoutAppointmentsInput, MedicalServiceUncheckedCreateWithoutAppointmentsInput>
+    connectOrCreate?: MedicalServiceCreateOrConnectWithoutAppointmentsInput
+    connect?: MedicalServiceWhereUniqueInput
+  }
+
   export type NullableEnumAppointmentTypeFieldUpdateOperationsInput = {
     set?: $Enums.AppointmentType | null
   }
@@ -34985,6 +35122,16 @@ export namespace Prisma {
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutAppointmentsInput, UserUpdateWithoutAppointmentsInput>, UserUncheckedUpdateWithoutAppointmentsInput>
   }
 
+  export type MedicalServiceUpdateOneWithoutAppointmentsNestedInput = {
+    create?: XOR<MedicalServiceCreateWithoutAppointmentsInput, MedicalServiceUncheckedCreateWithoutAppointmentsInput>
+    connectOrCreate?: MedicalServiceCreateOrConnectWithoutAppointmentsInput
+    upsert?: MedicalServiceUpsertWithoutAppointmentsInput
+    disconnect?: MedicalServiceWhereInput | boolean
+    delete?: MedicalServiceWhereInput | boolean
+    connect?: MedicalServiceWhereUniqueInput
+    update?: XOR<XOR<MedicalServiceUpdateToOneWithWhereWithoutAppointmentsInput, MedicalServiceUpdateWithoutAppointmentsInput>, MedicalServiceUncheckedUpdateWithoutAppointmentsInput>
+  }
+
   export type EnumDayOfWeekFieldUpdateOperationsInput = {
     set?: $Enums.DayOfWeek
   }
@@ -34993,6 +35140,20 @@ export namespace Prisma {
     create?: XOR<UserCreateWithoutMedicalServicesInput, UserUncheckedCreateWithoutMedicalServicesInput>
     connectOrCreate?: UserCreateOrConnectWithoutMedicalServicesInput
     connect?: UserWhereUniqueInput
+  }
+
+  export type AppointmentCreateNestedManyWithoutMedicalServiceInput = {
+    create?: XOR<AppointmentCreateWithoutMedicalServiceInput, AppointmentUncheckedCreateWithoutMedicalServiceInput> | AppointmentCreateWithoutMedicalServiceInput[] | AppointmentUncheckedCreateWithoutMedicalServiceInput[]
+    connectOrCreate?: AppointmentCreateOrConnectWithoutMedicalServiceInput | AppointmentCreateOrConnectWithoutMedicalServiceInput[]
+    createMany?: AppointmentCreateManyMedicalServiceInputEnvelope
+    connect?: AppointmentWhereUniqueInput | AppointmentWhereUniqueInput[]
+  }
+
+  export type AppointmentUncheckedCreateNestedManyWithoutMedicalServiceInput = {
+    create?: XOR<AppointmentCreateWithoutMedicalServiceInput, AppointmentUncheckedCreateWithoutMedicalServiceInput> | AppointmentCreateWithoutMedicalServiceInput[] | AppointmentUncheckedCreateWithoutMedicalServiceInput[]
+    connectOrCreate?: AppointmentCreateOrConnectWithoutMedicalServiceInput | AppointmentCreateOrConnectWithoutMedicalServiceInput[]
+    createMany?: AppointmentCreateManyMedicalServiceInputEnvelope
+    connect?: AppointmentWhereUniqueInput | AppointmentWhereUniqueInput[]
   }
 
   export type EnumServiceTypeFieldUpdateOperationsInput = {
@@ -35025,6 +35186,34 @@ export namespace Prisma {
     upsert?: UserUpsertWithoutMedicalServicesInput
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutMedicalServicesInput, UserUpdateWithoutMedicalServicesInput>, UserUncheckedUpdateWithoutMedicalServicesInput>
+  }
+
+  export type AppointmentUpdateManyWithoutMedicalServiceNestedInput = {
+    create?: XOR<AppointmentCreateWithoutMedicalServiceInput, AppointmentUncheckedCreateWithoutMedicalServiceInput> | AppointmentCreateWithoutMedicalServiceInput[] | AppointmentUncheckedCreateWithoutMedicalServiceInput[]
+    connectOrCreate?: AppointmentCreateOrConnectWithoutMedicalServiceInput | AppointmentCreateOrConnectWithoutMedicalServiceInput[]
+    upsert?: AppointmentUpsertWithWhereUniqueWithoutMedicalServiceInput | AppointmentUpsertWithWhereUniqueWithoutMedicalServiceInput[]
+    createMany?: AppointmentCreateManyMedicalServiceInputEnvelope
+    set?: AppointmentWhereUniqueInput | AppointmentWhereUniqueInput[]
+    disconnect?: AppointmentWhereUniqueInput | AppointmentWhereUniqueInput[]
+    delete?: AppointmentWhereUniqueInput | AppointmentWhereUniqueInput[]
+    connect?: AppointmentWhereUniqueInput | AppointmentWhereUniqueInput[]
+    update?: AppointmentUpdateWithWhereUniqueWithoutMedicalServiceInput | AppointmentUpdateWithWhereUniqueWithoutMedicalServiceInput[]
+    updateMany?: AppointmentUpdateManyWithWhereWithoutMedicalServiceInput | AppointmentUpdateManyWithWhereWithoutMedicalServiceInput[]
+    deleteMany?: AppointmentScalarWhereInput | AppointmentScalarWhereInput[]
+  }
+
+  export type AppointmentUncheckedUpdateManyWithoutMedicalServiceNestedInput = {
+    create?: XOR<AppointmentCreateWithoutMedicalServiceInput, AppointmentUncheckedCreateWithoutMedicalServiceInput> | AppointmentCreateWithoutMedicalServiceInput[] | AppointmentUncheckedCreateWithoutMedicalServiceInput[]
+    connectOrCreate?: AppointmentCreateOrConnectWithoutMedicalServiceInput | AppointmentCreateOrConnectWithoutMedicalServiceInput[]
+    upsert?: AppointmentUpsertWithWhereUniqueWithoutMedicalServiceInput | AppointmentUpsertWithWhereUniqueWithoutMedicalServiceInput[]
+    createMany?: AppointmentCreateManyMedicalServiceInputEnvelope
+    set?: AppointmentWhereUniqueInput | AppointmentWhereUniqueInput[]
+    disconnect?: AppointmentWhereUniqueInput | AppointmentWhereUniqueInput[]
+    delete?: AppointmentWhereUniqueInput | AppointmentWhereUniqueInput[]
+    connect?: AppointmentWhereUniqueInput | AppointmentWhereUniqueInput[]
+    update?: AppointmentUpdateWithWhereUniqueWithoutMedicalServiceInput | AppointmentUpdateWithWhereUniqueWithoutMedicalServiceInput[]
+    updateMany?: AppointmentUpdateManyWithWhereWithoutMedicalServiceInput | AppointmentUpdateManyWithWhereWithoutMedicalServiceInput[]
+    deleteMany?: AppointmentScalarWhereInput | AppointmentScalarWhereInput[]
   }
 
   export type PharmacyItemCreateNestedManyWithoutBrandInput = {
@@ -36438,11 +36627,13 @@ export namespace Prisma {
     facilityId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    medicalService?: MedicalServiceCreateNestedOneWithoutAppointmentsInput
   }
 
   export type AppointmentUncheckedCreateWithoutUserInput = {
     id?: string
     doctorId: string
+    medicalServiceId?: string | null
     date: string
     time: string
     duration?: number | null
@@ -36478,6 +36669,7 @@ export namespace Prisma {
     notes?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    appointments?: AppointmentCreateNestedManyWithoutMedicalServiceInput
   }
 
   export type MedicalServiceUncheckedCreateWithoutStaffInput = {
@@ -36493,6 +36685,7 @@ export namespace Prisma {
     notes?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    appointments?: AppointmentUncheckedCreateNestedManyWithoutMedicalServiceInput
   }
 
   export type MedicalServiceCreateOrConnectWithoutStaffInput = {
@@ -36707,6 +36900,7 @@ export namespace Prisma {
     id?: StringFilter<"Appointment"> | string
     userId?: StringFilter<"Appointment"> | string
     doctorId?: StringFilter<"Appointment"> | string
+    medicalServiceId?: StringNullableFilter<"Appointment"> | string | null
     date?: StringFilter<"Appointment"> | string
     time?: StringFilter<"Appointment"> | string
     duration?: IntNullableFilter<"Appointment"> | number | null
@@ -37835,6 +38029,43 @@ export namespace Prisma {
     create: XOR<UserCreateWithoutAppointmentsInput, UserUncheckedCreateWithoutAppointmentsInput>
   }
 
+  export type MedicalServiceCreateWithoutAppointmentsInput = {
+    id?: string
+    name: string
+    type: $Enums.ServiceType
+    category?: $Enums.ServiceCategory | null
+    description?: string | null
+    price: Decimal | DecimalJsLike | number | string
+    duration: number
+    isActive?: boolean
+    requirements?: string | null
+    notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    staff: UserCreateNestedOneWithoutMedicalServicesInput
+  }
+
+  export type MedicalServiceUncheckedCreateWithoutAppointmentsInput = {
+    id?: string
+    staffId: string
+    name: string
+    type: $Enums.ServiceType
+    category?: $Enums.ServiceCategory | null
+    description?: string | null
+    price: Decimal | DecimalJsLike | number | string
+    duration: number
+    isActive?: boolean
+    requirements?: string | null
+    notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type MedicalServiceCreateOrConnectWithoutAppointmentsInput = {
+    where: MedicalServiceWhereUniqueInput
+    create: XOR<MedicalServiceCreateWithoutAppointmentsInput, MedicalServiceUncheckedCreateWithoutAppointmentsInput>
+  }
+
   export type UserUpsertWithoutAppointmentsInput = {
     update: XOR<UserUpdateWithoutAppointmentsInput, UserUncheckedUpdateWithoutAppointmentsInput>
     create: XOR<UserCreateWithoutAppointmentsInput, UserUncheckedCreateWithoutAppointmentsInput>
@@ -37922,6 +38153,49 @@ export namespace Prisma {
     medicalServices?: MedicalServiceUncheckedUpdateManyWithoutStaffNestedInput
   }
 
+  export type MedicalServiceUpsertWithoutAppointmentsInput = {
+    update: XOR<MedicalServiceUpdateWithoutAppointmentsInput, MedicalServiceUncheckedUpdateWithoutAppointmentsInput>
+    create: XOR<MedicalServiceCreateWithoutAppointmentsInput, MedicalServiceUncheckedCreateWithoutAppointmentsInput>
+    where?: MedicalServiceWhereInput
+  }
+
+  export type MedicalServiceUpdateToOneWithWhereWithoutAppointmentsInput = {
+    where?: MedicalServiceWhereInput
+    data: XOR<MedicalServiceUpdateWithoutAppointmentsInput, MedicalServiceUncheckedUpdateWithoutAppointmentsInput>
+  }
+
+  export type MedicalServiceUpdateWithoutAppointmentsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    type?: EnumServiceTypeFieldUpdateOperationsInput | $Enums.ServiceType
+    category?: NullableEnumServiceCategoryFieldUpdateOperationsInput | $Enums.ServiceCategory | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    duration?: IntFieldUpdateOperationsInput | number
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    requirements?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    staff?: UserUpdateOneRequiredWithoutMedicalServicesNestedInput
+  }
+
+  export type MedicalServiceUncheckedUpdateWithoutAppointmentsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    staffId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    type?: EnumServiceTypeFieldUpdateOperationsInput | $Enums.ServiceType
+    category?: NullableEnumServiceCategoryFieldUpdateOperationsInput | $Enums.ServiceCategory | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    duration?: IntFieldUpdateOperationsInput | number
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    requirements?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type UserCreateWithoutMedicalServicesInput = {
     id?: string
     email: string
@@ -38001,6 +38275,48 @@ export namespace Prisma {
   export type UserCreateOrConnectWithoutMedicalServicesInput = {
     where: UserWhereUniqueInput
     create: XOR<UserCreateWithoutMedicalServicesInput, UserUncheckedCreateWithoutMedicalServicesInput>
+  }
+
+  export type AppointmentCreateWithoutMedicalServiceInput = {
+    id?: string
+    doctorId: string
+    date: string
+    time: string
+    duration?: number | null
+    type?: $Enums.AppointmentType | null
+    status?: $Enums.AppointmentStatus
+    reason?: string | null
+    notes?: string | null
+    facilityId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutAppointmentsInput
+  }
+
+  export type AppointmentUncheckedCreateWithoutMedicalServiceInput = {
+    id?: string
+    userId: string
+    doctorId: string
+    date: string
+    time: string
+    duration?: number | null
+    type?: $Enums.AppointmentType | null
+    status?: $Enums.AppointmentStatus
+    reason?: string | null
+    notes?: string | null
+    facilityId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type AppointmentCreateOrConnectWithoutMedicalServiceInput = {
+    where: AppointmentWhereUniqueInput
+    create: XOR<AppointmentCreateWithoutMedicalServiceInput, AppointmentUncheckedCreateWithoutMedicalServiceInput>
+  }
+
+  export type AppointmentCreateManyMedicalServiceInputEnvelope = {
+    data: AppointmentCreateManyMedicalServiceInput | AppointmentCreateManyMedicalServiceInput[]
+    skipDuplicates?: boolean
   }
 
   export type UserUpsertWithoutMedicalServicesInput = {
@@ -38088,6 +38404,22 @@ export namespace Prisma {
     partnerProfile?: PartnerUncheckedUpdateOneWithoutUserNestedInput
     staffCredentials?: StaffCredentialsUncheckedUpdateOneWithoutUserNestedInput
     appointments?: AppointmentUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type AppointmentUpsertWithWhereUniqueWithoutMedicalServiceInput = {
+    where: AppointmentWhereUniqueInput
+    update: XOR<AppointmentUpdateWithoutMedicalServiceInput, AppointmentUncheckedUpdateWithoutMedicalServiceInput>
+    create: XOR<AppointmentCreateWithoutMedicalServiceInput, AppointmentUncheckedCreateWithoutMedicalServiceInput>
+  }
+
+  export type AppointmentUpdateWithWhereUniqueWithoutMedicalServiceInput = {
+    where: AppointmentWhereUniqueInput
+    data: XOR<AppointmentUpdateWithoutMedicalServiceInput, AppointmentUncheckedUpdateWithoutMedicalServiceInput>
+  }
+
+  export type AppointmentUpdateManyWithWhereWithoutMedicalServiceInput = {
+    where: AppointmentScalarWhereInput
+    data: XOR<AppointmentUpdateManyMutationInput, AppointmentUncheckedUpdateManyWithoutMedicalServiceInput>
   }
 
   export type PharmacyItemCreateWithoutBrandInput = {
@@ -39349,6 +39681,7 @@ export namespace Prisma {
   export type AppointmentCreateManyUserInput = {
     id?: string
     doctorId: string
+    medicalServiceId?: string | null
     date: string
     time: string
     duration?: number | null
@@ -39437,11 +39770,13 @@ export namespace Prisma {
     facilityId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    medicalService?: MedicalServiceUpdateOneWithoutAppointmentsNestedInput
   }
 
   export type AppointmentUncheckedUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     doctorId?: StringFieldUpdateOperationsInput | string
+    medicalServiceId?: NullableStringFieldUpdateOperationsInput | string | null
     date?: StringFieldUpdateOperationsInput | string
     time?: StringFieldUpdateOperationsInput | string
     duration?: NullableIntFieldUpdateOperationsInput | number | null
@@ -39457,6 +39792,7 @@ export namespace Prisma {
   export type AppointmentUncheckedUpdateManyWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     doctorId?: StringFieldUpdateOperationsInput | string
+    medicalServiceId?: NullableStringFieldUpdateOperationsInput | string | null
     date?: StringFieldUpdateOperationsInput | string
     time?: StringFieldUpdateOperationsInput | string
     duration?: NullableIntFieldUpdateOperationsInput | number | null
@@ -39482,6 +39818,7 @@ export namespace Prisma {
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    appointments?: AppointmentUpdateManyWithoutMedicalServiceNestedInput
   }
 
   export type MedicalServiceUncheckedUpdateWithoutStaffInput = {
@@ -39497,6 +39834,7 @@ export namespace Prisma {
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    appointments?: AppointmentUncheckedUpdateManyWithoutMedicalServiceNestedInput
   }
 
   export type MedicalServiceUncheckedUpdateManyWithoutStaffInput = {
@@ -39642,6 +39980,70 @@ export namespace Prisma {
     consultationFee?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     paymentStatus?: EnumOutpatientPaymentStatusFieldUpdateOperationsInput | $Enums.OutpatientPaymentStatus
     notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AppointmentCreateManyMedicalServiceInput = {
+    id?: string
+    userId: string
+    doctorId: string
+    date: string
+    time: string
+    duration?: number | null
+    type?: $Enums.AppointmentType | null
+    status?: $Enums.AppointmentStatus
+    reason?: string | null
+    notes?: string | null
+    facilityId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type AppointmentUpdateWithoutMedicalServiceInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    doctorId?: StringFieldUpdateOperationsInput | string
+    date?: StringFieldUpdateOperationsInput | string
+    time?: StringFieldUpdateOperationsInput | string
+    duration?: NullableIntFieldUpdateOperationsInput | number | null
+    type?: NullableEnumAppointmentTypeFieldUpdateOperationsInput | $Enums.AppointmentType | null
+    status?: EnumAppointmentStatusFieldUpdateOperationsInput | $Enums.AppointmentStatus
+    reason?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    facilityId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutAppointmentsNestedInput
+  }
+
+  export type AppointmentUncheckedUpdateWithoutMedicalServiceInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    doctorId?: StringFieldUpdateOperationsInput | string
+    date?: StringFieldUpdateOperationsInput | string
+    time?: StringFieldUpdateOperationsInput | string
+    duration?: NullableIntFieldUpdateOperationsInput | number | null
+    type?: NullableEnumAppointmentTypeFieldUpdateOperationsInput | $Enums.AppointmentType | null
+    status?: EnumAppointmentStatusFieldUpdateOperationsInput | $Enums.AppointmentStatus
+    reason?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    facilityId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AppointmentUncheckedUpdateManyWithoutMedicalServiceInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    doctorId?: StringFieldUpdateOperationsInput | string
+    date?: StringFieldUpdateOperationsInput | string
+    time?: StringFieldUpdateOperationsInput | string
+    duration?: NullableIntFieldUpdateOperationsInput | number | null
+    type?: NullableEnumAppointmentTypeFieldUpdateOperationsInput | $Enums.AppointmentType | null
+    status?: EnumAppointmentStatusFieldUpdateOperationsInput | $Enums.AppointmentStatus
+    reason?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    facilityId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
