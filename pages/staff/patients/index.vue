@@ -22,7 +22,7 @@ onMounted(async () => {
 				<div class="w-full flex items-center gap-2">
 					<Input type="text" placeholder="Search" class="bg-white max-w-xs" />
 				</div>
-				<NuxtLink to="/patients/new">
+				<NuxtLink to="/staff/patients/new">
 					<Button variant="outline" size="icon">
 						<Icon name="mdi:plus" />
 					</Button>
