@@ -5,10 +5,38 @@ import {
 } from "@/components/ui/table"
 import { Button } from "@/components/ui/button"
 import { Skeleton } from "@/components/ui/skeleton"
+import {
+  Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription,
+} from "@/components/ui/dialog"
 
 const appointmentStore = useAppointmentStore()
 
+// Dialog state
+const showViewDialog = ref(false)
+const selectedAppointment = ref<any>(null)
+
 const onEdit = (id: string) => navigateTo(`/appointments/${id}`)
+
+const handleAccept = async (appointment: any) => {
+  await appointmentStore.updateAppointmentStatus({ 
+    id: appointment.id, 
+    status: 'CONFIRMED' 
+  })
+  useToast('success', 'Appointment', 'Appointment accepted successfully')
+}
+
+const handleDecline = async (appointment: any) => {
+  await appointmentStore.updateAppointmentStatus({ 
+    id: appointment.id, 
+    status: 'CANCELLED' 
+  })
+  useToast('success', 'Appointment', 'Appointment declined successfully')
+}
+
+const viewDetails = (appointment: any) => {
+  selectedAppointment.value = appointment
+  showViewDialog.value = true
+}
 
 const currentPage = computed(() => appointmentStore.pagination.page)
 const totalPages = computed(() => appointmentStore.pagination.totalPages)
@@ -96,22 +124,34 @@ onMounted(() => { appointmentStore.getAppointments() })
             </TableCell>
 
             <TableCell class="flex gap-2">
-              <!-- Approve/Confirm Button for SCHEDULED appointments -->
+              <!-- Accept Button for SCHEDULED appointments -->
               <Button 
                 v-if="appointment.status === 'SCHEDULED'" 
                 variant="default"
                 size="sm"
                 class="bg-green-600 hover:bg-green-700 text-white"
-                @click="appointmentStore.updateAppointmentStatus({ id: appointment.id, status: 'CONFIRMED' })"
+                @click="handleAccept(appointment)"
               >
-                <Icon name="mdi:check-circle" class="mr-1" /> Approve
+                <Icon name="mdi:check-circle" class="mr-1" /> Accept
               </Button>
               
-              <Button variant="outline" size="icon" @click="onEdit(appointment.id)">
-                <Icon name="mdi:pencil" />
+              <!-- Decline Button for SCHEDULED appointments -->
+              <Button 
+                v-if="appointment.status === 'SCHEDULED'" 
+                variant="destructive"
+                size="sm"
+                @click="handleDecline(appointment)"
+              >
+                <Icon name="mdi:close-circle" class="mr-1" /> Decline
               </Button>
-              <Button variant="outline" size="icon" @click="appointmentStore.deleteAppointment(appointment.id)">
-                <Icon name="mdi:trash" />
+              
+              <!-- View Details Button -->
+              <Button 
+                variant="outline" 
+                size="sm"
+                @click="viewDetails(appointment)"
+              >
+                <Icon name="mdi:eye" class="mr-1" /> View
               </Button>
             </TableCell>
           </TableRow>
@@ -141,5 +181,146 @@ onMounted(() => { appointmentStore.getAppointments() })
         <Button variant="outline" size="sm" :disabled="currentPage === totalPages" @click="goToLastPage">Last <Icon name="mdi:page-last" class="w-4 h-4" /></Button>
       </div>
     </div>
+
+    <!-- View Appointment Details Dialog -->
+    <Dialog v-model:open="showViewDialog">
+      <DialogContent class="max-w-2xl max-h-[80vh] overflow-y-auto">
+        <DialogHeader>
+          <DialogTitle>Appointment Details</DialogTitle>
+          <DialogDescription>Complete information about this appointment</DialogDescription>
+        </DialogHeader>
+
+        <div v-if="selectedAppointment" class="space-y-6 mt-4">
+          <!-- Patient Information -->
+          <div class="space-y-2">
+            <h3 class="font-semibold text-lg border-b pb-2">Patient Information</h3>
+            <div class="grid grid-cols-2 gap-4">
+              <div>
+                <p class="text-sm text-muted-foreground">Full Name</p>
+                <p class="font-medium">
+                  {{ selectedAppointment.patient.lastName }}, {{ selectedAppointment.patient.firstName }}
+                  <span v-if="selectedAppointment.patient.middleName"> {{ selectedAppointment.patient.middleName }}</span>
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Doctor Information -->
+          <div class="space-y-2">
+            <h3 class="font-semibold text-lg border-b pb-2">Doctor Information</h3>
+            <div class="grid grid-cols-2 gap-4">
+              <div>
+                <p class="text-sm text-muted-foreground">Doctor Name</p>
+                <p class="font-medium">
+                  Dr. {{ selectedAppointment.doctor.lastName }}, {{ selectedAppointment.doctor.firstName }}
+                  {{ selectedAppointment.doctor.middleName || "" }}
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Medical Service Information -->
+          <div v-if="selectedAppointment.medicalService" class="space-y-2">
+            <h3 class="font-semibold text-lg border-b pb-2">Medical Service</h3>
+            <div class="grid grid-cols-2 gap-4">
+              <div>
+                <p class="text-sm text-muted-foreground">Service Name</p>
+                <p class="font-medium">{{ selectedAppointment.medicalService.name }}</p>
+              </div>
+              <div>
+                <p class="text-sm text-muted-foreground">Service Type</p>
+                <p class="font-medium">{{ selectedAppointment.medicalService.type }}</p>
+              </div>
+              <div v-if="selectedAppointment.medicalService.category">
+                <p class="text-sm text-muted-foreground">Category</p>
+                <p class="font-medium">{{ selectedAppointment.medicalService.category }}</p>
+              </div>
+              <div>
+                <p class="text-sm text-muted-foreground">Duration</p>
+                <p class="font-medium">{{ selectedAppointment.medicalService.duration }} minutes</p>
+              </div>
+              <div>
+                <p class="text-sm text-muted-foreground">Price</p>
+                <p class="font-medium">₱{{ Number(selectedAppointment.medicalService.price).toFixed(2) }}</p>
+              </div>
+            </div>
+          </div>
+          <div v-else class="space-y-2">
+            <h3 class="font-semibold text-lg border-b pb-2">Medical Service</h3>
+            <p class="text-muted-foreground italic">No medical service specified</p>
+          </div>
+
+          <!-- Appointment Details -->
+          <div class="space-y-2">
+            <h3 class="font-semibold text-lg border-b pb-2">Appointment Details</h3>
+            <div class="grid grid-cols-2 gap-4">
+              <div>
+                <p class="text-sm text-muted-foreground">Date</p>
+                <p class="font-medium">{{ new Date(selectedAppointment.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) }}</p>
+              </div>
+              <div>
+                <p class="text-sm text-muted-foreground">Time</p>
+                <p class="font-medium">{{ new Date(`2000-01-01T${selectedAppointment.time}`).toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit',hour12:true}) }}</p>
+              </div>
+              <div>
+                <p class="text-sm text-muted-foreground">Status</p>
+                <span 
+                  :class="{
+                    'px-2 py-1 rounded-md text-xs font-medium': true,
+                    'bg-orange-100 text-orange-800': selectedAppointment.status === 'SCHEDULED',
+                    'bg-blue-100 text-blue-800': selectedAppointment.status === 'CONFIRMED',
+                    'bg-yellow-100 text-yellow-800': selectedAppointment.status === 'IN_PROGRESS',
+                    'bg-green-100 text-green-800': selectedAppointment.status === 'COMPLETED',
+                    'bg-red-100 text-red-800': selectedAppointment.status === 'CANCELLED',
+                    'bg-gray-100 text-gray-800': selectedAppointment.status === 'NO_SHOW'
+                  }"
+                >
+                  {{ selectedAppointment.status }}
+                </span>
+              </div>
+              <div v-if="selectedAppointment.duration">
+                <p class="text-sm text-muted-foreground">Duration</p>
+                <p class="font-medium">{{ selectedAppointment.duration }} minutes</p>
+              </div>
+              <div v-if="selectedAppointment.type">
+                <p class="text-sm text-muted-foreground">Type</p>
+                <p class="font-medium">{{ selectedAppointment.type }}</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Additional Notes -->
+          <div v-if="selectedAppointment.reason || selectedAppointment.notes" class="space-y-2">
+            <h3 class="font-semibold text-lg border-b pb-2">Additional Information</h3>
+            <div v-if="selectedAppointment.reason">
+              <p class="text-sm text-muted-foreground">Reason</p>
+              <p class="font-medium">{{ selectedAppointment.reason }}</p>
+            </div>
+            <div v-if="selectedAppointment.notes" class="mt-2">
+              <p class="text-sm text-muted-foreground">Notes</p>
+              <p class="font-medium">{{ selectedAppointment.notes }}</p>
+            </div>
+          </div>
+
+          <!-- Action Buttons in Dialog -->
+          <div v-if="selectedAppointment.status === 'SCHEDULED'" class="flex gap-2 pt-4 border-t">
+            <Button 
+              variant="default"
+              class="bg-green-600 hover:bg-green-700 text-white flex-1"
+              @click="handleAccept(selectedAppointment); showViewDialog = false"
+            >
+              <Icon name="mdi:check-circle" class="mr-2" /> Accept Appointment
+            </Button>
+            <Button 
+              variant="destructive"
+              class="flex-1"
+              @click="handleDecline(selectedAppointment); showViewDialog = false"
+            >
+              <Icon name="mdi:close-circle" class="mr-2" /> Decline Appointment
+            </Button>
+          </div>
+        </div>
+      </DialogContent>
+    </Dialog>
   </div>
 </template>
