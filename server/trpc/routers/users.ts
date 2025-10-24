@@ -35,6 +35,26 @@ const getUserSchema = z.object({
   id: z.string(),
 })
 
+const updateUserSchema = z.object({
+  id: z.string(),
+  firstName: z.string().min(1).optional(),
+  lastName: z.string().min(1).optional(),
+  email: z.string().email().optional(),
+  phone: z.string().optional(),
+  
+  // Staff-specific fields
+  staffType: z.enum(['DOCTOR', 'NURSE', 'STAFF', 'ADMISSIONS_STAFF', 'BILLING_STAFF', 'PHARMACIST']).optional(),
+  position: z.string().optional(),
+  department: z.string().optional(),
+  specialization: z.string().optional(),
+  licenseNumber: z.string().optional(),
+  
+  // Common fields
+  dateOfBirth: z.string().optional(),
+  gender: z.enum(['MALE', 'FEMALE', 'OTHER', 'PREFER_NOT_TO_SAY']).optional(),
+  address: z.string().optional(),
+})
+
 export const usersRouter = createTRPCRouter({
   // Get all users with their profiles
   list: publicProcedure.query(async ({ ctx }) => {
@@ -231,6 +251,91 @@ export const usersRouter = createTRPCRouter({
         return {
           success: false,
           message: "Failed to create user.",
+          data: null,
+        }
+      }
+    }),
+
+  // Update user
+  update: publicProcedure
+    .input(updateUserSchema)
+    .mutation(async ({ ctx, input }) => {
+      const {
+        id,
+        firstName,
+        lastName,
+        email,
+        phone,
+        staffType,
+        position,
+        department,
+        specialization,
+        licenseNumber,
+        dateOfBirth,
+        gender,
+        address,
+      } = input
+
+      try {
+        // Get current user to check role
+        const currentUser = await ctx.instancePrisma.user.findUnique({
+          where: { id },
+          include: { staffCredentials: true },
+        })
+
+        if (!currentUser) {
+          return {
+            success: false,
+            message: "User not found.",
+            data: null,
+          }
+        }
+
+        // Update user in a transaction
+        const result = await ctx.instancePrisma.$transaction(async (prisma) => {
+          // Update basic user information
+          const user = await prisma.user.update({
+            where: { id },
+            data: {
+              ...(firstName && { firstName }),
+              ...(lastName && { lastName }),
+              ...(email && { email }),
+              ...(phone && { phone }),
+              ...(dateOfBirth && { dateOfBirth: new Date(dateOfBirth) }),
+              ...(gender && { gender }),
+              ...(address && { address }),
+              ...(department && { department }),
+              ...(position && { position }),
+            },
+          })
+
+          // Update staff credentials if user is staff and has credentials
+          if (currentUser.role === 'STAFF' && currentUser.staffCredentials) {
+            if (staffType || specialization || licenseNumber) {
+              await prisma.staffCredentials.update({
+                where: { userId: id },
+                data: {
+                  ...(staffType && { staffType: staffType as any }),
+                  ...(specialization && { specialization }),
+                  ...(licenseNumber && { licenseNumber }),
+                },
+              })
+            }
+          }
+
+          return user
+        })
+
+        return {
+          success: true,
+          message: "User updated successfully.",
+          data: result,
+        }
+      } catch (error) {
+        console.error("Error updating user:", error)
+        return {
+          success: false,
+          message: "Failed to update user.",
           data: null,
         }
       }
