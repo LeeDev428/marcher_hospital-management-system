@@ -60,13 +60,14 @@ export const patientProfileSchema = z.object({
 
 /* For Get & Delete */
 export const getPatientProfileSchema = z.object({
-	id: z.string().uuid("Invalid patient profile ID."),
+	// IDs for patients are CUIDs in the instance schema — validate as CUID
+	id: z.string().cuid("Invalid patient profile ID."),
 })
 
 /* For Table */
 export const tablePatientProfileSchema = patientProfileSchema
 	.extend({
-		id: z.string().uuid("Invalid patient profile ID."),
+		id: z.string().cuid("Invalid patient profile ID."),
 		archived: z.boolean(),
 		createdAt: z.string().datetime(),
 		updatedAt: z.string().datetime(),
@@ -92,7 +93,7 @@ export const createPatientProfileSchema = patientProfileSchema
 export const updatePatientProfileSchema = patientProfileSchema
 	.partial()
 	.extend({
-		id: z.string().uuid("Invalid patient profile ID."),
+		id: z.string().cuid("Invalid patient profile ID."),
 		addresses: z.array(createPatientAddressSchema).optional().nullable(),
 		contacts: z.array(createPatientContactSchema).optional().nullable(),
 		employments: z.array(createPatientEmploymentSchema).optional().nullable(),
