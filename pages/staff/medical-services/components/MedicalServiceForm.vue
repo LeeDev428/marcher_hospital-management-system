@@ -32,8 +32,10 @@ const emit = defineEmits<{
 /* ---------------- Local state ---------------- */
 
 const loading = ref(false)
+
+// Initialize formData with computed staffId that updates when auth loads
 const formData = ref<CreateMedicalService | UpdateMedicalService>({
-  staffId: authStore.user?.id || "",
+  staffId: "",
   name: "",
   type: "CONSULTATION",
   category: undefined,
@@ -44,6 +46,14 @@ const formData = ref<CreateMedicalService | UpdateMedicalService>({
   requirements: "",
   notes: "",
 })
+
+// Watch for auth store user to load
+watch(() => authStore.user, (user) => {
+  if (user?.id && !formData.value.staffId) {
+    formData.value.staffId = user.id
+    console.log('📝 Staff ID set to:', user.id)
+  }
+}, { immediate: true })
 
 /* ---------------- Load existing service ---------------- */
 
@@ -76,10 +86,22 @@ const onSubmit = async (data: CreateMedicalService) => {
   try {
     loading.value = true
 
+    // Ensure staffId is set
+    const staffId = data.staffId || formData.value.staffId || authStore.user?.id
+    
+    if (!staffId) {
+      console.error('❌ No staff ID available')
+      useToast("error", "Medical Services", "Unable to identify staff member. Please refresh and try again.")
+      loading.value = false
+      return
+    }
+
+    console.log('📝 Submitting with staffId:', staffId)
+
     // Ensure required fields
     const payload: CreateMedicalService | UpdateMedicalService = {
       ...data,
-      staffId: data.staffId,
+      staffId: staffId,
       name: data.name.trim(),
       type: data.type,
       category: data.category || undefined,
