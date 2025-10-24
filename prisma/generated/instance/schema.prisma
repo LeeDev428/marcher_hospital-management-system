@@ -179,6 +179,10 @@ model Appointment {
   user     User   @relation(fields: [userId], references: [id])
   doctorId String // References User.id where role = STAFF and staffType = DOCTOR
 
+  // Medical Service
+  medicalServiceId String? // References MedicalService.id
+  medicalService   MedicalService? @relation(fields: [medicalServiceId], references: [id])
+
   // Appointment details
   date       String // Date in YYYY-MM-DD format
   time       String // Time in HH:MM format (24-hour)
@@ -195,6 +199,7 @@ model Appointment {
 
   @@index([userId])
   @@index([doctorId])
+  @@index([medicalServiceId])
   @@index([date])
   @@index([status])
   @@map("appointments")
@@ -328,6 +333,9 @@ model MedicalService {
   // Additional fields
   requirements String? // Any requirements/preparations needed
   notes        String? // Internal notes
+
+  // Relations
+  appointments Appointment[] // Appointments using this service
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
