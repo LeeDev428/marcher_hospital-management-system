@@ -116,6 +116,7 @@ model Patient {
   // Relationships
   inpatientEncounters  InpatientEncounter[]
   outpatientEncounters OutpatientEncounter[]
+  insuranceClaims      InsuranceClaim[]
   
   // System fields
   createdAt DateTime @default(now())
@@ -588,6 +589,7 @@ model OutpatientEncounter {
   consultationFee  Decimal?                  @db.Decimal(10, 2) // Doctor sets this directly
   paymentStatus    OutpatientPaymentStatus   @default(UNPAID)
   notes            String?                   // Additional notes
+  insuranceClaim   InsuranceClaim?           // Insurance claim for this encounter
   createdAt        DateTime                  @default(now())
   updatedAt        DateTime                  @updatedAt
 
@@ -633,6 +635,7 @@ model InpatientEncounter {
   dispositionNote      String?                   // Notes about disposition
   charts               InpatientEncounterChart[] // Progress notes by doctor
   orders               InpatientEncounterOrder[] // Orders/particulars added by doctor
+  insuranceClaim       InsuranceClaim?           // Insurance claim for this encounter
   createdAt            DateTime                  @default(now())
   updatedAt            DateTime                  @updatedAt
 
@@ -725,4 +728,118 @@ model ParticularCatalogue {
   @@index([isActive])
   @@index([name])
   @@map("particular_catalogue")
+}
+
+// ==================== INSURANCE SYSTEM ====================
+
+// Insurance Claim Status
+enum InsuranceClaimStatus {
+  PENDING       // Waiting for documents upload
+  SUBMITTED     // Documents uploaded, token sent
+  UNDER_REVIEW  // Insurance company reviewing
+  APPROVED      // Claim approved by insurance
+  DENIED        // Claim denied by insurance
+  CANCELLED     // Cancelled by billing staff
+}
+
+// Insurance Claims - Main claim record
+model InsuranceClaim {
+  id                String                @id @default(uuid()) @db.Uuid
+  claimNumber       String                @unique // Auto-generated: INS-YYYYMMDD-XXXX
+  
+  // Patient and Encounter
+  patientId         String
+  patient           Patient               @relation(fields: [patientId], references: [id], onDelete: Cascade)
+  
+  // Can be either inpatient or outpatient encounter
+  inpatientEncounterId  String?           @unique @db.Uuid
+  inpatientEncounter    InpatientEncounter?  @relation(fields: [inpatientEncounterId], references: [id], onDelete: Cascade)
+  
+  outpatientEncounterId String?           @unique @db.Uuid
+  outpatientEncounter   OutpatientEncounter? @relation(fields: [outpatientEncounterId], references: [id], onDelete: Cascade)
+  
+  // Insurance Details
+  insuranceProvider String                // Insurance company name
+  insuranceNumber   String?               // Patient's insurance number
+  policyNumber      String?               // Policy number
+  
+  // Claim Details
+  claimAmount       Decimal               @db.Decimal(10, 2) // Total amount claimed
+  approvedAmount    Decimal?              @db.Decimal(10, 2) // Amount approved by insurance
+  denialReason      String?               // Reason if denied
+  
+  // Status and workflow
+  status            InsuranceClaimStatus  @default(PENDING)
+  submittedAt       DateTime?             // When documents were submitted
+  reviewedAt        DateTime?             // When insurance reviewed
+  
+  // Notes
+  billingStaffNotes String?               // Notes from billing staff
+  insuranceNotes    String?               // Notes from insurance company
+  
+  // Staff who created/managed
+  createdBy         String                // User ID of billing staff
+  reviewedBy        String?               // Email of insurance reviewer
+  
+  // Relationships
+  documents         InsuranceDocument[]
+  accessTokens      InsuranceAccessToken[]
+  
+  // System fields
+  createdAt         DateTime              @default(now())
+  updatedAt         DateTime              @updatedAt
+  
+  @@index([patientId])
+  @@index([status])
+  @@index([claimNumber])
+  @@index([insuranceProvider])
+  @@map("insurance_claims")
+}
+
+// Insurance Documents - Files uploaded for claim
+model InsuranceDocument {
+  id              String            @id @default(uuid()) @db.Uuid
+  claimId         String            @db.Uuid
+  claim           InsuranceClaim    @relation(fields: [claimId], references: [id], onDelete: Cascade)
+  
+  // Document details
+  documentType    String            // e.g., "Medical Certificate", "Laboratory Results", "Prescription"
+  fileName        String            // Original file name
+  fileUrl         String            // Path or URL to stored file
+  fileSize        Int               // Size in bytes
+  mimeType        String            // File MIME type
+  
+  // Metadata
+  description     String?           // Optional description
+  uploadedBy      String            // User ID who uploaded
+  
+  // System fields
+  createdAt       DateTime          @default(now())
+  
+  @@index([claimId])
+  @@map("insurance_documents")
+}
+
+// Insurance Access Tokens - For insurance company to access claim
+model InsuranceAccessToken {
+  id              String            @id @default(uuid()) @db.Uuid
+  claimId         String            @db.Uuid
+  claim           InsuranceClaim    @relation(fields: [claimId], references: [id], onDelete: Cascade)
+  
+  // Token details
+  token           String            @unique // Secure random token
+  recipientEmail  String            // Insurance company email
+  
+  // Expiration and usage
+  expiresAt       DateTime          // Token expiration (e.g., 7 days)
+  usedAt          DateTime?         // When token was first used
+  isRevoked       Boolean           @default(false) // Can be manually revoked
+  
+  // System fields
+  createdAt       DateTime          @default(now())
+  
+  @@index([token])
+  @@index([claimId])
+  @@index([expiresAt])
+  @@map("insurance_access_tokens")
 }
