@@ -410,6 +410,53 @@ exports.Prisma.ParticularCatalogueScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.InsuranceClaimScalarFieldEnum = {
+  id: 'id',
+  claimNumber: 'claimNumber',
+  patientId: 'patientId',
+  inpatientEncounterId: 'inpatientEncounterId',
+  outpatientEncounterId: 'outpatientEncounterId',
+  insuranceProvider: 'insuranceProvider',
+  insuranceNumber: 'insuranceNumber',
+  policyNumber: 'policyNumber',
+  claimAmount: 'claimAmount',
+  approvedAmount: 'approvedAmount',
+  denialReason: 'denialReason',
+  status: 'status',
+  submittedAt: 'submittedAt',
+  reviewedAt: 'reviewedAt',
+  billingStaffNotes: 'billingStaffNotes',
+  insuranceNotes: 'insuranceNotes',
+  createdBy: 'createdBy',
+  reviewedBy: 'reviewedBy',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.InsuranceDocumentScalarFieldEnum = {
+  id: 'id',
+  claimId: 'claimId',
+  documentType: 'documentType',
+  fileName: 'fileName',
+  fileUrl: 'fileUrl',
+  fileSize: 'fileSize',
+  mimeType: 'mimeType',
+  description: 'description',
+  uploadedBy: 'uploadedBy',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.InsuranceAccessTokenScalarFieldEnum = {
+  id: 'id',
+  claimId: 'claimId',
+  token: 'token',
+  recipientEmail: 'recipientEmail',
+  expiresAt: 'expiresAt',
+  usedAt: 'usedAt',
+  isRevoked: 'isRevoked',
+  createdAt: 'createdAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -650,6 +697,15 @@ exports.ParticularType = exports.$Enums.ParticularType = {
   OTHER: 'OTHER'
 };
 
+exports.InsuranceClaimStatus = exports.$Enums.InsuranceClaimStatus = {
+  PENDING: 'PENDING',
+  SUBMITTED: 'SUBMITTED',
+  UNDER_REVIEW: 'UNDER_REVIEW',
+  APPROVED: 'APPROVED',
+  DENIED: 'DENIED',
+  CANCELLED: 'CANCELLED'
+};
+
 exports.Prisma.ModelName = {
   User: 'User',
   StaffCredentials: 'StaffCredentials',
@@ -671,7 +727,10 @@ exports.Prisma.ModelName = {
   InpatientEncounter: 'InpatientEncounter',
   InpatientEncounterChart: 'InpatientEncounterChart',
   InpatientEncounterOrder: 'InpatientEncounterOrder',
-  ParticularCatalogue: 'ParticularCatalogue'
+  ParticularCatalogue: 'ParticularCatalogue',
+  InsuranceClaim: 'InsuranceClaim',
+  InsuranceDocument: 'InsuranceDocument',
+  InsuranceAccessToken: 'InsuranceAccessToken'
 };
 
 /**
