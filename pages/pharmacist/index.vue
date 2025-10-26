@@ -241,6 +241,8 @@ onMounted(() => {
             </Button>
           </NuxtLink>
         </div>
+
+        
       </CardContent>
     </Card>
 
