@@ -56,11 +56,11 @@ export type SubmitInsuranceClaimInput = z.infer<typeof submitInsuranceClaimSchem
 // Review Claim (insurance company) Schema
 export const reviewInsuranceClaimSchema = z.object({
   token: z.string().min(1, 'Access token is required'),
-  approved: z.boolean(),
+  decision: z.enum(['APPROVED', 'DENIED']),
   approvedAmount: z.number().positive().optional(),
   denialReason: z.string().optional(),
   insuranceNotes: z.string().optional(),
-  reviewedBy: z.string().email('Invalid reviewer email'),
+  reviewerEmail: z.string().email('Invalid reviewer email'),
 })
 
 export type ReviewInsuranceClaimInput = z.infer<typeof reviewInsuranceClaimSchema>
