@@ -1,7 +1,9 @@
 <script setup lang="ts">
+import { ref } from 'vue'
 import { useAuthStore } from "~/stores/app"
 
 const authStore = useAuthStore()
+const navContainer = ref<HTMLDivElement>()
 
 const getUserInitials = () => {
   if (!authStore.user) return 'P'
@@ -17,7 +19,23 @@ const handleLogout = async () => {
     console.error('Logout error:', error)
   }
 }
+
+const scrollNav = (scrollAmount: number) => {
+  if (navContainer.value) {
+    navContainer.value.scrollBy({ left: scrollAmount, behavior: 'smooth' })
+  }
+}
 </script>
+
+<style scoped>
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+</style>
 
 <template>
   <div class="min-h-screen bg-gray-50">
@@ -35,44 +53,74 @@ const handleLogout = async () => {
             </div>
           </div>
 
-          <!-- Navigation Links -->
-          <nav class="hidden md:flex space-x-8">
-            <NuxtLink 
-              to="/patient" 
-              class="flex items-center px-3 py-2 text-sm font-medium rounded-md"
-              :class="$route.path === '/patient' ? 'text-teal-700 bg-teal-50' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'"
+          <!-- Navigation Links with Scroll -->
+          <div class="hidden md:flex items-center space-x-2 flex-1 max-w-2xl mx-8">
+            <!-- Previous Button -->
+            <button 
+              @click="scrollNav(-200)"
+              class="p-1.5 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-md"
             >
-              <Icon name="lucide:home" class="w-4 h-4 mr-2" />
-              Dashboard
-            </NuxtLink>
+              <Icon name="lucide:chevron-left" class="w-5 h-5" />
+            </button>
             
-            <NuxtLink 
-              to="/patient/appointments" 
-              class="flex items-center px-3 py-2 text-sm font-medium rounded-md"
-              :class="$route.path.startsWith('/patient/appointments') ? 'text-teal-700 bg-teal-50' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'"
-            >
-              <Icon name="lucide:calendar" class="w-4 h-4 mr-2" />
-              Appointments
-            </NuxtLink>
+            <!-- Scrollable Nav Container -->
+            <div ref="navContainer" class="flex-1 overflow-x-auto scrollbar-hide scroll-smooth">
+              <nav class="flex space-x-2 whitespace-nowrap">
+                <NuxtLink 
+                  to="/patient" 
+                  class="flex items-center px-3 py-2 text-sm font-medium rounded-md"
+                  :class="$route.path === '/patient' ? 'text-teal-700 bg-teal-50' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'"
+                >
+                  <Icon name="lucide:home" class="w-4 h-4 mr-2" />
+                  Dashboard
+                </NuxtLink>
+                
+                <NuxtLink 
+                  to="/patient/appointments" 
+                  class="flex items-center px-3 py-2 text-sm font-medium rounded-md"
+                  :class="$route.path.startsWith('/patient/appointments') ? 'text-teal-700 bg-teal-50' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'"
+                >
+                  <Icon name="lucide:calendar" class="w-4 h-4 mr-2" />
+                  Appointments
+                </NuxtLink>
+                
+                <NuxtLink 
+                  to="/patient/medical-records" 
+                  class="flex items-center px-3 py-2 text-sm font-medium rounded-md"
+                  :class="$route.path.startsWith('/patient/medical-records') ? 'text-teal-700 bg-teal-50' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'"
+                >
+                  <Icon name="lucide:file-text" class="w-4 h-4 mr-2" />
+                  Medical Records
+                </NuxtLink>
+                
+                <NuxtLink 
+                  to="/patient/insurance" 
+                  class="flex items-center px-3 py-2 text-sm font-medium rounded-md"
+                  :class="$route.path.startsWith('/patient/insurance') ? 'text-teal-700 bg-teal-50' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'"
+                >
+                  <Icon name="lucide:shield-check" class="w-4 h-4 mr-2" />
+                  Insurance
+                </NuxtLink>
+                
+                <NuxtLink 
+                  to="/patient/billing" 
+                  class="flex items-center px-3 py-2 text-sm font-medium rounded-md"
+                  :class="$route.path.startsWith('/patient/billing') ? 'text-teal-700 bg-teal-50' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'"
+                >
+                  <Icon name="lucide:credit-card" class="w-4 h-4 mr-2" />
+                  Billing
+                </NuxtLink>
+              </nav>
+            </div>
             
-            <NuxtLink 
-              to="/patient/medical-records" 
-              class="flex items-center px-3 py-2 text-sm font-medium rounded-md"
-              :class="$route.path.startsWith('/patient/medical-records') ? 'text-teal-700 bg-teal-50' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'"
+            <!-- Next Button -->
+            <button 
+              @click="scrollNav(200)"
+              class="p-1.5 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-md"
             >
-              <Icon name="lucide:file-text" class="w-4 h-4 mr-2" />
-              Medical Records
-            </NuxtLink>
-            
-            <NuxtLink 
-              to="/patient/billing" 
-              class="flex items-center px-3 py-2 text-sm font-medium rounded-md"
-              :class="$route.path.startsWith('/patient/billing') ? 'text-teal-700 bg-teal-50' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'"
-            >
-              <Icon name="lucide:credit-card" class="w-4 h-4 mr-2" />
-              Billing
-            </NuxtLink>
-          </nav>
+              <Icon name="lucide:chevron-right" class="w-5 h-5" />
+            </button>
+          </div>
 
           <!-- User Menu -->
           <div class="flex items-center space-x-4">
@@ -141,6 +189,15 @@ const handleLogout = async () => {
           >
             <Icon name="lucide:file-text" class="w-4 h-4 mr-2" />
             Medical Records
+          </NuxtLink>
+          
+          <NuxtLink 
+            to="/patient/insurance" 
+            class="flex items-center px-3 py-2 text-sm font-medium rounded-md"
+            :class="$route.path.startsWith('/patient/insurance') ? 'text-teal-700 bg-teal-50' : 'text-gray-600'"
+          >
+            <Icon name="lucide:shield-check" class="w-4 h-4 mr-2" />
+            Insurance
           </NuxtLink>
           
           <NuxtLink 
