@@ -118,6 +118,21 @@ export type InpatientEncounterOrder = $Result.DefaultSelection<Prisma.$Inpatient
  * 
  */
 export type ParticularCatalogue = $Result.DefaultSelection<Prisma.$ParticularCataloguePayload>
+/**
+ * Model InsuranceClaim
+ * 
+ */
+export type InsuranceClaim = $Result.DefaultSelection<Prisma.$InsuranceClaimPayload>
+/**
+ * Model InsuranceDocument
+ * 
+ */
+export type InsuranceDocument = $Result.DefaultSelection<Prisma.$InsuranceDocumentPayload>
+/**
+ * Model InsuranceAccessToken
+ * 
+ */
+export type InsuranceAccessToken = $Result.DefaultSelection<Prisma.$InsuranceAccessTokenPayload>
 
 /**
  * Enums
@@ -406,6 +421,18 @@ export const ParticularType: {
 
 export type ParticularType = (typeof ParticularType)[keyof typeof ParticularType]
 
+
+export const InsuranceClaimStatus: {
+  PENDING: 'PENDING',
+  SUBMITTED: 'SUBMITTED',
+  UNDER_REVIEW: 'UNDER_REVIEW',
+  APPROVED: 'APPROVED',
+  DENIED: 'DENIED',
+  CANCELLED: 'CANCELLED'
+};
+
+export type InsuranceClaimStatus = (typeof InsuranceClaimStatus)[keyof typeof InsuranceClaimStatus]
+
 }
 
 export type UserRole = $Enums.UserRole
@@ -499,6 +526,10 @@ export const InpatientEncounterOrderStatus: typeof $Enums.InpatientEncounterOrde
 export type ParticularType = $Enums.ParticularType
 
 export const ParticularType: typeof $Enums.ParticularType
+
+export type InsuranceClaimStatus = $Enums.InsuranceClaimStatus
+
+export const InsuranceClaimStatus: typeof $Enums.InsuranceClaimStatus
 
 /**
  * ##  Prisma Client ʲˢ
@@ -827,6 +858,36 @@ export class PrismaClient<
     * ```
     */
   get particularCatalogue(): Prisma.ParticularCatalogueDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.insuranceClaim`: Exposes CRUD operations for the **InsuranceClaim** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more InsuranceClaims
+    * const insuranceClaims = await prisma.insuranceClaim.findMany()
+    * ```
+    */
+  get insuranceClaim(): Prisma.InsuranceClaimDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.insuranceDocument`: Exposes CRUD operations for the **InsuranceDocument** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more InsuranceDocuments
+    * const insuranceDocuments = await prisma.insuranceDocument.findMany()
+    * ```
+    */
+  get insuranceDocument(): Prisma.InsuranceDocumentDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.insuranceAccessToken`: Exposes CRUD operations for the **InsuranceAccessToken** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more InsuranceAccessTokens
+    * const insuranceAccessTokens = await prisma.insuranceAccessToken.findMany()
+    * ```
+    */
+  get insuranceAccessToken(): Prisma.InsuranceAccessTokenDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -1287,7 +1348,10 @@ export namespace Prisma {
     InpatientEncounter: 'InpatientEncounter',
     InpatientEncounterChart: 'InpatientEncounterChart',
     InpatientEncounterOrder: 'InpatientEncounterOrder',
-    ParticularCatalogue: 'ParticularCatalogue'
+    ParticularCatalogue: 'ParticularCatalogue',
+    InsuranceClaim: 'InsuranceClaim',
+    InsuranceDocument: 'InsuranceDocument',
+    InsuranceAccessToken: 'InsuranceAccessToken'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -1306,7 +1370,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "staffCredentials" | "patient" | "partner" | "refreshToken" | "passwordResetToken" | "appointment" | "staffSchedule" | "medicalService" | "pharmacySupplier" | "pharmacyBrand" | "pharmacyItemCategory" | "pharmacyItem" | "pharmacySale" | "pharmacySaleItem" | "pharmacyPayment" | "outpatientEncounter" | "inpatientEncounter" | "inpatientEncounterChart" | "inpatientEncounterOrder" | "particularCatalogue"
+      modelProps: "user" | "staffCredentials" | "patient" | "partner" | "refreshToken" | "passwordResetToken" | "appointment" | "staffSchedule" | "medicalService" | "pharmacySupplier" | "pharmacyBrand" | "pharmacyItemCategory" | "pharmacyItem" | "pharmacySale" | "pharmacySaleItem" | "pharmacyPayment" | "outpatientEncounter" | "inpatientEncounter" | "inpatientEncounterChart" | "inpatientEncounterOrder" | "particularCatalogue" | "insuranceClaim" | "insuranceDocument" | "insuranceAccessToken"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -2864,6 +2928,228 @@ export namespace Prisma {
           }
         }
       }
+      InsuranceClaim: {
+        payload: Prisma.$InsuranceClaimPayload<ExtArgs>
+        fields: Prisma.InsuranceClaimFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.InsuranceClaimFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InsuranceClaimPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.InsuranceClaimFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InsuranceClaimPayload>
+          }
+          findFirst: {
+            args: Prisma.InsuranceClaimFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InsuranceClaimPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.InsuranceClaimFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InsuranceClaimPayload>
+          }
+          findMany: {
+            args: Prisma.InsuranceClaimFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InsuranceClaimPayload>[]
+          }
+          create: {
+            args: Prisma.InsuranceClaimCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InsuranceClaimPayload>
+          }
+          createMany: {
+            args: Prisma.InsuranceClaimCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.InsuranceClaimCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InsuranceClaimPayload>[]
+          }
+          delete: {
+            args: Prisma.InsuranceClaimDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InsuranceClaimPayload>
+          }
+          update: {
+            args: Prisma.InsuranceClaimUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InsuranceClaimPayload>
+          }
+          deleteMany: {
+            args: Prisma.InsuranceClaimDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.InsuranceClaimUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.InsuranceClaimUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InsuranceClaimPayload>[]
+          }
+          upsert: {
+            args: Prisma.InsuranceClaimUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InsuranceClaimPayload>
+          }
+          aggregate: {
+            args: Prisma.InsuranceClaimAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateInsuranceClaim>
+          }
+          groupBy: {
+            args: Prisma.InsuranceClaimGroupByArgs<ExtArgs>
+            result: $Utils.Optional<InsuranceClaimGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.InsuranceClaimCountArgs<ExtArgs>
+            result: $Utils.Optional<InsuranceClaimCountAggregateOutputType> | number
+          }
+        }
+      }
+      InsuranceDocument: {
+        payload: Prisma.$InsuranceDocumentPayload<ExtArgs>
+        fields: Prisma.InsuranceDocumentFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.InsuranceDocumentFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InsuranceDocumentPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.InsuranceDocumentFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InsuranceDocumentPayload>
+          }
+          findFirst: {
+            args: Prisma.InsuranceDocumentFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InsuranceDocumentPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.InsuranceDocumentFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InsuranceDocumentPayload>
+          }
+          findMany: {
+            args: Prisma.InsuranceDocumentFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InsuranceDocumentPayload>[]
+          }
+          create: {
+            args: Prisma.InsuranceDocumentCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InsuranceDocumentPayload>
+          }
+          createMany: {
+            args: Prisma.InsuranceDocumentCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.InsuranceDocumentCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InsuranceDocumentPayload>[]
+          }
+          delete: {
+            args: Prisma.InsuranceDocumentDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InsuranceDocumentPayload>
+          }
+          update: {
+            args: Prisma.InsuranceDocumentUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InsuranceDocumentPayload>
+          }
+          deleteMany: {
+            args: Prisma.InsuranceDocumentDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.InsuranceDocumentUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.InsuranceDocumentUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InsuranceDocumentPayload>[]
+          }
+          upsert: {
+            args: Prisma.InsuranceDocumentUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InsuranceDocumentPayload>
+          }
+          aggregate: {
+            args: Prisma.InsuranceDocumentAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateInsuranceDocument>
+          }
+          groupBy: {
+            args: Prisma.InsuranceDocumentGroupByArgs<ExtArgs>
+            result: $Utils.Optional<InsuranceDocumentGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.InsuranceDocumentCountArgs<ExtArgs>
+            result: $Utils.Optional<InsuranceDocumentCountAggregateOutputType> | number
+          }
+        }
+      }
+      InsuranceAccessToken: {
+        payload: Prisma.$InsuranceAccessTokenPayload<ExtArgs>
+        fields: Prisma.InsuranceAccessTokenFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.InsuranceAccessTokenFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InsuranceAccessTokenPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.InsuranceAccessTokenFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InsuranceAccessTokenPayload>
+          }
+          findFirst: {
+            args: Prisma.InsuranceAccessTokenFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InsuranceAccessTokenPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.InsuranceAccessTokenFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InsuranceAccessTokenPayload>
+          }
+          findMany: {
+            args: Prisma.InsuranceAccessTokenFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InsuranceAccessTokenPayload>[]
+          }
+          create: {
+            args: Prisma.InsuranceAccessTokenCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InsuranceAccessTokenPayload>
+          }
+          createMany: {
+            args: Prisma.InsuranceAccessTokenCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.InsuranceAccessTokenCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InsuranceAccessTokenPayload>[]
+          }
+          delete: {
+            args: Prisma.InsuranceAccessTokenDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InsuranceAccessTokenPayload>
+          }
+          update: {
+            args: Prisma.InsuranceAccessTokenUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InsuranceAccessTokenPayload>
+          }
+          deleteMany: {
+            args: Prisma.InsuranceAccessTokenDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.InsuranceAccessTokenUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.InsuranceAccessTokenUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InsuranceAccessTokenPayload>[]
+          }
+          upsert: {
+            args: Prisma.InsuranceAccessTokenUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InsuranceAccessTokenPayload>
+          }
+          aggregate: {
+            args: Prisma.InsuranceAccessTokenAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateInsuranceAccessToken>
+          }
+          groupBy: {
+            args: Prisma.InsuranceAccessTokenGroupByArgs<ExtArgs>
+            result: $Utils.Optional<InsuranceAccessTokenGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.InsuranceAccessTokenCountArgs<ExtArgs>
+            result: $Utils.Optional<InsuranceAccessTokenCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -2981,6 +3267,9 @@ export namespace Prisma {
     inpatientEncounterChart?: InpatientEncounterChartOmit
     inpatientEncounterOrder?: InpatientEncounterOrderOmit
     particularCatalogue?: ParticularCatalogueOmit
+    insuranceClaim?: InsuranceClaimOmit
+    insuranceDocument?: InsuranceDocumentOmit
+    insuranceAccessToken?: InsuranceAccessTokenOmit
   }
 
   /* Types for Logging */
@@ -3121,11 +3410,13 @@ export namespace Prisma {
   export type PatientCountOutputType = {
     inpatientEncounters: number
     outpatientEncounters: number
+    insuranceClaims: number
   }
 
   export type PatientCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     inpatientEncounters?: boolean | PatientCountOutputTypeCountInpatientEncountersArgs
     outpatientEncounters?: boolean | PatientCountOutputTypeCountOutpatientEncountersArgs
+    insuranceClaims?: boolean | PatientCountOutputTypeCountInsuranceClaimsArgs
   }
 
   // Custom InputTypes
@@ -3151,6 +3442,13 @@ export namespace Prisma {
    */
   export type PatientCountOutputTypeCountOutpatientEncountersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: OutpatientEncounterWhereInput
+  }
+
+  /**
+   * PatientCountOutputType without action
+   */
+  export type PatientCountOutputTypeCountInsuranceClaimsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: InsuranceClaimWhereInput
   }
 
 
@@ -3386,6 +3684,46 @@ export namespace Prisma {
    */
   export type ParticularCatalogueCountOutputTypeCountOrdersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: InpatientEncounterOrderWhereInput
+  }
+
+
+  /**
+   * Count Type InsuranceClaimCountOutputType
+   */
+
+  export type InsuranceClaimCountOutputType = {
+    documents: number
+    accessTokens: number
+  }
+
+  export type InsuranceClaimCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    documents?: boolean | InsuranceClaimCountOutputTypeCountDocumentsArgs
+    accessTokens?: boolean | InsuranceClaimCountOutputTypeCountAccessTokensArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * InsuranceClaimCountOutputType without action
+   */
+  export type InsuranceClaimCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InsuranceClaimCountOutputType
+     */
+    select?: InsuranceClaimCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * InsuranceClaimCountOutputType without action
+   */
+  export type InsuranceClaimCountOutputTypeCountDocumentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: InsuranceDocumentWhereInput
+  }
+
+  /**
+   * InsuranceClaimCountOutputType without action
+   */
+  export type InsuranceClaimCountOutputTypeCountAccessTokensArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: InsuranceAccessTokenWhereInput
   }
 
 
@@ -6416,6 +6754,7 @@ export namespace Prisma {
     user?: boolean | UserDefaultArgs<ExtArgs>
     inpatientEncounters?: boolean | Patient$inpatientEncountersArgs<ExtArgs>
     outpatientEncounters?: boolean | Patient$outpatientEncountersArgs<ExtArgs>
+    insuranceClaims?: boolean | Patient$insuranceClaimsArgs<ExtArgs>
     _count?: boolean | PatientCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["patient"]>
 
@@ -6471,6 +6810,7 @@ export namespace Prisma {
     user?: boolean | UserDefaultArgs<ExtArgs>
     inpatientEncounters?: boolean | Patient$inpatientEncountersArgs<ExtArgs>
     outpatientEncounters?: boolean | Patient$outpatientEncountersArgs<ExtArgs>
+    insuranceClaims?: boolean | Patient$insuranceClaimsArgs<ExtArgs>
     _count?: boolean | PatientCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type PatientIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -6486,6 +6826,7 @@ export namespace Prisma {
       user: Prisma.$UserPayload<ExtArgs>
       inpatientEncounters: Prisma.$InpatientEncounterPayload<ExtArgs>[]
       outpatientEncounters: Prisma.$OutpatientEncounterPayload<ExtArgs>[]
+      insuranceClaims: Prisma.$InsuranceClaimPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -6897,6 +7238,7 @@ export namespace Prisma {
     user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     inpatientEncounters<T extends Patient$inpatientEncountersArgs<ExtArgs> = {}>(args?: Subset<T, Patient$inpatientEncountersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InpatientEncounterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     outpatientEncounters<T extends Patient$outpatientEncountersArgs<ExtArgs> = {}>(args?: Subset<T, Patient$outpatientEncountersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OutpatientEncounterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    insuranceClaims<T extends Patient$insuranceClaimsArgs<ExtArgs> = {}>(args?: Subset<T, Patient$insuranceClaimsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InsuranceClaimPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -7379,6 +7721,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: OutpatientEncounterScalarFieldEnum | OutpatientEncounterScalarFieldEnum[]
+  }
+
+  /**
+   * Patient.insuranceClaims
+   */
+  export type Patient$insuranceClaimsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InsuranceClaim
+     */
+    select?: InsuranceClaimSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InsuranceClaim
+     */
+    omit?: InsuranceClaimOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InsuranceClaimInclude<ExtArgs> | null
+    where?: InsuranceClaimWhereInput
+    orderBy?: InsuranceClaimOrderByWithRelationInput | InsuranceClaimOrderByWithRelationInput[]
+    cursor?: InsuranceClaimWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: InsuranceClaimScalarFieldEnum | InsuranceClaimScalarFieldEnum[]
   }
 
   /**
@@ -22374,6 +22740,7 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     patient?: boolean | PatientDefaultArgs<ExtArgs>
+    insuranceClaim?: boolean | OutpatientEncounter$insuranceClaimArgs<ExtArgs>
   }, ExtArgs["result"]["outpatientEncounter"]>
 
   export type OutpatientEncounterSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -22429,6 +22796,7 @@ export namespace Prisma {
   export type OutpatientEncounterOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "patientId" | "doctorId" | "date" | "time" | "chiefComplaint" | "doctorDiagnosis" | "type" | "consultationFee" | "paymentStatus" | "notes" | "createdAt" | "updatedAt", ExtArgs["result"]["outpatientEncounter"]>
   export type OutpatientEncounterInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     patient?: boolean | PatientDefaultArgs<ExtArgs>
+    insuranceClaim?: boolean | OutpatientEncounter$insuranceClaimArgs<ExtArgs>
   }
   export type OutpatientEncounterIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     patient?: boolean | PatientDefaultArgs<ExtArgs>
@@ -22441,6 +22809,7 @@ export namespace Prisma {
     name: "OutpatientEncounter"
     objects: {
       patient: Prisma.$PatientPayload<ExtArgs>
+      insuranceClaim: Prisma.$InsuranceClaimPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -22851,6 +23220,7 @@ export namespace Prisma {
   export interface Prisma__OutpatientEncounterClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     patient<T extends PatientDefaultArgs<ExtArgs> = {}>(args?: Subset<T, PatientDefaultArgs<ExtArgs>>): Prisma__PatientClient<$Result.GetResult<Prisma.$PatientPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    insuranceClaim<T extends OutpatientEncounter$insuranceClaimArgs<ExtArgs> = {}>(args?: Subset<T, OutpatientEncounter$insuranceClaimArgs<ExtArgs>>): Prisma__InsuranceClaimClient<$Result.GetResult<Prisma.$InsuranceClaimPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -23289,6 +23659,25 @@ export namespace Prisma {
   }
 
   /**
+   * OutpatientEncounter.insuranceClaim
+   */
+  export type OutpatientEncounter$insuranceClaimArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InsuranceClaim
+     */
+    select?: InsuranceClaimSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InsuranceClaim
+     */
+    omit?: InsuranceClaimOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InsuranceClaimInclude<ExtArgs> | null
+    where?: InsuranceClaimWhereInput
+  }
+
+  /**
    * OutpatientEncounter without action
    */
   export type OutpatientEncounterDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -23554,6 +23943,7 @@ export namespace Prisma {
     patient?: boolean | PatientDefaultArgs<ExtArgs>
     charts?: boolean | InpatientEncounter$chartsArgs<ExtArgs>
     orders?: boolean | InpatientEncounter$ordersArgs<ExtArgs>
+    insuranceClaim?: boolean | InpatientEncounter$insuranceClaimArgs<ExtArgs>
     _count?: boolean | InpatientEncounterCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["inpatientEncounter"]>
 
@@ -23618,6 +24008,7 @@ export namespace Prisma {
     patient?: boolean | PatientDefaultArgs<ExtArgs>
     charts?: boolean | InpatientEncounter$chartsArgs<ExtArgs>
     orders?: boolean | InpatientEncounter$ordersArgs<ExtArgs>
+    insuranceClaim?: boolean | InpatientEncounter$insuranceClaimArgs<ExtArgs>
     _count?: boolean | InpatientEncounterCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type InpatientEncounterIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -23633,6 +24024,7 @@ export namespace Prisma {
       patient: Prisma.$PatientPayload<ExtArgs>
       charts: Prisma.$InpatientEncounterChartPayload<ExtArgs>[]
       orders: Prisma.$InpatientEncounterOrderPayload<ExtArgs>[]
+      insuranceClaim: Prisma.$InsuranceClaimPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -24047,6 +24439,7 @@ export namespace Prisma {
     patient<T extends PatientDefaultArgs<ExtArgs> = {}>(args?: Subset<T, PatientDefaultArgs<ExtArgs>>): Prisma__PatientClient<$Result.GetResult<Prisma.$PatientPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     charts<T extends InpatientEncounter$chartsArgs<ExtArgs> = {}>(args?: Subset<T, InpatientEncounter$chartsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InpatientEncounterChartPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     orders<T extends InpatientEncounter$ordersArgs<ExtArgs> = {}>(args?: Subset<T, InpatientEncounter$ordersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InpatientEncounterOrderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    insuranceClaim<T extends InpatientEncounter$insuranceClaimArgs<ExtArgs> = {}>(args?: Subset<T, InpatientEncounter$insuranceClaimArgs<ExtArgs>>): Prisma__InsuranceClaimClient<$Result.GetResult<Prisma.$InsuranceClaimPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -24532,6 +24925,25 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: InpatientEncounterOrderScalarFieldEnum | InpatientEncounterOrderScalarFieldEnum[]
+  }
+
+  /**
+   * InpatientEncounter.insuranceClaim
+   */
+  export type InpatientEncounter$insuranceClaimArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InsuranceClaim
+     */
+    select?: InsuranceClaimSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InsuranceClaim
+     */
+    omit?: InsuranceClaimOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InsuranceClaimInclude<ExtArgs> | null
+    where?: InsuranceClaimWhereInput
   }
 
   /**
@@ -27965,6 +28377,3663 @@ export namespace Prisma {
 
 
   /**
+   * Model InsuranceClaim
+   */
+
+  export type AggregateInsuranceClaim = {
+    _count: InsuranceClaimCountAggregateOutputType | null
+    _avg: InsuranceClaimAvgAggregateOutputType | null
+    _sum: InsuranceClaimSumAggregateOutputType | null
+    _min: InsuranceClaimMinAggregateOutputType | null
+    _max: InsuranceClaimMaxAggregateOutputType | null
+  }
+
+  export type InsuranceClaimAvgAggregateOutputType = {
+    claimAmount: Decimal | null
+    approvedAmount: Decimal | null
+  }
+
+  export type InsuranceClaimSumAggregateOutputType = {
+    claimAmount: Decimal | null
+    approvedAmount: Decimal | null
+  }
+
+  export type InsuranceClaimMinAggregateOutputType = {
+    id: string | null
+    claimNumber: string | null
+    patientId: string | null
+    inpatientEncounterId: string | null
+    outpatientEncounterId: string | null
+    insuranceProvider: string | null
+    insuranceNumber: string | null
+    policyNumber: string | null
+    claimAmount: Decimal | null
+    approvedAmount: Decimal | null
+    denialReason: string | null
+    status: $Enums.InsuranceClaimStatus | null
+    submittedAt: Date | null
+    reviewedAt: Date | null
+    billingStaffNotes: string | null
+    insuranceNotes: string | null
+    createdBy: string | null
+    reviewedBy: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type InsuranceClaimMaxAggregateOutputType = {
+    id: string | null
+    claimNumber: string | null
+    patientId: string | null
+    inpatientEncounterId: string | null
+    outpatientEncounterId: string | null
+    insuranceProvider: string | null
+    insuranceNumber: string | null
+    policyNumber: string | null
+    claimAmount: Decimal | null
+    approvedAmount: Decimal | null
+    denialReason: string | null
+    status: $Enums.InsuranceClaimStatus | null
+    submittedAt: Date | null
+    reviewedAt: Date | null
+    billingStaffNotes: string | null
+    insuranceNotes: string | null
+    createdBy: string | null
+    reviewedBy: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type InsuranceClaimCountAggregateOutputType = {
+    id: number
+    claimNumber: number
+    patientId: number
+    inpatientEncounterId: number
+    outpatientEncounterId: number
+    insuranceProvider: number
+    insuranceNumber: number
+    policyNumber: number
+    claimAmount: number
+    approvedAmount: number
+    denialReason: number
+    status: number
+    submittedAt: number
+    reviewedAt: number
+    billingStaffNotes: number
+    insuranceNotes: number
+    createdBy: number
+    reviewedBy: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type InsuranceClaimAvgAggregateInputType = {
+    claimAmount?: true
+    approvedAmount?: true
+  }
+
+  export type InsuranceClaimSumAggregateInputType = {
+    claimAmount?: true
+    approvedAmount?: true
+  }
+
+  export type InsuranceClaimMinAggregateInputType = {
+    id?: true
+    claimNumber?: true
+    patientId?: true
+    inpatientEncounterId?: true
+    outpatientEncounterId?: true
+    insuranceProvider?: true
+    insuranceNumber?: true
+    policyNumber?: true
+    claimAmount?: true
+    approvedAmount?: true
+    denialReason?: true
+    status?: true
+    submittedAt?: true
+    reviewedAt?: true
+    billingStaffNotes?: true
+    insuranceNotes?: true
+    createdBy?: true
+    reviewedBy?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type InsuranceClaimMaxAggregateInputType = {
+    id?: true
+    claimNumber?: true
+    patientId?: true
+    inpatientEncounterId?: true
+    outpatientEncounterId?: true
+    insuranceProvider?: true
+    insuranceNumber?: true
+    policyNumber?: true
+    claimAmount?: true
+    approvedAmount?: true
+    denialReason?: true
+    status?: true
+    submittedAt?: true
+    reviewedAt?: true
+    billingStaffNotes?: true
+    insuranceNotes?: true
+    createdBy?: true
+    reviewedBy?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type InsuranceClaimCountAggregateInputType = {
+    id?: true
+    claimNumber?: true
+    patientId?: true
+    inpatientEncounterId?: true
+    outpatientEncounterId?: true
+    insuranceProvider?: true
+    insuranceNumber?: true
+    policyNumber?: true
+    claimAmount?: true
+    approvedAmount?: true
+    denialReason?: true
+    status?: true
+    submittedAt?: true
+    reviewedAt?: true
+    billingStaffNotes?: true
+    insuranceNotes?: true
+    createdBy?: true
+    reviewedBy?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type InsuranceClaimAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which InsuranceClaim to aggregate.
+     */
+    where?: InsuranceClaimWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of InsuranceClaims to fetch.
+     */
+    orderBy?: InsuranceClaimOrderByWithRelationInput | InsuranceClaimOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: InsuranceClaimWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` InsuranceClaims from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` InsuranceClaims.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned InsuranceClaims
+    **/
+    _count?: true | InsuranceClaimCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: InsuranceClaimAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: InsuranceClaimSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: InsuranceClaimMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: InsuranceClaimMaxAggregateInputType
+  }
+
+  export type GetInsuranceClaimAggregateType<T extends InsuranceClaimAggregateArgs> = {
+        [P in keyof T & keyof AggregateInsuranceClaim]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateInsuranceClaim[P]>
+      : GetScalarType<T[P], AggregateInsuranceClaim[P]>
+  }
+
+
+
+
+  export type InsuranceClaimGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: InsuranceClaimWhereInput
+    orderBy?: InsuranceClaimOrderByWithAggregationInput | InsuranceClaimOrderByWithAggregationInput[]
+    by: InsuranceClaimScalarFieldEnum[] | InsuranceClaimScalarFieldEnum
+    having?: InsuranceClaimScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: InsuranceClaimCountAggregateInputType | true
+    _avg?: InsuranceClaimAvgAggregateInputType
+    _sum?: InsuranceClaimSumAggregateInputType
+    _min?: InsuranceClaimMinAggregateInputType
+    _max?: InsuranceClaimMaxAggregateInputType
+  }
+
+  export type InsuranceClaimGroupByOutputType = {
+    id: string
+    claimNumber: string
+    patientId: string
+    inpatientEncounterId: string | null
+    outpatientEncounterId: string | null
+    insuranceProvider: string
+    insuranceNumber: string | null
+    policyNumber: string | null
+    claimAmount: Decimal
+    approvedAmount: Decimal | null
+    denialReason: string | null
+    status: $Enums.InsuranceClaimStatus
+    submittedAt: Date | null
+    reviewedAt: Date | null
+    billingStaffNotes: string | null
+    insuranceNotes: string | null
+    createdBy: string
+    reviewedBy: string | null
+    createdAt: Date
+    updatedAt: Date
+    _count: InsuranceClaimCountAggregateOutputType | null
+    _avg: InsuranceClaimAvgAggregateOutputType | null
+    _sum: InsuranceClaimSumAggregateOutputType | null
+    _min: InsuranceClaimMinAggregateOutputType | null
+    _max: InsuranceClaimMaxAggregateOutputType | null
+  }
+
+  type GetInsuranceClaimGroupByPayload<T extends InsuranceClaimGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<InsuranceClaimGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof InsuranceClaimGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], InsuranceClaimGroupByOutputType[P]>
+            : GetScalarType<T[P], InsuranceClaimGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type InsuranceClaimSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    claimNumber?: boolean
+    patientId?: boolean
+    inpatientEncounterId?: boolean
+    outpatientEncounterId?: boolean
+    insuranceProvider?: boolean
+    insuranceNumber?: boolean
+    policyNumber?: boolean
+    claimAmount?: boolean
+    approvedAmount?: boolean
+    denialReason?: boolean
+    status?: boolean
+    submittedAt?: boolean
+    reviewedAt?: boolean
+    billingStaffNotes?: boolean
+    insuranceNotes?: boolean
+    createdBy?: boolean
+    reviewedBy?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    patient?: boolean | PatientDefaultArgs<ExtArgs>
+    inpatientEncounter?: boolean | InsuranceClaim$inpatientEncounterArgs<ExtArgs>
+    outpatientEncounter?: boolean | InsuranceClaim$outpatientEncounterArgs<ExtArgs>
+    documents?: boolean | InsuranceClaim$documentsArgs<ExtArgs>
+    accessTokens?: boolean | InsuranceClaim$accessTokensArgs<ExtArgs>
+    _count?: boolean | InsuranceClaimCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["insuranceClaim"]>
+
+  export type InsuranceClaimSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    claimNumber?: boolean
+    patientId?: boolean
+    inpatientEncounterId?: boolean
+    outpatientEncounterId?: boolean
+    insuranceProvider?: boolean
+    insuranceNumber?: boolean
+    policyNumber?: boolean
+    claimAmount?: boolean
+    approvedAmount?: boolean
+    denialReason?: boolean
+    status?: boolean
+    submittedAt?: boolean
+    reviewedAt?: boolean
+    billingStaffNotes?: boolean
+    insuranceNotes?: boolean
+    createdBy?: boolean
+    reviewedBy?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    patient?: boolean | PatientDefaultArgs<ExtArgs>
+    inpatientEncounter?: boolean | InsuranceClaim$inpatientEncounterArgs<ExtArgs>
+    outpatientEncounter?: boolean | InsuranceClaim$outpatientEncounterArgs<ExtArgs>
+  }, ExtArgs["result"]["insuranceClaim"]>
+
+  export type InsuranceClaimSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    claimNumber?: boolean
+    patientId?: boolean
+    inpatientEncounterId?: boolean
+    outpatientEncounterId?: boolean
+    insuranceProvider?: boolean
+    insuranceNumber?: boolean
+    policyNumber?: boolean
+    claimAmount?: boolean
+    approvedAmount?: boolean
+    denialReason?: boolean
+    status?: boolean
+    submittedAt?: boolean
+    reviewedAt?: boolean
+    billingStaffNotes?: boolean
+    insuranceNotes?: boolean
+    createdBy?: boolean
+    reviewedBy?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    patient?: boolean | PatientDefaultArgs<ExtArgs>
+    inpatientEncounter?: boolean | InsuranceClaim$inpatientEncounterArgs<ExtArgs>
+    outpatientEncounter?: boolean | InsuranceClaim$outpatientEncounterArgs<ExtArgs>
+  }, ExtArgs["result"]["insuranceClaim"]>
+
+  export type InsuranceClaimSelectScalar = {
+    id?: boolean
+    claimNumber?: boolean
+    patientId?: boolean
+    inpatientEncounterId?: boolean
+    outpatientEncounterId?: boolean
+    insuranceProvider?: boolean
+    insuranceNumber?: boolean
+    policyNumber?: boolean
+    claimAmount?: boolean
+    approvedAmount?: boolean
+    denialReason?: boolean
+    status?: boolean
+    submittedAt?: boolean
+    reviewedAt?: boolean
+    billingStaffNotes?: boolean
+    insuranceNotes?: boolean
+    createdBy?: boolean
+    reviewedBy?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type InsuranceClaimOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "claimNumber" | "patientId" | "inpatientEncounterId" | "outpatientEncounterId" | "insuranceProvider" | "insuranceNumber" | "policyNumber" | "claimAmount" | "approvedAmount" | "denialReason" | "status" | "submittedAt" | "reviewedAt" | "billingStaffNotes" | "insuranceNotes" | "createdBy" | "reviewedBy" | "createdAt" | "updatedAt", ExtArgs["result"]["insuranceClaim"]>
+  export type InsuranceClaimInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    patient?: boolean | PatientDefaultArgs<ExtArgs>
+    inpatientEncounter?: boolean | InsuranceClaim$inpatientEncounterArgs<ExtArgs>
+    outpatientEncounter?: boolean | InsuranceClaim$outpatientEncounterArgs<ExtArgs>
+    documents?: boolean | InsuranceClaim$documentsArgs<ExtArgs>
+    accessTokens?: boolean | InsuranceClaim$accessTokensArgs<ExtArgs>
+    _count?: boolean | InsuranceClaimCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type InsuranceClaimIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    patient?: boolean | PatientDefaultArgs<ExtArgs>
+    inpatientEncounter?: boolean | InsuranceClaim$inpatientEncounterArgs<ExtArgs>
+    outpatientEncounter?: boolean | InsuranceClaim$outpatientEncounterArgs<ExtArgs>
+  }
+  export type InsuranceClaimIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    patient?: boolean | PatientDefaultArgs<ExtArgs>
+    inpatientEncounter?: boolean | InsuranceClaim$inpatientEncounterArgs<ExtArgs>
+    outpatientEncounter?: boolean | InsuranceClaim$outpatientEncounterArgs<ExtArgs>
+  }
+
+  export type $InsuranceClaimPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "InsuranceClaim"
+    objects: {
+      patient: Prisma.$PatientPayload<ExtArgs>
+      inpatientEncounter: Prisma.$InpatientEncounterPayload<ExtArgs> | null
+      outpatientEncounter: Prisma.$OutpatientEncounterPayload<ExtArgs> | null
+      documents: Prisma.$InsuranceDocumentPayload<ExtArgs>[]
+      accessTokens: Prisma.$InsuranceAccessTokenPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      claimNumber: string
+      patientId: string
+      inpatientEncounterId: string | null
+      outpatientEncounterId: string | null
+      insuranceProvider: string
+      insuranceNumber: string | null
+      policyNumber: string | null
+      claimAmount: Prisma.Decimal
+      approvedAmount: Prisma.Decimal | null
+      denialReason: string | null
+      status: $Enums.InsuranceClaimStatus
+      submittedAt: Date | null
+      reviewedAt: Date | null
+      billingStaffNotes: string | null
+      insuranceNotes: string | null
+      createdBy: string
+      reviewedBy: string | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["insuranceClaim"]>
+    composites: {}
+  }
+
+  type InsuranceClaimGetPayload<S extends boolean | null | undefined | InsuranceClaimDefaultArgs> = $Result.GetResult<Prisma.$InsuranceClaimPayload, S>
+
+  type InsuranceClaimCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<InsuranceClaimFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: InsuranceClaimCountAggregateInputType | true
+    }
+
+  export interface InsuranceClaimDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['InsuranceClaim'], meta: { name: 'InsuranceClaim' } }
+    /**
+     * Find zero or one InsuranceClaim that matches the filter.
+     * @param {InsuranceClaimFindUniqueArgs} args - Arguments to find a InsuranceClaim
+     * @example
+     * // Get one InsuranceClaim
+     * const insuranceClaim = await prisma.insuranceClaim.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends InsuranceClaimFindUniqueArgs>(args: SelectSubset<T, InsuranceClaimFindUniqueArgs<ExtArgs>>): Prisma__InsuranceClaimClient<$Result.GetResult<Prisma.$InsuranceClaimPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one InsuranceClaim that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {InsuranceClaimFindUniqueOrThrowArgs} args - Arguments to find a InsuranceClaim
+     * @example
+     * // Get one InsuranceClaim
+     * const insuranceClaim = await prisma.insuranceClaim.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends InsuranceClaimFindUniqueOrThrowArgs>(args: SelectSubset<T, InsuranceClaimFindUniqueOrThrowArgs<ExtArgs>>): Prisma__InsuranceClaimClient<$Result.GetResult<Prisma.$InsuranceClaimPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first InsuranceClaim that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InsuranceClaimFindFirstArgs} args - Arguments to find a InsuranceClaim
+     * @example
+     * // Get one InsuranceClaim
+     * const insuranceClaim = await prisma.insuranceClaim.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends InsuranceClaimFindFirstArgs>(args?: SelectSubset<T, InsuranceClaimFindFirstArgs<ExtArgs>>): Prisma__InsuranceClaimClient<$Result.GetResult<Prisma.$InsuranceClaimPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first InsuranceClaim that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InsuranceClaimFindFirstOrThrowArgs} args - Arguments to find a InsuranceClaim
+     * @example
+     * // Get one InsuranceClaim
+     * const insuranceClaim = await prisma.insuranceClaim.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends InsuranceClaimFindFirstOrThrowArgs>(args?: SelectSubset<T, InsuranceClaimFindFirstOrThrowArgs<ExtArgs>>): Prisma__InsuranceClaimClient<$Result.GetResult<Prisma.$InsuranceClaimPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more InsuranceClaims that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InsuranceClaimFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all InsuranceClaims
+     * const insuranceClaims = await prisma.insuranceClaim.findMany()
+     * 
+     * // Get first 10 InsuranceClaims
+     * const insuranceClaims = await prisma.insuranceClaim.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const insuranceClaimWithIdOnly = await prisma.insuranceClaim.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends InsuranceClaimFindManyArgs>(args?: SelectSubset<T, InsuranceClaimFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InsuranceClaimPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a InsuranceClaim.
+     * @param {InsuranceClaimCreateArgs} args - Arguments to create a InsuranceClaim.
+     * @example
+     * // Create one InsuranceClaim
+     * const InsuranceClaim = await prisma.insuranceClaim.create({
+     *   data: {
+     *     // ... data to create a InsuranceClaim
+     *   }
+     * })
+     * 
+     */
+    create<T extends InsuranceClaimCreateArgs>(args: SelectSubset<T, InsuranceClaimCreateArgs<ExtArgs>>): Prisma__InsuranceClaimClient<$Result.GetResult<Prisma.$InsuranceClaimPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many InsuranceClaims.
+     * @param {InsuranceClaimCreateManyArgs} args - Arguments to create many InsuranceClaims.
+     * @example
+     * // Create many InsuranceClaims
+     * const insuranceClaim = await prisma.insuranceClaim.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends InsuranceClaimCreateManyArgs>(args?: SelectSubset<T, InsuranceClaimCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many InsuranceClaims and returns the data saved in the database.
+     * @param {InsuranceClaimCreateManyAndReturnArgs} args - Arguments to create many InsuranceClaims.
+     * @example
+     * // Create many InsuranceClaims
+     * const insuranceClaim = await prisma.insuranceClaim.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many InsuranceClaims and only return the `id`
+     * const insuranceClaimWithIdOnly = await prisma.insuranceClaim.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends InsuranceClaimCreateManyAndReturnArgs>(args?: SelectSubset<T, InsuranceClaimCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InsuranceClaimPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a InsuranceClaim.
+     * @param {InsuranceClaimDeleteArgs} args - Arguments to delete one InsuranceClaim.
+     * @example
+     * // Delete one InsuranceClaim
+     * const InsuranceClaim = await prisma.insuranceClaim.delete({
+     *   where: {
+     *     // ... filter to delete one InsuranceClaim
+     *   }
+     * })
+     * 
+     */
+    delete<T extends InsuranceClaimDeleteArgs>(args: SelectSubset<T, InsuranceClaimDeleteArgs<ExtArgs>>): Prisma__InsuranceClaimClient<$Result.GetResult<Prisma.$InsuranceClaimPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one InsuranceClaim.
+     * @param {InsuranceClaimUpdateArgs} args - Arguments to update one InsuranceClaim.
+     * @example
+     * // Update one InsuranceClaim
+     * const insuranceClaim = await prisma.insuranceClaim.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends InsuranceClaimUpdateArgs>(args: SelectSubset<T, InsuranceClaimUpdateArgs<ExtArgs>>): Prisma__InsuranceClaimClient<$Result.GetResult<Prisma.$InsuranceClaimPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more InsuranceClaims.
+     * @param {InsuranceClaimDeleteManyArgs} args - Arguments to filter InsuranceClaims to delete.
+     * @example
+     * // Delete a few InsuranceClaims
+     * const { count } = await prisma.insuranceClaim.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends InsuranceClaimDeleteManyArgs>(args?: SelectSubset<T, InsuranceClaimDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more InsuranceClaims.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InsuranceClaimUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many InsuranceClaims
+     * const insuranceClaim = await prisma.insuranceClaim.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends InsuranceClaimUpdateManyArgs>(args: SelectSubset<T, InsuranceClaimUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more InsuranceClaims and returns the data updated in the database.
+     * @param {InsuranceClaimUpdateManyAndReturnArgs} args - Arguments to update many InsuranceClaims.
+     * @example
+     * // Update many InsuranceClaims
+     * const insuranceClaim = await prisma.insuranceClaim.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more InsuranceClaims and only return the `id`
+     * const insuranceClaimWithIdOnly = await prisma.insuranceClaim.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends InsuranceClaimUpdateManyAndReturnArgs>(args: SelectSubset<T, InsuranceClaimUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InsuranceClaimPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one InsuranceClaim.
+     * @param {InsuranceClaimUpsertArgs} args - Arguments to update or create a InsuranceClaim.
+     * @example
+     * // Update or create a InsuranceClaim
+     * const insuranceClaim = await prisma.insuranceClaim.upsert({
+     *   create: {
+     *     // ... data to create a InsuranceClaim
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the InsuranceClaim we want to update
+     *   }
+     * })
+     */
+    upsert<T extends InsuranceClaimUpsertArgs>(args: SelectSubset<T, InsuranceClaimUpsertArgs<ExtArgs>>): Prisma__InsuranceClaimClient<$Result.GetResult<Prisma.$InsuranceClaimPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of InsuranceClaims.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InsuranceClaimCountArgs} args - Arguments to filter InsuranceClaims to count.
+     * @example
+     * // Count the number of InsuranceClaims
+     * const count = await prisma.insuranceClaim.count({
+     *   where: {
+     *     // ... the filter for the InsuranceClaims we want to count
+     *   }
+     * })
+    **/
+    count<T extends InsuranceClaimCountArgs>(
+      args?: Subset<T, InsuranceClaimCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], InsuranceClaimCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a InsuranceClaim.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InsuranceClaimAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends InsuranceClaimAggregateArgs>(args: Subset<T, InsuranceClaimAggregateArgs>): Prisma.PrismaPromise<GetInsuranceClaimAggregateType<T>>
+
+    /**
+     * Group by InsuranceClaim.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InsuranceClaimGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends InsuranceClaimGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: InsuranceClaimGroupByArgs['orderBy'] }
+        : { orderBy?: InsuranceClaimGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, InsuranceClaimGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetInsuranceClaimGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the InsuranceClaim model
+   */
+  readonly fields: InsuranceClaimFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for InsuranceClaim.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__InsuranceClaimClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    patient<T extends PatientDefaultArgs<ExtArgs> = {}>(args?: Subset<T, PatientDefaultArgs<ExtArgs>>): Prisma__PatientClient<$Result.GetResult<Prisma.$PatientPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    inpatientEncounter<T extends InsuranceClaim$inpatientEncounterArgs<ExtArgs> = {}>(args?: Subset<T, InsuranceClaim$inpatientEncounterArgs<ExtArgs>>): Prisma__InpatientEncounterClient<$Result.GetResult<Prisma.$InpatientEncounterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    outpatientEncounter<T extends InsuranceClaim$outpatientEncounterArgs<ExtArgs> = {}>(args?: Subset<T, InsuranceClaim$outpatientEncounterArgs<ExtArgs>>): Prisma__OutpatientEncounterClient<$Result.GetResult<Prisma.$OutpatientEncounterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    documents<T extends InsuranceClaim$documentsArgs<ExtArgs> = {}>(args?: Subset<T, InsuranceClaim$documentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InsuranceDocumentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    accessTokens<T extends InsuranceClaim$accessTokensArgs<ExtArgs> = {}>(args?: Subset<T, InsuranceClaim$accessTokensArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InsuranceAccessTokenPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the InsuranceClaim model
+   */
+  interface InsuranceClaimFieldRefs {
+    readonly id: FieldRef<"InsuranceClaim", 'String'>
+    readonly claimNumber: FieldRef<"InsuranceClaim", 'String'>
+    readonly patientId: FieldRef<"InsuranceClaim", 'String'>
+    readonly inpatientEncounterId: FieldRef<"InsuranceClaim", 'String'>
+    readonly outpatientEncounterId: FieldRef<"InsuranceClaim", 'String'>
+    readonly insuranceProvider: FieldRef<"InsuranceClaim", 'String'>
+    readonly insuranceNumber: FieldRef<"InsuranceClaim", 'String'>
+    readonly policyNumber: FieldRef<"InsuranceClaim", 'String'>
+    readonly claimAmount: FieldRef<"InsuranceClaim", 'Decimal'>
+    readonly approvedAmount: FieldRef<"InsuranceClaim", 'Decimal'>
+    readonly denialReason: FieldRef<"InsuranceClaim", 'String'>
+    readonly status: FieldRef<"InsuranceClaim", 'InsuranceClaimStatus'>
+    readonly submittedAt: FieldRef<"InsuranceClaim", 'DateTime'>
+    readonly reviewedAt: FieldRef<"InsuranceClaim", 'DateTime'>
+    readonly billingStaffNotes: FieldRef<"InsuranceClaim", 'String'>
+    readonly insuranceNotes: FieldRef<"InsuranceClaim", 'String'>
+    readonly createdBy: FieldRef<"InsuranceClaim", 'String'>
+    readonly reviewedBy: FieldRef<"InsuranceClaim", 'String'>
+    readonly createdAt: FieldRef<"InsuranceClaim", 'DateTime'>
+    readonly updatedAt: FieldRef<"InsuranceClaim", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * InsuranceClaim findUnique
+   */
+  export type InsuranceClaimFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InsuranceClaim
+     */
+    select?: InsuranceClaimSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InsuranceClaim
+     */
+    omit?: InsuranceClaimOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InsuranceClaimInclude<ExtArgs> | null
+    /**
+     * Filter, which InsuranceClaim to fetch.
+     */
+    where: InsuranceClaimWhereUniqueInput
+  }
+
+  /**
+   * InsuranceClaim findUniqueOrThrow
+   */
+  export type InsuranceClaimFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InsuranceClaim
+     */
+    select?: InsuranceClaimSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InsuranceClaim
+     */
+    omit?: InsuranceClaimOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InsuranceClaimInclude<ExtArgs> | null
+    /**
+     * Filter, which InsuranceClaim to fetch.
+     */
+    where: InsuranceClaimWhereUniqueInput
+  }
+
+  /**
+   * InsuranceClaim findFirst
+   */
+  export type InsuranceClaimFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InsuranceClaim
+     */
+    select?: InsuranceClaimSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InsuranceClaim
+     */
+    omit?: InsuranceClaimOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InsuranceClaimInclude<ExtArgs> | null
+    /**
+     * Filter, which InsuranceClaim to fetch.
+     */
+    where?: InsuranceClaimWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of InsuranceClaims to fetch.
+     */
+    orderBy?: InsuranceClaimOrderByWithRelationInput | InsuranceClaimOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for InsuranceClaims.
+     */
+    cursor?: InsuranceClaimWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` InsuranceClaims from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` InsuranceClaims.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of InsuranceClaims.
+     */
+    distinct?: InsuranceClaimScalarFieldEnum | InsuranceClaimScalarFieldEnum[]
+  }
+
+  /**
+   * InsuranceClaim findFirstOrThrow
+   */
+  export type InsuranceClaimFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InsuranceClaim
+     */
+    select?: InsuranceClaimSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InsuranceClaim
+     */
+    omit?: InsuranceClaimOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InsuranceClaimInclude<ExtArgs> | null
+    /**
+     * Filter, which InsuranceClaim to fetch.
+     */
+    where?: InsuranceClaimWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of InsuranceClaims to fetch.
+     */
+    orderBy?: InsuranceClaimOrderByWithRelationInput | InsuranceClaimOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for InsuranceClaims.
+     */
+    cursor?: InsuranceClaimWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` InsuranceClaims from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` InsuranceClaims.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of InsuranceClaims.
+     */
+    distinct?: InsuranceClaimScalarFieldEnum | InsuranceClaimScalarFieldEnum[]
+  }
+
+  /**
+   * InsuranceClaim findMany
+   */
+  export type InsuranceClaimFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InsuranceClaim
+     */
+    select?: InsuranceClaimSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InsuranceClaim
+     */
+    omit?: InsuranceClaimOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InsuranceClaimInclude<ExtArgs> | null
+    /**
+     * Filter, which InsuranceClaims to fetch.
+     */
+    where?: InsuranceClaimWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of InsuranceClaims to fetch.
+     */
+    orderBy?: InsuranceClaimOrderByWithRelationInput | InsuranceClaimOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing InsuranceClaims.
+     */
+    cursor?: InsuranceClaimWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` InsuranceClaims from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` InsuranceClaims.
+     */
+    skip?: number
+    distinct?: InsuranceClaimScalarFieldEnum | InsuranceClaimScalarFieldEnum[]
+  }
+
+  /**
+   * InsuranceClaim create
+   */
+  export type InsuranceClaimCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InsuranceClaim
+     */
+    select?: InsuranceClaimSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InsuranceClaim
+     */
+    omit?: InsuranceClaimOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InsuranceClaimInclude<ExtArgs> | null
+    /**
+     * The data needed to create a InsuranceClaim.
+     */
+    data: XOR<InsuranceClaimCreateInput, InsuranceClaimUncheckedCreateInput>
+  }
+
+  /**
+   * InsuranceClaim createMany
+   */
+  export type InsuranceClaimCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many InsuranceClaims.
+     */
+    data: InsuranceClaimCreateManyInput | InsuranceClaimCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * InsuranceClaim createManyAndReturn
+   */
+  export type InsuranceClaimCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InsuranceClaim
+     */
+    select?: InsuranceClaimSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the InsuranceClaim
+     */
+    omit?: InsuranceClaimOmit<ExtArgs> | null
+    /**
+     * The data used to create many InsuranceClaims.
+     */
+    data: InsuranceClaimCreateManyInput | InsuranceClaimCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InsuranceClaimIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * InsuranceClaim update
+   */
+  export type InsuranceClaimUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InsuranceClaim
+     */
+    select?: InsuranceClaimSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InsuranceClaim
+     */
+    omit?: InsuranceClaimOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InsuranceClaimInclude<ExtArgs> | null
+    /**
+     * The data needed to update a InsuranceClaim.
+     */
+    data: XOR<InsuranceClaimUpdateInput, InsuranceClaimUncheckedUpdateInput>
+    /**
+     * Choose, which InsuranceClaim to update.
+     */
+    where: InsuranceClaimWhereUniqueInput
+  }
+
+  /**
+   * InsuranceClaim updateMany
+   */
+  export type InsuranceClaimUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update InsuranceClaims.
+     */
+    data: XOR<InsuranceClaimUpdateManyMutationInput, InsuranceClaimUncheckedUpdateManyInput>
+    /**
+     * Filter which InsuranceClaims to update
+     */
+    where?: InsuranceClaimWhereInput
+    /**
+     * Limit how many InsuranceClaims to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * InsuranceClaim updateManyAndReturn
+   */
+  export type InsuranceClaimUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InsuranceClaim
+     */
+    select?: InsuranceClaimSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the InsuranceClaim
+     */
+    omit?: InsuranceClaimOmit<ExtArgs> | null
+    /**
+     * The data used to update InsuranceClaims.
+     */
+    data: XOR<InsuranceClaimUpdateManyMutationInput, InsuranceClaimUncheckedUpdateManyInput>
+    /**
+     * Filter which InsuranceClaims to update
+     */
+    where?: InsuranceClaimWhereInput
+    /**
+     * Limit how many InsuranceClaims to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InsuranceClaimIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * InsuranceClaim upsert
+   */
+  export type InsuranceClaimUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InsuranceClaim
+     */
+    select?: InsuranceClaimSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InsuranceClaim
+     */
+    omit?: InsuranceClaimOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InsuranceClaimInclude<ExtArgs> | null
+    /**
+     * The filter to search for the InsuranceClaim to update in case it exists.
+     */
+    where: InsuranceClaimWhereUniqueInput
+    /**
+     * In case the InsuranceClaim found by the `where` argument doesn't exist, create a new InsuranceClaim with this data.
+     */
+    create: XOR<InsuranceClaimCreateInput, InsuranceClaimUncheckedCreateInput>
+    /**
+     * In case the InsuranceClaim was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<InsuranceClaimUpdateInput, InsuranceClaimUncheckedUpdateInput>
+  }
+
+  /**
+   * InsuranceClaim delete
+   */
+  export type InsuranceClaimDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InsuranceClaim
+     */
+    select?: InsuranceClaimSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InsuranceClaim
+     */
+    omit?: InsuranceClaimOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InsuranceClaimInclude<ExtArgs> | null
+    /**
+     * Filter which InsuranceClaim to delete.
+     */
+    where: InsuranceClaimWhereUniqueInput
+  }
+
+  /**
+   * InsuranceClaim deleteMany
+   */
+  export type InsuranceClaimDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which InsuranceClaims to delete
+     */
+    where?: InsuranceClaimWhereInput
+    /**
+     * Limit how many InsuranceClaims to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * InsuranceClaim.inpatientEncounter
+   */
+  export type InsuranceClaim$inpatientEncounterArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InpatientEncounter
+     */
+    select?: InpatientEncounterSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InpatientEncounter
+     */
+    omit?: InpatientEncounterOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InpatientEncounterInclude<ExtArgs> | null
+    where?: InpatientEncounterWhereInput
+  }
+
+  /**
+   * InsuranceClaim.outpatientEncounter
+   */
+  export type InsuranceClaim$outpatientEncounterArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OutpatientEncounter
+     */
+    select?: OutpatientEncounterSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OutpatientEncounter
+     */
+    omit?: OutpatientEncounterOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OutpatientEncounterInclude<ExtArgs> | null
+    where?: OutpatientEncounterWhereInput
+  }
+
+  /**
+   * InsuranceClaim.documents
+   */
+  export type InsuranceClaim$documentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InsuranceDocument
+     */
+    select?: InsuranceDocumentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InsuranceDocument
+     */
+    omit?: InsuranceDocumentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InsuranceDocumentInclude<ExtArgs> | null
+    where?: InsuranceDocumentWhereInput
+    orderBy?: InsuranceDocumentOrderByWithRelationInput | InsuranceDocumentOrderByWithRelationInput[]
+    cursor?: InsuranceDocumentWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: InsuranceDocumentScalarFieldEnum | InsuranceDocumentScalarFieldEnum[]
+  }
+
+  /**
+   * InsuranceClaim.accessTokens
+   */
+  export type InsuranceClaim$accessTokensArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InsuranceAccessToken
+     */
+    select?: InsuranceAccessTokenSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InsuranceAccessToken
+     */
+    omit?: InsuranceAccessTokenOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InsuranceAccessTokenInclude<ExtArgs> | null
+    where?: InsuranceAccessTokenWhereInput
+    orderBy?: InsuranceAccessTokenOrderByWithRelationInput | InsuranceAccessTokenOrderByWithRelationInput[]
+    cursor?: InsuranceAccessTokenWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: InsuranceAccessTokenScalarFieldEnum | InsuranceAccessTokenScalarFieldEnum[]
+  }
+
+  /**
+   * InsuranceClaim without action
+   */
+  export type InsuranceClaimDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InsuranceClaim
+     */
+    select?: InsuranceClaimSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InsuranceClaim
+     */
+    omit?: InsuranceClaimOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InsuranceClaimInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model InsuranceDocument
+   */
+
+  export type AggregateInsuranceDocument = {
+    _count: InsuranceDocumentCountAggregateOutputType | null
+    _avg: InsuranceDocumentAvgAggregateOutputType | null
+    _sum: InsuranceDocumentSumAggregateOutputType | null
+    _min: InsuranceDocumentMinAggregateOutputType | null
+    _max: InsuranceDocumentMaxAggregateOutputType | null
+  }
+
+  export type InsuranceDocumentAvgAggregateOutputType = {
+    fileSize: number | null
+  }
+
+  export type InsuranceDocumentSumAggregateOutputType = {
+    fileSize: number | null
+  }
+
+  export type InsuranceDocumentMinAggregateOutputType = {
+    id: string | null
+    claimId: string | null
+    documentType: string | null
+    fileName: string | null
+    fileUrl: string | null
+    fileSize: number | null
+    mimeType: string | null
+    description: string | null
+    uploadedBy: string | null
+    createdAt: Date | null
+  }
+
+  export type InsuranceDocumentMaxAggregateOutputType = {
+    id: string | null
+    claimId: string | null
+    documentType: string | null
+    fileName: string | null
+    fileUrl: string | null
+    fileSize: number | null
+    mimeType: string | null
+    description: string | null
+    uploadedBy: string | null
+    createdAt: Date | null
+  }
+
+  export type InsuranceDocumentCountAggregateOutputType = {
+    id: number
+    claimId: number
+    documentType: number
+    fileName: number
+    fileUrl: number
+    fileSize: number
+    mimeType: number
+    description: number
+    uploadedBy: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type InsuranceDocumentAvgAggregateInputType = {
+    fileSize?: true
+  }
+
+  export type InsuranceDocumentSumAggregateInputType = {
+    fileSize?: true
+  }
+
+  export type InsuranceDocumentMinAggregateInputType = {
+    id?: true
+    claimId?: true
+    documentType?: true
+    fileName?: true
+    fileUrl?: true
+    fileSize?: true
+    mimeType?: true
+    description?: true
+    uploadedBy?: true
+    createdAt?: true
+  }
+
+  export type InsuranceDocumentMaxAggregateInputType = {
+    id?: true
+    claimId?: true
+    documentType?: true
+    fileName?: true
+    fileUrl?: true
+    fileSize?: true
+    mimeType?: true
+    description?: true
+    uploadedBy?: true
+    createdAt?: true
+  }
+
+  export type InsuranceDocumentCountAggregateInputType = {
+    id?: true
+    claimId?: true
+    documentType?: true
+    fileName?: true
+    fileUrl?: true
+    fileSize?: true
+    mimeType?: true
+    description?: true
+    uploadedBy?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type InsuranceDocumentAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which InsuranceDocument to aggregate.
+     */
+    where?: InsuranceDocumentWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of InsuranceDocuments to fetch.
+     */
+    orderBy?: InsuranceDocumentOrderByWithRelationInput | InsuranceDocumentOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: InsuranceDocumentWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` InsuranceDocuments from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` InsuranceDocuments.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned InsuranceDocuments
+    **/
+    _count?: true | InsuranceDocumentCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: InsuranceDocumentAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: InsuranceDocumentSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: InsuranceDocumentMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: InsuranceDocumentMaxAggregateInputType
+  }
+
+  export type GetInsuranceDocumentAggregateType<T extends InsuranceDocumentAggregateArgs> = {
+        [P in keyof T & keyof AggregateInsuranceDocument]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateInsuranceDocument[P]>
+      : GetScalarType<T[P], AggregateInsuranceDocument[P]>
+  }
+
+
+
+
+  export type InsuranceDocumentGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: InsuranceDocumentWhereInput
+    orderBy?: InsuranceDocumentOrderByWithAggregationInput | InsuranceDocumentOrderByWithAggregationInput[]
+    by: InsuranceDocumentScalarFieldEnum[] | InsuranceDocumentScalarFieldEnum
+    having?: InsuranceDocumentScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: InsuranceDocumentCountAggregateInputType | true
+    _avg?: InsuranceDocumentAvgAggregateInputType
+    _sum?: InsuranceDocumentSumAggregateInputType
+    _min?: InsuranceDocumentMinAggregateInputType
+    _max?: InsuranceDocumentMaxAggregateInputType
+  }
+
+  export type InsuranceDocumentGroupByOutputType = {
+    id: string
+    claimId: string
+    documentType: string
+    fileName: string
+    fileUrl: string
+    fileSize: number
+    mimeType: string
+    description: string | null
+    uploadedBy: string
+    createdAt: Date
+    _count: InsuranceDocumentCountAggregateOutputType | null
+    _avg: InsuranceDocumentAvgAggregateOutputType | null
+    _sum: InsuranceDocumentSumAggregateOutputType | null
+    _min: InsuranceDocumentMinAggregateOutputType | null
+    _max: InsuranceDocumentMaxAggregateOutputType | null
+  }
+
+  type GetInsuranceDocumentGroupByPayload<T extends InsuranceDocumentGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<InsuranceDocumentGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof InsuranceDocumentGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], InsuranceDocumentGroupByOutputType[P]>
+            : GetScalarType<T[P], InsuranceDocumentGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type InsuranceDocumentSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    claimId?: boolean
+    documentType?: boolean
+    fileName?: boolean
+    fileUrl?: boolean
+    fileSize?: boolean
+    mimeType?: boolean
+    description?: boolean
+    uploadedBy?: boolean
+    createdAt?: boolean
+    claim?: boolean | InsuranceClaimDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["insuranceDocument"]>
+
+  export type InsuranceDocumentSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    claimId?: boolean
+    documentType?: boolean
+    fileName?: boolean
+    fileUrl?: boolean
+    fileSize?: boolean
+    mimeType?: boolean
+    description?: boolean
+    uploadedBy?: boolean
+    createdAt?: boolean
+    claim?: boolean | InsuranceClaimDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["insuranceDocument"]>
+
+  export type InsuranceDocumentSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    claimId?: boolean
+    documentType?: boolean
+    fileName?: boolean
+    fileUrl?: boolean
+    fileSize?: boolean
+    mimeType?: boolean
+    description?: boolean
+    uploadedBy?: boolean
+    createdAt?: boolean
+    claim?: boolean | InsuranceClaimDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["insuranceDocument"]>
+
+  export type InsuranceDocumentSelectScalar = {
+    id?: boolean
+    claimId?: boolean
+    documentType?: boolean
+    fileName?: boolean
+    fileUrl?: boolean
+    fileSize?: boolean
+    mimeType?: boolean
+    description?: boolean
+    uploadedBy?: boolean
+    createdAt?: boolean
+  }
+
+  export type InsuranceDocumentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "claimId" | "documentType" | "fileName" | "fileUrl" | "fileSize" | "mimeType" | "description" | "uploadedBy" | "createdAt", ExtArgs["result"]["insuranceDocument"]>
+  export type InsuranceDocumentInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    claim?: boolean | InsuranceClaimDefaultArgs<ExtArgs>
+  }
+  export type InsuranceDocumentIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    claim?: boolean | InsuranceClaimDefaultArgs<ExtArgs>
+  }
+  export type InsuranceDocumentIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    claim?: boolean | InsuranceClaimDefaultArgs<ExtArgs>
+  }
+
+  export type $InsuranceDocumentPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "InsuranceDocument"
+    objects: {
+      claim: Prisma.$InsuranceClaimPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      claimId: string
+      documentType: string
+      fileName: string
+      fileUrl: string
+      fileSize: number
+      mimeType: string
+      description: string | null
+      uploadedBy: string
+      createdAt: Date
+    }, ExtArgs["result"]["insuranceDocument"]>
+    composites: {}
+  }
+
+  type InsuranceDocumentGetPayload<S extends boolean | null | undefined | InsuranceDocumentDefaultArgs> = $Result.GetResult<Prisma.$InsuranceDocumentPayload, S>
+
+  type InsuranceDocumentCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<InsuranceDocumentFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: InsuranceDocumentCountAggregateInputType | true
+    }
+
+  export interface InsuranceDocumentDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['InsuranceDocument'], meta: { name: 'InsuranceDocument' } }
+    /**
+     * Find zero or one InsuranceDocument that matches the filter.
+     * @param {InsuranceDocumentFindUniqueArgs} args - Arguments to find a InsuranceDocument
+     * @example
+     * // Get one InsuranceDocument
+     * const insuranceDocument = await prisma.insuranceDocument.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends InsuranceDocumentFindUniqueArgs>(args: SelectSubset<T, InsuranceDocumentFindUniqueArgs<ExtArgs>>): Prisma__InsuranceDocumentClient<$Result.GetResult<Prisma.$InsuranceDocumentPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one InsuranceDocument that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {InsuranceDocumentFindUniqueOrThrowArgs} args - Arguments to find a InsuranceDocument
+     * @example
+     * // Get one InsuranceDocument
+     * const insuranceDocument = await prisma.insuranceDocument.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends InsuranceDocumentFindUniqueOrThrowArgs>(args: SelectSubset<T, InsuranceDocumentFindUniqueOrThrowArgs<ExtArgs>>): Prisma__InsuranceDocumentClient<$Result.GetResult<Prisma.$InsuranceDocumentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first InsuranceDocument that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InsuranceDocumentFindFirstArgs} args - Arguments to find a InsuranceDocument
+     * @example
+     * // Get one InsuranceDocument
+     * const insuranceDocument = await prisma.insuranceDocument.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends InsuranceDocumentFindFirstArgs>(args?: SelectSubset<T, InsuranceDocumentFindFirstArgs<ExtArgs>>): Prisma__InsuranceDocumentClient<$Result.GetResult<Prisma.$InsuranceDocumentPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first InsuranceDocument that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InsuranceDocumentFindFirstOrThrowArgs} args - Arguments to find a InsuranceDocument
+     * @example
+     * // Get one InsuranceDocument
+     * const insuranceDocument = await prisma.insuranceDocument.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends InsuranceDocumentFindFirstOrThrowArgs>(args?: SelectSubset<T, InsuranceDocumentFindFirstOrThrowArgs<ExtArgs>>): Prisma__InsuranceDocumentClient<$Result.GetResult<Prisma.$InsuranceDocumentPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more InsuranceDocuments that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InsuranceDocumentFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all InsuranceDocuments
+     * const insuranceDocuments = await prisma.insuranceDocument.findMany()
+     * 
+     * // Get first 10 InsuranceDocuments
+     * const insuranceDocuments = await prisma.insuranceDocument.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const insuranceDocumentWithIdOnly = await prisma.insuranceDocument.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends InsuranceDocumentFindManyArgs>(args?: SelectSubset<T, InsuranceDocumentFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InsuranceDocumentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a InsuranceDocument.
+     * @param {InsuranceDocumentCreateArgs} args - Arguments to create a InsuranceDocument.
+     * @example
+     * // Create one InsuranceDocument
+     * const InsuranceDocument = await prisma.insuranceDocument.create({
+     *   data: {
+     *     // ... data to create a InsuranceDocument
+     *   }
+     * })
+     * 
+     */
+    create<T extends InsuranceDocumentCreateArgs>(args: SelectSubset<T, InsuranceDocumentCreateArgs<ExtArgs>>): Prisma__InsuranceDocumentClient<$Result.GetResult<Prisma.$InsuranceDocumentPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many InsuranceDocuments.
+     * @param {InsuranceDocumentCreateManyArgs} args - Arguments to create many InsuranceDocuments.
+     * @example
+     * // Create many InsuranceDocuments
+     * const insuranceDocument = await prisma.insuranceDocument.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends InsuranceDocumentCreateManyArgs>(args?: SelectSubset<T, InsuranceDocumentCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many InsuranceDocuments and returns the data saved in the database.
+     * @param {InsuranceDocumentCreateManyAndReturnArgs} args - Arguments to create many InsuranceDocuments.
+     * @example
+     * // Create many InsuranceDocuments
+     * const insuranceDocument = await prisma.insuranceDocument.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many InsuranceDocuments and only return the `id`
+     * const insuranceDocumentWithIdOnly = await prisma.insuranceDocument.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends InsuranceDocumentCreateManyAndReturnArgs>(args?: SelectSubset<T, InsuranceDocumentCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InsuranceDocumentPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a InsuranceDocument.
+     * @param {InsuranceDocumentDeleteArgs} args - Arguments to delete one InsuranceDocument.
+     * @example
+     * // Delete one InsuranceDocument
+     * const InsuranceDocument = await prisma.insuranceDocument.delete({
+     *   where: {
+     *     // ... filter to delete one InsuranceDocument
+     *   }
+     * })
+     * 
+     */
+    delete<T extends InsuranceDocumentDeleteArgs>(args: SelectSubset<T, InsuranceDocumentDeleteArgs<ExtArgs>>): Prisma__InsuranceDocumentClient<$Result.GetResult<Prisma.$InsuranceDocumentPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one InsuranceDocument.
+     * @param {InsuranceDocumentUpdateArgs} args - Arguments to update one InsuranceDocument.
+     * @example
+     * // Update one InsuranceDocument
+     * const insuranceDocument = await prisma.insuranceDocument.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends InsuranceDocumentUpdateArgs>(args: SelectSubset<T, InsuranceDocumentUpdateArgs<ExtArgs>>): Prisma__InsuranceDocumentClient<$Result.GetResult<Prisma.$InsuranceDocumentPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more InsuranceDocuments.
+     * @param {InsuranceDocumentDeleteManyArgs} args - Arguments to filter InsuranceDocuments to delete.
+     * @example
+     * // Delete a few InsuranceDocuments
+     * const { count } = await prisma.insuranceDocument.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends InsuranceDocumentDeleteManyArgs>(args?: SelectSubset<T, InsuranceDocumentDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more InsuranceDocuments.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InsuranceDocumentUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many InsuranceDocuments
+     * const insuranceDocument = await prisma.insuranceDocument.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends InsuranceDocumentUpdateManyArgs>(args: SelectSubset<T, InsuranceDocumentUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more InsuranceDocuments and returns the data updated in the database.
+     * @param {InsuranceDocumentUpdateManyAndReturnArgs} args - Arguments to update many InsuranceDocuments.
+     * @example
+     * // Update many InsuranceDocuments
+     * const insuranceDocument = await prisma.insuranceDocument.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more InsuranceDocuments and only return the `id`
+     * const insuranceDocumentWithIdOnly = await prisma.insuranceDocument.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends InsuranceDocumentUpdateManyAndReturnArgs>(args: SelectSubset<T, InsuranceDocumentUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InsuranceDocumentPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one InsuranceDocument.
+     * @param {InsuranceDocumentUpsertArgs} args - Arguments to update or create a InsuranceDocument.
+     * @example
+     * // Update or create a InsuranceDocument
+     * const insuranceDocument = await prisma.insuranceDocument.upsert({
+     *   create: {
+     *     // ... data to create a InsuranceDocument
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the InsuranceDocument we want to update
+     *   }
+     * })
+     */
+    upsert<T extends InsuranceDocumentUpsertArgs>(args: SelectSubset<T, InsuranceDocumentUpsertArgs<ExtArgs>>): Prisma__InsuranceDocumentClient<$Result.GetResult<Prisma.$InsuranceDocumentPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of InsuranceDocuments.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InsuranceDocumentCountArgs} args - Arguments to filter InsuranceDocuments to count.
+     * @example
+     * // Count the number of InsuranceDocuments
+     * const count = await prisma.insuranceDocument.count({
+     *   where: {
+     *     // ... the filter for the InsuranceDocuments we want to count
+     *   }
+     * })
+    **/
+    count<T extends InsuranceDocumentCountArgs>(
+      args?: Subset<T, InsuranceDocumentCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], InsuranceDocumentCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a InsuranceDocument.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InsuranceDocumentAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends InsuranceDocumentAggregateArgs>(args: Subset<T, InsuranceDocumentAggregateArgs>): Prisma.PrismaPromise<GetInsuranceDocumentAggregateType<T>>
+
+    /**
+     * Group by InsuranceDocument.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InsuranceDocumentGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends InsuranceDocumentGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: InsuranceDocumentGroupByArgs['orderBy'] }
+        : { orderBy?: InsuranceDocumentGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, InsuranceDocumentGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetInsuranceDocumentGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the InsuranceDocument model
+   */
+  readonly fields: InsuranceDocumentFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for InsuranceDocument.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__InsuranceDocumentClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    claim<T extends InsuranceClaimDefaultArgs<ExtArgs> = {}>(args?: Subset<T, InsuranceClaimDefaultArgs<ExtArgs>>): Prisma__InsuranceClaimClient<$Result.GetResult<Prisma.$InsuranceClaimPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the InsuranceDocument model
+   */
+  interface InsuranceDocumentFieldRefs {
+    readonly id: FieldRef<"InsuranceDocument", 'String'>
+    readonly claimId: FieldRef<"InsuranceDocument", 'String'>
+    readonly documentType: FieldRef<"InsuranceDocument", 'String'>
+    readonly fileName: FieldRef<"InsuranceDocument", 'String'>
+    readonly fileUrl: FieldRef<"InsuranceDocument", 'String'>
+    readonly fileSize: FieldRef<"InsuranceDocument", 'Int'>
+    readonly mimeType: FieldRef<"InsuranceDocument", 'String'>
+    readonly description: FieldRef<"InsuranceDocument", 'String'>
+    readonly uploadedBy: FieldRef<"InsuranceDocument", 'String'>
+    readonly createdAt: FieldRef<"InsuranceDocument", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * InsuranceDocument findUnique
+   */
+  export type InsuranceDocumentFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InsuranceDocument
+     */
+    select?: InsuranceDocumentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InsuranceDocument
+     */
+    omit?: InsuranceDocumentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InsuranceDocumentInclude<ExtArgs> | null
+    /**
+     * Filter, which InsuranceDocument to fetch.
+     */
+    where: InsuranceDocumentWhereUniqueInput
+  }
+
+  /**
+   * InsuranceDocument findUniqueOrThrow
+   */
+  export type InsuranceDocumentFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InsuranceDocument
+     */
+    select?: InsuranceDocumentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InsuranceDocument
+     */
+    omit?: InsuranceDocumentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InsuranceDocumentInclude<ExtArgs> | null
+    /**
+     * Filter, which InsuranceDocument to fetch.
+     */
+    where: InsuranceDocumentWhereUniqueInput
+  }
+
+  /**
+   * InsuranceDocument findFirst
+   */
+  export type InsuranceDocumentFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InsuranceDocument
+     */
+    select?: InsuranceDocumentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InsuranceDocument
+     */
+    omit?: InsuranceDocumentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InsuranceDocumentInclude<ExtArgs> | null
+    /**
+     * Filter, which InsuranceDocument to fetch.
+     */
+    where?: InsuranceDocumentWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of InsuranceDocuments to fetch.
+     */
+    orderBy?: InsuranceDocumentOrderByWithRelationInput | InsuranceDocumentOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for InsuranceDocuments.
+     */
+    cursor?: InsuranceDocumentWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` InsuranceDocuments from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` InsuranceDocuments.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of InsuranceDocuments.
+     */
+    distinct?: InsuranceDocumentScalarFieldEnum | InsuranceDocumentScalarFieldEnum[]
+  }
+
+  /**
+   * InsuranceDocument findFirstOrThrow
+   */
+  export type InsuranceDocumentFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InsuranceDocument
+     */
+    select?: InsuranceDocumentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InsuranceDocument
+     */
+    omit?: InsuranceDocumentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InsuranceDocumentInclude<ExtArgs> | null
+    /**
+     * Filter, which InsuranceDocument to fetch.
+     */
+    where?: InsuranceDocumentWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of InsuranceDocuments to fetch.
+     */
+    orderBy?: InsuranceDocumentOrderByWithRelationInput | InsuranceDocumentOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for InsuranceDocuments.
+     */
+    cursor?: InsuranceDocumentWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` InsuranceDocuments from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` InsuranceDocuments.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of InsuranceDocuments.
+     */
+    distinct?: InsuranceDocumentScalarFieldEnum | InsuranceDocumentScalarFieldEnum[]
+  }
+
+  /**
+   * InsuranceDocument findMany
+   */
+  export type InsuranceDocumentFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InsuranceDocument
+     */
+    select?: InsuranceDocumentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InsuranceDocument
+     */
+    omit?: InsuranceDocumentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InsuranceDocumentInclude<ExtArgs> | null
+    /**
+     * Filter, which InsuranceDocuments to fetch.
+     */
+    where?: InsuranceDocumentWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of InsuranceDocuments to fetch.
+     */
+    orderBy?: InsuranceDocumentOrderByWithRelationInput | InsuranceDocumentOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing InsuranceDocuments.
+     */
+    cursor?: InsuranceDocumentWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` InsuranceDocuments from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` InsuranceDocuments.
+     */
+    skip?: number
+    distinct?: InsuranceDocumentScalarFieldEnum | InsuranceDocumentScalarFieldEnum[]
+  }
+
+  /**
+   * InsuranceDocument create
+   */
+  export type InsuranceDocumentCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InsuranceDocument
+     */
+    select?: InsuranceDocumentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InsuranceDocument
+     */
+    omit?: InsuranceDocumentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InsuranceDocumentInclude<ExtArgs> | null
+    /**
+     * The data needed to create a InsuranceDocument.
+     */
+    data: XOR<InsuranceDocumentCreateInput, InsuranceDocumentUncheckedCreateInput>
+  }
+
+  /**
+   * InsuranceDocument createMany
+   */
+  export type InsuranceDocumentCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many InsuranceDocuments.
+     */
+    data: InsuranceDocumentCreateManyInput | InsuranceDocumentCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * InsuranceDocument createManyAndReturn
+   */
+  export type InsuranceDocumentCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InsuranceDocument
+     */
+    select?: InsuranceDocumentSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the InsuranceDocument
+     */
+    omit?: InsuranceDocumentOmit<ExtArgs> | null
+    /**
+     * The data used to create many InsuranceDocuments.
+     */
+    data: InsuranceDocumentCreateManyInput | InsuranceDocumentCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InsuranceDocumentIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * InsuranceDocument update
+   */
+  export type InsuranceDocumentUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InsuranceDocument
+     */
+    select?: InsuranceDocumentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InsuranceDocument
+     */
+    omit?: InsuranceDocumentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InsuranceDocumentInclude<ExtArgs> | null
+    /**
+     * The data needed to update a InsuranceDocument.
+     */
+    data: XOR<InsuranceDocumentUpdateInput, InsuranceDocumentUncheckedUpdateInput>
+    /**
+     * Choose, which InsuranceDocument to update.
+     */
+    where: InsuranceDocumentWhereUniqueInput
+  }
+
+  /**
+   * InsuranceDocument updateMany
+   */
+  export type InsuranceDocumentUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update InsuranceDocuments.
+     */
+    data: XOR<InsuranceDocumentUpdateManyMutationInput, InsuranceDocumentUncheckedUpdateManyInput>
+    /**
+     * Filter which InsuranceDocuments to update
+     */
+    where?: InsuranceDocumentWhereInput
+    /**
+     * Limit how many InsuranceDocuments to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * InsuranceDocument updateManyAndReturn
+   */
+  export type InsuranceDocumentUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InsuranceDocument
+     */
+    select?: InsuranceDocumentSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the InsuranceDocument
+     */
+    omit?: InsuranceDocumentOmit<ExtArgs> | null
+    /**
+     * The data used to update InsuranceDocuments.
+     */
+    data: XOR<InsuranceDocumentUpdateManyMutationInput, InsuranceDocumentUncheckedUpdateManyInput>
+    /**
+     * Filter which InsuranceDocuments to update
+     */
+    where?: InsuranceDocumentWhereInput
+    /**
+     * Limit how many InsuranceDocuments to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InsuranceDocumentIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * InsuranceDocument upsert
+   */
+  export type InsuranceDocumentUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InsuranceDocument
+     */
+    select?: InsuranceDocumentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InsuranceDocument
+     */
+    omit?: InsuranceDocumentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InsuranceDocumentInclude<ExtArgs> | null
+    /**
+     * The filter to search for the InsuranceDocument to update in case it exists.
+     */
+    where: InsuranceDocumentWhereUniqueInput
+    /**
+     * In case the InsuranceDocument found by the `where` argument doesn't exist, create a new InsuranceDocument with this data.
+     */
+    create: XOR<InsuranceDocumentCreateInput, InsuranceDocumentUncheckedCreateInput>
+    /**
+     * In case the InsuranceDocument was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<InsuranceDocumentUpdateInput, InsuranceDocumentUncheckedUpdateInput>
+  }
+
+  /**
+   * InsuranceDocument delete
+   */
+  export type InsuranceDocumentDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InsuranceDocument
+     */
+    select?: InsuranceDocumentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InsuranceDocument
+     */
+    omit?: InsuranceDocumentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InsuranceDocumentInclude<ExtArgs> | null
+    /**
+     * Filter which InsuranceDocument to delete.
+     */
+    where: InsuranceDocumentWhereUniqueInput
+  }
+
+  /**
+   * InsuranceDocument deleteMany
+   */
+  export type InsuranceDocumentDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which InsuranceDocuments to delete
+     */
+    where?: InsuranceDocumentWhereInput
+    /**
+     * Limit how many InsuranceDocuments to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * InsuranceDocument without action
+   */
+  export type InsuranceDocumentDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InsuranceDocument
+     */
+    select?: InsuranceDocumentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InsuranceDocument
+     */
+    omit?: InsuranceDocumentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InsuranceDocumentInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model InsuranceAccessToken
+   */
+
+  export type AggregateInsuranceAccessToken = {
+    _count: InsuranceAccessTokenCountAggregateOutputType | null
+    _min: InsuranceAccessTokenMinAggregateOutputType | null
+    _max: InsuranceAccessTokenMaxAggregateOutputType | null
+  }
+
+  export type InsuranceAccessTokenMinAggregateOutputType = {
+    id: string | null
+    claimId: string | null
+    token: string | null
+    recipientEmail: string | null
+    expiresAt: Date | null
+    usedAt: Date | null
+    isRevoked: boolean | null
+    createdAt: Date | null
+  }
+
+  export type InsuranceAccessTokenMaxAggregateOutputType = {
+    id: string | null
+    claimId: string | null
+    token: string | null
+    recipientEmail: string | null
+    expiresAt: Date | null
+    usedAt: Date | null
+    isRevoked: boolean | null
+    createdAt: Date | null
+  }
+
+  export type InsuranceAccessTokenCountAggregateOutputType = {
+    id: number
+    claimId: number
+    token: number
+    recipientEmail: number
+    expiresAt: number
+    usedAt: number
+    isRevoked: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type InsuranceAccessTokenMinAggregateInputType = {
+    id?: true
+    claimId?: true
+    token?: true
+    recipientEmail?: true
+    expiresAt?: true
+    usedAt?: true
+    isRevoked?: true
+    createdAt?: true
+  }
+
+  export type InsuranceAccessTokenMaxAggregateInputType = {
+    id?: true
+    claimId?: true
+    token?: true
+    recipientEmail?: true
+    expiresAt?: true
+    usedAt?: true
+    isRevoked?: true
+    createdAt?: true
+  }
+
+  export type InsuranceAccessTokenCountAggregateInputType = {
+    id?: true
+    claimId?: true
+    token?: true
+    recipientEmail?: true
+    expiresAt?: true
+    usedAt?: true
+    isRevoked?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type InsuranceAccessTokenAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which InsuranceAccessToken to aggregate.
+     */
+    where?: InsuranceAccessTokenWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of InsuranceAccessTokens to fetch.
+     */
+    orderBy?: InsuranceAccessTokenOrderByWithRelationInput | InsuranceAccessTokenOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: InsuranceAccessTokenWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` InsuranceAccessTokens from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` InsuranceAccessTokens.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned InsuranceAccessTokens
+    **/
+    _count?: true | InsuranceAccessTokenCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: InsuranceAccessTokenMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: InsuranceAccessTokenMaxAggregateInputType
+  }
+
+  export type GetInsuranceAccessTokenAggregateType<T extends InsuranceAccessTokenAggregateArgs> = {
+        [P in keyof T & keyof AggregateInsuranceAccessToken]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateInsuranceAccessToken[P]>
+      : GetScalarType<T[P], AggregateInsuranceAccessToken[P]>
+  }
+
+
+
+
+  export type InsuranceAccessTokenGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: InsuranceAccessTokenWhereInput
+    orderBy?: InsuranceAccessTokenOrderByWithAggregationInput | InsuranceAccessTokenOrderByWithAggregationInput[]
+    by: InsuranceAccessTokenScalarFieldEnum[] | InsuranceAccessTokenScalarFieldEnum
+    having?: InsuranceAccessTokenScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: InsuranceAccessTokenCountAggregateInputType | true
+    _min?: InsuranceAccessTokenMinAggregateInputType
+    _max?: InsuranceAccessTokenMaxAggregateInputType
+  }
+
+  export type InsuranceAccessTokenGroupByOutputType = {
+    id: string
+    claimId: string
+    token: string
+    recipientEmail: string
+    expiresAt: Date
+    usedAt: Date | null
+    isRevoked: boolean
+    createdAt: Date
+    _count: InsuranceAccessTokenCountAggregateOutputType | null
+    _min: InsuranceAccessTokenMinAggregateOutputType | null
+    _max: InsuranceAccessTokenMaxAggregateOutputType | null
+  }
+
+  type GetInsuranceAccessTokenGroupByPayload<T extends InsuranceAccessTokenGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<InsuranceAccessTokenGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof InsuranceAccessTokenGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], InsuranceAccessTokenGroupByOutputType[P]>
+            : GetScalarType<T[P], InsuranceAccessTokenGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type InsuranceAccessTokenSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    claimId?: boolean
+    token?: boolean
+    recipientEmail?: boolean
+    expiresAt?: boolean
+    usedAt?: boolean
+    isRevoked?: boolean
+    createdAt?: boolean
+    claim?: boolean | InsuranceClaimDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["insuranceAccessToken"]>
+
+  export type InsuranceAccessTokenSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    claimId?: boolean
+    token?: boolean
+    recipientEmail?: boolean
+    expiresAt?: boolean
+    usedAt?: boolean
+    isRevoked?: boolean
+    createdAt?: boolean
+    claim?: boolean | InsuranceClaimDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["insuranceAccessToken"]>
+
+  export type InsuranceAccessTokenSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    claimId?: boolean
+    token?: boolean
+    recipientEmail?: boolean
+    expiresAt?: boolean
+    usedAt?: boolean
+    isRevoked?: boolean
+    createdAt?: boolean
+    claim?: boolean | InsuranceClaimDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["insuranceAccessToken"]>
+
+  export type InsuranceAccessTokenSelectScalar = {
+    id?: boolean
+    claimId?: boolean
+    token?: boolean
+    recipientEmail?: boolean
+    expiresAt?: boolean
+    usedAt?: boolean
+    isRevoked?: boolean
+    createdAt?: boolean
+  }
+
+  export type InsuranceAccessTokenOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "claimId" | "token" | "recipientEmail" | "expiresAt" | "usedAt" | "isRevoked" | "createdAt", ExtArgs["result"]["insuranceAccessToken"]>
+  export type InsuranceAccessTokenInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    claim?: boolean | InsuranceClaimDefaultArgs<ExtArgs>
+  }
+  export type InsuranceAccessTokenIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    claim?: boolean | InsuranceClaimDefaultArgs<ExtArgs>
+  }
+  export type InsuranceAccessTokenIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    claim?: boolean | InsuranceClaimDefaultArgs<ExtArgs>
+  }
+
+  export type $InsuranceAccessTokenPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "InsuranceAccessToken"
+    objects: {
+      claim: Prisma.$InsuranceClaimPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      claimId: string
+      token: string
+      recipientEmail: string
+      expiresAt: Date
+      usedAt: Date | null
+      isRevoked: boolean
+      createdAt: Date
+    }, ExtArgs["result"]["insuranceAccessToken"]>
+    composites: {}
+  }
+
+  type InsuranceAccessTokenGetPayload<S extends boolean | null | undefined | InsuranceAccessTokenDefaultArgs> = $Result.GetResult<Prisma.$InsuranceAccessTokenPayload, S>
+
+  type InsuranceAccessTokenCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<InsuranceAccessTokenFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: InsuranceAccessTokenCountAggregateInputType | true
+    }
+
+  export interface InsuranceAccessTokenDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['InsuranceAccessToken'], meta: { name: 'InsuranceAccessToken' } }
+    /**
+     * Find zero or one InsuranceAccessToken that matches the filter.
+     * @param {InsuranceAccessTokenFindUniqueArgs} args - Arguments to find a InsuranceAccessToken
+     * @example
+     * // Get one InsuranceAccessToken
+     * const insuranceAccessToken = await prisma.insuranceAccessToken.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends InsuranceAccessTokenFindUniqueArgs>(args: SelectSubset<T, InsuranceAccessTokenFindUniqueArgs<ExtArgs>>): Prisma__InsuranceAccessTokenClient<$Result.GetResult<Prisma.$InsuranceAccessTokenPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one InsuranceAccessToken that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {InsuranceAccessTokenFindUniqueOrThrowArgs} args - Arguments to find a InsuranceAccessToken
+     * @example
+     * // Get one InsuranceAccessToken
+     * const insuranceAccessToken = await prisma.insuranceAccessToken.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends InsuranceAccessTokenFindUniqueOrThrowArgs>(args: SelectSubset<T, InsuranceAccessTokenFindUniqueOrThrowArgs<ExtArgs>>): Prisma__InsuranceAccessTokenClient<$Result.GetResult<Prisma.$InsuranceAccessTokenPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first InsuranceAccessToken that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InsuranceAccessTokenFindFirstArgs} args - Arguments to find a InsuranceAccessToken
+     * @example
+     * // Get one InsuranceAccessToken
+     * const insuranceAccessToken = await prisma.insuranceAccessToken.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends InsuranceAccessTokenFindFirstArgs>(args?: SelectSubset<T, InsuranceAccessTokenFindFirstArgs<ExtArgs>>): Prisma__InsuranceAccessTokenClient<$Result.GetResult<Prisma.$InsuranceAccessTokenPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first InsuranceAccessToken that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InsuranceAccessTokenFindFirstOrThrowArgs} args - Arguments to find a InsuranceAccessToken
+     * @example
+     * // Get one InsuranceAccessToken
+     * const insuranceAccessToken = await prisma.insuranceAccessToken.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends InsuranceAccessTokenFindFirstOrThrowArgs>(args?: SelectSubset<T, InsuranceAccessTokenFindFirstOrThrowArgs<ExtArgs>>): Prisma__InsuranceAccessTokenClient<$Result.GetResult<Prisma.$InsuranceAccessTokenPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more InsuranceAccessTokens that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InsuranceAccessTokenFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all InsuranceAccessTokens
+     * const insuranceAccessTokens = await prisma.insuranceAccessToken.findMany()
+     * 
+     * // Get first 10 InsuranceAccessTokens
+     * const insuranceAccessTokens = await prisma.insuranceAccessToken.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const insuranceAccessTokenWithIdOnly = await prisma.insuranceAccessToken.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends InsuranceAccessTokenFindManyArgs>(args?: SelectSubset<T, InsuranceAccessTokenFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InsuranceAccessTokenPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a InsuranceAccessToken.
+     * @param {InsuranceAccessTokenCreateArgs} args - Arguments to create a InsuranceAccessToken.
+     * @example
+     * // Create one InsuranceAccessToken
+     * const InsuranceAccessToken = await prisma.insuranceAccessToken.create({
+     *   data: {
+     *     // ... data to create a InsuranceAccessToken
+     *   }
+     * })
+     * 
+     */
+    create<T extends InsuranceAccessTokenCreateArgs>(args: SelectSubset<T, InsuranceAccessTokenCreateArgs<ExtArgs>>): Prisma__InsuranceAccessTokenClient<$Result.GetResult<Prisma.$InsuranceAccessTokenPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many InsuranceAccessTokens.
+     * @param {InsuranceAccessTokenCreateManyArgs} args - Arguments to create many InsuranceAccessTokens.
+     * @example
+     * // Create many InsuranceAccessTokens
+     * const insuranceAccessToken = await prisma.insuranceAccessToken.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends InsuranceAccessTokenCreateManyArgs>(args?: SelectSubset<T, InsuranceAccessTokenCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many InsuranceAccessTokens and returns the data saved in the database.
+     * @param {InsuranceAccessTokenCreateManyAndReturnArgs} args - Arguments to create many InsuranceAccessTokens.
+     * @example
+     * // Create many InsuranceAccessTokens
+     * const insuranceAccessToken = await prisma.insuranceAccessToken.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many InsuranceAccessTokens and only return the `id`
+     * const insuranceAccessTokenWithIdOnly = await prisma.insuranceAccessToken.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends InsuranceAccessTokenCreateManyAndReturnArgs>(args?: SelectSubset<T, InsuranceAccessTokenCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InsuranceAccessTokenPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a InsuranceAccessToken.
+     * @param {InsuranceAccessTokenDeleteArgs} args - Arguments to delete one InsuranceAccessToken.
+     * @example
+     * // Delete one InsuranceAccessToken
+     * const InsuranceAccessToken = await prisma.insuranceAccessToken.delete({
+     *   where: {
+     *     // ... filter to delete one InsuranceAccessToken
+     *   }
+     * })
+     * 
+     */
+    delete<T extends InsuranceAccessTokenDeleteArgs>(args: SelectSubset<T, InsuranceAccessTokenDeleteArgs<ExtArgs>>): Prisma__InsuranceAccessTokenClient<$Result.GetResult<Prisma.$InsuranceAccessTokenPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one InsuranceAccessToken.
+     * @param {InsuranceAccessTokenUpdateArgs} args - Arguments to update one InsuranceAccessToken.
+     * @example
+     * // Update one InsuranceAccessToken
+     * const insuranceAccessToken = await prisma.insuranceAccessToken.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends InsuranceAccessTokenUpdateArgs>(args: SelectSubset<T, InsuranceAccessTokenUpdateArgs<ExtArgs>>): Prisma__InsuranceAccessTokenClient<$Result.GetResult<Prisma.$InsuranceAccessTokenPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more InsuranceAccessTokens.
+     * @param {InsuranceAccessTokenDeleteManyArgs} args - Arguments to filter InsuranceAccessTokens to delete.
+     * @example
+     * // Delete a few InsuranceAccessTokens
+     * const { count } = await prisma.insuranceAccessToken.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends InsuranceAccessTokenDeleteManyArgs>(args?: SelectSubset<T, InsuranceAccessTokenDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more InsuranceAccessTokens.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InsuranceAccessTokenUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many InsuranceAccessTokens
+     * const insuranceAccessToken = await prisma.insuranceAccessToken.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends InsuranceAccessTokenUpdateManyArgs>(args: SelectSubset<T, InsuranceAccessTokenUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more InsuranceAccessTokens and returns the data updated in the database.
+     * @param {InsuranceAccessTokenUpdateManyAndReturnArgs} args - Arguments to update many InsuranceAccessTokens.
+     * @example
+     * // Update many InsuranceAccessTokens
+     * const insuranceAccessToken = await prisma.insuranceAccessToken.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more InsuranceAccessTokens and only return the `id`
+     * const insuranceAccessTokenWithIdOnly = await prisma.insuranceAccessToken.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends InsuranceAccessTokenUpdateManyAndReturnArgs>(args: SelectSubset<T, InsuranceAccessTokenUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InsuranceAccessTokenPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one InsuranceAccessToken.
+     * @param {InsuranceAccessTokenUpsertArgs} args - Arguments to update or create a InsuranceAccessToken.
+     * @example
+     * // Update or create a InsuranceAccessToken
+     * const insuranceAccessToken = await prisma.insuranceAccessToken.upsert({
+     *   create: {
+     *     // ... data to create a InsuranceAccessToken
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the InsuranceAccessToken we want to update
+     *   }
+     * })
+     */
+    upsert<T extends InsuranceAccessTokenUpsertArgs>(args: SelectSubset<T, InsuranceAccessTokenUpsertArgs<ExtArgs>>): Prisma__InsuranceAccessTokenClient<$Result.GetResult<Prisma.$InsuranceAccessTokenPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of InsuranceAccessTokens.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InsuranceAccessTokenCountArgs} args - Arguments to filter InsuranceAccessTokens to count.
+     * @example
+     * // Count the number of InsuranceAccessTokens
+     * const count = await prisma.insuranceAccessToken.count({
+     *   where: {
+     *     // ... the filter for the InsuranceAccessTokens we want to count
+     *   }
+     * })
+    **/
+    count<T extends InsuranceAccessTokenCountArgs>(
+      args?: Subset<T, InsuranceAccessTokenCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], InsuranceAccessTokenCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a InsuranceAccessToken.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InsuranceAccessTokenAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends InsuranceAccessTokenAggregateArgs>(args: Subset<T, InsuranceAccessTokenAggregateArgs>): Prisma.PrismaPromise<GetInsuranceAccessTokenAggregateType<T>>
+
+    /**
+     * Group by InsuranceAccessToken.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InsuranceAccessTokenGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends InsuranceAccessTokenGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: InsuranceAccessTokenGroupByArgs['orderBy'] }
+        : { orderBy?: InsuranceAccessTokenGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, InsuranceAccessTokenGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetInsuranceAccessTokenGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the InsuranceAccessToken model
+   */
+  readonly fields: InsuranceAccessTokenFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for InsuranceAccessToken.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__InsuranceAccessTokenClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    claim<T extends InsuranceClaimDefaultArgs<ExtArgs> = {}>(args?: Subset<T, InsuranceClaimDefaultArgs<ExtArgs>>): Prisma__InsuranceClaimClient<$Result.GetResult<Prisma.$InsuranceClaimPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the InsuranceAccessToken model
+   */
+  interface InsuranceAccessTokenFieldRefs {
+    readonly id: FieldRef<"InsuranceAccessToken", 'String'>
+    readonly claimId: FieldRef<"InsuranceAccessToken", 'String'>
+    readonly token: FieldRef<"InsuranceAccessToken", 'String'>
+    readonly recipientEmail: FieldRef<"InsuranceAccessToken", 'String'>
+    readonly expiresAt: FieldRef<"InsuranceAccessToken", 'DateTime'>
+    readonly usedAt: FieldRef<"InsuranceAccessToken", 'DateTime'>
+    readonly isRevoked: FieldRef<"InsuranceAccessToken", 'Boolean'>
+    readonly createdAt: FieldRef<"InsuranceAccessToken", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * InsuranceAccessToken findUnique
+   */
+  export type InsuranceAccessTokenFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InsuranceAccessToken
+     */
+    select?: InsuranceAccessTokenSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InsuranceAccessToken
+     */
+    omit?: InsuranceAccessTokenOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InsuranceAccessTokenInclude<ExtArgs> | null
+    /**
+     * Filter, which InsuranceAccessToken to fetch.
+     */
+    where: InsuranceAccessTokenWhereUniqueInput
+  }
+
+  /**
+   * InsuranceAccessToken findUniqueOrThrow
+   */
+  export type InsuranceAccessTokenFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InsuranceAccessToken
+     */
+    select?: InsuranceAccessTokenSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InsuranceAccessToken
+     */
+    omit?: InsuranceAccessTokenOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InsuranceAccessTokenInclude<ExtArgs> | null
+    /**
+     * Filter, which InsuranceAccessToken to fetch.
+     */
+    where: InsuranceAccessTokenWhereUniqueInput
+  }
+
+  /**
+   * InsuranceAccessToken findFirst
+   */
+  export type InsuranceAccessTokenFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InsuranceAccessToken
+     */
+    select?: InsuranceAccessTokenSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InsuranceAccessToken
+     */
+    omit?: InsuranceAccessTokenOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InsuranceAccessTokenInclude<ExtArgs> | null
+    /**
+     * Filter, which InsuranceAccessToken to fetch.
+     */
+    where?: InsuranceAccessTokenWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of InsuranceAccessTokens to fetch.
+     */
+    orderBy?: InsuranceAccessTokenOrderByWithRelationInput | InsuranceAccessTokenOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for InsuranceAccessTokens.
+     */
+    cursor?: InsuranceAccessTokenWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` InsuranceAccessTokens from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` InsuranceAccessTokens.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of InsuranceAccessTokens.
+     */
+    distinct?: InsuranceAccessTokenScalarFieldEnum | InsuranceAccessTokenScalarFieldEnum[]
+  }
+
+  /**
+   * InsuranceAccessToken findFirstOrThrow
+   */
+  export type InsuranceAccessTokenFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InsuranceAccessToken
+     */
+    select?: InsuranceAccessTokenSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InsuranceAccessToken
+     */
+    omit?: InsuranceAccessTokenOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InsuranceAccessTokenInclude<ExtArgs> | null
+    /**
+     * Filter, which InsuranceAccessToken to fetch.
+     */
+    where?: InsuranceAccessTokenWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of InsuranceAccessTokens to fetch.
+     */
+    orderBy?: InsuranceAccessTokenOrderByWithRelationInput | InsuranceAccessTokenOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for InsuranceAccessTokens.
+     */
+    cursor?: InsuranceAccessTokenWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` InsuranceAccessTokens from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` InsuranceAccessTokens.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of InsuranceAccessTokens.
+     */
+    distinct?: InsuranceAccessTokenScalarFieldEnum | InsuranceAccessTokenScalarFieldEnum[]
+  }
+
+  /**
+   * InsuranceAccessToken findMany
+   */
+  export type InsuranceAccessTokenFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InsuranceAccessToken
+     */
+    select?: InsuranceAccessTokenSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InsuranceAccessToken
+     */
+    omit?: InsuranceAccessTokenOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InsuranceAccessTokenInclude<ExtArgs> | null
+    /**
+     * Filter, which InsuranceAccessTokens to fetch.
+     */
+    where?: InsuranceAccessTokenWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of InsuranceAccessTokens to fetch.
+     */
+    orderBy?: InsuranceAccessTokenOrderByWithRelationInput | InsuranceAccessTokenOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing InsuranceAccessTokens.
+     */
+    cursor?: InsuranceAccessTokenWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` InsuranceAccessTokens from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` InsuranceAccessTokens.
+     */
+    skip?: number
+    distinct?: InsuranceAccessTokenScalarFieldEnum | InsuranceAccessTokenScalarFieldEnum[]
+  }
+
+  /**
+   * InsuranceAccessToken create
+   */
+  export type InsuranceAccessTokenCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InsuranceAccessToken
+     */
+    select?: InsuranceAccessTokenSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InsuranceAccessToken
+     */
+    omit?: InsuranceAccessTokenOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InsuranceAccessTokenInclude<ExtArgs> | null
+    /**
+     * The data needed to create a InsuranceAccessToken.
+     */
+    data: XOR<InsuranceAccessTokenCreateInput, InsuranceAccessTokenUncheckedCreateInput>
+  }
+
+  /**
+   * InsuranceAccessToken createMany
+   */
+  export type InsuranceAccessTokenCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many InsuranceAccessTokens.
+     */
+    data: InsuranceAccessTokenCreateManyInput | InsuranceAccessTokenCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * InsuranceAccessToken createManyAndReturn
+   */
+  export type InsuranceAccessTokenCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InsuranceAccessToken
+     */
+    select?: InsuranceAccessTokenSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the InsuranceAccessToken
+     */
+    omit?: InsuranceAccessTokenOmit<ExtArgs> | null
+    /**
+     * The data used to create many InsuranceAccessTokens.
+     */
+    data: InsuranceAccessTokenCreateManyInput | InsuranceAccessTokenCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InsuranceAccessTokenIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * InsuranceAccessToken update
+   */
+  export type InsuranceAccessTokenUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InsuranceAccessToken
+     */
+    select?: InsuranceAccessTokenSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InsuranceAccessToken
+     */
+    omit?: InsuranceAccessTokenOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InsuranceAccessTokenInclude<ExtArgs> | null
+    /**
+     * The data needed to update a InsuranceAccessToken.
+     */
+    data: XOR<InsuranceAccessTokenUpdateInput, InsuranceAccessTokenUncheckedUpdateInput>
+    /**
+     * Choose, which InsuranceAccessToken to update.
+     */
+    where: InsuranceAccessTokenWhereUniqueInput
+  }
+
+  /**
+   * InsuranceAccessToken updateMany
+   */
+  export type InsuranceAccessTokenUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update InsuranceAccessTokens.
+     */
+    data: XOR<InsuranceAccessTokenUpdateManyMutationInput, InsuranceAccessTokenUncheckedUpdateManyInput>
+    /**
+     * Filter which InsuranceAccessTokens to update
+     */
+    where?: InsuranceAccessTokenWhereInput
+    /**
+     * Limit how many InsuranceAccessTokens to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * InsuranceAccessToken updateManyAndReturn
+   */
+  export type InsuranceAccessTokenUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InsuranceAccessToken
+     */
+    select?: InsuranceAccessTokenSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the InsuranceAccessToken
+     */
+    omit?: InsuranceAccessTokenOmit<ExtArgs> | null
+    /**
+     * The data used to update InsuranceAccessTokens.
+     */
+    data: XOR<InsuranceAccessTokenUpdateManyMutationInput, InsuranceAccessTokenUncheckedUpdateManyInput>
+    /**
+     * Filter which InsuranceAccessTokens to update
+     */
+    where?: InsuranceAccessTokenWhereInput
+    /**
+     * Limit how many InsuranceAccessTokens to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InsuranceAccessTokenIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * InsuranceAccessToken upsert
+   */
+  export type InsuranceAccessTokenUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InsuranceAccessToken
+     */
+    select?: InsuranceAccessTokenSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InsuranceAccessToken
+     */
+    omit?: InsuranceAccessTokenOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InsuranceAccessTokenInclude<ExtArgs> | null
+    /**
+     * The filter to search for the InsuranceAccessToken to update in case it exists.
+     */
+    where: InsuranceAccessTokenWhereUniqueInput
+    /**
+     * In case the InsuranceAccessToken found by the `where` argument doesn't exist, create a new InsuranceAccessToken with this data.
+     */
+    create: XOR<InsuranceAccessTokenCreateInput, InsuranceAccessTokenUncheckedCreateInput>
+    /**
+     * In case the InsuranceAccessToken was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<InsuranceAccessTokenUpdateInput, InsuranceAccessTokenUncheckedUpdateInput>
+  }
+
+  /**
+   * InsuranceAccessToken delete
+   */
+  export type InsuranceAccessTokenDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InsuranceAccessToken
+     */
+    select?: InsuranceAccessTokenSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InsuranceAccessToken
+     */
+    omit?: InsuranceAccessTokenOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InsuranceAccessTokenInclude<ExtArgs> | null
+    /**
+     * Filter which InsuranceAccessToken to delete.
+     */
+    where: InsuranceAccessTokenWhereUniqueInput
+  }
+
+  /**
+   * InsuranceAccessToken deleteMany
+   */
+  export type InsuranceAccessTokenDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which InsuranceAccessTokens to delete
+     */
+    where?: InsuranceAccessTokenWhereInput
+    /**
+     * Limit how many InsuranceAccessTokens to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * InsuranceAccessToken without action
+   */
+  export type InsuranceAccessTokenDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InsuranceAccessToken
+     */
+    select?: InsuranceAccessTokenSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InsuranceAccessToken
+     */
+    omit?: InsuranceAccessTokenOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InsuranceAccessTokenInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -28329,6 +32398,62 @@ export namespace Prisma {
   };
 
   export type ParticularCatalogueScalarFieldEnum = (typeof ParticularCatalogueScalarFieldEnum)[keyof typeof ParticularCatalogueScalarFieldEnum]
+
+
+  export const InsuranceClaimScalarFieldEnum: {
+    id: 'id',
+    claimNumber: 'claimNumber',
+    patientId: 'patientId',
+    inpatientEncounterId: 'inpatientEncounterId',
+    outpatientEncounterId: 'outpatientEncounterId',
+    insuranceProvider: 'insuranceProvider',
+    insuranceNumber: 'insuranceNumber',
+    policyNumber: 'policyNumber',
+    claimAmount: 'claimAmount',
+    approvedAmount: 'approvedAmount',
+    denialReason: 'denialReason',
+    status: 'status',
+    submittedAt: 'submittedAt',
+    reviewedAt: 'reviewedAt',
+    billingStaffNotes: 'billingStaffNotes',
+    insuranceNotes: 'insuranceNotes',
+    createdBy: 'createdBy',
+    reviewedBy: 'reviewedBy',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type InsuranceClaimScalarFieldEnum = (typeof InsuranceClaimScalarFieldEnum)[keyof typeof InsuranceClaimScalarFieldEnum]
+
+
+  export const InsuranceDocumentScalarFieldEnum: {
+    id: 'id',
+    claimId: 'claimId',
+    documentType: 'documentType',
+    fileName: 'fileName',
+    fileUrl: 'fileUrl',
+    fileSize: 'fileSize',
+    mimeType: 'mimeType',
+    description: 'description',
+    uploadedBy: 'uploadedBy',
+    createdAt: 'createdAt'
+  };
+
+  export type InsuranceDocumentScalarFieldEnum = (typeof InsuranceDocumentScalarFieldEnum)[keyof typeof InsuranceDocumentScalarFieldEnum]
+
+
+  export const InsuranceAccessTokenScalarFieldEnum: {
+    id: 'id',
+    claimId: 'claimId',
+    token: 'token',
+    recipientEmail: 'recipientEmail',
+    expiresAt: 'expiresAt',
+    usedAt: 'usedAt',
+    isRevoked: 'isRevoked',
+    createdAt: 'createdAt'
+  };
+
+  export type InsuranceAccessTokenScalarFieldEnum = (typeof InsuranceAccessTokenScalarFieldEnum)[keyof typeof InsuranceAccessTokenScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -28777,6 +32902,20 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'InsuranceClaimStatus'
+   */
+  export type EnumInsuranceClaimStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'InsuranceClaimStatus'>
+    
+
+
+  /**
+   * Reference to a field of type 'InsuranceClaimStatus[]'
+   */
+  export type ListEnumInsuranceClaimStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'InsuranceClaimStatus[]'>
+    
+
+
+  /**
    * Reference to a field of type 'Float'
    */
   export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
@@ -29119,6 +33258,7 @@ export namespace Prisma {
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
     inpatientEncounters?: InpatientEncounterListRelationFilter
     outpatientEncounters?: OutpatientEncounterListRelationFilter
+    insuranceClaims?: InsuranceClaimListRelationFilter
   }
 
   export type PatientOrderByWithRelationInput = {
@@ -29137,6 +33277,7 @@ export namespace Prisma {
     user?: UserOrderByWithRelationInput
     inpatientEncounters?: InpatientEncounterOrderByRelationAggregateInput
     outpatientEncounters?: OutpatientEncounterOrderByRelationAggregateInput
+    insuranceClaims?: InsuranceClaimOrderByRelationAggregateInput
   }
 
   export type PatientWhereUniqueInput = Prisma.AtLeast<{
@@ -29158,6 +33299,7 @@ export namespace Prisma {
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
     inpatientEncounters?: InpatientEncounterListRelationFilter
     outpatientEncounters?: OutpatientEncounterListRelationFilter
+    insuranceClaims?: InsuranceClaimListRelationFilter
   }, "id" | "userId" | "patientNumber">
 
   export type PatientOrderByWithAggregationInput = {
@@ -30214,6 +34356,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"OutpatientEncounter"> | Date | string
     updatedAt?: DateTimeFilter<"OutpatientEncounter"> | Date | string
     patient?: XOR<PatientScalarRelationFilter, PatientWhereInput>
+    insuranceClaim?: XOR<InsuranceClaimNullableScalarRelationFilter, InsuranceClaimWhereInput> | null
   }
 
   export type OutpatientEncounterOrderByWithRelationInput = {
@@ -30231,6 +34374,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     patient?: PatientOrderByWithRelationInput
+    insuranceClaim?: InsuranceClaimOrderByWithRelationInput
   }
 
   export type OutpatientEncounterWhereUniqueInput = Prisma.AtLeast<{
@@ -30251,6 +34395,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"OutpatientEncounter"> | Date | string
     updatedAt?: DateTimeFilter<"OutpatientEncounter"> | Date | string
     patient?: XOR<PatientScalarRelationFilter, PatientWhereInput>
+    insuranceClaim?: XOR<InsuranceClaimNullableScalarRelationFilter, InsuranceClaimWhereInput> | null
   }, "id">
 
   export type OutpatientEncounterOrderByWithAggregationInput = {
@@ -30315,6 +34460,7 @@ export namespace Prisma {
     patient?: XOR<PatientScalarRelationFilter, PatientWhereInput>
     charts?: InpatientEncounterChartListRelationFilter
     orders?: InpatientEncounterOrderListRelationFilter
+    insuranceClaim?: XOR<InsuranceClaimNullableScalarRelationFilter, InsuranceClaimWhereInput> | null
   }
 
   export type InpatientEncounterOrderByWithRelationInput = {
@@ -30336,6 +34482,7 @@ export namespace Prisma {
     patient?: PatientOrderByWithRelationInput
     charts?: InpatientEncounterChartOrderByRelationAggregateInput
     orders?: InpatientEncounterOrderOrderByRelationAggregateInput
+    insuranceClaim?: InsuranceClaimOrderByWithRelationInput
   }
 
   export type InpatientEncounterWhereUniqueInput = Prisma.AtLeast<{
@@ -30360,6 +34507,7 @@ export namespace Prisma {
     patient?: XOR<PatientScalarRelationFilter, PatientWhereInput>
     charts?: InpatientEncounterChartListRelationFilter
     orders?: InpatientEncounterOrderListRelationFilter
+    insuranceClaim?: XOR<InsuranceClaimNullableScalarRelationFilter, InsuranceClaimWhereInput> | null
   }, "id">
 
   export type InpatientEncounterOrderByWithAggregationInput = {
@@ -30624,6 +34772,302 @@ export namespace Prisma {
     isActive?: BoolWithAggregatesFilter<"ParticularCatalogue"> | boolean
     createdAt?: DateTimeWithAggregatesFilter<"ParticularCatalogue"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"ParticularCatalogue"> | Date | string
+  }
+
+  export type InsuranceClaimWhereInput = {
+    AND?: InsuranceClaimWhereInput | InsuranceClaimWhereInput[]
+    OR?: InsuranceClaimWhereInput[]
+    NOT?: InsuranceClaimWhereInput | InsuranceClaimWhereInput[]
+    id?: UuidFilter<"InsuranceClaim"> | string
+    claimNumber?: StringFilter<"InsuranceClaim"> | string
+    patientId?: StringFilter<"InsuranceClaim"> | string
+    inpatientEncounterId?: UuidNullableFilter<"InsuranceClaim"> | string | null
+    outpatientEncounterId?: UuidNullableFilter<"InsuranceClaim"> | string | null
+    insuranceProvider?: StringFilter<"InsuranceClaim"> | string
+    insuranceNumber?: StringNullableFilter<"InsuranceClaim"> | string | null
+    policyNumber?: StringNullableFilter<"InsuranceClaim"> | string | null
+    claimAmount?: DecimalFilter<"InsuranceClaim"> | Decimal | DecimalJsLike | number | string
+    approvedAmount?: DecimalNullableFilter<"InsuranceClaim"> | Decimal | DecimalJsLike | number | string | null
+    denialReason?: StringNullableFilter<"InsuranceClaim"> | string | null
+    status?: EnumInsuranceClaimStatusFilter<"InsuranceClaim"> | $Enums.InsuranceClaimStatus
+    submittedAt?: DateTimeNullableFilter<"InsuranceClaim"> | Date | string | null
+    reviewedAt?: DateTimeNullableFilter<"InsuranceClaim"> | Date | string | null
+    billingStaffNotes?: StringNullableFilter<"InsuranceClaim"> | string | null
+    insuranceNotes?: StringNullableFilter<"InsuranceClaim"> | string | null
+    createdBy?: StringFilter<"InsuranceClaim"> | string
+    reviewedBy?: StringNullableFilter<"InsuranceClaim"> | string | null
+    createdAt?: DateTimeFilter<"InsuranceClaim"> | Date | string
+    updatedAt?: DateTimeFilter<"InsuranceClaim"> | Date | string
+    patient?: XOR<PatientScalarRelationFilter, PatientWhereInput>
+    inpatientEncounter?: XOR<InpatientEncounterNullableScalarRelationFilter, InpatientEncounterWhereInput> | null
+    outpatientEncounter?: XOR<OutpatientEncounterNullableScalarRelationFilter, OutpatientEncounterWhereInput> | null
+    documents?: InsuranceDocumentListRelationFilter
+    accessTokens?: InsuranceAccessTokenListRelationFilter
+  }
+
+  export type InsuranceClaimOrderByWithRelationInput = {
+    id?: SortOrder
+    claimNumber?: SortOrder
+    patientId?: SortOrder
+    inpatientEncounterId?: SortOrderInput | SortOrder
+    outpatientEncounterId?: SortOrderInput | SortOrder
+    insuranceProvider?: SortOrder
+    insuranceNumber?: SortOrderInput | SortOrder
+    policyNumber?: SortOrderInput | SortOrder
+    claimAmount?: SortOrder
+    approvedAmount?: SortOrderInput | SortOrder
+    denialReason?: SortOrderInput | SortOrder
+    status?: SortOrder
+    submittedAt?: SortOrderInput | SortOrder
+    reviewedAt?: SortOrderInput | SortOrder
+    billingStaffNotes?: SortOrderInput | SortOrder
+    insuranceNotes?: SortOrderInput | SortOrder
+    createdBy?: SortOrder
+    reviewedBy?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    patient?: PatientOrderByWithRelationInput
+    inpatientEncounter?: InpatientEncounterOrderByWithRelationInput
+    outpatientEncounter?: OutpatientEncounterOrderByWithRelationInput
+    documents?: InsuranceDocumentOrderByRelationAggregateInput
+    accessTokens?: InsuranceAccessTokenOrderByRelationAggregateInput
+  }
+
+  export type InsuranceClaimWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    claimNumber?: string
+    inpatientEncounterId?: string
+    outpatientEncounterId?: string
+    AND?: InsuranceClaimWhereInput | InsuranceClaimWhereInput[]
+    OR?: InsuranceClaimWhereInput[]
+    NOT?: InsuranceClaimWhereInput | InsuranceClaimWhereInput[]
+    patientId?: StringFilter<"InsuranceClaim"> | string
+    insuranceProvider?: StringFilter<"InsuranceClaim"> | string
+    insuranceNumber?: StringNullableFilter<"InsuranceClaim"> | string | null
+    policyNumber?: StringNullableFilter<"InsuranceClaim"> | string | null
+    claimAmount?: DecimalFilter<"InsuranceClaim"> | Decimal | DecimalJsLike | number | string
+    approvedAmount?: DecimalNullableFilter<"InsuranceClaim"> | Decimal | DecimalJsLike | number | string | null
+    denialReason?: StringNullableFilter<"InsuranceClaim"> | string | null
+    status?: EnumInsuranceClaimStatusFilter<"InsuranceClaim"> | $Enums.InsuranceClaimStatus
+    submittedAt?: DateTimeNullableFilter<"InsuranceClaim"> | Date | string | null
+    reviewedAt?: DateTimeNullableFilter<"InsuranceClaim"> | Date | string | null
+    billingStaffNotes?: StringNullableFilter<"InsuranceClaim"> | string | null
+    insuranceNotes?: StringNullableFilter<"InsuranceClaim"> | string | null
+    createdBy?: StringFilter<"InsuranceClaim"> | string
+    reviewedBy?: StringNullableFilter<"InsuranceClaim"> | string | null
+    createdAt?: DateTimeFilter<"InsuranceClaim"> | Date | string
+    updatedAt?: DateTimeFilter<"InsuranceClaim"> | Date | string
+    patient?: XOR<PatientScalarRelationFilter, PatientWhereInput>
+    inpatientEncounter?: XOR<InpatientEncounterNullableScalarRelationFilter, InpatientEncounterWhereInput> | null
+    outpatientEncounter?: XOR<OutpatientEncounterNullableScalarRelationFilter, OutpatientEncounterWhereInput> | null
+    documents?: InsuranceDocumentListRelationFilter
+    accessTokens?: InsuranceAccessTokenListRelationFilter
+  }, "id" | "claimNumber" | "inpatientEncounterId" | "outpatientEncounterId">
+
+  export type InsuranceClaimOrderByWithAggregationInput = {
+    id?: SortOrder
+    claimNumber?: SortOrder
+    patientId?: SortOrder
+    inpatientEncounterId?: SortOrderInput | SortOrder
+    outpatientEncounterId?: SortOrderInput | SortOrder
+    insuranceProvider?: SortOrder
+    insuranceNumber?: SortOrderInput | SortOrder
+    policyNumber?: SortOrderInput | SortOrder
+    claimAmount?: SortOrder
+    approvedAmount?: SortOrderInput | SortOrder
+    denialReason?: SortOrderInput | SortOrder
+    status?: SortOrder
+    submittedAt?: SortOrderInput | SortOrder
+    reviewedAt?: SortOrderInput | SortOrder
+    billingStaffNotes?: SortOrderInput | SortOrder
+    insuranceNotes?: SortOrderInput | SortOrder
+    createdBy?: SortOrder
+    reviewedBy?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: InsuranceClaimCountOrderByAggregateInput
+    _avg?: InsuranceClaimAvgOrderByAggregateInput
+    _max?: InsuranceClaimMaxOrderByAggregateInput
+    _min?: InsuranceClaimMinOrderByAggregateInput
+    _sum?: InsuranceClaimSumOrderByAggregateInput
+  }
+
+  export type InsuranceClaimScalarWhereWithAggregatesInput = {
+    AND?: InsuranceClaimScalarWhereWithAggregatesInput | InsuranceClaimScalarWhereWithAggregatesInput[]
+    OR?: InsuranceClaimScalarWhereWithAggregatesInput[]
+    NOT?: InsuranceClaimScalarWhereWithAggregatesInput | InsuranceClaimScalarWhereWithAggregatesInput[]
+    id?: UuidWithAggregatesFilter<"InsuranceClaim"> | string
+    claimNumber?: StringWithAggregatesFilter<"InsuranceClaim"> | string
+    patientId?: StringWithAggregatesFilter<"InsuranceClaim"> | string
+    inpatientEncounterId?: UuidNullableWithAggregatesFilter<"InsuranceClaim"> | string | null
+    outpatientEncounterId?: UuidNullableWithAggregatesFilter<"InsuranceClaim"> | string | null
+    insuranceProvider?: StringWithAggregatesFilter<"InsuranceClaim"> | string
+    insuranceNumber?: StringNullableWithAggregatesFilter<"InsuranceClaim"> | string | null
+    policyNumber?: StringNullableWithAggregatesFilter<"InsuranceClaim"> | string | null
+    claimAmount?: DecimalWithAggregatesFilter<"InsuranceClaim"> | Decimal | DecimalJsLike | number | string
+    approvedAmount?: DecimalNullableWithAggregatesFilter<"InsuranceClaim"> | Decimal | DecimalJsLike | number | string | null
+    denialReason?: StringNullableWithAggregatesFilter<"InsuranceClaim"> | string | null
+    status?: EnumInsuranceClaimStatusWithAggregatesFilter<"InsuranceClaim"> | $Enums.InsuranceClaimStatus
+    submittedAt?: DateTimeNullableWithAggregatesFilter<"InsuranceClaim"> | Date | string | null
+    reviewedAt?: DateTimeNullableWithAggregatesFilter<"InsuranceClaim"> | Date | string | null
+    billingStaffNotes?: StringNullableWithAggregatesFilter<"InsuranceClaim"> | string | null
+    insuranceNotes?: StringNullableWithAggregatesFilter<"InsuranceClaim"> | string | null
+    createdBy?: StringWithAggregatesFilter<"InsuranceClaim"> | string
+    reviewedBy?: StringNullableWithAggregatesFilter<"InsuranceClaim"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"InsuranceClaim"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"InsuranceClaim"> | Date | string
+  }
+
+  export type InsuranceDocumentWhereInput = {
+    AND?: InsuranceDocumentWhereInput | InsuranceDocumentWhereInput[]
+    OR?: InsuranceDocumentWhereInput[]
+    NOT?: InsuranceDocumentWhereInput | InsuranceDocumentWhereInput[]
+    id?: UuidFilter<"InsuranceDocument"> | string
+    claimId?: UuidFilter<"InsuranceDocument"> | string
+    documentType?: StringFilter<"InsuranceDocument"> | string
+    fileName?: StringFilter<"InsuranceDocument"> | string
+    fileUrl?: StringFilter<"InsuranceDocument"> | string
+    fileSize?: IntFilter<"InsuranceDocument"> | number
+    mimeType?: StringFilter<"InsuranceDocument"> | string
+    description?: StringNullableFilter<"InsuranceDocument"> | string | null
+    uploadedBy?: StringFilter<"InsuranceDocument"> | string
+    createdAt?: DateTimeFilter<"InsuranceDocument"> | Date | string
+    claim?: XOR<InsuranceClaimScalarRelationFilter, InsuranceClaimWhereInput>
+  }
+
+  export type InsuranceDocumentOrderByWithRelationInput = {
+    id?: SortOrder
+    claimId?: SortOrder
+    documentType?: SortOrder
+    fileName?: SortOrder
+    fileUrl?: SortOrder
+    fileSize?: SortOrder
+    mimeType?: SortOrder
+    description?: SortOrderInput | SortOrder
+    uploadedBy?: SortOrder
+    createdAt?: SortOrder
+    claim?: InsuranceClaimOrderByWithRelationInput
+  }
+
+  export type InsuranceDocumentWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: InsuranceDocumentWhereInput | InsuranceDocumentWhereInput[]
+    OR?: InsuranceDocumentWhereInput[]
+    NOT?: InsuranceDocumentWhereInput | InsuranceDocumentWhereInput[]
+    claimId?: UuidFilter<"InsuranceDocument"> | string
+    documentType?: StringFilter<"InsuranceDocument"> | string
+    fileName?: StringFilter<"InsuranceDocument"> | string
+    fileUrl?: StringFilter<"InsuranceDocument"> | string
+    fileSize?: IntFilter<"InsuranceDocument"> | number
+    mimeType?: StringFilter<"InsuranceDocument"> | string
+    description?: StringNullableFilter<"InsuranceDocument"> | string | null
+    uploadedBy?: StringFilter<"InsuranceDocument"> | string
+    createdAt?: DateTimeFilter<"InsuranceDocument"> | Date | string
+    claim?: XOR<InsuranceClaimScalarRelationFilter, InsuranceClaimWhereInput>
+  }, "id">
+
+  export type InsuranceDocumentOrderByWithAggregationInput = {
+    id?: SortOrder
+    claimId?: SortOrder
+    documentType?: SortOrder
+    fileName?: SortOrder
+    fileUrl?: SortOrder
+    fileSize?: SortOrder
+    mimeType?: SortOrder
+    description?: SortOrderInput | SortOrder
+    uploadedBy?: SortOrder
+    createdAt?: SortOrder
+    _count?: InsuranceDocumentCountOrderByAggregateInput
+    _avg?: InsuranceDocumentAvgOrderByAggregateInput
+    _max?: InsuranceDocumentMaxOrderByAggregateInput
+    _min?: InsuranceDocumentMinOrderByAggregateInput
+    _sum?: InsuranceDocumentSumOrderByAggregateInput
+  }
+
+  export type InsuranceDocumentScalarWhereWithAggregatesInput = {
+    AND?: InsuranceDocumentScalarWhereWithAggregatesInput | InsuranceDocumentScalarWhereWithAggregatesInput[]
+    OR?: InsuranceDocumentScalarWhereWithAggregatesInput[]
+    NOT?: InsuranceDocumentScalarWhereWithAggregatesInput | InsuranceDocumentScalarWhereWithAggregatesInput[]
+    id?: UuidWithAggregatesFilter<"InsuranceDocument"> | string
+    claimId?: UuidWithAggregatesFilter<"InsuranceDocument"> | string
+    documentType?: StringWithAggregatesFilter<"InsuranceDocument"> | string
+    fileName?: StringWithAggregatesFilter<"InsuranceDocument"> | string
+    fileUrl?: StringWithAggregatesFilter<"InsuranceDocument"> | string
+    fileSize?: IntWithAggregatesFilter<"InsuranceDocument"> | number
+    mimeType?: StringWithAggregatesFilter<"InsuranceDocument"> | string
+    description?: StringNullableWithAggregatesFilter<"InsuranceDocument"> | string | null
+    uploadedBy?: StringWithAggregatesFilter<"InsuranceDocument"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"InsuranceDocument"> | Date | string
+  }
+
+  export type InsuranceAccessTokenWhereInput = {
+    AND?: InsuranceAccessTokenWhereInput | InsuranceAccessTokenWhereInput[]
+    OR?: InsuranceAccessTokenWhereInput[]
+    NOT?: InsuranceAccessTokenWhereInput | InsuranceAccessTokenWhereInput[]
+    id?: UuidFilter<"InsuranceAccessToken"> | string
+    claimId?: UuidFilter<"InsuranceAccessToken"> | string
+    token?: StringFilter<"InsuranceAccessToken"> | string
+    recipientEmail?: StringFilter<"InsuranceAccessToken"> | string
+    expiresAt?: DateTimeFilter<"InsuranceAccessToken"> | Date | string
+    usedAt?: DateTimeNullableFilter<"InsuranceAccessToken"> | Date | string | null
+    isRevoked?: BoolFilter<"InsuranceAccessToken"> | boolean
+    createdAt?: DateTimeFilter<"InsuranceAccessToken"> | Date | string
+    claim?: XOR<InsuranceClaimScalarRelationFilter, InsuranceClaimWhereInput>
+  }
+
+  export type InsuranceAccessTokenOrderByWithRelationInput = {
+    id?: SortOrder
+    claimId?: SortOrder
+    token?: SortOrder
+    recipientEmail?: SortOrder
+    expiresAt?: SortOrder
+    usedAt?: SortOrderInput | SortOrder
+    isRevoked?: SortOrder
+    createdAt?: SortOrder
+    claim?: InsuranceClaimOrderByWithRelationInput
+  }
+
+  export type InsuranceAccessTokenWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    token?: string
+    AND?: InsuranceAccessTokenWhereInput | InsuranceAccessTokenWhereInput[]
+    OR?: InsuranceAccessTokenWhereInput[]
+    NOT?: InsuranceAccessTokenWhereInput | InsuranceAccessTokenWhereInput[]
+    claimId?: UuidFilter<"InsuranceAccessToken"> | string
+    recipientEmail?: StringFilter<"InsuranceAccessToken"> | string
+    expiresAt?: DateTimeFilter<"InsuranceAccessToken"> | Date | string
+    usedAt?: DateTimeNullableFilter<"InsuranceAccessToken"> | Date | string | null
+    isRevoked?: BoolFilter<"InsuranceAccessToken"> | boolean
+    createdAt?: DateTimeFilter<"InsuranceAccessToken"> | Date | string
+    claim?: XOR<InsuranceClaimScalarRelationFilter, InsuranceClaimWhereInput>
+  }, "id" | "token">
+
+  export type InsuranceAccessTokenOrderByWithAggregationInput = {
+    id?: SortOrder
+    claimId?: SortOrder
+    token?: SortOrder
+    recipientEmail?: SortOrder
+    expiresAt?: SortOrder
+    usedAt?: SortOrderInput | SortOrder
+    isRevoked?: SortOrder
+    createdAt?: SortOrder
+    _count?: InsuranceAccessTokenCountOrderByAggregateInput
+    _max?: InsuranceAccessTokenMaxOrderByAggregateInput
+    _min?: InsuranceAccessTokenMinOrderByAggregateInput
+  }
+
+  export type InsuranceAccessTokenScalarWhereWithAggregatesInput = {
+    AND?: InsuranceAccessTokenScalarWhereWithAggregatesInput | InsuranceAccessTokenScalarWhereWithAggregatesInput[]
+    OR?: InsuranceAccessTokenScalarWhereWithAggregatesInput[]
+    NOT?: InsuranceAccessTokenScalarWhereWithAggregatesInput | InsuranceAccessTokenScalarWhereWithAggregatesInput[]
+    id?: UuidWithAggregatesFilter<"InsuranceAccessToken"> | string
+    claimId?: UuidWithAggregatesFilter<"InsuranceAccessToken"> | string
+    token?: StringWithAggregatesFilter<"InsuranceAccessToken"> | string
+    recipientEmail?: StringWithAggregatesFilter<"InsuranceAccessToken"> | string
+    expiresAt?: DateTimeWithAggregatesFilter<"InsuranceAccessToken"> | Date | string
+    usedAt?: DateTimeNullableWithAggregatesFilter<"InsuranceAccessToken"> | Date | string | null
+    isRevoked?: BoolWithAggregatesFilter<"InsuranceAccessToken"> | boolean
+    createdAt?: DateTimeWithAggregatesFilter<"InsuranceAccessToken"> | Date | string
   }
 
   export type UserCreateInput = {
@@ -31025,6 +35469,7 @@ export namespace Prisma {
     user: UserCreateNestedOneWithoutPatientProfileInput
     inpatientEncounters?: InpatientEncounterCreateNestedManyWithoutPatientInput
     outpatientEncounters?: OutpatientEncounterCreateNestedManyWithoutPatientInput
+    insuranceClaims?: InsuranceClaimCreateNestedManyWithoutPatientInput
   }
 
   export type PatientUncheckedCreateInput = {
@@ -31042,6 +35487,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     inpatientEncounters?: InpatientEncounterUncheckedCreateNestedManyWithoutPatientInput
     outpatientEncounters?: OutpatientEncounterUncheckedCreateNestedManyWithoutPatientInput
+    insuranceClaims?: InsuranceClaimUncheckedCreateNestedManyWithoutPatientInput
   }
 
   export type PatientUpdateInput = {
@@ -31059,6 +35505,7 @@ export namespace Prisma {
     user?: UserUpdateOneRequiredWithoutPatientProfileNestedInput
     inpatientEncounters?: InpatientEncounterUpdateManyWithoutPatientNestedInput
     outpatientEncounters?: OutpatientEncounterUpdateManyWithoutPatientNestedInput
+    insuranceClaims?: InsuranceClaimUpdateManyWithoutPatientNestedInput
   }
 
   export type PatientUncheckedUpdateInput = {
@@ -31076,6 +35523,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     inpatientEncounters?: InpatientEncounterUncheckedUpdateManyWithoutPatientNestedInput
     outpatientEncounters?: OutpatientEncounterUncheckedUpdateManyWithoutPatientNestedInput
+    insuranceClaims?: InsuranceClaimUncheckedUpdateManyWithoutPatientNestedInput
   }
 
   export type PatientCreateManyInput = {
@@ -32241,6 +36689,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     patient: PatientCreateNestedOneWithoutOutpatientEncountersInput
+    insuranceClaim?: InsuranceClaimCreateNestedOneWithoutOutpatientEncounterInput
   }
 
   export type OutpatientEncounterUncheckedCreateInput = {
@@ -32257,6 +36706,7 @@ export namespace Prisma {
     notes?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    insuranceClaim?: InsuranceClaimUncheckedCreateNestedOneWithoutOutpatientEncounterInput
   }
 
   export type OutpatientEncounterUpdateInput = {
@@ -32273,6 +36723,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     patient?: PatientUpdateOneRequiredWithoutOutpatientEncountersNestedInput
+    insuranceClaim?: InsuranceClaimUpdateOneWithoutOutpatientEncounterNestedInput
   }
 
   export type OutpatientEncounterUncheckedUpdateInput = {
@@ -32289,6 +36740,7 @@ export namespace Prisma {
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    insuranceClaim?: InsuranceClaimUncheckedUpdateOneWithoutOutpatientEncounterNestedInput
   }
 
   export type OutpatientEncounterCreateManyInput = {
@@ -32356,6 +36808,7 @@ export namespace Prisma {
     patient: PatientCreateNestedOneWithoutInpatientEncountersInput
     charts?: InpatientEncounterChartCreateNestedManyWithoutEncounterInput
     orders?: InpatientEncounterOrderCreateNestedManyWithoutEncounterInput
+    insuranceClaim?: InsuranceClaimCreateNestedOneWithoutInpatientEncounterInput
   }
 
   export type InpatientEncounterUncheckedCreateInput = {
@@ -32376,6 +36829,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     charts?: InpatientEncounterChartUncheckedCreateNestedManyWithoutEncounterInput
     orders?: InpatientEncounterOrderUncheckedCreateNestedManyWithoutEncounterInput
+    insuranceClaim?: InsuranceClaimUncheckedCreateNestedOneWithoutInpatientEncounterInput
   }
 
   export type InpatientEncounterUpdateInput = {
@@ -32396,6 +36850,7 @@ export namespace Prisma {
     patient?: PatientUpdateOneRequiredWithoutInpatientEncountersNestedInput
     charts?: InpatientEncounterChartUpdateManyWithoutEncounterNestedInput
     orders?: InpatientEncounterOrderUpdateManyWithoutEncounterNestedInput
+    insuranceClaim?: InsuranceClaimUpdateOneWithoutInpatientEncounterNestedInput
   }
 
   export type InpatientEncounterUncheckedUpdateInput = {
@@ -32416,6 +36871,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     charts?: InpatientEncounterChartUncheckedUpdateManyWithoutEncounterNestedInput
     orders?: InpatientEncounterOrderUncheckedUpdateManyWithoutEncounterNestedInput
+    insuranceClaim?: InsuranceClaimUncheckedUpdateOneWithoutInpatientEncounterNestedInput
   }
 
   export type InpatientEncounterCreateManyInput = {
@@ -32708,6 +37164,338 @@ export namespace Prisma {
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type InsuranceClaimCreateInput = {
+    id?: string
+    claimNumber: string
+    insuranceProvider: string
+    insuranceNumber?: string | null
+    policyNumber?: string | null
+    claimAmount: Decimal | DecimalJsLike | number | string
+    approvedAmount?: Decimal | DecimalJsLike | number | string | null
+    denialReason?: string | null
+    status?: $Enums.InsuranceClaimStatus
+    submittedAt?: Date | string | null
+    reviewedAt?: Date | string | null
+    billingStaffNotes?: string | null
+    insuranceNotes?: string | null
+    createdBy: string
+    reviewedBy?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    patient: PatientCreateNestedOneWithoutInsuranceClaimsInput
+    inpatientEncounter?: InpatientEncounterCreateNestedOneWithoutInsuranceClaimInput
+    outpatientEncounter?: OutpatientEncounterCreateNestedOneWithoutInsuranceClaimInput
+    documents?: InsuranceDocumentCreateNestedManyWithoutClaimInput
+    accessTokens?: InsuranceAccessTokenCreateNestedManyWithoutClaimInput
+  }
+
+  export type InsuranceClaimUncheckedCreateInput = {
+    id?: string
+    claimNumber: string
+    patientId: string
+    inpatientEncounterId?: string | null
+    outpatientEncounterId?: string | null
+    insuranceProvider: string
+    insuranceNumber?: string | null
+    policyNumber?: string | null
+    claimAmount: Decimal | DecimalJsLike | number | string
+    approvedAmount?: Decimal | DecimalJsLike | number | string | null
+    denialReason?: string | null
+    status?: $Enums.InsuranceClaimStatus
+    submittedAt?: Date | string | null
+    reviewedAt?: Date | string | null
+    billingStaffNotes?: string | null
+    insuranceNotes?: string | null
+    createdBy: string
+    reviewedBy?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    documents?: InsuranceDocumentUncheckedCreateNestedManyWithoutClaimInput
+    accessTokens?: InsuranceAccessTokenUncheckedCreateNestedManyWithoutClaimInput
+  }
+
+  export type InsuranceClaimUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    claimNumber?: StringFieldUpdateOperationsInput | string
+    insuranceProvider?: StringFieldUpdateOperationsInput | string
+    insuranceNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    policyNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    claimAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    approvedAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    denialReason?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumInsuranceClaimStatusFieldUpdateOperationsInput | $Enums.InsuranceClaimStatus
+    submittedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    billingStaffNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    insuranceNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdBy?: StringFieldUpdateOperationsInput | string
+    reviewedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    patient?: PatientUpdateOneRequiredWithoutInsuranceClaimsNestedInput
+    inpatientEncounter?: InpatientEncounterUpdateOneWithoutInsuranceClaimNestedInput
+    outpatientEncounter?: OutpatientEncounterUpdateOneWithoutInsuranceClaimNestedInput
+    documents?: InsuranceDocumentUpdateManyWithoutClaimNestedInput
+    accessTokens?: InsuranceAccessTokenUpdateManyWithoutClaimNestedInput
+  }
+
+  export type InsuranceClaimUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    claimNumber?: StringFieldUpdateOperationsInput | string
+    patientId?: StringFieldUpdateOperationsInput | string
+    inpatientEncounterId?: NullableStringFieldUpdateOperationsInput | string | null
+    outpatientEncounterId?: NullableStringFieldUpdateOperationsInput | string | null
+    insuranceProvider?: StringFieldUpdateOperationsInput | string
+    insuranceNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    policyNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    claimAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    approvedAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    denialReason?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumInsuranceClaimStatusFieldUpdateOperationsInput | $Enums.InsuranceClaimStatus
+    submittedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    billingStaffNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    insuranceNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdBy?: StringFieldUpdateOperationsInput | string
+    reviewedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    documents?: InsuranceDocumentUncheckedUpdateManyWithoutClaimNestedInput
+    accessTokens?: InsuranceAccessTokenUncheckedUpdateManyWithoutClaimNestedInput
+  }
+
+  export type InsuranceClaimCreateManyInput = {
+    id?: string
+    claimNumber: string
+    patientId: string
+    inpatientEncounterId?: string | null
+    outpatientEncounterId?: string | null
+    insuranceProvider: string
+    insuranceNumber?: string | null
+    policyNumber?: string | null
+    claimAmount: Decimal | DecimalJsLike | number | string
+    approvedAmount?: Decimal | DecimalJsLike | number | string | null
+    denialReason?: string | null
+    status?: $Enums.InsuranceClaimStatus
+    submittedAt?: Date | string | null
+    reviewedAt?: Date | string | null
+    billingStaffNotes?: string | null
+    insuranceNotes?: string | null
+    createdBy: string
+    reviewedBy?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type InsuranceClaimUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    claimNumber?: StringFieldUpdateOperationsInput | string
+    insuranceProvider?: StringFieldUpdateOperationsInput | string
+    insuranceNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    policyNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    claimAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    approvedAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    denialReason?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumInsuranceClaimStatusFieldUpdateOperationsInput | $Enums.InsuranceClaimStatus
+    submittedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    billingStaffNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    insuranceNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdBy?: StringFieldUpdateOperationsInput | string
+    reviewedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type InsuranceClaimUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    claimNumber?: StringFieldUpdateOperationsInput | string
+    patientId?: StringFieldUpdateOperationsInput | string
+    inpatientEncounterId?: NullableStringFieldUpdateOperationsInput | string | null
+    outpatientEncounterId?: NullableStringFieldUpdateOperationsInput | string | null
+    insuranceProvider?: StringFieldUpdateOperationsInput | string
+    insuranceNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    policyNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    claimAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    approvedAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    denialReason?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumInsuranceClaimStatusFieldUpdateOperationsInput | $Enums.InsuranceClaimStatus
+    submittedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    billingStaffNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    insuranceNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdBy?: StringFieldUpdateOperationsInput | string
+    reviewedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type InsuranceDocumentCreateInput = {
+    id?: string
+    documentType: string
+    fileName: string
+    fileUrl: string
+    fileSize: number
+    mimeType: string
+    description?: string | null
+    uploadedBy: string
+    createdAt?: Date | string
+    claim: InsuranceClaimCreateNestedOneWithoutDocumentsInput
+  }
+
+  export type InsuranceDocumentUncheckedCreateInput = {
+    id?: string
+    claimId: string
+    documentType: string
+    fileName: string
+    fileUrl: string
+    fileSize: number
+    mimeType: string
+    description?: string | null
+    uploadedBy: string
+    createdAt?: Date | string
+  }
+
+  export type InsuranceDocumentUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    documentType?: StringFieldUpdateOperationsInput | string
+    fileName?: StringFieldUpdateOperationsInput | string
+    fileUrl?: StringFieldUpdateOperationsInput | string
+    fileSize?: IntFieldUpdateOperationsInput | number
+    mimeType?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    uploadedBy?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    claim?: InsuranceClaimUpdateOneRequiredWithoutDocumentsNestedInput
+  }
+
+  export type InsuranceDocumentUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    claimId?: StringFieldUpdateOperationsInput | string
+    documentType?: StringFieldUpdateOperationsInput | string
+    fileName?: StringFieldUpdateOperationsInput | string
+    fileUrl?: StringFieldUpdateOperationsInput | string
+    fileSize?: IntFieldUpdateOperationsInput | number
+    mimeType?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    uploadedBy?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type InsuranceDocumentCreateManyInput = {
+    id?: string
+    claimId: string
+    documentType: string
+    fileName: string
+    fileUrl: string
+    fileSize: number
+    mimeType: string
+    description?: string | null
+    uploadedBy: string
+    createdAt?: Date | string
+  }
+
+  export type InsuranceDocumentUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    documentType?: StringFieldUpdateOperationsInput | string
+    fileName?: StringFieldUpdateOperationsInput | string
+    fileUrl?: StringFieldUpdateOperationsInput | string
+    fileSize?: IntFieldUpdateOperationsInput | number
+    mimeType?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    uploadedBy?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type InsuranceDocumentUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    claimId?: StringFieldUpdateOperationsInput | string
+    documentType?: StringFieldUpdateOperationsInput | string
+    fileName?: StringFieldUpdateOperationsInput | string
+    fileUrl?: StringFieldUpdateOperationsInput | string
+    fileSize?: IntFieldUpdateOperationsInput | number
+    mimeType?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    uploadedBy?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type InsuranceAccessTokenCreateInput = {
+    id?: string
+    token: string
+    recipientEmail: string
+    expiresAt: Date | string
+    usedAt?: Date | string | null
+    isRevoked?: boolean
+    createdAt?: Date | string
+    claim: InsuranceClaimCreateNestedOneWithoutAccessTokensInput
+  }
+
+  export type InsuranceAccessTokenUncheckedCreateInput = {
+    id?: string
+    claimId: string
+    token: string
+    recipientEmail: string
+    expiresAt: Date | string
+    usedAt?: Date | string | null
+    isRevoked?: boolean
+    createdAt?: Date | string
+  }
+
+  export type InsuranceAccessTokenUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    token?: StringFieldUpdateOperationsInput | string
+    recipientEmail?: StringFieldUpdateOperationsInput | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    usedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isRevoked?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    claim?: InsuranceClaimUpdateOneRequiredWithoutAccessTokensNestedInput
+  }
+
+  export type InsuranceAccessTokenUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    claimId?: StringFieldUpdateOperationsInput | string
+    token?: StringFieldUpdateOperationsInput | string
+    recipientEmail?: StringFieldUpdateOperationsInput | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    usedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isRevoked?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type InsuranceAccessTokenCreateManyInput = {
+    id?: string
+    claimId: string
+    token: string
+    recipientEmail: string
+    expiresAt: Date | string
+    usedAt?: Date | string | null
+    isRevoked?: boolean
+    createdAt?: Date | string
+  }
+
+  export type InsuranceAccessTokenUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    token?: StringFieldUpdateOperationsInput | string
+    recipientEmail?: StringFieldUpdateOperationsInput | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    usedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isRevoked?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type InsuranceAccessTokenUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    claimId?: StringFieldUpdateOperationsInput | string
+    token?: StringFieldUpdateOperationsInput | string
+    recipientEmail?: StringFieldUpdateOperationsInput | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    usedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isRevoked?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type StringFilter<$PrismaModel = never> = {
@@ -33286,11 +38074,21 @@ export namespace Prisma {
     none?: OutpatientEncounterWhereInput
   }
 
+  export type InsuranceClaimListRelationFilter = {
+    every?: InsuranceClaimWhereInput
+    some?: InsuranceClaimWhereInput
+    none?: InsuranceClaimWhereInput
+  }
+
   export type InpatientEncounterOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
   export type OutpatientEncounterOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type InsuranceClaimOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -34213,6 +39011,11 @@ export namespace Prisma {
     isNot?: PatientWhereInput
   }
 
+  export type InsuranceClaimNullableScalarRelationFilter = {
+    is?: InsuranceClaimWhereInput | null
+    isNot?: InsuranceClaimWhereInput | null
+  }
+
   export type OutpatientEncounterCountOrderByAggregateInput = {
     id?: SortOrder
     patientId?: SortOrder
@@ -34603,6 +39406,217 @@ export namespace Prisma {
     _max?: NestedEnumParticularTypeFilter<$PrismaModel>
   }
 
+  export type EnumInsuranceClaimStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.InsuranceClaimStatus | EnumInsuranceClaimStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.InsuranceClaimStatus[] | ListEnumInsuranceClaimStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.InsuranceClaimStatus[] | ListEnumInsuranceClaimStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumInsuranceClaimStatusFilter<$PrismaModel> | $Enums.InsuranceClaimStatus
+  }
+
+  export type InpatientEncounterNullableScalarRelationFilter = {
+    is?: InpatientEncounterWhereInput | null
+    isNot?: InpatientEncounterWhereInput | null
+  }
+
+  export type OutpatientEncounterNullableScalarRelationFilter = {
+    is?: OutpatientEncounterWhereInput | null
+    isNot?: OutpatientEncounterWhereInput | null
+  }
+
+  export type InsuranceDocumentListRelationFilter = {
+    every?: InsuranceDocumentWhereInput
+    some?: InsuranceDocumentWhereInput
+    none?: InsuranceDocumentWhereInput
+  }
+
+  export type InsuranceAccessTokenListRelationFilter = {
+    every?: InsuranceAccessTokenWhereInput
+    some?: InsuranceAccessTokenWhereInput
+    none?: InsuranceAccessTokenWhereInput
+  }
+
+  export type InsuranceDocumentOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type InsuranceAccessTokenOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type InsuranceClaimCountOrderByAggregateInput = {
+    id?: SortOrder
+    claimNumber?: SortOrder
+    patientId?: SortOrder
+    inpatientEncounterId?: SortOrder
+    outpatientEncounterId?: SortOrder
+    insuranceProvider?: SortOrder
+    insuranceNumber?: SortOrder
+    policyNumber?: SortOrder
+    claimAmount?: SortOrder
+    approvedAmount?: SortOrder
+    denialReason?: SortOrder
+    status?: SortOrder
+    submittedAt?: SortOrder
+    reviewedAt?: SortOrder
+    billingStaffNotes?: SortOrder
+    insuranceNotes?: SortOrder
+    createdBy?: SortOrder
+    reviewedBy?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type InsuranceClaimAvgOrderByAggregateInput = {
+    claimAmount?: SortOrder
+    approvedAmount?: SortOrder
+  }
+
+  export type InsuranceClaimMaxOrderByAggregateInput = {
+    id?: SortOrder
+    claimNumber?: SortOrder
+    patientId?: SortOrder
+    inpatientEncounterId?: SortOrder
+    outpatientEncounterId?: SortOrder
+    insuranceProvider?: SortOrder
+    insuranceNumber?: SortOrder
+    policyNumber?: SortOrder
+    claimAmount?: SortOrder
+    approvedAmount?: SortOrder
+    denialReason?: SortOrder
+    status?: SortOrder
+    submittedAt?: SortOrder
+    reviewedAt?: SortOrder
+    billingStaffNotes?: SortOrder
+    insuranceNotes?: SortOrder
+    createdBy?: SortOrder
+    reviewedBy?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type InsuranceClaimMinOrderByAggregateInput = {
+    id?: SortOrder
+    claimNumber?: SortOrder
+    patientId?: SortOrder
+    inpatientEncounterId?: SortOrder
+    outpatientEncounterId?: SortOrder
+    insuranceProvider?: SortOrder
+    insuranceNumber?: SortOrder
+    policyNumber?: SortOrder
+    claimAmount?: SortOrder
+    approvedAmount?: SortOrder
+    denialReason?: SortOrder
+    status?: SortOrder
+    submittedAt?: SortOrder
+    reviewedAt?: SortOrder
+    billingStaffNotes?: SortOrder
+    insuranceNotes?: SortOrder
+    createdBy?: SortOrder
+    reviewedBy?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type InsuranceClaimSumOrderByAggregateInput = {
+    claimAmount?: SortOrder
+    approvedAmount?: SortOrder
+  }
+
+  export type EnumInsuranceClaimStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.InsuranceClaimStatus | EnumInsuranceClaimStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.InsuranceClaimStatus[] | ListEnumInsuranceClaimStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.InsuranceClaimStatus[] | ListEnumInsuranceClaimStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumInsuranceClaimStatusWithAggregatesFilter<$PrismaModel> | $Enums.InsuranceClaimStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumInsuranceClaimStatusFilter<$PrismaModel>
+    _max?: NestedEnumInsuranceClaimStatusFilter<$PrismaModel>
+  }
+
+  export type InsuranceClaimScalarRelationFilter = {
+    is?: InsuranceClaimWhereInput
+    isNot?: InsuranceClaimWhereInput
+  }
+
+  export type InsuranceDocumentCountOrderByAggregateInput = {
+    id?: SortOrder
+    claimId?: SortOrder
+    documentType?: SortOrder
+    fileName?: SortOrder
+    fileUrl?: SortOrder
+    fileSize?: SortOrder
+    mimeType?: SortOrder
+    description?: SortOrder
+    uploadedBy?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type InsuranceDocumentAvgOrderByAggregateInput = {
+    fileSize?: SortOrder
+  }
+
+  export type InsuranceDocumentMaxOrderByAggregateInput = {
+    id?: SortOrder
+    claimId?: SortOrder
+    documentType?: SortOrder
+    fileName?: SortOrder
+    fileUrl?: SortOrder
+    fileSize?: SortOrder
+    mimeType?: SortOrder
+    description?: SortOrder
+    uploadedBy?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type InsuranceDocumentMinOrderByAggregateInput = {
+    id?: SortOrder
+    claimId?: SortOrder
+    documentType?: SortOrder
+    fileName?: SortOrder
+    fileUrl?: SortOrder
+    fileSize?: SortOrder
+    mimeType?: SortOrder
+    description?: SortOrder
+    uploadedBy?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type InsuranceDocumentSumOrderByAggregateInput = {
+    fileSize?: SortOrder
+  }
+
+  export type InsuranceAccessTokenCountOrderByAggregateInput = {
+    id?: SortOrder
+    claimId?: SortOrder
+    token?: SortOrder
+    recipientEmail?: SortOrder
+    expiresAt?: SortOrder
+    usedAt?: SortOrder
+    isRevoked?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type InsuranceAccessTokenMaxOrderByAggregateInput = {
+    id?: SortOrder
+    claimId?: SortOrder
+    token?: SortOrder
+    recipientEmail?: SortOrder
+    expiresAt?: SortOrder
+    usedAt?: SortOrder
+    isRevoked?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type InsuranceAccessTokenMinOrderByAggregateInput = {
+    id?: SortOrder
+    claimId?: SortOrder
+    token?: SortOrder
+    recipientEmail?: SortOrder
+    expiresAt?: SortOrder
+    usedAt?: SortOrder
+    isRevoked?: SortOrder
+    createdAt?: SortOrder
+  }
+
   export type RefreshTokenCreateNestedManyWithoutUserInput = {
     create?: XOR<RefreshTokenCreateWithoutUserInput, RefreshTokenUncheckedCreateWithoutUserInput> | RefreshTokenCreateWithoutUserInput[] | RefreshTokenUncheckedCreateWithoutUserInput[]
     connectOrCreate?: RefreshTokenCreateOrConnectWithoutUserInput | RefreshTokenCreateOrConnectWithoutUserInput[]
@@ -34966,6 +39980,13 @@ export namespace Prisma {
     connect?: OutpatientEncounterWhereUniqueInput | OutpatientEncounterWhereUniqueInput[]
   }
 
+  export type InsuranceClaimCreateNestedManyWithoutPatientInput = {
+    create?: XOR<InsuranceClaimCreateWithoutPatientInput, InsuranceClaimUncheckedCreateWithoutPatientInput> | InsuranceClaimCreateWithoutPatientInput[] | InsuranceClaimUncheckedCreateWithoutPatientInput[]
+    connectOrCreate?: InsuranceClaimCreateOrConnectWithoutPatientInput | InsuranceClaimCreateOrConnectWithoutPatientInput[]
+    createMany?: InsuranceClaimCreateManyPatientInputEnvelope
+    connect?: InsuranceClaimWhereUniqueInput | InsuranceClaimWhereUniqueInput[]
+  }
+
   export type InpatientEncounterUncheckedCreateNestedManyWithoutPatientInput = {
     create?: XOR<InpatientEncounterCreateWithoutPatientInput, InpatientEncounterUncheckedCreateWithoutPatientInput> | InpatientEncounterCreateWithoutPatientInput[] | InpatientEncounterUncheckedCreateWithoutPatientInput[]
     connectOrCreate?: InpatientEncounterCreateOrConnectWithoutPatientInput | InpatientEncounterCreateOrConnectWithoutPatientInput[]
@@ -34978,6 +39999,13 @@ export namespace Prisma {
     connectOrCreate?: OutpatientEncounterCreateOrConnectWithoutPatientInput | OutpatientEncounterCreateOrConnectWithoutPatientInput[]
     createMany?: OutpatientEncounterCreateManyPatientInputEnvelope
     connect?: OutpatientEncounterWhereUniqueInput | OutpatientEncounterWhereUniqueInput[]
+  }
+
+  export type InsuranceClaimUncheckedCreateNestedManyWithoutPatientInput = {
+    create?: XOR<InsuranceClaimCreateWithoutPatientInput, InsuranceClaimUncheckedCreateWithoutPatientInput> | InsuranceClaimCreateWithoutPatientInput[] | InsuranceClaimUncheckedCreateWithoutPatientInput[]
+    connectOrCreate?: InsuranceClaimCreateOrConnectWithoutPatientInput | InsuranceClaimCreateOrConnectWithoutPatientInput[]
+    createMany?: InsuranceClaimCreateManyPatientInputEnvelope
+    connect?: InsuranceClaimWhereUniqueInput | InsuranceClaimWhereUniqueInput[]
   }
 
   export type NullableEnumBloodTypeFieldUpdateOperationsInput = {
@@ -35020,6 +40048,20 @@ export namespace Prisma {
     deleteMany?: OutpatientEncounterScalarWhereInput | OutpatientEncounterScalarWhereInput[]
   }
 
+  export type InsuranceClaimUpdateManyWithoutPatientNestedInput = {
+    create?: XOR<InsuranceClaimCreateWithoutPatientInput, InsuranceClaimUncheckedCreateWithoutPatientInput> | InsuranceClaimCreateWithoutPatientInput[] | InsuranceClaimUncheckedCreateWithoutPatientInput[]
+    connectOrCreate?: InsuranceClaimCreateOrConnectWithoutPatientInput | InsuranceClaimCreateOrConnectWithoutPatientInput[]
+    upsert?: InsuranceClaimUpsertWithWhereUniqueWithoutPatientInput | InsuranceClaimUpsertWithWhereUniqueWithoutPatientInput[]
+    createMany?: InsuranceClaimCreateManyPatientInputEnvelope
+    set?: InsuranceClaimWhereUniqueInput | InsuranceClaimWhereUniqueInput[]
+    disconnect?: InsuranceClaimWhereUniqueInput | InsuranceClaimWhereUniqueInput[]
+    delete?: InsuranceClaimWhereUniqueInput | InsuranceClaimWhereUniqueInput[]
+    connect?: InsuranceClaimWhereUniqueInput | InsuranceClaimWhereUniqueInput[]
+    update?: InsuranceClaimUpdateWithWhereUniqueWithoutPatientInput | InsuranceClaimUpdateWithWhereUniqueWithoutPatientInput[]
+    updateMany?: InsuranceClaimUpdateManyWithWhereWithoutPatientInput | InsuranceClaimUpdateManyWithWhereWithoutPatientInput[]
+    deleteMany?: InsuranceClaimScalarWhereInput | InsuranceClaimScalarWhereInput[]
+  }
+
   export type InpatientEncounterUncheckedUpdateManyWithoutPatientNestedInput = {
     create?: XOR<InpatientEncounterCreateWithoutPatientInput, InpatientEncounterUncheckedCreateWithoutPatientInput> | InpatientEncounterCreateWithoutPatientInput[] | InpatientEncounterUncheckedCreateWithoutPatientInput[]
     connectOrCreate?: InpatientEncounterCreateOrConnectWithoutPatientInput | InpatientEncounterCreateOrConnectWithoutPatientInput[]
@@ -35046,6 +40088,20 @@ export namespace Prisma {
     update?: OutpatientEncounterUpdateWithWhereUniqueWithoutPatientInput | OutpatientEncounterUpdateWithWhereUniqueWithoutPatientInput[]
     updateMany?: OutpatientEncounterUpdateManyWithWhereWithoutPatientInput | OutpatientEncounterUpdateManyWithWhereWithoutPatientInput[]
     deleteMany?: OutpatientEncounterScalarWhereInput | OutpatientEncounterScalarWhereInput[]
+  }
+
+  export type InsuranceClaimUncheckedUpdateManyWithoutPatientNestedInput = {
+    create?: XOR<InsuranceClaimCreateWithoutPatientInput, InsuranceClaimUncheckedCreateWithoutPatientInput> | InsuranceClaimCreateWithoutPatientInput[] | InsuranceClaimUncheckedCreateWithoutPatientInput[]
+    connectOrCreate?: InsuranceClaimCreateOrConnectWithoutPatientInput | InsuranceClaimCreateOrConnectWithoutPatientInput[]
+    upsert?: InsuranceClaimUpsertWithWhereUniqueWithoutPatientInput | InsuranceClaimUpsertWithWhereUniqueWithoutPatientInput[]
+    createMany?: InsuranceClaimCreateManyPatientInputEnvelope
+    set?: InsuranceClaimWhereUniqueInput | InsuranceClaimWhereUniqueInput[]
+    disconnect?: InsuranceClaimWhereUniqueInput | InsuranceClaimWhereUniqueInput[]
+    delete?: InsuranceClaimWhereUniqueInput | InsuranceClaimWhereUniqueInput[]
+    connect?: InsuranceClaimWhereUniqueInput | InsuranceClaimWhereUniqueInput[]
+    update?: InsuranceClaimUpdateWithWhereUniqueWithoutPatientInput | InsuranceClaimUpdateWithWhereUniqueWithoutPatientInput[]
+    updateMany?: InsuranceClaimUpdateManyWithWhereWithoutPatientInput | InsuranceClaimUpdateManyWithWhereWithoutPatientInput[]
+    deleteMany?: InsuranceClaimScalarWhereInput | InsuranceClaimScalarWhereInput[]
   }
 
   export type UserCreateNestedOneWithoutPartnerProfileInput = {
@@ -35518,6 +40574,18 @@ export namespace Prisma {
     connect?: PatientWhereUniqueInput
   }
 
+  export type InsuranceClaimCreateNestedOneWithoutOutpatientEncounterInput = {
+    create?: XOR<InsuranceClaimCreateWithoutOutpatientEncounterInput, InsuranceClaimUncheckedCreateWithoutOutpatientEncounterInput>
+    connectOrCreate?: InsuranceClaimCreateOrConnectWithoutOutpatientEncounterInput
+    connect?: InsuranceClaimWhereUniqueInput
+  }
+
+  export type InsuranceClaimUncheckedCreateNestedOneWithoutOutpatientEncounterInput = {
+    create?: XOR<InsuranceClaimCreateWithoutOutpatientEncounterInput, InsuranceClaimUncheckedCreateWithoutOutpatientEncounterInput>
+    connectOrCreate?: InsuranceClaimCreateOrConnectWithoutOutpatientEncounterInput
+    connect?: InsuranceClaimWhereUniqueInput
+  }
+
   export type EnumOutpatientEncounterTypeFieldUpdateOperationsInput = {
     set?: $Enums.OutpatientEncounterType
   }
@@ -35532,6 +40600,26 @@ export namespace Prisma {
     upsert?: PatientUpsertWithoutOutpatientEncountersInput
     connect?: PatientWhereUniqueInput
     update?: XOR<XOR<PatientUpdateToOneWithWhereWithoutOutpatientEncountersInput, PatientUpdateWithoutOutpatientEncountersInput>, PatientUncheckedUpdateWithoutOutpatientEncountersInput>
+  }
+
+  export type InsuranceClaimUpdateOneWithoutOutpatientEncounterNestedInput = {
+    create?: XOR<InsuranceClaimCreateWithoutOutpatientEncounterInput, InsuranceClaimUncheckedCreateWithoutOutpatientEncounterInput>
+    connectOrCreate?: InsuranceClaimCreateOrConnectWithoutOutpatientEncounterInput
+    upsert?: InsuranceClaimUpsertWithoutOutpatientEncounterInput
+    disconnect?: InsuranceClaimWhereInput | boolean
+    delete?: InsuranceClaimWhereInput | boolean
+    connect?: InsuranceClaimWhereUniqueInput
+    update?: XOR<XOR<InsuranceClaimUpdateToOneWithWhereWithoutOutpatientEncounterInput, InsuranceClaimUpdateWithoutOutpatientEncounterInput>, InsuranceClaimUncheckedUpdateWithoutOutpatientEncounterInput>
+  }
+
+  export type InsuranceClaimUncheckedUpdateOneWithoutOutpatientEncounterNestedInput = {
+    create?: XOR<InsuranceClaimCreateWithoutOutpatientEncounterInput, InsuranceClaimUncheckedCreateWithoutOutpatientEncounterInput>
+    connectOrCreate?: InsuranceClaimCreateOrConnectWithoutOutpatientEncounterInput
+    upsert?: InsuranceClaimUpsertWithoutOutpatientEncounterInput
+    disconnect?: InsuranceClaimWhereInput | boolean
+    delete?: InsuranceClaimWhereInput | boolean
+    connect?: InsuranceClaimWhereUniqueInput
+    update?: XOR<XOR<InsuranceClaimUpdateToOneWithWhereWithoutOutpatientEncounterInput, InsuranceClaimUpdateWithoutOutpatientEncounterInput>, InsuranceClaimUncheckedUpdateWithoutOutpatientEncounterInput>
   }
 
   export type PatientCreateNestedOneWithoutInpatientEncountersInput = {
@@ -35554,6 +40642,12 @@ export namespace Prisma {
     connect?: InpatientEncounterOrderWhereUniqueInput | InpatientEncounterOrderWhereUniqueInput[]
   }
 
+  export type InsuranceClaimCreateNestedOneWithoutInpatientEncounterInput = {
+    create?: XOR<InsuranceClaimCreateWithoutInpatientEncounterInput, InsuranceClaimUncheckedCreateWithoutInpatientEncounterInput>
+    connectOrCreate?: InsuranceClaimCreateOrConnectWithoutInpatientEncounterInput
+    connect?: InsuranceClaimWhereUniqueInput
+  }
+
   export type InpatientEncounterChartUncheckedCreateNestedManyWithoutEncounterInput = {
     create?: XOR<InpatientEncounterChartCreateWithoutEncounterInput, InpatientEncounterChartUncheckedCreateWithoutEncounterInput> | InpatientEncounterChartCreateWithoutEncounterInput[] | InpatientEncounterChartUncheckedCreateWithoutEncounterInput[]
     connectOrCreate?: InpatientEncounterChartCreateOrConnectWithoutEncounterInput | InpatientEncounterChartCreateOrConnectWithoutEncounterInput[]
@@ -35566,6 +40660,12 @@ export namespace Prisma {
     connectOrCreate?: InpatientEncounterOrderCreateOrConnectWithoutEncounterInput | InpatientEncounterOrderCreateOrConnectWithoutEncounterInput[]
     createMany?: InpatientEncounterOrderCreateManyEncounterInputEnvelope
     connect?: InpatientEncounterOrderWhereUniqueInput | InpatientEncounterOrderWhereUniqueInput[]
+  }
+
+  export type InsuranceClaimUncheckedCreateNestedOneWithoutInpatientEncounterInput = {
+    create?: XOR<InsuranceClaimCreateWithoutInpatientEncounterInput, InsuranceClaimUncheckedCreateWithoutInpatientEncounterInput>
+    connectOrCreate?: InsuranceClaimCreateOrConnectWithoutInpatientEncounterInput
+    connect?: InsuranceClaimWhereUniqueInput
   }
 
   export type EnumInpatientTriageFieldUpdateOperationsInput = {
@@ -35612,6 +40712,16 @@ export namespace Prisma {
     deleteMany?: InpatientEncounterOrderScalarWhereInput | InpatientEncounterOrderScalarWhereInput[]
   }
 
+  export type InsuranceClaimUpdateOneWithoutInpatientEncounterNestedInput = {
+    create?: XOR<InsuranceClaimCreateWithoutInpatientEncounterInput, InsuranceClaimUncheckedCreateWithoutInpatientEncounterInput>
+    connectOrCreate?: InsuranceClaimCreateOrConnectWithoutInpatientEncounterInput
+    upsert?: InsuranceClaimUpsertWithoutInpatientEncounterInput
+    disconnect?: InsuranceClaimWhereInput | boolean
+    delete?: InsuranceClaimWhereInput | boolean
+    connect?: InsuranceClaimWhereUniqueInput
+    update?: XOR<XOR<InsuranceClaimUpdateToOneWithWhereWithoutInpatientEncounterInput, InsuranceClaimUpdateWithoutInpatientEncounterInput>, InsuranceClaimUncheckedUpdateWithoutInpatientEncounterInput>
+  }
+
   export type InpatientEncounterChartUncheckedUpdateManyWithoutEncounterNestedInput = {
     create?: XOR<InpatientEncounterChartCreateWithoutEncounterInput, InpatientEncounterChartUncheckedCreateWithoutEncounterInput> | InpatientEncounterChartCreateWithoutEncounterInput[] | InpatientEncounterChartUncheckedCreateWithoutEncounterInput[]
     connectOrCreate?: InpatientEncounterChartCreateOrConnectWithoutEncounterInput | InpatientEncounterChartCreateOrConnectWithoutEncounterInput[]
@@ -35638,6 +40748,16 @@ export namespace Prisma {
     update?: InpatientEncounterOrderUpdateWithWhereUniqueWithoutEncounterInput | InpatientEncounterOrderUpdateWithWhereUniqueWithoutEncounterInput[]
     updateMany?: InpatientEncounterOrderUpdateManyWithWhereWithoutEncounterInput | InpatientEncounterOrderUpdateManyWithWhereWithoutEncounterInput[]
     deleteMany?: InpatientEncounterOrderScalarWhereInput | InpatientEncounterOrderScalarWhereInput[]
+  }
+
+  export type InsuranceClaimUncheckedUpdateOneWithoutInpatientEncounterNestedInput = {
+    create?: XOR<InsuranceClaimCreateWithoutInpatientEncounterInput, InsuranceClaimUncheckedCreateWithoutInpatientEncounterInput>
+    connectOrCreate?: InsuranceClaimCreateOrConnectWithoutInpatientEncounterInput
+    upsert?: InsuranceClaimUpsertWithoutInpatientEncounterInput
+    disconnect?: InsuranceClaimWhereInput | boolean
+    delete?: InsuranceClaimWhereInput | boolean
+    connect?: InsuranceClaimWhereUniqueInput
+    update?: XOR<XOR<InsuranceClaimUpdateToOneWithWhereWithoutInpatientEncounterInput, InsuranceClaimUpdateWithoutInpatientEncounterInput>, InsuranceClaimUncheckedUpdateWithoutInpatientEncounterInput>
   }
 
   export type InpatientEncounterCreateNestedOneWithoutChartsInput = {
@@ -35736,6 +40856,168 @@ export namespace Prisma {
     update?: InpatientEncounterOrderUpdateWithWhereUniqueWithoutCatalogueItemInput | InpatientEncounterOrderUpdateWithWhereUniqueWithoutCatalogueItemInput[]
     updateMany?: InpatientEncounterOrderUpdateManyWithWhereWithoutCatalogueItemInput | InpatientEncounterOrderUpdateManyWithWhereWithoutCatalogueItemInput[]
     deleteMany?: InpatientEncounterOrderScalarWhereInput | InpatientEncounterOrderScalarWhereInput[]
+  }
+
+  export type PatientCreateNestedOneWithoutInsuranceClaimsInput = {
+    create?: XOR<PatientCreateWithoutInsuranceClaimsInput, PatientUncheckedCreateWithoutInsuranceClaimsInput>
+    connectOrCreate?: PatientCreateOrConnectWithoutInsuranceClaimsInput
+    connect?: PatientWhereUniqueInput
+  }
+
+  export type InpatientEncounterCreateNestedOneWithoutInsuranceClaimInput = {
+    create?: XOR<InpatientEncounterCreateWithoutInsuranceClaimInput, InpatientEncounterUncheckedCreateWithoutInsuranceClaimInput>
+    connectOrCreate?: InpatientEncounterCreateOrConnectWithoutInsuranceClaimInput
+    connect?: InpatientEncounterWhereUniqueInput
+  }
+
+  export type OutpatientEncounterCreateNestedOneWithoutInsuranceClaimInput = {
+    create?: XOR<OutpatientEncounterCreateWithoutInsuranceClaimInput, OutpatientEncounterUncheckedCreateWithoutInsuranceClaimInput>
+    connectOrCreate?: OutpatientEncounterCreateOrConnectWithoutInsuranceClaimInput
+    connect?: OutpatientEncounterWhereUniqueInput
+  }
+
+  export type InsuranceDocumentCreateNestedManyWithoutClaimInput = {
+    create?: XOR<InsuranceDocumentCreateWithoutClaimInput, InsuranceDocumentUncheckedCreateWithoutClaimInput> | InsuranceDocumentCreateWithoutClaimInput[] | InsuranceDocumentUncheckedCreateWithoutClaimInput[]
+    connectOrCreate?: InsuranceDocumentCreateOrConnectWithoutClaimInput | InsuranceDocumentCreateOrConnectWithoutClaimInput[]
+    createMany?: InsuranceDocumentCreateManyClaimInputEnvelope
+    connect?: InsuranceDocumentWhereUniqueInput | InsuranceDocumentWhereUniqueInput[]
+  }
+
+  export type InsuranceAccessTokenCreateNestedManyWithoutClaimInput = {
+    create?: XOR<InsuranceAccessTokenCreateWithoutClaimInput, InsuranceAccessTokenUncheckedCreateWithoutClaimInput> | InsuranceAccessTokenCreateWithoutClaimInput[] | InsuranceAccessTokenUncheckedCreateWithoutClaimInput[]
+    connectOrCreate?: InsuranceAccessTokenCreateOrConnectWithoutClaimInput | InsuranceAccessTokenCreateOrConnectWithoutClaimInput[]
+    createMany?: InsuranceAccessTokenCreateManyClaimInputEnvelope
+    connect?: InsuranceAccessTokenWhereUniqueInput | InsuranceAccessTokenWhereUniqueInput[]
+  }
+
+  export type InsuranceDocumentUncheckedCreateNestedManyWithoutClaimInput = {
+    create?: XOR<InsuranceDocumentCreateWithoutClaimInput, InsuranceDocumentUncheckedCreateWithoutClaimInput> | InsuranceDocumentCreateWithoutClaimInput[] | InsuranceDocumentUncheckedCreateWithoutClaimInput[]
+    connectOrCreate?: InsuranceDocumentCreateOrConnectWithoutClaimInput | InsuranceDocumentCreateOrConnectWithoutClaimInput[]
+    createMany?: InsuranceDocumentCreateManyClaimInputEnvelope
+    connect?: InsuranceDocumentWhereUniqueInput | InsuranceDocumentWhereUniqueInput[]
+  }
+
+  export type InsuranceAccessTokenUncheckedCreateNestedManyWithoutClaimInput = {
+    create?: XOR<InsuranceAccessTokenCreateWithoutClaimInput, InsuranceAccessTokenUncheckedCreateWithoutClaimInput> | InsuranceAccessTokenCreateWithoutClaimInput[] | InsuranceAccessTokenUncheckedCreateWithoutClaimInput[]
+    connectOrCreate?: InsuranceAccessTokenCreateOrConnectWithoutClaimInput | InsuranceAccessTokenCreateOrConnectWithoutClaimInput[]
+    createMany?: InsuranceAccessTokenCreateManyClaimInputEnvelope
+    connect?: InsuranceAccessTokenWhereUniqueInput | InsuranceAccessTokenWhereUniqueInput[]
+  }
+
+  export type EnumInsuranceClaimStatusFieldUpdateOperationsInput = {
+    set?: $Enums.InsuranceClaimStatus
+  }
+
+  export type PatientUpdateOneRequiredWithoutInsuranceClaimsNestedInput = {
+    create?: XOR<PatientCreateWithoutInsuranceClaimsInput, PatientUncheckedCreateWithoutInsuranceClaimsInput>
+    connectOrCreate?: PatientCreateOrConnectWithoutInsuranceClaimsInput
+    upsert?: PatientUpsertWithoutInsuranceClaimsInput
+    connect?: PatientWhereUniqueInput
+    update?: XOR<XOR<PatientUpdateToOneWithWhereWithoutInsuranceClaimsInput, PatientUpdateWithoutInsuranceClaimsInput>, PatientUncheckedUpdateWithoutInsuranceClaimsInput>
+  }
+
+  export type InpatientEncounterUpdateOneWithoutInsuranceClaimNestedInput = {
+    create?: XOR<InpatientEncounterCreateWithoutInsuranceClaimInput, InpatientEncounterUncheckedCreateWithoutInsuranceClaimInput>
+    connectOrCreate?: InpatientEncounterCreateOrConnectWithoutInsuranceClaimInput
+    upsert?: InpatientEncounterUpsertWithoutInsuranceClaimInput
+    disconnect?: InpatientEncounterWhereInput | boolean
+    delete?: InpatientEncounterWhereInput | boolean
+    connect?: InpatientEncounterWhereUniqueInput
+    update?: XOR<XOR<InpatientEncounterUpdateToOneWithWhereWithoutInsuranceClaimInput, InpatientEncounterUpdateWithoutInsuranceClaimInput>, InpatientEncounterUncheckedUpdateWithoutInsuranceClaimInput>
+  }
+
+  export type OutpatientEncounterUpdateOneWithoutInsuranceClaimNestedInput = {
+    create?: XOR<OutpatientEncounterCreateWithoutInsuranceClaimInput, OutpatientEncounterUncheckedCreateWithoutInsuranceClaimInput>
+    connectOrCreate?: OutpatientEncounterCreateOrConnectWithoutInsuranceClaimInput
+    upsert?: OutpatientEncounterUpsertWithoutInsuranceClaimInput
+    disconnect?: OutpatientEncounterWhereInput | boolean
+    delete?: OutpatientEncounterWhereInput | boolean
+    connect?: OutpatientEncounterWhereUniqueInput
+    update?: XOR<XOR<OutpatientEncounterUpdateToOneWithWhereWithoutInsuranceClaimInput, OutpatientEncounterUpdateWithoutInsuranceClaimInput>, OutpatientEncounterUncheckedUpdateWithoutInsuranceClaimInput>
+  }
+
+  export type InsuranceDocumentUpdateManyWithoutClaimNestedInput = {
+    create?: XOR<InsuranceDocumentCreateWithoutClaimInput, InsuranceDocumentUncheckedCreateWithoutClaimInput> | InsuranceDocumentCreateWithoutClaimInput[] | InsuranceDocumentUncheckedCreateWithoutClaimInput[]
+    connectOrCreate?: InsuranceDocumentCreateOrConnectWithoutClaimInput | InsuranceDocumentCreateOrConnectWithoutClaimInput[]
+    upsert?: InsuranceDocumentUpsertWithWhereUniqueWithoutClaimInput | InsuranceDocumentUpsertWithWhereUniqueWithoutClaimInput[]
+    createMany?: InsuranceDocumentCreateManyClaimInputEnvelope
+    set?: InsuranceDocumentWhereUniqueInput | InsuranceDocumentWhereUniqueInput[]
+    disconnect?: InsuranceDocumentWhereUniqueInput | InsuranceDocumentWhereUniqueInput[]
+    delete?: InsuranceDocumentWhereUniqueInput | InsuranceDocumentWhereUniqueInput[]
+    connect?: InsuranceDocumentWhereUniqueInput | InsuranceDocumentWhereUniqueInput[]
+    update?: InsuranceDocumentUpdateWithWhereUniqueWithoutClaimInput | InsuranceDocumentUpdateWithWhereUniqueWithoutClaimInput[]
+    updateMany?: InsuranceDocumentUpdateManyWithWhereWithoutClaimInput | InsuranceDocumentUpdateManyWithWhereWithoutClaimInput[]
+    deleteMany?: InsuranceDocumentScalarWhereInput | InsuranceDocumentScalarWhereInput[]
+  }
+
+  export type InsuranceAccessTokenUpdateManyWithoutClaimNestedInput = {
+    create?: XOR<InsuranceAccessTokenCreateWithoutClaimInput, InsuranceAccessTokenUncheckedCreateWithoutClaimInput> | InsuranceAccessTokenCreateWithoutClaimInput[] | InsuranceAccessTokenUncheckedCreateWithoutClaimInput[]
+    connectOrCreate?: InsuranceAccessTokenCreateOrConnectWithoutClaimInput | InsuranceAccessTokenCreateOrConnectWithoutClaimInput[]
+    upsert?: InsuranceAccessTokenUpsertWithWhereUniqueWithoutClaimInput | InsuranceAccessTokenUpsertWithWhereUniqueWithoutClaimInput[]
+    createMany?: InsuranceAccessTokenCreateManyClaimInputEnvelope
+    set?: InsuranceAccessTokenWhereUniqueInput | InsuranceAccessTokenWhereUniqueInput[]
+    disconnect?: InsuranceAccessTokenWhereUniqueInput | InsuranceAccessTokenWhereUniqueInput[]
+    delete?: InsuranceAccessTokenWhereUniqueInput | InsuranceAccessTokenWhereUniqueInput[]
+    connect?: InsuranceAccessTokenWhereUniqueInput | InsuranceAccessTokenWhereUniqueInput[]
+    update?: InsuranceAccessTokenUpdateWithWhereUniqueWithoutClaimInput | InsuranceAccessTokenUpdateWithWhereUniqueWithoutClaimInput[]
+    updateMany?: InsuranceAccessTokenUpdateManyWithWhereWithoutClaimInput | InsuranceAccessTokenUpdateManyWithWhereWithoutClaimInput[]
+    deleteMany?: InsuranceAccessTokenScalarWhereInput | InsuranceAccessTokenScalarWhereInput[]
+  }
+
+  export type InsuranceDocumentUncheckedUpdateManyWithoutClaimNestedInput = {
+    create?: XOR<InsuranceDocumentCreateWithoutClaimInput, InsuranceDocumentUncheckedCreateWithoutClaimInput> | InsuranceDocumentCreateWithoutClaimInput[] | InsuranceDocumentUncheckedCreateWithoutClaimInput[]
+    connectOrCreate?: InsuranceDocumentCreateOrConnectWithoutClaimInput | InsuranceDocumentCreateOrConnectWithoutClaimInput[]
+    upsert?: InsuranceDocumentUpsertWithWhereUniqueWithoutClaimInput | InsuranceDocumentUpsertWithWhereUniqueWithoutClaimInput[]
+    createMany?: InsuranceDocumentCreateManyClaimInputEnvelope
+    set?: InsuranceDocumentWhereUniqueInput | InsuranceDocumentWhereUniqueInput[]
+    disconnect?: InsuranceDocumentWhereUniqueInput | InsuranceDocumentWhereUniqueInput[]
+    delete?: InsuranceDocumentWhereUniqueInput | InsuranceDocumentWhereUniqueInput[]
+    connect?: InsuranceDocumentWhereUniqueInput | InsuranceDocumentWhereUniqueInput[]
+    update?: InsuranceDocumentUpdateWithWhereUniqueWithoutClaimInput | InsuranceDocumentUpdateWithWhereUniqueWithoutClaimInput[]
+    updateMany?: InsuranceDocumentUpdateManyWithWhereWithoutClaimInput | InsuranceDocumentUpdateManyWithWhereWithoutClaimInput[]
+    deleteMany?: InsuranceDocumentScalarWhereInput | InsuranceDocumentScalarWhereInput[]
+  }
+
+  export type InsuranceAccessTokenUncheckedUpdateManyWithoutClaimNestedInput = {
+    create?: XOR<InsuranceAccessTokenCreateWithoutClaimInput, InsuranceAccessTokenUncheckedCreateWithoutClaimInput> | InsuranceAccessTokenCreateWithoutClaimInput[] | InsuranceAccessTokenUncheckedCreateWithoutClaimInput[]
+    connectOrCreate?: InsuranceAccessTokenCreateOrConnectWithoutClaimInput | InsuranceAccessTokenCreateOrConnectWithoutClaimInput[]
+    upsert?: InsuranceAccessTokenUpsertWithWhereUniqueWithoutClaimInput | InsuranceAccessTokenUpsertWithWhereUniqueWithoutClaimInput[]
+    createMany?: InsuranceAccessTokenCreateManyClaimInputEnvelope
+    set?: InsuranceAccessTokenWhereUniqueInput | InsuranceAccessTokenWhereUniqueInput[]
+    disconnect?: InsuranceAccessTokenWhereUniqueInput | InsuranceAccessTokenWhereUniqueInput[]
+    delete?: InsuranceAccessTokenWhereUniqueInput | InsuranceAccessTokenWhereUniqueInput[]
+    connect?: InsuranceAccessTokenWhereUniqueInput | InsuranceAccessTokenWhereUniqueInput[]
+    update?: InsuranceAccessTokenUpdateWithWhereUniqueWithoutClaimInput | InsuranceAccessTokenUpdateWithWhereUniqueWithoutClaimInput[]
+    updateMany?: InsuranceAccessTokenUpdateManyWithWhereWithoutClaimInput | InsuranceAccessTokenUpdateManyWithWhereWithoutClaimInput[]
+    deleteMany?: InsuranceAccessTokenScalarWhereInput | InsuranceAccessTokenScalarWhereInput[]
+  }
+
+  export type InsuranceClaimCreateNestedOneWithoutDocumentsInput = {
+    create?: XOR<InsuranceClaimCreateWithoutDocumentsInput, InsuranceClaimUncheckedCreateWithoutDocumentsInput>
+    connectOrCreate?: InsuranceClaimCreateOrConnectWithoutDocumentsInput
+    connect?: InsuranceClaimWhereUniqueInput
+  }
+
+  export type InsuranceClaimUpdateOneRequiredWithoutDocumentsNestedInput = {
+    create?: XOR<InsuranceClaimCreateWithoutDocumentsInput, InsuranceClaimUncheckedCreateWithoutDocumentsInput>
+    connectOrCreate?: InsuranceClaimCreateOrConnectWithoutDocumentsInput
+    upsert?: InsuranceClaimUpsertWithoutDocumentsInput
+    connect?: InsuranceClaimWhereUniqueInput
+    update?: XOR<XOR<InsuranceClaimUpdateToOneWithWhereWithoutDocumentsInput, InsuranceClaimUpdateWithoutDocumentsInput>, InsuranceClaimUncheckedUpdateWithoutDocumentsInput>
+  }
+
+  export type InsuranceClaimCreateNestedOneWithoutAccessTokensInput = {
+    create?: XOR<InsuranceClaimCreateWithoutAccessTokensInput, InsuranceClaimUncheckedCreateWithoutAccessTokensInput>
+    connectOrCreate?: InsuranceClaimCreateOrConnectWithoutAccessTokensInput
+    connect?: InsuranceClaimWhereUniqueInput
+  }
+
+  export type InsuranceClaimUpdateOneRequiredWithoutAccessTokensNestedInput = {
+    create?: XOR<InsuranceClaimCreateWithoutAccessTokensInput, InsuranceClaimUncheckedCreateWithoutAccessTokensInput>
+    connectOrCreate?: InsuranceClaimCreateOrConnectWithoutAccessTokensInput
+    upsert?: InsuranceClaimUpsertWithoutAccessTokensInput
+    connect?: InsuranceClaimWhereUniqueInput
+    update?: XOR<XOR<InsuranceClaimUpdateToOneWithWhereWithoutAccessTokensInput, InsuranceClaimUpdateWithoutAccessTokensInput>, InsuranceClaimUncheckedUpdateWithoutAccessTokensInput>
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -36457,6 +41739,23 @@ export namespace Prisma {
     _max?: NestedEnumParticularTypeFilter<$PrismaModel>
   }
 
+  export type NestedEnumInsuranceClaimStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.InsuranceClaimStatus | EnumInsuranceClaimStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.InsuranceClaimStatus[] | ListEnumInsuranceClaimStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.InsuranceClaimStatus[] | ListEnumInsuranceClaimStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumInsuranceClaimStatusFilter<$PrismaModel> | $Enums.InsuranceClaimStatus
+  }
+
+  export type NestedEnumInsuranceClaimStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.InsuranceClaimStatus | EnumInsuranceClaimStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.InsuranceClaimStatus[] | ListEnumInsuranceClaimStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.InsuranceClaimStatus[] | ListEnumInsuranceClaimStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumInsuranceClaimStatusWithAggregatesFilter<$PrismaModel> | $Enums.InsuranceClaimStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumInsuranceClaimStatusFilter<$PrismaModel>
+    _max?: NestedEnumInsuranceClaimStatusFilter<$PrismaModel>
+  }
+
   export type RefreshTokenCreateWithoutUserInput = {
     id?: string
     token: string
@@ -36523,6 +41822,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     inpatientEncounters?: InpatientEncounterCreateNestedManyWithoutPatientInput
     outpatientEncounters?: OutpatientEncounterCreateNestedManyWithoutPatientInput
+    insuranceClaims?: InsuranceClaimCreateNestedManyWithoutPatientInput
   }
 
   export type PatientUncheckedCreateWithoutUserInput = {
@@ -36539,6 +41839,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     inpatientEncounters?: InpatientEncounterUncheckedCreateNestedManyWithoutPatientInput
     outpatientEncounters?: OutpatientEncounterUncheckedCreateNestedManyWithoutPatientInput
+    insuranceClaims?: InsuranceClaimUncheckedCreateNestedManyWithoutPatientInput
   }
 
   export type PatientCreateOrConnectWithoutUserInput = {
@@ -36779,6 +42080,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     inpatientEncounters?: InpatientEncounterUpdateManyWithoutPatientNestedInput
     outpatientEncounters?: OutpatientEncounterUpdateManyWithoutPatientNestedInput
+    insuranceClaims?: InsuranceClaimUpdateManyWithoutPatientNestedInput
   }
 
   export type PatientUncheckedUpdateWithoutUserInput = {
@@ -36795,6 +42097,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     inpatientEncounters?: InpatientEncounterUncheckedUpdateManyWithoutPatientNestedInput
     outpatientEncounters?: OutpatientEncounterUncheckedUpdateManyWithoutPatientNestedInput
+    insuranceClaims?: InsuranceClaimUncheckedUpdateManyWithoutPatientNestedInput
   }
 
   export type PartnerUpsertWithoutUserInput = {
@@ -37214,6 +42517,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     charts?: InpatientEncounterChartCreateNestedManyWithoutEncounterInput
     orders?: InpatientEncounterOrderCreateNestedManyWithoutEncounterInput
+    insuranceClaim?: InsuranceClaimCreateNestedOneWithoutInpatientEncounterInput
   }
 
   export type InpatientEncounterUncheckedCreateWithoutPatientInput = {
@@ -37233,6 +42537,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     charts?: InpatientEncounterChartUncheckedCreateNestedManyWithoutEncounterInput
     orders?: InpatientEncounterOrderUncheckedCreateNestedManyWithoutEncounterInput
+    insuranceClaim?: InsuranceClaimUncheckedCreateNestedOneWithoutInpatientEncounterInput
   }
 
   export type InpatientEncounterCreateOrConnectWithoutPatientInput = {
@@ -37258,6 +42563,7 @@ export namespace Prisma {
     notes?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    insuranceClaim?: InsuranceClaimCreateNestedOneWithoutOutpatientEncounterInput
   }
 
   export type OutpatientEncounterUncheckedCreateWithoutPatientInput = {
@@ -37273,6 +42579,7 @@ export namespace Prisma {
     notes?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    insuranceClaim?: InsuranceClaimUncheckedCreateNestedOneWithoutOutpatientEncounterInput
   }
 
   export type OutpatientEncounterCreateOrConnectWithoutPatientInput = {
@@ -37282,6 +42589,64 @@ export namespace Prisma {
 
   export type OutpatientEncounterCreateManyPatientInputEnvelope = {
     data: OutpatientEncounterCreateManyPatientInput | OutpatientEncounterCreateManyPatientInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type InsuranceClaimCreateWithoutPatientInput = {
+    id?: string
+    claimNumber: string
+    insuranceProvider: string
+    insuranceNumber?: string | null
+    policyNumber?: string | null
+    claimAmount: Decimal | DecimalJsLike | number | string
+    approvedAmount?: Decimal | DecimalJsLike | number | string | null
+    denialReason?: string | null
+    status?: $Enums.InsuranceClaimStatus
+    submittedAt?: Date | string | null
+    reviewedAt?: Date | string | null
+    billingStaffNotes?: string | null
+    insuranceNotes?: string | null
+    createdBy: string
+    reviewedBy?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    inpatientEncounter?: InpatientEncounterCreateNestedOneWithoutInsuranceClaimInput
+    outpatientEncounter?: OutpatientEncounterCreateNestedOneWithoutInsuranceClaimInput
+    documents?: InsuranceDocumentCreateNestedManyWithoutClaimInput
+    accessTokens?: InsuranceAccessTokenCreateNestedManyWithoutClaimInput
+  }
+
+  export type InsuranceClaimUncheckedCreateWithoutPatientInput = {
+    id?: string
+    claimNumber: string
+    inpatientEncounterId?: string | null
+    outpatientEncounterId?: string | null
+    insuranceProvider: string
+    insuranceNumber?: string | null
+    policyNumber?: string | null
+    claimAmount: Decimal | DecimalJsLike | number | string
+    approvedAmount?: Decimal | DecimalJsLike | number | string | null
+    denialReason?: string | null
+    status?: $Enums.InsuranceClaimStatus
+    submittedAt?: Date | string | null
+    reviewedAt?: Date | string | null
+    billingStaffNotes?: string | null
+    insuranceNotes?: string | null
+    createdBy: string
+    reviewedBy?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    documents?: InsuranceDocumentUncheckedCreateNestedManyWithoutClaimInput
+    accessTokens?: InsuranceAccessTokenUncheckedCreateNestedManyWithoutClaimInput
+  }
+
+  export type InsuranceClaimCreateOrConnectWithoutPatientInput = {
+    where: InsuranceClaimWhereUniqueInput
+    create: XOR<InsuranceClaimCreateWithoutPatientInput, InsuranceClaimUncheckedCreateWithoutPatientInput>
+  }
+
+  export type InsuranceClaimCreateManyPatientInputEnvelope = {
+    data: InsuranceClaimCreateManyPatientInput | InsuranceClaimCreateManyPatientInput[]
     skipDuplicates?: boolean
   }
 
@@ -37442,6 +42807,48 @@ export namespace Prisma {
     notes?: StringNullableFilter<"OutpatientEncounter"> | string | null
     createdAt?: DateTimeFilter<"OutpatientEncounter"> | Date | string
     updatedAt?: DateTimeFilter<"OutpatientEncounter"> | Date | string
+  }
+
+  export type InsuranceClaimUpsertWithWhereUniqueWithoutPatientInput = {
+    where: InsuranceClaimWhereUniqueInput
+    update: XOR<InsuranceClaimUpdateWithoutPatientInput, InsuranceClaimUncheckedUpdateWithoutPatientInput>
+    create: XOR<InsuranceClaimCreateWithoutPatientInput, InsuranceClaimUncheckedCreateWithoutPatientInput>
+  }
+
+  export type InsuranceClaimUpdateWithWhereUniqueWithoutPatientInput = {
+    where: InsuranceClaimWhereUniqueInput
+    data: XOR<InsuranceClaimUpdateWithoutPatientInput, InsuranceClaimUncheckedUpdateWithoutPatientInput>
+  }
+
+  export type InsuranceClaimUpdateManyWithWhereWithoutPatientInput = {
+    where: InsuranceClaimScalarWhereInput
+    data: XOR<InsuranceClaimUpdateManyMutationInput, InsuranceClaimUncheckedUpdateManyWithoutPatientInput>
+  }
+
+  export type InsuranceClaimScalarWhereInput = {
+    AND?: InsuranceClaimScalarWhereInput | InsuranceClaimScalarWhereInput[]
+    OR?: InsuranceClaimScalarWhereInput[]
+    NOT?: InsuranceClaimScalarWhereInput | InsuranceClaimScalarWhereInput[]
+    id?: UuidFilter<"InsuranceClaim"> | string
+    claimNumber?: StringFilter<"InsuranceClaim"> | string
+    patientId?: StringFilter<"InsuranceClaim"> | string
+    inpatientEncounterId?: UuidNullableFilter<"InsuranceClaim"> | string | null
+    outpatientEncounterId?: UuidNullableFilter<"InsuranceClaim"> | string | null
+    insuranceProvider?: StringFilter<"InsuranceClaim"> | string
+    insuranceNumber?: StringNullableFilter<"InsuranceClaim"> | string | null
+    policyNumber?: StringNullableFilter<"InsuranceClaim"> | string | null
+    claimAmount?: DecimalFilter<"InsuranceClaim"> | Decimal | DecimalJsLike | number | string
+    approvedAmount?: DecimalNullableFilter<"InsuranceClaim"> | Decimal | DecimalJsLike | number | string | null
+    denialReason?: StringNullableFilter<"InsuranceClaim"> | string | null
+    status?: EnumInsuranceClaimStatusFilter<"InsuranceClaim"> | $Enums.InsuranceClaimStatus
+    submittedAt?: DateTimeNullableFilter<"InsuranceClaim"> | Date | string | null
+    reviewedAt?: DateTimeNullableFilter<"InsuranceClaim"> | Date | string | null
+    billingStaffNotes?: StringNullableFilter<"InsuranceClaim"> | string | null
+    insuranceNotes?: StringNullableFilter<"InsuranceClaim"> | string | null
+    createdBy?: StringFilter<"InsuranceClaim"> | string
+    reviewedBy?: StringNullableFilter<"InsuranceClaim"> | string | null
+    createdAt?: DateTimeFilter<"InsuranceClaim"> | Date | string
+    updatedAt?: DateTimeFilter<"InsuranceClaim"> | Date | string
   }
 
   export type UserCreateWithoutPartnerProfileInput = {
@@ -39097,6 +44504,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     user: UserCreateNestedOneWithoutPatientProfileInput
     inpatientEncounters?: InpatientEncounterCreateNestedManyWithoutPatientInput
+    insuranceClaims?: InsuranceClaimCreateNestedManyWithoutPatientInput
   }
 
   export type PatientUncheckedCreateWithoutOutpatientEncountersInput = {
@@ -39113,11 +44521,65 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     inpatientEncounters?: InpatientEncounterUncheckedCreateNestedManyWithoutPatientInput
+    insuranceClaims?: InsuranceClaimUncheckedCreateNestedManyWithoutPatientInput
   }
 
   export type PatientCreateOrConnectWithoutOutpatientEncountersInput = {
     where: PatientWhereUniqueInput
     create: XOR<PatientCreateWithoutOutpatientEncountersInput, PatientUncheckedCreateWithoutOutpatientEncountersInput>
+  }
+
+  export type InsuranceClaimCreateWithoutOutpatientEncounterInput = {
+    id?: string
+    claimNumber: string
+    insuranceProvider: string
+    insuranceNumber?: string | null
+    policyNumber?: string | null
+    claimAmount: Decimal | DecimalJsLike | number | string
+    approvedAmount?: Decimal | DecimalJsLike | number | string | null
+    denialReason?: string | null
+    status?: $Enums.InsuranceClaimStatus
+    submittedAt?: Date | string | null
+    reviewedAt?: Date | string | null
+    billingStaffNotes?: string | null
+    insuranceNotes?: string | null
+    createdBy: string
+    reviewedBy?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    patient: PatientCreateNestedOneWithoutInsuranceClaimsInput
+    inpatientEncounter?: InpatientEncounterCreateNestedOneWithoutInsuranceClaimInput
+    documents?: InsuranceDocumentCreateNestedManyWithoutClaimInput
+    accessTokens?: InsuranceAccessTokenCreateNestedManyWithoutClaimInput
+  }
+
+  export type InsuranceClaimUncheckedCreateWithoutOutpatientEncounterInput = {
+    id?: string
+    claimNumber: string
+    patientId: string
+    inpatientEncounterId?: string | null
+    insuranceProvider: string
+    insuranceNumber?: string | null
+    policyNumber?: string | null
+    claimAmount: Decimal | DecimalJsLike | number | string
+    approvedAmount?: Decimal | DecimalJsLike | number | string | null
+    denialReason?: string | null
+    status?: $Enums.InsuranceClaimStatus
+    submittedAt?: Date | string | null
+    reviewedAt?: Date | string | null
+    billingStaffNotes?: string | null
+    insuranceNotes?: string | null
+    createdBy: string
+    reviewedBy?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    documents?: InsuranceDocumentUncheckedCreateNestedManyWithoutClaimInput
+    accessTokens?: InsuranceAccessTokenUncheckedCreateNestedManyWithoutClaimInput
+  }
+
+  export type InsuranceClaimCreateOrConnectWithoutOutpatientEncounterInput = {
+    where: InsuranceClaimWhereUniqueInput
+    create: XOR<InsuranceClaimCreateWithoutOutpatientEncounterInput, InsuranceClaimUncheckedCreateWithoutOutpatientEncounterInput>
   }
 
   export type PatientUpsertWithoutOutpatientEncountersInput = {
@@ -39145,6 +44607,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutPatientProfileNestedInput
     inpatientEncounters?: InpatientEncounterUpdateManyWithoutPatientNestedInput
+    insuranceClaims?: InsuranceClaimUpdateManyWithoutPatientNestedInput
   }
 
   export type PatientUncheckedUpdateWithoutOutpatientEncountersInput = {
@@ -39161,6 +44624,66 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     inpatientEncounters?: InpatientEncounterUncheckedUpdateManyWithoutPatientNestedInput
+    insuranceClaims?: InsuranceClaimUncheckedUpdateManyWithoutPatientNestedInput
+  }
+
+  export type InsuranceClaimUpsertWithoutOutpatientEncounterInput = {
+    update: XOR<InsuranceClaimUpdateWithoutOutpatientEncounterInput, InsuranceClaimUncheckedUpdateWithoutOutpatientEncounterInput>
+    create: XOR<InsuranceClaimCreateWithoutOutpatientEncounterInput, InsuranceClaimUncheckedCreateWithoutOutpatientEncounterInput>
+    where?: InsuranceClaimWhereInput
+  }
+
+  export type InsuranceClaimUpdateToOneWithWhereWithoutOutpatientEncounterInput = {
+    where?: InsuranceClaimWhereInput
+    data: XOR<InsuranceClaimUpdateWithoutOutpatientEncounterInput, InsuranceClaimUncheckedUpdateWithoutOutpatientEncounterInput>
+  }
+
+  export type InsuranceClaimUpdateWithoutOutpatientEncounterInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    claimNumber?: StringFieldUpdateOperationsInput | string
+    insuranceProvider?: StringFieldUpdateOperationsInput | string
+    insuranceNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    policyNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    claimAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    approvedAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    denialReason?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumInsuranceClaimStatusFieldUpdateOperationsInput | $Enums.InsuranceClaimStatus
+    submittedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    billingStaffNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    insuranceNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdBy?: StringFieldUpdateOperationsInput | string
+    reviewedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    patient?: PatientUpdateOneRequiredWithoutInsuranceClaimsNestedInput
+    inpatientEncounter?: InpatientEncounterUpdateOneWithoutInsuranceClaimNestedInput
+    documents?: InsuranceDocumentUpdateManyWithoutClaimNestedInput
+    accessTokens?: InsuranceAccessTokenUpdateManyWithoutClaimNestedInput
+  }
+
+  export type InsuranceClaimUncheckedUpdateWithoutOutpatientEncounterInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    claimNumber?: StringFieldUpdateOperationsInput | string
+    patientId?: StringFieldUpdateOperationsInput | string
+    inpatientEncounterId?: NullableStringFieldUpdateOperationsInput | string | null
+    insuranceProvider?: StringFieldUpdateOperationsInput | string
+    insuranceNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    policyNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    claimAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    approvedAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    denialReason?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumInsuranceClaimStatusFieldUpdateOperationsInput | $Enums.InsuranceClaimStatus
+    submittedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    billingStaffNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    insuranceNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdBy?: StringFieldUpdateOperationsInput | string
+    reviewedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    documents?: InsuranceDocumentUncheckedUpdateManyWithoutClaimNestedInput
+    accessTokens?: InsuranceAccessTokenUncheckedUpdateManyWithoutClaimNestedInput
   }
 
   export type PatientCreateWithoutInpatientEncountersInput = {
@@ -39177,6 +44700,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     user: UserCreateNestedOneWithoutPatientProfileInput
     outpatientEncounters?: OutpatientEncounterCreateNestedManyWithoutPatientInput
+    insuranceClaims?: InsuranceClaimCreateNestedManyWithoutPatientInput
   }
 
   export type PatientUncheckedCreateWithoutInpatientEncountersInput = {
@@ -39193,6 +44717,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     outpatientEncounters?: OutpatientEncounterUncheckedCreateNestedManyWithoutPatientInput
+    insuranceClaims?: InsuranceClaimUncheckedCreateNestedManyWithoutPatientInput
   }
 
   export type PatientCreateOrConnectWithoutInpatientEncountersInput = {
@@ -39262,6 +44787,59 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type InsuranceClaimCreateWithoutInpatientEncounterInput = {
+    id?: string
+    claimNumber: string
+    insuranceProvider: string
+    insuranceNumber?: string | null
+    policyNumber?: string | null
+    claimAmount: Decimal | DecimalJsLike | number | string
+    approvedAmount?: Decimal | DecimalJsLike | number | string | null
+    denialReason?: string | null
+    status?: $Enums.InsuranceClaimStatus
+    submittedAt?: Date | string | null
+    reviewedAt?: Date | string | null
+    billingStaffNotes?: string | null
+    insuranceNotes?: string | null
+    createdBy: string
+    reviewedBy?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    patient: PatientCreateNestedOneWithoutInsuranceClaimsInput
+    outpatientEncounter?: OutpatientEncounterCreateNestedOneWithoutInsuranceClaimInput
+    documents?: InsuranceDocumentCreateNestedManyWithoutClaimInput
+    accessTokens?: InsuranceAccessTokenCreateNestedManyWithoutClaimInput
+  }
+
+  export type InsuranceClaimUncheckedCreateWithoutInpatientEncounterInput = {
+    id?: string
+    claimNumber: string
+    patientId: string
+    outpatientEncounterId?: string | null
+    insuranceProvider: string
+    insuranceNumber?: string | null
+    policyNumber?: string | null
+    claimAmount: Decimal | DecimalJsLike | number | string
+    approvedAmount?: Decimal | DecimalJsLike | number | string | null
+    denialReason?: string | null
+    status?: $Enums.InsuranceClaimStatus
+    submittedAt?: Date | string | null
+    reviewedAt?: Date | string | null
+    billingStaffNotes?: string | null
+    insuranceNotes?: string | null
+    createdBy: string
+    reviewedBy?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    documents?: InsuranceDocumentUncheckedCreateNestedManyWithoutClaimInput
+    accessTokens?: InsuranceAccessTokenUncheckedCreateNestedManyWithoutClaimInput
+  }
+
+  export type InsuranceClaimCreateOrConnectWithoutInpatientEncounterInput = {
+    where: InsuranceClaimWhereUniqueInput
+    create: XOR<InsuranceClaimCreateWithoutInpatientEncounterInput, InsuranceClaimUncheckedCreateWithoutInpatientEncounterInput>
+  }
+
   export type PatientUpsertWithoutInpatientEncountersInput = {
     update: XOR<PatientUpdateWithoutInpatientEncountersInput, PatientUncheckedUpdateWithoutInpatientEncountersInput>
     create: XOR<PatientCreateWithoutInpatientEncountersInput, PatientUncheckedCreateWithoutInpatientEncountersInput>
@@ -39287,6 +44865,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutPatientProfileNestedInput
     outpatientEncounters?: OutpatientEncounterUpdateManyWithoutPatientNestedInput
+    insuranceClaims?: InsuranceClaimUpdateManyWithoutPatientNestedInput
   }
 
   export type PatientUncheckedUpdateWithoutInpatientEncountersInput = {
@@ -39303,6 +44882,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     outpatientEncounters?: OutpatientEncounterUncheckedUpdateManyWithoutPatientNestedInput
+    insuranceClaims?: InsuranceClaimUncheckedUpdateManyWithoutPatientNestedInput
   }
 
   export type InpatientEncounterChartUpsertWithWhereUniqueWithoutEncounterInput = {
@@ -39366,6 +44946,65 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"InpatientEncounterOrder"> | Date | string
   }
 
+  export type InsuranceClaimUpsertWithoutInpatientEncounterInput = {
+    update: XOR<InsuranceClaimUpdateWithoutInpatientEncounterInput, InsuranceClaimUncheckedUpdateWithoutInpatientEncounterInput>
+    create: XOR<InsuranceClaimCreateWithoutInpatientEncounterInput, InsuranceClaimUncheckedCreateWithoutInpatientEncounterInput>
+    where?: InsuranceClaimWhereInput
+  }
+
+  export type InsuranceClaimUpdateToOneWithWhereWithoutInpatientEncounterInput = {
+    where?: InsuranceClaimWhereInput
+    data: XOR<InsuranceClaimUpdateWithoutInpatientEncounterInput, InsuranceClaimUncheckedUpdateWithoutInpatientEncounterInput>
+  }
+
+  export type InsuranceClaimUpdateWithoutInpatientEncounterInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    claimNumber?: StringFieldUpdateOperationsInput | string
+    insuranceProvider?: StringFieldUpdateOperationsInput | string
+    insuranceNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    policyNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    claimAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    approvedAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    denialReason?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumInsuranceClaimStatusFieldUpdateOperationsInput | $Enums.InsuranceClaimStatus
+    submittedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    billingStaffNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    insuranceNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdBy?: StringFieldUpdateOperationsInput | string
+    reviewedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    patient?: PatientUpdateOneRequiredWithoutInsuranceClaimsNestedInput
+    outpatientEncounter?: OutpatientEncounterUpdateOneWithoutInsuranceClaimNestedInput
+    documents?: InsuranceDocumentUpdateManyWithoutClaimNestedInput
+    accessTokens?: InsuranceAccessTokenUpdateManyWithoutClaimNestedInput
+  }
+
+  export type InsuranceClaimUncheckedUpdateWithoutInpatientEncounterInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    claimNumber?: StringFieldUpdateOperationsInput | string
+    patientId?: StringFieldUpdateOperationsInput | string
+    outpatientEncounterId?: NullableStringFieldUpdateOperationsInput | string | null
+    insuranceProvider?: StringFieldUpdateOperationsInput | string
+    insuranceNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    policyNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    claimAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    approvedAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    denialReason?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumInsuranceClaimStatusFieldUpdateOperationsInput | $Enums.InsuranceClaimStatus
+    submittedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    billingStaffNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    insuranceNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdBy?: StringFieldUpdateOperationsInput | string
+    reviewedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    documents?: InsuranceDocumentUncheckedUpdateManyWithoutClaimNestedInput
+    accessTokens?: InsuranceAccessTokenUncheckedUpdateManyWithoutClaimNestedInput
+  }
+
   export type InpatientEncounterCreateWithoutChartsInput = {
     id?: string
     doctorId: string
@@ -39383,6 +45022,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     patient: PatientCreateNestedOneWithoutInpatientEncountersInput
     orders?: InpatientEncounterOrderCreateNestedManyWithoutEncounterInput
+    insuranceClaim?: InsuranceClaimCreateNestedOneWithoutInpatientEncounterInput
   }
 
   export type InpatientEncounterUncheckedCreateWithoutChartsInput = {
@@ -39402,6 +45042,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     orders?: InpatientEncounterOrderUncheckedCreateNestedManyWithoutEncounterInput
+    insuranceClaim?: InsuranceClaimUncheckedCreateNestedOneWithoutInpatientEncounterInput
   }
 
   export type InpatientEncounterCreateOrConnectWithoutChartsInput = {
@@ -39437,6 +45078,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     patient?: PatientUpdateOneRequiredWithoutInpatientEncountersNestedInput
     orders?: InpatientEncounterOrderUpdateManyWithoutEncounterNestedInput
+    insuranceClaim?: InsuranceClaimUpdateOneWithoutInpatientEncounterNestedInput
   }
 
   export type InpatientEncounterUncheckedUpdateWithoutChartsInput = {
@@ -39456,6 +45098,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     orders?: InpatientEncounterOrderUncheckedUpdateManyWithoutEncounterNestedInput
+    insuranceClaim?: InsuranceClaimUncheckedUpdateOneWithoutInpatientEncounterNestedInput
   }
 
   export type InpatientEncounterCreateWithoutOrdersInput = {
@@ -39475,6 +45118,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     patient: PatientCreateNestedOneWithoutInpatientEncountersInput
     charts?: InpatientEncounterChartCreateNestedManyWithoutEncounterInput
+    insuranceClaim?: InsuranceClaimCreateNestedOneWithoutInpatientEncounterInput
   }
 
   export type InpatientEncounterUncheckedCreateWithoutOrdersInput = {
@@ -39494,6 +45138,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     charts?: InpatientEncounterChartUncheckedCreateNestedManyWithoutEncounterInput
+    insuranceClaim?: InsuranceClaimUncheckedCreateNestedOneWithoutInpatientEncounterInput
   }
 
   export type InpatientEncounterCreateOrConnectWithoutOrdersInput = {
@@ -39556,6 +45201,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     patient?: PatientUpdateOneRequiredWithoutInpatientEncountersNestedInput
     charts?: InpatientEncounterChartUpdateManyWithoutEncounterNestedInput
+    insuranceClaim?: InsuranceClaimUpdateOneWithoutInpatientEncounterNestedInput
   }
 
   export type InpatientEncounterUncheckedUpdateWithoutOrdersInput = {
@@ -39575,6 +45221,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     charts?: InpatientEncounterChartUncheckedUpdateManyWithoutEncounterNestedInput
+    insuranceClaim?: InsuranceClaimUncheckedUpdateOneWithoutInpatientEncounterNestedInput
   }
 
   export type ParticularCatalogueUpsertWithoutOrdersInput = {
@@ -39660,6 +45307,616 @@ export namespace Prisma {
   export type InpatientEncounterOrderUpdateManyWithWhereWithoutCatalogueItemInput = {
     where: InpatientEncounterOrderScalarWhereInput
     data: XOR<InpatientEncounterOrderUpdateManyMutationInput, InpatientEncounterOrderUncheckedUpdateManyWithoutCatalogueItemInput>
+  }
+
+  export type PatientCreateWithoutInsuranceClaimsInput = {
+    id?: string
+    patientNumber: string
+    bloodType?: $Enums.BloodType | null
+    allergies?: string | null
+    medicalHistory?: string | null
+    emergencyContact?: string | null
+    emergencyPhone?: string | null
+    insuranceProvider?: string | null
+    insuranceNumber?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutPatientProfileInput
+    inpatientEncounters?: InpatientEncounterCreateNestedManyWithoutPatientInput
+    outpatientEncounters?: OutpatientEncounterCreateNestedManyWithoutPatientInput
+  }
+
+  export type PatientUncheckedCreateWithoutInsuranceClaimsInput = {
+    id?: string
+    userId: string
+    patientNumber: string
+    bloodType?: $Enums.BloodType | null
+    allergies?: string | null
+    medicalHistory?: string | null
+    emergencyContact?: string | null
+    emergencyPhone?: string | null
+    insuranceProvider?: string | null
+    insuranceNumber?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    inpatientEncounters?: InpatientEncounterUncheckedCreateNestedManyWithoutPatientInput
+    outpatientEncounters?: OutpatientEncounterUncheckedCreateNestedManyWithoutPatientInput
+  }
+
+  export type PatientCreateOrConnectWithoutInsuranceClaimsInput = {
+    where: PatientWhereUniqueInput
+    create: XOR<PatientCreateWithoutInsuranceClaimsInput, PatientUncheckedCreateWithoutInsuranceClaimsInput>
+  }
+
+  export type InpatientEncounterCreateWithoutInsuranceClaimInput = {
+    id?: string
+    doctorId: string
+    admittedBy?: string | null
+    date: string
+    time: string
+    chiefComplaint: string
+    doctorDiagnosis?: string | null
+    triage: $Enums.InpatientTriage
+    disposition?: $Enums.InpatientDisposition
+    dispositionDate?: string | null
+    dispositionTime?: string | null
+    dispositionNote?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    patient: PatientCreateNestedOneWithoutInpatientEncountersInput
+    charts?: InpatientEncounterChartCreateNestedManyWithoutEncounterInput
+    orders?: InpatientEncounterOrderCreateNestedManyWithoutEncounterInput
+  }
+
+  export type InpatientEncounterUncheckedCreateWithoutInsuranceClaimInput = {
+    id?: string
+    patientId: string
+    doctorId: string
+    admittedBy?: string | null
+    date: string
+    time: string
+    chiefComplaint: string
+    doctorDiagnosis?: string | null
+    triage: $Enums.InpatientTriage
+    disposition?: $Enums.InpatientDisposition
+    dispositionDate?: string | null
+    dispositionTime?: string | null
+    dispositionNote?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    charts?: InpatientEncounterChartUncheckedCreateNestedManyWithoutEncounterInput
+    orders?: InpatientEncounterOrderUncheckedCreateNestedManyWithoutEncounterInput
+  }
+
+  export type InpatientEncounterCreateOrConnectWithoutInsuranceClaimInput = {
+    where: InpatientEncounterWhereUniqueInput
+    create: XOR<InpatientEncounterCreateWithoutInsuranceClaimInput, InpatientEncounterUncheckedCreateWithoutInsuranceClaimInput>
+  }
+
+  export type OutpatientEncounterCreateWithoutInsuranceClaimInput = {
+    id?: string
+    doctorId: string
+    date: string
+    time: string
+    chiefComplaint: string
+    doctorDiagnosis?: string | null
+    type?: $Enums.OutpatientEncounterType
+    consultationFee?: Decimal | DecimalJsLike | number | string | null
+    paymentStatus?: $Enums.OutpatientPaymentStatus
+    notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    patient: PatientCreateNestedOneWithoutOutpatientEncountersInput
+  }
+
+  export type OutpatientEncounterUncheckedCreateWithoutInsuranceClaimInput = {
+    id?: string
+    patientId: string
+    doctorId: string
+    date: string
+    time: string
+    chiefComplaint: string
+    doctorDiagnosis?: string | null
+    type?: $Enums.OutpatientEncounterType
+    consultationFee?: Decimal | DecimalJsLike | number | string | null
+    paymentStatus?: $Enums.OutpatientPaymentStatus
+    notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type OutpatientEncounterCreateOrConnectWithoutInsuranceClaimInput = {
+    where: OutpatientEncounterWhereUniqueInput
+    create: XOR<OutpatientEncounterCreateWithoutInsuranceClaimInput, OutpatientEncounterUncheckedCreateWithoutInsuranceClaimInput>
+  }
+
+  export type InsuranceDocumentCreateWithoutClaimInput = {
+    id?: string
+    documentType: string
+    fileName: string
+    fileUrl: string
+    fileSize: number
+    mimeType: string
+    description?: string | null
+    uploadedBy: string
+    createdAt?: Date | string
+  }
+
+  export type InsuranceDocumentUncheckedCreateWithoutClaimInput = {
+    id?: string
+    documentType: string
+    fileName: string
+    fileUrl: string
+    fileSize: number
+    mimeType: string
+    description?: string | null
+    uploadedBy: string
+    createdAt?: Date | string
+  }
+
+  export type InsuranceDocumentCreateOrConnectWithoutClaimInput = {
+    where: InsuranceDocumentWhereUniqueInput
+    create: XOR<InsuranceDocumentCreateWithoutClaimInput, InsuranceDocumentUncheckedCreateWithoutClaimInput>
+  }
+
+  export type InsuranceDocumentCreateManyClaimInputEnvelope = {
+    data: InsuranceDocumentCreateManyClaimInput | InsuranceDocumentCreateManyClaimInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type InsuranceAccessTokenCreateWithoutClaimInput = {
+    id?: string
+    token: string
+    recipientEmail: string
+    expiresAt: Date | string
+    usedAt?: Date | string | null
+    isRevoked?: boolean
+    createdAt?: Date | string
+  }
+
+  export type InsuranceAccessTokenUncheckedCreateWithoutClaimInput = {
+    id?: string
+    token: string
+    recipientEmail: string
+    expiresAt: Date | string
+    usedAt?: Date | string | null
+    isRevoked?: boolean
+    createdAt?: Date | string
+  }
+
+  export type InsuranceAccessTokenCreateOrConnectWithoutClaimInput = {
+    where: InsuranceAccessTokenWhereUniqueInput
+    create: XOR<InsuranceAccessTokenCreateWithoutClaimInput, InsuranceAccessTokenUncheckedCreateWithoutClaimInput>
+  }
+
+  export type InsuranceAccessTokenCreateManyClaimInputEnvelope = {
+    data: InsuranceAccessTokenCreateManyClaimInput | InsuranceAccessTokenCreateManyClaimInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type PatientUpsertWithoutInsuranceClaimsInput = {
+    update: XOR<PatientUpdateWithoutInsuranceClaimsInput, PatientUncheckedUpdateWithoutInsuranceClaimsInput>
+    create: XOR<PatientCreateWithoutInsuranceClaimsInput, PatientUncheckedCreateWithoutInsuranceClaimsInput>
+    where?: PatientWhereInput
+  }
+
+  export type PatientUpdateToOneWithWhereWithoutInsuranceClaimsInput = {
+    where?: PatientWhereInput
+    data: XOR<PatientUpdateWithoutInsuranceClaimsInput, PatientUncheckedUpdateWithoutInsuranceClaimsInput>
+  }
+
+  export type PatientUpdateWithoutInsuranceClaimsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    patientNumber?: StringFieldUpdateOperationsInput | string
+    bloodType?: NullableEnumBloodTypeFieldUpdateOperationsInput | $Enums.BloodType | null
+    allergies?: NullableStringFieldUpdateOperationsInput | string | null
+    medicalHistory?: NullableStringFieldUpdateOperationsInput | string | null
+    emergencyContact?: NullableStringFieldUpdateOperationsInput | string | null
+    emergencyPhone?: NullableStringFieldUpdateOperationsInput | string | null
+    insuranceProvider?: NullableStringFieldUpdateOperationsInput | string | null
+    insuranceNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutPatientProfileNestedInput
+    inpatientEncounters?: InpatientEncounterUpdateManyWithoutPatientNestedInput
+    outpatientEncounters?: OutpatientEncounterUpdateManyWithoutPatientNestedInput
+  }
+
+  export type PatientUncheckedUpdateWithoutInsuranceClaimsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    patientNumber?: StringFieldUpdateOperationsInput | string
+    bloodType?: NullableEnumBloodTypeFieldUpdateOperationsInput | $Enums.BloodType | null
+    allergies?: NullableStringFieldUpdateOperationsInput | string | null
+    medicalHistory?: NullableStringFieldUpdateOperationsInput | string | null
+    emergencyContact?: NullableStringFieldUpdateOperationsInput | string | null
+    emergencyPhone?: NullableStringFieldUpdateOperationsInput | string | null
+    insuranceProvider?: NullableStringFieldUpdateOperationsInput | string | null
+    insuranceNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    inpatientEncounters?: InpatientEncounterUncheckedUpdateManyWithoutPatientNestedInput
+    outpatientEncounters?: OutpatientEncounterUncheckedUpdateManyWithoutPatientNestedInput
+  }
+
+  export type InpatientEncounterUpsertWithoutInsuranceClaimInput = {
+    update: XOR<InpatientEncounterUpdateWithoutInsuranceClaimInput, InpatientEncounterUncheckedUpdateWithoutInsuranceClaimInput>
+    create: XOR<InpatientEncounterCreateWithoutInsuranceClaimInput, InpatientEncounterUncheckedCreateWithoutInsuranceClaimInput>
+    where?: InpatientEncounterWhereInput
+  }
+
+  export type InpatientEncounterUpdateToOneWithWhereWithoutInsuranceClaimInput = {
+    where?: InpatientEncounterWhereInput
+    data: XOR<InpatientEncounterUpdateWithoutInsuranceClaimInput, InpatientEncounterUncheckedUpdateWithoutInsuranceClaimInput>
+  }
+
+  export type InpatientEncounterUpdateWithoutInsuranceClaimInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    doctorId?: StringFieldUpdateOperationsInput | string
+    admittedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    date?: StringFieldUpdateOperationsInput | string
+    time?: StringFieldUpdateOperationsInput | string
+    chiefComplaint?: StringFieldUpdateOperationsInput | string
+    doctorDiagnosis?: NullableStringFieldUpdateOperationsInput | string | null
+    triage?: EnumInpatientTriageFieldUpdateOperationsInput | $Enums.InpatientTriage
+    disposition?: EnumInpatientDispositionFieldUpdateOperationsInput | $Enums.InpatientDisposition
+    dispositionDate?: NullableStringFieldUpdateOperationsInput | string | null
+    dispositionTime?: NullableStringFieldUpdateOperationsInput | string | null
+    dispositionNote?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    patient?: PatientUpdateOneRequiredWithoutInpatientEncountersNestedInput
+    charts?: InpatientEncounterChartUpdateManyWithoutEncounterNestedInput
+    orders?: InpatientEncounterOrderUpdateManyWithoutEncounterNestedInput
+  }
+
+  export type InpatientEncounterUncheckedUpdateWithoutInsuranceClaimInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    patientId?: StringFieldUpdateOperationsInput | string
+    doctorId?: StringFieldUpdateOperationsInput | string
+    admittedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    date?: StringFieldUpdateOperationsInput | string
+    time?: StringFieldUpdateOperationsInput | string
+    chiefComplaint?: StringFieldUpdateOperationsInput | string
+    doctorDiagnosis?: NullableStringFieldUpdateOperationsInput | string | null
+    triage?: EnumInpatientTriageFieldUpdateOperationsInput | $Enums.InpatientTriage
+    disposition?: EnumInpatientDispositionFieldUpdateOperationsInput | $Enums.InpatientDisposition
+    dispositionDate?: NullableStringFieldUpdateOperationsInput | string | null
+    dispositionTime?: NullableStringFieldUpdateOperationsInput | string | null
+    dispositionNote?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    charts?: InpatientEncounterChartUncheckedUpdateManyWithoutEncounterNestedInput
+    orders?: InpatientEncounterOrderUncheckedUpdateManyWithoutEncounterNestedInput
+  }
+
+  export type OutpatientEncounterUpsertWithoutInsuranceClaimInput = {
+    update: XOR<OutpatientEncounterUpdateWithoutInsuranceClaimInput, OutpatientEncounterUncheckedUpdateWithoutInsuranceClaimInput>
+    create: XOR<OutpatientEncounterCreateWithoutInsuranceClaimInput, OutpatientEncounterUncheckedCreateWithoutInsuranceClaimInput>
+    where?: OutpatientEncounterWhereInput
+  }
+
+  export type OutpatientEncounterUpdateToOneWithWhereWithoutInsuranceClaimInput = {
+    where?: OutpatientEncounterWhereInput
+    data: XOR<OutpatientEncounterUpdateWithoutInsuranceClaimInput, OutpatientEncounterUncheckedUpdateWithoutInsuranceClaimInput>
+  }
+
+  export type OutpatientEncounterUpdateWithoutInsuranceClaimInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    doctorId?: StringFieldUpdateOperationsInput | string
+    date?: StringFieldUpdateOperationsInput | string
+    time?: StringFieldUpdateOperationsInput | string
+    chiefComplaint?: StringFieldUpdateOperationsInput | string
+    doctorDiagnosis?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: EnumOutpatientEncounterTypeFieldUpdateOperationsInput | $Enums.OutpatientEncounterType
+    consultationFee?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    paymentStatus?: EnumOutpatientPaymentStatusFieldUpdateOperationsInput | $Enums.OutpatientPaymentStatus
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    patient?: PatientUpdateOneRequiredWithoutOutpatientEncountersNestedInput
+  }
+
+  export type OutpatientEncounterUncheckedUpdateWithoutInsuranceClaimInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    patientId?: StringFieldUpdateOperationsInput | string
+    doctorId?: StringFieldUpdateOperationsInput | string
+    date?: StringFieldUpdateOperationsInput | string
+    time?: StringFieldUpdateOperationsInput | string
+    chiefComplaint?: StringFieldUpdateOperationsInput | string
+    doctorDiagnosis?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: EnumOutpatientEncounterTypeFieldUpdateOperationsInput | $Enums.OutpatientEncounterType
+    consultationFee?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    paymentStatus?: EnumOutpatientPaymentStatusFieldUpdateOperationsInput | $Enums.OutpatientPaymentStatus
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type InsuranceDocumentUpsertWithWhereUniqueWithoutClaimInput = {
+    where: InsuranceDocumentWhereUniqueInput
+    update: XOR<InsuranceDocumentUpdateWithoutClaimInput, InsuranceDocumentUncheckedUpdateWithoutClaimInput>
+    create: XOR<InsuranceDocumentCreateWithoutClaimInput, InsuranceDocumentUncheckedCreateWithoutClaimInput>
+  }
+
+  export type InsuranceDocumentUpdateWithWhereUniqueWithoutClaimInput = {
+    where: InsuranceDocumentWhereUniqueInput
+    data: XOR<InsuranceDocumentUpdateWithoutClaimInput, InsuranceDocumentUncheckedUpdateWithoutClaimInput>
+  }
+
+  export type InsuranceDocumentUpdateManyWithWhereWithoutClaimInput = {
+    where: InsuranceDocumentScalarWhereInput
+    data: XOR<InsuranceDocumentUpdateManyMutationInput, InsuranceDocumentUncheckedUpdateManyWithoutClaimInput>
+  }
+
+  export type InsuranceDocumentScalarWhereInput = {
+    AND?: InsuranceDocumentScalarWhereInput | InsuranceDocumentScalarWhereInput[]
+    OR?: InsuranceDocumentScalarWhereInput[]
+    NOT?: InsuranceDocumentScalarWhereInput | InsuranceDocumentScalarWhereInput[]
+    id?: UuidFilter<"InsuranceDocument"> | string
+    claimId?: UuidFilter<"InsuranceDocument"> | string
+    documentType?: StringFilter<"InsuranceDocument"> | string
+    fileName?: StringFilter<"InsuranceDocument"> | string
+    fileUrl?: StringFilter<"InsuranceDocument"> | string
+    fileSize?: IntFilter<"InsuranceDocument"> | number
+    mimeType?: StringFilter<"InsuranceDocument"> | string
+    description?: StringNullableFilter<"InsuranceDocument"> | string | null
+    uploadedBy?: StringFilter<"InsuranceDocument"> | string
+    createdAt?: DateTimeFilter<"InsuranceDocument"> | Date | string
+  }
+
+  export type InsuranceAccessTokenUpsertWithWhereUniqueWithoutClaimInput = {
+    where: InsuranceAccessTokenWhereUniqueInput
+    update: XOR<InsuranceAccessTokenUpdateWithoutClaimInput, InsuranceAccessTokenUncheckedUpdateWithoutClaimInput>
+    create: XOR<InsuranceAccessTokenCreateWithoutClaimInput, InsuranceAccessTokenUncheckedCreateWithoutClaimInput>
+  }
+
+  export type InsuranceAccessTokenUpdateWithWhereUniqueWithoutClaimInput = {
+    where: InsuranceAccessTokenWhereUniqueInput
+    data: XOR<InsuranceAccessTokenUpdateWithoutClaimInput, InsuranceAccessTokenUncheckedUpdateWithoutClaimInput>
+  }
+
+  export type InsuranceAccessTokenUpdateManyWithWhereWithoutClaimInput = {
+    where: InsuranceAccessTokenScalarWhereInput
+    data: XOR<InsuranceAccessTokenUpdateManyMutationInput, InsuranceAccessTokenUncheckedUpdateManyWithoutClaimInput>
+  }
+
+  export type InsuranceAccessTokenScalarWhereInput = {
+    AND?: InsuranceAccessTokenScalarWhereInput | InsuranceAccessTokenScalarWhereInput[]
+    OR?: InsuranceAccessTokenScalarWhereInput[]
+    NOT?: InsuranceAccessTokenScalarWhereInput | InsuranceAccessTokenScalarWhereInput[]
+    id?: UuidFilter<"InsuranceAccessToken"> | string
+    claimId?: UuidFilter<"InsuranceAccessToken"> | string
+    token?: StringFilter<"InsuranceAccessToken"> | string
+    recipientEmail?: StringFilter<"InsuranceAccessToken"> | string
+    expiresAt?: DateTimeFilter<"InsuranceAccessToken"> | Date | string
+    usedAt?: DateTimeNullableFilter<"InsuranceAccessToken"> | Date | string | null
+    isRevoked?: BoolFilter<"InsuranceAccessToken"> | boolean
+    createdAt?: DateTimeFilter<"InsuranceAccessToken"> | Date | string
+  }
+
+  export type InsuranceClaimCreateWithoutDocumentsInput = {
+    id?: string
+    claimNumber: string
+    insuranceProvider: string
+    insuranceNumber?: string | null
+    policyNumber?: string | null
+    claimAmount: Decimal | DecimalJsLike | number | string
+    approvedAmount?: Decimal | DecimalJsLike | number | string | null
+    denialReason?: string | null
+    status?: $Enums.InsuranceClaimStatus
+    submittedAt?: Date | string | null
+    reviewedAt?: Date | string | null
+    billingStaffNotes?: string | null
+    insuranceNotes?: string | null
+    createdBy: string
+    reviewedBy?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    patient: PatientCreateNestedOneWithoutInsuranceClaimsInput
+    inpatientEncounter?: InpatientEncounterCreateNestedOneWithoutInsuranceClaimInput
+    outpatientEncounter?: OutpatientEncounterCreateNestedOneWithoutInsuranceClaimInput
+    accessTokens?: InsuranceAccessTokenCreateNestedManyWithoutClaimInput
+  }
+
+  export type InsuranceClaimUncheckedCreateWithoutDocumentsInput = {
+    id?: string
+    claimNumber: string
+    patientId: string
+    inpatientEncounterId?: string | null
+    outpatientEncounterId?: string | null
+    insuranceProvider: string
+    insuranceNumber?: string | null
+    policyNumber?: string | null
+    claimAmount: Decimal | DecimalJsLike | number | string
+    approvedAmount?: Decimal | DecimalJsLike | number | string | null
+    denialReason?: string | null
+    status?: $Enums.InsuranceClaimStatus
+    submittedAt?: Date | string | null
+    reviewedAt?: Date | string | null
+    billingStaffNotes?: string | null
+    insuranceNotes?: string | null
+    createdBy: string
+    reviewedBy?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    accessTokens?: InsuranceAccessTokenUncheckedCreateNestedManyWithoutClaimInput
+  }
+
+  export type InsuranceClaimCreateOrConnectWithoutDocumentsInput = {
+    where: InsuranceClaimWhereUniqueInput
+    create: XOR<InsuranceClaimCreateWithoutDocumentsInput, InsuranceClaimUncheckedCreateWithoutDocumentsInput>
+  }
+
+  export type InsuranceClaimUpsertWithoutDocumentsInput = {
+    update: XOR<InsuranceClaimUpdateWithoutDocumentsInput, InsuranceClaimUncheckedUpdateWithoutDocumentsInput>
+    create: XOR<InsuranceClaimCreateWithoutDocumentsInput, InsuranceClaimUncheckedCreateWithoutDocumentsInput>
+    where?: InsuranceClaimWhereInput
+  }
+
+  export type InsuranceClaimUpdateToOneWithWhereWithoutDocumentsInput = {
+    where?: InsuranceClaimWhereInput
+    data: XOR<InsuranceClaimUpdateWithoutDocumentsInput, InsuranceClaimUncheckedUpdateWithoutDocumentsInput>
+  }
+
+  export type InsuranceClaimUpdateWithoutDocumentsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    claimNumber?: StringFieldUpdateOperationsInput | string
+    insuranceProvider?: StringFieldUpdateOperationsInput | string
+    insuranceNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    policyNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    claimAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    approvedAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    denialReason?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumInsuranceClaimStatusFieldUpdateOperationsInput | $Enums.InsuranceClaimStatus
+    submittedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    billingStaffNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    insuranceNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdBy?: StringFieldUpdateOperationsInput | string
+    reviewedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    patient?: PatientUpdateOneRequiredWithoutInsuranceClaimsNestedInput
+    inpatientEncounter?: InpatientEncounterUpdateOneWithoutInsuranceClaimNestedInput
+    outpatientEncounter?: OutpatientEncounterUpdateOneWithoutInsuranceClaimNestedInput
+    accessTokens?: InsuranceAccessTokenUpdateManyWithoutClaimNestedInput
+  }
+
+  export type InsuranceClaimUncheckedUpdateWithoutDocumentsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    claimNumber?: StringFieldUpdateOperationsInput | string
+    patientId?: StringFieldUpdateOperationsInput | string
+    inpatientEncounterId?: NullableStringFieldUpdateOperationsInput | string | null
+    outpatientEncounterId?: NullableStringFieldUpdateOperationsInput | string | null
+    insuranceProvider?: StringFieldUpdateOperationsInput | string
+    insuranceNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    policyNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    claimAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    approvedAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    denialReason?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumInsuranceClaimStatusFieldUpdateOperationsInput | $Enums.InsuranceClaimStatus
+    submittedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    billingStaffNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    insuranceNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdBy?: StringFieldUpdateOperationsInput | string
+    reviewedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    accessTokens?: InsuranceAccessTokenUncheckedUpdateManyWithoutClaimNestedInput
+  }
+
+  export type InsuranceClaimCreateWithoutAccessTokensInput = {
+    id?: string
+    claimNumber: string
+    insuranceProvider: string
+    insuranceNumber?: string | null
+    policyNumber?: string | null
+    claimAmount: Decimal | DecimalJsLike | number | string
+    approvedAmount?: Decimal | DecimalJsLike | number | string | null
+    denialReason?: string | null
+    status?: $Enums.InsuranceClaimStatus
+    submittedAt?: Date | string | null
+    reviewedAt?: Date | string | null
+    billingStaffNotes?: string | null
+    insuranceNotes?: string | null
+    createdBy: string
+    reviewedBy?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    patient: PatientCreateNestedOneWithoutInsuranceClaimsInput
+    inpatientEncounter?: InpatientEncounterCreateNestedOneWithoutInsuranceClaimInput
+    outpatientEncounter?: OutpatientEncounterCreateNestedOneWithoutInsuranceClaimInput
+    documents?: InsuranceDocumentCreateNestedManyWithoutClaimInput
+  }
+
+  export type InsuranceClaimUncheckedCreateWithoutAccessTokensInput = {
+    id?: string
+    claimNumber: string
+    patientId: string
+    inpatientEncounterId?: string | null
+    outpatientEncounterId?: string | null
+    insuranceProvider: string
+    insuranceNumber?: string | null
+    policyNumber?: string | null
+    claimAmount: Decimal | DecimalJsLike | number | string
+    approvedAmount?: Decimal | DecimalJsLike | number | string | null
+    denialReason?: string | null
+    status?: $Enums.InsuranceClaimStatus
+    submittedAt?: Date | string | null
+    reviewedAt?: Date | string | null
+    billingStaffNotes?: string | null
+    insuranceNotes?: string | null
+    createdBy: string
+    reviewedBy?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    documents?: InsuranceDocumentUncheckedCreateNestedManyWithoutClaimInput
+  }
+
+  export type InsuranceClaimCreateOrConnectWithoutAccessTokensInput = {
+    where: InsuranceClaimWhereUniqueInput
+    create: XOR<InsuranceClaimCreateWithoutAccessTokensInput, InsuranceClaimUncheckedCreateWithoutAccessTokensInput>
+  }
+
+  export type InsuranceClaimUpsertWithoutAccessTokensInput = {
+    update: XOR<InsuranceClaimUpdateWithoutAccessTokensInput, InsuranceClaimUncheckedUpdateWithoutAccessTokensInput>
+    create: XOR<InsuranceClaimCreateWithoutAccessTokensInput, InsuranceClaimUncheckedCreateWithoutAccessTokensInput>
+    where?: InsuranceClaimWhereInput
+  }
+
+  export type InsuranceClaimUpdateToOneWithWhereWithoutAccessTokensInput = {
+    where?: InsuranceClaimWhereInput
+    data: XOR<InsuranceClaimUpdateWithoutAccessTokensInput, InsuranceClaimUncheckedUpdateWithoutAccessTokensInput>
+  }
+
+  export type InsuranceClaimUpdateWithoutAccessTokensInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    claimNumber?: StringFieldUpdateOperationsInput | string
+    insuranceProvider?: StringFieldUpdateOperationsInput | string
+    insuranceNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    policyNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    claimAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    approvedAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    denialReason?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumInsuranceClaimStatusFieldUpdateOperationsInput | $Enums.InsuranceClaimStatus
+    submittedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    billingStaffNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    insuranceNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdBy?: StringFieldUpdateOperationsInput | string
+    reviewedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    patient?: PatientUpdateOneRequiredWithoutInsuranceClaimsNestedInput
+    inpatientEncounter?: InpatientEncounterUpdateOneWithoutInsuranceClaimNestedInput
+    outpatientEncounter?: OutpatientEncounterUpdateOneWithoutInsuranceClaimNestedInput
+    documents?: InsuranceDocumentUpdateManyWithoutClaimNestedInput
+  }
+
+  export type InsuranceClaimUncheckedUpdateWithoutAccessTokensInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    claimNumber?: StringFieldUpdateOperationsInput | string
+    patientId?: StringFieldUpdateOperationsInput | string
+    inpatientEncounterId?: NullableStringFieldUpdateOperationsInput | string | null
+    outpatientEncounterId?: NullableStringFieldUpdateOperationsInput | string | null
+    insuranceProvider?: StringFieldUpdateOperationsInput | string
+    insuranceNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    policyNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    claimAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    approvedAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    denialReason?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumInsuranceClaimStatusFieldUpdateOperationsInput | $Enums.InsuranceClaimStatus
+    submittedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    billingStaffNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    insuranceNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdBy?: StringFieldUpdateOperationsInput | string
+    reviewedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    documents?: InsuranceDocumentUncheckedUpdateManyWithoutClaimNestedInput
   }
 
   export type RefreshTokenCreateManyUserInput = {
@@ -39884,6 +46141,28 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
+  export type InsuranceClaimCreateManyPatientInput = {
+    id?: string
+    claimNumber: string
+    inpatientEncounterId?: string | null
+    outpatientEncounterId?: string | null
+    insuranceProvider: string
+    insuranceNumber?: string | null
+    policyNumber?: string | null
+    claimAmount: Decimal | DecimalJsLike | number | string
+    approvedAmount?: Decimal | DecimalJsLike | number | string | null
+    denialReason?: string | null
+    status?: $Enums.InsuranceClaimStatus
+    submittedAt?: Date | string | null
+    reviewedAt?: Date | string | null
+    billingStaffNotes?: string | null
+    insuranceNotes?: string | null
+    createdBy: string
+    reviewedBy?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
   export type InpatientEncounterUpdateWithoutPatientInput = {
     id?: StringFieldUpdateOperationsInput | string
     doctorId?: StringFieldUpdateOperationsInput | string
@@ -39901,6 +46180,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     charts?: InpatientEncounterChartUpdateManyWithoutEncounterNestedInput
     orders?: InpatientEncounterOrderUpdateManyWithoutEncounterNestedInput
+    insuranceClaim?: InsuranceClaimUpdateOneWithoutInpatientEncounterNestedInput
   }
 
   export type InpatientEncounterUncheckedUpdateWithoutPatientInput = {
@@ -39920,6 +46200,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     charts?: InpatientEncounterChartUncheckedUpdateManyWithoutEncounterNestedInput
     orders?: InpatientEncounterOrderUncheckedUpdateManyWithoutEncounterNestedInput
+    insuranceClaim?: InsuranceClaimUncheckedUpdateOneWithoutInpatientEncounterNestedInput
   }
 
   export type InpatientEncounterUncheckedUpdateManyWithoutPatientInput = {
@@ -39952,6 +46233,7 @@ export namespace Prisma {
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    insuranceClaim?: InsuranceClaimUpdateOneWithoutOutpatientEncounterNestedInput
   }
 
   export type OutpatientEncounterUncheckedUpdateWithoutPatientInput = {
@@ -39967,6 +46249,7 @@ export namespace Prisma {
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    insuranceClaim?: InsuranceClaimUncheckedUpdateOneWithoutOutpatientEncounterNestedInput
   }
 
   export type OutpatientEncounterUncheckedUpdateManyWithoutPatientInput = {
@@ -39980,6 +46263,76 @@ export namespace Prisma {
     consultationFee?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     paymentStatus?: EnumOutpatientPaymentStatusFieldUpdateOperationsInput | $Enums.OutpatientPaymentStatus
     notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type InsuranceClaimUpdateWithoutPatientInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    claimNumber?: StringFieldUpdateOperationsInput | string
+    insuranceProvider?: StringFieldUpdateOperationsInput | string
+    insuranceNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    policyNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    claimAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    approvedAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    denialReason?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumInsuranceClaimStatusFieldUpdateOperationsInput | $Enums.InsuranceClaimStatus
+    submittedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    billingStaffNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    insuranceNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdBy?: StringFieldUpdateOperationsInput | string
+    reviewedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    inpatientEncounter?: InpatientEncounterUpdateOneWithoutInsuranceClaimNestedInput
+    outpatientEncounter?: OutpatientEncounterUpdateOneWithoutInsuranceClaimNestedInput
+    documents?: InsuranceDocumentUpdateManyWithoutClaimNestedInput
+    accessTokens?: InsuranceAccessTokenUpdateManyWithoutClaimNestedInput
+  }
+
+  export type InsuranceClaimUncheckedUpdateWithoutPatientInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    claimNumber?: StringFieldUpdateOperationsInput | string
+    inpatientEncounterId?: NullableStringFieldUpdateOperationsInput | string | null
+    outpatientEncounterId?: NullableStringFieldUpdateOperationsInput | string | null
+    insuranceProvider?: StringFieldUpdateOperationsInput | string
+    insuranceNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    policyNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    claimAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    approvedAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    denialReason?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumInsuranceClaimStatusFieldUpdateOperationsInput | $Enums.InsuranceClaimStatus
+    submittedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    billingStaffNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    insuranceNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdBy?: StringFieldUpdateOperationsInput | string
+    reviewedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    documents?: InsuranceDocumentUncheckedUpdateManyWithoutClaimNestedInput
+    accessTokens?: InsuranceAccessTokenUncheckedUpdateManyWithoutClaimNestedInput
+  }
+
+  export type InsuranceClaimUncheckedUpdateManyWithoutPatientInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    claimNumber?: StringFieldUpdateOperationsInput | string
+    inpatientEncounterId?: NullableStringFieldUpdateOperationsInput | string | null
+    outpatientEncounterId?: NullableStringFieldUpdateOperationsInput | string | null
+    insuranceProvider?: StringFieldUpdateOperationsInput | string
+    insuranceNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    policyNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    claimAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    approvedAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    denialReason?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumInsuranceClaimStatusFieldUpdateOperationsInput | $Enums.InsuranceClaimStatus
+    submittedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    billingStaffNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    insuranceNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdBy?: StringFieldUpdateOperationsInput | string
+    reviewedBy?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -40426,6 +46779,94 @@ export namespace Prisma {
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type InsuranceDocumentCreateManyClaimInput = {
+    id?: string
+    documentType: string
+    fileName: string
+    fileUrl: string
+    fileSize: number
+    mimeType: string
+    description?: string | null
+    uploadedBy: string
+    createdAt?: Date | string
+  }
+
+  export type InsuranceAccessTokenCreateManyClaimInput = {
+    id?: string
+    token: string
+    recipientEmail: string
+    expiresAt: Date | string
+    usedAt?: Date | string | null
+    isRevoked?: boolean
+    createdAt?: Date | string
+  }
+
+  export type InsuranceDocumentUpdateWithoutClaimInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    documentType?: StringFieldUpdateOperationsInput | string
+    fileName?: StringFieldUpdateOperationsInput | string
+    fileUrl?: StringFieldUpdateOperationsInput | string
+    fileSize?: IntFieldUpdateOperationsInput | number
+    mimeType?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    uploadedBy?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type InsuranceDocumentUncheckedUpdateWithoutClaimInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    documentType?: StringFieldUpdateOperationsInput | string
+    fileName?: StringFieldUpdateOperationsInput | string
+    fileUrl?: StringFieldUpdateOperationsInput | string
+    fileSize?: IntFieldUpdateOperationsInput | number
+    mimeType?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    uploadedBy?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type InsuranceDocumentUncheckedUpdateManyWithoutClaimInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    documentType?: StringFieldUpdateOperationsInput | string
+    fileName?: StringFieldUpdateOperationsInput | string
+    fileUrl?: StringFieldUpdateOperationsInput | string
+    fileSize?: IntFieldUpdateOperationsInput | number
+    mimeType?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    uploadedBy?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type InsuranceAccessTokenUpdateWithoutClaimInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    token?: StringFieldUpdateOperationsInput | string
+    recipientEmail?: StringFieldUpdateOperationsInput | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    usedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isRevoked?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type InsuranceAccessTokenUncheckedUpdateWithoutClaimInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    token?: StringFieldUpdateOperationsInput | string
+    recipientEmail?: StringFieldUpdateOperationsInput | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    usedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isRevoked?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type InsuranceAccessTokenUncheckedUpdateManyWithoutClaimInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    token?: StringFieldUpdateOperationsInput | string
+    recipientEmail?: StringFieldUpdateOperationsInput | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    usedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isRevoked?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
 
