@@ -70,7 +70,7 @@ const getInpatientEncounters = publicProcedure
 	})
 
 // Get single inpatient encounter with full details
-const getInpatientEncounter = protectedProcedure
+const getInpatientEncounter = publicProcedure
 	.input(getInpatientEncounterSchema)
 	.query(async ({ ctx, input }) => {
 		const { instancePrisma } = ctx
@@ -101,6 +101,7 @@ const getInpatientEncounter = protectedProcedure
 						},
 						orderBy: { createdAt: 'desc' },
 					},
+					insuranceClaim: true, // Include insurance claim if exists
 				},
 			})
 
