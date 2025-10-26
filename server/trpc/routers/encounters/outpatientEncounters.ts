@@ -50,7 +50,7 @@ const getOutpatientEncounters = publicProcedure
 	})
 
 // Get single outpatient encounter
-const getOutpatientEncounter = protectedProcedure
+const getOutpatientEncounter = publicProcedure
 	.input(getOutpatientEncounterSchema)
 	.query(async ({ ctx, input }) => {
 		const { instancePrisma } = ctx
@@ -72,6 +72,7 @@ const getOutpatientEncounter = protectedProcedure
 							},
 						},
 					},
+					insuranceClaim: true, // Include insurance claim if exists
 				},
 			})
 
