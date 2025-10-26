@@ -54,6 +54,15 @@ const handleLogout = async () => {
           </NuxtLink>
           
           <NuxtLink 
+            to="/billing_staff/particulars" 
+            class="flex items-center px-3 py-2 text-sm font-medium rounded-lg"
+            :class="$route.path.startsWith('/billing_staff/particulars') ? 'bg-blue-50 text-blue-700 border-r-2 border-blue-600' : 'text-gray-600 hover:bg-gray-50'"
+          >
+            <Icon name="lucide:package" class="w-5 h-5 mr-3" />
+            Particulars Catalogue
+          </NuxtLink>
+          
+          <NuxtLink 
             to="/billing_staff/encounters" 
             class="flex items-center px-3 py-2 text-sm font-medium rounded-lg"
             :class="$route.path.startsWith('/billing_staff/encounters') ? 'bg-blue-50 text-blue-700 border-r-2 border-blue-600' : 'text-gray-600 hover:bg-gray-50'"
@@ -76,7 +85,7 @@ const handleLogout = async () => {
             class="flex items-center px-3 py-2 text-sm font-medium rounded-lg"
             :class="$route.path.startsWith('/billing_staff/invoices') ? 'bg-blue-50 text-blue-700 border-r-2 border-blue-600' : 'text-gray-600 hover:bg-gray-50'"
           >
-            <Icon name="lucide:file-invoice" class="w-5 h-5 mr-3" />
+            <Icon name="lucide:receipt" class="w-5 h-5 mr-3" />
             Invoices
           </NuxtLink>
           
@@ -87,6 +96,15 @@ const handleLogout = async () => {
           >
             <Icon name="lucide:wallet" class="w-5 h-5 mr-3" />
             Balance Settlements
+          </NuxtLink>
+          
+          <NuxtLink 
+            to="/billing_staff/insurance" 
+            class="flex items-center px-3 py-2 text-sm font-medium rounded-lg"
+            :class="$route.path.startsWith('/billing_staff/insurance') ? 'bg-blue-50 text-blue-700 border-r-2 border-blue-600' : 'text-gray-600 hover:bg-gray-50'"
+          >
+            <Icon name="lucide:shield-check" class="w-5 h-5 mr-3" />
+            Insurance Claims
           </NuxtLink>
           
           <NuxtLink 
