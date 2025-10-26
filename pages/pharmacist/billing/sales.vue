@@ -283,9 +283,7 @@ useHead({
                 <TableHead>Items</TableHead>
                 <TableHead>Payment</TableHead>
                 <TableHead>Status</TableHead>
-                <TableHead class="text-right">Total Amount</TableHead>
-                <TableHead class="text-right">Amount Paid</TableHead>
-                <TableHead class="text-right">Change</TableHead>
+                <TableHead class="text-right">Amount</TableHead>
                 <TableHead class="text-center">Actions</TableHead>
               </TableRow>
             </TableHeader>
@@ -329,12 +327,6 @@ useHead({
                 </TableCell>
                 <TableCell class="text-right font-bold text-gray-900">
                   {{ formatCurrency(sale.total) }}
-                </TableCell>
-                <TableCell class="text-right font-semibold text-green-600">
-                  {{ formatCurrency(sale.amountPaid || sale.total) }}
-                </TableCell>
-                <TableCell class="text-right text-sm text-gray-600">
-                  {{ formatCurrency((sale.amountPaid || sale.total) - sale.total) }}
                 </TableCell>
                 <TableCell class="text-center">
                   <Button 
