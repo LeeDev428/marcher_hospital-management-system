@@ -35,12 +35,9 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
         const staffType = authStore.user.staffCredentials?.staffType
         const currentPath = to.path
         
-        // Role-based route protection
+        // Role-based route protection - check more specific paths first
         if (currentPath.startsWith('/admin') && userRole !== 'admin') {
           throw createError({ statusCode: 403, statusMessage: 'Access denied. Admin privileges required.' })
-        }
-        if (currentPath.startsWith('/staff') && !['staff', 'admin'].includes(userRole)) {
-          throw createError({ statusCode: 403, statusMessage: 'Access denied. Staff privileges required.' })
         }
         if (currentPath.startsWith('/admissions_staff') && staffType !== 'ADMISSIONS_STAFF') {
           throw createError({ statusCode: 403, statusMessage: 'Access denied. Admissions Staff privileges required.' })
@@ -51,7 +48,12 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
         if (currentPath.startsWith('/pharmacist') && staffType !== 'PHARMACIST') {
           throw createError({ statusCode: 403, statusMessage: 'Access denied. Pharmacist privileges required.' })
         }
-        if (currentPath.startsWith('/patient') && !['patient', 'admin'].includes(userRole)) {
+        // Check /staff BEFORE /patient to handle /staff/patients/... routes
+        if (currentPath.startsWith('/staff') && !['staff', 'admin'].includes(userRole)) {
+          throw createError({ statusCode: 403, statusMessage: 'Access denied. Staff privileges required.' })
+        }
+        // Only check /patient for actual patient portal routes (not /staff/patient* routes)
+        if (currentPath.startsWith('/patient') && !currentPath.startsWith('/staff/patient') && !['patient', 'admin'].includes(userRole)) {
           throw createError({ statusCode: 403, statusMessage: 'Access denied. Patient privileges required.' })
         }
         
@@ -94,19 +96,12 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
       console.log('🔍 Role check:', { userRole, staffType, currentPath })
       
       // Role-based route protection
+      // Check more specific paths first to avoid conflicts (e.g., /staff/patients vs /patient)
       if (currentPath.startsWith('/admin') && userRole !== 'admin') {
         console.log('❌ Access denied - Admin required')
         throw createError({
           statusCode: 403,
           statusMessage: 'Access denied. Admin privileges required.'
-        })
-      }
-      
-      if (currentPath.startsWith('/staff') && !['staff', 'admin'].includes(userRole)) {
-        console.log('❌ Access denied - Staff required')
-        throw createError({
-          statusCode: 403,
-          statusMessage: 'Access denied. Staff privileges required.'
         })
       }
       
@@ -134,7 +129,17 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
         })
       }
       
-      if (currentPath.startsWith('/patient') && !['patient', 'admin'].includes(userRole)) {
+      // Check /staff BEFORE /patient to handle /staff/patients/... routes correctly
+      if (currentPath.startsWith('/staff') && !['staff', 'admin'].includes(userRole)) {
+        console.log('❌ Access denied - Staff required')
+        throw createError({
+          statusCode: 403,
+          statusMessage: 'Access denied. Staff privileges required.'
+        })
+      }
+      
+      // Only check /patient for actual patient portal routes (not /staff/patient* routes)
+      if (currentPath.startsWith('/patient') && !currentPath.startsWith('/staff/patient') && !['patient', 'admin'].includes(userRole)) {
         console.log('❌ Access denied - Patient required')
         throw createError({
           statusCode: 403,
