@@ -6,6 +6,7 @@ import bcrypt from "bcrypt"
 const createUserSchema = z.object({
   firstName: z.string().min(1),
   lastName: z.string().min(1),
+  middleName: z.string().optional(),
   email: z.string().email(),
   password: z.string().min(6),
   phone: z.string().optional(),
@@ -28,7 +29,12 @@ const createUserSchema = z.object({
   gender: z.enum(['MALE', 'FEMALE', 'OTHER', 'PREFER_NOT_TO_SAY']).optional(),
   address: z.string().optional(),
   emergencyContact: z.string().optional(),
+  emergencyPhone: z.string().optional(),
   bloodType: z.enum(['A_POSITIVE', 'A_NEGATIVE', 'B_POSITIVE', 'B_NEGATIVE', 'AB_POSITIVE', 'AB_NEGATIVE', 'O_POSITIVE', 'O_NEGATIVE']).optional(),
+  allergies: z.string().optional(),
+  medicalHistory: z.string().optional(),
+  insuranceProvider: z.string().optional(),
+  insuranceNumber: z.string().optional(),
 })
 
 const getUserSchema = z.object({
@@ -129,6 +135,7 @@ export const usersRouter = createTRPCRouter({
         const {
           firstName,
           lastName,
+          middleName,
           email,
           password,
           phone,
@@ -145,7 +152,12 @@ export const usersRouter = createTRPCRouter({
           gender,
           address,
           emergencyContact,
+          emergencyPhone,
           bloodType,
+          allergies,
+          medicalHistory,
+          insuranceProvider,
+          insuranceNumber,
         } = input
 
         try {
@@ -233,7 +245,12 @@ export const usersRouter = createTRPCRouter({
                 userId: user.id,
                 patientNumber,
                 emergencyContact,
+                emergencyPhone,
                 bloodType,
+                allergies,
+                medicalHistory,
+                insuranceProvider,
+                insuranceNumber,
               },
             })
           }
