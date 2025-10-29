@@ -7,6 +7,40 @@ import { staffProfilesRouter } from "./staffProfiles";
 export const staffRouter = createTRPCRouter({
 	profiles: staffProfilesRouter,
 
+	// Get staff credentials by user ID
+	getStaffCredentialsByUserId: protectedProcedure
+		.input(z.object({ userId: z.string() }))
+		.query(async ({ ctx, input }) => {
+			try {
+				const { instancePrisma } = ctx
+				
+				const credentials = await instancePrisma.staffCredentials.findUnique({
+					where: { userId: input.userId }
+				})
+				
+				if (!credentials) {
+					return {
+						success: false,
+						message: 'Staff credentials not found',
+						data: null
+					}
+				}
+				
+				return {
+					success: true,
+					message: 'Staff credentials found',
+					data: credentials
+				}
+			} catch (error: any) {
+				console.error('Error getting staff credentials:', error)
+				return {
+					success: false,
+					message: error.message || 'Failed to get staff credentials',
+					data: null
+				}
+			}
+		}),
+
 	// List all staff - simple method for components
 	list: protectedProcedure.query(async ({ ctx }) => {
 		try {
