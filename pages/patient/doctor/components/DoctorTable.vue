@@ -9,6 +9,7 @@ import {
   TableBody,
   TableCell,
 } from "@/components/ui/table"
+import { Button } from "@/components/ui/button"
 import { Skeleton } from "@/components/ui/skeleton"
 
 // Reuse Staff store, but fetch only doctors
@@ -162,11 +163,11 @@ defineExpose({ search, clearSearch, searchInputRef })
       <Table class="min-w-full text-sm">
         <TableHeader>
           <TableRow class="bg-gray-50 border-b border-gray-200">
-            <TableHead class="px-6 py-3 text-gray-600 font-medium">Profession</TableHead>
-            <TableHead class="px-6 py-3 text-gray-600 font-medium">Last Name</TableHead>
-            <TableHead class="px-6 py-3 text-gray-600 font-medium">First Name</TableHead>
-            <TableHead class="px-6 py-3 text-gray-600 font-medium">Middle Name</TableHead>
-            <TableHead class="px-6 py-3 text-gray-600 font-medium">Suffix</TableHead>
+            <TableHead class="px-6 py-3 text-gray-600 font-medium">Doctor Name</TableHead>
+            <TableHead class="px-6 py-3 text-gray-600 font-medium">Department</TableHead>
+            <TableHead class="px-6 py-3 text-gray-600 font-medium">Qualification</TableHead>
+            <TableHead class="px-6 py-3 text-gray-600 font-medium">OPD Day & Time</TableHead>
+            <TableHead class="px-6 py-3 text-gray-600 font-medium">Actions</TableHead>
           </TableRow>
         </TableHeader>
 
@@ -176,11 +177,32 @@ defineExpose({ search, clearSearch, searchInputRef })
             :key="doc.id"
             class="border-b border-gray-200 hover:bg-gray-50"
           >
+            <TableCell class="px-6 py-4">
+              <div class="font-medium">
+                Dr. {{ doc.lastName }}, {{ doc.firstName }}
+                <span v-if="doc.middleName"> {{ doc.middleName }}</span>
+                <span v-if="doc.suffix"> {{ doc.suffix }}</span>
+              </div>
+            </TableCell>
             <TableCell class="px-6 py-4 whitespace-nowrap">{{ doc.profession || '-' }}</TableCell>
-            <TableCell class="px-6 py-4">{{ doc.lastName }}</TableCell>
-            <TableCell class="px-6 py-4 whitespace-nowrap">{{ doc.firstName }}</TableCell>
-            <TableCell class="px-6 py-4 whitespace-nowrap">{{ doc.middleName || '-' }}</TableCell>
-            <TableCell class="px-6 py-4 whitespace-nowrap">{{ doc.suffix || '-' }}</TableCell>
+            <TableCell class="px-6 py-4">{{ doc.qualification || '-' }}</TableCell>
+            <TableCell class="px-6 py-4">
+              <div v-if="doc.opdSchedule" class="text-sm">
+                <div class="font-medium">{{ doc.opdSchedule.day }}</div>
+                <div class="text-muted-foreground">{{ doc.opdSchedule.time }}</div>
+              </div>
+              <span v-else class="text-muted-foreground">Not available</span>
+            </TableCell>
+            <TableCell class="px-6 py-4">
+              <Button
+                size="sm"
+                class="bg-black hover:bg-black/80 text-white"
+                @click="navigateTo(`/patient/appointments/new?doctorId=${doc.id}`)"
+              >
+                <Icon name="mdi:calendar-plus" class="mr-1" />
+                Book Appointment
+              </Button>
+            </TableCell>
           </TableRow>
 
           <TableRow v-if="paginatedDoctors.length === 0">
