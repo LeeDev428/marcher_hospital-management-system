@@ -101,6 +101,30 @@ const formatDateTime = (date: string | Date) => {
 	return `${d.toLocaleDateString()} ${d.toLocaleTimeString()}`
 }
 
+const getDispositionVariant = (disposition: string): 'default' | 'secondary' | 'outline' | 'destructive' => {
+	const variants: Record<string, 'default' | 'secondary' | 'outline' | 'destructive'> = {
+		ADMITTED: 'default',
+		DISCHARGED: 'secondary',
+		TRANSFERRED: 'outline',
+		DISCONTINUED: 'outline',
+		DECEASED: 'destructive',
+		OTHER: 'outline'
+	}
+	return variants[disposition] || 'default'
+}
+
+const getDataShareVariant = (status: string): 'default' | 'secondary' | 'outline' | 'destructive' => {
+	const variants: Record<string, 'default' | 'secondary' | 'outline' | 'destructive'> = {
+		PENDING: 'outline',
+		SUBMITTED: 'default',
+		APPROVED: 'default',
+		DENIED: 'destructive',
+		ACCESSED: 'secondary',
+		EXPIRED: 'outline'
+	}
+	return variants[status] || 'outline'
+}
+
 // Watch tab changes
 watch(activeTab, async () => {
 	await loadPatients()
@@ -135,6 +159,8 @@ onMounted(async () => {
 						<TableHead>Phone</TableHead>
 						<TableHead>Gender</TableHead>
 						<TableHead>Blood Type</TableHead>
+						<TableHead>Latest Encounter</TableHead>
+						<TableHead>Data Share Status</TableHead>
 						<TableHead>Created At</TableHead>
 						<TableHead>Actions</TableHead>
 					</TableRow>
@@ -157,6 +183,23 @@ onMounted(async () => {
 								{{ patient.bloodType.replace('_', '') }}
 							</Badge>
 							<span v-else class="text-muted-foreground">N/A</span>
+						</TableCell>
+						<TableCell>
+							<div v-if="patient.latestEncounter" class="flex flex-col gap-1">
+								<Badge :variant="getDispositionVariant(patient.latestEncounter.disposition)" class="text-xs">
+									{{ patient.latestEncounter.disposition }}
+								</Badge>
+								<span class="text-xs text-muted-foreground">
+									{{ formatDate(patient.latestEncounter.createdAt) }}
+								</span>
+							</div>
+							<span v-else class="text-muted-foreground text-xs">No encounters</span>
+						</TableCell>
+						<TableCell>
+							<Badge v-if="patient.dataShareStatus" :variant="getDataShareVariant(patient.dataShareStatus)" class="text-xs">
+								{{ patient.dataShareStatus }}
+							</Badge>
+							<span v-else class="text-muted-foreground text-xs">None</span>
 						</TableCell>
 						<TableCell>{{ formatDate(patient.createdAt) }}</TableCell>
 						<TableCell class="flex gap-2">
