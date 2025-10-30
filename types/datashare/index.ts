@@ -10,6 +10,7 @@ export const createDataShareRequestSchema = z.object({
   hospitalEmail: z.string().email('Valid email is required'),
   reason: z.string().min(10, 'Reason must be at least 10 characters'),
   requestNotes: z.string().optional(),
+  patientConsent: z.boolean().optional(),
 })
 
 export type CreateDataShareRequestInput = z.infer<typeof createDataShareRequestSchema>
