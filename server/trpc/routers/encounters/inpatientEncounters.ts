@@ -16,8 +16,86 @@ import {
 } from "@/types/encounters"
 import { createTRPCRouter, protectedProcedure, publicProcedure } from "../../init"
 import { TRPCError } from "@trpc/server"
+import { z } from 'zod'
 
 // ==================== INPATIENT ENCOUNTERS ====================
+
+// Get all inpatient encounters (for admissions staff)
+const getAllInpatientEncounters = publicProcedure
+	.input(z.object({
+		disposition: z.string().optional(),
+		page: z.number().default(1),
+		limit: z.number().default(50),
+	}))
+	.query(async ({ ctx, input }) => {
+		const { instancePrisma } = ctx
+
+		try {
+			const where: any = {}
+			if (input.disposition) {
+				where.disposition = input.disposition
+			}
+
+			const encounters = await instancePrisma.inpatientEncounter.findMany({
+				where,
+				include: {
+					patient: {
+						include: {
+							user: {
+								select: {
+									firstName: true,
+									lastName: true,
+									middleName: true,
+									email: true,
+								},
+							},
+							dataShareRequests: {
+								where: {
+									inpatientEncounterId: {
+										not: null
+									}
+								},
+								orderBy: {
+									createdAt: 'desc'
+								},
+								take: 1,
+								select: {
+									status: true,
+									requestNumber: true,
+								}
+							}
+						},
+					},
+				},
+				orderBy: { createdAt: 'desc' },
+				skip: (input.page - 1) * input.limit,
+				take: input.limit,
+			})
+
+			// Add dataShareStatus to each encounter
+			const encountersWithStatus = encounters.map(encounter => {
+				const latestRequest = encounter.patient.dataShareRequests?.[0]
+				return {
+					...encounter,
+					dataShareStatus: latestRequest?.status || null,
+					dataShareRequestNumber: latestRequest?.requestNumber || null,
+				}
+			})
+
+			return {
+				success: true,
+				message: "Inpatient encounters fetched successfully.",
+				data: encountersWithStatus,
+			}
+		} catch (error) {
+			console.error("Get all inpatient encounters error:", error)
+			return {
+				success: false,
+				message: "Failed to fetch inpatient encounters.",
+				data: [],
+			}
+		}
+	})
 
 // Get all inpatient encounters for a patient
 const getInpatientEncounters = publicProcedure
@@ -233,30 +311,10 @@ const createInpatientEncounter = publicProcedure
 	})
 
 // Update inpatient encounter (DOCTOR only - for disposition)
-const updateInpatientEncounter = protectedProcedure
+const updateInpatientEncounter = publicProcedure
 	.input(updateInpatientEncounterSchema)
 	.mutation(async ({ ctx, input }) => {
-		const { instancePrisma, user } = ctx
-
-		// Check user role - only doctors can update
-		if (!user || user.role !== 'STAFF') {
-			throw new TRPCError({
-				code: 'FORBIDDEN',
-				message: 'Only doctors can update inpatient encounters',
-			})
-		}
-
-		const staffUser = await instancePrisma.user.findUnique({
-			where: { id: user.id },
-			include: { staffCredentials: true },
-		})
-
-		if (!staffUser?.staffCredentials || staffUser.staffCredentials.staffType !== 'DOCTOR') {
-			throw new TRPCError({
-				code: 'FORBIDDEN',
-				message: 'Only doctors can update inpatient encounters',
-			})
-		}
+		const { instancePrisma } = ctx
 
 		const { id, doctorDiagnosis, disposition, dispositionDate, dispositionTime, dispositionNote } = input
 
@@ -270,15 +328,6 @@ const updateInpatientEncounter = protectedProcedure
 				return {
 					success: false,
 					message: "Encounter not found.",
-					data: null,
-				}
-			}
-
-			// Check if doctor is assigned to this encounter
-			if (currentEncounter.doctorId !== user.id) {
-				return {
-					success: false,
-					message: "You can only update encounters assigned to you.",
 					data: null,
 				}
 			}
@@ -721,6 +770,7 @@ const deleteInpatientOrder = protectedProcedure
 
 export const inpatientEncountersRouter = createTRPCRouter({
 	// Encounters
+	getAllInpatientEncounters,
 	getInpatientEncounters,
 	getInpatientEncounter,
 	checkActiveEncounter,
