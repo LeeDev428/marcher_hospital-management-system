@@ -133,6 +133,21 @@ export type InsuranceDocument = $Result.DefaultSelection<Prisma.$InsuranceDocume
  * 
  */
 export type InsuranceAccessToken = $Result.DefaultSelection<Prisma.$InsuranceAccessTokenPayload>
+/**
+ * Model DataShareRequest
+ * 
+ */
+export type DataShareRequest = $Result.DefaultSelection<Prisma.$DataShareRequestPayload>
+/**
+ * Model DataShareDocument
+ * 
+ */
+export type DataShareDocument = $Result.DefaultSelection<Prisma.$DataShareDocumentPayload>
+/**
+ * Model DataShareAccessToken
+ * 
+ */
+export type DataShareAccessToken = $Result.DefaultSelection<Prisma.$DataShareAccessTokenPayload>
 
 /**
  * Enums
@@ -433,6 +448,19 @@ export const InsuranceClaimStatus: {
 
 export type InsuranceClaimStatus = (typeof InsuranceClaimStatus)[keyof typeof InsuranceClaimStatus]
 
+
+export const DataShareStatus: {
+  PENDING: 'PENDING',
+  SUBMITTED: 'SUBMITTED',
+  APPROVED: 'APPROVED',
+  DENIED: 'DENIED',
+  ACCESSED: 'ACCESSED',
+  EXPIRED: 'EXPIRED',
+  CANCELLED: 'CANCELLED'
+};
+
+export type DataShareStatus = (typeof DataShareStatus)[keyof typeof DataShareStatus]
+
 }
 
 export type UserRole = $Enums.UserRole
@@ -530,6 +558,10 @@ export const ParticularType: typeof $Enums.ParticularType
 export type InsuranceClaimStatus = $Enums.InsuranceClaimStatus
 
 export const InsuranceClaimStatus: typeof $Enums.InsuranceClaimStatus
+
+export type DataShareStatus = $Enums.DataShareStatus
+
+export const DataShareStatus: typeof $Enums.DataShareStatus
 
 /**
  * ##  Prisma Client ʲˢ
@@ -888,6 +920,36 @@ export class PrismaClient<
     * ```
     */
   get insuranceAccessToken(): Prisma.InsuranceAccessTokenDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.dataShareRequest`: Exposes CRUD operations for the **DataShareRequest** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more DataShareRequests
+    * const dataShareRequests = await prisma.dataShareRequest.findMany()
+    * ```
+    */
+  get dataShareRequest(): Prisma.DataShareRequestDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.dataShareDocument`: Exposes CRUD operations for the **DataShareDocument** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more DataShareDocuments
+    * const dataShareDocuments = await prisma.dataShareDocument.findMany()
+    * ```
+    */
+  get dataShareDocument(): Prisma.DataShareDocumentDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.dataShareAccessToken`: Exposes CRUD operations for the **DataShareAccessToken** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more DataShareAccessTokens
+    * const dataShareAccessTokens = await prisma.dataShareAccessToken.findMany()
+    * ```
+    */
+  get dataShareAccessToken(): Prisma.DataShareAccessTokenDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -1351,7 +1413,10 @@ export namespace Prisma {
     ParticularCatalogue: 'ParticularCatalogue',
     InsuranceClaim: 'InsuranceClaim',
     InsuranceDocument: 'InsuranceDocument',
-    InsuranceAccessToken: 'InsuranceAccessToken'
+    InsuranceAccessToken: 'InsuranceAccessToken',
+    DataShareRequest: 'DataShareRequest',
+    DataShareDocument: 'DataShareDocument',
+    DataShareAccessToken: 'DataShareAccessToken'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -1370,7 +1435,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "staffCredentials" | "patient" | "partner" | "refreshToken" | "passwordResetToken" | "appointment" | "staffSchedule" | "medicalService" | "pharmacySupplier" | "pharmacyBrand" | "pharmacyItemCategory" | "pharmacyItem" | "pharmacySale" | "pharmacySaleItem" | "pharmacyPayment" | "outpatientEncounter" | "inpatientEncounter" | "inpatientEncounterChart" | "inpatientEncounterOrder" | "particularCatalogue" | "insuranceClaim" | "insuranceDocument" | "insuranceAccessToken"
+      modelProps: "user" | "staffCredentials" | "patient" | "partner" | "refreshToken" | "passwordResetToken" | "appointment" | "staffSchedule" | "medicalService" | "pharmacySupplier" | "pharmacyBrand" | "pharmacyItemCategory" | "pharmacyItem" | "pharmacySale" | "pharmacySaleItem" | "pharmacyPayment" | "outpatientEncounter" | "inpatientEncounter" | "inpatientEncounterChart" | "inpatientEncounterOrder" | "particularCatalogue" | "insuranceClaim" | "insuranceDocument" | "insuranceAccessToken" | "dataShareRequest" | "dataShareDocument" | "dataShareAccessToken"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -3150,6 +3215,228 @@ export namespace Prisma {
           }
         }
       }
+      DataShareRequest: {
+        payload: Prisma.$DataShareRequestPayload<ExtArgs>
+        fields: Prisma.DataShareRequestFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.DataShareRequestFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DataShareRequestPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.DataShareRequestFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DataShareRequestPayload>
+          }
+          findFirst: {
+            args: Prisma.DataShareRequestFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DataShareRequestPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.DataShareRequestFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DataShareRequestPayload>
+          }
+          findMany: {
+            args: Prisma.DataShareRequestFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DataShareRequestPayload>[]
+          }
+          create: {
+            args: Prisma.DataShareRequestCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DataShareRequestPayload>
+          }
+          createMany: {
+            args: Prisma.DataShareRequestCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.DataShareRequestCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DataShareRequestPayload>[]
+          }
+          delete: {
+            args: Prisma.DataShareRequestDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DataShareRequestPayload>
+          }
+          update: {
+            args: Prisma.DataShareRequestUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DataShareRequestPayload>
+          }
+          deleteMany: {
+            args: Prisma.DataShareRequestDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.DataShareRequestUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.DataShareRequestUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DataShareRequestPayload>[]
+          }
+          upsert: {
+            args: Prisma.DataShareRequestUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DataShareRequestPayload>
+          }
+          aggregate: {
+            args: Prisma.DataShareRequestAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateDataShareRequest>
+          }
+          groupBy: {
+            args: Prisma.DataShareRequestGroupByArgs<ExtArgs>
+            result: $Utils.Optional<DataShareRequestGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.DataShareRequestCountArgs<ExtArgs>
+            result: $Utils.Optional<DataShareRequestCountAggregateOutputType> | number
+          }
+        }
+      }
+      DataShareDocument: {
+        payload: Prisma.$DataShareDocumentPayload<ExtArgs>
+        fields: Prisma.DataShareDocumentFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.DataShareDocumentFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DataShareDocumentPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.DataShareDocumentFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DataShareDocumentPayload>
+          }
+          findFirst: {
+            args: Prisma.DataShareDocumentFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DataShareDocumentPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.DataShareDocumentFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DataShareDocumentPayload>
+          }
+          findMany: {
+            args: Prisma.DataShareDocumentFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DataShareDocumentPayload>[]
+          }
+          create: {
+            args: Prisma.DataShareDocumentCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DataShareDocumentPayload>
+          }
+          createMany: {
+            args: Prisma.DataShareDocumentCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.DataShareDocumentCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DataShareDocumentPayload>[]
+          }
+          delete: {
+            args: Prisma.DataShareDocumentDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DataShareDocumentPayload>
+          }
+          update: {
+            args: Prisma.DataShareDocumentUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DataShareDocumentPayload>
+          }
+          deleteMany: {
+            args: Prisma.DataShareDocumentDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.DataShareDocumentUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.DataShareDocumentUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DataShareDocumentPayload>[]
+          }
+          upsert: {
+            args: Prisma.DataShareDocumentUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DataShareDocumentPayload>
+          }
+          aggregate: {
+            args: Prisma.DataShareDocumentAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateDataShareDocument>
+          }
+          groupBy: {
+            args: Prisma.DataShareDocumentGroupByArgs<ExtArgs>
+            result: $Utils.Optional<DataShareDocumentGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.DataShareDocumentCountArgs<ExtArgs>
+            result: $Utils.Optional<DataShareDocumentCountAggregateOutputType> | number
+          }
+        }
+      }
+      DataShareAccessToken: {
+        payload: Prisma.$DataShareAccessTokenPayload<ExtArgs>
+        fields: Prisma.DataShareAccessTokenFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.DataShareAccessTokenFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DataShareAccessTokenPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.DataShareAccessTokenFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DataShareAccessTokenPayload>
+          }
+          findFirst: {
+            args: Prisma.DataShareAccessTokenFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DataShareAccessTokenPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.DataShareAccessTokenFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DataShareAccessTokenPayload>
+          }
+          findMany: {
+            args: Prisma.DataShareAccessTokenFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DataShareAccessTokenPayload>[]
+          }
+          create: {
+            args: Prisma.DataShareAccessTokenCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DataShareAccessTokenPayload>
+          }
+          createMany: {
+            args: Prisma.DataShareAccessTokenCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.DataShareAccessTokenCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DataShareAccessTokenPayload>[]
+          }
+          delete: {
+            args: Prisma.DataShareAccessTokenDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DataShareAccessTokenPayload>
+          }
+          update: {
+            args: Prisma.DataShareAccessTokenUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DataShareAccessTokenPayload>
+          }
+          deleteMany: {
+            args: Prisma.DataShareAccessTokenDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.DataShareAccessTokenUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.DataShareAccessTokenUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DataShareAccessTokenPayload>[]
+          }
+          upsert: {
+            args: Prisma.DataShareAccessTokenUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DataShareAccessTokenPayload>
+          }
+          aggregate: {
+            args: Prisma.DataShareAccessTokenAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateDataShareAccessToken>
+          }
+          groupBy: {
+            args: Prisma.DataShareAccessTokenGroupByArgs<ExtArgs>
+            result: $Utils.Optional<DataShareAccessTokenGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.DataShareAccessTokenCountArgs<ExtArgs>
+            result: $Utils.Optional<DataShareAccessTokenCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -3270,6 +3557,9 @@ export namespace Prisma {
     insuranceClaim?: InsuranceClaimOmit
     insuranceDocument?: InsuranceDocumentOmit
     insuranceAccessToken?: InsuranceAccessTokenOmit
+    dataShareRequest?: DataShareRequestOmit
+    dataShareDocument?: DataShareDocumentOmit
+    dataShareAccessToken?: DataShareAccessTokenOmit
   }
 
   /* Types for Logging */
@@ -3411,12 +3701,14 @@ export namespace Prisma {
     inpatientEncounters: number
     outpatientEncounters: number
     insuranceClaims: number
+    dataShareRequests: number
   }
 
   export type PatientCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     inpatientEncounters?: boolean | PatientCountOutputTypeCountInpatientEncountersArgs
     outpatientEncounters?: boolean | PatientCountOutputTypeCountOutpatientEncountersArgs
     insuranceClaims?: boolean | PatientCountOutputTypeCountInsuranceClaimsArgs
+    dataShareRequests?: boolean | PatientCountOutputTypeCountDataShareRequestsArgs
   }
 
   // Custom InputTypes
@@ -3449,6 +3741,13 @@ export namespace Prisma {
    */
   export type PatientCountOutputTypeCountInsuranceClaimsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: InsuranceClaimWhereInput
+  }
+
+  /**
+   * PatientCountOutputType without action
+   */
+  export type PatientCountOutputTypeCountDataShareRequestsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: DataShareRequestWhereInput
   }
 
 
@@ -3724,6 +4023,46 @@ export namespace Prisma {
    */
   export type InsuranceClaimCountOutputTypeCountAccessTokensArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: InsuranceAccessTokenWhereInput
+  }
+
+
+  /**
+   * Count Type DataShareRequestCountOutputType
+   */
+
+  export type DataShareRequestCountOutputType = {
+    documents: number
+    accessTokens: number
+  }
+
+  export type DataShareRequestCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    documents?: boolean | DataShareRequestCountOutputTypeCountDocumentsArgs
+    accessTokens?: boolean | DataShareRequestCountOutputTypeCountAccessTokensArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * DataShareRequestCountOutputType without action
+   */
+  export type DataShareRequestCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DataShareRequestCountOutputType
+     */
+    select?: DataShareRequestCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * DataShareRequestCountOutputType without action
+   */
+  export type DataShareRequestCountOutputTypeCountDocumentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: DataShareDocumentWhereInput
+  }
+
+  /**
+   * DataShareRequestCountOutputType without action
+   */
+  export type DataShareRequestCountOutputTypeCountAccessTokensArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: DataShareAccessTokenWhereInput
   }
 
 
@@ -6755,6 +7094,7 @@ export namespace Prisma {
     inpatientEncounters?: boolean | Patient$inpatientEncountersArgs<ExtArgs>
     outpatientEncounters?: boolean | Patient$outpatientEncountersArgs<ExtArgs>
     insuranceClaims?: boolean | Patient$insuranceClaimsArgs<ExtArgs>
+    dataShareRequests?: boolean | Patient$dataShareRequestsArgs<ExtArgs>
     _count?: boolean | PatientCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["patient"]>
 
@@ -6811,6 +7151,7 @@ export namespace Prisma {
     inpatientEncounters?: boolean | Patient$inpatientEncountersArgs<ExtArgs>
     outpatientEncounters?: boolean | Patient$outpatientEncountersArgs<ExtArgs>
     insuranceClaims?: boolean | Patient$insuranceClaimsArgs<ExtArgs>
+    dataShareRequests?: boolean | Patient$dataShareRequestsArgs<ExtArgs>
     _count?: boolean | PatientCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type PatientIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -6827,6 +7168,7 @@ export namespace Prisma {
       inpatientEncounters: Prisma.$InpatientEncounterPayload<ExtArgs>[]
       outpatientEncounters: Prisma.$OutpatientEncounterPayload<ExtArgs>[]
       insuranceClaims: Prisma.$InsuranceClaimPayload<ExtArgs>[]
+      dataShareRequests: Prisma.$DataShareRequestPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -7239,6 +7581,7 @@ export namespace Prisma {
     inpatientEncounters<T extends Patient$inpatientEncountersArgs<ExtArgs> = {}>(args?: Subset<T, Patient$inpatientEncountersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InpatientEncounterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     outpatientEncounters<T extends Patient$outpatientEncountersArgs<ExtArgs> = {}>(args?: Subset<T, Patient$outpatientEncountersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OutpatientEncounterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     insuranceClaims<T extends Patient$insuranceClaimsArgs<ExtArgs> = {}>(args?: Subset<T, Patient$insuranceClaimsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InsuranceClaimPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    dataShareRequests<T extends Patient$dataShareRequestsArgs<ExtArgs> = {}>(args?: Subset<T, Patient$dataShareRequestsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DataShareRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -7745,6 +8088,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: InsuranceClaimScalarFieldEnum | InsuranceClaimScalarFieldEnum[]
+  }
+
+  /**
+   * Patient.dataShareRequests
+   */
+  export type Patient$dataShareRequestsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DataShareRequest
+     */
+    select?: DataShareRequestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DataShareRequest
+     */
+    omit?: DataShareRequestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DataShareRequestInclude<ExtArgs> | null
+    where?: DataShareRequestWhereInput
+    orderBy?: DataShareRequestOrderByWithRelationInput | DataShareRequestOrderByWithRelationInput[]
+    cursor?: DataShareRequestWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: DataShareRequestScalarFieldEnum | DataShareRequestScalarFieldEnum[]
   }
 
   /**
@@ -22741,6 +23108,7 @@ export namespace Prisma {
     updatedAt?: boolean
     patient?: boolean | PatientDefaultArgs<ExtArgs>
     insuranceClaim?: boolean | OutpatientEncounter$insuranceClaimArgs<ExtArgs>
+    dataShareRequest?: boolean | OutpatientEncounter$dataShareRequestArgs<ExtArgs>
   }, ExtArgs["result"]["outpatientEncounter"]>
 
   export type OutpatientEncounterSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -22797,6 +23165,7 @@ export namespace Prisma {
   export type OutpatientEncounterInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     patient?: boolean | PatientDefaultArgs<ExtArgs>
     insuranceClaim?: boolean | OutpatientEncounter$insuranceClaimArgs<ExtArgs>
+    dataShareRequest?: boolean | OutpatientEncounter$dataShareRequestArgs<ExtArgs>
   }
   export type OutpatientEncounterIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     patient?: boolean | PatientDefaultArgs<ExtArgs>
@@ -22810,6 +23179,7 @@ export namespace Prisma {
     objects: {
       patient: Prisma.$PatientPayload<ExtArgs>
       insuranceClaim: Prisma.$InsuranceClaimPayload<ExtArgs> | null
+      dataShareRequest: Prisma.$DataShareRequestPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -23221,6 +23591,7 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     patient<T extends PatientDefaultArgs<ExtArgs> = {}>(args?: Subset<T, PatientDefaultArgs<ExtArgs>>): Prisma__PatientClient<$Result.GetResult<Prisma.$PatientPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     insuranceClaim<T extends OutpatientEncounter$insuranceClaimArgs<ExtArgs> = {}>(args?: Subset<T, OutpatientEncounter$insuranceClaimArgs<ExtArgs>>): Prisma__InsuranceClaimClient<$Result.GetResult<Prisma.$InsuranceClaimPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    dataShareRequest<T extends OutpatientEncounter$dataShareRequestArgs<ExtArgs> = {}>(args?: Subset<T, OutpatientEncounter$dataShareRequestArgs<ExtArgs>>): Prisma__DataShareRequestClient<$Result.GetResult<Prisma.$DataShareRequestPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -23678,6 +24049,25 @@ export namespace Prisma {
   }
 
   /**
+   * OutpatientEncounter.dataShareRequest
+   */
+  export type OutpatientEncounter$dataShareRequestArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DataShareRequest
+     */
+    select?: DataShareRequestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DataShareRequest
+     */
+    omit?: DataShareRequestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DataShareRequestInclude<ExtArgs> | null
+    where?: DataShareRequestWhereInput
+  }
+
+  /**
    * OutpatientEncounter without action
    */
   export type OutpatientEncounterDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -23944,6 +24334,7 @@ export namespace Prisma {
     charts?: boolean | InpatientEncounter$chartsArgs<ExtArgs>
     orders?: boolean | InpatientEncounter$ordersArgs<ExtArgs>
     insuranceClaim?: boolean | InpatientEncounter$insuranceClaimArgs<ExtArgs>
+    dataShareRequest?: boolean | InpatientEncounter$dataShareRequestArgs<ExtArgs>
     _count?: boolean | InpatientEncounterCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["inpatientEncounter"]>
 
@@ -24009,6 +24400,7 @@ export namespace Prisma {
     charts?: boolean | InpatientEncounter$chartsArgs<ExtArgs>
     orders?: boolean | InpatientEncounter$ordersArgs<ExtArgs>
     insuranceClaim?: boolean | InpatientEncounter$insuranceClaimArgs<ExtArgs>
+    dataShareRequest?: boolean | InpatientEncounter$dataShareRequestArgs<ExtArgs>
     _count?: boolean | InpatientEncounterCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type InpatientEncounterIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -24025,6 +24417,7 @@ export namespace Prisma {
       charts: Prisma.$InpatientEncounterChartPayload<ExtArgs>[]
       orders: Prisma.$InpatientEncounterOrderPayload<ExtArgs>[]
       insuranceClaim: Prisma.$InsuranceClaimPayload<ExtArgs> | null
+      dataShareRequest: Prisma.$DataShareRequestPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -24440,6 +24833,7 @@ export namespace Prisma {
     charts<T extends InpatientEncounter$chartsArgs<ExtArgs> = {}>(args?: Subset<T, InpatientEncounter$chartsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InpatientEncounterChartPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     orders<T extends InpatientEncounter$ordersArgs<ExtArgs> = {}>(args?: Subset<T, InpatientEncounter$ordersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InpatientEncounterOrderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     insuranceClaim<T extends InpatientEncounter$insuranceClaimArgs<ExtArgs> = {}>(args?: Subset<T, InpatientEncounter$insuranceClaimArgs<ExtArgs>>): Prisma__InsuranceClaimClient<$Result.GetResult<Prisma.$InsuranceClaimPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    dataShareRequest<T extends InpatientEncounter$dataShareRequestArgs<ExtArgs> = {}>(args?: Subset<T, InpatientEncounter$dataShareRequestArgs<ExtArgs>>): Prisma__DataShareRequestClient<$Result.GetResult<Prisma.$DataShareRequestPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -24944,6 +25338,25 @@ export namespace Prisma {
      */
     include?: InsuranceClaimInclude<ExtArgs> | null
     where?: InsuranceClaimWhereInput
+  }
+
+  /**
+   * InpatientEncounter.dataShareRequest
+   */
+  export type InpatientEncounter$dataShareRequestArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DataShareRequest
+     */
+    select?: DataShareRequestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DataShareRequest
+     */
+    omit?: DataShareRequestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DataShareRequestInclude<ExtArgs> | null
+    where?: DataShareRequestWhereInput
   }
 
   /**
@@ -32034,6 +32447,3647 @@ export namespace Prisma {
 
 
   /**
+   * Model DataShareRequest
+   */
+
+  export type AggregateDataShareRequest = {
+    _count: DataShareRequestCountAggregateOutputType | null
+    _min: DataShareRequestMinAggregateOutputType | null
+    _max: DataShareRequestMaxAggregateOutputType | null
+  }
+
+  export type DataShareRequestMinAggregateOutputType = {
+    id: string | null
+    requestNumber: string | null
+    patientId: string | null
+    inpatientEncounterId: string | null
+    outpatientEncounterId: string | null
+    hospitalIdentifier: string | null
+    hospitalName: string | null
+    hospitalEmail: string | null
+    reason: string | null
+    status: $Enums.DataShareStatus | null
+    submittedAt: Date | null
+    reviewedAt: Date | null
+    accessedAt: Date | null
+    requestNotes: string | null
+    reviewNotes: string | null
+    denialReason: string | null
+    requestedBy: string | null
+    reviewedBy: string | null
+    patientConsent: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type DataShareRequestMaxAggregateOutputType = {
+    id: string | null
+    requestNumber: string | null
+    patientId: string | null
+    inpatientEncounterId: string | null
+    outpatientEncounterId: string | null
+    hospitalIdentifier: string | null
+    hospitalName: string | null
+    hospitalEmail: string | null
+    reason: string | null
+    status: $Enums.DataShareStatus | null
+    submittedAt: Date | null
+    reviewedAt: Date | null
+    accessedAt: Date | null
+    requestNotes: string | null
+    reviewNotes: string | null
+    denialReason: string | null
+    requestedBy: string | null
+    reviewedBy: string | null
+    patientConsent: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type DataShareRequestCountAggregateOutputType = {
+    id: number
+    requestNumber: number
+    patientId: number
+    inpatientEncounterId: number
+    outpatientEncounterId: number
+    hospitalIdentifier: number
+    hospitalName: number
+    hospitalEmail: number
+    reason: number
+    status: number
+    submittedAt: number
+    reviewedAt: number
+    accessedAt: number
+    selectedData: number
+    requestNotes: number
+    reviewNotes: number
+    denialReason: number
+    requestedBy: number
+    reviewedBy: number
+    patientConsent: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type DataShareRequestMinAggregateInputType = {
+    id?: true
+    requestNumber?: true
+    patientId?: true
+    inpatientEncounterId?: true
+    outpatientEncounterId?: true
+    hospitalIdentifier?: true
+    hospitalName?: true
+    hospitalEmail?: true
+    reason?: true
+    status?: true
+    submittedAt?: true
+    reviewedAt?: true
+    accessedAt?: true
+    requestNotes?: true
+    reviewNotes?: true
+    denialReason?: true
+    requestedBy?: true
+    reviewedBy?: true
+    patientConsent?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type DataShareRequestMaxAggregateInputType = {
+    id?: true
+    requestNumber?: true
+    patientId?: true
+    inpatientEncounterId?: true
+    outpatientEncounterId?: true
+    hospitalIdentifier?: true
+    hospitalName?: true
+    hospitalEmail?: true
+    reason?: true
+    status?: true
+    submittedAt?: true
+    reviewedAt?: true
+    accessedAt?: true
+    requestNotes?: true
+    reviewNotes?: true
+    denialReason?: true
+    requestedBy?: true
+    reviewedBy?: true
+    patientConsent?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type DataShareRequestCountAggregateInputType = {
+    id?: true
+    requestNumber?: true
+    patientId?: true
+    inpatientEncounterId?: true
+    outpatientEncounterId?: true
+    hospitalIdentifier?: true
+    hospitalName?: true
+    hospitalEmail?: true
+    reason?: true
+    status?: true
+    submittedAt?: true
+    reviewedAt?: true
+    accessedAt?: true
+    selectedData?: true
+    requestNotes?: true
+    reviewNotes?: true
+    denialReason?: true
+    requestedBy?: true
+    reviewedBy?: true
+    patientConsent?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type DataShareRequestAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which DataShareRequest to aggregate.
+     */
+    where?: DataShareRequestWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of DataShareRequests to fetch.
+     */
+    orderBy?: DataShareRequestOrderByWithRelationInput | DataShareRequestOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: DataShareRequestWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` DataShareRequests from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` DataShareRequests.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned DataShareRequests
+    **/
+    _count?: true | DataShareRequestCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: DataShareRequestMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: DataShareRequestMaxAggregateInputType
+  }
+
+  export type GetDataShareRequestAggregateType<T extends DataShareRequestAggregateArgs> = {
+        [P in keyof T & keyof AggregateDataShareRequest]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateDataShareRequest[P]>
+      : GetScalarType<T[P], AggregateDataShareRequest[P]>
+  }
+
+
+
+
+  export type DataShareRequestGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: DataShareRequestWhereInput
+    orderBy?: DataShareRequestOrderByWithAggregationInput | DataShareRequestOrderByWithAggregationInput[]
+    by: DataShareRequestScalarFieldEnum[] | DataShareRequestScalarFieldEnum
+    having?: DataShareRequestScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: DataShareRequestCountAggregateInputType | true
+    _min?: DataShareRequestMinAggregateInputType
+    _max?: DataShareRequestMaxAggregateInputType
+  }
+
+  export type DataShareRequestGroupByOutputType = {
+    id: string
+    requestNumber: string
+    patientId: string
+    inpatientEncounterId: string | null
+    outpatientEncounterId: string | null
+    hospitalIdentifier: string
+    hospitalName: string
+    hospitalEmail: string
+    reason: string
+    status: $Enums.DataShareStatus
+    submittedAt: Date | null
+    reviewedAt: Date | null
+    accessedAt: Date | null
+    selectedData: JsonValue | null
+    requestNotes: string | null
+    reviewNotes: string | null
+    denialReason: string | null
+    requestedBy: string
+    reviewedBy: string | null
+    patientConsent: boolean
+    createdAt: Date
+    updatedAt: Date
+    _count: DataShareRequestCountAggregateOutputType | null
+    _min: DataShareRequestMinAggregateOutputType | null
+    _max: DataShareRequestMaxAggregateOutputType | null
+  }
+
+  type GetDataShareRequestGroupByPayload<T extends DataShareRequestGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<DataShareRequestGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof DataShareRequestGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], DataShareRequestGroupByOutputType[P]>
+            : GetScalarType<T[P], DataShareRequestGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type DataShareRequestSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    requestNumber?: boolean
+    patientId?: boolean
+    inpatientEncounterId?: boolean
+    outpatientEncounterId?: boolean
+    hospitalIdentifier?: boolean
+    hospitalName?: boolean
+    hospitalEmail?: boolean
+    reason?: boolean
+    status?: boolean
+    submittedAt?: boolean
+    reviewedAt?: boolean
+    accessedAt?: boolean
+    selectedData?: boolean
+    requestNotes?: boolean
+    reviewNotes?: boolean
+    denialReason?: boolean
+    requestedBy?: boolean
+    reviewedBy?: boolean
+    patientConsent?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    patient?: boolean | PatientDefaultArgs<ExtArgs>
+    inpatientEncounter?: boolean | DataShareRequest$inpatientEncounterArgs<ExtArgs>
+    outpatientEncounter?: boolean | DataShareRequest$outpatientEncounterArgs<ExtArgs>
+    documents?: boolean | DataShareRequest$documentsArgs<ExtArgs>
+    accessTokens?: boolean | DataShareRequest$accessTokensArgs<ExtArgs>
+    _count?: boolean | DataShareRequestCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["dataShareRequest"]>
+
+  export type DataShareRequestSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    requestNumber?: boolean
+    patientId?: boolean
+    inpatientEncounterId?: boolean
+    outpatientEncounterId?: boolean
+    hospitalIdentifier?: boolean
+    hospitalName?: boolean
+    hospitalEmail?: boolean
+    reason?: boolean
+    status?: boolean
+    submittedAt?: boolean
+    reviewedAt?: boolean
+    accessedAt?: boolean
+    selectedData?: boolean
+    requestNotes?: boolean
+    reviewNotes?: boolean
+    denialReason?: boolean
+    requestedBy?: boolean
+    reviewedBy?: boolean
+    patientConsent?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    patient?: boolean | PatientDefaultArgs<ExtArgs>
+    inpatientEncounter?: boolean | DataShareRequest$inpatientEncounterArgs<ExtArgs>
+    outpatientEncounter?: boolean | DataShareRequest$outpatientEncounterArgs<ExtArgs>
+  }, ExtArgs["result"]["dataShareRequest"]>
+
+  export type DataShareRequestSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    requestNumber?: boolean
+    patientId?: boolean
+    inpatientEncounterId?: boolean
+    outpatientEncounterId?: boolean
+    hospitalIdentifier?: boolean
+    hospitalName?: boolean
+    hospitalEmail?: boolean
+    reason?: boolean
+    status?: boolean
+    submittedAt?: boolean
+    reviewedAt?: boolean
+    accessedAt?: boolean
+    selectedData?: boolean
+    requestNotes?: boolean
+    reviewNotes?: boolean
+    denialReason?: boolean
+    requestedBy?: boolean
+    reviewedBy?: boolean
+    patientConsent?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    patient?: boolean | PatientDefaultArgs<ExtArgs>
+    inpatientEncounter?: boolean | DataShareRequest$inpatientEncounterArgs<ExtArgs>
+    outpatientEncounter?: boolean | DataShareRequest$outpatientEncounterArgs<ExtArgs>
+  }, ExtArgs["result"]["dataShareRequest"]>
+
+  export type DataShareRequestSelectScalar = {
+    id?: boolean
+    requestNumber?: boolean
+    patientId?: boolean
+    inpatientEncounterId?: boolean
+    outpatientEncounterId?: boolean
+    hospitalIdentifier?: boolean
+    hospitalName?: boolean
+    hospitalEmail?: boolean
+    reason?: boolean
+    status?: boolean
+    submittedAt?: boolean
+    reviewedAt?: boolean
+    accessedAt?: boolean
+    selectedData?: boolean
+    requestNotes?: boolean
+    reviewNotes?: boolean
+    denialReason?: boolean
+    requestedBy?: boolean
+    reviewedBy?: boolean
+    patientConsent?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type DataShareRequestOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "requestNumber" | "patientId" | "inpatientEncounterId" | "outpatientEncounterId" | "hospitalIdentifier" | "hospitalName" | "hospitalEmail" | "reason" | "status" | "submittedAt" | "reviewedAt" | "accessedAt" | "selectedData" | "requestNotes" | "reviewNotes" | "denialReason" | "requestedBy" | "reviewedBy" | "patientConsent" | "createdAt" | "updatedAt", ExtArgs["result"]["dataShareRequest"]>
+  export type DataShareRequestInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    patient?: boolean | PatientDefaultArgs<ExtArgs>
+    inpatientEncounter?: boolean | DataShareRequest$inpatientEncounterArgs<ExtArgs>
+    outpatientEncounter?: boolean | DataShareRequest$outpatientEncounterArgs<ExtArgs>
+    documents?: boolean | DataShareRequest$documentsArgs<ExtArgs>
+    accessTokens?: boolean | DataShareRequest$accessTokensArgs<ExtArgs>
+    _count?: boolean | DataShareRequestCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type DataShareRequestIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    patient?: boolean | PatientDefaultArgs<ExtArgs>
+    inpatientEncounter?: boolean | DataShareRequest$inpatientEncounterArgs<ExtArgs>
+    outpatientEncounter?: boolean | DataShareRequest$outpatientEncounterArgs<ExtArgs>
+  }
+  export type DataShareRequestIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    patient?: boolean | PatientDefaultArgs<ExtArgs>
+    inpatientEncounter?: boolean | DataShareRequest$inpatientEncounterArgs<ExtArgs>
+    outpatientEncounter?: boolean | DataShareRequest$outpatientEncounterArgs<ExtArgs>
+  }
+
+  export type $DataShareRequestPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "DataShareRequest"
+    objects: {
+      patient: Prisma.$PatientPayload<ExtArgs>
+      inpatientEncounter: Prisma.$InpatientEncounterPayload<ExtArgs> | null
+      outpatientEncounter: Prisma.$OutpatientEncounterPayload<ExtArgs> | null
+      documents: Prisma.$DataShareDocumentPayload<ExtArgs>[]
+      accessTokens: Prisma.$DataShareAccessTokenPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      requestNumber: string
+      patientId: string
+      inpatientEncounterId: string | null
+      outpatientEncounterId: string | null
+      hospitalIdentifier: string
+      hospitalName: string
+      hospitalEmail: string
+      reason: string
+      status: $Enums.DataShareStatus
+      submittedAt: Date | null
+      reviewedAt: Date | null
+      accessedAt: Date | null
+      selectedData: Prisma.JsonValue | null
+      requestNotes: string | null
+      reviewNotes: string | null
+      denialReason: string | null
+      requestedBy: string
+      reviewedBy: string | null
+      patientConsent: boolean
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["dataShareRequest"]>
+    composites: {}
+  }
+
+  type DataShareRequestGetPayload<S extends boolean | null | undefined | DataShareRequestDefaultArgs> = $Result.GetResult<Prisma.$DataShareRequestPayload, S>
+
+  type DataShareRequestCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<DataShareRequestFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: DataShareRequestCountAggregateInputType | true
+    }
+
+  export interface DataShareRequestDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['DataShareRequest'], meta: { name: 'DataShareRequest' } }
+    /**
+     * Find zero or one DataShareRequest that matches the filter.
+     * @param {DataShareRequestFindUniqueArgs} args - Arguments to find a DataShareRequest
+     * @example
+     * // Get one DataShareRequest
+     * const dataShareRequest = await prisma.dataShareRequest.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends DataShareRequestFindUniqueArgs>(args: SelectSubset<T, DataShareRequestFindUniqueArgs<ExtArgs>>): Prisma__DataShareRequestClient<$Result.GetResult<Prisma.$DataShareRequestPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one DataShareRequest that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {DataShareRequestFindUniqueOrThrowArgs} args - Arguments to find a DataShareRequest
+     * @example
+     * // Get one DataShareRequest
+     * const dataShareRequest = await prisma.dataShareRequest.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends DataShareRequestFindUniqueOrThrowArgs>(args: SelectSubset<T, DataShareRequestFindUniqueOrThrowArgs<ExtArgs>>): Prisma__DataShareRequestClient<$Result.GetResult<Prisma.$DataShareRequestPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first DataShareRequest that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DataShareRequestFindFirstArgs} args - Arguments to find a DataShareRequest
+     * @example
+     * // Get one DataShareRequest
+     * const dataShareRequest = await prisma.dataShareRequest.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends DataShareRequestFindFirstArgs>(args?: SelectSubset<T, DataShareRequestFindFirstArgs<ExtArgs>>): Prisma__DataShareRequestClient<$Result.GetResult<Prisma.$DataShareRequestPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first DataShareRequest that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DataShareRequestFindFirstOrThrowArgs} args - Arguments to find a DataShareRequest
+     * @example
+     * // Get one DataShareRequest
+     * const dataShareRequest = await prisma.dataShareRequest.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends DataShareRequestFindFirstOrThrowArgs>(args?: SelectSubset<T, DataShareRequestFindFirstOrThrowArgs<ExtArgs>>): Prisma__DataShareRequestClient<$Result.GetResult<Prisma.$DataShareRequestPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more DataShareRequests that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DataShareRequestFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all DataShareRequests
+     * const dataShareRequests = await prisma.dataShareRequest.findMany()
+     * 
+     * // Get first 10 DataShareRequests
+     * const dataShareRequests = await prisma.dataShareRequest.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const dataShareRequestWithIdOnly = await prisma.dataShareRequest.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends DataShareRequestFindManyArgs>(args?: SelectSubset<T, DataShareRequestFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DataShareRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a DataShareRequest.
+     * @param {DataShareRequestCreateArgs} args - Arguments to create a DataShareRequest.
+     * @example
+     * // Create one DataShareRequest
+     * const DataShareRequest = await prisma.dataShareRequest.create({
+     *   data: {
+     *     // ... data to create a DataShareRequest
+     *   }
+     * })
+     * 
+     */
+    create<T extends DataShareRequestCreateArgs>(args: SelectSubset<T, DataShareRequestCreateArgs<ExtArgs>>): Prisma__DataShareRequestClient<$Result.GetResult<Prisma.$DataShareRequestPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many DataShareRequests.
+     * @param {DataShareRequestCreateManyArgs} args - Arguments to create many DataShareRequests.
+     * @example
+     * // Create many DataShareRequests
+     * const dataShareRequest = await prisma.dataShareRequest.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends DataShareRequestCreateManyArgs>(args?: SelectSubset<T, DataShareRequestCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many DataShareRequests and returns the data saved in the database.
+     * @param {DataShareRequestCreateManyAndReturnArgs} args - Arguments to create many DataShareRequests.
+     * @example
+     * // Create many DataShareRequests
+     * const dataShareRequest = await prisma.dataShareRequest.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many DataShareRequests and only return the `id`
+     * const dataShareRequestWithIdOnly = await prisma.dataShareRequest.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends DataShareRequestCreateManyAndReturnArgs>(args?: SelectSubset<T, DataShareRequestCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DataShareRequestPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a DataShareRequest.
+     * @param {DataShareRequestDeleteArgs} args - Arguments to delete one DataShareRequest.
+     * @example
+     * // Delete one DataShareRequest
+     * const DataShareRequest = await prisma.dataShareRequest.delete({
+     *   where: {
+     *     // ... filter to delete one DataShareRequest
+     *   }
+     * })
+     * 
+     */
+    delete<T extends DataShareRequestDeleteArgs>(args: SelectSubset<T, DataShareRequestDeleteArgs<ExtArgs>>): Prisma__DataShareRequestClient<$Result.GetResult<Prisma.$DataShareRequestPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one DataShareRequest.
+     * @param {DataShareRequestUpdateArgs} args - Arguments to update one DataShareRequest.
+     * @example
+     * // Update one DataShareRequest
+     * const dataShareRequest = await prisma.dataShareRequest.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends DataShareRequestUpdateArgs>(args: SelectSubset<T, DataShareRequestUpdateArgs<ExtArgs>>): Prisma__DataShareRequestClient<$Result.GetResult<Prisma.$DataShareRequestPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more DataShareRequests.
+     * @param {DataShareRequestDeleteManyArgs} args - Arguments to filter DataShareRequests to delete.
+     * @example
+     * // Delete a few DataShareRequests
+     * const { count } = await prisma.dataShareRequest.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends DataShareRequestDeleteManyArgs>(args?: SelectSubset<T, DataShareRequestDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more DataShareRequests.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DataShareRequestUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many DataShareRequests
+     * const dataShareRequest = await prisma.dataShareRequest.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends DataShareRequestUpdateManyArgs>(args: SelectSubset<T, DataShareRequestUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more DataShareRequests and returns the data updated in the database.
+     * @param {DataShareRequestUpdateManyAndReturnArgs} args - Arguments to update many DataShareRequests.
+     * @example
+     * // Update many DataShareRequests
+     * const dataShareRequest = await prisma.dataShareRequest.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more DataShareRequests and only return the `id`
+     * const dataShareRequestWithIdOnly = await prisma.dataShareRequest.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends DataShareRequestUpdateManyAndReturnArgs>(args: SelectSubset<T, DataShareRequestUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DataShareRequestPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one DataShareRequest.
+     * @param {DataShareRequestUpsertArgs} args - Arguments to update or create a DataShareRequest.
+     * @example
+     * // Update or create a DataShareRequest
+     * const dataShareRequest = await prisma.dataShareRequest.upsert({
+     *   create: {
+     *     // ... data to create a DataShareRequest
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the DataShareRequest we want to update
+     *   }
+     * })
+     */
+    upsert<T extends DataShareRequestUpsertArgs>(args: SelectSubset<T, DataShareRequestUpsertArgs<ExtArgs>>): Prisma__DataShareRequestClient<$Result.GetResult<Prisma.$DataShareRequestPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of DataShareRequests.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DataShareRequestCountArgs} args - Arguments to filter DataShareRequests to count.
+     * @example
+     * // Count the number of DataShareRequests
+     * const count = await prisma.dataShareRequest.count({
+     *   where: {
+     *     // ... the filter for the DataShareRequests we want to count
+     *   }
+     * })
+    **/
+    count<T extends DataShareRequestCountArgs>(
+      args?: Subset<T, DataShareRequestCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], DataShareRequestCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a DataShareRequest.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DataShareRequestAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends DataShareRequestAggregateArgs>(args: Subset<T, DataShareRequestAggregateArgs>): Prisma.PrismaPromise<GetDataShareRequestAggregateType<T>>
+
+    /**
+     * Group by DataShareRequest.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DataShareRequestGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends DataShareRequestGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: DataShareRequestGroupByArgs['orderBy'] }
+        : { orderBy?: DataShareRequestGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, DataShareRequestGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetDataShareRequestGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the DataShareRequest model
+   */
+  readonly fields: DataShareRequestFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for DataShareRequest.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__DataShareRequestClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    patient<T extends PatientDefaultArgs<ExtArgs> = {}>(args?: Subset<T, PatientDefaultArgs<ExtArgs>>): Prisma__PatientClient<$Result.GetResult<Prisma.$PatientPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    inpatientEncounter<T extends DataShareRequest$inpatientEncounterArgs<ExtArgs> = {}>(args?: Subset<T, DataShareRequest$inpatientEncounterArgs<ExtArgs>>): Prisma__InpatientEncounterClient<$Result.GetResult<Prisma.$InpatientEncounterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    outpatientEncounter<T extends DataShareRequest$outpatientEncounterArgs<ExtArgs> = {}>(args?: Subset<T, DataShareRequest$outpatientEncounterArgs<ExtArgs>>): Prisma__OutpatientEncounterClient<$Result.GetResult<Prisma.$OutpatientEncounterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    documents<T extends DataShareRequest$documentsArgs<ExtArgs> = {}>(args?: Subset<T, DataShareRequest$documentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DataShareDocumentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    accessTokens<T extends DataShareRequest$accessTokensArgs<ExtArgs> = {}>(args?: Subset<T, DataShareRequest$accessTokensArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DataShareAccessTokenPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the DataShareRequest model
+   */
+  interface DataShareRequestFieldRefs {
+    readonly id: FieldRef<"DataShareRequest", 'String'>
+    readonly requestNumber: FieldRef<"DataShareRequest", 'String'>
+    readonly patientId: FieldRef<"DataShareRequest", 'String'>
+    readonly inpatientEncounterId: FieldRef<"DataShareRequest", 'String'>
+    readonly outpatientEncounterId: FieldRef<"DataShareRequest", 'String'>
+    readonly hospitalIdentifier: FieldRef<"DataShareRequest", 'String'>
+    readonly hospitalName: FieldRef<"DataShareRequest", 'String'>
+    readonly hospitalEmail: FieldRef<"DataShareRequest", 'String'>
+    readonly reason: FieldRef<"DataShareRequest", 'String'>
+    readonly status: FieldRef<"DataShareRequest", 'DataShareStatus'>
+    readonly submittedAt: FieldRef<"DataShareRequest", 'DateTime'>
+    readonly reviewedAt: FieldRef<"DataShareRequest", 'DateTime'>
+    readonly accessedAt: FieldRef<"DataShareRequest", 'DateTime'>
+    readonly selectedData: FieldRef<"DataShareRequest", 'Json'>
+    readonly requestNotes: FieldRef<"DataShareRequest", 'String'>
+    readonly reviewNotes: FieldRef<"DataShareRequest", 'String'>
+    readonly denialReason: FieldRef<"DataShareRequest", 'String'>
+    readonly requestedBy: FieldRef<"DataShareRequest", 'String'>
+    readonly reviewedBy: FieldRef<"DataShareRequest", 'String'>
+    readonly patientConsent: FieldRef<"DataShareRequest", 'Boolean'>
+    readonly createdAt: FieldRef<"DataShareRequest", 'DateTime'>
+    readonly updatedAt: FieldRef<"DataShareRequest", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * DataShareRequest findUnique
+   */
+  export type DataShareRequestFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DataShareRequest
+     */
+    select?: DataShareRequestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DataShareRequest
+     */
+    omit?: DataShareRequestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DataShareRequestInclude<ExtArgs> | null
+    /**
+     * Filter, which DataShareRequest to fetch.
+     */
+    where: DataShareRequestWhereUniqueInput
+  }
+
+  /**
+   * DataShareRequest findUniqueOrThrow
+   */
+  export type DataShareRequestFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DataShareRequest
+     */
+    select?: DataShareRequestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DataShareRequest
+     */
+    omit?: DataShareRequestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DataShareRequestInclude<ExtArgs> | null
+    /**
+     * Filter, which DataShareRequest to fetch.
+     */
+    where: DataShareRequestWhereUniqueInput
+  }
+
+  /**
+   * DataShareRequest findFirst
+   */
+  export type DataShareRequestFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DataShareRequest
+     */
+    select?: DataShareRequestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DataShareRequest
+     */
+    omit?: DataShareRequestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DataShareRequestInclude<ExtArgs> | null
+    /**
+     * Filter, which DataShareRequest to fetch.
+     */
+    where?: DataShareRequestWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of DataShareRequests to fetch.
+     */
+    orderBy?: DataShareRequestOrderByWithRelationInput | DataShareRequestOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for DataShareRequests.
+     */
+    cursor?: DataShareRequestWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` DataShareRequests from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` DataShareRequests.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of DataShareRequests.
+     */
+    distinct?: DataShareRequestScalarFieldEnum | DataShareRequestScalarFieldEnum[]
+  }
+
+  /**
+   * DataShareRequest findFirstOrThrow
+   */
+  export type DataShareRequestFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DataShareRequest
+     */
+    select?: DataShareRequestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DataShareRequest
+     */
+    omit?: DataShareRequestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DataShareRequestInclude<ExtArgs> | null
+    /**
+     * Filter, which DataShareRequest to fetch.
+     */
+    where?: DataShareRequestWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of DataShareRequests to fetch.
+     */
+    orderBy?: DataShareRequestOrderByWithRelationInput | DataShareRequestOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for DataShareRequests.
+     */
+    cursor?: DataShareRequestWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` DataShareRequests from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` DataShareRequests.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of DataShareRequests.
+     */
+    distinct?: DataShareRequestScalarFieldEnum | DataShareRequestScalarFieldEnum[]
+  }
+
+  /**
+   * DataShareRequest findMany
+   */
+  export type DataShareRequestFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DataShareRequest
+     */
+    select?: DataShareRequestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DataShareRequest
+     */
+    omit?: DataShareRequestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DataShareRequestInclude<ExtArgs> | null
+    /**
+     * Filter, which DataShareRequests to fetch.
+     */
+    where?: DataShareRequestWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of DataShareRequests to fetch.
+     */
+    orderBy?: DataShareRequestOrderByWithRelationInput | DataShareRequestOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing DataShareRequests.
+     */
+    cursor?: DataShareRequestWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` DataShareRequests from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` DataShareRequests.
+     */
+    skip?: number
+    distinct?: DataShareRequestScalarFieldEnum | DataShareRequestScalarFieldEnum[]
+  }
+
+  /**
+   * DataShareRequest create
+   */
+  export type DataShareRequestCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DataShareRequest
+     */
+    select?: DataShareRequestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DataShareRequest
+     */
+    omit?: DataShareRequestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DataShareRequestInclude<ExtArgs> | null
+    /**
+     * The data needed to create a DataShareRequest.
+     */
+    data: XOR<DataShareRequestCreateInput, DataShareRequestUncheckedCreateInput>
+  }
+
+  /**
+   * DataShareRequest createMany
+   */
+  export type DataShareRequestCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many DataShareRequests.
+     */
+    data: DataShareRequestCreateManyInput | DataShareRequestCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * DataShareRequest createManyAndReturn
+   */
+  export type DataShareRequestCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DataShareRequest
+     */
+    select?: DataShareRequestSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the DataShareRequest
+     */
+    omit?: DataShareRequestOmit<ExtArgs> | null
+    /**
+     * The data used to create many DataShareRequests.
+     */
+    data: DataShareRequestCreateManyInput | DataShareRequestCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DataShareRequestIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * DataShareRequest update
+   */
+  export type DataShareRequestUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DataShareRequest
+     */
+    select?: DataShareRequestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DataShareRequest
+     */
+    omit?: DataShareRequestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DataShareRequestInclude<ExtArgs> | null
+    /**
+     * The data needed to update a DataShareRequest.
+     */
+    data: XOR<DataShareRequestUpdateInput, DataShareRequestUncheckedUpdateInput>
+    /**
+     * Choose, which DataShareRequest to update.
+     */
+    where: DataShareRequestWhereUniqueInput
+  }
+
+  /**
+   * DataShareRequest updateMany
+   */
+  export type DataShareRequestUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update DataShareRequests.
+     */
+    data: XOR<DataShareRequestUpdateManyMutationInput, DataShareRequestUncheckedUpdateManyInput>
+    /**
+     * Filter which DataShareRequests to update
+     */
+    where?: DataShareRequestWhereInput
+    /**
+     * Limit how many DataShareRequests to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * DataShareRequest updateManyAndReturn
+   */
+  export type DataShareRequestUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DataShareRequest
+     */
+    select?: DataShareRequestSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the DataShareRequest
+     */
+    omit?: DataShareRequestOmit<ExtArgs> | null
+    /**
+     * The data used to update DataShareRequests.
+     */
+    data: XOR<DataShareRequestUpdateManyMutationInput, DataShareRequestUncheckedUpdateManyInput>
+    /**
+     * Filter which DataShareRequests to update
+     */
+    where?: DataShareRequestWhereInput
+    /**
+     * Limit how many DataShareRequests to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DataShareRequestIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * DataShareRequest upsert
+   */
+  export type DataShareRequestUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DataShareRequest
+     */
+    select?: DataShareRequestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DataShareRequest
+     */
+    omit?: DataShareRequestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DataShareRequestInclude<ExtArgs> | null
+    /**
+     * The filter to search for the DataShareRequest to update in case it exists.
+     */
+    where: DataShareRequestWhereUniqueInput
+    /**
+     * In case the DataShareRequest found by the `where` argument doesn't exist, create a new DataShareRequest with this data.
+     */
+    create: XOR<DataShareRequestCreateInput, DataShareRequestUncheckedCreateInput>
+    /**
+     * In case the DataShareRequest was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<DataShareRequestUpdateInput, DataShareRequestUncheckedUpdateInput>
+  }
+
+  /**
+   * DataShareRequest delete
+   */
+  export type DataShareRequestDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DataShareRequest
+     */
+    select?: DataShareRequestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DataShareRequest
+     */
+    omit?: DataShareRequestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DataShareRequestInclude<ExtArgs> | null
+    /**
+     * Filter which DataShareRequest to delete.
+     */
+    where: DataShareRequestWhereUniqueInput
+  }
+
+  /**
+   * DataShareRequest deleteMany
+   */
+  export type DataShareRequestDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which DataShareRequests to delete
+     */
+    where?: DataShareRequestWhereInput
+    /**
+     * Limit how many DataShareRequests to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * DataShareRequest.inpatientEncounter
+   */
+  export type DataShareRequest$inpatientEncounterArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InpatientEncounter
+     */
+    select?: InpatientEncounterSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InpatientEncounter
+     */
+    omit?: InpatientEncounterOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InpatientEncounterInclude<ExtArgs> | null
+    where?: InpatientEncounterWhereInput
+  }
+
+  /**
+   * DataShareRequest.outpatientEncounter
+   */
+  export type DataShareRequest$outpatientEncounterArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OutpatientEncounter
+     */
+    select?: OutpatientEncounterSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OutpatientEncounter
+     */
+    omit?: OutpatientEncounterOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OutpatientEncounterInclude<ExtArgs> | null
+    where?: OutpatientEncounterWhereInput
+  }
+
+  /**
+   * DataShareRequest.documents
+   */
+  export type DataShareRequest$documentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DataShareDocument
+     */
+    select?: DataShareDocumentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DataShareDocument
+     */
+    omit?: DataShareDocumentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DataShareDocumentInclude<ExtArgs> | null
+    where?: DataShareDocumentWhereInput
+    orderBy?: DataShareDocumentOrderByWithRelationInput | DataShareDocumentOrderByWithRelationInput[]
+    cursor?: DataShareDocumentWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: DataShareDocumentScalarFieldEnum | DataShareDocumentScalarFieldEnum[]
+  }
+
+  /**
+   * DataShareRequest.accessTokens
+   */
+  export type DataShareRequest$accessTokensArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DataShareAccessToken
+     */
+    select?: DataShareAccessTokenSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DataShareAccessToken
+     */
+    omit?: DataShareAccessTokenOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DataShareAccessTokenInclude<ExtArgs> | null
+    where?: DataShareAccessTokenWhereInput
+    orderBy?: DataShareAccessTokenOrderByWithRelationInput | DataShareAccessTokenOrderByWithRelationInput[]
+    cursor?: DataShareAccessTokenWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: DataShareAccessTokenScalarFieldEnum | DataShareAccessTokenScalarFieldEnum[]
+  }
+
+  /**
+   * DataShareRequest without action
+   */
+  export type DataShareRequestDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DataShareRequest
+     */
+    select?: DataShareRequestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DataShareRequest
+     */
+    omit?: DataShareRequestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DataShareRequestInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model DataShareDocument
+   */
+
+  export type AggregateDataShareDocument = {
+    _count: DataShareDocumentCountAggregateOutputType | null
+    _avg: DataShareDocumentAvgAggregateOutputType | null
+    _sum: DataShareDocumentSumAggregateOutputType | null
+    _min: DataShareDocumentMinAggregateOutputType | null
+    _max: DataShareDocumentMaxAggregateOutputType | null
+  }
+
+  export type DataShareDocumentAvgAggregateOutputType = {
+    fileSize: number | null
+  }
+
+  export type DataShareDocumentSumAggregateOutputType = {
+    fileSize: number | null
+  }
+
+  export type DataShareDocumentMinAggregateOutputType = {
+    id: string | null
+    requestId: string | null
+    documentType: string | null
+    fileName: string | null
+    fileUrl: string | null
+    fileSize: number | null
+    mimeType: string | null
+    description: string | null
+    uploadedBy: string | null
+    createdAt: Date | null
+  }
+
+  export type DataShareDocumentMaxAggregateOutputType = {
+    id: string | null
+    requestId: string | null
+    documentType: string | null
+    fileName: string | null
+    fileUrl: string | null
+    fileSize: number | null
+    mimeType: string | null
+    description: string | null
+    uploadedBy: string | null
+    createdAt: Date | null
+  }
+
+  export type DataShareDocumentCountAggregateOutputType = {
+    id: number
+    requestId: number
+    documentType: number
+    fileName: number
+    fileUrl: number
+    fileSize: number
+    mimeType: number
+    description: number
+    uploadedBy: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type DataShareDocumentAvgAggregateInputType = {
+    fileSize?: true
+  }
+
+  export type DataShareDocumentSumAggregateInputType = {
+    fileSize?: true
+  }
+
+  export type DataShareDocumentMinAggregateInputType = {
+    id?: true
+    requestId?: true
+    documentType?: true
+    fileName?: true
+    fileUrl?: true
+    fileSize?: true
+    mimeType?: true
+    description?: true
+    uploadedBy?: true
+    createdAt?: true
+  }
+
+  export type DataShareDocumentMaxAggregateInputType = {
+    id?: true
+    requestId?: true
+    documentType?: true
+    fileName?: true
+    fileUrl?: true
+    fileSize?: true
+    mimeType?: true
+    description?: true
+    uploadedBy?: true
+    createdAt?: true
+  }
+
+  export type DataShareDocumentCountAggregateInputType = {
+    id?: true
+    requestId?: true
+    documentType?: true
+    fileName?: true
+    fileUrl?: true
+    fileSize?: true
+    mimeType?: true
+    description?: true
+    uploadedBy?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type DataShareDocumentAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which DataShareDocument to aggregate.
+     */
+    where?: DataShareDocumentWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of DataShareDocuments to fetch.
+     */
+    orderBy?: DataShareDocumentOrderByWithRelationInput | DataShareDocumentOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: DataShareDocumentWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` DataShareDocuments from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` DataShareDocuments.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned DataShareDocuments
+    **/
+    _count?: true | DataShareDocumentCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: DataShareDocumentAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: DataShareDocumentSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: DataShareDocumentMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: DataShareDocumentMaxAggregateInputType
+  }
+
+  export type GetDataShareDocumentAggregateType<T extends DataShareDocumentAggregateArgs> = {
+        [P in keyof T & keyof AggregateDataShareDocument]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateDataShareDocument[P]>
+      : GetScalarType<T[P], AggregateDataShareDocument[P]>
+  }
+
+
+
+
+  export type DataShareDocumentGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: DataShareDocumentWhereInput
+    orderBy?: DataShareDocumentOrderByWithAggregationInput | DataShareDocumentOrderByWithAggregationInput[]
+    by: DataShareDocumentScalarFieldEnum[] | DataShareDocumentScalarFieldEnum
+    having?: DataShareDocumentScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: DataShareDocumentCountAggregateInputType | true
+    _avg?: DataShareDocumentAvgAggregateInputType
+    _sum?: DataShareDocumentSumAggregateInputType
+    _min?: DataShareDocumentMinAggregateInputType
+    _max?: DataShareDocumentMaxAggregateInputType
+  }
+
+  export type DataShareDocumentGroupByOutputType = {
+    id: string
+    requestId: string
+    documentType: string
+    fileName: string
+    fileUrl: string
+    fileSize: number
+    mimeType: string
+    description: string | null
+    uploadedBy: string
+    createdAt: Date
+    _count: DataShareDocumentCountAggregateOutputType | null
+    _avg: DataShareDocumentAvgAggregateOutputType | null
+    _sum: DataShareDocumentSumAggregateOutputType | null
+    _min: DataShareDocumentMinAggregateOutputType | null
+    _max: DataShareDocumentMaxAggregateOutputType | null
+  }
+
+  type GetDataShareDocumentGroupByPayload<T extends DataShareDocumentGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<DataShareDocumentGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof DataShareDocumentGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], DataShareDocumentGroupByOutputType[P]>
+            : GetScalarType<T[P], DataShareDocumentGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type DataShareDocumentSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    requestId?: boolean
+    documentType?: boolean
+    fileName?: boolean
+    fileUrl?: boolean
+    fileSize?: boolean
+    mimeType?: boolean
+    description?: boolean
+    uploadedBy?: boolean
+    createdAt?: boolean
+    request?: boolean | DataShareRequestDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["dataShareDocument"]>
+
+  export type DataShareDocumentSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    requestId?: boolean
+    documentType?: boolean
+    fileName?: boolean
+    fileUrl?: boolean
+    fileSize?: boolean
+    mimeType?: boolean
+    description?: boolean
+    uploadedBy?: boolean
+    createdAt?: boolean
+    request?: boolean | DataShareRequestDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["dataShareDocument"]>
+
+  export type DataShareDocumentSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    requestId?: boolean
+    documentType?: boolean
+    fileName?: boolean
+    fileUrl?: boolean
+    fileSize?: boolean
+    mimeType?: boolean
+    description?: boolean
+    uploadedBy?: boolean
+    createdAt?: boolean
+    request?: boolean | DataShareRequestDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["dataShareDocument"]>
+
+  export type DataShareDocumentSelectScalar = {
+    id?: boolean
+    requestId?: boolean
+    documentType?: boolean
+    fileName?: boolean
+    fileUrl?: boolean
+    fileSize?: boolean
+    mimeType?: boolean
+    description?: boolean
+    uploadedBy?: boolean
+    createdAt?: boolean
+  }
+
+  export type DataShareDocumentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "requestId" | "documentType" | "fileName" | "fileUrl" | "fileSize" | "mimeType" | "description" | "uploadedBy" | "createdAt", ExtArgs["result"]["dataShareDocument"]>
+  export type DataShareDocumentInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    request?: boolean | DataShareRequestDefaultArgs<ExtArgs>
+  }
+  export type DataShareDocumentIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    request?: boolean | DataShareRequestDefaultArgs<ExtArgs>
+  }
+  export type DataShareDocumentIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    request?: boolean | DataShareRequestDefaultArgs<ExtArgs>
+  }
+
+  export type $DataShareDocumentPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "DataShareDocument"
+    objects: {
+      request: Prisma.$DataShareRequestPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      requestId: string
+      documentType: string
+      fileName: string
+      fileUrl: string
+      fileSize: number
+      mimeType: string
+      description: string | null
+      uploadedBy: string
+      createdAt: Date
+    }, ExtArgs["result"]["dataShareDocument"]>
+    composites: {}
+  }
+
+  type DataShareDocumentGetPayload<S extends boolean | null | undefined | DataShareDocumentDefaultArgs> = $Result.GetResult<Prisma.$DataShareDocumentPayload, S>
+
+  type DataShareDocumentCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<DataShareDocumentFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: DataShareDocumentCountAggregateInputType | true
+    }
+
+  export interface DataShareDocumentDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['DataShareDocument'], meta: { name: 'DataShareDocument' } }
+    /**
+     * Find zero or one DataShareDocument that matches the filter.
+     * @param {DataShareDocumentFindUniqueArgs} args - Arguments to find a DataShareDocument
+     * @example
+     * // Get one DataShareDocument
+     * const dataShareDocument = await prisma.dataShareDocument.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends DataShareDocumentFindUniqueArgs>(args: SelectSubset<T, DataShareDocumentFindUniqueArgs<ExtArgs>>): Prisma__DataShareDocumentClient<$Result.GetResult<Prisma.$DataShareDocumentPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one DataShareDocument that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {DataShareDocumentFindUniqueOrThrowArgs} args - Arguments to find a DataShareDocument
+     * @example
+     * // Get one DataShareDocument
+     * const dataShareDocument = await prisma.dataShareDocument.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends DataShareDocumentFindUniqueOrThrowArgs>(args: SelectSubset<T, DataShareDocumentFindUniqueOrThrowArgs<ExtArgs>>): Prisma__DataShareDocumentClient<$Result.GetResult<Prisma.$DataShareDocumentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first DataShareDocument that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DataShareDocumentFindFirstArgs} args - Arguments to find a DataShareDocument
+     * @example
+     * // Get one DataShareDocument
+     * const dataShareDocument = await prisma.dataShareDocument.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends DataShareDocumentFindFirstArgs>(args?: SelectSubset<T, DataShareDocumentFindFirstArgs<ExtArgs>>): Prisma__DataShareDocumentClient<$Result.GetResult<Prisma.$DataShareDocumentPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first DataShareDocument that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DataShareDocumentFindFirstOrThrowArgs} args - Arguments to find a DataShareDocument
+     * @example
+     * // Get one DataShareDocument
+     * const dataShareDocument = await prisma.dataShareDocument.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends DataShareDocumentFindFirstOrThrowArgs>(args?: SelectSubset<T, DataShareDocumentFindFirstOrThrowArgs<ExtArgs>>): Prisma__DataShareDocumentClient<$Result.GetResult<Prisma.$DataShareDocumentPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more DataShareDocuments that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DataShareDocumentFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all DataShareDocuments
+     * const dataShareDocuments = await prisma.dataShareDocument.findMany()
+     * 
+     * // Get first 10 DataShareDocuments
+     * const dataShareDocuments = await prisma.dataShareDocument.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const dataShareDocumentWithIdOnly = await prisma.dataShareDocument.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends DataShareDocumentFindManyArgs>(args?: SelectSubset<T, DataShareDocumentFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DataShareDocumentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a DataShareDocument.
+     * @param {DataShareDocumentCreateArgs} args - Arguments to create a DataShareDocument.
+     * @example
+     * // Create one DataShareDocument
+     * const DataShareDocument = await prisma.dataShareDocument.create({
+     *   data: {
+     *     // ... data to create a DataShareDocument
+     *   }
+     * })
+     * 
+     */
+    create<T extends DataShareDocumentCreateArgs>(args: SelectSubset<T, DataShareDocumentCreateArgs<ExtArgs>>): Prisma__DataShareDocumentClient<$Result.GetResult<Prisma.$DataShareDocumentPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many DataShareDocuments.
+     * @param {DataShareDocumentCreateManyArgs} args - Arguments to create many DataShareDocuments.
+     * @example
+     * // Create many DataShareDocuments
+     * const dataShareDocument = await prisma.dataShareDocument.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends DataShareDocumentCreateManyArgs>(args?: SelectSubset<T, DataShareDocumentCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many DataShareDocuments and returns the data saved in the database.
+     * @param {DataShareDocumentCreateManyAndReturnArgs} args - Arguments to create many DataShareDocuments.
+     * @example
+     * // Create many DataShareDocuments
+     * const dataShareDocument = await prisma.dataShareDocument.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many DataShareDocuments and only return the `id`
+     * const dataShareDocumentWithIdOnly = await prisma.dataShareDocument.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends DataShareDocumentCreateManyAndReturnArgs>(args?: SelectSubset<T, DataShareDocumentCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DataShareDocumentPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a DataShareDocument.
+     * @param {DataShareDocumentDeleteArgs} args - Arguments to delete one DataShareDocument.
+     * @example
+     * // Delete one DataShareDocument
+     * const DataShareDocument = await prisma.dataShareDocument.delete({
+     *   where: {
+     *     // ... filter to delete one DataShareDocument
+     *   }
+     * })
+     * 
+     */
+    delete<T extends DataShareDocumentDeleteArgs>(args: SelectSubset<T, DataShareDocumentDeleteArgs<ExtArgs>>): Prisma__DataShareDocumentClient<$Result.GetResult<Prisma.$DataShareDocumentPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one DataShareDocument.
+     * @param {DataShareDocumentUpdateArgs} args - Arguments to update one DataShareDocument.
+     * @example
+     * // Update one DataShareDocument
+     * const dataShareDocument = await prisma.dataShareDocument.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends DataShareDocumentUpdateArgs>(args: SelectSubset<T, DataShareDocumentUpdateArgs<ExtArgs>>): Prisma__DataShareDocumentClient<$Result.GetResult<Prisma.$DataShareDocumentPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more DataShareDocuments.
+     * @param {DataShareDocumentDeleteManyArgs} args - Arguments to filter DataShareDocuments to delete.
+     * @example
+     * // Delete a few DataShareDocuments
+     * const { count } = await prisma.dataShareDocument.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends DataShareDocumentDeleteManyArgs>(args?: SelectSubset<T, DataShareDocumentDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more DataShareDocuments.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DataShareDocumentUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many DataShareDocuments
+     * const dataShareDocument = await prisma.dataShareDocument.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends DataShareDocumentUpdateManyArgs>(args: SelectSubset<T, DataShareDocumentUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more DataShareDocuments and returns the data updated in the database.
+     * @param {DataShareDocumentUpdateManyAndReturnArgs} args - Arguments to update many DataShareDocuments.
+     * @example
+     * // Update many DataShareDocuments
+     * const dataShareDocument = await prisma.dataShareDocument.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more DataShareDocuments and only return the `id`
+     * const dataShareDocumentWithIdOnly = await prisma.dataShareDocument.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends DataShareDocumentUpdateManyAndReturnArgs>(args: SelectSubset<T, DataShareDocumentUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DataShareDocumentPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one DataShareDocument.
+     * @param {DataShareDocumentUpsertArgs} args - Arguments to update or create a DataShareDocument.
+     * @example
+     * // Update or create a DataShareDocument
+     * const dataShareDocument = await prisma.dataShareDocument.upsert({
+     *   create: {
+     *     // ... data to create a DataShareDocument
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the DataShareDocument we want to update
+     *   }
+     * })
+     */
+    upsert<T extends DataShareDocumentUpsertArgs>(args: SelectSubset<T, DataShareDocumentUpsertArgs<ExtArgs>>): Prisma__DataShareDocumentClient<$Result.GetResult<Prisma.$DataShareDocumentPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of DataShareDocuments.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DataShareDocumentCountArgs} args - Arguments to filter DataShareDocuments to count.
+     * @example
+     * // Count the number of DataShareDocuments
+     * const count = await prisma.dataShareDocument.count({
+     *   where: {
+     *     // ... the filter for the DataShareDocuments we want to count
+     *   }
+     * })
+    **/
+    count<T extends DataShareDocumentCountArgs>(
+      args?: Subset<T, DataShareDocumentCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], DataShareDocumentCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a DataShareDocument.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DataShareDocumentAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends DataShareDocumentAggregateArgs>(args: Subset<T, DataShareDocumentAggregateArgs>): Prisma.PrismaPromise<GetDataShareDocumentAggregateType<T>>
+
+    /**
+     * Group by DataShareDocument.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DataShareDocumentGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends DataShareDocumentGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: DataShareDocumentGroupByArgs['orderBy'] }
+        : { orderBy?: DataShareDocumentGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, DataShareDocumentGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetDataShareDocumentGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the DataShareDocument model
+   */
+  readonly fields: DataShareDocumentFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for DataShareDocument.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__DataShareDocumentClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    request<T extends DataShareRequestDefaultArgs<ExtArgs> = {}>(args?: Subset<T, DataShareRequestDefaultArgs<ExtArgs>>): Prisma__DataShareRequestClient<$Result.GetResult<Prisma.$DataShareRequestPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the DataShareDocument model
+   */
+  interface DataShareDocumentFieldRefs {
+    readonly id: FieldRef<"DataShareDocument", 'String'>
+    readonly requestId: FieldRef<"DataShareDocument", 'String'>
+    readonly documentType: FieldRef<"DataShareDocument", 'String'>
+    readonly fileName: FieldRef<"DataShareDocument", 'String'>
+    readonly fileUrl: FieldRef<"DataShareDocument", 'String'>
+    readonly fileSize: FieldRef<"DataShareDocument", 'Int'>
+    readonly mimeType: FieldRef<"DataShareDocument", 'String'>
+    readonly description: FieldRef<"DataShareDocument", 'String'>
+    readonly uploadedBy: FieldRef<"DataShareDocument", 'String'>
+    readonly createdAt: FieldRef<"DataShareDocument", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * DataShareDocument findUnique
+   */
+  export type DataShareDocumentFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DataShareDocument
+     */
+    select?: DataShareDocumentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DataShareDocument
+     */
+    omit?: DataShareDocumentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DataShareDocumentInclude<ExtArgs> | null
+    /**
+     * Filter, which DataShareDocument to fetch.
+     */
+    where: DataShareDocumentWhereUniqueInput
+  }
+
+  /**
+   * DataShareDocument findUniqueOrThrow
+   */
+  export type DataShareDocumentFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DataShareDocument
+     */
+    select?: DataShareDocumentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DataShareDocument
+     */
+    omit?: DataShareDocumentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DataShareDocumentInclude<ExtArgs> | null
+    /**
+     * Filter, which DataShareDocument to fetch.
+     */
+    where: DataShareDocumentWhereUniqueInput
+  }
+
+  /**
+   * DataShareDocument findFirst
+   */
+  export type DataShareDocumentFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DataShareDocument
+     */
+    select?: DataShareDocumentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DataShareDocument
+     */
+    omit?: DataShareDocumentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DataShareDocumentInclude<ExtArgs> | null
+    /**
+     * Filter, which DataShareDocument to fetch.
+     */
+    where?: DataShareDocumentWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of DataShareDocuments to fetch.
+     */
+    orderBy?: DataShareDocumentOrderByWithRelationInput | DataShareDocumentOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for DataShareDocuments.
+     */
+    cursor?: DataShareDocumentWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` DataShareDocuments from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` DataShareDocuments.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of DataShareDocuments.
+     */
+    distinct?: DataShareDocumentScalarFieldEnum | DataShareDocumentScalarFieldEnum[]
+  }
+
+  /**
+   * DataShareDocument findFirstOrThrow
+   */
+  export type DataShareDocumentFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DataShareDocument
+     */
+    select?: DataShareDocumentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DataShareDocument
+     */
+    omit?: DataShareDocumentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DataShareDocumentInclude<ExtArgs> | null
+    /**
+     * Filter, which DataShareDocument to fetch.
+     */
+    where?: DataShareDocumentWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of DataShareDocuments to fetch.
+     */
+    orderBy?: DataShareDocumentOrderByWithRelationInput | DataShareDocumentOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for DataShareDocuments.
+     */
+    cursor?: DataShareDocumentWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` DataShareDocuments from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` DataShareDocuments.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of DataShareDocuments.
+     */
+    distinct?: DataShareDocumentScalarFieldEnum | DataShareDocumentScalarFieldEnum[]
+  }
+
+  /**
+   * DataShareDocument findMany
+   */
+  export type DataShareDocumentFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DataShareDocument
+     */
+    select?: DataShareDocumentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DataShareDocument
+     */
+    omit?: DataShareDocumentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DataShareDocumentInclude<ExtArgs> | null
+    /**
+     * Filter, which DataShareDocuments to fetch.
+     */
+    where?: DataShareDocumentWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of DataShareDocuments to fetch.
+     */
+    orderBy?: DataShareDocumentOrderByWithRelationInput | DataShareDocumentOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing DataShareDocuments.
+     */
+    cursor?: DataShareDocumentWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` DataShareDocuments from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` DataShareDocuments.
+     */
+    skip?: number
+    distinct?: DataShareDocumentScalarFieldEnum | DataShareDocumentScalarFieldEnum[]
+  }
+
+  /**
+   * DataShareDocument create
+   */
+  export type DataShareDocumentCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DataShareDocument
+     */
+    select?: DataShareDocumentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DataShareDocument
+     */
+    omit?: DataShareDocumentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DataShareDocumentInclude<ExtArgs> | null
+    /**
+     * The data needed to create a DataShareDocument.
+     */
+    data: XOR<DataShareDocumentCreateInput, DataShareDocumentUncheckedCreateInput>
+  }
+
+  /**
+   * DataShareDocument createMany
+   */
+  export type DataShareDocumentCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many DataShareDocuments.
+     */
+    data: DataShareDocumentCreateManyInput | DataShareDocumentCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * DataShareDocument createManyAndReturn
+   */
+  export type DataShareDocumentCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DataShareDocument
+     */
+    select?: DataShareDocumentSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the DataShareDocument
+     */
+    omit?: DataShareDocumentOmit<ExtArgs> | null
+    /**
+     * The data used to create many DataShareDocuments.
+     */
+    data: DataShareDocumentCreateManyInput | DataShareDocumentCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DataShareDocumentIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * DataShareDocument update
+   */
+  export type DataShareDocumentUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DataShareDocument
+     */
+    select?: DataShareDocumentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DataShareDocument
+     */
+    omit?: DataShareDocumentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DataShareDocumentInclude<ExtArgs> | null
+    /**
+     * The data needed to update a DataShareDocument.
+     */
+    data: XOR<DataShareDocumentUpdateInput, DataShareDocumentUncheckedUpdateInput>
+    /**
+     * Choose, which DataShareDocument to update.
+     */
+    where: DataShareDocumentWhereUniqueInput
+  }
+
+  /**
+   * DataShareDocument updateMany
+   */
+  export type DataShareDocumentUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update DataShareDocuments.
+     */
+    data: XOR<DataShareDocumentUpdateManyMutationInput, DataShareDocumentUncheckedUpdateManyInput>
+    /**
+     * Filter which DataShareDocuments to update
+     */
+    where?: DataShareDocumentWhereInput
+    /**
+     * Limit how many DataShareDocuments to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * DataShareDocument updateManyAndReturn
+   */
+  export type DataShareDocumentUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DataShareDocument
+     */
+    select?: DataShareDocumentSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the DataShareDocument
+     */
+    omit?: DataShareDocumentOmit<ExtArgs> | null
+    /**
+     * The data used to update DataShareDocuments.
+     */
+    data: XOR<DataShareDocumentUpdateManyMutationInput, DataShareDocumentUncheckedUpdateManyInput>
+    /**
+     * Filter which DataShareDocuments to update
+     */
+    where?: DataShareDocumentWhereInput
+    /**
+     * Limit how many DataShareDocuments to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DataShareDocumentIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * DataShareDocument upsert
+   */
+  export type DataShareDocumentUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DataShareDocument
+     */
+    select?: DataShareDocumentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DataShareDocument
+     */
+    omit?: DataShareDocumentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DataShareDocumentInclude<ExtArgs> | null
+    /**
+     * The filter to search for the DataShareDocument to update in case it exists.
+     */
+    where: DataShareDocumentWhereUniqueInput
+    /**
+     * In case the DataShareDocument found by the `where` argument doesn't exist, create a new DataShareDocument with this data.
+     */
+    create: XOR<DataShareDocumentCreateInput, DataShareDocumentUncheckedCreateInput>
+    /**
+     * In case the DataShareDocument was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<DataShareDocumentUpdateInput, DataShareDocumentUncheckedUpdateInput>
+  }
+
+  /**
+   * DataShareDocument delete
+   */
+  export type DataShareDocumentDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DataShareDocument
+     */
+    select?: DataShareDocumentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DataShareDocument
+     */
+    omit?: DataShareDocumentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DataShareDocumentInclude<ExtArgs> | null
+    /**
+     * Filter which DataShareDocument to delete.
+     */
+    where: DataShareDocumentWhereUniqueInput
+  }
+
+  /**
+   * DataShareDocument deleteMany
+   */
+  export type DataShareDocumentDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which DataShareDocuments to delete
+     */
+    where?: DataShareDocumentWhereInput
+    /**
+     * Limit how many DataShareDocuments to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * DataShareDocument without action
+   */
+  export type DataShareDocumentDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DataShareDocument
+     */
+    select?: DataShareDocumentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DataShareDocument
+     */
+    omit?: DataShareDocumentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DataShareDocumentInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model DataShareAccessToken
+   */
+
+  export type AggregateDataShareAccessToken = {
+    _count: DataShareAccessTokenCountAggregateOutputType | null
+    _min: DataShareAccessTokenMinAggregateOutputType | null
+    _max: DataShareAccessTokenMaxAggregateOutputType | null
+  }
+
+  export type DataShareAccessTokenMinAggregateOutputType = {
+    id: string | null
+    requestId: string | null
+    token: string | null
+    recipientEmail: string | null
+    expiresAt: Date | null
+    usedAt: Date | null
+    isRevoked: boolean | null
+    createdAt: Date | null
+  }
+
+  export type DataShareAccessTokenMaxAggregateOutputType = {
+    id: string | null
+    requestId: string | null
+    token: string | null
+    recipientEmail: string | null
+    expiresAt: Date | null
+    usedAt: Date | null
+    isRevoked: boolean | null
+    createdAt: Date | null
+  }
+
+  export type DataShareAccessTokenCountAggregateOutputType = {
+    id: number
+    requestId: number
+    token: number
+    recipientEmail: number
+    expiresAt: number
+    usedAt: number
+    isRevoked: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type DataShareAccessTokenMinAggregateInputType = {
+    id?: true
+    requestId?: true
+    token?: true
+    recipientEmail?: true
+    expiresAt?: true
+    usedAt?: true
+    isRevoked?: true
+    createdAt?: true
+  }
+
+  export type DataShareAccessTokenMaxAggregateInputType = {
+    id?: true
+    requestId?: true
+    token?: true
+    recipientEmail?: true
+    expiresAt?: true
+    usedAt?: true
+    isRevoked?: true
+    createdAt?: true
+  }
+
+  export type DataShareAccessTokenCountAggregateInputType = {
+    id?: true
+    requestId?: true
+    token?: true
+    recipientEmail?: true
+    expiresAt?: true
+    usedAt?: true
+    isRevoked?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type DataShareAccessTokenAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which DataShareAccessToken to aggregate.
+     */
+    where?: DataShareAccessTokenWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of DataShareAccessTokens to fetch.
+     */
+    orderBy?: DataShareAccessTokenOrderByWithRelationInput | DataShareAccessTokenOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: DataShareAccessTokenWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` DataShareAccessTokens from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` DataShareAccessTokens.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned DataShareAccessTokens
+    **/
+    _count?: true | DataShareAccessTokenCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: DataShareAccessTokenMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: DataShareAccessTokenMaxAggregateInputType
+  }
+
+  export type GetDataShareAccessTokenAggregateType<T extends DataShareAccessTokenAggregateArgs> = {
+        [P in keyof T & keyof AggregateDataShareAccessToken]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateDataShareAccessToken[P]>
+      : GetScalarType<T[P], AggregateDataShareAccessToken[P]>
+  }
+
+
+
+
+  export type DataShareAccessTokenGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: DataShareAccessTokenWhereInput
+    orderBy?: DataShareAccessTokenOrderByWithAggregationInput | DataShareAccessTokenOrderByWithAggregationInput[]
+    by: DataShareAccessTokenScalarFieldEnum[] | DataShareAccessTokenScalarFieldEnum
+    having?: DataShareAccessTokenScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: DataShareAccessTokenCountAggregateInputType | true
+    _min?: DataShareAccessTokenMinAggregateInputType
+    _max?: DataShareAccessTokenMaxAggregateInputType
+  }
+
+  export type DataShareAccessTokenGroupByOutputType = {
+    id: string
+    requestId: string
+    token: string
+    recipientEmail: string
+    expiresAt: Date
+    usedAt: Date | null
+    isRevoked: boolean
+    createdAt: Date
+    _count: DataShareAccessTokenCountAggregateOutputType | null
+    _min: DataShareAccessTokenMinAggregateOutputType | null
+    _max: DataShareAccessTokenMaxAggregateOutputType | null
+  }
+
+  type GetDataShareAccessTokenGroupByPayload<T extends DataShareAccessTokenGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<DataShareAccessTokenGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof DataShareAccessTokenGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], DataShareAccessTokenGroupByOutputType[P]>
+            : GetScalarType<T[P], DataShareAccessTokenGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type DataShareAccessTokenSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    requestId?: boolean
+    token?: boolean
+    recipientEmail?: boolean
+    expiresAt?: boolean
+    usedAt?: boolean
+    isRevoked?: boolean
+    createdAt?: boolean
+    request?: boolean | DataShareRequestDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["dataShareAccessToken"]>
+
+  export type DataShareAccessTokenSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    requestId?: boolean
+    token?: boolean
+    recipientEmail?: boolean
+    expiresAt?: boolean
+    usedAt?: boolean
+    isRevoked?: boolean
+    createdAt?: boolean
+    request?: boolean | DataShareRequestDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["dataShareAccessToken"]>
+
+  export type DataShareAccessTokenSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    requestId?: boolean
+    token?: boolean
+    recipientEmail?: boolean
+    expiresAt?: boolean
+    usedAt?: boolean
+    isRevoked?: boolean
+    createdAt?: boolean
+    request?: boolean | DataShareRequestDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["dataShareAccessToken"]>
+
+  export type DataShareAccessTokenSelectScalar = {
+    id?: boolean
+    requestId?: boolean
+    token?: boolean
+    recipientEmail?: boolean
+    expiresAt?: boolean
+    usedAt?: boolean
+    isRevoked?: boolean
+    createdAt?: boolean
+  }
+
+  export type DataShareAccessTokenOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "requestId" | "token" | "recipientEmail" | "expiresAt" | "usedAt" | "isRevoked" | "createdAt", ExtArgs["result"]["dataShareAccessToken"]>
+  export type DataShareAccessTokenInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    request?: boolean | DataShareRequestDefaultArgs<ExtArgs>
+  }
+  export type DataShareAccessTokenIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    request?: boolean | DataShareRequestDefaultArgs<ExtArgs>
+  }
+  export type DataShareAccessTokenIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    request?: boolean | DataShareRequestDefaultArgs<ExtArgs>
+  }
+
+  export type $DataShareAccessTokenPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "DataShareAccessToken"
+    objects: {
+      request: Prisma.$DataShareRequestPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      requestId: string
+      token: string
+      recipientEmail: string
+      expiresAt: Date
+      usedAt: Date | null
+      isRevoked: boolean
+      createdAt: Date
+    }, ExtArgs["result"]["dataShareAccessToken"]>
+    composites: {}
+  }
+
+  type DataShareAccessTokenGetPayload<S extends boolean | null | undefined | DataShareAccessTokenDefaultArgs> = $Result.GetResult<Prisma.$DataShareAccessTokenPayload, S>
+
+  type DataShareAccessTokenCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<DataShareAccessTokenFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: DataShareAccessTokenCountAggregateInputType | true
+    }
+
+  export interface DataShareAccessTokenDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['DataShareAccessToken'], meta: { name: 'DataShareAccessToken' } }
+    /**
+     * Find zero or one DataShareAccessToken that matches the filter.
+     * @param {DataShareAccessTokenFindUniqueArgs} args - Arguments to find a DataShareAccessToken
+     * @example
+     * // Get one DataShareAccessToken
+     * const dataShareAccessToken = await prisma.dataShareAccessToken.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends DataShareAccessTokenFindUniqueArgs>(args: SelectSubset<T, DataShareAccessTokenFindUniqueArgs<ExtArgs>>): Prisma__DataShareAccessTokenClient<$Result.GetResult<Prisma.$DataShareAccessTokenPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one DataShareAccessToken that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {DataShareAccessTokenFindUniqueOrThrowArgs} args - Arguments to find a DataShareAccessToken
+     * @example
+     * // Get one DataShareAccessToken
+     * const dataShareAccessToken = await prisma.dataShareAccessToken.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends DataShareAccessTokenFindUniqueOrThrowArgs>(args: SelectSubset<T, DataShareAccessTokenFindUniqueOrThrowArgs<ExtArgs>>): Prisma__DataShareAccessTokenClient<$Result.GetResult<Prisma.$DataShareAccessTokenPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first DataShareAccessToken that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DataShareAccessTokenFindFirstArgs} args - Arguments to find a DataShareAccessToken
+     * @example
+     * // Get one DataShareAccessToken
+     * const dataShareAccessToken = await prisma.dataShareAccessToken.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends DataShareAccessTokenFindFirstArgs>(args?: SelectSubset<T, DataShareAccessTokenFindFirstArgs<ExtArgs>>): Prisma__DataShareAccessTokenClient<$Result.GetResult<Prisma.$DataShareAccessTokenPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first DataShareAccessToken that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DataShareAccessTokenFindFirstOrThrowArgs} args - Arguments to find a DataShareAccessToken
+     * @example
+     * // Get one DataShareAccessToken
+     * const dataShareAccessToken = await prisma.dataShareAccessToken.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends DataShareAccessTokenFindFirstOrThrowArgs>(args?: SelectSubset<T, DataShareAccessTokenFindFirstOrThrowArgs<ExtArgs>>): Prisma__DataShareAccessTokenClient<$Result.GetResult<Prisma.$DataShareAccessTokenPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more DataShareAccessTokens that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DataShareAccessTokenFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all DataShareAccessTokens
+     * const dataShareAccessTokens = await prisma.dataShareAccessToken.findMany()
+     * 
+     * // Get first 10 DataShareAccessTokens
+     * const dataShareAccessTokens = await prisma.dataShareAccessToken.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const dataShareAccessTokenWithIdOnly = await prisma.dataShareAccessToken.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends DataShareAccessTokenFindManyArgs>(args?: SelectSubset<T, DataShareAccessTokenFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DataShareAccessTokenPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a DataShareAccessToken.
+     * @param {DataShareAccessTokenCreateArgs} args - Arguments to create a DataShareAccessToken.
+     * @example
+     * // Create one DataShareAccessToken
+     * const DataShareAccessToken = await prisma.dataShareAccessToken.create({
+     *   data: {
+     *     // ... data to create a DataShareAccessToken
+     *   }
+     * })
+     * 
+     */
+    create<T extends DataShareAccessTokenCreateArgs>(args: SelectSubset<T, DataShareAccessTokenCreateArgs<ExtArgs>>): Prisma__DataShareAccessTokenClient<$Result.GetResult<Prisma.$DataShareAccessTokenPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many DataShareAccessTokens.
+     * @param {DataShareAccessTokenCreateManyArgs} args - Arguments to create many DataShareAccessTokens.
+     * @example
+     * // Create many DataShareAccessTokens
+     * const dataShareAccessToken = await prisma.dataShareAccessToken.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends DataShareAccessTokenCreateManyArgs>(args?: SelectSubset<T, DataShareAccessTokenCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many DataShareAccessTokens and returns the data saved in the database.
+     * @param {DataShareAccessTokenCreateManyAndReturnArgs} args - Arguments to create many DataShareAccessTokens.
+     * @example
+     * // Create many DataShareAccessTokens
+     * const dataShareAccessToken = await prisma.dataShareAccessToken.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many DataShareAccessTokens and only return the `id`
+     * const dataShareAccessTokenWithIdOnly = await prisma.dataShareAccessToken.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends DataShareAccessTokenCreateManyAndReturnArgs>(args?: SelectSubset<T, DataShareAccessTokenCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DataShareAccessTokenPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a DataShareAccessToken.
+     * @param {DataShareAccessTokenDeleteArgs} args - Arguments to delete one DataShareAccessToken.
+     * @example
+     * // Delete one DataShareAccessToken
+     * const DataShareAccessToken = await prisma.dataShareAccessToken.delete({
+     *   where: {
+     *     // ... filter to delete one DataShareAccessToken
+     *   }
+     * })
+     * 
+     */
+    delete<T extends DataShareAccessTokenDeleteArgs>(args: SelectSubset<T, DataShareAccessTokenDeleteArgs<ExtArgs>>): Prisma__DataShareAccessTokenClient<$Result.GetResult<Prisma.$DataShareAccessTokenPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one DataShareAccessToken.
+     * @param {DataShareAccessTokenUpdateArgs} args - Arguments to update one DataShareAccessToken.
+     * @example
+     * // Update one DataShareAccessToken
+     * const dataShareAccessToken = await prisma.dataShareAccessToken.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends DataShareAccessTokenUpdateArgs>(args: SelectSubset<T, DataShareAccessTokenUpdateArgs<ExtArgs>>): Prisma__DataShareAccessTokenClient<$Result.GetResult<Prisma.$DataShareAccessTokenPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more DataShareAccessTokens.
+     * @param {DataShareAccessTokenDeleteManyArgs} args - Arguments to filter DataShareAccessTokens to delete.
+     * @example
+     * // Delete a few DataShareAccessTokens
+     * const { count } = await prisma.dataShareAccessToken.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends DataShareAccessTokenDeleteManyArgs>(args?: SelectSubset<T, DataShareAccessTokenDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more DataShareAccessTokens.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DataShareAccessTokenUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many DataShareAccessTokens
+     * const dataShareAccessToken = await prisma.dataShareAccessToken.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends DataShareAccessTokenUpdateManyArgs>(args: SelectSubset<T, DataShareAccessTokenUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more DataShareAccessTokens and returns the data updated in the database.
+     * @param {DataShareAccessTokenUpdateManyAndReturnArgs} args - Arguments to update many DataShareAccessTokens.
+     * @example
+     * // Update many DataShareAccessTokens
+     * const dataShareAccessToken = await prisma.dataShareAccessToken.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more DataShareAccessTokens and only return the `id`
+     * const dataShareAccessTokenWithIdOnly = await prisma.dataShareAccessToken.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends DataShareAccessTokenUpdateManyAndReturnArgs>(args: SelectSubset<T, DataShareAccessTokenUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DataShareAccessTokenPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one DataShareAccessToken.
+     * @param {DataShareAccessTokenUpsertArgs} args - Arguments to update or create a DataShareAccessToken.
+     * @example
+     * // Update or create a DataShareAccessToken
+     * const dataShareAccessToken = await prisma.dataShareAccessToken.upsert({
+     *   create: {
+     *     // ... data to create a DataShareAccessToken
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the DataShareAccessToken we want to update
+     *   }
+     * })
+     */
+    upsert<T extends DataShareAccessTokenUpsertArgs>(args: SelectSubset<T, DataShareAccessTokenUpsertArgs<ExtArgs>>): Prisma__DataShareAccessTokenClient<$Result.GetResult<Prisma.$DataShareAccessTokenPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of DataShareAccessTokens.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DataShareAccessTokenCountArgs} args - Arguments to filter DataShareAccessTokens to count.
+     * @example
+     * // Count the number of DataShareAccessTokens
+     * const count = await prisma.dataShareAccessToken.count({
+     *   where: {
+     *     // ... the filter for the DataShareAccessTokens we want to count
+     *   }
+     * })
+    **/
+    count<T extends DataShareAccessTokenCountArgs>(
+      args?: Subset<T, DataShareAccessTokenCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], DataShareAccessTokenCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a DataShareAccessToken.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DataShareAccessTokenAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends DataShareAccessTokenAggregateArgs>(args: Subset<T, DataShareAccessTokenAggregateArgs>): Prisma.PrismaPromise<GetDataShareAccessTokenAggregateType<T>>
+
+    /**
+     * Group by DataShareAccessToken.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DataShareAccessTokenGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends DataShareAccessTokenGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: DataShareAccessTokenGroupByArgs['orderBy'] }
+        : { orderBy?: DataShareAccessTokenGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, DataShareAccessTokenGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetDataShareAccessTokenGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the DataShareAccessToken model
+   */
+  readonly fields: DataShareAccessTokenFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for DataShareAccessToken.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__DataShareAccessTokenClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    request<T extends DataShareRequestDefaultArgs<ExtArgs> = {}>(args?: Subset<T, DataShareRequestDefaultArgs<ExtArgs>>): Prisma__DataShareRequestClient<$Result.GetResult<Prisma.$DataShareRequestPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the DataShareAccessToken model
+   */
+  interface DataShareAccessTokenFieldRefs {
+    readonly id: FieldRef<"DataShareAccessToken", 'String'>
+    readonly requestId: FieldRef<"DataShareAccessToken", 'String'>
+    readonly token: FieldRef<"DataShareAccessToken", 'String'>
+    readonly recipientEmail: FieldRef<"DataShareAccessToken", 'String'>
+    readonly expiresAt: FieldRef<"DataShareAccessToken", 'DateTime'>
+    readonly usedAt: FieldRef<"DataShareAccessToken", 'DateTime'>
+    readonly isRevoked: FieldRef<"DataShareAccessToken", 'Boolean'>
+    readonly createdAt: FieldRef<"DataShareAccessToken", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * DataShareAccessToken findUnique
+   */
+  export type DataShareAccessTokenFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DataShareAccessToken
+     */
+    select?: DataShareAccessTokenSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DataShareAccessToken
+     */
+    omit?: DataShareAccessTokenOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DataShareAccessTokenInclude<ExtArgs> | null
+    /**
+     * Filter, which DataShareAccessToken to fetch.
+     */
+    where: DataShareAccessTokenWhereUniqueInput
+  }
+
+  /**
+   * DataShareAccessToken findUniqueOrThrow
+   */
+  export type DataShareAccessTokenFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DataShareAccessToken
+     */
+    select?: DataShareAccessTokenSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DataShareAccessToken
+     */
+    omit?: DataShareAccessTokenOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DataShareAccessTokenInclude<ExtArgs> | null
+    /**
+     * Filter, which DataShareAccessToken to fetch.
+     */
+    where: DataShareAccessTokenWhereUniqueInput
+  }
+
+  /**
+   * DataShareAccessToken findFirst
+   */
+  export type DataShareAccessTokenFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DataShareAccessToken
+     */
+    select?: DataShareAccessTokenSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DataShareAccessToken
+     */
+    omit?: DataShareAccessTokenOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DataShareAccessTokenInclude<ExtArgs> | null
+    /**
+     * Filter, which DataShareAccessToken to fetch.
+     */
+    where?: DataShareAccessTokenWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of DataShareAccessTokens to fetch.
+     */
+    orderBy?: DataShareAccessTokenOrderByWithRelationInput | DataShareAccessTokenOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for DataShareAccessTokens.
+     */
+    cursor?: DataShareAccessTokenWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` DataShareAccessTokens from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` DataShareAccessTokens.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of DataShareAccessTokens.
+     */
+    distinct?: DataShareAccessTokenScalarFieldEnum | DataShareAccessTokenScalarFieldEnum[]
+  }
+
+  /**
+   * DataShareAccessToken findFirstOrThrow
+   */
+  export type DataShareAccessTokenFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DataShareAccessToken
+     */
+    select?: DataShareAccessTokenSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DataShareAccessToken
+     */
+    omit?: DataShareAccessTokenOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DataShareAccessTokenInclude<ExtArgs> | null
+    /**
+     * Filter, which DataShareAccessToken to fetch.
+     */
+    where?: DataShareAccessTokenWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of DataShareAccessTokens to fetch.
+     */
+    orderBy?: DataShareAccessTokenOrderByWithRelationInput | DataShareAccessTokenOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for DataShareAccessTokens.
+     */
+    cursor?: DataShareAccessTokenWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` DataShareAccessTokens from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` DataShareAccessTokens.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of DataShareAccessTokens.
+     */
+    distinct?: DataShareAccessTokenScalarFieldEnum | DataShareAccessTokenScalarFieldEnum[]
+  }
+
+  /**
+   * DataShareAccessToken findMany
+   */
+  export type DataShareAccessTokenFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DataShareAccessToken
+     */
+    select?: DataShareAccessTokenSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DataShareAccessToken
+     */
+    omit?: DataShareAccessTokenOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DataShareAccessTokenInclude<ExtArgs> | null
+    /**
+     * Filter, which DataShareAccessTokens to fetch.
+     */
+    where?: DataShareAccessTokenWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of DataShareAccessTokens to fetch.
+     */
+    orderBy?: DataShareAccessTokenOrderByWithRelationInput | DataShareAccessTokenOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing DataShareAccessTokens.
+     */
+    cursor?: DataShareAccessTokenWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` DataShareAccessTokens from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` DataShareAccessTokens.
+     */
+    skip?: number
+    distinct?: DataShareAccessTokenScalarFieldEnum | DataShareAccessTokenScalarFieldEnum[]
+  }
+
+  /**
+   * DataShareAccessToken create
+   */
+  export type DataShareAccessTokenCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DataShareAccessToken
+     */
+    select?: DataShareAccessTokenSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DataShareAccessToken
+     */
+    omit?: DataShareAccessTokenOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DataShareAccessTokenInclude<ExtArgs> | null
+    /**
+     * The data needed to create a DataShareAccessToken.
+     */
+    data: XOR<DataShareAccessTokenCreateInput, DataShareAccessTokenUncheckedCreateInput>
+  }
+
+  /**
+   * DataShareAccessToken createMany
+   */
+  export type DataShareAccessTokenCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many DataShareAccessTokens.
+     */
+    data: DataShareAccessTokenCreateManyInput | DataShareAccessTokenCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * DataShareAccessToken createManyAndReturn
+   */
+  export type DataShareAccessTokenCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DataShareAccessToken
+     */
+    select?: DataShareAccessTokenSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the DataShareAccessToken
+     */
+    omit?: DataShareAccessTokenOmit<ExtArgs> | null
+    /**
+     * The data used to create many DataShareAccessTokens.
+     */
+    data: DataShareAccessTokenCreateManyInput | DataShareAccessTokenCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DataShareAccessTokenIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * DataShareAccessToken update
+   */
+  export type DataShareAccessTokenUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DataShareAccessToken
+     */
+    select?: DataShareAccessTokenSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DataShareAccessToken
+     */
+    omit?: DataShareAccessTokenOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DataShareAccessTokenInclude<ExtArgs> | null
+    /**
+     * The data needed to update a DataShareAccessToken.
+     */
+    data: XOR<DataShareAccessTokenUpdateInput, DataShareAccessTokenUncheckedUpdateInput>
+    /**
+     * Choose, which DataShareAccessToken to update.
+     */
+    where: DataShareAccessTokenWhereUniqueInput
+  }
+
+  /**
+   * DataShareAccessToken updateMany
+   */
+  export type DataShareAccessTokenUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update DataShareAccessTokens.
+     */
+    data: XOR<DataShareAccessTokenUpdateManyMutationInput, DataShareAccessTokenUncheckedUpdateManyInput>
+    /**
+     * Filter which DataShareAccessTokens to update
+     */
+    where?: DataShareAccessTokenWhereInput
+    /**
+     * Limit how many DataShareAccessTokens to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * DataShareAccessToken updateManyAndReturn
+   */
+  export type DataShareAccessTokenUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DataShareAccessToken
+     */
+    select?: DataShareAccessTokenSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the DataShareAccessToken
+     */
+    omit?: DataShareAccessTokenOmit<ExtArgs> | null
+    /**
+     * The data used to update DataShareAccessTokens.
+     */
+    data: XOR<DataShareAccessTokenUpdateManyMutationInput, DataShareAccessTokenUncheckedUpdateManyInput>
+    /**
+     * Filter which DataShareAccessTokens to update
+     */
+    where?: DataShareAccessTokenWhereInput
+    /**
+     * Limit how many DataShareAccessTokens to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DataShareAccessTokenIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * DataShareAccessToken upsert
+   */
+  export type DataShareAccessTokenUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DataShareAccessToken
+     */
+    select?: DataShareAccessTokenSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DataShareAccessToken
+     */
+    omit?: DataShareAccessTokenOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DataShareAccessTokenInclude<ExtArgs> | null
+    /**
+     * The filter to search for the DataShareAccessToken to update in case it exists.
+     */
+    where: DataShareAccessTokenWhereUniqueInput
+    /**
+     * In case the DataShareAccessToken found by the `where` argument doesn't exist, create a new DataShareAccessToken with this data.
+     */
+    create: XOR<DataShareAccessTokenCreateInput, DataShareAccessTokenUncheckedCreateInput>
+    /**
+     * In case the DataShareAccessToken was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<DataShareAccessTokenUpdateInput, DataShareAccessTokenUncheckedUpdateInput>
+  }
+
+  /**
+   * DataShareAccessToken delete
+   */
+  export type DataShareAccessTokenDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DataShareAccessToken
+     */
+    select?: DataShareAccessTokenSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DataShareAccessToken
+     */
+    omit?: DataShareAccessTokenOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DataShareAccessTokenInclude<ExtArgs> | null
+    /**
+     * Filter which DataShareAccessToken to delete.
+     */
+    where: DataShareAccessTokenWhereUniqueInput
+  }
+
+  /**
+   * DataShareAccessToken deleteMany
+   */
+  export type DataShareAccessTokenDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which DataShareAccessTokens to delete
+     */
+    where?: DataShareAccessTokenWhereInput
+    /**
+     * Limit how many DataShareAccessTokens to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * DataShareAccessToken without action
+   */
+  export type DataShareAccessTokenDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DataShareAccessToken
+     */
+    select?: DataShareAccessTokenSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DataShareAccessToken
+     */
+    omit?: DataShareAccessTokenOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DataShareAccessTokenInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -32454,6 +36508,64 @@ export namespace Prisma {
   };
 
   export type InsuranceAccessTokenScalarFieldEnum = (typeof InsuranceAccessTokenScalarFieldEnum)[keyof typeof InsuranceAccessTokenScalarFieldEnum]
+
+
+  export const DataShareRequestScalarFieldEnum: {
+    id: 'id',
+    requestNumber: 'requestNumber',
+    patientId: 'patientId',
+    inpatientEncounterId: 'inpatientEncounterId',
+    outpatientEncounterId: 'outpatientEncounterId',
+    hospitalIdentifier: 'hospitalIdentifier',
+    hospitalName: 'hospitalName',
+    hospitalEmail: 'hospitalEmail',
+    reason: 'reason',
+    status: 'status',
+    submittedAt: 'submittedAt',
+    reviewedAt: 'reviewedAt',
+    accessedAt: 'accessedAt',
+    selectedData: 'selectedData',
+    requestNotes: 'requestNotes',
+    reviewNotes: 'reviewNotes',
+    denialReason: 'denialReason',
+    requestedBy: 'requestedBy',
+    reviewedBy: 'reviewedBy',
+    patientConsent: 'patientConsent',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type DataShareRequestScalarFieldEnum = (typeof DataShareRequestScalarFieldEnum)[keyof typeof DataShareRequestScalarFieldEnum]
+
+
+  export const DataShareDocumentScalarFieldEnum: {
+    id: 'id',
+    requestId: 'requestId',
+    documentType: 'documentType',
+    fileName: 'fileName',
+    fileUrl: 'fileUrl',
+    fileSize: 'fileSize',
+    mimeType: 'mimeType',
+    description: 'description',
+    uploadedBy: 'uploadedBy',
+    createdAt: 'createdAt'
+  };
+
+  export type DataShareDocumentScalarFieldEnum = (typeof DataShareDocumentScalarFieldEnum)[keyof typeof DataShareDocumentScalarFieldEnum]
+
+
+  export const DataShareAccessTokenScalarFieldEnum: {
+    id: 'id',
+    requestId: 'requestId',
+    token: 'token',
+    recipientEmail: 'recipientEmail',
+    expiresAt: 'expiresAt',
+    usedAt: 'usedAt',
+    isRevoked: 'isRevoked',
+    createdAt: 'createdAt'
+  };
+
+  export type DataShareAccessTokenScalarFieldEnum = (typeof DataShareAccessTokenScalarFieldEnum)[keyof typeof DataShareAccessTokenScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -32916,6 +37028,20 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'DataShareStatus'
+   */
+  export type EnumDataShareStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DataShareStatus'>
+    
+
+
+  /**
+   * Reference to a field of type 'DataShareStatus[]'
+   */
+  export type ListEnumDataShareStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DataShareStatus[]'>
+    
+
+
+  /**
    * Reference to a field of type 'Float'
    */
   export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
@@ -33259,6 +37385,7 @@ export namespace Prisma {
     inpatientEncounters?: InpatientEncounterListRelationFilter
     outpatientEncounters?: OutpatientEncounterListRelationFilter
     insuranceClaims?: InsuranceClaimListRelationFilter
+    dataShareRequests?: DataShareRequestListRelationFilter
   }
 
   export type PatientOrderByWithRelationInput = {
@@ -33278,6 +37405,7 @@ export namespace Prisma {
     inpatientEncounters?: InpatientEncounterOrderByRelationAggregateInput
     outpatientEncounters?: OutpatientEncounterOrderByRelationAggregateInput
     insuranceClaims?: InsuranceClaimOrderByRelationAggregateInput
+    dataShareRequests?: DataShareRequestOrderByRelationAggregateInput
   }
 
   export type PatientWhereUniqueInput = Prisma.AtLeast<{
@@ -33300,6 +37428,7 @@ export namespace Prisma {
     inpatientEncounters?: InpatientEncounterListRelationFilter
     outpatientEncounters?: OutpatientEncounterListRelationFilter
     insuranceClaims?: InsuranceClaimListRelationFilter
+    dataShareRequests?: DataShareRequestListRelationFilter
   }, "id" | "userId" | "patientNumber">
 
   export type PatientOrderByWithAggregationInput = {
@@ -34357,6 +38486,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"OutpatientEncounter"> | Date | string
     patient?: XOR<PatientScalarRelationFilter, PatientWhereInput>
     insuranceClaim?: XOR<InsuranceClaimNullableScalarRelationFilter, InsuranceClaimWhereInput> | null
+    dataShareRequest?: XOR<DataShareRequestNullableScalarRelationFilter, DataShareRequestWhereInput> | null
   }
 
   export type OutpatientEncounterOrderByWithRelationInput = {
@@ -34375,6 +38505,7 @@ export namespace Prisma {
     updatedAt?: SortOrder
     patient?: PatientOrderByWithRelationInput
     insuranceClaim?: InsuranceClaimOrderByWithRelationInput
+    dataShareRequest?: DataShareRequestOrderByWithRelationInput
   }
 
   export type OutpatientEncounterWhereUniqueInput = Prisma.AtLeast<{
@@ -34396,6 +38527,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"OutpatientEncounter"> | Date | string
     patient?: XOR<PatientScalarRelationFilter, PatientWhereInput>
     insuranceClaim?: XOR<InsuranceClaimNullableScalarRelationFilter, InsuranceClaimWhereInput> | null
+    dataShareRequest?: XOR<DataShareRequestNullableScalarRelationFilter, DataShareRequestWhereInput> | null
   }, "id">
 
   export type OutpatientEncounterOrderByWithAggregationInput = {
@@ -34461,6 +38593,7 @@ export namespace Prisma {
     charts?: InpatientEncounterChartListRelationFilter
     orders?: InpatientEncounterOrderListRelationFilter
     insuranceClaim?: XOR<InsuranceClaimNullableScalarRelationFilter, InsuranceClaimWhereInput> | null
+    dataShareRequest?: XOR<DataShareRequestNullableScalarRelationFilter, DataShareRequestWhereInput> | null
   }
 
   export type InpatientEncounterOrderByWithRelationInput = {
@@ -34483,6 +38616,7 @@ export namespace Prisma {
     charts?: InpatientEncounterChartOrderByRelationAggregateInput
     orders?: InpatientEncounterOrderOrderByRelationAggregateInput
     insuranceClaim?: InsuranceClaimOrderByWithRelationInput
+    dataShareRequest?: DataShareRequestOrderByWithRelationInput
   }
 
   export type InpatientEncounterWhereUniqueInput = Prisma.AtLeast<{
@@ -34508,6 +38642,7 @@ export namespace Prisma {
     charts?: InpatientEncounterChartListRelationFilter
     orders?: InpatientEncounterOrderListRelationFilter
     insuranceClaim?: XOR<InsuranceClaimNullableScalarRelationFilter, InsuranceClaimWhereInput> | null
+    dataShareRequest?: XOR<DataShareRequestNullableScalarRelationFilter, DataShareRequestWhereInput> | null
   }, "id">
 
   export type InpatientEncounterOrderByWithAggregationInput = {
@@ -35070,6 +39205,310 @@ export namespace Prisma {
     createdAt?: DateTimeWithAggregatesFilter<"InsuranceAccessToken"> | Date | string
   }
 
+  export type DataShareRequestWhereInput = {
+    AND?: DataShareRequestWhereInput | DataShareRequestWhereInput[]
+    OR?: DataShareRequestWhereInput[]
+    NOT?: DataShareRequestWhereInput | DataShareRequestWhereInput[]
+    id?: UuidFilter<"DataShareRequest"> | string
+    requestNumber?: StringFilter<"DataShareRequest"> | string
+    patientId?: StringFilter<"DataShareRequest"> | string
+    inpatientEncounterId?: UuidNullableFilter<"DataShareRequest"> | string | null
+    outpatientEncounterId?: UuidNullableFilter<"DataShareRequest"> | string | null
+    hospitalIdentifier?: StringFilter<"DataShareRequest"> | string
+    hospitalName?: StringFilter<"DataShareRequest"> | string
+    hospitalEmail?: StringFilter<"DataShareRequest"> | string
+    reason?: StringFilter<"DataShareRequest"> | string
+    status?: EnumDataShareStatusFilter<"DataShareRequest"> | $Enums.DataShareStatus
+    submittedAt?: DateTimeNullableFilter<"DataShareRequest"> | Date | string | null
+    reviewedAt?: DateTimeNullableFilter<"DataShareRequest"> | Date | string | null
+    accessedAt?: DateTimeNullableFilter<"DataShareRequest"> | Date | string | null
+    selectedData?: JsonNullableFilter<"DataShareRequest">
+    requestNotes?: StringNullableFilter<"DataShareRequest"> | string | null
+    reviewNotes?: StringNullableFilter<"DataShareRequest"> | string | null
+    denialReason?: StringNullableFilter<"DataShareRequest"> | string | null
+    requestedBy?: StringFilter<"DataShareRequest"> | string
+    reviewedBy?: StringNullableFilter<"DataShareRequest"> | string | null
+    patientConsent?: BoolFilter<"DataShareRequest"> | boolean
+    createdAt?: DateTimeFilter<"DataShareRequest"> | Date | string
+    updatedAt?: DateTimeFilter<"DataShareRequest"> | Date | string
+    patient?: XOR<PatientScalarRelationFilter, PatientWhereInput>
+    inpatientEncounter?: XOR<InpatientEncounterNullableScalarRelationFilter, InpatientEncounterWhereInput> | null
+    outpatientEncounter?: XOR<OutpatientEncounterNullableScalarRelationFilter, OutpatientEncounterWhereInput> | null
+    documents?: DataShareDocumentListRelationFilter
+    accessTokens?: DataShareAccessTokenListRelationFilter
+  }
+
+  export type DataShareRequestOrderByWithRelationInput = {
+    id?: SortOrder
+    requestNumber?: SortOrder
+    patientId?: SortOrder
+    inpatientEncounterId?: SortOrderInput | SortOrder
+    outpatientEncounterId?: SortOrderInput | SortOrder
+    hospitalIdentifier?: SortOrder
+    hospitalName?: SortOrder
+    hospitalEmail?: SortOrder
+    reason?: SortOrder
+    status?: SortOrder
+    submittedAt?: SortOrderInput | SortOrder
+    reviewedAt?: SortOrderInput | SortOrder
+    accessedAt?: SortOrderInput | SortOrder
+    selectedData?: SortOrderInput | SortOrder
+    requestNotes?: SortOrderInput | SortOrder
+    reviewNotes?: SortOrderInput | SortOrder
+    denialReason?: SortOrderInput | SortOrder
+    requestedBy?: SortOrder
+    reviewedBy?: SortOrderInput | SortOrder
+    patientConsent?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    patient?: PatientOrderByWithRelationInput
+    inpatientEncounter?: InpatientEncounterOrderByWithRelationInput
+    outpatientEncounter?: OutpatientEncounterOrderByWithRelationInput
+    documents?: DataShareDocumentOrderByRelationAggregateInput
+    accessTokens?: DataShareAccessTokenOrderByRelationAggregateInput
+  }
+
+  export type DataShareRequestWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    requestNumber?: string
+    inpatientEncounterId?: string
+    outpatientEncounterId?: string
+    AND?: DataShareRequestWhereInput | DataShareRequestWhereInput[]
+    OR?: DataShareRequestWhereInput[]
+    NOT?: DataShareRequestWhereInput | DataShareRequestWhereInput[]
+    patientId?: StringFilter<"DataShareRequest"> | string
+    hospitalIdentifier?: StringFilter<"DataShareRequest"> | string
+    hospitalName?: StringFilter<"DataShareRequest"> | string
+    hospitalEmail?: StringFilter<"DataShareRequest"> | string
+    reason?: StringFilter<"DataShareRequest"> | string
+    status?: EnumDataShareStatusFilter<"DataShareRequest"> | $Enums.DataShareStatus
+    submittedAt?: DateTimeNullableFilter<"DataShareRequest"> | Date | string | null
+    reviewedAt?: DateTimeNullableFilter<"DataShareRequest"> | Date | string | null
+    accessedAt?: DateTimeNullableFilter<"DataShareRequest"> | Date | string | null
+    selectedData?: JsonNullableFilter<"DataShareRequest">
+    requestNotes?: StringNullableFilter<"DataShareRequest"> | string | null
+    reviewNotes?: StringNullableFilter<"DataShareRequest"> | string | null
+    denialReason?: StringNullableFilter<"DataShareRequest"> | string | null
+    requestedBy?: StringFilter<"DataShareRequest"> | string
+    reviewedBy?: StringNullableFilter<"DataShareRequest"> | string | null
+    patientConsent?: BoolFilter<"DataShareRequest"> | boolean
+    createdAt?: DateTimeFilter<"DataShareRequest"> | Date | string
+    updatedAt?: DateTimeFilter<"DataShareRequest"> | Date | string
+    patient?: XOR<PatientScalarRelationFilter, PatientWhereInput>
+    inpatientEncounter?: XOR<InpatientEncounterNullableScalarRelationFilter, InpatientEncounterWhereInput> | null
+    outpatientEncounter?: XOR<OutpatientEncounterNullableScalarRelationFilter, OutpatientEncounterWhereInput> | null
+    documents?: DataShareDocumentListRelationFilter
+    accessTokens?: DataShareAccessTokenListRelationFilter
+  }, "id" | "requestNumber" | "inpatientEncounterId" | "outpatientEncounterId">
+
+  export type DataShareRequestOrderByWithAggregationInput = {
+    id?: SortOrder
+    requestNumber?: SortOrder
+    patientId?: SortOrder
+    inpatientEncounterId?: SortOrderInput | SortOrder
+    outpatientEncounterId?: SortOrderInput | SortOrder
+    hospitalIdentifier?: SortOrder
+    hospitalName?: SortOrder
+    hospitalEmail?: SortOrder
+    reason?: SortOrder
+    status?: SortOrder
+    submittedAt?: SortOrderInput | SortOrder
+    reviewedAt?: SortOrderInput | SortOrder
+    accessedAt?: SortOrderInput | SortOrder
+    selectedData?: SortOrderInput | SortOrder
+    requestNotes?: SortOrderInput | SortOrder
+    reviewNotes?: SortOrderInput | SortOrder
+    denialReason?: SortOrderInput | SortOrder
+    requestedBy?: SortOrder
+    reviewedBy?: SortOrderInput | SortOrder
+    patientConsent?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: DataShareRequestCountOrderByAggregateInput
+    _max?: DataShareRequestMaxOrderByAggregateInput
+    _min?: DataShareRequestMinOrderByAggregateInput
+  }
+
+  export type DataShareRequestScalarWhereWithAggregatesInput = {
+    AND?: DataShareRequestScalarWhereWithAggregatesInput | DataShareRequestScalarWhereWithAggregatesInput[]
+    OR?: DataShareRequestScalarWhereWithAggregatesInput[]
+    NOT?: DataShareRequestScalarWhereWithAggregatesInput | DataShareRequestScalarWhereWithAggregatesInput[]
+    id?: UuidWithAggregatesFilter<"DataShareRequest"> | string
+    requestNumber?: StringWithAggregatesFilter<"DataShareRequest"> | string
+    patientId?: StringWithAggregatesFilter<"DataShareRequest"> | string
+    inpatientEncounterId?: UuidNullableWithAggregatesFilter<"DataShareRequest"> | string | null
+    outpatientEncounterId?: UuidNullableWithAggregatesFilter<"DataShareRequest"> | string | null
+    hospitalIdentifier?: StringWithAggregatesFilter<"DataShareRequest"> | string
+    hospitalName?: StringWithAggregatesFilter<"DataShareRequest"> | string
+    hospitalEmail?: StringWithAggregatesFilter<"DataShareRequest"> | string
+    reason?: StringWithAggregatesFilter<"DataShareRequest"> | string
+    status?: EnumDataShareStatusWithAggregatesFilter<"DataShareRequest"> | $Enums.DataShareStatus
+    submittedAt?: DateTimeNullableWithAggregatesFilter<"DataShareRequest"> | Date | string | null
+    reviewedAt?: DateTimeNullableWithAggregatesFilter<"DataShareRequest"> | Date | string | null
+    accessedAt?: DateTimeNullableWithAggregatesFilter<"DataShareRequest"> | Date | string | null
+    selectedData?: JsonNullableWithAggregatesFilter<"DataShareRequest">
+    requestNotes?: StringNullableWithAggregatesFilter<"DataShareRequest"> | string | null
+    reviewNotes?: StringNullableWithAggregatesFilter<"DataShareRequest"> | string | null
+    denialReason?: StringNullableWithAggregatesFilter<"DataShareRequest"> | string | null
+    requestedBy?: StringWithAggregatesFilter<"DataShareRequest"> | string
+    reviewedBy?: StringNullableWithAggregatesFilter<"DataShareRequest"> | string | null
+    patientConsent?: BoolWithAggregatesFilter<"DataShareRequest"> | boolean
+    createdAt?: DateTimeWithAggregatesFilter<"DataShareRequest"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"DataShareRequest"> | Date | string
+  }
+
+  export type DataShareDocumentWhereInput = {
+    AND?: DataShareDocumentWhereInput | DataShareDocumentWhereInput[]
+    OR?: DataShareDocumentWhereInput[]
+    NOT?: DataShareDocumentWhereInput | DataShareDocumentWhereInput[]
+    id?: UuidFilter<"DataShareDocument"> | string
+    requestId?: UuidFilter<"DataShareDocument"> | string
+    documentType?: StringFilter<"DataShareDocument"> | string
+    fileName?: StringFilter<"DataShareDocument"> | string
+    fileUrl?: StringFilter<"DataShareDocument"> | string
+    fileSize?: IntFilter<"DataShareDocument"> | number
+    mimeType?: StringFilter<"DataShareDocument"> | string
+    description?: StringNullableFilter<"DataShareDocument"> | string | null
+    uploadedBy?: StringFilter<"DataShareDocument"> | string
+    createdAt?: DateTimeFilter<"DataShareDocument"> | Date | string
+    request?: XOR<DataShareRequestScalarRelationFilter, DataShareRequestWhereInput>
+  }
+
+  export type DataShareDocumentOrderByWithRelationInput = {
+    id?: SortOrder
+    requestId?: SortOrder
+    documentType?: SortOrder
+    fileName?: SortOrder
+    fileUrl?: SortOrder
+    fileSize?: SortOrder
+    mimeType?: SortOrder
+    description?: SortOrderInput | SortOrder
+    uploadedBy?: SortOrder
+    createdAt?: SortOrder
+    request?: DataShareRequestOrderByWithRelationInput
+  }
+
+  export type DataShareDocumentWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: DataShareDocumentWhereInput | DataShareDocumentWhereInput[]
+    OR?: DataShareDocumentWhereInput[]
+    NOT?: DataShareDocumentWhereInput | DataShareDocumentWhereInput[]
+    requestId?: UuidFilter<"DataShareDocument"> | string
+    documentType?: StringFilter<"DataShareDocument"> | string
+    fileName?: StringFilter<"DataShareDocument"> | string
+    fileUrl?: StringFilter<"DataShareDocument"> | string
+    fileSize?: IntFilter<"DataShareDocument"> | number
+    mimeType?: StringFilter<"DataShareDocument"> | string
+    description?: StringNullableFilter<"DataShareDocument"> | string | null
+    uploadedBy?: StringFilter<"DataShareDocument"> | string
+    createdAt?: DateTimeFilter<"DataShareDocument"> | Date | string
+    request?: XOR<DataShareRequestScalarRelationFilter, DataShareRequestWhereInput>
+  }, "id">
+
+  export type DataShareDocumentOrderByWithAggregationInput = {
+    id?: SortOrder
+    requestId?: SortOrder
+    documentType?: SortOrder
+    fileName?: SortOrder
+    fileUrl?: SortOrder
+    fileSize?: SortOrder
+    mimeType?: SortOrder
+    description?: SortOrderInput | SortOrder
+    uploadedBy?: SortOrder
+    createdAt?: SortOrder
+    _count?: DataShareDocumentCountOrderByAggregateInput
+    _avg?: DataShareDocumentAvgOrderByAggregateInput
+    _max?: DataShareDocumentMaxOrderByAggregateInput
+    _min?: DataShareDocumentMinOrderByAggregateInput
+    _sum?: DataShareDocumentSumOrderByAggregateInput
+  }
+
+  export type DataShareDocumentScalarWhereWithAggregatesInput = {
+    AND?: DataShareDocumentScalarWhereWithAggregatesInput | DataShareDocumentScalarWhereWithAggregatesInput[]
+    OR?: DataShareDocumentScalarWhereWithAggregatesInput[]
+    NOT?: DataShareDocumentScalarWhereWithAggregatesInput | DataShareDocumentScalarWhereWithAggregatesInput[]
+    id?: UuidWithAggregatesFilter<"DataShareDocument"> | string
+    requestId?: UuidWithAggregatesFilter<"DataShareDocument"> | string
+    documentType?: StringWithAggregatesFilter<"DataShareDocument"> | string
+    fileName?: StringWithAggregatesFilter<"DataShareDocument"> | string
+    fileUrl?: StringWithAggregatesFilter<"DataShareDocument"> | string
+    fileSize?: IntWithAggregatesFilter<"DataShareDocument"> | number
+    mimeType?: StringWithAggregatesFilter<"DataShareDocument"> | string
+    description?: StringNullableWithAggregatesFilter<"DataShareDocument"> | string | null
+    uploadedBy?: StringWithAggregatesFilter<"DataShareDocument"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"DataShareDocument"> | Date | string
+  }
+
+  export type DataShareAccessTokenWhereInput = {
+    AND?: DataShareAccessTokenWhereInput | DataShareAccessTokenWhereInput[]
+    OR?: DataShareAccessTokenWhereInput[]
+    NOT?: DataShareAccessTokenWhereInput | DataShareAccessTokenWhereInput[]
+    id?: UuidFilter<"DataShareAccessToken"> | string
+    requestId?: UuidFilter<"DataShareAccessToken"> | string
+    token?: StringFilter<"DataShareAccessToken"> | string
+    recipientEmail?: StringFilter<"DataShareAccessToken"> | string
+    expiresAt?: DateTimeFilter<"DataShareAccessToken"> | Date | string
+    usedAt?: DateTimeNullableFilter<"DataShareAccessToken"> | Date | string | null
+    isRevoked?: BoolFilter<"DataShareAccessToken"> | boolean
+    createdAt?: DateTimeFilter<"DataShareAccessToken"> | Date | string
+    request?: XOR<DataShareRequestScalarRelationFilter, DataShareRequestWhereInput>
+  }
+
+  export type DataShareAccessTokenOrderByWithRelationInput = {
+    id?: SortOrder
+    requestId?: SortOrder
+    token?: SortOrder
+    recipientEmail?: SortOrder
+    expiresAt?: SortOrder
+    usedAt?: SortOrderInput | SortOrder
+    isRevoked?: SortOrder
+    createdAt?: SortOrder
+    request?: DataShareRequestOrderByWithRelationInput
+  }
+
+  export type DataShareAccessTokenWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    token?: string
+    AND?: DataShareAccessTokenWhereInput | DataShareAccessTokenWhereInput[]
+    OR?: DataShareAccessTokenWhereInput[]
+    NOT?: DataShareAccessTokenWhereInput | DataShareAccessTokenWhereInput[]
+    requestId?: UuidFilter<"DataShareAccessToken"> | string
+    recipientEmail?: StringFilter<"DataShareAccessToken"> | string
+    expiresAt?: DateTimeFilter<"DataShareAccessToken"> | Date | string
+    usedAt?: DateTimeNullableFilter<"DataShareAccessToken"> | Date | string | null
+    isRevoked?: BoolFilter<"DataShareAccessToken"> | boolean
+    createdAt?: DateTimeFilter<"DataShareAccessToken"> | Date | string
+    request?: XOR<DataShareRequestScalarRelationFilter, DataShareRequestWhereInput>
+  }, "id" | "token">
+
+  export type DataShareAccessTokenOrderByWithAggregationInput = {
+    id?: SortOrder
+    requestId?: SortOrder
+    token?: SortOrder
+    recipientEmail?: SortOrder
+    expiresAt?: SortOrder
+    usedAt?: SortOrderInput | SortOrder
+    isRevoked?: SortOrder
+    createdAt?: SortOrder
+    _count?: DataShareAccessTokenCountOrderByAggregateInput
+    _max?: DataShareAccessTokenMaxOrderByAggregateInput
+    _min?: DataShareAccessTokenMinOrderByAggregateInput
+  }
+
+  export type DataShareAccessTokenScalarWhereWithAggregatesInput = {
+    AND?: DataShareAccessTokenScalarWhereWithAggregatesInput | DataShareAccessTokenScalarWhereWithAggregatesInput[]
+    OR?: DataShareAccessTokenScalarWhereWithAggregatesInput[]
+    NOT?: DataShareAccessTokenScalarWhereWithAggregatesInput | DataShareAccessTokenScalarWhereWithAggregatesInput[]
+    id?: UuidWithAggregatesFilter<"DataShareAccessToken"> | string
+    requestId?: UuidWithAggregatesFilter<"DataShareAccessToken"> | string
+    token?: StringWithAggregatesFilter<"DataShareAccessToken"> | string
+    recipientEmail?: StringWithAggregatesFilter<"DataShareAccessToken"> | string
+    expiresAt?: DateTimeWithAggregatesFilter<"DataShareAccessToken"> | Date | string
+    usedAt?: DateTimeNullableWithAggregatesFilter<"DataShareAccessToken"> | Date | string | null
+    isRevoked?: BoolWithAggregatesFilter<"DataShareAccessToken"> | boolean
+    createdAt?: DateTimeWithAggregatesFilter<"DataShareAccessToken"> | Date | string
+  }
+
   export type UserCreateInput = {
     id?: string
     email: string
@@ -35470,6 +39909,7 @@ export namespace Prisma {
     inpatientEncounters?: InpatientEncounterCreateNestedManyWithoutPatientInput
     outpatientEncounters?: OutpatientEncounterCreateNestedManyWithoutPatientInput
     insuranceClaims?: InsuranceClaimCreateNestedManyWithoutPatientInput
+    dataShareRequests?: DataShareRequestCreateNestedManyWithoutPatientInput
   }
 
   export type PatientUncheckedCreateInput = {
@@ -35488,6 +39928,7 @@ export namespace Prisma {
     inpatientEncounters?: InpatientEncounterUncheckedCreateNestedManyWithoutPatientInput
     outpatientEncounters?: OutpatientEncounterUncheckedCreateNestedManyWithoutPatientInput
     insuranceClaims?: InsuranceClaimUncheckedCreateNestedManyWithoutPatientInput
+    dataShareRequests?: DataShareRequestUncheckedCreateNestedManyWithoutPatientInput
   }
 
   export type PatientUpdateInput = {
@@ -35506,6 +39947,7 @@ export namespace Prisma {
     inpatientEncounters?: InpatientEncounterUpdateManyWithoutPatientNestedInput
     outpatientEncounters?: OutpatientEncounterUpdateManyWithoutPatientNestedInput
     insuranceClaims?: InsuranceClaimUpdateManyWithoutPatientNestedInput
+    dataShareRequests?: DataShareRequestUpdateManyWithoutPatientNestedInput
   }
 
   export type PatientUncheckedUpdateInput = {
@@ -35524,6 +39966,7 @@ export namespace Prisma {
     inpatientEncounters?: InpatientEncounterUncheckedUpdateManyWithoutPatientNestedInput
     outpatientEncounters?: OutpatientEncounterUncheckedUpdateManyWithoutPatientNestedInput
     insuranceClaims?: InsuranceClaimUncheckedUpdateManyWithoutPatientNestedInput
+    dataShareRequests?: DataShareRequestUncheckedUpdateManyWithoutPatientNestedInput
   }
 
   export type PatientCreateManyInput = {
@@ -36690,6 +41133,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     patient: PatientCreateNestedOneWithoutOutpatientEncountersInput
     insuranceClaim?: InsuranceClaimCreateNestedOneWithoutOutpatientEncounterInput
+    dataShareRequest?: DataShareRequestCreateNestedOneWithoutOutpatientEncounterInput
   }
 
   export type OutpatientEncounterUncheckedCreateInput = {
@@ -36707,6 +41151,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     insuranceClaim?: InsuranceClaimUncheckedCreateNestedOneWithoutOutpatientEncounterInput
+    dataShareRequest?: DataShareRequestUncheckedCreateNestedOneWithoutOutpatientEncounterInput
   }
 
   export type OutpatientEncounterUpdateInput = {
@@ -36724,6 +41169,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     patient?: PatientUpdateOneRequiredWithoutOutpatientEncountersNestedInput
     insuranceClaim?: InsuranceClaimUpdateOneWithoutOutpatientEncounterNestedInput
+    dataShareRequest?: DataShareRequestUpdateOneWithoutOutpatientEncounterNestedInput
   }
 
   export type OutpatientEncounterUncheckedUpdateInput = {
@@ -36741,6 +41187,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     insuranceClaim?: InsuranceClaimUncheckedUpdateOneWithoutOutpatientEncounterNestedInput
+    dataShareRequest?: DataShareRequestUncheckedUpdateOneWithoutOutpatientEncounterNestedInput
   }
 
   export type OutpatientEncounterCreateManyInput = {
@@ -36809,6 +41256,7 @@ export namespace Prisma {
     charts?: InpatientEncounterChartCreateNestedManyWithoutEncounterInput
     orders?: InpatientEncounterOrderCreateNestedManyWithoutEncounterInput
     insuranceClaim?: InsuranceClaimCreateNestedOneWithoutInpatientEncounterInput
+    dataShareRequest?: DataShareRequestCreateNestedOneWithoutInpatientEncounterInput
   }
 
   export type InpatientEncounterUncheckedCreateInput = {
@@ -36830,6 +41278,7 @@ export namespace Prisma {
     charts?: InpatientEncounterChartUncheckedCreateNestedManyWithoutEncounterInput
     orders?: InpatientEncounterOrderUncheckedCreateNestedManyWithoutEncounterInput
     insuranceClaim?: InsuranceClaimUncheckedCreateNestedOneWithoutInpatientEncounterInput
+    dataShareRequest?: DataShareRequestUncheckedCreateNestedOneWithoutInpatientEncounterInput
   }
 
   export type InpatientEncounterUpdateInput = {
@@ -36851,6 +41300,7 @@ export namespace Prisma {
     charts?: InpatientEncounterChartUpdateManyWithoutEncounterNestedInput
     orders?: InpatientEncounterOrderUpdateManyWithoutEncounterNestedInput
     insuranceClaim?: InsuranceClaimUpdateOneWithoutInpatientEncounterNestedInput
+    dataShareRequest?: DataShareRequestUpdateOneWithoutInpatientEncounterNestedInput
   }
 
   export type InpatientEncounterUncheckedUpdateInput = {
@@ -36872,6 +41322,7 @@ export namespace Prisma {
     charts?: InpatientEncounterChartUncheckedUpdateManyWithoutEncounterNestedInput
     orders?: InpatientEncounterOrderUncheckedUpdateManyWithoutEncounterNestedInput
     insuranceClaim?: InsuranceClaimUncheckedUpdateOneWithoutInpatientEncounterNestedInput
+    dataShareRequest?: DataShareRequestUncheckedUpdateOneWithoutInpatientEncounterNestedInput
   }
 
   export type InpatientEncounterCreateManyInput = {
@@ -37498,6 +41949,352 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type DataShareRequestCreateInput = {
+    id?: string
+    requestNumber: string
+    hospitalIdentifier: string
+    hospitalName: string
+    hospitalEmail: string
+    reason: string
+    status?: $Enums.DataShareStatus
+    submittedAt?: Date | string | null
+    reviewedAt?: Date | string | null
+    accessedAt?: Date | string | null
+    selectedData?: NullableJsonNullValueInput | InputJsonValue
+    requestNotes?: string | null
+    reviewNotes?: string | null
+    denialReason?: string | null
+    requestedBy: string
+    reviewedBy?: string | null
+    patientConsent?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    patient: PatientCreateNestedOneWithoutDataShareRequestsInput
+    inpatientEncounter?: InpatientEncounterCreateNestedOneWithoutDataShareRequestInput
+    outpatientEncounter?: OutpatientEncounterCreateNestedOneWithoutDataShareRequestInput
+    documents?: DataShareDocumentCreateNestedManyWithoutRequestInput
+    accessTokens?: DataShareAccessTokenCreateNestedManyWithoutRequestInput
+  }
+
+  export type DataShareRequestUncheckedCreateInput = {
+    id?: string
+    requestNumber: string
+    patientId: string
+    inpatientEncounterId?: string | null
+    outpatientEncounterId?: string | null
+    hospitalIdentifier: string
+    hospitalName: string
+    hospitalEmail: string
+    reason: string
+    status?: $Enums.DataShareStatus
+    submittedAt?: Date | string | null
+    reviewedAt?: Date | string | null
+    accessedAt?: Date | string | null
+    selectedData?: NullableJsonNullValueInput | InputJsonValue
+    requestNotes?: string | null
+    reviewNotes?: string | null
+    denialReason?: string | null
+    requestedBy: string
+    reviewedBy?: string | null
+    patientConsent?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    documents?: DataShareDocumentUncheckedCreateNestedManyWithoutRequestInput
+    accessTokens?: DataShareAccessTokenUncheckedCreateNestedManyWithoutRequestInput
+  }
+
+  export type DataShareRequestUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    requestNumber?: StringFieldUpdateOperationsInput | string
+    hospitalIdentifier?: StringFieldUpdateOperationsInput | string
+    hospitalName?: StringFieldUpdateOperationsInput | string
+    hospitalEmail?: StringFieldUpdateOperationsInput | string
+    reason?: StringFieldUpdateOperationsInput | string
+    status?: EnumDataShareStatusFieldUpdateOperationsInput | $Enums.DataShareStatus
+    submittedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    accessedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    selectedData?: NullableJsonNullValueInput | InputJsonValue
+    requestNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    denialReason?: NullableStringFieldUpdateOperationsInput | string | null
+    requestedBy?: StringFieldUpdateOperationsInput | string
+    reviewedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    patientConsent?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    patient?: PatientUpdateOneRequiredWithoutDataShareRequestsNestedInput
+    inpatientEncounter?: InpatientEncounterUpdateOneWithoutDataShareRequestNestedInput
+    outpatientEncounter?: OutpatientEncounterUpdateOneWithoutDataShareRequestNestedInput
+    documents?: DataShareDocumentUpdateManyWithoutRequestNestedInput
+    accessTokens?: DataShareAccessTokenUpdateManyWithoutRequestNestedInput
+  }
+
+  export type DataShareRequestUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    requestNumber?: StringFieldUpdateOperationsInput | string
+    patientId?: StringFieldUpdateOperationsInput | string
+    inpatientEncounterId?: NullableStringFieldUpdateOperationsInput | string | null
+    outpatientEncounterId?: NullableStringFieldUpdateOperationsInput | string | null
+    hospitalIdentifier?: StringFieldUpdateOperationsInput | string
+    hospitalName?: StringFieldUpdateOperationsInput | string
+    hospitalEmail?: StringFieldUpdateOperationsInput | string
+    reason?: StringFieldUpdateOperationsInput | string
+    status?: EnumDataShareStatusFieldUpdateOperationsInput | $Enums.DataShareStatus
+    submittedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    accessedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    selectedData?: NullableJsonNullValueInput | InputJsonValue
+    requestNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    denialReason?: NullableStringFieldUpdateOperationsInput | string | null
+    requestedBy?: StringFieldUpdateOperationsInput | string
+    reviewedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    patientConsent?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    documents?: DataShareDocumentUncheckedUpdateManyWithoutRequestNestedInput
+    accessTokens?: DataShareAccessTokenUncheckedUpdateManyWithoutRequestNestedInput
+  }
+
+  export type DataShareRequestCreateManyInput = {
+    id?: string
+    requestNumber: string
+    patientId: string
+    inpatientEncounterId?: string | null
+    outpatientEncounterId?: string | null
+    hospitalIdentifier: string
+    hospitalName: string
+    hospitalEmail: string
+    reason: string
+    status?: $Enums.DataShareStatus
+    submittedAt?: Date | string | null
+    reviewedAt?: Date | string | null
+    accessedAt?: Date | string | null
+    selectedData?: NullableJsonNullValueInput | InputJsonValue
+    requestNotes?: string | null
+    reviewNotes?: string | null
+    denialReason?: string | null
+    requestedBy: string
+    reviewedBy?: string | null
+    patientConsent?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type DataShareRequestUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    requestNumber?: StringFieldUpdateOperationsInput | string
+    hospitalIdentifier?: StringFieldUpdateOperationsInput | string
+    hospitalName?: StringFieldUpdateOperationsInput | string
+    hospitalEmail?: StringFieldUpdateOperationsInput | string
+    reason?: StringFieldUpdateOperationsInput | string
+    status?: EnumDataShareStatusFieldUpdateOperationsInput | $Enums.DataShareStatus
+    submittedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    accessedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    selectedData?: NullableJsonNullValueInput | InputJsonValue
+    requestNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    denialReason?: NullableStringFieldUpdateOperationsInput | string | null
+    requestedBy?: StringFieldUpdateOperationsInput | string
+    reviewedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    patientConsent?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DataShareRequestUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    requestNumber?: StringFieldUpdateOperationsInput | string
+    patientId?: StringFieldUpdateOperationsInput | string
+    inpatientEncounterId?: NullableStringFieldUpdateOperationsInput | string | null
+    outpatientEncounterId?: NullableStringFieldUpdateOperationsInput | string | null
+    hospitalIdentifier?: StringFieldUpdateOperationsInput | string
+    hospitalName?: StringFieldUpdateOperationsInput | string
+    hospitalEmail?: StringFieldUpdateOperationsInput | string
+    reason?: StringFieldUpdateOperationsInput | string
+    status?: EnumDataShareStatusFieldUpdateOperationsInput | $Enums.DataShareStatus
+    submittedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    accessedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    selectedData?: NullableJsonNullValueInput | InputJsonValue
+    requestNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    denialReason?: NullableStringFieldUpdateOperationsInput | string | null
+    requestedBy?: StringFieldUpdateOperationsInput | string
+    reviewedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    patientConsent?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DataShareDocumentCreateInput = {
+    id?: string
+    documentType: string
+    fileName: string
+    fileUrl: string
+    fileSize: number
+    mimeType: string
+    description?: string | null
+    uploadedBy: string
+    createdAt?: Date | string
+    request: DataShareRequestCreateNestedOneWithoutDocumentsInput
+  }
+
+  export type DataShareDocumentUncheckedCreateInput = {
+    id?: string
+    requestId: string
+    documentType: string
+    fileName: string
+    fileUrl: string
+    fileSize: number
+    mimeType: string
+    description?: string | null
+    uploadedBy: string
+    createdAt?: Date | string
+  }
+
+  export type DataShareDocumentUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    documentType?: StringFieldUpdateOperationsInput | string
+    fileName?: StringFieldUpdateOperationsInput | string
+    fileUrl?: StringFieldUpdateOperationsInput | string
+    fileSize?: IntFieldUpdateOperationsInput | number
+    mimeType?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    uploadedBy?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    request?: DataShareRequestUpdateOneRequiredWithoutDocumentsNestedInput
+  }
+
+  export type DataShareDocumentUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    requestId?: StringFieldUpdateOperationsInput | string
+    documentType?: StringFieldUpdateOperationsInput | string
+    fileName?: StringFieldUpdateOperationsInput | string
+    fileUrl?: StringFieldUpdateOperationsInput | string
+    fileSize?: IntFieldUpdateOperationsInput | number
+    mimeType?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    uploadedBy?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DataShareDocumentCreateManyInput = {
+    id?: string
+    requestId: string
+    documentType: string
+    fileName: string
+    fileUrl: string
+    fileSize: number
+    mimeType: string
+    description?: string | null
+    uploadedBy: string
+    createdAt?: Date | string
+  }
+
+  export type DataShareDocumentUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    documentType?: StringFieldUpdateOperationsInput | string
+    fileName?: StringFieldUpdateOperationsInput | string
+    fileUrl?: StringFieldUpdateOperationsInput | string
+    fileSize?: IntFieldUpdateOperationsInput | number
+    mimeType?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    uploadedBy?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DataShareDocumentUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    requestId?: StringFieldUpdateOperationsInput | string
+    documentType?: StringFieldUpdateOperationsInput | string
+    fileName?: StringFieldUpdateOperationsInput | string
+    fileUrl?: StringFieldUpdateOperationsInput | string
+    fileSize?: IntFieldUpdateOperationsInput | number
+    mimeType?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    uploadedBy?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DataShareAccessTokenCreateInput = {
+    id?: string
+    token: string
+    recipientEmail: string
+    expiresAt: Date | string
+    usedAt?: Date | string | null
+    isRevoked?: boolean
+    createdAt?: Date | string
+    request: DataShareRequestCreateNestedOneWithoutAccessTokensInput
+  }
+
+  export type DataShareAccessTokenUncheckedCreateInput = {
+    id?: string
+    requestId: string
+    token: string
+    recipientEmail: string
+    expiresAt: Date | string
+    usedAt?: Date | string | null
+    isRevoked?: boolean
+    createdAt?: Date | string
+  }
+
+  export type DataShareAccessTokenUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    token?: StringFieldUpdateOperationsInput | string
+    recipientEmail?: StringFieldUpdateOperationsInput | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    usedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isRevoked?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    request?: DataShareRequestUpdateOneRequiredWithoutAccessTokensNestedInput
+  }
+
+  export type DataShareAccessTokenUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    requestId?: StringFieldUpdateOperationsInput | string
+    token?: StringFieldUpdateOperationsInput | string
+    recipientEmail?: StringFieldUpdateOperationsInput | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    usedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isRevoked?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DataShareAccessTokenCreateManyInput = {
+    id?: string
+    requestId: string
+    token: string
+    recipientEmail: string
+    expiresAt: Date | string
+    usedAt?: Date | string | null
+    isRevoked?: boolean
+    createdAt?: Date | string
+  }
+
+  export type DataShareAccessTokenUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    token?: StringFieldUpdateOperationsInput | string
+    recipientEmail?: StringFieldUpdateOperationsInput | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    usedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isRevoked?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DataShareAccessTokenUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    requestId?: StringFieldUpdateOperationsInput | string
+    token?: StringFieldUpdateOperationsInput | string
+    recipientEmail?: StringFieldUpdateOperationsInput | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    usedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isRevoked?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -38080,6 +42877,12 @@ export namespace Prisma {
     none?: InsuranceClaimWhereInput
   }
 
+  export type DataShareRequestListRelationFilter = {
+    every?: DataShareRequestWhereInput
+    some?: DataShareRequestWhereInput
+    none?: DataShareRequestWhereInput
+  }
+
   export type InpatientEncounterOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
@@ -38089,6 +42892,10 @@ export namespace Prisma {
   }
 
   export type InsuranceClaimOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type DataShareRequestOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -39016,6 +43823,11 @@ export namespace Prisma {
     isNot?: InsuranceClaimWhereInput | null
   }
 
+  export type DataShareRequestNullableScalarRelationFilter = {
+    is?: DataShareRequestWhereInput | null
+    isNot?: DataShareRequestWhereInput | null
+  }
+
   export type OutpatientEncounterCountOrderByAggregateInput = {
     id?: SortOrder
     patientId?: SortOrder
@@ -39617,6 +44429,201 @@ export namespace Prisma {
     createdAt?: SortOrder
   }
 
+  export type EnumDataShareStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.DataShareStatus | EnumDataShareStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.DataShareStatus[] | ListEnumDataShareStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.DataShareStatus[] | ListEnumDataShareStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumDataShareStatusFilter<$PrismaModel> | $Enums.DataShareStatus
+  }
+
+  export type DataShareDocumentListRelationFilter = {
+    every?: DataShareDocumentWhereInput
+    some?: DataShareDocumentWhereInput
+    none?: DataShareDocumentWhereInput
+  }
+
+  export type DataShareAccessTokenListRelationFilter = {
+    every?: DataShareAccessTokenWhereInput
+    some?: DataShareAccessTokenWhereInput
+    none?: DataShareAccessTokenWhereInput
+  }
+
+  export type DataShareDocumentOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type DataShareAccessTokenOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type DataShareRequestCountOrderByAggregateInput = {
+    id?: SortOrder
+    requestNumber?: SortOrder
+    patientId?: SortOrder
+    inpatientEncounterId?: SortOrder
+    outpatientEncounterId?: SortOrder
+    hospitalIdentifier?: SortOrder
+    hospitalName?: SortOrder
+    hospitalEmail?: SortOrder
+    reason?: SortOrder
+    status?: SortOrder
+    submittedAt?: SortOrder
+    reviewedAt?: SortOrder
+    accessedAt?: SortOrder
+    selectedData?: SortOrder
+    requestNotes?: SortOrder
+    reviewNotes?: SortOrder
+    denialReason?: SortOrder
+    requestedBy?: SortOrder
+    reviewedBy?: SortOrder
+    patientConsent?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type DataShareRequestMaxOrderByAggregateInput = {
+    id?: SortOrder
+    requestNumber?: SortOrder
+    patientId?: SortOrder
+    inpatientEncounterId?: SortOrder
+    outpatientEncounterId?: SortOrder
+    hospitalIdentifier?: SortOrder
+    hospitalName?: SortOrder
+    hospitalEmail?: SortOrder
+    reason?: SortOrder
+    status?: SortOrder
+    submittedAt?: SortOrder
+    reviewedAt?: SortOrder
+    accessedAt?: SortOrder
+    requestNotes?: SortOrder
+    reviewNotes?: SortOrder
+    denialReason?: SortOrder
+    requestedBy?: SortOrder
+    reviewedBy?: SortOrder
+    patientConsent?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type DataShareRequestMinOrderByAggregateInput = {
+    id?: SortOrder
+    requestNumber?: SortOrder
+    patientId?: SortOrder
+    inpatientEncounterId?: SortOrder
+    outpatientEncounterId?: SortOrder
+    hospitalIdentifier?: SortOrder
+    hospitalName?: SortOrder
+    hospitalEmail?: SortOrder
+    reason?: SortOrder
+    status?: SortOrder
+    submittedAt?: SortOrder
+    reviewedAt?: SortOrder
+    accessedAt?: SortOrder
+    requestNotes?: SortOrder
+    reviewNotes?: SortOrder
+    denialReason?: SortOrder
+    requestedBy?: SortOrder
+    reviewedBy?: SortOrder
+    patientConsent?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type EnumDataShareStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.DataShareStatus | EnumDataShareStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.DataShareStatus[] | ListEnumDataShareStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.DataShareStatus[] | ListEnumDataShareStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumDataShareStatusWithAggregatesFilter<$PrismaModel> | $Enums.DataShareStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumDataShareStatusFilter<$PrismaModel>
+    _max?: NestedEnumDataShareStatusFilter<$PrismaModel>
+  }
+
+  export type DataShareRequestScalarRelationFilter = {
+    is?: DataShareRequestWhereInput
+    isNot?: DataShareRequestWhereInput
+  }
+
+  export type DataShareDocumentCountOrderByAggregateInput = {
+    id?: SortOrder
+    requestId?: SortOrder
+    documentType?: SortOrder
+    fileName?: SortOrder
+    fileUrl?: SortOrder
+    fileSize?: SortOrder
+    mimeType?: SortOrder
+    description?: SortOrder
+    uploadedBy?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type DataShareDocumentAvgOrderByAggregateInput = {
+    fileSize?: SortOrder
+  }
+
+  export type DataShareDocumentMaxOrderByAggregateInput = {
+    id?: SortOrder
+    requestId?: SortOrder
+    documentType?: SortOrder
+    fileName?: SortOrder
+    fileUrl?: SortOrder
+    fileSize?: SortOrder
+    mimeType?: SortOrder
+    description?: SortOrder
+    uploadedBy?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type DataShareDocumentMinOrderByAggregateInput = {
+    id?: SortOrder
+    requestId?: SortOrder
+    documentType?: SortOrder
+    fileName?: SortOrder
+    fileUrl?: SortOrder
+    fileSize?: SortOrder
+    mimeType?: SortOrder
+    description?: SortOrder
+    uploadedBy?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type DataShareDocumentSumOrderByAggregateInput = {
+    fileSize?: SortOrder
+  }
+
+  export type DataShareAccessTokenCountOrderByAggregateInput = {
+    id?: SortOrder
+    requestId?: SortOrder
+    token?: SortOrder
+    recipientEmail?: SortOrder
+    expiresAt?: SortOrder
+    usedAt?: SortOrder
+    isRevoked?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type DataShareAccessTokenMaxOrderByAggregateInput = {
+    id?: SortOrder
+    requestId?: SortOrder
+    token?: SortOrder
+    recipientEmail?: SortOrder
+    expiresAt?: SortOrder
+    usedAt?: SortOrder
+    isRevoked?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type DataShareAccessTokenMinOrderByAggregateInput = {
+    id?: SortOrder
+    requestId?: SortOrder
+    token?: SortOrder
+    recipientEmail?: SortOrder
+    expiresAt?: SortOrder
+    usedAt?: SortOrder
+    isRevoked?: SortOrder
+    createdAt?: SortOrder
+  }
+
   export type RefreshTokenCreateNestedManyWithoutUserInput = {
     create?: XOR<RefreshTokenCreateWithoutUserInput, RefreshTokenUncheckedCreateWithoutUserInput> | RefreshTokenCreateWithoutUserInput[] | RefreshTokenUncheckedCreateWithoutUserInput[]
     connectOrCreate?: RefreshTokenCreateOrConnectWithoutUserInput | RefreshTokenCreateOrConnectWithoutUserInput[]
@@ -39987,6 +44994,13 @@ export namespace Prisma {
     connect?: InsuranceClaimWhereUniqueInput | InsuranceClaimWhereUniqueInput[]
   }
 
+  export type DataShareRequestCreateNestedManyWithoutPatientInput = {
+    create?: XOR<DataShareRequestCreateWithoutPatientInput, DataShareRequestUncheckedCreateWithoutPatientInput> | DataShareRequestCreateWithoutPatientInput[] | DataShareRequestUncheckedCreateWithoutPatientInput[]
+    connectOrCreate?: DataShareRequestCreateOrConnectWithoutPatientInput | DataShareRequestCreateOrConnectWithoutPatientInput[]
+    createMany?: DataShareRequestCreateManyPatientInputEnvelope
+    connect?: DataShareRequestWhereUniqueInput | DataShareRequestWhereUniqueInput[]
+  }
+
   export type InpatientEncounterUncheckedCreateNestedManyWithoutPatientInput = {
     create?: XOR<InpatientEncounterCreateWithoutPatientInput, InpatientEncounterUncheckedCreateWithoutPatientInput> | InpatientEncounterCreateWithoutPatientInput[] | InpatientEncounterUncheckedCreateWithoutPatientInput[]
     connectOrCreate?: InpatientEncounterCreateOrConnectWithoutPatientInput | InpatientEncounterCreateOrConnectWithoutPatientInput[]
@@ -40006,6 +45020,13 @@ export namespace Prisma {
     connectOrCreate?: InsuranceClaimCreateOrConnectWithoutPatientInput | InsuranceClaimCreateOrConnectWithoutPatientInput[]
     createMany?: InsuranceClaimCreateManyPatientInputEnvelope
     connect?: InsuranceClaimWhereUniqueInput | InsuranceClaimWhereUniqueInput[]
+  }
+
+  export type DataShareRequestUncheckedCreateNestedManyWithoutPatientInput = {
+    create?: XOR<DataShareRequestCreateWithoutPatientInput, DataShareRequestUncheckedCreateWithoutPatientInput> | DataShareRequestCreateWithoutPatientInput[] | DataShareRequestUncheckedCreateWithoutPatientInput[]
+    connectOrCreate?: DataShareRequestCreateOrConnectWithoutPatientInput | DataShareRequestCreateOrConnectWithoutPatientInput[]
+    createMany?: DataShareRequestCreateManyPatientInputEnvelope
+    connect?: DataShareRequestWhereUniqueInput | DataShareRequestWhereUniqueInput[]
   }
 
   export type NullableEnumBloodTypeFieldUpdateOperationsInput = {
@@ -40062,6 +45083,20 @@ export namespace Prisma {
     deleteMany?: InsuranceClaimScalarWhereInput | InsuranceClaimScalarWhereInput[]
   }
 
+  export type DataShareRequestUpdateManyWithoutPatientNestedInput = {
+    create?: XOR<DataShareRequestCreateWithoutPatientInput, DataShareRequestUncheckedCreateWithoutPatientInput> | DataShareRequestCreateWithoutPatientInput[] | DataShareRequestUncheckedCreateWithoutPatientInput[]
+    connectOrCreate?: DataShareRequestCreateOrConnectWithoutPatientInput | DataShareRequestCreateOrConnectWithoutPatientInput[]
+    upsert?: DataShareRequestUpsertWithWhereUniqueWithoutPatientInput | DataShareRequestUpsertWithWhereUniqueWithoutPatientInput[]
+    createMany?: DataShareRequestCreateManyPatientInputEnvelope
+    set?: DataShareRequestWhereUniqueInput | DataShareRequestWhereUniqueInput[]
+    disconnect?: DataShareRequestWhereUniqueInput | DataShareRequestWhereUniqueInput[]
+    delete?: DataShareRequestWhereUniqueInput | DataShareRequestWhereUniqueInput[]
+    connect?: DataShareRequestWhereUniqueInput | DataShareRequestWhereUniqueInput[]
+    update?: DataShareRequestUpdateWithWhereUniqueWithoutPatientInput | DataShareRequestUpdateWithWhereUniqueWithoutPatientInput[]
+    updateMany?: DataShareRequestUpdateManyWithWhereWithoutPatientInput | DataShareRequestUpdateManyWithWhereWithoutPatientInput[]
+    deleteMany?: DataShareRequestScalarWhereInput | DataShareRequestScalarWhereInput[]
+  }
+
   export type InpatientEncounterUncheckedUpdateManyWithoutPatientNestedInput = {
     create?: XOR<InpatientEncounterCreateWithoutPatientInput, InpatientEncounterUncheckedCreateWithoutPatientInput> | InpatientEncounterCreateWithoutPatientInput[] | InpatientEncounterUncheckedCreateWithoutPatientInput[]
     connectOrCreate?: InpatientEncounterCreateOrConnectWithoutPatientInput | InpatientEncounterCreateOrConnectWithoutPatientInput[]
@@ -40102,6 +45137,20 @@ export namespace Prisma {
     update?: InsuranceClaimUpdateWithWhereUniqueWithoutPatientInput | InsuranceClaimUpdateWithWhereUniqueWithoutPatientInput[]
     updateMany?: InsuranceClaimUpdateManyWithWhereWithoutPatientInput | InsuranceClaimUpdateManyWithWhereWithoutPatientInput[]
     deleteMany?: InsuranceClaimScalarWhereInput | InsuranceClaimScalarWhereInput[]
+  }
+
+  export type DataShareRequestUncheckedUpdateManyWithoutPatientNestedInput = {
+    create?: XOR<DataShareRequestCreateWithoutPatientInput, DataShareRequestUncheckedCreateWithoutPatientInput> | DataShareRequestCreateWithoutPatientInput[] | DataShareRequestUncheckedCreateWithoutPatientInput[]
+    connectOrCreate?: DataShareRequestCreateOrConnectWithoutPatientInput | DataShareRequestCreateOrConnectWithoutPatientInput[]
+    upsert?: DataShareRequestUpsertWithWhereUniqueWithoutPatientInput | DataShareRequestUpsertWithWhereUniqueWithoutPatientInput[]
+    createMany?: DataShareRequestCreateManyPatientInputEnvelope
+    set?: DataShareRequestWhereUniqueInput | DataShareRequestWhereUniqueInput[]
+    disconnect?: DataShareRequestWhereUniqueInput | DataShareRequestWhereUniqueInput[]
+    delete?: DataShareRequestWhereUniqueInput | DataShareRequestWhereUniqueInput[]
+    connect?: DataShareRequestWhereUniqueInput | DataShareRequestWhereUniqueInput[]
+    update?: DataShareRequestUpdateWithWhereUniqueWithoutPatientInput | DataShareRequestUpdateWithWhereUniqueWithoutPatientInput[]
+    updateMany?: DataShareRequestUpdateManyWithWhereWithoutPatientInput | DataShareRequestUpdateManyWithWhereWithoutPatientInput[]
+    deleteMany?: DataShareRequestScalarWhereInput | DataShareRequestScalarWhereInput[]
   }
 
   export type UserCreateNestedOneWithoutPartnerProfileInput = {
@@ -40580,10 +45629,22 @@ export namespace Prisma {
     connect?: InsuranceClaimWhereUniqueInput
   }
 
+  export type DataShareRequestCreateNestedOneWithoutOutpatientEncounterInput = {
+    create?: XOR<DataShareRequestCreateWithoutOutpatientEncounterInput, DataShareRequestUncheckedCreateWithoutOutpatientEncounterInput>
+    connectOrCreate?: DataShareRequestCreateOrConnectWithoutOutpatientEncounterInput
+    connect?: DataShareRequestWhereUniqueInput
+  }
+
   export type InsuranceClaimUncheckedCreateNestedOneWithoutOutpatientEncounterInput = {
     create?: XOR<InsuranceClaimCreateWithoutOutpatientEncounterInput, InsuranceClaimUncheckedCreateWithoutOutpatientEncounterInput>
     connectOrCreate?: InsuranceClaimCreateOrConnectWithoutOutpatientEncounterInput
     connect?: InsuranceClaimWhereUniqueInput
+  }
+
+  export type DataShareRequestUncheckedCreateNestedOneWithoutOutpatientEncounterInput = {
+    create?: XOR<DataShareRequestCreateWithoutOutpatientEncounterInput, DataShareRequestUncheckedCreateWithoutOutpatientEncounterInput>
+    connectOrCreate?: DataShareRequestCreateOrConnectWithoutOutpatientEncounterInput
+    connect?: DataShareRequestWhereUniqueInput
   }
 
   export type EnumOutpatientEncounterTypeFieldUpdateOperationsInput = {
@@ -40612,6 +45673,16 @@ export namespace Prisma {
     update?: XOR<XOR<InsuranceClaimUpdateToOneWithWhereWithoutOutpatientEncounterInput, InsuranceClaimUpdateWithoutOutpatientEncounterInput>, InsuranceClaimUncheckedUpdateWithoutOutpatientEncounterInput>
   }
 
+  export type DataShareRequestUpdateOneWithoutOutpatientEncounterNestedInput = {
+    create?: XOR<DataShareRequestCreateWithoutOutpatientEncounterInput, DataShareRequestUncheckedCreateWithoutOutpatientEncounterInput>
+    connectOrCreate?: DataShareRequestCreateOrConnectWithoutOutpatientEncounterInput
+    upsert?: DataShareRequestUpsertWithoutOutpatientEncounterInput
+    disconnect?: DataShareRequestWhereInput | boolean
+    delete?: DataShareRequestWhereInput | boolean
+    connect?: DataShareRequestWhereUniqueInput
+    update?: XOR<XOR<DataShareRequestUpdateToOneWithWhereWithoutOutpatientEncounterInput, DataShareRequestUpdateWithoutOutpatientEncounterInput>, DataShareRequestUncheckedUpdateWithoutOutpatientEncounterInput>
+  }
+
   export type InsuranceClaimUncheckedUpdateOneWithoutOutpatientEncounterNestedInput = {
     create?: XOR<InsuranceClaimCreateWithoutOutpatientEncounterInput, InsuranceClaimUncheckedCreateWithoutOutpatientEncounterInput>
     connectOrCreate?: InsuranceClaimCreateOrConnectWithoutOutpatientEncounterInput
@@ -40620,6 +45691,16 @@ export namespace Prisma {
     delete?: InsuranceClaimWhereInput | boolean
     connect?: InsuranceClaimWhereUniqueInput
     update?: XOR<XOR<InsuranceClaimUpdateToOneWithWhereWithoutOutpatientEncounterInput, InsuranceClaimUpdateWithoutOutpatientEncounterInput>, InsuranceClaimUncheckedUpdateWithoutOutpatientEncounterInput>
+  }
+
+  export type DataShareRequestUncheckedUpdateOneWithoutOutpatientEncounterNestedInput = {
+    create?: XOR<DataShareRequestCreateWithoutOutpatientEncounterInput, DataShareRequestUncheckedCreateWithoutOutpatientEncounterInput>
+    connectOrCreate?: DataShareRequestCreateOrConnectWithoutOutpatientEncounterInput
+    upsert?: DataShareRequestUpsertWithoutOutpatientEncounterInput
+    disconnect?: DataShareRequestWhereInput | boolean
+    delete?: DataShareRequestWhereInput | boolean
+    connect?: DataShareRequestWhereUniqueInput
+    update?: XOR<XOR<DataShareRequestUpdateToOneWithWhereWithoutOutpatientEncounterInput, DataShareRequestUpdateWithoutOutpatientEncounterInput>, DataShareRequestUncheckedUpdateWithoutOutpatientEncounterInput>
   }
 
   export type PatientCreateNestedOneWithoutInpatientEncountersInput = {
@@ -40648,6 +45729,12 @@ export namespace Prisma {
     connect?: InsuranceClaimWhereUniqueInput
   }
 
+  export type DataShareRequestCreateNestedOneWithoutInpatientEncounterInput = {
+    create?: XOR<DataShareRequestCreateWithoutInpatientEncounterInput, DataShareRequestUncheckedCreateWithoutInpatientEncounterInput>
+    connectOrCreate?: DataShareRequestCreateOrConnectWithoutInpatientEncounterInput
+    connect?: DataShareRequestWhereUniqueInput
+  }
+
   export type InpatientEncounterChartUncheckedCreateNestedManyWithoutEncounterInput = {
     create?: XOR<InpatientEncounterChartCreateWithoutEncounterInput, InpatientEncounterChartUncheckedCreateWithoutEncounterInput> | InpatientEncounterChartCreateWithoutEncounterInput[] | InpatientEncounterChartUncheckedCreateWithoutEncounterInput[]
     connectOrCreate?: InpatientEncounterChartCreateOrConnectWithoutEncounterInput | InpatientEncounterChartCreateOrConnectWithoutEncounterInput[]
@@ -40666,6 +45753,12 @@ export namespace Prisma {
     create?: XOR<InsuranceClaimCreateWithoutInpatientEncounterInput, InsuranceClaimUncheckedCreateWithoutInpatientEncounterInput>
     connectOrCreate?: InsuranceClaimCreateOrConnectWithoutInpatientEncounterInput
     connect?: InsuranceClaimWhereUniqueInput
+  }
+
+  export type DataShareRequestUncheckedCreateNestedOneWithoutInpatientEncounterInput = {
+    create?: XOR<DataShareRequestCreateWithoutInpatientEncounterInput, DataShareRequestUncheckedCreateWithoutInpatientEncounterInput>
+    connectOrCreate?: DataShareRequestCreateOrConnectWithoutInpatientEncounterInput
+    connect?: DataShareRequestWhereUniqueInput
   }
 
   export type EnumInpatientTriageFieldUpdateOperationsInput = {
@@ -40722,6 +45815,16 @@ export namespace Prisma {
     update?: XOR<XOR<InsuranceClaimUpdateToOneWithWhereWithoutInpatientEncounterInput, InsuranceClaimUpdateWithoutInpatientEncounterInput>, InsuranceClaimUncheckedUpdateWithoutInpatientEncounterInput>
   }
 
+  export type DataShareRequestUpdateOneWithoutInpatientEncounterNestedInput = {
+    create?: XOR<DataShareRequestCreateWithoutInpatientEncounterInput, DataShareRequestUncheckedCreateWithoutInpatientEncounterInput>
+    connectOrCreate?: DataShareRequestCreateOrConnectWithoutInpatientEncounterInput
+    upsert?: DataShareRequestUpsertWithoutInpatientEncounterInput
+    disconnect?: DataShareRequestWhereInput | boolean
+    delete?: DataShareRequestWhereInput | boolean
+    connect?: DataShareRequestWhereUniqueInput
+    update?: XOR<XOR<DataShareRequestUpdateToOneWithWhereWithoutInpatientEncounterInput, DataShareRequestUpdateWithoutInpatientEncounterInput>, DataShareRequestUncheckedUpdateWithoutInpatientEncounterInput>
+  }
+
   export type InpatientEncounterChartUncheckedUpdateManyWithoutEncounterNestedInput = {
     create?: XOR<InpatientEncounterChartCreateWithoutEncounterInput, InpatientEncounterChartUncheckedCreateWithoutEncounterInput> | InpatientEncounterChartCreateWithoutEncounterInput[] | InpatientEncounterChartUncheckedCreateWithoutEncounterInput[]
     connectOrCreate?: InpatientEncounterChartCreateOrConnectWithoutEncounterInput | InpatientEncounterChartCreateOrConnectWithoutEncounterInput[]
@@ -40758,6 +45861,16 @@ export namespace Prisma {
     delete?: InsuranceClaimWhereInput | boolean
     connect?: InsuranceClaimWhereUniqueInput
     update?: XOR<XOR<InsuranceClaimUpdateToOneWithWhereWithoutInpatientEncounterInput, InsuranceClaimUpdateWithoutInpatientEncounterInput>, InsuranceClaimUncheckedUpdateWithoutInpatientEncounterInput>
+  }
+
+  export type DataShareRequestUncheckedUpdateOneWithoutInpatientEncounterNestedInput = {
+    create?: XOR<DataShareRequestCreateWithoutInpatientEncounterInput, DataShareRequestUncheckedCreateWithoutInpatientEncounterInput>
+    connectOrCreate?: DataShareRequestCreateOrConnectWithoutInpatientEncounterInput
+    upsert?: DataShareRequestUpsertWithoutInpatientEncounterInput
+    disconnect?: DataShareRequestWhereInput | boolean
+    delete?: DataShareRequestWhereInput | boolean
+    connect?: DataShareRequestWhereUniqueInput
+    update?: XOR<XOR<DataShareRequestUpdateToOneWithWhereWithoutInpatientEncounterInput, DataShareRequestUpdateWithoutInpatientEncounterInput>, DataShareRequestUncheckedUpdateWithoutInpatientEncounterInput>
   }
 
   export type InpatientEncounterCreateNestedOneWithoutChartsInput = {
@@ -41018,6 +46131,168 @@ export namespace Prisma {
     upsert?: InsuranceClaimUpsertWithoutAccessTokensInput
     connect?: InsuranceClaimWhereUniqueInput
     update?: XOR<XOR<InsuranceClaimUpdateToOneWithWhereWithoutAccessTokensInput, InsuranceClaimUpdateWithoutAccessTokensInput>, InsuranceClaimUncheckedUpdateWithoutAccessTokensInput>
+  }
+
+  export type PatientCreateNestedOneWithoutDataShareRequestsInput = {
+    create?: XOR<PatientCreateWithoutDataShareRequestsInput, PatientUncheckedCreateWithoutDataShareRequestsInput>
+    connectOrCreate?: PatientCreateOrConnectWithoutDataShareRequestsInput
+    connect?: PatientWhereUniqueInput
+  }
+
+  export type InpatientEncounterCreateNestedOneWithoutDataShareRequestInput = {
+    create?: XOR<InpatientEncounterCreateWithoutDataShareRequestInput, InpatientEncounterUncheckedCreateWithoutDataShareRequestInput>
+    connectOrCreate?: InpatientEncounterCreateOrConnectWithoutDataShareRequestInput
+    connect?: InpatientEncounterWhereUniqueInput
+  }
+
+  export type OutpatientEncounterCreateNestedOneWithoutDataShareRequestInput = {
+    create?: XOR<OutpatientEncounterCreateWithoutDataShareRequestInput, OutpatientEncounterUncheckedCreateWithoutDataShareRequestInput>
+    connectOrCreate?: OutpatientEncounterCreateOrConnectWithoutDataShareRequestInput
+    connect?: OutpatientEncounterWhereUniqueInput
+  }
+
+  export type DataShareDocumentCreateNestedManyWithoutRequestInput = {
+    create?: XOR<DataShareDocumentCreateWithoutRequestInput, DataShareDocumentUncheckedCreateWithoutRequestInput> | DataShareDocumentCreateWithoutRequestInput[] | DataShareDocumentUncheckedCreateWithoutRequestInput[]
+    connectOrCreate?: DataShareDocumentCreateOrConnectWithoutRequestInput | DataShareDocumentCreateOrConnectWithoutRequestInput[]
+    createMany?: DataShareDocumentCreateManyRequestInputEnvelope
+    connect?: DataShareDocumentWhereUniqueInput | DataShareDocumentWhereUniqueInput[]
+  }
+
+  export type DataShareAccessTokenCreateNestedManyWithoutRequestInput = {
+    create?: XOR<DataShareAccessTokenCreateWithoutRequestInput, DataShareAccessTokenUncheckedCreateWithoutRequestInput> | DataShareAccessTokenCreateWithoutRequestInput[] | DataShareAccessTokenUncheckedCreateWithoutRequestInput[]
+    connectOrCreate?: DataShareAccessTokenCreateOrConnectWithoutRequestInput | DataShareAccessTokenCreateOrConnectWithoutRequestInput[]
+    createMany?: DataShareAccessTokenCreateManyRequestInputEnvelope
+    connect?: DataShareAccessTokenWhereUniqueInput | DataShareAccessTokenWhereUniqueInput[]
+  }
+
+  export type DataShareDocumentUncheckedCreateNestedManyWithoutRequestInput = {
+    create?: XOR<DataShareDocumentCreateWithoutRequestInput, DataShareDocumentUncheckedCreateWithoutRequestInput> | DataShareDocumentCreateWithoutRequestInput[] | DataShareDocumentUncheckedCreateWithoutRequestInput[]
+    connectOrCreate?: DataShareDocumentCreateOrConnectWithoutRequestInput | DataShareDocumentCreateOrConnectWithoutRequestInput[]
+    createMany?: DataShareDocumentCreateManyRequestInputEnvelope
+    connect?: DataShareDocumentWhereUniqueInput | DataShareDocumentWhereUniqueInput[]
+  }
+
+  export type DataShareAccessTokenUncheckedCreateNestedManyWithoutRequestInput = {
+    create?: XOR<DataShareAccessTokenCreateWithoutRequestInput, DataShareAccessTokenUncheckedCreateWithoutRequestInput> | DataShareAccessTokenCreateWithoutRequestInput[] | DataShareAccessTokenUncheckedCreateWithoutRequestInput[]
+    connectOrCreate?: DataShareAccessTokenCreateOrConnectWithoutRequestInput | DataShareAccessTokenCreateOrConnectWithoutRequestInput[]
+    createMany?: DataShareAccessTokenCreateManyRequestInputEnvelope
+    connect?: DataShareAccessTokenWhereUniqueInput | DataShareAccessTokenWhereUniqueInput[]
+  }
+
+  export type EnumDataShareStatusFieldUpdateOperationsInput = {
+    set?: $Enums.DataShareStatus
+  }
+
+  export type PatientUpdateOneRequiredWithoutDataShareRequestsNestedInput = {
+    create?: XOR<PatientCreateWithoutDataShareRequestsInput, PatientUncheckedCreateWithoutDataShareRequestsInput>
+    connectOrCreate?: PatientCreateOrConnectWithoutDataShareRequestsInput
+    upsert?: PatientUpsertWithoutDataShareRequestsInput
+    connect?: PatientWhereUniqueInput
+    update?: XOR<XOR<PatientUpdateToOneWithWhereWithoutDataShareRequestsInput, PatientUpdateWithoutDataShareRequestsInput>, PatientUncheckedUpdateWithoutDataShareRequestsInput>
+  }
+
+  export type InpatientEncounterUpdateOneWithoutDataShareRequestNestedInput = {
+    create?: XOR<InpatientEncounterCreateWithoutDataShareRequestInput, InpatientEncounterUncheckedCreateWithoutDataShareRequestInput>
+    connectOrCreate?: InpatientEncounterCreateOrConnectWithoutDataShareRequestInput
+    upsert?: InpatientEncounterUpsertWithoutDataShareRequestInput
+    disconnect?: InpatientEncounterWhereInput | boolean
+    delete?: InpatientEncounterWhereInput | boolean
+    connect?: InpatientEncounterWhereUniqueInput
+    update?: XOR<XOR<InpatientEncounterUpdateToOneWithWhereWithoutDataShareRequestInput, InpatientEncounterUpdateWithoutDataShareRequestInput>, InpatientEncounterUncheckedUpdateWithoutDataShareRequestInput>
+  }
+
+  export type OutpatientEncounterUpdateOneWithoutDataShareRequestNestedInput = {
+    create?: XOR<OutpatientEncounterCreateWithoutDataShareRequestInput, OutpatientEncounterUncheckedCreateWithoutDataShareRequestInput>
+    connectOrCreate?: OutpatientEncounterCreateOrConnectWithoutDataShareRequestInput
+    upsert?: OutpatientEncounterUpsertWithoutDataShareRequestInput
+    disconnect?: OutpatientEncounterWhereInput | boolean
+    delete?: OutpatientEncounterWhereInput | boolean
+    connect?: OutpatientEncounterWhereUniqueInput
+    update?: XOR<XOR<OutpatientEncounterUpdateToOneWithWhereWithoutDataShareRequestInput, OutpatientEncounterUpdateWithoutDataShareRequestInput>, OutpatientEncounterUncheckedUpdateWithoutDataShareRequestInput>
+  }
+
+  export type DataShareDocumentUpdateManyWithoutRequestNestedInput = {
+    create?: XOR<DataShareDocumentCreateWithoutRequestInput, DataShareDocumentUncheckedCreateWithoutRequestInput> | DataShareDocumentCreateWithoutRequestInput[] | DataShareDocumentUncheckedCreateWithoutRequestInput[]
+    connectOrCreate?: DataShareDocumentCreateOrConnectWithoutRequestInput | DataShareDocumentCreateOrConnectWithoutRequestInput[]
+    upsert?: DataShareDocumentUpsertWithWhereUniqueWithoutRequestInput | DataShareDocumentUpsertWithWhereUniqueWithoutRequestInput[]
+    createMany?: DataShareDocumentCreateManyRequestInputEnvelope
+    set?: DataShareDocumentWhereUniqueInput | DataShareDocumentWhereUniqueInput[]
+    disconnect?: DataShareDocumentWhereUniqueInput | DataShareDocumentWhereUniqueInput[]
+    delete?: DataShareDocumentWhereUniqueInput | DataShareDocumentWhereUniqueInput[]
+    connect?: DataShareDocumentWhereUniqueInput | DataShareDocumentWhereUniqueInput[]
+    update?: DataShareDocumentUpdateWithWhereUniqueWithoutRequestInput | DataShareDocumentUpdateWithWhereUniqueWithoutRequestInput[]
+    updateMany?: DataShareDocumentUpdateManyWithWhereWithoutRequestInput | DataShareDocumentUpdateManyWithWhereWithoutRequestInput[]
+    deleteMany?: DataShareDocumentScalarWhereInput | DataShareDocumentScalarWhereInput[]
+  }
+
+  export type DataShareAccessTokenUpdateManyWithoutRequestNestedInput = {
+    create?: XOR<DataShareAccessTokenCreateWithoutRequestInput, DataShareAccessTokenUncheckedCreateWithoutRequestInput> | DataShareAccessTokenCreateWithoutRequestInput[] | DataShareAccessTokenUncheckedCreateWithoutRequestInput[]
+    connectOrCreate?: DataShareAccessTokenCreateOrConnectWithoutRequestInput | DataShareAccessTokenCreateOrConnectWithoutRequestInput[]
+    upsert?: DataShareAccessTokenUpsertWithWhereUniqueWithoutRequestInput | DataShareAccessTokenUpsertWithWhereUniqueWithoutRequestInput[]
+    createMany?: DataShareAccessTokenCreateManyRequestInputEnvelope
+    set?: DataShareAccessTokenWhereUniqueInput | DataShareAccessTokenWhereUniqueInput[]
+    disconnect?: DataShareAccessTokenWhereUniqueInput | DataShareAccessTokenWhereUniqueInput[]
+    delete?: DataShareAccessTokenWhereUniqueInput | DataShareAccessTokenWhereUniqueInput[]
+    connect?: DataShareAccessTokenWhereUniqueInput | DataShareAccessTokenWhereUniqueInput[]
+    update?: DataShareAccessTokenUpdateWithWhereUniqueWithoutRequestInput | DataShareAccessTokenUpdateWithWhereUniqueWithoutRequestInput[]
+    updateMany?: DataShareAccessTokenUpdateManyWithWhereWithoutRequestInput | DataShareAccessTokenUpdateManyWithWhereWithoutRequestInput[]
+    deleteMany?: DataShareAccessTokenScalarWhereInput | DataShareAccessTokenScalarWhereInput[]
+  }
+
+  export type DataShareDocumentUncheckedUpdateManyWithoutRequestNestedInput = {
+    create?: XOR<DataShareDocumentCreateWithoutRequestInput, DataShareDocumentUncheckedCreateWithoutRequestInput> | DataShareDocumentCreateWithoutRequestInput[] | DataShareDocumentUncheckedCreateWithoutRequestInput[]
+    connectOrCreate?: DataShareDocumentCreateOrConnectWithoutRequestInput | DataShareDocumentCreateOrConnectWithoutRequestInput[]
+    upsert?: DataShareDocumentUpsertWithWhereUniqueWithoutRequestInput | DataShareDocumentUpsertWithWhereUniqueWithoutRequestInput[]
+    createMany?: DataShareDocumentCreateManyRequestInputEnvelope
+    set?: DataShareDocumentWhereUniqueInput | DataShareDocumentWhereUniqueInput[]
+    disconnect?: DataShareDocumentWhereUniqueInput | DataShareDocumentWhereUniqueInput[]
+    delete?: DataShareDocumentWhereUniqueInput | DataShareDocumentWhereUniqueInput[]
+    connect?: DataShareDocumentWhereUniqueInput | DataShareDocumentWhereUniqueInput[]
+    update?: DataShareDocumentUpdateWithWhereUniqueWithoutRequestInput | DataShareDocumentUpdateWithWhereUniqueWithoutRequestInput[]
+    updateMany?: DataShareDocumentUpdateManyWithWhereWithoutRequestInput | DataShareDocumentUpdateManyWithWhereWithoutRequestInput[]
+    deleteMany?: DataShareDocumentScalarWhereInput | DataShareDocumentScalarWhereInput[]
+  }
+
+  export type DataShareAccessTokenUncheckedUpdateManyWithoutRequestNestedInput = {
+    create?: XOR<DataShareAccessTokenCreateWithoutRequestInput, DataShareAccessTokenUncheckedCreateWithoutRequestInput> | DataShareAccessTokenCreateWithoutRequestInput[] | DataShareAccessTokenUncheckedCreateWithoutRequestInput[]
+    connectOrCreate?: DataShareAccessTokenCreateOrConnectWithoutRequestInput | DataShareAccessTokenCreateOrConnectWithoutRequestInput[]
+    upsert?: DataShareAccessTokenUpsertWithWhereUniqueWithoutRequestInput | DataShareAccessTokenUpsertWithWhereUniqueWithoutRequestInput[]
+    createMany?: DataShareAccessTokenCreateManyRequestInputEnvelope
+    set?: DataShareAccessTokenWhereUniqueInput | DataShareAccessTokenWhereUniqueInput[]
+    disconnect?: DataShareAccessTokenWhereUniqueInput | DataShareAccessTokenWhereUniqueInput[]
+    delete?: DataShareAccessTokenWhereUniqueInput | DataShareAccessTokenWhereUniqueInput[]
+    connect?: DataShareAccessTokenWhereUniqueInput | DataShareAccessTokenWhereUniqueInput[]
+    update?: DataShareAccessTokenUpdateWithWhereUniqueWithoutRequestInput | DataShareAccessTokenUpdateWithWhereUniqueWithoutRequestInput[]
+    updateMany?: DataShareAccessTokenUpdateManyWithWhereWithoutRequestInput | DataShareAccessTokenUpdateManyWithWhereWithoutRequestInput[]
+    deleteMany?: DataShareAccessTokenScalarWhereInput | DataShareAccessTokenScalarWhereInput[]
+  }
+
+  export type DataShareRequestCreateNestedOneWithoutDocumentsInput = {
+    create?: XOR<DataShareRequestCreateWithoutDocumentsInput, DataShareRequestUncheckedCreateWithoutDocumentsInput>
+    connectOrCreate?: DataShareRequestCreateOrConnectWithoutDocumentsInput
+    connect?: DataShareRequestWhereUniqueInput
+  }
+
+  export type DataShareRequestUpdateOneRequiredWithoutDocumentsNestedInput = {
+    create?: XOR<DataShareRequestCreateWithoutDocumentsInput, DataShareRequestUncheckedCreateWithoutDocumentsInput>
+    connectOrCreate?: DataShareRequestCreateOrConnectWithoutDocumentsInput
+    upsert?: DataShareRequestUpsertWithoutDocumentsInput
+    connect?: DataShareRequestWhereUniqueInput
+    update?: XOR<XOR<DataShareRequestUpdateToOneWithWhereWithoutDocumentsInput, DataShareRequestUpdateWithoutDocumentsInput>, DataShareRequestUncheckedUpdateWithoutDocumentsInput>
+  }
+
+  export type DataShareRequestCreateNestedOneWithoutAccessTokensInput = {
+    create?: XOR<DataShareRequestCreateWithoutAccessTokensInput, DataShareRequestUncheckedCreateWithoutAccessTokensInput>
+    connectOrCreate?: DataShareRequestCreateOrConnectWithoutAccessTokensInput
+    connect?: DataShareRequestWhereUniqueInput
+  }
+
+  export type DataShareRequestUpdateOneRequiredWithoutAccessTokensNestedInput = {
+    create?: XOR<DataShareRequestCreateWithoutAccessTokensInput, DataShareRequestUncheckedCreateWithoutAccessTokensInput>
+    connectOrCreate?: DataShareRequestCreateOrConnectWithoutAccessTokensInput
+    upsert?: DataShareRequestUpsertWithoutAccessTokensInput
+    connect?: DataShareRequestWhereUniqueInput
+    update?: XOR<XOR<DataShareRequestUpdateToOneWithWhereWithoutAccessTokensInput, DataShareRequestUpdateWithoutAccessTokensInput>, DataShareRequestUncheckedUpdateWithoutAccessTokensInput>
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -41756,6 +47031,23 @@ export namespace Prisma {
     _max?: NestedEnumInsuranceClaimStatusFilter<$PrismaModel>
   }
 
+  export type NestedEnumDataShareStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.DataShareStatus | EnumDataShareStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.DataShareStatus[] | ListEnumDataShareStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.DataShareStatus[] | ListEnumDataShareStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumDataShareStatusFilter<$PrismaModel> | $Enums.DataShareStatus
+  }
+
+  export type NestedEnumDataShareStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.DataShareStatus | EnumDataShareStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.DataShareStatus[] | ListEnumDataShareStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.DataShareStatus[] | ListEnumDataShareStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumDataShareStatusWithAggregatesFilter<$PrismaModel> | $Enums.DataShareStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumDataShareStatusFilter<$PrismaModel>
+    _max?: NestedEnumDataShareStatusFilter<$PrismaModel>
+  }
+
   export type RefreshTokenCreateWithoutUserInput = {
     id?: string
     token: string
@@ -41823,6 +47115,7 @@ export namespace Prisma {
     inpatientEncounters?: InpatientEncounterCreateNestedManyWithoutPatientInput
     outpatientEncounters?: OutpatientEncounterCreateNestedManyWithoutPatientInput
     insuranceClaims?: InsuranceClaimCreateNestedManyWithoutPatientInput
+    dataShareRequests?: DataShareRequestCreateNestedManyWithoutPatientInput
   }
 
   export type PatientUncheckedCreateWithoutUserInput = {
@@ -41840,6 +47133,7 @@ export namespace Prisma {
     inpatientEncounters?: InpatientEncounterUncheckedCreateNestedManyWithoutPatientInput
     outpatientEncounters?: OutpatientEncounterUncheckedCreateNestedManyWithoutPatientInput
     insuranceClaims?: InsuranceClaimUncheckedCreateNestedManyWithoutPatientInput
+    dataShareRequests?: DataShareRequestUncheckedCreateNestedManyWithoutPatientInput
   }
 
   export type PatientCreateOrConnectWithoutUserInput = {
@@ -42081,6 +47375,7 @@ export namespace Prisma {
     inpatientEncounters?: InpatientEncounterUpdateManyWithoutPatientNestedInput
     outpatientEncounters?: OutpatientEncounterUpdateManyWithoutPatientNestedInput
     insuranceClaims?: InsuranceClaimUpdateManyWithoutPatientNestedInput
+    dataShareRequests?: DataShareRequestUpdateManyWithoutPatientNestedInput
   }
 
   export type PatientUncheckedUpdateWithoutUserInput = {
@@ -42098,6 +47393,7 @@ export namespace Prisma {
     inpatientEncounters?: InpatientEncounterUncheckedUpdateManyWithoutPatientNestedInput
     outpatientEncounters?: OutpatientEncounterUncheckedUpdateManyWithoutPatientNestedInput
     insuranceClaims?: InsuranceClaimUncheckedUpdateManyWithoutPatientNestedInput
+    dataShareRequests?: DataShareRequestUncheckedUpdateManyWithoutPatientNestedInput
   }
 
   export type PartnerUpsertWithoutUserInput = {
@@ -42518,6 +47814,7 @@ export namespace Prisma {
     charts?: InpatientEncounterChartCreateNestedManyWithoutEncounterInput
     orders?: InpatientEncounterOrderCreateNestedManyWithoutEncounterInput
     insuranceClaim?: InsuranceClaimCreateNestedOneWithoutInpatientEncounterInput
+    dataShareRequest?: DataShareRequestCreateNestedOneWithoutInpatientEncounterInput
   }
 
   export type InpatientEncounterUncheckedCreateWithoutPatientInput = {
@@ -42538,6 +47835,7 @@ export namespace Prisma {
     charts?: InpatientEncounterChartUncheckedCreateNestedManyWithoutEncounterInput
     orders?: InpatientEncounterOrderUncheckedCreateNestedManyWithoutEncounterInput
     insuranceClaim?: InsuranceClaimUncheckedCreateNestedOneWithoutInpatientEncounterInput
+    dataShareRequest?: DataShareRequestUncheckedCreateNestedOneWithoutInpatientEncounterInput
   }
 
   export type InpatientEncounterCreateOrConnectWithoutPatientInput = {
@@ -42564,6 +47862,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     insuranceClaim?: InsuranceClaimCreateNestedOneWithoutOutpatientEncounterInput
+    dataShareRequest?: DataShareRequestCreateNestedOneWithoutOutpatientEncounterInput
   }
 
   export type OutpatientEncounterUncheckedCreateWithoutPatientInput = {
@@ -42580,6 +47879,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     insuranceClaim?: InsuranceClaimUncheckedCreateNestedOneWithoutOutpatientEncounterInput
+    dataShareRequest?: DataShareRequestUncheckedCreateNestedOneWithoutOutpatientEncounterInput
   }
 
   export type OutpatientEncounterCreateOrConnectWithoutPatientInput = {
@@ -42647,6 +47947,68 @@ export namespace Prisma {
 
   export type InsuranceClaimCreateManyPatientInputEnvelope = {
     data: InsuranceClaimCreateManyPatientInput | InsuranceClaimCreateManyPatientInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type DataShareRequestCreateWithoutPatientInput = {
+    id?: string
+    requestNumber: string
+    hospitalIdentifier: string
+    hospitalName: string
+    hospitalEmail: string
+    reason: string
+    status?: $Enums.DataShareStatus
+    submittedAt?: Date | string | null
+    reviewedAt?: Date | string | null
+    accessedAt?: Date | string | null
+    selectedData?: NullableJsonNullValueInput | InputJsonValue
+    requestNotes?: string | null
+    reviewNotes?: string | null
+    denialReason?: string | null
+    requestedBy: string
+    reviewedBy?: string | null
+    patientConsent?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    inpatientEncounter?: InpatientEncounterCreateNestedOneWithoutDataShareRequestInput
+    outpatientEncounter?: OutpatientEncounterCreateNestedOneWithoutDataShareRequestInput
+    documents?: DataShareDocumentCreateNestedManyWithoutRequestInput
+    accessTokens?: DataShareAccessTokenCreateNestedManyWithoutRequestInput
+  }
+
+  export type DataShareRequestUncheckedCreateWithoutPatientInput = {
+    id?: string
+    requestNumber: string
+    inpatientEncounterId?: string | null
+    outpatientEncounterId?: string | null
+    hospitalIdentifier: string
+    hospitalName: string
+    hospitalEmail: string
+    reason: string
+    status?: $Enums.DataShareStatus
+    submittedAt?: Date | string | null
+    reviewedAt?: Date | string | null
+    accessedAt?: Date | string | null
+    selectedData?: NullableJsonNullValueInput | InputJsonValue
+    requestNotes?: string | null
+    reviewNotes?: string | null
+    denialReason?: string | null
+    requestedBy: string
+    reviewedBy?: string | null
+    patientConsent?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    documents?: DataShareDocumentUncheckedCreateNestedManyWithoutRequestInput
+    accessTokens?: DataShareAccessTokenUncheckedCreateNestedManyWithoutRequestInput
+  }
+
+  export type DataShareRequestCreateOrConnectWithoutPatientInput = {
+    where: DataShareRequestWhereUniqueInput
+    create: XOR<DataShareRequestCreateWithoutPatientInput, DataShareRequestUncheckedCreateWithoutPatientInput>
+  }
+
+  export type DataShareRequestCreateManyPatientInputEnvelope = {
+    data: DataShareRequestCreateManyPatientInput | DataShareRequestCreateManyPatientInput[]
     skipDuplicates?: boolean
   }
 
@@ -42849,6 +48211,50 @@ export namespace Prisma {
     reviewedBy?: StringNullableFilter<"InsuranceClaim"> | string | null
     createdAt?: DateTimeFilter<"InsuranceClaim"> | Date | string
     updatedAt?: DateTimeFilter<"InsuranceClaim"> | Date | string
+  }
+
+  export type DataShareRequestUpsertWithWhereUniqueWithoutPatientInput = {
+    where: DataShareRequestWhereUniqueInput
+    update: XOR<DataShareRequestUpdateWithoutPatientInput, DataShareRequestUncheckedUpdateWithoutPatientInput>
+    create: XOR<DataShareRequestCreateWithoutPatientInput, DataShareRequestUncheckedCreateWithoutPatientInput>
+  }
+
+  export type DataShareRequestUpdateWithWhereUniqueWithoutPatientInput = {
+    where: DataShareRequestWhereUniqueInput
+    data: XOR<DataShareRequestUpdateWithoutPatientInput, DataShareRequestUncheckedUpdateWithoutPatientInput>
+  }
+
+  export type DataShareRequestUpdateManyWithWhereWithoutPatientInput = {
+    where: DataShareRequestScalarWhereInput
+    data: XOR<DataShareRequestUpdateManyMutationInput, DataShareRequestUncheckedUpdateManyWithoutPatientInput>
+  }
+
+  export type DataShareRequestScalarWhereInput = {
+    AND?: DataShareRequestScalarWhereInput | DataShareRequestScalarWhereInput[]
+    OR?: DataShareRequestScalarWhereInput[]
+    NOT?: DataShareRequestScalarWhereInput | DataShareRequestScalarWhereInput[]
+    id?: UuidFilter<"DataShareRequest"> | string
+    requestNumber?: StringFilter<"DataShareRequest"> | string
+    patientId?: StringFilter<"DataShareRequest"> | string
+    inpatientEncounterId?: UuidNullableFilter<"DataShareRequest"> | string | null
+    outpatientEncounterId?: UuidNullableFilter<"DataShareRequest"> | string | null
+    hospitalIdentifier?: StringFilter<"DataShareRequest"> | string
+    hospitalName?: StringFilter<"DataShareRequest"> | string
+    hospitalEmail?: StringFilter<"DataShareRequest"> | string
+    reason?: StringFilter<"DataShareRequest"> | string
+    status?: EnumDataShareStatusFilter<"DataShareRequest"> | $Enums.DataShareStatus
+    submittedAt?: DateTimeNullableFilter<"DataShareRequest"> | Date | string | null
+    reviewedAt?: DateTimeNullableFilter<"DataShareRequest"> | Date | string | null
+    accessedAt?: DateTimeNullableFilter<"DataShareRequest"> | Date | string | null
+    selectedData?: JsonNullableFilter<"DataShareRequest">
+    requestNotes?: StringNullableFilter<"DataShareRequest"> | string | null
+    reviewNotes?: StringNullableFilter<"DataShareRequest"> | string | null
+    denialReason?: StringNullableFilter<"DataShareRequest"> | string | null
+    requestedBy?: StringFilter<"DataShareRequest"> | string
+    reviewedBy?: StringNullableFilter<"DataShareRequest"> | string | null
+    patientConsent?: BoolFilter<"DataShareRequest"> | boolean
+    createdAt?: DateTimeFilter<"DataShareRequest"> | Date | string
+    updatedAt?: DateTimeFilter<"DataShareRequest"> | Date | string
   }
 
   export type UserCreateWithoutPartnerProfileInput = {
@@ -44505,6 +49911,7 @@ export namespace Prisma {
     user: UserCreateNestedOneWithoutPatientProfileInput
     inpatientEncounters?: InpatientEncounterCreateNestedManyWithoutPatientInput
     insuranceClaims?: InsuranceClaimCreateNestedManyWithoutPatientInput
+    dataShareRequests?: DataShareRequestCreateNestedManyWithoutPatientInput
   }
 
   export type PatientUncheckedCreateWithoutOutpatientEncountersInput = {
@@ -44522,6 +49929,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     inpatientEncounters?: InpatientEncounterUncheckedCreateNestedManyWithoutPatientInput
     insuranceClaims?: InsuranceClaimUncheckedCreateNestedManyWithoutPatientInput
+    dataShareRequests?: DataShareRequestUncheckedCreateNestedManyWithoutPatientInput
   }
 
   export type PatientCreateOrConnectWithoutOutpatientEncountersInput = {
@@ -44582,6 +49990,63 @@ export namespace Prisma {
     create: XOR<InsuranceClaimCreateWithoutOutpatientEncounterInput, InsuranceClaimUncheckedCreateWithoutOutpatientEncounterInput>
   }
 
+  export type DataShareRequestCreateWithoutOutpatientEncounterInput = {
+    id?: string
+    requestNumber: string
+    hospitalIdentifier: string
+    hospitalName: string
+    hospitalEmail: string
+    reason: string
+    status?: $Enums.DataShareStatus
+    submittedAt?: Date | string | null
+    reviewedAt?: Date | string | null
+    accessedAt?: Date | string | null
+    selectedData?: NullableJsonNullValueInput | InputJsonValue
+    requestNotes?: string | null
+    reviewNotes?: string | null
+    denialReason?: string | null
+    requestedBy: string
+    reviewedBy?: string | null
+    patientConsent?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    patient: PatientCreateNestedOneWithoutDataShareRequestsInput
+    inpatientEncounter?: InpatientEncounterCreateNestedOneWithoutDataShareRequestInput
+    documents?: DataShareDocumentCreateNestedManyWithoutRequestInput
+    accessTokens?: DataShareAccessTokenCreateNestedManyWithoutRequestInput
+  }
+
+  export type DataShareRequestUncheckedCreateWithoutOutpatientEncounterInput = {
+    id?: string
+    requestNumber: string
+    patientId: string
+    inpatientEncounterId?: string | null
+    hospitalIdentifier: string
+    hospitalName: string
+    hospitalEmail: string
+    reason: string
+    status?: $Enums.DataShareStatus
+    submittedAt?: Date | string | null
+    reviewedAt?: Date | string | null
+    accessedAt?: Date | string | null
+    selectedData?: NullableJsonNullValueInput | InputJsonValue
+    requestNotes?: string | null
+    reviewNotes?: string | null
+    denialReason?: string | null
+    requestedBy: string
+    reviewedBy?: string | null
+    patientConsent?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    documents?: DataShareDocumentUncheckedCreateNestedManyWithoutRequestInput
+    accessTokens?: DataShareAccessTokenUncheckedCreateNestedManyWithoutRequestInput
+  }
+
+  export type DataShareRequestCreateOrConnectWithoutOutpatientEncounterInput = {
+    where: DataShareRequestWhereUniqueInput
+    create: XOR<DataShareRequestCreateWithoutOutpatientEncounterInput, DataShareRequestUncheckedCreateWithoutOutpatientEncounterInput>
+  }
+
   export type PatientUpsertWithoutOutpatientEncountersInput = {
     update: XOR<PatientUpdateWithoutOutpatientEncountersInput, PatientUncheckedUpdateWithoutOutpatientEncountersInput>
     create: XOR<PatientCreateWithoutOutpatientEncountersInput, PatientUncheckedCreateWithoutOutpatientEncountersInput>
@@ -44608,6 +50073,7 @@ export namespace Prisma {
     user?: UserUpdateOneRequiredWithoutPatientProfileNestedInput
     inpatientEncounters?: InpatientEncounterUpdateManyWithoutPatientNestedInput
     insuranceClaims?: InsuranceClaimUpdateManyWithoutPatientNestedInput
+    dataShareRequests?: DataShareRequestUpdateManyWithoutPatientNestedInput
   }
 
   export type PatientUncheckedUpdateWithoutOutpatientEncountersInput = {
@@ -44625,6 +50091,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     inpatientEncounters?: InpatientEncounterUncheckedUpdateManyWithoutPatientNestedInput
     insuranceClaims?: InsuranceClaimUncheckedUpdateManyWithoutPatientNestedInput
+    dataShareRequests?: DataShareRequestUncheckedUpdateManyWithoutPatientNestedInput
   }
 
   export type InsuranceClaimUpsertWithoutOutpatientEncounterInput = {
@@ -44686,6 +50153,69 @@ export namespace Prisma {
     accessTokens?: InsuranceAccessTokenUncheckedUpdateManyWithoutClaimNestedInput
   }
 
+  export type DataShareRequestUpsertWithoutOutpatientEncounterInput = {
+    update: XOR<DataShareRequestUpdateWithoutOutpatientEncounterInput, DataShareRequestUncheckedUpdateWithoutOutpatientEncounterInput>
+    create: XOR<DataShareRequestCreateWithoutOutpatientEncounterInput, DataShareRequestUncheckedCreateWithoutOutpatientEncounterInput>
+    where?: DataShareRequestWhereInput
+  }
+
+  export type DataShareRequestUpdateToOneWithWhereWithoutOutpatientEncounterInput = {
+    where?: DataShareRequestWhereInput
+    data: XOR<DataShareRequestUpdateWithoutOutpatientEncounterInput, DataShareRequestUncheckedUpdateWithoutOutpatientEncounterInput>
+  }
+
+  export type DataShareRequestUpdateWithoutOutpatientEncounterInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    requestNumber?: StringFieldUpdateOperationsInput | string
+    hospitalIdentifier?: StringFieldUpdateOperationsInput | string
+    hospitalName?: StringFieldUpdateOperationsInput | string
+    hospitalEmail?: StringFieldUpdateOperationsInput | string
+    reason?: StringFieldUpdateOperationsInput | string
+    status?: EnumDataShareStatusFieldUpdateOperationsInput | $Enums.DataShareStatus
+    submittedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    accessedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    selectedData?: NullableJsonNullValueInput | InputJsonValue
+    requestNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    denialReason?: NullableStringFieldUpdateOperationsInput | string | null
+    requestedBy?: StringFieldUpdateOperationsInput | string
+    reviewedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    patientConsent?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    patient?: PatientUpdateOneRequiredWithoutDataShareRequestsNestedInput
+    inpatientEncounter?: InpatientEncounterUpdateOneWithoutDataShareRequestNestedInput
+    documents?: DataShareDocumentUpdateManyWithoutRequestNestedInput
+    accessTokens?: DataShareAccessTokenUpdateManyWithoutRequestNestedInput
+  }
+
+  export type DataShareRequestUncheckedUpdateWithoutOutpatientEncounterInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    requestNumber?: StringFieldUpdateOperationsInput | string
+    patientId?: StringFieldUpdateOperationsInput | string
+    inpatientEncounterId?: NullableStringFieldUpdateOperationsInput | string | null
+    hospitalIdentifier?: StringFieldUpdateOperationsInput | string
+    hospitalName?: StringFieldUpdateOperationsInput | string
+    hospitalEmail?: StringFieldUpdateOperationsInput | string
+    reason?: StringFieldUpdateOperationsInput | string
+    status?: EnumDataShareStatusFieldUpdateOperationsInput | $Enums.DataShareStatus
+    submittedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    accessedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    selectedData?: NullableJsonNullValueInput | InputJsonValue
+    requestNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    denialReason?: NullableStringFieldUpdateOperationsInput | string | null
+    requestedBy?: StringFieldUpdateOperationsInput | string
+    reviewedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    patientConsent?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    documents?: DataShareDocumentUncheckedUpdateManyWithoutRequestNestedInput
+    accessTokens?: DataShareAccessTokenUncheckedUpdateManyWithoutRequestNestedInput
+  }
+
   export type PatientCreateWithoutInpatientEncountersInput = {
     id?: string
     patientNumber: string
@@ -44701,6 +50231,7 @@ export namespace Prisma {
     user: UserCreateNestedOneWithoutPatientProfileInput
     outpatientEncounters?: OutpatientEncounterCreateNestedManyWithoutPatientInput
     insuranceClaims?: InsuranceClaimCreateNestedManyWithoutPatientInput
+    dataShareRequests?: DataShareRequestCreateNestedManyWithoutPatientInput
   }
 
   export type PatientUncheckedCreateWithoutInpatientEncountersInput = {
@@ -44718,6 +50249,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     outpatientEncounters?: OutpatientEncounterUncheckedCreateNestedManyWithoutPatientInput
     insuranceClaims?: InsuranceClaimUncheckedCreateNestedManyWithoutPatientInput
+    dataShareRequests?: DataShareRequestUncheckedCreateNestedManyWithoutPatientInput
   }
 
   export type PatientCreateOrConnectWithoutInpatientEncountersInput = {
@@ -44840,6 +50372,63 @@ export namespace Prisma {
     create: XOR<InsuranceClaimCreateWithoutInpatientEncounterInput, InsuranceClaimUncheckedCreateWithoutInpatientEncounterInput>
   }
 
+  export type DataShareRequestCreateWithoutInpatientEncounterInput = {
+    id?: string
+    requestNumber: string
+    hospitalIdentifier: string
+    hospitalName: string
+    hospitalEmail: string
+    reason: string
+    status?: $Enums.DataShareStatus
+    submittedAt?: Date | string | null
+    reviewedAt?: Date | string | null
+    accessedAt?: Date | string | null
+    selectedData?: NullableJsonNullValueInput | InputJsonValue
+    requestNotes?: string | null
+    reviewNotes?: string | null
+    denialReason?: string | null
+    requestedBy: string
+    reviewedBy?: string | null
+    patientConsent?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    patient: PatientCreateNestedOneWithoutDataShareRequestsInput
+    outpatientEncounter?: OutpatientEncounterCreateNestedOneWithoutDataShareRequestInput
+    documents?: DataShareDocumentCreateNestedManyWithoutRequestInput
+    accessTokens?: DataShareAccessTokenCreateNestedManyWithoutRequestInput
+  }
+
+  export type DataShareRequestUncheckedCreateWithoutInpatientEncounterInput = {
+    id?: string
+    requestNumber: string
+    patientId: string
+    outpatientEncounterId?: string | null
+    hospitalIdentifier: string
+    hospitalName: string
+    hospitalEmail: string
+    reason: string
+    status?: $Enums.DataShareStatus
+    submittedAt?: Date | string | null
+    reviewedAt?: Date | string | null
+    accessedAt?: Date | string | null
+    selectedData?: NullableJsonNullValueInput | InputJsonValue
+    requestNotes?: string | null
+    reviewNotes?: string | null
+    denialReason?: string | null
+    requestedBy: string
+    reviewedBy?: string | null
+    patientConsent?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    documents?: DataShareDocumentUncheckedCreateNestedManyWithoutRequestInput
+    accessTokens?: DataShareAccessTokenUncheckedCreateNestedManyWithoutRequestInput
+  }
+
+  export type DataShareRequestCreateOrConnectWithoutInpatientEncounterInput = {
+    where: DataShareRequestWhereUniqueInput
+    create: XOR<DataShareRequestCreateWithoutInpatientEncounterInput, DataShareRequestUncheckedCreateWithoutInpatientEncounterInput>
+  }
+
   export type PatientUpsertWithoutInpatientEncountersInput = {
     update: XOR<PatientUpdateWithoutInpatientEncountersInput, PatientUncheckedUpdateWithoutInpatientEncountersInput>
     create: XOR<PatientCreateWithoutInpatientEncountersInput, PatientUncheckedCreateWithoutInpatientEncountersInput>
@@ -44866,6 +50455,7 @@ export namespace Prisma {
     user?: UserUpdateOneRequiredWithoutPatientProfileNestedInput
     outpatientEncounters?: OutpatientEncounterUpdateManyWithoutPatientNestedInput
     insuranceClaims?: InsuranceClaimUpdateManyWithoutPatientNestedInput
+    dataShareRequests?: DataShareRequestUpdateManyWithoutPatientNestedInput
   }
 
   export type PatientUncheckedUpdateWithoutInpatientEncountersInput = {
@@ -44883,6 +50473,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     outpatientEncounters?: OutpatientEncounterUncheckedUpdateManyWithoutPatientNestedInput
     insuranceClaims?: InsuranceClaimUncheckedUpdateManyWithoutPatientNestedInput
+    dataShareRequests?: DataShareRequestUncheckedUpdateManyWithoutPatientNestedInput
   }
 
   export type InpatientEncounterChartUpsertWithWhereUniqueWithoutEncounterInput = {
@@ -45005,6 +50596,69 @@ export namespace Prisma {
     accessTokens?: InsuranceAccessTokenUncheckedUpdateManyWithoutClaimNestedInput
   }
 
+  export type DataShareRequestUpsertWithoutInpatientEncounterInput = {
+    update: XOR<DataShareRequestUpdateWithoutInpatientEncounterInput, DataShareRequestUncheckedUpdateWithoutInpatientEncounterInput>
+    create: XOR<DataShareRequestCreateWithoutInpatientEncounterInput, DataShareRequestUncheckedCreateWithoutInpatientEncounterInput>
+    where?: DataShareRequestWhereInput
+  }
+
+  export type DataShareRequestUpdateToOneWithWhereWithoutInpatientEncounterInput = {
+    where?: DataShareRequestWhereInput
+    data: XOR<DataShareRequestUpdateWithoutInpatientEncounterInput, DataShareRequestUncheckedUpdateWithoutInpatientEncounterInput>
+  }
+
+  export type DataShareRequestUpdateWithoutInpatientEncounterInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    requestNumber?: StringFieldUpdateOperationsInput | string
+    hospitalIdentifier?: StringFieldUpdateOperationsInput | string
+    hospitalName?: StringFieldUpdateOperationsInput | string
+    hospitalEmail?: StringFieldUpdateOperationsInput | string
+    reason?: StringFieldUpdateOperationsInput | string
+    status?: EnumDataShareStatusFieldUpdateOperationsInput | $Enums.DataShareStatus
+    submittedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    accessedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    selectedData?: NullableJsonNullValueInput | InputJsonValue
+    requestNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    denialReason?: NullableStringFieldUpdateOperationsInput | string | null
+    requestedBy?: StringFieldUpdateOperationsInput | string
+    reviewedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    patientConsent?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    patient?: PatientUpdateOneRequiredWithoutDataShareRequestsNestedInput
+    outpatientEncounter?: OutpatientEncounterUpdateOneWithoutDataShareRequestNestedInput
+    documents?: DataShareDocumentUpdateManyWithoutRequestNestedInput
+    accessTokens?: DataShareAccessTokenUpdateManyWithoutRequestNestedInput
+  }
+
+  export type DataShareRequestUncheckedUpdateWithoutInpatientEncounterInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    requestNumber?: StringFieldUpdateOperationsInput | string
+    patientId?: StringFieldUpdateOperationsInput | string
+    outpatientEncounterId?: NullableStringFieldUpdateOperationsInput | string | null
+    hospitalIdentifier?: StringFieldUpdateOperationsInput | string
+    hospitalName?: StringFieldUpdateOperationsInput | string
+    hospitalEmail?: StringFieldUpdateOperationsInput | string
+    reason?: StringFieldUpdateOperationsInput | string
+    status?: EnumDataShareStatusFieldUpdateOperationsInput | $Enums.DataShareStatus
+    submittedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    accessedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    selectedData?: NullableJsonNullValueInput | InputJsonValue
+    requestNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    denialReason?: NullableStringFieldUpdateOperationsInput | string | null
+    requestedBy?: StringFieldUpdateOperationsInput | string
+    reviewedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    patientConsent?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    documents?: DataShareDocumentUncheckedUpdateManyWithoutRequestNestedInput
+    accessTokens?: DataShareAccessTokenUncheckedUpdateManyWithoutRequestNestedInput
+  }
+
   export type InpatientEncounterCreateWithoutChartsInput = {
     id?: string
     doctorId: string
@@ -45023,6 +50677,7 @@ export namespace Prisma {
     patient: PatientCreateNestedOneWithoutInpatientEncountersInput
     orders?: InpatientEncounterOrderCreateNestedManyWithoutEncounterInput
     insuranceClaim?: InsuranceClaimCreateNestedOneWithoutInpatientEncounterInput
+    dataShareRequest?: DataShareRequestCreateNestedOneWithoutInpatientEncounterInput
   }
 
   export type InpatientEncounterUncheckedCreateWithoutChartsInput = {
@@ -45043,6 +50698,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     orders?: InpatientEncounterOrderUncheckedCreateNestedManyWithoutEncounterInput
     insuranceClaim?: InsuranceClaimUncheckedCreateNestedOneWithoutInpatientEncounterInput
+    dataShareRequest?: DataShareRequestUncheckedCreateNestedOneWithoutInpatientEncounterInput
   }
 
   export type InpatientEncounterCreateOrConnectWithoutChartsInput = {
@@ -45079,6 +50735,7 @@ export namespace Prisma {
     patient?: PatientUpdateOneRequiredWithoutInpatientEncountersNestedInput
     orders?: InpatientEncounterOrderUpdateManyWithoutEncounterNestedInput
     insuranceClaim?: InsuranceClaimUpdateOneWithoutInpatientEncounterNestedInput
+    dataShareRequest?: DataShareRequestUpdateOneWithoutInpatientEncounterNestedInput
   }
 
   export type InpatientEncounterUncheckedUpdateWithoutChartsInput = {
@@ -45099,6 +50756,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     orders?: InpatientEncounterOrderUncheckedUpdateManyWithoutEncounterNestedInput
     insuranceClaim?: InsuranceClaimUncheckedUpdateOneWithoutInpatientEncounterNestedInput
+    dataShareRequest?: DataShareRequestUncheckedUpdateOneWithoutInpatientEncounterNestedInput
   }
 
   export type InpatientEncounterCreateWithoutOrdersInput = {
@@ -45119,6 +50777,7 @@ export namespace Prisma {
     patient: PatientCreateNestedOneWithoutInpatientEncountersInput
     charts?: InpatientEncounterChartCreateNestedManyWithoutEncounterInput
     insuranceClaim?: InsuranceClaimCreateNestedOneWithoutInpatientEncounterInput
+    dataShareRequest?: DataShareRequestCreateNestedOneWithoutInpatientEncounterInput
   }
 
   export type InpatientEncounterUncheckedCreateWithoutOrdersInput = {
@@ -45139,6 +50798,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     charts?: InpatientEncounterChartUncheckedCreateNestedManyWithoutEncounterInput
     insuranceClaim?: InsuranceClaimUncheckedCreateNestedOneWithoutInpatientEncounterInput
+    dataShareRequest?: DataShareRequestUncheckedCreateNestedOneWithoutInpatientEncounterInput
   }
 
   export type InpatientEncounterCreateOrConnectWithoutOrdersInput = {
@@ -45202,6 +50862,7 @@ export namespace Prisma {
     patient?: PatientUpdateOneRequiredWithoutInpatientEncountersNestedInput
     charts?: InpatientEncounterChartUpdateManyWithoutEncounterNestedInput
     insuranceClaim?: InsuranceClaimUpdateOneWithoutInpatientEncounterNestedInput
+    dataShareRequest?: DataShareRequestUpdateOneWithoutInpatientEncounterNestedInput
   }
 
   export type InpatientEncounterUncheckedUpdateWithoutOrdersInput = {
@@ -45222,6 +50883,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     charts?: InpatientEncounterChartUncheckedUpdateManyWithoutEncounterNestedInput
     insuranceClaim?: InsuranceClaimUncheckedUpdateOneWithoutInpatientEncounterNestedInput
+    dataShareRequest?: DataShareRequestUncheckedUpdateOneWithoutInpatientEncounterNestedInput
   }
 
   export type ParticularCatalogueUpsertWithoutOrdersInput = {
@@ -45324,6 +50986,7 @@ export namespace Prisma {
     user: UserCreateNestedOneWithoutPatientProfileInput
     inpatientEncounters?: InpatientEncounterCreateNestedManyWithoutPatientInput
     outpatientEncounters?: OutpatientEncounterCreateNestedManyWithoutPatientInput
+    dataShareRequests?: DataShareRequestCreateNestedManyWithoutPatientInput
   }
 
   export type PatientUncheckedCreateWithoutInsuranceClaimsInput = {
@@ -45341,6 +51004,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     inpatientEncounters?: InpatientEncounterUncheckedCreateNestedManyWithoutPatientInput
     outpatientEncounters?: OutpatientEncounterUncheckedCreateNestedManyWithoutPatientInput
+    dataShareRequests?: DataShareRequestUncheckedCreateNestedManyWithoutPatientInput
   }
 
   export type PatientCreateOrConnectWithoutInsuranceClaimsInput = {
@@ -45366,6 +51030,7 @@ export namespace Prisma {
     patient: PatientCreateNestedOneWithoutInpatientEncountersInput
     charts?: InpatientEncounterChartCreateNestedManyWithoutEncounterInput
     orders?: InpatientEncounterOrderCreateNestedManyWithoutEncounterInput
+    dataShareRequest?: DataShareRequestCreateNestedOneWithoutInpatientEncounterInput
   }
 
   export type InpatientEncounterUncheckedCreateWithoutInsuranceClaimInput = {
@@ -45386,6 +51051,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     charts?: InpatientEncounterChartUncheckedCreateNestedManyWithoutEncounterInput
     orders?: InpatientEncounterOrderUncheckedCreateNestedManyWithoutEncounterInput
+    dataShareRequest?: DataShareRequestUncheckedCreateNestedOneWithoutInpatientEncounterInput
   }
 
   export type InpatientEncounterCreateOrConnectWithoutInsuranceClaimInput = {
@@ -45407,6 +51073,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     patient: PatientCreateNestedOneWithoutOutpatientEncountersInput
+    dataShareRequest?: DataShareRequestCreateNestedOneWithoutOutpatientEncounterInput
   }
 
   export type OutpatientEncounterUncheckedCreateWithoutInsuranceClaimInput = {
@@ -45423,6 +51090,7 @@ export namespace Prisma {
     notes?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    dataShareRequest?: DataShareRequestUncheckedCreateNestedOneWithoutOutpatientEncounterInput
   }
 
   export type OutpatientEncounterCreateOrConnectWithoutInsuranceClaimInput = {
@@ -45520,6 +51188,7 @@ export namespace Prisma {
     user?: UserUpdateOneRequiredWithoutPatientProfileNestedInput
     inpatientEncounters?: InpatientEncounterUpdateManyWithoutPatientNestedInput
     outpatientEncounters?: OutpatientEncounterUpdateManyWithoutPatientNestedInput
+    dataShareRequests?: DataShareRequestUpdateManyWithoutPatientNestedInput
   }
 
   export type PatientUncheckedUpdateWithoutInsuranceClaimsInput = {
@@ -45537,6 +51206,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     inpatientEncounters?: InpatientEncounterUncheckedUpdateManyWithoutPatientNestedInput
     outpatientEncounters?: OutpatientEncounterUncheckedUpdateManyWithoutPatientNestedInput
+    dataShareRequests?: DataShareRequestUncheckedUpdateManyWithoutPatientNestedInput
   }
 
   export type InpatientEncounterUpsertWithoutInsuranceClaimInput = {
@@ -45568,6 +51238,7 @@ export namespace Prisma {
     patient?: PatientUpdateOneRequiredWithoutInpatientEncountersNestedInput
     charts?: InpatientEncounterChartUpdateManyWithoutEncounterNestedInput
     orders?: InpatientEncounterOrderUpdateManyWithoutEncounterNestedInput
+    dataShareRequest?: DataShareRequestUpdateOneWithoutInpatientEncounterNestedInput
   }
 
   export type InpatientEncounterUncheckedUpdateWithoutInsuranceClaimInput = {
@@ -45588,6 +51259,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     charts?: InpatientEncounterChartUncheckedUpdateManyWithoutEncounterNestedInput
     orders?: InpatientEncounterOrderUncheckedUpdateManyWithoutEncounterNestedInput
+    dataShareRequest?: DataShareRequestUncheckedUpdateOneWithoutInpatientEncounterNestedInput
   }
 
   export type OutpatientEncounterUpsertWithoutInsuranceClaimInput = {
@@ -45615,6 +51287,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     patient?: PatientUpdateOneRequiredWithoutOutpatientEncountersNestedInput
+    dataShareRequest?: DataShareRequestUpdateOneWithoutOutpatientEncounterNestedInput
   }
 
   export type OutpatientEncounterUncheckedUpdateWithoutInsuranceClaimInput = {
@@ -45631,6 +51304,7 @@ export namespace Prisma {
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    dataShareRequest?: DataShareRequestUncheckedUpdateOneWithoutOutpatientEncounterNestedInput
   }
 
   export type InsuranceDocumentUpsertWithWhereUniqueWithoutClaimInput = {
@@ -45919,6 +51593,644 @@ export namespace Prisma {
     documents?: InsuranceDocumentUncheckedUpdateManyWithoutClaimNestedInput
   }
 
+  export type PatientCreateWithoutDataShareRequestsInput = {
+    id?: string
+    patientNumber: string
+    bloodType?: $Enums.BloodType | null
+    allergies?: string | null
+    medicalHistory?: string | null
+    emergencyContact?: string | null
+    emergencyPhone?: string | null
+    insuranceProvider?: string | null
+    insuranceNumber?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutPatientProfileInput
+    inpatientEncounters?: InpatientEncounterCreateNestedManyWithoutPatientInput
+    outpatientEncounters?: OutpatientEncounterCreateNestedManyWithoutPatientInput
+    insuranceClaims?: InsuranceClaimCreateNestedManyWithoutPatientInput
+  }
+
+  export type PatientUncheckedCreateWithoutDataShareRequestsInput = {
+    id?: string
+    userId: string
+    patientNumber: string
+    bloodType?: $Enums.BloodType | null
+    allergies?: string | null
+    medicalHistory?: string | null
+    emergencyContact?: string | null
+    emergencyPhone?: string | null
+    insuranceProvider?: string | null
+    insuranceNumber?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    inpatientEncounters?: InpatientEncounterUncheckedCreateNestedManyWithoutPatientInput
+    outpatientEncounters?: OutpatientEncounterUncheckedCreateNestedManyWithoutPatientInput
+    insuranceClaims?: InsuranceClaimUncheckedCreateNestedManyWithoutPatientInput
+  }
+
+  export type PatientCreateOrConnectWithoutDataShareRequestsInput = {
+    where: PatientWhereUniqueInput
+    create: XOR<PatientCreateWithoutDataShareRequestsInput, PatientUncheckedCreateWithoutDataShareRequestsInput>
+  }
+
+  export type InpatientEncounterCreateWithoutDataShareRequestInput = {
+    id?: string
+    doctorId: string
+    admittedBy?: string | null
+    date: string
+    time: string
+    chiefComplaint: string
+    doctorDiagnosis?: string | null
+    triage: $Enums.InpatientTriage
+    disposition?: $Enums.InpatientDisposition
+    dispositionDate?: string | null
+    dispositionTime?: string | null
+    dispositionNote?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    patient: PatientCreateNestedOneWithoutInpatientEncountersInput
+    charts?: InpatientEncounterChartCreateNestedManyWithoutEncounterInput
+    orders?: InpatientEncounterOrderCreateNestedManyWithoutEncounterInput
+    insuranceClaim?: InsuranceClaimCreateNestedOneWithoutInpatientEncounterInput
+  }
+
+  export type InpatientEncounterUncheckedCreateWithoutDataShareRequestInput = {
+    id?: string
+    patientId: string
+    doctorId: string
+    admittedBy?: string | null
+    date: string
+    time: string
+    chiefComplaint: string
+    doctorDiagnosis?: string | null
+    triage: $Enums.InpatientTriage
+    disposition?: $Enums.InpatientDisposition
+    dispositionDate?: string | null
+    dispositionTime?: string | null
+    dispositionNote?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    charts?: InpatientEncounterChartUncheckedCreateNestedManyWithoutEncounterInput
+    orders?: InpatientEncounterOrderUncheckedCreateNestedManyWithoutEncounterInput
+    insuranceClaim?: InsuranceClaimUncheckedCreateNestedOneWithoutInpatientEncounterInput
+  }
+
+  export type InpatientEncounterCreateOrConnectWithoutDataShareRequestInput = {
+    where: InpatientEncounterWhereUniqueInput
+    create: XOR<InpatientEncounterCreateWithoutDataShareRequestInput, InpatientEncounterUncheckedCreateWithoutDataShareRequestInput>
+  }
+
+  export type OutpatientEncounterCreateWithoutDataShareRequestInput = {
+    id?: string
+    doctorId: string
+    date: string
+    time: string
+    chiefComplaint: string
+    doctorDiagnosis?: string | null
+    type?: $Enums.OutpatientEncounterType
+    consultationFee?: Decimal | DecimalJsLike | number | string | null
+    paymentStatus?: $Enums.OutpatientPaymentStatus
+    notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    patient: PatientCreateNestedOneWithoutOutpatientEncountersInput
+    insuranceClaim?: InsuranceClaimCreateNestedOneWithoutOutpatientEncounterInput
+  }
+
+  export type OutpatientEncounterUncheckedCreateWithoutDataShareRequestInput = {
+    id?: string
+    patientId: string
+    doctorId: string
+    date: string
+    time: string
+    chiefComplaint: string
+    doctorDiagnosis?: string | null
+    type?: $Enums.OutpatientEncounterType
+    consultationFee?: Decimal | DecimalJsLike | number | string | null
+    paymentStatus?: $Enums.OutpatientPaymentStatus
+    notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    insuranceClaim?: InsuranceClaimUncheckedCreateNestedOneWithoutOutpatientEncounterInput
+  }
+
+  export type OutpatientEncounterCreateOrConnectWithoutDataShareRequestInput = {
+    where: OutpatientEncounterWhereUniqueInput
+    create: XOR<OutpatientEncounterCreateWithoutDataShareRequestInput, OutpatientEncounterUncheckedCreateWithoutDataShareRequestInput>
+  }
+
+  export type DataShareDocumentCreateWithoutRequestInput = {
+    id?: string
+    documentType: string
+    fileName: string
+    fileUrl: string
+    fileSize: number
+    mimeType: string
+    description?: string | null
+    uploadedBy: string
+    createdAt?: Date | string
+  }
+
+  export type DataShareDocumentUncheckedCreateWithoutRequestInput = {
+    id?: string
+    documentType: string
+    fileName: string
+    fileUrl: string
+    fileSize: number
+    mimeType: string
+    description?: string | null
+    uploadedBy: string
+    createdAt?: Date | string
+  }
+
+  export type DataShareDocumentCreateOrConnectWithoutRequestInput = {
+    where: DataShareDocumentWhereUniqueInput
+    create: XOR<DataShareDocumentCreateWithoutRequestInput, DataShareDocumentUncheckedCreateWithoutRequestInput>
+  }
+
+  export type DataShareDocumentCreateManyRequestInputEnvelope = {
+    data: DataShareDocumentCreateManyRequestInput | DataShareDocumentCreateManyRequestInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type DataShareAccessTokenCreateWithoutRequestInput = {
+    id?: string
+    token: string
+    recipientEmail: string
+    expiresAt: Date | string
+    usedAt?: Date | string | null
+    isRevoked?: boolean
+    createdAt?: Date | string
+  }
+
+  export type DataShareAccessTokenUncheckedCreateWithoutRequestInput = {
+    id?: string
+    token: string
+    recipientEmail: string
+    expiresAt: Date | string
+    usedAt?: Date | string | null
+    isRevoked?: boolean
+    createdAt?: Date | string
+  }
+
+  export type DataShareAccessTokenCreateOrConnectWithoutRequestInput = {
+    where: DataShareAccessTokenWhereUniqueInput
+    create: XOR<DataShareAccessTokenCreateWithoutRequestInput, DataShareAccessTokenUncheckedCreateWithoutRequestInput>
+  }
+
+  export type DataShareAccessTokenCreateManyRequestInputEnvelope = {
+    data: DataShareAccessTokenCreateManyRequestInput | DataShareAccessTokenCreateManyRequestInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type PatientUpsertWithoutDataShareRequestsInput = {
+    update: XOR<PatientUpdateWithoutDataShareRequestsInput, PatientUncheckedUpdateWithoutDataShareRequestsInput>
+    create: XOR<PatientCreateWithoutDataShareRequestsInput, PatientUncheckedCreateWithoutDataShareRequestsInput>
+    where?: PatientWhereInput
+  }
+
+  export type PatientUpdateToOneWithWhereWithoutDataShareRequestsInput = {
+    where?: PatientWhereInput
+    data: XOR<PatientUpdateWithoutDataShareRequestsInput, PatientUncheckedUpdateWithoutDataShareRequestsInput>
+  }
+
+  export type PatientUpdateWithoutDataShareRequestsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    patientNumber?: StringFieldUpdateOperationsInput | string
+    bloodType?: NullableEnumBloodTypeFieldUpdateOperationsInput | $Enums.BloodType | null
+    allergies?: NullableStringFieldUpdateOperationsInput | string | null
+    medicalHistory?: NullableStringFieldUpdateOperationsInput | string | null
+    emergencyContact?: NullableStringFieldUpdateOperationsInput | string | null
+    emergencyPhone?: NullableStringFieldUpdateOperationsInput | string | null
+    insuranceProvider?: NullableStringFieldUpdateOperationsInput | string | null
+    insuranceNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutPatientProfileNestedInput
+    inpatientEncounters?: InpatientEncounterUpdateManyWithoutPatientNestedInput
+    outpatientEncounters?: OutpatientEncounterUpdateManyWithoutPatientNestedInput
+    insuranceClaims?: InsuranceClaimUpdateManyWithoutPatientNestedInput
+  }
+
+  export type PatientUncheckedUpdateWithoutDataShareRequestsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    patientNumber?: StringFieldUpdateOperationsInput | string
+    bloodType?: NullableEnumBloodTypeFieldUpdateOperationsInput | $Enums.BloodType | null
+    allergies?: NullableStringFieldUpdateOperationsInput | string | null
+    medicalHistory?: NullableStringFieldUpdateOperationsInput | string | null
+    emergencyContact?: NullableStringFieldUpdateOperationsInput | string | null
+    emergencyPhone?: NullableStringFieldUpdateOperationsInput | string | null
+    insuranceProvider?: NullableStringFieldUpdateOperationsInput | string | null
+    insuranceNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    inpatientEncounters?: InpatientEncounterUncheckedUpdateManyWithoutPatientNestedInput
+    outpatientEncounters?: OutpatientEncounterUncheckedUpdateManyWithoutPatientNestedInput
+    insuranceClaims?: InsuranceClaimUncheckedUpdateManyWithoutPatientNestedInput
+  }
+
+  export type InpatientEncounterUpsertWithoutDataShareRequestInput = {
+    update: XOR<InpatientEncounterUpdateWithoutDataShareRequestInput, InpatientEncounterUncheckedUpdateWithoutDataShareRequestInput>
+    create: XOR<InpatientEncounterCreateWithoutDataShareRequestInput, InpatientEncounterUncheckedCreateWithoutDataShareRequestInput>
+    where?: InpatientEncounterWhereInput
+  }
+
+  export type InpatientEncounterUpdateToOneWithWhereWithoutDataShareRequestInput = {
+    where?: InpatientEncounterWhereInput
+    data: XOR<InpatientEncounterUpdateWithoutDataShareRequestInput, InpatientEncounterUncheckedUpdateWithoutDataShareRequestInput>
+  }
+
+  export type InpatientEncounterUpdateWithoutDataShareRequestInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    doctorId?: StringFieldUpdateOperationsInput | string
+    admittedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    date?: StringFieldUpdateOperationsInput | string
+    time?: StringFieldUpdateOperationsInput | string
+    chiefComplaint?: StringFieldUpdateOperationsInput | string
+    doctorDiagnosis?: NullableStringFieldUpdateOperationsInput | string | null
+    triage?: EnumInpatientTriageFieldUpdateOperationsInput | $Enums.InpatientTriage
+    disposition?: EnumInpatientDispositionFieldUpdateOperationsInput | $Enums.InpatientDisposition
+    dispositionDate?: NullableStringFieldUpdateOperationsInput | string | null
+    dispositionTime?: NullableStringFieldUpdateOperationsInput | string | null
+    dispositionNote?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    patient?: PatientUpdateOneRequiredWithoutInpatientEncountersNestedInput
+    charts?: InpatientEncounterChartUpdateManyWithoutEncounterNestedInput
+    orders?: InpatientEncounterOrderUpdateManyWithoutEncounterNestedInput
+    insuranceClaim?: InsuranceClaimUpdateOneWithoutInpatientEncounterNestedInput
+  }
+
+  export type InpatientEncounterUncheckedUpdateWithoutDataShareRequestInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    patientId?: StringFieldUpdateOperationsInput | string
+    doctorId?: StringFieldUpdateOperationsInput | string
+    admittedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    date?: StringFieldUpdateOperationsInput | string
+    time?: StringFieldUpdateOperationsInput | string
+    chiefComplaint?: StringFieldUpdateOperationsInput | string
+    doctorDiagnosis?: NullableStringFieldUpdateOperationsInput | string | null
+    triage?: EnumInpatientTriageFieldUpdateOperationsInput | $Enums.InpatientTriage
+    disposition?: EnumInpatientDispositionFieldUpdateOperationsInput | $Enums.InpatientDisposition
+    dispositionDate?: NullableStringFieldUpdateOperationsInput | string | null
+    dispositionTime?: NullableStringFieldUpdateOperationsInput | string | null
+    dispositionNote?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    charts?: InpatientEncounterChartUncheckedUpdateManyWithoutEncounterNestedInput
+    orders?: InpatientEncounterOrderUncheckedUpdateManyWithoutEncounterNestedInput
+    insuranceClaim?: InsuranceClaimUncheckedUpdateOneWithoutInpatientEncounterNestedInput
+  }
+
+  export type OutpatientEncounterUpsertWithoutDataShareRequestInput = {
+    update: XOR<OutpatientEncounterUpdateWithoutDataShareRequestInput, OutpatientEncounterUncheckedUpdateWithoutDataShareRequestInput>
+    create: XOR<OutpatientEncounterCreateWithoutDataShareRequestInput, OutpatientEncounterUncheckedCreateWithoutDataShareRequestInput>
+    where?: OutpatientEncounterWhereInput
+  }
+
+  export type OutpatientEncounterUpdateToOneWithWhereWithoutDataShareRequestInput = {
+    where?: OutpatientEncounterWhereInput
+    data: XOR<OutpatientEncounterUpdateWithoutDataShareRequestInput, OutpatientEncounterUncheckedUpdateWithoutDataShareRequestInput>
+  }
+
+  export type OutpatientEncounterUpdateWithoutDataShareRequestInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    doctorId?: StringFieldUpdateOperationsInput | string
+    date?: StringFieldUpdateOperationsInput | string
+    time?: StringFieldUpdateOperationsInput | string
+    chiefComplaint?: StringFieldUpdateOperationsInput | string
+    doctorDiagnosis?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: EnumOutpatientEncounterTypeFieldUpdateOperationsInput | $Enums.OutpatientEncounterType
+    consultationFee?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    paymentStatus?: EnumOutpatientPaymentStatusFieldUpdateOperationsInput | $Enums.OutpatientPaymentStatus
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    patient?: PatientUpdateOneRequiredWithoutOutpatientEncountersNestedInput
+    insuranceClaim?: InsuranceClaimUpdateOneWithoutOutpatientEncounterNestedInput
+  }
+
+  export type OutpatientEncounterUncheckedUpdateWithoutDataShareRequestInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    patientId?: StringFieldUpdateOperationsInput | string
+    doctorId?: StringFieldUpdateOperationsInput | string
+    date?: StringFieldUpdateOperationsInput | string
+    time?: StringFieldUpdateOperationsInput | string
+    chiefComplaint?: StringFieldUpdateOperationsInput | string
+    doctorDiagnosis?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: EnumOutpatientEncounterTypeFieldUpdateOperationsInput | $Enums.OutpatientEncounterType
+    consultationFee?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    paymentStatus?: EnumOutpatientPaymentStatusFieldUpdateOperationsInput | $Enums.OutpatientPaymentStatus
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    insuranceClaim?: InsuranceClaimUncheckedUpdateOneWithoutOutpatientEncounterNestedInput
+  }
+
+  export type DataShareDocumentUpsertWithWhereUniqueWithoutRequestInput = {
+    where: DataShareDocumentWhereUniqueInput
+    update: XOR<DataShareDocumentUpdateWithoutRequestInput, DataShareDocumentUncheckedUpdateWithoutRequestInput>
+    create: XOR<DataShareDocumentCreateWithoutRequestInput, DataShareDocumentUncheckedCreateWithoutRequestInput>
+  }
+
+  export type DataShareDocumentUpdateWithWhereUniqueWithoutRequestInput = {
+    where: DataShareDocumentWhereUniqueInput
+    data: XOR<DataShareDocumentUpdateWithoutRequestInput, DataShareDocumentUncheckedUpdateWithoutRequestInput>
+  }
+
+  export type DataShareDocumentUpdateManyWithWhereWithoutRequestInput = {
+    where: DataShareDocumentScalarWhereInput
+    data: XOR<DataShareDocumentUpdateManyMutationInput, DataShareDocumentUncheckedUpdateManyWithoutRequestInput>
+  }
+
+  export type DataShareDocumentScalarWhereInput = {
+    AND?: DataShareDocumentScalarWhereInput | DataShareDocumentScalarWhereInput[]
+    OR?: DataShareDocumentScalarWhereInput[]
+    NOT?: DataShareDocumentScalarWhereInput | DataShareDocumentScalarWhereInput[]
+    id?: UuidFilter<"DataShareDocument"> | string
+    requestId?: UuidFilter<"DataShareDocument"> | string
+    documentType?: StringFilter<"DataShareDocument"> | string
+    fileName?: StringFilter<"DataShareDocument"> | string
+    fileUrl?: StringFilter<"DataShareDocument"> | string
+    fileSize?: IntFilter<"DataShareDocument"> | number
+    mimeType?: StringFilter<"DataShareDocument"> | string
+    description?: StringNullableFilter<"DataShareDocument"> | string | null
+    uploadedBy?: StringFilter<"DataShareDocument"> | string
+    createdAt?: DateTimeFilter<"DataShareDocument"> | Date | string
+  }
+
+  export type DataShareAccessTokenUpsertWithWhereUniqueWithoutRequestInput = {
+    where: DataShareAccessTokenWhereUniqueInput
+    update: XOR<DataShareAccessTokenUpdateWithoutRequestInput, DataShareAccessTokenUncheckedUpdateWithoutRequestInput>
+    create: XOR<DataShareAccessTokenCreateWithoutRequestInput, DataShareAccessTokenUncheckedCreateWithoutRequestInput>
+  }
+
+  export type DataShareAccessTokenUpdateWithWhereUniqueWithoutRequestInput = {
+    where: DataShareAccessTokenWhereUniqueInput
+    data: XOR<DataShareAccessTokenUpdateWithoutRequestInput, DataShareAccessTokenUncheckedUpdateWithoutRequestInput>
+  }
+
+  export type DataShareAccessTokenUpdateManyWithWhereWithoutRequestInput = {
+    where: DataShareAccessTokenScalarWhereInput
+    data: XOR<DataShareAccessTokenUpdateManyMutationInput, DataShareAccessTokenUncheckedUpdateManyWithoutRequestInput>
+  }
+
+  export type DataShareAccessTokenScalarWhereInput = {
+    AND?: DataShareAccessTokenScalarWhereInput | DataShareAccessTokenScalarWhereInput[]
+    OR?: DataShareAccessTokenScalarWhereInput[]
+    NOT?: DataShareAccessTokenScalarWhereInput | DataShareAccessTokenScalarWhereInput[]
+    id?: UuidFilter<"DataShareAccessToken"> | string
+    requestId?: UuidFilter<"DataShareAccessToken"> | string
+    token?: StringFilter<"DataShareAccessToken"> | string
+    recipientEmail?: StringFilter<"DataShareAccessToken"> | string
+    expiresAt?: DateTimeFilter<"DataShareAccessToken"> | Date | string
+    usedAt?: DateTimeNullableFilter<"DataShareAccessToken"> | Date | string | null
+    isRevoked?: BoolFilter<"DataShareAccessToken"> | boolean
+    createdAt?: DateTimeFilter<"DataShareAccessToken"> | Date | string
+  }
+
+  export type DataShareRequestCreateWithoutDocumentsInput = {
+    id?: string
+    requestNumber: string
+    hospitalIdentifier: string
+    hospitalName: string
+    hospitalEmail: string
+    reason: string
+    status?: $Enums.DataShareStatus
+    submittedAt?: Date | string | null
+    reviewedAt?: Date | string | null
+    accessedAt?: Date | string | null
+    selectedData?: NullableJsonNullValueInput | InputJsonValue
+    requestNotes?: string | null
+    reviewNotes?: string | null
+    denialReason?: string | null
+    requestedBy: string
+    reviewedBy?: string | null
+    patientConsent?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    patient: PatientCreateNestedOneWithoutDataShareRequestsInput
+    inpatientEncounter?: InpatientEncounterCreateNestedOneWithoutDataShareRequestInput
+    outpatientEncounter?: OutpatientEncounterCreateNestedOneWithoutDataShareRequestInput
+    accessTokens?: DataShareAccessTokenCreateNestedManyWithoutRequestInput
+  }
+
+  export type DataShareRequestUncheckedCreateWithoutDocumentsInput = {
+    id?: string
+    requestNumber: string
+    patientId: string
+    inpatientEncounterId?: string | null
+    outpatientEncounterId?: string | null
+    hospitalIdentifier: string
+    hospitalName: string
+    hospitalEmail: string
+    reason: string
+    status?: $Enums.DataShareStatus
+    submittedAt?: Date | string | null
+    reviewedAt?: Date | string | null
+    accessedAt?: Date | string | null
+    selectedData?: NullableJsonNullValueInput | InputJsonValue
+    requestNotes?: string | null
+    reviewNotes?: string | null
+    denialReason?: string | null
+    requestedBy: string
+    reviewedBy?: string | null
+    patientConsent?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    accessTokens?: DataShareAccessTokenUncheckedCreateNestedManyWithoutRequestInput
+  }
+
+  export type DataShareRequestCreateOrConnectWithoutDocumentsInput = {
+    where: DataShareRequestWhereUniqueInput
+    create: XOR<DataShareRequestCreateWithoutDocumentsInput, DataShareRequestUncheckedCreateWithoutDocumentsInput>
+  }
+
+  export type DataShareRequestUpsertWithoutDocumentsInput = {
+    update: XOR<DataShareRequestUpdateWithoutDocumentsInput, DataShareRequestUncheckedUpdateWithoutDocumentsInput>
+    create: XOR<DataShareRequestCreateWithoutDocumentsInput, DataShareRequestUncheckedCreateWithoutDocumentsInput>
+    where?: DataShareRequestWhereInput
+  }
+
+  export type DataShareRequestUpdateToOneWithWhereWithoutDocumentsInput = {
+    where?: DataShareRequestWhereInput
+    data: XOR<DataShareRequestUpdateWithoutDocumentsInput, DataShareRequestUncheckedUpdateWithoutDocumentsInput>
+  }
+
+  export type DataShareRequestUpdateWithoutDocumentsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    requestNumber?: StringFieldUpdateOperationsInput | string
+    hospitalIdentifier?: StringFieldUpdateOperationsInput | string
+    hospitalName?: StringFieldUpdateOperationsInput | string
+    hospitalEmail?: StringFieldUpdateOperationsInput | string
+    reason?: StringFieldUpdateOperationsInput | string
+    status?: EnumDataShareStatusFieldUpdateOperationsInput | $Enums.DataShareStatus
+    submittedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    accessedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    selectedData?: NullableJsonNullValueInput | InputJsonValue
+    requestNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    denialReason?: NullableStringFieldUpdateOperationsInput | string | null
+    requestedBy?: StringFieldUpdateOperationsInput | string
+    reviewedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    patientConsent?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    patient?: PatientUpdateOneRequiredWithoutDataShareRequestsNestedInput
+    inpatientEncounter?: InpatientEncounterUpdateOneWithoutDataShareRequestNestedInput
+    outpatientEncounter?: OutpatientEncounterUpdateOneWithoutDataShareRequestNestedInput
+    accessTokens?: DataShareAccessTokenUpdateManyWithoutRequestNestedInput
+  }
+
+  export type DataShareRequestUncheckedUpdateWithoutDocumentsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    requestNumber?: StringFieldUpdateOperationsInput | string
+    patientId?: StringFieldUpdateOperationsInput | string
+    inpatientEncounterId?: NullableStringFieldUpdateOperationsInput | string | null
+    outpatientEncounterId?: NullableStringFieldUpdateOperationsInput | string | null
+    hospitalIdentifier?: StringFieldUpdateOperationsInput | string
+    hospitalName?: StringFieldUpdateOperationsInput | string
+    hospitalEmail?: StringFieldUpdateOperationsInput | string
+    reason?: StringFieldUpdateOperationsInput | string
+    status?: EnumDataShareStatusFieldUpdateOperationsInput | $Enums.DataShareStatus
+    submittedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    accessedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    selectedData?: NullableJsonNullValueInput | InputJsonValue
+    requestNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    denialReason?: NullableStringFieldUpdateOperationsInput | string | null
+    requestedBy?: StringFieldUpdateOperationsInput | string
+    reviewedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    patientConsent?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    accessTokens?: DataShareAccessTokenUncheckedUpdateManyWithoutRequestNestedInput
+  }
+
+  export type DataShareRequestCreateWithoutAccessTokensInput = {
+    id?: string
+    requestNumber: string
+    hospitalIdentifier: string
+    hospitalName: string
+    hospitalEmail: string
+    reason: string
+    status?: $Enums.DataShareStatus
+    submittedAt?: Date | string | null
+    reviewedAt?: Date | string | null
+    accessedAt?: Date | string | null
+    selectedData?: NullableJsonNullValueInput | InputJsonValue
+    requestNotes?: string | null
+    reviewNotes?: string | null
+    denialReason?: string | null
+    requestedBy: string
+    reviewedBy?: string | null
+    patientConsent?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    patient: PatientCreateNestedOneWithoutDataShareRequestsInput
+    inpatientEncounter?: InpatientEncounterCreateNestedOneWithoutDataShareRequestInput
+    outpatientEncounter?: OutpatientEncounterCreateNestedOneWithoutDataShareRequestInput
+    documents?: DataShareDocumentCreateNestedManyWithoutRequestInput
+  }
+
+  export type DataShareRequestUncheckedCreateWithoutAccessTokensInput = {
+    id?: string
+    requestNumber: string
+    patientId: string
+    inpatientEncounterId?: string | null
+    outpatientEncounterId?: string | null
+    hospitalIdentifier: string
+    hospitalName: string
+    hospitalEmail: string
+    reason: string
+    status?: $Enums.DataShareStatus
+    submittedAt?: Date | string | null
+    reviewedAt?: Date | string | null
+    accessedAt?: Date | string | null
+    selectedData?: NullableJsonNullValueInput | InputJsonValue
+    requestNotes?: string | null
+    reviewNotes?: string | null
+    denialReason?: string | null
+    requestedBy: string
+    reviewedBy?: string | null
+    patientConsent?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    documents?: DataShareDocumentUncheckedCreateNestedManyWithoutRequestInput
+  }
+
+  export type DataShareRequestCreateOrConnectWithoutAccessTokensInput = {
+    where: DataShareRequestWhereUniqueInput
+    create: XOR<DataShareRequestCreateWithoutAccessTokensInput, DataShareRequestUncheckedCreateWithoutAccessTokensInput>
+  }
+
+  export type DataShareRequestUpsertWithoutAccessTokensInput = {
+    update: XOR<DataShareRequestUpdateWithoutAccessTokensInput, DataShareRequestUncheckedUpdateWithoutAccessTokensInput>
+    create: XOR<DataShareRequestCreateWithoutAccessTokensInput, DataShareRequestUncheckedCreateWithoutAccessTokensInput>
+    where?: DataShareRequestWhereInput
+  }
+
+  export type DataShareRequestUpdateToOneWithWhereWithoutAccessTokensInput = {
+    where?: DataShareRequestWhereInput
+    data: XOR<DataShareRequestUpdateWithoutAccessTokensInput, DataShareRequestUncheckedUpdateWithoutAccessTokensInput>
+  }
+
+  export type DataShareRequestUpdateWithoutAccessTokensInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    requestNumber?: StringFieldUpdateOperationsInput | string
+    hospitalIdentifier?: StringFieldUpdateOperationsInput | string
+    hospitalName?: StringFieldUpdateOperationsInput | string
+    hospitalEmail?: StringFieldUpdateOperationsInput | string
+    reason?: StringFieldUpdateOperationsInput | string
+    status?: EnumDataShareStatusFieldUpdateOperationsInput | $Enums.DataShareStatus
+    submittedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    accessedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    selectedData?: NullableJsonNullValueInput | InputJsonValue
+    requestNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    denialReason?: NullableStringFieldUpdateOperationsInput | string | null
+    requestedBy?: StringFieldUpdateOperationsInput | string
+    reviewedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    patientConsent?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    patient?: PatientUpdateOneRequiredWithoutDataShareRequestsNestedInput
+    inpatientEncounter?: InpatientEncounterUpdateOneWithoutDataShareRequestNestedInput
+    outpatientEncounter?: OutpatientEncounterUpdateOneWithoutDataShareRequestNestedInput
+    documents?: DataShareDocumentUpdateManyWithoutRequestNestedInput
+  }
+
+  export type DataShareRequestUncheckedUpdateWithoutAccessTokensInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    requestNumber?: StringFieldUpdateOperationsInput | string
+    patientId?: StringFieldUpdateOperationsInput | string
+    inpatientEncounterId?: NullableStringFieldUpdateOperationsInput | string | null
+    outpatientEncounterId?: NullableStringFieldUpdateOperationsInput | string | null
+    hospitalIdentifier?: StringFieldUpdateOperationsInput | string
+    hospitalName?: StringFieldUpdateOperationsInput | string
+    hospitalEmail?: StringFieldUpdateOperationsInput | string
+    reason?: StringFieldUpdateOperationsInput | string
+    status?: EnumDataShareStatusFieldUpdateOperationsInput | $Enums.DataShareStatus
+    submittedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    accessedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    selectedData?: NullableJsonNullValueInput | InputJsonValue
+    requestNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    denialReason?: NullableStringFieldUpdateOperationsInput | string | null
+    requestedBy?: StringFieldUpdateOperationsInput | string
+    reviewedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    patientConsent?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    documents?: DataShareDocumentUncheckedUpdateManyWithoutRequestNestedInput
+  }
+
   export type RefreshTokenCreateManyUserInput = {
     id?: string
     token: string
@@ -46163,6 +52475,30 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
+  export type DataShareRequestCreateManyPatientInput = {
+    id?: string
+    requestNumber: string
+    inpatientEncounterId?: string | null
+    outpatientEncounterId?: string | null
+    hospitalIdentifier: string
+    hospitalName: string
+    hospitalEmail: string
+    reason: string
+    status?: $Enums.DataShareStatus
+    submittedAt?: Date | string | null
+    reviewedAt?: Date | string | null
+    accessedAt?: Date | string | null
+    selectedData?: NullableJsonNullValueInput | InputJsonValue
+    requestNotes?: string | null
+    reviewNotes?: string | null
+    denialReason?: string | null
+    requestedBy: string
+    reviewedBy?: string | null
+    patientConsent?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
   export type InpatientEncounterUpdateWithoutPatientInput = {
     id?: StringFieldUpdateOperationsInput | string
     doctorId?: StringFieldUpdateOperationsInput | string
@@ -46181,6 +52517,7 @@ export namespace Prisma {
     charts?: InpatientEncounterChartUpdateManyWithoutEncounterNestedInput
     orders?: InpatientEncounterOrderUpdateManyWithoutEncounterNestedInput
     insuranceClaim?: InsuranceClaimUpdateOneWithoutInpatientEncounterNestedInput
+    dataShareRequest?: DataShareRequestUpdateOneWithoutInpatientEncounterNestedInput
   }
 
   export type InpatientEncounterUncheckedUpdateWithoutPatientInput = {
@@ -46201,6 +52538,7 @@ export namespace Prisma {
     charts?: InpatientEncounterChartUncheckedUpdateManyWithoutEncounterNestedInput
     orders?: InpatientEncounterOrderUncheckedUpdateManyWithoutEncounterNestedInput
     insuranceClaim?: InsuranceClaimUncheckedUpdateOneWithoutInpatientEncounterNestedInput
+    dataShareRequest?: DataShareRequestUncheckedUpdateOneWithoutInpatientEncounterNestedInput
   }
 
   export type InpatientEncounterUncheckedUpdateManyWithoutPatientInput = {
@@ -46234,6 +52572,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     insuranceClaim?: InsuranceClaimUpdateOneWithoutOutpatientEncounterNestedInput
+    dataShareRequest?: DataShareRequestUpdateOneWithoutOutpatientEncounterNestedInput
   }
 
   export type OutpatientEncounterUncheckedUpdateWithoutPatientInput = {
@@ -46250,6 +52589,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     insuranceClaim?: InsuranceClaimUncheckedUpdateOneWithoutOutpatientEncounterNestedInput
+    dataShareRequest?: DataShareRequestUncheckedUpdateOneWithoutOutpatientEncounterNestedInput
   }
 
   export type OutpatientEncounterUncheckedUpdateManyWithoutPatientInput = {
@@ -46333,6 +52673,82 @@ export namespace Prisma {
     insuranceNotes?: NullableStringFieldUpdateOperationsInput | string | null
     createdBy?: StringFieldUpdateOperationsInput | string
     reviewedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DataShareRequestUpdateWithoutPatientInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    requestNumber?: StringFieldUpdateOperationsInput | string
+    hospitalIdentifier?: StringFieldUpdateOperationsInput | string
+    hospitalName?: StringFieldUpdateOperationsInput | string
+    hospitalEmail?: StringFieldUpdateOperationsInput | string
+    reason?: StringFieldUpdateOperationsInput | string
+    status?: EnumDataShareStatusFieldUpdateOperationsInput | $Enums.DataShareStatus
+    submittedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    accessedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    selectedData?: NullableJsonNullValueInput | InputJsonValue
+    requestNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    denialReason?: NullableStringFieldUpdateOperationsInput | string | null
+    requestedBy?: StringFieldUpdateOperationsInput | string
+    reviewedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    patientConsent?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    inpatientEncounter?: InpatientEncounterUpdateOneWithoutDataShareRequestNestedInput
+    outpatientEncounter?: OutpatientEncounterUpdateOneWithoutDataShareRequestNestedInput
+    documents?: DataShareDocumentUpdateManyWithoutRequestNestedInput
+    accessTokens?: DataShareAccessTokenUpdateManyWithoutRequestNestedInput
+  }
+
+  export type DataShareRequestUncheckedUpdateWithoutPatientInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    requestNumber?: StringFieldUpdateOperationsInput | string
+    inpatientEncounterId?: NullableStringFieldUpdateOperationsInput | string | null
+    outpatientEncounterId?: NullableStringFieldUpdateOperationsInput | string | null
+    hospitalIdentifier?: StringFieldUpdateOperationsInput | string
+    hospitalName?: StringFieldUpdateOperationsInput | string
+    hospitalEmail?: StringFieldUpdateOperationsInput | string
+    reason?: StringFieldUpdateOperationsInput | string
+    status?: EnumDataShareStatusFieldUpdateOperationsInput | $Enums.DataShareStatus
+    submittedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    accessedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    selectedData?: NullableJsonNullValueInput | InputJsonValue
+    requestNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    denialReason?: NullableStringFieldUpdateOperationsInput | string | null
+    requestedBy?: StringFieldUpdateOperationsInput | string
+    reviewedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    patientConsent?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    documents?: DataShareDocumentUncheckedUpdateManyWithoutRequestNestedInput
+    accessTokens?: DataShareAccessTokenUncheckedUpdateManyWithoutRequestNestedInput
+  }
+
+  export type DataShareRequestUncheckedUpdateManyWithoutPatientInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    requestNumber?: StringFieldUpdateOperationsInput | string
+    inpatientEncounterId?: NullableStringFieldUpdateOperationsInput | string | null
+    outpatientEncounterId?: NullableStringFieldUpdateOperationsInput | string | null
+    hospitalIdentifier?: StringFieldUpdateOperationsInput | string
+    hospitalName?: StringFieldUpdateOperationsInput | string
+    hospitalEmail?: StringFieldUpdateOperationsInput | string
+    reason?: StringFieldUpdateOperationsInput | string
+    status?: EnumDataShareStatusFieldUpdateOperationsInput | $Enums.DataShareStatus
+    submittedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    accessedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    selectedData?: NullableJsonNullValueInput | InputJsonValue
+    requestNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    denialReason?: NullableStringFieldUpdateOperationsInput | string | null
+    requestedBy?: StringFieldUpdateOperationsInput | string
+    reviewedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    patientConsent?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -46860,6 +53276,94 @@ export namespace Prisma {
   }
 
   export type InsuranceAccessTokenUncheckedUpdateManyWithoutClaimInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    token?: StringFieldUpdateOperationsInput | string
+    recipientEmail?: StringFieldUpdateOperationsInput | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    usedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isRevoked?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DataShareDocumentCreateManyRequestInput = {
+    id?: string
+    documentType: string
+    fileName: string
+    fileUrl: string
+    fileSize: number
+    mimeType: string
+    description?: string | null
+    uploadedBy: string
+    createdAt?: Date | string
+  }
+
+  export type DataShareAccessTokenCreateManyRequestInput = {
+    id?: string
+    token: string
+    recipientEmail: string
+    expiresAt: Date | string
+    usedAt?: Date | string | null
+    isRevoked?: boolean
+    createdAt?: Date | string
+  }
+
+  export type DataShareDocumentUpdateWithoutRequestInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    documentType?: StringFieldUpdateOperationsInput | string
+    fileName?: StringFieldUpdateOperationsInput | string
+    fileUrl?: StringFieldUpdateOperationsInput | string
+    fileSize?: IntFieldUpdateOperationsInput | number
+    mimeType?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    uploadedBy?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DataShareDocumentUncheckedUpdateWithoutRequestInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    documentType?: StringFieldUpdateOperationsInput | string
+    fileName?: StringFieldUpdateOperationsInput | string
+    fileUrl?: StringFieldUpdateOperationsInput | string
+    fileSize?: IntFieldUpdateOperationsInput | number
+    mimeType?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    uploadedBy?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DataShareDocumentUncheckedUpdateManyWithoutRequestInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    documentType?: StringFieldUpdateOperationsInput | string
+    fileName?: StringFieldUpdateOperationsInput | string
+    fileUrl?: StringFieldUpdateOperationsInput | string
+    fileSize?: IntFieldUpdateOperationsInput | number
+    mimeType?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    uploadedBy?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DataShareAccessTokenUpdateWithoutRequestInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    token?: StringFieldUpdateOperationsInput | string
+    recipientEmail?: StringFieldUpdateOperationsInput | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    usedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isRevoked?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DataShareAccessTokenUncheckedUpdateWithoutRequestInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    token?: StringFieldUpdateOperationsInput | string
+    recipientEmail?: StringFieldUpdateOperationsInput | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    usedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isRevoked?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DataShareAccessTokenUncheckedUpdateManyWithoutRequestInput = {
     id?: StringFieldUpdateOperationsInput | string
     token?: StringFieldUpdateOperationsInput | string
     recipientEmail?: StringFieldUpdateOperationsInput | string
