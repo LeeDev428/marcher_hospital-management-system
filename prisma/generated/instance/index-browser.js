@@ -457,6 +457,55 @@ exports.Prisma.InsuranceAccessTokenScalarFieldEnum = {
   createdAt: 'createdAt'
 };
 
+exports.Prisma.DataShareRequestScalarFieldEnum = {
+  id: 'id',
+  requestNumber: 'requestNumber',
+  patientId: 'patientId',
+  inpatientEncounterId: 'inpatientEncounterId',
+  outpatientEncounterId: 'outpatientEncounterId',
+  hospitalIdentifier: 'hospitalIdentifier',
+  hospitalName: 'hospitalName',
+  hospitalEmail: 'hospitalEmail',
+  reason: 'reason',
+  status: 'status',
+  submittedAt: 'submittedAt',
+  reviewedAt: 'reviewedAt',
+  accessedAt: 'accessedAt',
+  selectedData: 'selectedData',
+  requestNotes: 'requestNotes',
+  reviewNotes: 'reviewNotes',
+  denialReason: 'denialReason',
+  requestedBy: 'requestedBy',
+  reviewedBy: 'reviewedBy',
+  patientConsent: 'patientConsent',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.DataShareDocumentScalarFieldEnum = {
+  id: 'id',
+  requestId: 'requestId',
+  documentType: 'documentType',
+  fileName: 'fileName',
+  fileUrl: 'fileUrl',
+  fileSize: 'fileSize',
+  mimeType: 'mimeType',
+  description: 'description',
+  uploadedBy: 'uploadedBy',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.DataShareAccessTokenScalarFieldEnum = {
+  id: 'id',
+  requestId: 'requestId',
+  token: 'token',
+  recipientEmail: 'recipientEmail',
+  expiresAt: 'expiresAt',
+  usedAt: 'usedAt',
+  isRevoked: 'isRevoked',
+  createdAt: 'createdAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -706,6 +755,16 @@ exports.InsuranceClaimStatus = exports.$Enums.InsuranceClaimStatus = {
   CANCELLED: 'CANCELLED'
 };
 
+exports.DataShareStatus = exports.$Enums.DataShareStatus = {
+  PENDING: 'PENDING',
+  SUBMITTED: 'SUBMITTED',
+  APPROVED: 'APPROVED',
+  DENIED: 'DENIED',
+  ACCESSED: 'ACCESSED',
+  EXPIRED: 'EXPIRED',
+  CANCELLED: 'CANCELLED'
+};
+
 exports.Prisma.ModelName = {
   User: 'User',
   StaffCredentials: 'StaffCredentials',
@@ -730,7 +789,10 @@ exports.Prisma.ModelName = {
   ParticularCatalogue: 'ParticularCatalogue',
   InsuranceClaim: 'InsuranceClaim',
   InsuranceDocument: 'InsuranceDocument',
-  InsuranceAccessToken: 'InsuranceAccessToken'
+  InsuranceAccessToken: 'InsuranceAccessToken',
+  DataShareRequest: 'DataShareRequest',
+  DataShareDocument: 'DataShareDocument',
+  DataShareAccessToken: 'DataShareAccessToken'
 };
 
 /**
