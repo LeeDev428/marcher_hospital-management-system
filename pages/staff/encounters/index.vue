@@ -65,7 +65,11 @@
 
 					<!-- Show patient encounters when selected -->
 					<div v-if="selectedPatientId">
-						<PatientEncountersView :patient-id="selectedPatientId" />
+						<PatientEncountersView 
+							:patient-id="selectedPatientId" 
+							:show-insurance-button="canAccessInsurance"
+							:show-data-share-button="canAccessDataShare"
+						/>
 					</div>
 				</div>
 			</CardContent>
@@ -74,24 +78,52 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue"
+import { ref, computed, onMounted } from "vue"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "~/components/ui/card"
 import { Input } from "~/components/ui/input"
 import { Label } from "~/components/ui/label"
 import { Button } from "~/components/ui/button"
 import PatientEncountersView from "~/components/app/encounters/PatientEncountersView.vue"
+import { useAuthStore } from "~/stores/app"
 
 definePageMeta({
 	layout: "staff",
 })
 
 const { $trpc } = useNuxtApp()
+const authStore = useAuthStore()
 
 const searchQuery = ref("")
 const searchResults = ref<any[]>([])
 const searching = ref(false)
 const selectedPatient = ref<any>(null)
 const selectedPatientId = ref<string | null>(null)
+
+// Get staff type directly from auth store instead of API call
+const staffType = computed(() => {
+	return authStore.user?.staffCredentials?.staffType || null
+})
+
+// Computed property to check if current user can access insurance features
+const canAccessInsurance = computed(() => {
+	if (!staffType.value) return false
+	// BILLING_STAFF and ADMISSIONS_STAFF can access insurance features
+	return ['BILLING_STAFF', 'ADMISSIONS_STAFF'].includes(staffType.value)
+})
+
+// Computed property to check if current user can access data share features
+const canAccessDataShare = computed(() => {
+	if (!staffType.value) return false
+	// Only DOCTOR and NURSE can access data share features
+	return ['DOCTOR', 'NURSE'].includes(staffType.value)
+})
+
+onMounted(async () => {
+	console.log('🔍 Current User:', authStore.user)
+	console.log('✅ Staff Type:', staffType.value)
+	console.log('🔐 Can Access Insurance:', canAccessInsurance.value)
+	console.log('🔐 Can Access Data Share:', canAccessDataShare.value)
+})
 
 let searchTimeout: NodeJS.Timeout | null = null
 
