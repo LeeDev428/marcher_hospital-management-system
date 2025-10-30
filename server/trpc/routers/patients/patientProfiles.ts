@@ -84,6 +84,27 @@ const getActivePatientProfiles = publicProcedure
 							dateOfBirth: true,
 							status: true,
 						}
+					},
+					inpatientEncounters: {
+						orderBy: {
+							createdAt: 'desc'
+						},
+						take: 1,
+						select: {
+							id: true,
+							disposition: true,
+							createdAt: true,
+						}
+					},
+					dataShareRequests: {
+						orderBy: {
+							createdAt: 'desc'
+						},
+						take: 1,
+						select: {
+							status: true,
+							requestNumber: true,
+						}
 					}
 				},
 				orderBy: {
@@ -91,10 +112,18 @@ const getActivePatientProfiles = publicProcedure
 				},
 			})
 
+			// Map to include computed fields
+			const patientsWithStatus = patientProfiles.map(patient => ({
+				...patient,
+				latestEncounter: patient.inpatientEncounters[0] || null,
+				dataShareStatus: patient.dataShareRequests[0]?.status || null,
+				dataShareRequestNumber: patient.dataShareRequests[0]?.requestNumber || null,
+			}))
+
 			return {
 				success: true,
 				message: "Patient profiles fetched successfully",
-				data: patientProfiles,
+				data: patientsWithStatus,
 			}
 
 		} catch (error) {
