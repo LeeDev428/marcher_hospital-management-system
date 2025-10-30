@@ -117,6 +117,7 @@ model Patient {
   inpatientEncounters  InpatientEncounter[]
   outpatientEncounters OutpatientEncounter[]
   insuranceClaims      InsuranceClaim[]
+  dataShareRequests    DataShareRequest[]
 
   // System fields
   createdAt DateTime @default(now())
@@ -577,21 +578,22 @@ enum OutpatientPaymentStatus {
 
 // Outpatient Encounter - Created by doctors for consultations
 model OutpatientEncounter {
-  id              String                  @id @default(uuid()) @db.Uuid
-  patientId       String
-  patient         Patient                 @relation(fields: [patientId], references: [id], onDelete: Cascade)
-  doctorId        String // User ID of the doctor
-  date            String // Date in YYYY-MM-DD format
-  time            String // Time in HH:MM format
-  chiefComplaint  String // Main reason for visit
-  doctorDiagnosis String? // Doctor's diagnosis
-  type            OutpatientEncounterType @default(CONSULTATION)
-  consultationFee Decimal?                @db.Decimal(10, 2) // Doctor sets this directly
-  paymentStatus   OutpatientPaymentStatus @default(UNPAID)
-  notes           String? // Additional notes
-  insuranceClaim  InsuranceClaim? // Insurance claim for this encounter
-  createdAt       DateTime                @default(now())
-  updatedAt       DateTime                @updatedAt
+  id               String                  @id @default(uuid()) @db.Uuid
+  patientId        String
+  patient          Patient                 @relation(fields: [patientId], references: [id], onDelete: Cascade)
+  doctorId         String // User ID of the doctor
+  date             String // Date in YYYY-MM-DD format
+  time             String // Time in HH:MM format
+  chiefComplaint   String // Main reason for visit
+  doctorDiagnosis  String? // Doctor's diagnosis
+  type             OutpatientEncounterType @default(CONSULTATION)
+  consultationFee  Decimal?                @db.Decimal(10, 2) // Doctor sets this directly
+  paymentStatus    OutpatientPaymentStatus @default(UNPAID)
+  notes            String? // Additional notes
+  insuranceClaim   InsuranceClaim? // Insurance claim for this encounter
+  dataShareRequest DataShareRequest? // Data share request for this encounter
+  createdAt        DateTime                @default(now())
+  updatedAt        DateTime                @updatedAt
 
   @@index([patientId])
   @@index([doctorId])
@@ -619,25 +621,26 @@ enum InpatientDisposition {
 
 // Inpatient Encounter - Created by admissions staff
 model InpatientEncounter {
-  id              String                    @id @default(uuid()) @db.Uuid
-  patientId       String
-  patient         Patient                   @relation(fields: [patientId], references: [id], onDelete: Cascade)
-  doctorId        String // Assigned doctor (User ID)
-  admittedBy      String? // Admissions staff who created this (User ID)
-  date            String // Admission date in YYYY-MM-DD format
-  time            String // Admission time in HH:MM format
-  chiefComplaint  String // Initial complaint/reason for admission
-  doctorDiagnosis String? // Doctor's diagnosis
-  triage          InpatientTriage // Priority level
-  disposition     InpatientDisposition      @default(ADMITTED)
-  dispositionDate String? // Discharge/transfer date
-  dispositionTime String? // Discharge/transfer time
-  dispositionNote String? // Notes about disposition
-  charts          InpatientEncounterChart[] // Progress notes by doctor
-  orders          InpatientEncounterOrder[] // Orders/particulars added by doctor
-  insuranceClaim  InsuranceClaim? // Insurance claim for this encounter
-  createdAt       DateTime                  @default(now())
-  updatedAt       DateTime                  @updatedAt
+  id               String                    @id @default(uuid()) @db.Uuid
+  patientId        String
+  patient          Patient                   @relation(fields: [patientId], references: [id], onDelete: Cascade)
+  doctorId         String // Assigned doctor (User ID)
+  admittedBy       String? // Admissions staff who created this (User ID)
+  date             String // Admission date in YYYY-MM-DD format
+  time             String // Admission time in HH:MM format
+  chiefComplaint   String // Initial complaint/reason for admission
+  doctorDiagnosis  String? // Doctor's diagnosis
+  triage           InpatientTriage // Priority level
+  disposition      InpatientDisposition      @default(ADMITTED)
+  dispositionDate  String? // Discharge/transfer date
+  dispositionTime  String? // Discharge/transfer time
+  dispositionNote  String? // Notes about disposition
+  charts           InpatientEncounterChart[] // Progress notes by doctor
+  orders           InpatientEncounterOrder[] // Orders/particulars added by doctor
+  insuranceClaim   InsuranceClaim? // Insurance claim for this encounter
+  dataShareRequest DataShareRequest? // Data share request for this encounter
+  createdAt        DateTime                  @default(now())
+  updatedAt        DateTime                  @updatedAt
 
   @@index([patientId])
   @@index([doctorId])
@@ -842,4 +845,125 @@ model InsuranceAccessToken {
   @@index([claimId])
   @@index([expiresAt])
   @@map("insurance_access_tokens")
+}
+
+// ============================================
+// DATA SHARING SYSTEM (Doctor/Nurse → 3rd Party Hospitals)
+// ============================================
+
+// Data Share Requests - For sharing patient data with external hospitals
+model DataShareRequest {
+  id            String @id @default(uuid()) @db.Uuid
+  requestNumber String @unique // Auto-generated: DSR-YYYYMMDD-XXXX
+
+  // Patient and Encounter
+  patientId String
+  patient   Patient @relation(fields: [patientId], references: [id], onDelete: Cascade)
+
+  // Can be either inpatient or outpatient encounter
+  inpatientEncounterId String?             @unique @db.Uuid
+  inpatientEncounter   InpatientEncounter? @relation(fields: [inpatientEncounterId], references: [id], onDelete: Cascade)
+
+  outpatientEncounterId String?              @unique @db.Uuid
+  outpatientEncounter   OutpatientEncounter? @relation(fields: [outpatientEncounterId], references: [id], onDelete: Cascade)
+
+  // Request Details
+  hospitalIdentifier String // 3rd party hospital ID/name
+  hospitalName       String // Hospital name
+  hospitalEmail      String // Hospital email for access link
+  reason             String // Reason for data sharing request
+
+  // Status and workflow
+  status      DataShareStatus @default(PENDING)
+  submittedAt DateTime? // When submitted for review
+  reviewedAt  DateTime? // When staff reviewed
+  accessedAt  DateTime? // When hospital accessed data
+
+  // Data Selection (JSON - which encounter particulars to share)
+  selectedData Json? // Array of data types: ["vitals", "diagnosis", "medications", "labs"]
+
+  // Notes
+  requestNotes String? // Notes from requesting doctor/nurse
+  reviewNotes  String? // Notes from reviewing staff
+  denialReason String? // Reason if denied
+
+  // Actors
+  requestedBy String // Doctor/Nurse user ID
+  reviewedBy  String? // Staff user ID who approved/denied
+
+  // Patient Consent
+  patientConsent Boolean @default(false)
+
+  // Relationships
+  documents    DataShareDocument[]
+  accessTokens DataShareAccessToken[]
+
+  // System fields
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([patientId])
+  @@index([status])
+  @@index([requestNumber])
+  @@index([requestedBy])
+  @@map("data_share_requests")
+}
+
+// Data Share Documents - Additional documents for data sharing
+model DataShareDocument {
+  id        String           @id @default(uuid()) @db.Uuid
+  requestId String           @db.Uuid
+  request   DataShareRequest @relation(fields: [requestId], references: [id], onDelete: Cascade)
+
+  // Document details
+  documentType String // e.g., "Authorization Letter", "Medical Records"
+  fileName     String // Original file name
+  fileUrl      String // Path or URL to stored file
+  fileSize     Int // Size in bytes
+  mimeType     String // File MIME type
+
+  // Metadata
+  description String? // Optional description
+  uploadedBy  String // User ID who uploaded
+
+  // System fields
+  createdAt DateTime @default(now())
+
+  @@index([requestId])
+  @@map("data_share_documents")
+}
+
+// Data Share Access Tokens - For external hospital to access patient data
+model DataShareAccessToken {
+  id        String           @id @default(uuid()) @db.Uuid
+  requestId String           @db.Uuid
+  request   DataShareRequest @relation(fields: [requestId], references: [id], onDelete: Cascade)
+
+  // Token details
+  token          String @unique // Secure random token
+  recipientEmail String // Hospital email
+
+  // Expiration and usage
+  expiresAt DateTime // Token expiration (e.g., 30 days)
+  usedAt    DateTime? // When token was first used
+  isRevoked Boolean   @default(false) // Can be manually revoked
+
+  // System fields
+  createdAt DateTime @default(now())
+
+  @@index([token])
+  @@index([requestId])
+  @@index([expiresAt])
+  @@map("data_share_access_tokens")
+}
+
+// Data Share Status Enum
+enum DataShareStatus {
+  PENDING // Created by doctor/nurse, awaiting review
+  SUBMITTED // Submitted for staff review
+  APPROVED // Approved by staff, token sent to hospital
+  DENIED // Denied by staff
+  ACCESSED // Hospital has accessed the data
+  EXPIRED // Token expired before use
+  CANCELLED // Cancelled by requester
 }
