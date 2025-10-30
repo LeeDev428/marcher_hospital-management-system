@@ -170,7 +170,10 @@
 
 					<!-- Show patient encounters when selected -->
 					<div v-if="selectedPatientId">
-						<PatientEncountersView :patient-id="selectedPatientId" />
+						<PatientEncountersView 
+							:patient-id="selectedPatientId"
+							:show-insurance-button="true"
+						/>
 					</div>
 				</div>
 			</CardContent>
