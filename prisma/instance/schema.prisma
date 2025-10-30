@@ -79,6 +79,12 @@ model StaffCredentials {
   // Education and Experience
   education         String?
   yearsOfExperience Int?
+  qualification     String?  // Professional qualification (MD, RN, etc.)
+  
+  // OPD Schedule
+  opdDay            String?  // Day of week for OPD
+  opdStartTime      String?  // OPD start time (HH:mm format)
+  opdEndTime        String?  // OPD end time (HH:mm format)
   
   // Medical staff specific fields
   consultationFee   Decimal?  // For doctors
