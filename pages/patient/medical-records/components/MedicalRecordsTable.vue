@@ -216,10 +216,17 @@ defineExpose({
             </span>
           </TableCell>
           <TableCell>
-            <Button v-if="record.fileUrl" variant="outline" size="sm" @click="onDownload(record.fileUrl)">
-              <Icon name="mdi:download" class="mr-1" /> Download
-            </Button>
-            <span v-else class="text-gray-400 text-sm">No file</span>
+            <div v-if="record.status === 'COMPLETED' && record.fileUrl">
+              <Button variant="outline" size="sm" @click="onDownload(record.fileUrl)">
+                <Icon name="mdi:download" class="mr-1" /> Download
+              </Button>
+            </div>
+            <div v-else-if="record.status === 'COMPLETED' && !record.fileUrl">
+              <span class="text-gray-400 text-sm">No file</span>
+            </div>
+            <div v-else>
+              <span class="text-amber-600 text-xs font-medium">Payment Required</span>
+            </div>
           </TableCell>
           <TableCell>{{ new Date(record.createdAt).toLocaleDateString() }}</TableCell>
           <TableCell class="flex gap-2">
