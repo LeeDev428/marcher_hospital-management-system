@@ -15,10 +15,14 @@ import {
 } from "@/components/ui/table"
 import { Button } from "@/components/ui/button"
 import { Skeleton } from "@/components/ui/skeleton"
+import PaymentDialog from "./PaymentDialog.vue"
+import { useToast } from "@/composables/useToast"
 
 /* ===================== STATE ===================== */
 const activeTab = ref("unsettled")
 const loading = ref(true)
+const paymentDialogOpen = ref(false)
+const selectedBill = ref<any>(null)
 
 // 🔎 Search (debounced) — mirrored from DoctorTable.vue
 const search = ref("")
@@ -158,12 +162,39 @@ onMounted(() => {
   setTimeout(() => (loading.value = false), 500)
 })
 
-const handleSettle = (id: string) => {
-  const idx = bills.value.findIndex(b => b.id === id)
+const openPaymentDialog = (bill: any) => {
+  selectedBill.value = bill
+  paymentDialogOpen.value = true
+}
+
+const handleConfirmPayment = (billId: string, paymentMethod: string) => {
+  // Simulate payment processing
+  console.log(`Processing payment for bill ${billId} via ${paymentMethod}`)
+  
+  // Update bill status
+  const idx = bills.value.findIndex(b => b.id === billId)
   if (idx !== -1) {
     bills.value[idx].status = "completed"
     bills.value[idx].settledAtISO = new Date().toISOString()
-    activeTab.value = "completed" // show on top immediately
+  }
+  
+  // Close dialog
+  paymentDialogOpen.value = false
+  selectedBill.value = null
+  
+  // Show success message
+  useToast("success", "Payment Successful", `Your payment via ${paymentMethod === 'paymaya' ? 'PayMaya' : 'Maya'} has been processed successfully.`)
+  
+  // Switch to completed tab to show the payment
+  setTimeout(() => {
+    activeTab.value = "completed"
+  }, 500)
+}
+
+const handleSettle = (id: string) => {
+  const bill = bills.value.find(b => b.id === id)
+  if (bill) {
+    openPaymentDialog(bill)
   }
 }
 
@@ -272,8 +303,13 @@ function formatDateTimeISO(iso?: string) {
             <TableCell class="px-6 py-4 text-right whitespace-nowrap">{{ peso(bill.cost) }}</TableCell>
             <TableCell class="px-6 py-4 text-right whitespace-nowrap">
               <template v-if="bill.status === 'unsettled'">
-                <Button size="sm" class="rounded-full" @click="handleSettle(bill.id)">
-                  Settle
+                <Button 
+                  size="sm" 
+                  class="bg-green-600 hover:bg-green-700 text-white"
+                  @click="openPaymentDialog(bill)"
+                >
+                  <Icon name="mdi:credit-card" class="mr-1" />
+                  Pay Now
                 </Button>
               </template>
               <template v-else>
@@ -328,5 +364,14 @@ function formatDateTimeISO(iso?: string) {
         </div>
       </div>
     </div>
+
+    <!-- Payment Dialog -->
+    <PaymentDialog
+      v-if="selectedBill"
+      :open="paymentDialogOpen"
+      :bill="selectedBill"
+      @update:open="paymentDialogOpen = $event"
+      @confirm-payment="handleConfirmPayment"
+    />
   </div>
 </template>
