@@ -29,11 +29,13 @@ export const useStaffStore = defineStore("staff", {
 							email: user.email,
 							phone: user.phone,
 							role: user.staffCredentials?.staffType || 'OTHER',
-							department: user.staffCredentials?.department || '',
+							department: user.department || user.staffCredentials?.specialization || '',
 							specialization: user.staffCredentials?.specialization || '',
-							position: user.staffCredentials?.position || '',
+							position: user.position || user.staffCredentials?.staffType || '',
 							licenseNumber: user.staffCredentials?.licenseNumber || '',
 							profession: user.staffCredentials?.specialization || '', // Use specialization as profession
+							qualification: user.staffCredentials?.education || user.staffCredentials?.boardCertification?.join(', ') || '',
+							schedules: user.schedules || [],
 							createdAt: user.createdAt,
 							updatedAt: user.updatedAt,
 						}))
