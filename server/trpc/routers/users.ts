@@ -76,10 +76,32 @@ export const usersRouter = createTRPCRouter({
         },
       })
 
+      // Fetch staff schedules separately for staff members
+      const staffIds = users.filter(u => u.role === 'STAFF').map(u => u.id)
+      const schedules = staffIds.length > 0 
+        ? await ctx.instancePrisma.staffSchedule.findMany({
+            where: {
+              staffId: { in: staffIds },
+              isAvailable: true,
+            },
+            orderBy: {
+              day: 'asc',
+            },
+          })
+        : []
+
+      // Map schedules to users
+      const usersWithSchedules = users.map(user => ({
+        ...user,
+        schedules: user.role === 'STAFF' 
+          ? schedules.filter(s => s.staffId === user.id)
+          : [],
+      }))
+
       return {
         success: true,
         message: "Users fetched successfully.",
-        data: users,
+        data: usersWithSchedules,
       }
     } catch (error) {
       console.error("Error fetching users:", error)
