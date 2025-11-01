@@ -17,12 +17,17 @@ import { Button } from "@/components/ui/button"
 import { Skeleton } from "@/components/ui/skeleton"
 import PaymentDialog from "./PaymentDialog.vue"
 import { useToast } from "@/composables/useToast"
+import { useAuthStore } from "@/stores/app/useAuthStore"
+
+const { $trpc } = useNuxtApp()
+const authStore = useAuthStore()
 
 /* ===================== STATE ===================== */
 const activeTab = ref("unsettled")
 const loading = ref(true)
 const paymentDialogOpen = ref(false)
 const selectedBill = ref<any>(null)
+const bills = ref<any[]>([])
 
 // 🔎 Search (debounced) — mirrored from DoctorTable.vue
 const search = ref("")
@@ -49,43 +54,26 @@ function clearSearch() {
   searchInputRef.value?.focus()
 }
 
-// Mock data
-const bills = ref([
-  {
-    id: "1",
-    transactionId: "20249875",
-    date: "08 / 09 / 2025",
-    items: "Request Copy",
-    cost: 1234,
-    status: "unsettled",
-  },
-  {
-    id: "2",
-    transactionId: "20249876",
-    date: "08 / 07 / 2025",
-    items: "Consultation",
-    cost: 850,
-    status: "unsettled",
-  },
-  {
-    id: "3",
-    transactionId: "20249860",
-    date: "07 / 31 / 2025",
-    items: "Laboratory",
-    cost: 580,
-    status: "completed",
-    settledAtISO: "2024-01-02T10:15:00+08:00",
-  },
-  {
-    id: "4",
-    transactionId: "20249840",
-    date: "08 / 04 / 2025",
-    items: "Imaging",
-    cost: 1450,
-    status: "completed",
-    settledAtISO: "2023-12-29T14:45:00+08:00",
-  },
-])
+// Fetch bills from API
+const fetchBills = async () => {
+  if (!authStore.user?.id) return
+  
+  loading.value = true
+  try {
+    const { success, data } = await $trpc.billing.getPatientBills.query({
+      patientId: authStore.user.id
+    })
+    
+    if (success && data) {
+      bills.value = data
+    }
+  } catch (error) {
+    console.error("Error fetching bills:", error)
+    useToast("error", "Billing", "Failed to load bills")
+  } finally {
+    loading.value = false
+  }
+}
 
 /* ===================== SORTING PER TAB ===================== */
 function parseSlashDate(s: string) {
@@ -158,8 +146,8 @@ const pageWindow = computed(() => {
 })
 
 /* ===================== ACTIONS ===================== */
-onMounted(() => {
-  setTimeout(() => (loading.value = false), 500)
+onMounted(async () => {
+  await fetchBills()
 })
 
 const openPaymentDialog = (bill: any) => {
@@ -167,28 +155,40 @@ const openPaymentDialog = (bill: any) => {
   paymentDialogOpen.value = true
 }
 
-const handleConfirmPayment = (billId: string, paymentMethod: string) => {
-  // Simulate payment processing
-  console.log(`Processing payment for bill ${billId} via ${paymentMethod}`)
-  
-  // Update bill status
-  const idx = bills.value.findIndex(b => b.id === billId)
-  if (idx !== -1) {
-    bills.value[idx].status = "completed"
-    bills.value[idx].settledAtISO = new Date().toISOString()
+const handleConfirmPayment = async (billId: string, paymentMethod: string) => {
+  try {
+    const bill = bills.value.find(b => b.id === billId)
+    if (!bill) return
+    
+    // Call payment API
+    const { success, message } = await $trpc.billing.processPayment.mutate({
+      billId,
+      paymentMethod,
+      amount: bill.cost,
+    })
+    
+    if (success) {
+      // Refresh bills
+      await fetchBills()
+      
+      // Close dialog
+      paymentDialogOpen.value = false
+      selectedBill.value = null
+      
+      // Show success message
+      useToast("success", "Payment Successful", `Your payment via ${paymentMethod === 'paymaya' ? 'PayMaya' : 'Maya'} has been processed successfully.`)
+      
+      // Switch to completed tab
+      setTimeout(() => {
+        activeTab.value = "completed"
+      }, 500)
+    } else {
+      useToast("error", "Payment Failed", message || "Failed to process payment")
+    }
+  } catch (error) {
+    console.error("Payment error:", error)
+    useToast("error", "Payment Failed", "An error occurred while processing your payment")
   }
-  
-  // Close dialog
-  paymentDialogOpen.value = false
-  selectedBill.value = null
-  
-  // Show success message
-  useToast("success", "Payment Successful", `Your payment via ${paymentMethod === 'paymaya' ? 'PayMaya' : 'Maya'} has been processed successfully.`)
-  
-  // Switch to completed tab to show the payment
-  setTimeout(() => {
-    activeTab.value = "completed"
-  }, 500)
 }
 
 const handleSettle = (id: string) => {
