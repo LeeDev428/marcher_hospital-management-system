@@ -100,6 +100,31 @@ onMounted(async () => {
   await staffStore.getStaffProfiles("DOCTOR")
 })
 
+// Helper function to format schedule
+const formatSchedule = (schedules: any[]) => {
+  if (!schedules || schedules.length === 0) return null
+  
+  // Get first available schedule
+  const schedule = schedules[0]
+  const days = ['SUNDAY', 'MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY']
+  const dayName = schedule.day
+  
+  // Format time from 24hr to 12hr
+  const formatTime = (time: string) => {
+    if (!time) return ''
+    const [hours, minutes] = time.split(':')
+    const hour = parseInt(hours)
+    const ampm = hour >= 12 ? 'PM' : 'AM'
+    const hour12 = hour % 12 || 12
+    return `${hour12}:${minutes} ${ampm}`
+  }
+  
+  return {
+    day: dayName.charAt(0) + dayName.slice(1).toLowerCase(),
+    time: `${formatTime(schedule.startTime)} - ${formatTime(schedule.endTime)}`
+  }
+}
+
 // Expose search for parent component
 defineExpose({ search, clearSearch, searchInputRef })
 </script>
@@ -187,9 +212,9 @@ defineExpose({ search, clearSearch, searchInputRef })
             <TableCell class="px-6 py-4 whitespace-nowrap">{{ doc.profession || '-' }}</TableCell>
             <TableCell class="px-6 py-4">{{ doc.qualification || '-' }}</TableCell>
             <TableCell class="px-6 py-4">
-              <div v-if="doc.opdSchedule" class="text-sm">
-                <div class="font-medium">{{ doc.opdSchedule.day }}</div>
-                <div class="text-muted-foreground">{{ doc.opdSchedule.time }}</div>
+              <div v-if="formatSchedule(doc.schedules)" class="text-sm">
+                <div class="font-medium">{{ formatSchedule(doc.schedules).day }}</div>
+                <div class="text-muted-foreground">{{ formatSchedule(doc.schedules).time }}</div>
               </div>
               <span v-else class="text-muted-foreground">Not available</span>
             </TableCell>
