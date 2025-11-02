@@ -1,4 +1,4 @@
-import { createTRPCRouter, protectedProcedure } from "@/server/trpc/init"
+import { createTRPCRouter, protectedProcedure, publicProcedure } from "@/server/trpc/init"
 import { z } from "zod"
 
 // Validation schemas for audit trail
@@ -16,13 +16,11 @@ const addLogSchema = z.object({
 /**
  * GET: Fetch all facility logs (Audit Trail)
  */
-const getFacilityLogs = protectedProcedure
+const getFacilityLogs = publicProcedure
   .input(getLogsSchema.optional())
   .query(async ({ ctx }) => {
-    const { instancePrisma } = ctx
-
     try {
-      const logs = await instancePrisma.facilityLog.findMany({
+      const logs = await ctx.instancePrisma.facilityLog.findMany({
         orderBy: { timestamp: "desc" },
       })
 
