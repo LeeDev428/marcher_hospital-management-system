@@ -1,9 +1,10 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import { useAuthStore } from "~/stores/app"
 
 const authStore = useAuthStore()
 const navContainer = ref<HTMLDivElement>()
+const scrollPosition = ref(0)
 
 const getUserInitials = () => {
   if (!authStore.user) return 'P'
@@ -23,8 +24,26 @@ const handleLogout = async () => {
 const scrollNav = (scrollAmount: number) => {
   if (navContainer.value) {
     navContainer.value.scrollBy({ left: scrollAmount, behavior: 'smooth' })
+    // Save scroll position
+    scrollPosition.value = navContainer.value.scrollLeft
   }
 }
+
+// Restore scroll position on mount
+onMounted(() => {
+  if (navContainer.value && scrollPosition.value > 0) {
+    navContainer.value.scrollLeft = scrollPosition.value
+  }
+})
+
+// Watch for scroll changes and save position
+watch(navContainer, (el) => {
+  if (el) {
+    el.addEventListener('scroll', () => {
+      scrollPosition.value = el.scrollLeft
+    })
+  }
+})
 </script>
 
 <style scoped>
@@ -82,6 +101,15 @@ const scrollNav = (scrollAmount: number) => {
                 >
                   <Icon name="lucide:calendar" class="w-4 h-4 mr-2" />
                   Appointments
+                </NuxtLink>
+                
+                <NuxtLink 
+                  to="/patient/doctor" 
+                  class="flex items-center px-3 py-2 text-sm font-medium rounded-md"
+                  :class="$route.path.startsWith('/patient/doctor') ? 'text-teal-700 bg-teal-50' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'"
+                >
+                  <Icon name="lucide:stethoscope" class="w-4 h-4 mr-2" />
+                  Doctors Directory
                 </NuxtLink>
                 
                 <NuxtLink 
