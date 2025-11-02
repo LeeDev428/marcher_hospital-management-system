@@ -25,7 +25,7 @@ const showQRDialog = ref(false)
 const selectedRoom = ref<any>(null)
 
 const onEdit = (id: string) => {
-	navigateTo(`/facilities/${id}`)
+	navigateTo(`/staff/facilities/${id}`)
 }
 
 const viewQRCode = (room: any) => {
