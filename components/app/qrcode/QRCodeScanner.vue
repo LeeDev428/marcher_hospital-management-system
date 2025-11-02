@@ -36,16 +36,45 @@ const onDecode = async (result: QrScanner.ScanResult) => {
 			return
 		}
 
+		// Get current route to determine base path
+		const route = useRoute()
+		const isStaffRoute = route.path.startsWith('/staff')
+		const isAdminRoute = route.path.startsWith('/admin')
+		
+		let targetPath = ''
+
 		if (parsedData.entity === "patient") {
-			await navigateTo(`/patients/${parsedData.id}`)
+			if (isStaffRoute) {
+				targetPath = `/staff/patients/${parsedData.id}`
+			} else if (isAdminRoute) {
+				targetPath = `/admin/patients/${parsedData.id}`
+			} else {
+				targetPath = `/patients/${parsedData.id}`
+			}
 		}
 
 		if (parsedData.entity === "facility") {
-			await navigateTo(`/facilities/${parsedData.id}`)
+			if (isStaffRoute) {
+				targetPath = `/staff/facilities/${parsedData.id}`
+			} else if (isAdminRoute) {
+				targetPath = `/admin/facilities/${parsedData.id}`
+			} else {
+				targetPath = `/facilities/${parsedData.id}`
+			}
 		}
 
 		if (parsedData.entity === "staff") {
-			await navigateTo(`/staff/${parsedData.id}`)
+			if (isStaffRoute) {
+				targetPath = `/staff/profile/${parsedData.id}`
+			} else if (isAdminRoute) {
+				targetPath = `/admin/staff/${parsedData.id}`
+			} else {
+				targetPath = `/staff/${parsedData.id}`
+			}
+		}
+
+		if (targetPath) {
+			await navigateTo(targetPath)
 		}
 
 		qrScanner.stop()
