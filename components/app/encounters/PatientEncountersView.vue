@@ -56,9 +56,27 @@
 										<Icon name="lucide:eye" class="w-4 h-4 mr-2" />
 										View Details
 									</Button>
-									<Button @click="goToInsurance(encounter, 'inpatient')" size="sm" variant="outline" class="text-blue-600 border-blue-600 hover:bg-blue-50">
-										<Icon name="lucide:file-text" class="w-4 h-4 mr-2" />
+									<!-- Insurance Button (Billing/Admissions Staff) -->
+									<Button 
+										v-if="props.showInsuranceButton"
+										@click="goToInsurance(encounter, 'inpatient')" 
+										size="sm" 
+										variant="outline" 
+										class="text-blue-600 border-blue-600 hover:bg-blue-50"
+									>
+										<Icon name="lucide:shield-check" class="w-4 h-4 mr-2" />
 										Insurance
+									</Button>
+									<!-- Data Share Button (Doctor/Nurse) -->
+									<Button 
+										v-if="props.showDataShareButton"
+										@click="goToDataShare(encounter, 'inpatient')" 
+										size="sm" 
+										variant="outline" 
+										class="text-green-600 border-green-600 hover:bg-green-50"
+									>
+										<Icon name="lucide:share-2" class="w-4 h-4 mr-2" />
+										Data Share
 									</Button>
 								</div>
 							</div>
@@ -112,9 +130,27 @@
 										<Icon name="lucide:eye" class="w-4 h-4 mr-2" />
 										View Details
 									</Button>
-									<Button @click="goToInsurance(encounter, 'outpatient')" size="sm" variant="outline" class="text-blue-600 border-blue-600 hover:bg-blue-50">
-										<Icon name="lucide:file-text" class="w-4 h-4 mr-2" />
+									<!-- Insurance Button (Billing/Admissions Staff) -->
+									<Button 
+										v-if="props.showInsuranceButton"
+										@click="goToInsurance(encounter, 'outpatient')" 
+										size="sm" 
+										variant="outline" 
+										class="text-blue-600 border-blue-600 hover:bg-blue-50"
+									>
+										<Icon name="lucide:shield-check" class="w-4 h-4 mr-2" />
 										Insurance
+									</Button>
+									<!-- Data Share Button (Doctor/Nurse) -->
+									<Button 
+										v-if="props.showDataShareButton"
+										@click="goToDataShare(encounter, 'outpatient')" 
+										size="sm" 
+										variant="outline" 
+										class="text-green-600 border-green-600 hover:bg-green-50"
+									>
+										<Icon name="lucide:share-2" class="w-4 h-4 mr-2" />
+										Data Share
 									</Button>
 								</div>
 							</div>
@@ -268,6 +304,8 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } f
 
 const props = defineProps<{
 	patientId: string
+	showInsuranceButton?: boolean  // For BILLING_STAFF, ADMISSIONS_STAFF
+	showDataShareButton?: boolean  // For DOCTOR, NURSE
 }>()
 
 const { $trpc } = useNuxtApp()
@@ -362,6 +400,11 @@ function goToInsurance(encounter: any, type: 'inpatient' | 'outpatient') {
 		// Navigate to create new claim
 		router.push(`/billing_staff/insurance/${encounter.id}/new?type=${type}`)
 	}
+}
+
+function goToDataShare(encounter: any, type: 'inpatient' | 'outpatient') {
+	// Navigate to data share request page
+	router.push(`/staff/data-share/${encounter.id}/new?type=${type}`)
 }
 
 function formatDateTime(date: string, time: string) {
