@@ -3,14 +3,13 @@ import { createTRPCRouter, protectedProcedure, publicProcedure } from "@/server/
 import { getPatientProfileSchema } from "@/types/patients/patientProfile"
 import { querySchema } from "@/types/app/query"
 
-const getPatientProfile = protectedProcedure
+const getPatientProfile = publicProcedure
 	.input(getPatientProfileSchema)
 	.query(async ({ ctx, input }) => {
-		const { instancePrisma } = ctx
 		const { id } = input
 
 		try {
-			const patientProfile = await instancePrisma.patient.findUnique({
+			const patientProfile = await ctx.instancePrisma.patient.findUnique({
 				where: { id },
 				include: {
 					user: true,
