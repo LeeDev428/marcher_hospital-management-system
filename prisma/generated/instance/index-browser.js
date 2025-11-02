@@ -506,6 +506,99 @@ exports.Prisma.DataShareAccessTokenScalarFieldEnum = {
   createdAt: 'createdAt'
 };
 
+exports.Prisma.BillingTransactionScalarFieldEnum = {
+  id: 'id',
+  transactionNumber: 'transactionNumber',
+  patientId: 'patientId',
+  encounterId: 'encounterId',
+  status: 'status',
+  totalAmount: 'totalAmount',
+  insuranceDiscount: 'insuranceDiscount',
+  finalAmount: 'finalAmount',
+  paidAmount: 'paidAmount',
+  balanceAmount: 'balanceAmount',
+  hasPreAuth: 'hasPreAuth',
+  preAuthSettled: 'preAuthSettled',
+  hasPaymentPlan: 'hasPaymentPlan',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  createdBy: 'createdBy'
+};
+
+exports.Prisma.BillingLineItemScalarFieldEnum = {
+  id: 'id',
+  transactionId: 'transactionId',
+  itemType: 'itemType',
+  description: 'description',
+  quantity: 'quantity',
+  unitPrice: 'unitPrice',
+  totalPrice: 'totalPrice',
+  requiresPreAuth: 'requiresPreAuth',
+  preAuthPaid: 'preAuthPaid',
+  preAuthPaymentId: 'preAuthPaymentId',
+  insuranceCoverable: 'insuranceCoverable',
+  insuranceDiscount: 'insuranceDiscount',
+  finalPrice: 'finalPrice',
+  encounterOrderId: 'encounterOrderId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  addedBy: 'addedBy'
+};
+
+exports.Prisma.InsuranceCoverageScalarFieldEnum = {
+  id: 'id',
+  lineItemId: 'lineItemId',
+  insuranceProvider: 'insuranceProvider',
+  insuranceNumber: 'insuranceNumber',
+  coveragePercentage: 'coveragePercentage',
+  coverageAmount: 'coverageAmount',
+  claimStatus: 'claimStatus',
+  claimNumber: 'claimNumber',
+  claimNotes: 'claimNotes',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  verifiedBy: 'verifiedBy'
+};
+
+exports.Prisma.BillingPaymentScalarFieldEnum = {
+  id: 'id',
+  paymentNumber: 'paymentNumber',
+  transactionId: 'transactionId',
+  amount: 'amount',
+  paymentMethod: 'paymentMethod',
+  paymentType: 'paymentType',
+  isPreAuthPayment: 'isPreAuthPayment',
+  paymentPlanId: 'paymentPlanId',
+  installmentNumber: 'installmentNumber',
+  mayaPaymentId: 'mayaPaymentId',
+  mayaPaymentStatus: 'mayaPaymentStatus',
+  mayaReceiptUrl: 'mayaReceiptUrl',
+  status: 'status',
+  paidAt: 'paidAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  processedBy: 'processedBy'
+};
+
+exports.Prisma.PaymentPlanScalarFieldEnum = {
+  id: 'id',
+  transactionId: 'transactionId',
+  totalAmount: 'totalAmount',
+  installmentCount: 'installmentCount',
+  installmentAmount: 'installmentAmount',
+  frequency: 'frequency',
+  paidInstallments: 'paidInstallments',
+  remainingAmount: 'remainingAmount',
+  mayaSubscriptionId: 'mayaSubscriptionId',
+  mayaNextChargeDate: 'mayaNextChargeDate',
+  status: 'status',
+  startDate: 'startDate',
+  nextDueDate: 'nextDueDate',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  setupBy: 'setupBy'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -683,14 +776,21 @@ exports.PaymentMethod = exports.$Enums.PaymentMethod = {
   CASH: 'CASH',
   CARD: 'CARD',
   ONLINE: 'ONLINE',
-  INSURANCE: 'INSURANCE'
+  INSURANCE: 'INSURANCE',
+  MAYA: 'MAYA',
+  PAYMAYA: 'PAYMAYA',
+  BANK_TRANSFER: 'BANK_TRANSFER',
+  CHECK: 'CHECK',
+  CREDIT_CARD: 'CREDIT_CARD',
+  DEBIT_CARD: 'DEBIT_CARD'
 };
 
 exports.PaymentStatus = exports.$Enums.PaymentStatus = {
   PENDING: 'PENDING',
   COMPLETED: 'COMPLETED',
   CANCELLED: 'CANCELLED',
-  REFUNDED: 'REFUNDED'
+  REFUNDED: 'REFUNDED',
+  FAILED: 'FAILED'
 };
 
 exports.OutpatientEncounterType = exports.$Enums.OutpatientEncounterType = {
@@ -752,7 +852,8 @@ exports.InsuranceClaimStatus = exports.$Enums.InsuranceClaimStatus = {
   UNDER_REVIEW: 'UNDER_REVIEW',
   APPROVED: 'APPROVED',
   DENIED: 'DENIED',
-  CANCELLED: 'CANCELLED'
+  CANCELLED: 'CANCELLED',
+  PROCESSING: 'PROCESSING'
 };
 
 exports.DataShareStatus = exports.$Enums.DataShareStatus = {
@@ -762,6 +863,44 @@ exports.DataShareStatus = exports.$Enums.DataShareStatus = {
   DENIED: 'DENIED',
   ACCESSED: 'ACCESSED',
   EXPIRED: 'EXPIRED',
+  CANCELLED: 'CANCELLED'
+};
+
+exports.BillingStatus = exports.$Enums.BillingStatus = {
+  PENDING: 'PENDING',
+  PARTIALLY_PAID: 'PARTIALLY_PAID',
+  PAID: 'PAID',
+  OVERDUE: 'OVERDUE',
+  CANCELLED: 'CANCELLED'
+};
+
+exports.BillingItemType = exports.$Enums.BillingItemType = {
+  ROOM_CHARGE: 'ROOM_CHARGE',
+  CONSULTATION: 'CONSULTATION',
+  LABORATORY: 'LABORATORY',
+  RADIOLOGY: 'RADIOLOGY',
+  MEDICATION: 'MEDICATION',
+  PROCEDURE: 'PROCEDURE',
+  SURGERY: 'SURGERY',
+  SUPPLIES: 'SUPPLIES',
+  OTHER: 'OTHER'
+};
+
+exports.PaymentType = exports.$Enums.PaymentType = {
+  ONE_TIME: 'ONE_TIME',
+  INSTALLMENT: 'INSTALLMENT'
+};
+
+exports.PaymentFrequency = exports.$Enums.PaymentFrequency = {
+  WEEKLY: 'WEEKLY',
+  BI_WEEKLY: 'BI_WEEKLY',
+  MONTHLY: 'MONTHLY'
+};
+
+exports.PaymentPlanStatus = exports.$Enums.PaymentPlanStatus = {
+  ACTIVE: 'ACTIVE',
+  COMPLETED: 'COMPLETED',
+  DEFAULTED: 'DEFAULTED',
   CANCELLED: 'CANCELLED'
 };
 
@@ -792,7 +931,12 @@ exports.Prisma.ModelName = {
   InsuranceAccessToken: 'InsuranceAccessToken',
   DataShareRequest: 'DataShareRequest',
   DataShareDocument: 'DataShareDocument',
-  DataShareAccessToken: 'DataShareAccessToken'
+  DataShareAccessToken: 'DataShareAccessToken',
+  BillingTransaction: 'BillingTransaction',
+  BillingLineItem: 'BillingLineItem',
+  InsuranceCoverage: 'InsuranceCoverage',
+  BillingPayment: 'BillingPayment',
+  PaymentPlan: 'PaymentPlan'
 };
 
 /**
