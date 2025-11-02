@@ -13,8 +13,8 @@ import { scheduleRouter } from "./schedule"
 import { medicalServicesRouter } from "./medical-services"
 import { pharmacyRouter } from "./pharmacy/index"
 import { encountersRouter } from "./encounters/index"
-import { insuranceRouter } from "./insurance"
-import { datashareRouter } from "./datashare"
+import { insuranceRouter } from "./insurance/index"
+import { datashareRouter } from "./datashare/index"
 
 // Main application router that combines all feature routers
 export const appRouter = createTRPCRouter({
