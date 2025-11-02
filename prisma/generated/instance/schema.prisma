@@ -72,7 +72,8 @@ model StaffCredentials {
   // License and Certifications
   licenseNumber      String?
   licenseExpiryDate  DateTime?
-  specialization     String?
+  qualification      String? // Educational degrees: MD, MBBS, RN, BSN, etc.
+  specialization     String? // Medical specialty: Cardiology, Pediatrics, etc.
   subSpecialization  String?
   boardCertification String[] // Array of certifications
 
