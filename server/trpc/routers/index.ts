@@ -14,7 +14,7 @@ import { medicalServicesRouter } from "./medical-services"
 import { pharmacyRouter } from "./pharmacy/index"
 import { encountersRouter } from "./encounters/index"
 import { insuranceRouter } from "./insurance"
-import { dataShareRouter } from "./datashare"
+import { datashareRouter } from "./datashare"
 
 // Main application router that combines all feature routers
 export const appRouter = createTRPCRouter({
@@ -33,7 +33,7 @@ export const appRouter = createTRPCRouter({
 	pharmacy: pharmacyRouter,
 	encounters: encountersRouter,
 	insurance: insuranceRouter,
-	dataShare: dataShareRouter,
+	datashare: datashareRouter,
 })
 
 export type AppRouter = typeof appRouter
