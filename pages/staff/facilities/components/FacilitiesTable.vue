@@ -11,11 +11,26 @@ import {
 } from "@/components/ui/table"
 import { Button } from "@/components/ui/button"
 import { Skeleton } from "@/components/ui/skeleton"
+import {
+	Dialog,
+	DialogContent,
+	DialogHeader,
+	DialogTitle,
+} from "@/components/ui/dialog"
 
 const roomStore = useRoomStore()
 
+// QR Code Dialog
+const showQRDialog = ref(false)
+const selectedRoom = ref<any>(null)
+
 const onEdit = (id: string) => {
 	navigateTo(`/facilities/${id}`)
+}
+
+const viewQRCode = (room: any) => {
+	selectedRoom.value = room
+	showQRDialog.value = true
 }
 
 onMounted(() => {
@@ -169,6 +184,7 @@ defineExpose({
 							</span>
 						</button>
 					</TableHead>
+					<TableHead class="text-center">QR Code</TableHead>
 					<TableHead>Actions</TableHead>
 				</TableRow>
 			</TableHeader>
@@ -201,6 +217,17 @@ defineExpose({
 					<TableCell :title="new Date(room.updatedAt).toISOString()">
 						{{ new Date(room.updatedAt).toLocaleDateString() }} {{ new Date(room.updatedAt).toLocaleTimeString() }}
 					</TableCell>
+					<TableCell class="text-center">
+						<Button 
+							variant="ghost" 
+							size="icon"
+							@click="viewQRCode(room)"
+							class="hover:bg-blue-50"
+							title="View QR Code"
+						>
+							<Icon name="lucide:qr-code" class="w-5 h-5 text-blue-600" />
+						</Button>
+					</TableCell>
 					<TableCell class="flex gap-2">
 						<Button variant="outline" size="icon" @click="onEdit(room.id)">
 							<Icon name="mdi:pencil" />
@@ -212,7 +239,7 @@ defineExpose({
 				</TableRow>
 
 				<TableRow v-if="paginatedRooms.length === 0">
-					<TableCell colspan="8" class="text-center text-gray-500 py-4">
+					<TableCell colspan="9" class="text-center text-gray-500 py-4">
 						No rooms found.
 					</TableCell>
 				</TableRow>
@@ -298,4 +325,36 @@ defineExpose({
 			</button>
 		</div>
 	</div>
+
+	<!-- QR Code Dialog -->
+	<Dialog v-model:open="showQRDialog">
+		<DialogContent class="max-w-md">
+			<DialogHeader>
+				<DialogTitle>Facility QR Code</DialogTitle>
+			</DialogHeader>
+			
+			<div v-if="selectedRoom" class="space-y-4">
+				<div class="text-center">
+					<h3 class="font-semibold text-lg">{{ selectedRoom.identifier }}</h3>
+					<p class="text-sm text-muted-foreground">{{ selectedRoom.building?.name || 'No Building' }} - {{ selectedRoom.type }}</p>
+				</div>
+				
+				<div class="flex justify-center p-6 bg-white rounded-lg border-2 border-dashed">
+					<ClientOnly>
+						<AppQrcodeQRCodeDisplay 
+							:data="{
+								entity: 'facility',
+								id: selectedRoom.id
+							}"
+						/>
+					</ClientOnly>
+				</div>
+				
+				<div class="text-center text-sm text-muted-foreground">
+					<p>Scan this QR code to view facility details</p>
+					<p class="text-xs mt-1">ID: {{ selectedRoom.id }}</p>
+				</div>
+			</div>
+		</DialogContent>
+	</Dialog>
 </template>
