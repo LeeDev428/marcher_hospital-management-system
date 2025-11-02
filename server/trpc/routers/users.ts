@@ -16,6 +16,7 @@ const createUserSchema = z.object({
   staffType: z.enum(['DOCTOR', 'NURSE', 'STAFF', 'ADMISSIONS_STAFF', 'BILLING_STAFF', 'PHARMACIST']).optional(),
   position: z.string().optional(),
   department: z.string().optional(),
+  qualification: z.string().optional(),
   specialization: z.string().optional(),
   licenseNumber: z.string().optional(),
   
@@ -52,6 +53,7 @@ const updateUserSchema = z.object({
   staffType: z.enum(['DOCTOR', 'NURSE', 'STAFF', 'ADMISSIONS_STAFF', 'BILLING_STAFF', 'PHARMACIST']).optional(),
   position: z.string().optional(),
   department: z.string().optional(),
+  qualification: z.string().optional(),
   specialization: z.string().optional(),
   licenseNumber: z.string().optional(),
   
@@ -165,6 +167,7 @@ export const usersRouter = createTRPCRouter({
           staffType,
           position,
           department,
+          qualification,
           specialization,
           licenseNumber,
           institutionName,
@@ -243,6 +246,7 @@ export const usersRouter = createTRPCRouter({
                 data: {
                   userId: user.id,
                   staffType: staffType as any, // DOCTOR, NURSE, etc.
+                  qualification,
                   specialization,
                   licenseNumber,
                 },
@@ -308,6 +312,7 @@ export const usersRouter = createTRPCRouter({
         staffType,
         position,
         department,
+        qualification,
         specialization,
         licenseNumber,
         dateOfBirth,
@@ -350,11 +355,12 @@ export const usersRouter = createTRPCRouter({
 
           // Update staff credentials if user is staff and has credentials
           if (currentUser.role === 'STAFF' && currentUser.staffCredentials) {
-            if (staffType || specialization || licenseNumber) {
+            if (staffType || qualification || specialization || licenseNumber) {
               await prisma.staffCredentials.update({
                 where: { userId: id },
                 data: {
                   ...(staffType && { staffType: staffType as any }),
+                  ...(qualification && { qualification }),
                   ...(specialization && { specialization }),
                   ...(licenseNumber && { licenseNumber }),
                 },
