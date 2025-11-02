@@ -2,22 +2,33 @@ import { z } from "zod"
 import { tableBuildingSchema } from "./building"
 
 export const roomTypeSchema = z.enum([
-	"WARD",
-	"CLINIC",
+	"PATIENT_ROOM",
+	"ICU",
+	"EMERGENCY_ROOM",
+	"OPERATING_ROOM",
+	"CONSULTATION_ROOM",
 	"LABORATORY",
+	"RADIOLOGY",
 	"PHARMACY",
+	"STORAGE",
 	"OFFICE",
+	"WAITING_AREA",
+	"CAFETERIA",
+	"OTHER",
 ])
 
 export const roomTypeOptions = roomTypeSchema.options.map((option) => ({
-	label: option.charAt(0) + option.slice(1).toLowerCase(),
+	label: option.split('_').map(word => word.charAt(0) + word.slice(1).toLowerCase()).join(' '),
 	value: option,
 }))
 
 export const roomStatusSchema = z.enum([
 	"AVAILABLE",
 	"OCCUPIED",
-	"PREPARING",
+	"RESERVED",
+	"MAINTENANCE",
+	"CLEANING",
+	"OUT_OF_SERVICE",
 ])
 
 export const roomStatusOptions = roomStatusSchema.options.map((option) => ({
@@ -26,7 +37,7 @@ export const roomStatusOptions = roomStatusSchema.options.map((option) => ({
 }))
 
 export const roomSchema = z.object({
-	buildingId: z.string().uuid("Invalid building ID."),
+	building: z.string().optional().nullable(),
 	type: roomTypeSchema,
 	identifier: z.string().min(1, "Identifier is required.").max(255, "Identifier must be less than 255 characters."),
 	description: z.string().optional().nullable(),
@@ -41,7 +52,6 @@ export const getRoomSchema = z.object({
 export const tableRoomSchema = roomSchema
 	.extend({
 		id: z.string().uuid("Invalid room ID."),
-		building: tableBuildingSchema,
 		createdAt: z.string().datetime(),
 		updatedAt: z.string().datetime(),
 	})
