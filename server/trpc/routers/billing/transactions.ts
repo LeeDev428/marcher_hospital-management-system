@@ -202,10 +202,37 @@ const getAllBills = publicProcedure
         }
       })
       
+      // Transform Decimal to number for serialization
+      const transformedBills = bills.map(bill => ({
+        ...bill,
+        totalAmount: Number(bill.totalAmount),
+        paidAmount: Number(bill.paidAmount),
+        balanceAmount: Number(bill.balanceAmount),
+        insuranceDiscount: Number(bill.insuranceDiscount || 0),
+        createdAt: bill.createdAt.toISOString(),
+        updatedAt: bill.updatedAt.toISOString(),
+        lineItems: bill.lineItems.map(item => ({
+          ...item,
+          unitPrice: Number(item.unitPrice),
+          totalPrice: Number(item.totalPrice),
+          insuranceDiscount: Number(item.insuranceDiscount || 0),
+          finalPrice: Number(item.finalPrice),
+          createdAt: item.createdAt.toISOString(),
+          updatedAt: item.updatedAt.toISOString(),
+        })),
+        payments: bill.payments.map(payment => ({
+          ...payment,
+          amount: Number(payment.amount),
+          createdAt: payment.createdAt.toISOString(),
+          updatedAt: payment.updatedAt.toISOString(),
+          paidAt: payment.paidAt?.toISOString() || null,
+        }))
+      }))
+      
       return {
         success: true,
         message: "Bills fetched successfully",
-        data: bills,
+        data: transformedBills,
       }
     } catch (error) {
       console.error("Error fetching bills:", error)
