@@ -35,6 +35,7 @@ const form = ref({
   department: '',
   position: '',
   staffType: 'DOCTOR',
+  qualification: '',
   specialization: ''
 })
 
@@ -48,6 +49,7 @@ const editForm = ref({
   department: '',
   position: '',
   staffType: 'DOCTOR',
+  qualification: '',
   specialization: '',
   licenseNumber: ''
 })
@@ -118,6 +120,7 @@ const editStaff = (staffMember: any) => {
     department: staffMember.department || '',
     position: staffMember.position || '',
     staffType: staffMember.staffCredentials?.staffType || 'DOCTOR',
+    qualification: staffMember.staffCredentials?.qualification || '',
     specialization: staffMember.staffCredentials?.specialization || '',
     licenseNumber: staffMember.staffCredentials?.licenseNumber || ''
   }
@@ -138,6 +141,7 @@ const handleEditStaff = async () => {
       department: editForm.value.department,
       position: editForm.value.position,
       staffType: editForm.value.staffType as any,
+      qualification: editForm.value.qualification,
       specialization: editForm.value.specialization,
       licenseNumber: editForm.value.licenseNumber,
     })
@@ -196,6 +200,7 @@ const resetForm = () => {
     department: '',
     position: '',
     staffType: 'DOCTOR',
+    qualification: '',
     specialization: ''
   }
 }
@@ -216,6 +221,7 @@ const submitForm = async () => {
       department: form.value.department,
       position: form.value.position,
       staffType: form.value.staffType as any,
+      qualification: form.value.qualification,
       specialization: form.value.specialization
     })
     
@@ -499,13 +505,22 @@ const closeModal = () => {
               />
             </div>
             <div class="space-y-2">
-              <Label for="specialization">Specialization</Label>
+              <Label for="qualification">Qualification</Label>
               <Input 
-                id="specialization" 
-                v-model="form.specialization" 
-                placeholder="Medical specialization"
+                id="qualification" 
+                v-model="form.qualification" 
+                placeholder="e.g., MD, MBBS, RN, BSN"
               />
             </div>
+          </div>
+
+          <div class="space-y-2">
+            <Label for="specialization">Specialization</Label>
+            <Input 
+              id="specialization" 
+              v-model="form.specialization" 
+              placeholder="e.g., Cardiology, Pediatrics, Emergency Medicine"
+            />
           </div>
         </form>
 
@@ -578,6 +593,10 @@ const closeModal = () => {
               <div v-if="selectedStaff.position">
                 <p class="text-sm text-muted-foreground">Position</p>
                 <p class="font-medium">{{ selectedStaff.position }}</p>
+              </div>
+              <div v-if="selectedStaff.staffCredentials?.qualification">
+                <p class="text-sm text-muted-foreground">Qualification</p>
+                <p class="font-medium">{{ selectedStaff.staffCredentials.qualification }}</p>
               </div>
               <div v-if="selectedStaff.staffCredentials?.specialization">
                 <p class="text-sm text-muted-foreground">Specialization</p>
@@ -657,8 +676,12 @@ const closeModal = () => {
                 <Input id="editPosition" v-model="editForm.position" placeholder="Job position" />
               </div>
               <div>
+                <Label for="editQualification">Qualification</Label>
+                <Input id="editQualification" v-model="editForm.qualification" placeholder="e.g., MD, MBBS, RN, BSN" />
+              </div>
+              <div class="col-span-2">
                 <Label for="editSpecialization">Specialization</Label>
-                <Input id="editSpecialization" v-model="editForm.specialization" placeholder="Medical specialization" />
+                <Input id="editSpecialization" v-model="editForm.specialization" placeholder="e.g., Cardiology, Pediatrics" />
               </div>
               <div class="col-span-2">
                 <Label for="editLicenseNumber">License Number</Label>
