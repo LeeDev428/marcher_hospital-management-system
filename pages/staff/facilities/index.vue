@@ -9,7 +9,7 @@ const facilitiesTableRef = ref()
 
 onMounted(() => {
 	breadcrumbsStore.setBreadcrumbs([
-		{ label: "Facilities", link: "/facilities" },
+		{ label: "Facilities", link: "/staff/facilities" },
 	])
 })
 
@@ -60,19 +60,19 @@ function clearSearch() {
 					</div>
 				</div>
 				<div class="flex gap-2">
-					<NuxtLink to="/facilities/history">
+					<NuxtLink to="/staff/facilities/history">
 						<Button variant="outline">
 							<Icon name="mdi:history" />
 							Room Occupancy Logs
 						</Button>
 					</NuxtLink>
-					<NuxtLink to="/facilities/buildings">
+					<NuxtLink to="/staff/facilities/buildings">
 						<Button variant="outline">
 							<Icon name="mdi:building" />
 							Buildings
 						</Button>
 					</NuxtLink>
-					<NuxtLink to="/facilities/new">
+					<NuxtLink to="/staff/facilities/new">
 						<Button variant="outline" size="icon">
 							<Icon name="mdi:plus" />
 						</Button>
