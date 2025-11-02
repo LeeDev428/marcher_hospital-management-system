@@ -118,6 +118,7 @@ model Patient {
   outpatientEncounters OutpatientEncounter[]
   insuranceClaims      InsuranceClaim[]
   dataShareRequests    DataShareRequest[]
+  billingTransactions  BillingTransaction[]
 
   // System fields
   createdAt DateTime @default(now())
@@ -488,6 +489,12 @@ enum PaymentMethod {
   CARD
   ONLINE
   INSURANCE
+  MAYA // Maya payment gateway
+  PAYMAYA // Legacy PayMaya
+  BANK_TRANSFER
+  CHECK
+  CREDIT_CARD
+  DEBIT_CARD
 }
 
 // Payment Status
@@ -496,6 +503,7 @@ enum PaymentStatus {
   COMPLETED
   CANCELLED
   REFUNDED
+  FAILED
 }
 
 // Pharmacy Sale (POS)
@@ -621,26 +629,27 @@ enum InpatientDisposition {
 
 // Inpatient Encounter - Created by admissions staff
 model InpatientEncounter {
-  id               String                    @id @default(uuid()) @db.Uuid
-  patientId        String
-  patient          Patient                   @relation(fields: [patientId], references: [id], onDelete: Cascade)
-  doctorId         String // Assigned doctor (User ID)
-  admittedBy       String? // Admissions staff who created this (User ID)
-  date             String // Admission date in YYYY-MM-DD format
-  time             String // Admission time in HH:MM format
-  chiefComplaint   String // Initial complaint/reason for admission
-  doctorDiagnosis  String? // Doctor's diagnosis
-  triage           InpatientTriage // Priority level
-  disposition      InpatientDisposition      @default(ADMITTED)
-  dispositionDate  String? // Discharge/transfer date
-  dispositionTime  String? // Discharge/transfer time
-  dispositionNote  String? // Notes about disposition
-  charts           InpatientEncounterChart[] // Progress notes by doctor
-  orders           InpatientEncounterOrder[] // Orders/particulars added by doctor
-  insuranceClaim   InsuranceClaim? // Insurance claim for this encounter
-  dataShareRequest DataShareRequest? // Data share request for this encounter
-  createdAt        DateTime                  @default(now())
-  updatedAt        DateTime                  @updatedAt
+  id                 String                    @id @default(uuid()) @db.Uuid
+  patientId          String
+  patient            Patient                   @relation(fields: [patientId], references: [id], onDelete: Cascade)
+  doctorId           String // Assigned doctor (User ID)
+  admittedBy         String? // Admissions staff who created this (User ID)
+  date               String // Admission date in YYYY-MM-DD format
+  time               String // Admission time in HH:MM format
+  chiefComplaint     String // Initial complaint/reason for admission
+  doctorDiagnosis    String? // Doctor's diagnosis
+  triage             InpatientTriage // Priority level
+  disposition        InpatientDisposition      @default(ADMITTED)
+  dispositionDate    String? // Discharge/transfer date
+  dispositionTime    String? // Discharge/transfer time
+  dispositionNote    String? // Notes about disposition
+  charts             InpatientEncounterChart[] // Progress notes by doctor
+  orders             InpatientEncounterOrder[] // Orders/particulars added by doctor
+  insuranceClaim     InsuranceClaim? // Insurance claim for this encounter
+  dataShareRequest   DataShareRequest? // Data share request for this encounter
+  billingTransaction BillingTransaction? // Billing transaction for this encounter
+  createdAt          DateTime                  @default(now())
+  updatedAt          DateTime                  @updatedAt
 
   @@index([patientId])
   @@index([doctorId])
@@ -683,19 +692,20 @@ enum InpatientEncounterOrderStatus {
 
 // Inpatient Encounter Order - Orders/particulars added by doctor from catalogue
 model InpatientEncounterOrder {
-  id              String                        @id @default(uuid()) @db.Uuid
-  encounterId     String                        @db.Uuid
-  encounter       InpatientEncounter            @relation(fields: [encounterId], references: [id], onDelete: Cascade)
-  catalogueItemId String?                       @db.Uuid // Reference to ParticularCatalogue
-  catalogueItem   ParticularCatalogue?          @relation(fields: [catalogueItemId], references: [id], onDelete: SetNull)
-  type            InpatientEncounterOrderType
-  description     String // Order description
-  cost            Decimal                       @db.Decimal(10, 2) // Cost from catalogue or custom
-  status          InpatientEncounterOrderStatus @default(PENDING)
-  orderedBy       String // Doctor who ordered (User ID)
-  notes           String? // Additional notes
-  createdAt       DateTime                      @default(now())
-  updatedAt       DateTime                      @updatedAt
+  id               String                        @id @default(uuid()) @db.Uuid
+  encounterId      String                        @db.Uuid
+  encounter        InpatientEncounter            @relation(fields: [encounterId], references: [id], onDelete: Cascade)
+  catalogueItemId  String?                       @db.Uuid // Reference to ParticularCatalogue
+  catalogueItem    ParticularCatalogue?          @relation(fields: [catalogueItemId], references: [id], onDelete: SetNull)
+  type             InpatientEncounterOrderType
+  description      String // Order description
+  cost             Decimal                       @db.Decimal(10, 2) // Cost from catalogue or custom
+  status           InpatientEncounterOrderStatus @default(PENDING)
+  orderedBy        String // Doctor who ordered (User ID)
+  notes            String? // Additional notes
+  billingLineItems BillingLineItem[] // Link to billing
+  createdAt        DateTime                      @default(now())
+  updatedAt        DateTime                      @updatedAt
 
   @@index([encounterId])
   @@index([catalogueItemId])
@@ -743,6 +753,7 @@ enum InsuranceClaimStatus {
   APPROVED // Claim approved by insurance
   DENIED // Claim denied by insurance
   CANCELLED // Cancelled by billing staff
+  PROCESSING // Being processed
 }
 
 // Insurance Claims - Main claim record
@@ -966,4 +977,232 @@ enum DataShareStatus {
   ACCESSED // Hospital has accessed the data
   EXPIRED // Token expired before use
   CANCELLED // Cancelled by requester
+}
+
+// ============================================
+// BILLING SYSTEM MODELS
+// ============================================
+
+// Billing Transaction - Main billing record for an encounter
+model BillingTransaction {
+  id                String              @id @default(uuid()) @db.Uuid
+  transactionNumber String              @unique // Auto-generated: BT-{year}{month}-{seq}
+  patientId         String
+  patient           Patient             @relation(fields: [patientId], references: [id])
+  encounterId       String?             @unique @db.Uuid // Optional - can create bills without encounter
+  encounter         InpatientEncounter? @relation(fields: [encounterId], references: [id])
+
+  // Transaction status
+  status            BillingStatus @default(PENDING)
+  totalAmount       Decimal       @db.Decimal(12, 2) // Total before insurance
+  insuranceDiscount Decimal       @default(0) @db.Decimal(12, 2) // Total insurance coverage
+  finalAmount       Decimal       @db.Decimal(12, 2) // After insurance discount
+  paidAmount        Decimal       @default(0) @db.Decimal(12, 2) // Amount paid so far
+  balanceAmount     Decimal       @db.Decimal(12, 2) // Remaining balance
+
+  // Pre-authorization tracking
+  hasPreAuth     Boolean @default(false) // Has pre-auth items
+  preAuthSettled Boolean @default(false) // All pre-auth items settled
+
+  // Payment plan
+  hasPaymentPlan Boolean      @default(false)
+  paymentPlan    PaymentPlan?
+
+  // Relationships
+  lineItems BillingLineItem[]
+  payments  BillingPayment[]
+
+  // System fields
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  createdBy String? // Staff who created
+
+  @@index([patientId])
+  @@index([status])
+  @@index([transactionNumber])
+  @@map("billing_transactions")
+}
+
+// Billing Line Item - Individual charges/particulars
+model BillingLineItem {
+  id            String             @id @default(uuid()) @db.Uuid
+  transactionId String             @db.Uuid
+  transaction   BillingTransaction @relation(fields: [transactionId], references: [id], onDelete: Cascade)
+
+  // Item details
+  itemType    BillingItemType
+  description String
+  quantity    Int             @default(1)
+  unitPrice   Decimal         @db.Decimal(10, 2)
+  totalPrice  Decimal         @db.Decimal(10, 2) // quantity * unitPrice
+
+  // Pre-authorization
+  requiresPreAuth  Boolean         @default(false)
+  preAuthPaid      Boolean         @default(false)
+  preAuthPaymentId String?         @db.Uuid
+  preAuthPayment   BillingPayment? @relation("PreAuthPayment", fields: [preAuthPaymentId], references: [id])
+
+  // Insurance coverage
+  insuranceCoverable Boolean            @default(false)
+  insuranceCoverage  InsuranceCoverage?
+  insuranceDiscount  Decimal            @default(0) @db.Decimal(10, 2)
+  finalPrice         Decimal            @db.Decimal(10, 2) // After insurance discount
+
+  // Link to encounter order
+  encounterOrderId String?                  @db.Uuid
+  encounterOrder   InpatientEncounterOrder? @relation(fields: [encounterOrderId], references: [id])
+
+  // System fields
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  addedBy   String? // Staff/doctor who added
+
+  @@index([transactionId])
+  @@index([requiresPreAuth])
+  @@map("billing_line_items")
+}
+
+// Insurance Coverage - Coverage details for specific items
+model InsuranceCoverage {
+  id         String          @id @default(uuid()) @db.Uuid
+  lineItemId String          @unique @db.Uuid
+  lineItem   BillingLineItem @relation(fields: [lineItemId], references: [id], onDelete: Cascade)
+
+  // Insurance details
+  insuranceProvider  String
+  insuranceNumber    String
+  coveragePercentage Decimal @db.Decimal(5, 2) // e.g., 60.00 for 60%
+  coverageAmount     Decimal @db.Decimal(10, 2) // Actual discount amount
+
+  // Claim status
+  claimStatus InsuranceClaimStatus @default(PENDING)
+  claimNumber String?
+  claimNotes  String?
+
+  // System fields
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  verifiedBy String? // Staff who verified
+
+  @@index([insuranceProvider])
+  @@index([claimStatus])
+  @@map("insurance_coverages")
+}
+
+// Billing Payment - Payment records
+model BillingPayment {
+  id            String             @id @default(uuid()) @db.Uuid
+  paymentNumber String             @unique // Auto-generated: PAY-{year}{month}-{seq}
+  transactionId String             @db.Uuid
+  transaction   BillingTransaction @relation(fields: [transactionId], references: [id], onDelete: Cascade)
+
+  // Payment details
+  amount        Decimal       @db.Decimal(10, 2)
+  paymentMethod PaymentMethod
+  paymentType   PaymentType // ONE_TIME or INSTALLMENT
+
+  // Pre-auth tracking
+  isPreAuthPayment Boolean           @default(false)
+  preAuthItems     BillingLineItem[] @relation("PreAuthPayment")
+
+  // Payment plan installment
+  paymentPlanId     String?      @db.Uuid
+  paymentPlan       PaymentPlan? @relation(fields: [paymentPlanId], references: [id])
+  installmentNumber Int? // Which installment (1, 2, 3, etc.)
+
+  // Maya payment gateway
+  mayaPaymentId     String? @unique // Maya transaction ID
+  mayaPaymentStatus String? // Maya payment status
+  mayaReceiptUrl    String? // Receipt URL from Maya
+
+  // Payment status
+  status PaymentStatus @default(PENDING)
+  paidAt DateTime?
+
+  // System fields
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  processedBy String? // Staff who processed
+
+  @@index([transactionId])
+  @@index([status])
+  @@index([paymentMethod])
+  @@map("billing_payments")
+}
+
+// Payment Plan - Installment payment setup
+model PaymentPlan {
+  id            String             @id @default(uuid()) @db.Uuid
+  transactionId String             @unique @db.Uuid
+  transaction   BillingTransaction @relation(fields: [transactionId], references: [id], onDelete: Cascade)
+
+  // Plan details
+  totalAmount       Decimal          @db.Decimal(10, 2) // Total amount to pay (non-pre-auth only)
+  installmentCount  Int // Number of installments (e.g., 3, 6, 12)
+  installmentAmount Decimal          @db.Decimal(10, 2) // Amount per installment
+  frequency         PaymentFrequency // MONTHLY, BI_WEEKLY, WEEKLY
+
+  // Payment tracking
+  paidInstallments Int     @default(0)
+  remainingAmount  Decimal @db.Decimal(10, 2)
+
+  // Maya recurring setup
+  mayaSubscriptionId String?   @unique // Maya subscription ID for recurring
+  mayaNextChargeDate DateTime?
+
+  // Status
+  status      PaymentPlanStatus @default(ACTIVE)
+  startDate   DateTime
+  nextDueDate DateTime
+
+  // Relationships
+  payments BillingPayment[]
+
+  // System fields
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  setupBy   String? // Staff who set up the plan
+
+  @@index([status])
+  @@index([nextDueDate])
+  @@map("payment_plans")
+}
+
+// Enums for Billing System
+enum BillingStatus {
+  PENDING // Initial state, not yet settled
+  PARTIALLY_PAID // Some payments made
+  PAID // Fully paid
+  OVERDUE // Payment plan overdue
+  CANCELLED // Cancelled
+}
+
+enum BillingItemType {
+  ROOM_CHARGE
+  CONSULTATION
+  LABORATORY
+  RADIOLOGY
+  MEDICATION
+  PROCEDURE
+  SURGERY
+  SUPPLIES
+  OTHER
+}
+
+enum PaymentType {
+  ONE_TIME
+  INSTALLMENT
+}
+
+enum PaymentFrequency {
+  WEEKLY
+  BI_WEEKLY
+  MONTHLY
+}
+
+enum PaymentPlanStatus {
+  ACTIVE
+  COMPLETED
+  DEFAULTED
+  CANCELLED
 }
