@@ -158,6 +158,7 @@ exports.Prisma.StaffCredentialsScalarFieldEnum = {
   staffType: 'staffType',
   licenseNumber: 'licenseNumber',
   licenseExpiryDate: 'licenseExpiryDate',
+  qualification: 'qualification',
   specialization: 'specialization',
   subSpecialization: 'subSpecialization',
   boardCertification: 'boardCertification',
@@ -258,6 +259,46 @@ exports.Prisma.MedicalServiceScalarFieldEnum = {
   notes: 'notes',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
+};
+
+exports.Prisma.BuildingScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  code: 'code',
+  description: 'description',
+  address: 'address',
+  floors: 'floors',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.RoomScalarFieldEnum = {
+  id: 'id',
+  building: 'building',
+  identifier: 'identifier',
+  type: 'type',
+  description: 'description',
+  capacity: 'capacity',
+  status: 'status',
+  floor: 'floor',
+  wing: 'wing',
+  amenities: 'amenities',
+  notes: 'notes',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.FacilityLogScalarFieldEnum = {
+  id: 'id',
+  user: 'user',
+  role: 'role',
+  action: 'action',
+  roomIdentifier: 'roomIdentifier',
+  type: 'type',
+  oldStatus: 'oldStatus',
+  newStatus: 'newStatus',
+  timestamp: 'timestamp'
 };
 
 exports.Prisma.PharmacySupplierScalarFieldEnum = {
@@ -744,6 +785,31 @@ exports.ServiceCategory = exports.$Enums.ServiceCategory = {
   OTHER: 'OTHER'
 };
 
+exports.RoomType = exports.$Enums.RoomType = {
+  PATIENT_ROOM: 'PATIENT_ROOM',
+  ICU: 'ICU',
+  EMERGENCY_ROOM: 'EMERGENCY_ROOM',
+  OPERATING_ROOM: 'OPERATING_ROOM',
+  CONSULTATION_ROOM: 'CONSULTATION_ROOM',
+  LABORATORY: 'LABORATORY',
+  RADIOLOGY: 'RADIOLOGY',
+  PHARMACY: 'PHARMACY',
+  STORAGE: 'STORAGE',
+  OFFICE: 'OFFICE',
+  WAITING_AREA: 'WAITING_AREA',
+  CAFETERIA: 'CAFETERIA',
+  OTHER: 'OTHER'
+};
+
+exports.RoomStatus = exports.$Enums.RoomStatus = {
+  AVAILABLE: 'AVAILABLE',
+  OCCUPIED: 'OCCUPIED',
+  RESERVED: 'RESERVED',
+  MAINTENANCE: 'MAINTENANCE',
+  CLEANING: 'CLEANING',
+  OUT_OF_SERVICE: 'OUT_OF_SERVICE'
+};
+
 exports.PharmacyItemForm = exports.$Enums.PharmacyItemForm = {
   TABLET: 'TABLET',
   CAPSULE: 'CAPSULE',
@@ -914,6 +980,9 @@ exports.Prisma.ModelName = {
   Appointment: 'Appointment',
   StaffSchedule: 'StaffSchedule',
   MedicalService: 'MedicalService',
+  Building: 'Building',
+  Room: 'Room',
+  FacilityLog: 'FacilityLog',
   PharmacySupplier: 'PharmacySupplier',
   PharmacyBrand: 'PharmacyBrand',
   PharmacyItemCategory: 'PharmacyItemCategory',
