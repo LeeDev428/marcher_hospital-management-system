@@ -56,10 +56,19 @@ const handleLogout = async () => {
           <NuxtLink 
             to="/admissions_staff/encounters" 
             class="flex items-center px-3 py-2 text-sm font-medium rounded-lg"
-            :class="$route.path.startsWith('/admissions_staff/encounters') ? 'bg-blue-50 text-blue-700 border-r-2 border-blue-600' : 'text-gray-600 hover:bg-gray-50'"
+            :class="$route.path.startsWith('/admissions_staff/encounters') && !$route.path.includes('/manage') ? 'bg-blue-50 text-blue-700 border-r-2 border-blue-600' : 'text-gray-600 hover:bg-gray-50'"
           >
             <Icon name="lucide:clipboard-plus" class="w-5 h-5 mr-3" />
             New Encounter
+          </NuxtLink>
+          
+          <NuxtLink 
+            to="/admissions_staff/encounters/manage" 
+            class="flex items-center px-3 py-2 text-sm font-medium rounded-lg"
+            :class="$route.path.includes('/encounters/manage') ? 'bg-blue-50 text-blue-700 border-r-2 border-blue-600' : 'text-gray-600 hover:bg-gray-50'"
+          >
+            <Icon name="lucide:clipboard-check" class="w-5 h-5 mr-3" />
+            Manage Patient Status
           </NuxtLink>
           
           <NuxtLink 
