@@ -7,22 +7,44 @@ const getInsuranceClaims = protectedProcedure.query(async ({ ctx }) => {
 	try {
 		const insuranceClaims = await instancePrisma.insuranceClaim.findMany({
 			include: {
-				provider: true,
-				items: true,
+				patient: {
+					include: {
+						user: true
+					}
+				}
 			},
+			orderBy: {
+				createdAt: 'desc'
+			}
 		})
+
+		const transformedClaims = insuranceClaims.map(claim => ({
+			id: claim.id,
+			claimNumber: claim.claimNumber,
+			patientName: `${claim.patient.user.firstName} ${claim.patient.user.lastName}`,
+			patientId: claim.patientId,
+			insuranceProvider: claim.insuranceProvider,
+			insuranceNumber: claim.insuranceNumber,
+			policyNumber: claim.policyNumber,
+			claimAmount: Number(claim.claimAmount),
+			approvedAmount: claim.approvedAmount ? Number(claim.approvedAmount) : null,
+			status: claim.status,
+			submittedAt: claim.submittedAt?.toISOString() || null,
+			reviewedAt: claim.reviewedAt?.toISOString() || null,
+			createdAt: claim.createdAt.toISOString(),
+		}))
 
 		return {
 			success: true,
 			message: "Insurance claims fetched successfully",
-			data: insuranceClaims,
+			data: transformedClaims,
 		}
 	} catch (error) {
 		console.error(error)
 		return {
 			success: false,
 			message: "Failed to fetch insurance claims",
-			data: null,
+			data: [],
 		}
 	}
 })
