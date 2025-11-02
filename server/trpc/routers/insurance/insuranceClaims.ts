@@ -1,7 +1,7 @@
 import { createInsuranceClaimSchema, deleteInsuranceClaimSchema, getInsuranceClaimSchema, updateInsuranceClaimSchema } from "~/types/insurance"
-import { createTRPCRouter, protectedProcedure } from "../../init"
+import { createTRPCRouter, protectedProcedure, publicProcedure } from "../../init"
 
-const getInsuranceClaims = protectedProcedure.query(async ({ ctx }) => {
+const getInsuranceClaims = publicProcedure.query(async ({ ctx }) => {
 	const { instancePrisma } = ctx
 
 	try {
