@@ -45,7 +45,7 @@ onMounted(async () => {
 			/>
 		</div>
 		<TypedInput type="text" name="identifier" label="Identifier" placeholder="Room Identifier" />
-		<TypedSelect name="buildingId" label="Building" :options="buildingStore.buildings.map((building) => ({ label: building.name, value: building.id }))" placeholder="Select Building" />
+		<TypedInput type="text" name="building" label="Building" placeholder="Building Name" />
 		<TypedSelect name="type" label="Type" :options="roomTypeOptions" placeholder="Select Type" />
 		<TypedNumber name="capacity" label="Capacity" placeholder="Room Capacity" />
 		<TypedSelect name="status" label="Status" :options="roomStatusOptions" placeholder="Select Status" />
@@ -55,7 +55,7 @@ onMounted(async () => {
 				<Icon name="mdi:floppy" />
 				Save
 			</Button>
-			<Button type="button" variant="outline" @click="navigateTo('/facilities')">
+			<Button type="button" variant="outline" @click="navigateTo('/staff/facilities')">
 				<Icon name="mdi:arrow-left" />
 				Back
 			</Button>
