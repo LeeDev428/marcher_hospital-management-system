@@ -91,7 +91,7 @@ export const useBuildingStore = defineStore("building", {
 						"Building",
 						"Building created successfully."
 					)
-					await navigateTo("/facilities/buildings")
+					await navigateTo("/staff/facilities/buildings")
 				}
 
 				this.loading = false
@@ -125,7 +125,7 @@ export const useBuildingStore = defineStore("building", {
 						"Building",
 						"Building updated successfully."
 					)
-					await navigateTo("/facilities/buildings")
+					await navigateTo("/staff/facilities/buildings")
 				}
 
 				this.loading = false
