@@ -423,5 +423,39 @@ onMounted(async () => {
 				</DialogFooter>
 			</DialogContent>
 		</Dialog>
+
+		<!-- QR Code Dialog -->
+		<Dialog v-model:open="showQRDialog">
+			<DialogContent class="max-w-md">
+				<DialogHeader>
+					<DialogTitle>Patient QR Code</DialogTitle>
+				</DialogHeader>
+				
+				<div v-if="selectedPatient" class="space-y-4">
+					<div class="text-center">
+						<h3 class="font-semibold text-lg">{{ selectedPatient.patientNumber }}</h3>
+						<p class="text-sm text-muted-foreground">
+							{{ selectedPatient.user.firstName }} {{ selectedPatient.user.lastName }}
+						</p>
+					</div>
+					
+					<div class="flex justify-center p-6 bg-white rounded-lg border-2 border-dashed">
+						<ClientOnly>
+							<AppQrcodeQRCodeDisplay 
+								:data="{
+									entity: 'patient',
+									id: selectedPatient.id
+								}"
+							/>
+						</ClientOnly>
+					</div>
+					
+					<div class="text-center text-sm text-muted-foreground">
+						<p>Scan this QR code to view patient details</p>
+						<p class="text-xs mt-1">ID: {{ selectedPatient.id }}</p>
+					</div>
+				</div>
+			</DialogContent>
+		</Dialog>
 	</div>
 </template>
