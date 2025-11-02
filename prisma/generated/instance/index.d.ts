@@ -148,6 +148,31 @@ export type DataShareDocument = $Result.DefaultSelection<Prisma.$DataShareDocume
  * 
  */
 export type DataShareAccessToken = $Result.DefaultSelection<Prisma.$DataShareAccessTokenPayload>
+/**
+ * Model BillingTransaction
+ * 
+ */
+export type BillingTransaction = $Result.DefaultSelection<Prisma.$BillingTransactionPayload>
+/**
+ * Model BillingLineItem
+ * 
+ */
+export type BillingLineItem = $Result.DefaultSelection<Prisma.$BillingLineItemPayload>
+/**
+ * Model InsuranceCoverage
+ * 
+ */
+export type InsuranceCoverage = $Result.DefaultSelection<Prisma.$InsuranceCoveragePayload>
+/**
+ * Model BillingPayment
+ * 
+ */
+export type BillingPayment = $Result.DefaultSelection<Prisma.$BillingPaymentPayload>
+/**
+ * Model PaymentPlan
+ * 
+ */
+export type PaymentPlan = $Result.DefaultSelection<Prisma.$PaymentPlanPayload>
 
 /**
  * Enums
@@ -347,7 +372,13 @@ export const PaymentMethod: {
   CASH: 'CASH',
   CARD: 'CARD',
   ONLINE: 'ONLINE',
-  INSURANCE: 'INSURANCE'
+  INSURANCE: 'INSURANCE',
+  MAYA: 'MAYA',
+  PAYMAYA: 'PAYMAYA',
+  BANK_TRANSFER: 'BANK_TRANSFER',
+  CHECK: 'CHECK',
+  CREDIT_CARD: 'CREDIT_CARD',
+  DEBIT_CARD: 'DEBIT_CARD'
 };
 
 export type PaymentMethod = (typeof PaymentMethod)[keyof typeof PaymentMethod]
@@ -357,7 +388,8 @@ export const PaymentStatus: {
   PENDING: 'PENDING',
   COMPLETED: 'COMPLETED',
   CANCELLED: 'CANCELLED',
-  REFUNDED: 'REFUNDED'
+  REFUNDED: 'REFUNDED',
+  FAILED: 'FAILED'
 };
 
 export type PaymentStatus = (typeof PaymentStatus)[keyof typeof PaymentStatus]
@@ -443,7 +475,8 @@ export const InsuranceClaimStatus: {
   UNDER_REVIEW: 'UNDER_REVIEW',
   APPROVED: 'APPROVED',
   DENIED: 'DENIED',
-  CANCELLED: 'CANCELLED'
+  CANCELLED: 'CANCELLED',
+  PROCESSING: 'PROCESSING'
 };
 
 export type InsuranceClaimStatus = (typeof InsuranceClaimStatus)[keyof typeof InsuranceClaimStatus]
@@ -460,6 +493,59 @@ export const DataShareStatus: {
 };
 
 export type DataShareStatus = (typeof DataShareStatus)[keyof typeof DataShareStatus]
+
+
+export const BillingStatus: {
+  PENDING: 'PENDING',
+  PARTIALLY_PAID: 'PARTIALLY_PAID',
+  PAID: 'PAID',
+  OVERDUE: 'OVERDUE',
+  CANCELLED: 'CANCELLED'
+};
+
+export type BillingStatus = (typeof BillingStatus)[keyof typeof BillingStatus]
+
+
+export const BillingItemType: {
+  ROOM_CHARGE: 'ROOM_CHARGE',
+  CONSULTATION: 'CONSULTATION',
+  LABORATORY: 'LABORATORY',
+  RADIOLOGY: 'RADIOLOGY',
+  MEDICATION: 'MEDICATION',
+  PROCEDURE: 'PROCEDURE',
+  SURGERY: 'SURGERY',
+  SUPPLIES: 'SUPPLIES',
+  OTHER: 'OTHER'
+};
+
+export type BillingItemType = (typeof BillingItemType)[keyof typeof BillingItemType]
+
+
+export const PaymentType: {
+  ONE_TIME: 'ONE_TIME',
+  INSTALLMENT: 'INSTALLMENT'
+};
+
+export type PaymentType = (typeof PaymentType)[keyof typeof PaymentType]
+
+
+export const PaymentFrequency: {
+  WEEKLY: 'WEEKLY',
+  BI_WEEKLY: 'BI_WEEKLY',
+  MONTHLY: 'MONTHLY'
+};
+
+export type PaymentFrequency = (typeof PaymentFrequency)[keyof typeof PaymentFrequency]
+
+
+export const PaymentPlanStatus: {
+  ACTIVE: 'ACTIVE',
+  COMPLETED: 'COMPLETED',
+  DEFAULTED: 'DEFAULTED',
+  CANCELLED: 'CANCELLED'
+};
+
+export type PaymentPlanStatus = (typeof PaymentPlanStatus)[keyof typeof PaymentPlanStatus]
 
 }
 
@@ -562,6 +648,26 @@ export const InsuranceClaimStatus: typeof $Enums.InsuranceClaimStatus
 export type DataShareStatus = $Enums.DataShareStatus
 
 export const DataShareStatus: typeof $Enums.DataShareStatus
+
+export type BillingStatus = $Enums.BillingStatus
+
+export const BillingStatus: typeof $Enums.BillingStatus
+
+export type BillingItemType = $Enums.BillingItemType
+
+export const BillingItemType: typeof $Enums.BillingItemType
+
+export type PaymentType = $Enums.PaymentType
+
+export const PaymentType: typeof $Enums.PaymentType
+
+export type PaymentFrequency = $Enums.PaymentFrequency
+
+export const PaymentFrequency: typeof $Enums.PaymentFrequency
+
+export type PaymentPlanStatus = $Enums.PaymentPlanStatus
+
+export const PaymentPlanStatus: typeof $Enums.PaymentPlanStatus
 
 /**
  * ##  Prisma Client ʲˢ
@@ -950,6 +1056,56 @@ export class PrismaClient<
     * ```
     */
   get dataShareAccessToken(): Prisma.DataShareAccessTokenDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.billingTransaction`: Exposes CRUD operations for the **BillingTransaction** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more BillingTransactions
+    * const billingTransactions = await prisma.billingTransaction.findMany()
+    * ```
+    */
+  get billingTransaction(): Prisma.BillingTransactionDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.billingLineItem`: Exposes CRUD operations for the **BillingLineItem** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more BillingLineItems
+    * const billingLineItems = await prisma.billingLineItem.findMany()
+    * ```
+    */
+  get billingLineItem(): Prisma.BillingLineItemDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.insuranceCoverage`: Exposes CRUD operations for the **InsuranceCoverage** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more InsuranceCoverages
+    * const insuranceCoverages = await prisma.insuranceCoverage.findMany()
+    * ```
+    */
+  get insuranceCoverage(): Prisma.InsuranceCoverageDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.billingPayment`: Exposes CRUD operations for the **BillingPayment** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more BillingPayments
+    * const billingPayments = await prisma.billingPayment.findMany()
+    * ```
+    */
+  get billingPayment(): Prisma.BillingPaymentDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.paymentPlan`: Exposes CRUD operations for the **PaymentPlan** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more PaymentPlans
+    * const paymentPlans = await prisma.paymentPlan.findMany()
+    * ```
+    */
+  get paymentPlan(): Prisma.PaymentPlanDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -1416,7 +1572,12 @@ export namespace Prisma {
     InsuranceAccessToken: 'InsuranceAccessToken',
     DataShareRequest: 'DataShareRequest',
     DataShareDocument: 'DataShareDocument',
-    DataShareAccessToken: 'DataShareAccessToken'
+    DataShareAccessToken: 'DataShareAccessToken',
+    BillingTransaction: 'BillingTransaction',
+    BillingLineItem: 'BillingLineItem',
+    InsuranceCoverage: 'InsuranceCoverage',
+    BillingPayment: 'BillingPayment',
+    PaymentPlan: 'PaymentPlan'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -1435,7 +1596,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "staffCredentials" | "patient" | "partner" | "refreshToken" | "passwordResetToken" | "appointment" | "staffSchedule" | "medicalService" | "pharmacySupplier" | "pharmacyBrand" | "pharmacyItemCategory" | "pharmacyItem" | "pharmacySale" | "pharmacySaleItem" | "pharmacyPayment" | "outpatientEncounter" | "inpatientEncounter" | "inpatientEncounterChart" | "inpatientEncounterOrder" | "particularCatalogue" | "insuranceClaim" | "insuranceDocument" | "insuranceAccessToken" | "dataShareRequest" | "dataShareDocument" | "dataShareAccessToken"
+      modelProps: "user" | "staffCredentials" | "patient" | "partner" | "refreshToken" | "passwordResetToken" | "appointment" | "staffSchedule" | "medicalService" | "pharmacySupplier" | "pharmacyBrand" | "pharmacyItemCategory" | "pharmacyItem" | "pharmacySale" | "pharmacySaleItem" | "pharmacyPayment" | "outpatientEncounter" | "inpatientEncounter" | "inpatientEncounterChart" | "inpatientEncounterOrder" | "particularCatalogue" | "insuranceClaim" | "insuranceDocument" | "insuranceAccessToken" | "dataShareRequest" | "dataShareDocument" | "dataShareAccessToken" | "billingTransaction" | "billingLineItem" | "insuranceCoverage" | "billingPayment" | "paymentPlan"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -3437,6 +3598,376 @@ export namespace Prisma {
           }
         }
       }
+      BillingTransaction: {
+        payload: Prisma.$BillingTransactionPayload<ExtArgs>
+        fields: Prisma.BillingTransactionFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.BillingTransactionFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BillingTransactionPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.BillingTransactionFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BillingTransactionPayload>
+          }
+          findFirst: {
+            args: Prisma.BillingTransactionFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BillingTransactionPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.BillingTransactionFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BillingTransactionPayload>
+          }
+          findMany: {
+            args: Prisma.BillingTransactionFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BillingTransactionPayload>[]
+          }
+          create: {
+            args: Prisma.BillingTransactionCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BillingTransactionPayload>
+          }
+          createMany: {
+            args: Prisma.BillingTransactionCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.BillingTransactionCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BillingTransactionPayload>[]
+          }
+          delete: {
+            args: Prisma.BillingTransactionDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BillingTransactionPayload>
+          }
+          update: {
+            args: Prisma.BillingTransactionUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BillingTransactionPayload>
+          }
+          deleteMany: {
+            args: Prisma.BillingTransactionDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.BillingTransactionUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.BillingTransactionUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BillingTransactionPayload>[]
+          }
+          upsert: {
+            args: Prisma.BillingTransactionUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BillingTransactionPayload>
+          }
+          aggregate: {
+            args: Prisma.BillingTransactionAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateBillingTransaction>
+          }
+          groupBy: {
+            args: Prisma.BillingTransactionGroupByArgs<ExtArgs>
+            result: $Utils.Optional<BillingTransactionGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.BillingTransactionCountArgs<ExtArgs>
+            result: $Utils.Optional<BillingTransactionCountAggregateOutputType> | number
+          }
+        }
+      }
+      BillingLineItem: {
+        payload: Prisma.$BillingLineItemPayload<ExtArgs>
+        fields: Prisma.BillingLineItemFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.BillingLineItemFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BillingLineItemPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.BillingLineItemFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BillingLineItemPayload>
+          }
+          findFirst: {
+            args: Prisma.BillingLineItemFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BillingLineItemPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.BillingLineItemFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BillingLineItemPayload>
+          }
+          findMany: {
+            args: Prisma.BillingLineItemFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BillingLineItemPayload>[]
+          }
+          create: {
+            args: Prisma.BillingLineItemCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BillingLineItemPayload>
+          }
+          createMany: {
+            args: Prisma.BillingLineItemCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.BillingLineItemCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BillingLineItemPayload>[]
+          }
+          delete: {
+            args: Prisma.BillingLineItemDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BillingLineItemPayload>
+          }
+          update: {
+            args: Prisma.BillingLineItemUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BillingLineItemPayload>
+          }
+          deleteMany: {
+            args: Prisma.BillingLineItemDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.BillingLineItemUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.BillingLineItemUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BillingLineItemPayload>[]
+          }
+          upsert: {
+            args: Prisma.BillingLineItemUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BillingLineItemPayload>
+          }
+          aggregate: {
+            args: Prisma.BillingLineItemAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateBillingLineItem>
+          }
+          groupBy: {
+            args: Prisma.BillingLineItemGroupByArgs<ExtArgs>
+            result: $Utils.Optional<BillingLineItemGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.BillingLineItemCountArgs<ExtArgs>
+            result: $Utils.Optional<BillingLineItemCountAggregateOutputType> | number
+          }
+        }
+      }
+      InsuranceCoverage: {
+        payload: Prisma.$InsuranceCoveragePayload<ExtArgs>
+        fields: Prisma.InsuranceCoverageFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.InsuranceCoverageFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InsuranceCoveragePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.InsuranceCoverageFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InsuranceCoveragePayload>
+          }
+          findFirst: {
+            args: Prisma.InsuranceCoverageFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InsuranceCoveragePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.InsuranceCoverageFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InsuranceCoveragePayload>
+          }
+          findMany: {
+            args: Prisma.InsuranceCoverageFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InsuranceCoveragePayload>[]
+          }
+          create: {
+            args: Prisma.InsuranceCoverageCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InsuranceCoveragePayload>
+          }
+          createMany: {
+            args: Prisma.InsuranceCoverageCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.InsuranceCoverageCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InsuranceCoveragePayload>[]
+          }
+          delete: {
+            args: Prisma.InsuranceCoverageDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InsuranceCoveragePayload>
+          }
+          update: {
+            args: Prisma.InsuranceCoverageUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InsuranceCoveragePayload>
+          }
+          deleteMany: {
+            args: Prisma.InsuranceCoverageDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.InsuranceCoverageUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.InsuranceCoverageUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InsuranceCoveragePayload>[]
+          }
+          upsert: {
+            args: Prisma.InsuranceCoverageUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InsuranceCoveragePayload>
+          }
+          aggregate: {
+            args: Prisma.InsuranceCoverageAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateInsuranceCoverage>
+          }
+          groupBy: {
+            args: Prisma.InsuranceCoverageGroupByArgs<ExtArgs>
+            result: $Utils.Optional<InsuranceCoverageGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.InsuranceCoverageCountArgs<ExtArgs>
+            result: $Utils.Optional<InsuranceCoverageCountAggregateOutputType> | number
+          }
+        }
+      }
+      BillingPayment: {
+        payload: Prisma.$BillingPaymentPayload<ExtArgs>
+        fields: Prisma.BillingPaymentFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.BillingPaymentFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BillingPaymentPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.BillingPaymentFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BillingPaymentPayload>
+          }
+          findFirst: {
+            args: Prisma.BillingPaymentFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BillingPaymentPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.BillingPaymentFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BillingPaymentPayload>
+          }
+          findMany: {
+            args: Prisma.BillingPaymentFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BillingPaymentPayload>[]
+          }
+          create: {
+            args: Prisma.BillingPaymentCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BillingPaymentPayload>
+          }
+          createMany: {
+            args: Prisma.BillingPaymentCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.BillingPaymentCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BillingPaymentPayload>[]
+          }
+          delete: {
+            args: Prisma.BillingPaymentDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BillingPaymentPayload>
+          }
+          update: {
+            args: Prisma.BillingPaymentUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BillingPaymentPayload>
+          }
+          deleteMany: {
+            args: Prisma.BillingPaymentDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.BillingPaymentUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.BillingPaymentUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BillingPaymentPayload>[]
+          }
+          upsert: {
+            args: Prisma.BillingPaymentUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BillingPaymentPayload>
+          }
+          aggregate: {
+            args: Prisma.BillingPaymentAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateBillingPayment>
+          }
+          groupBy: {
+            args: Prisma.BillingPaymentGroupByArgs<ExtArgs>
+            result: $Utils.Optional<BillingPaymentGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.BillingPaymentCountArgs<ExtArgs>
+            result: $Utils.Optional<BillingPaymentCountAggregateOutputType> | number
+          }
+        }
+      }
+      PaymentPlan: {
+        payload: Prisma.$PaymentPlanPayload<ExtArgs>
+        fields: Prisma.PaymentPlanFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.PaymentPlanFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PaymentPlanPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.PaymentPlanFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PaymentPlanPayload>
+          }
+          findFirst: {
+            args: Prisma.PaymentPlanFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PaymentPlanPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.PaymentPlanFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PaymentPlanPayload>
+          }
+          findMany: {
+            args: Prisma.PaymentPlanFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PaymentPlanPayload>[]
+          }
+          create: {
+            args: Prisma.PaymentPlanCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PaymentPlanPayload>
+          }
+          createMany: {
+            args: Prisma.PaymentPlanCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.PaymentPlanCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PaymentPlanPayload>[]
+          }
+          delete: {
+            args: Prisma.PaymentPlanDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PaymentPlanPayload>
+          }
+          update: {
+            args: Prisma.PaymentPlanUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PaymentPlanPayload>
+          }
+          deleteMany: {
+            args: Prisma.PaymentPlanDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.PaymentPlanUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.PaymentPlanUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PaymentPlanPayload>[]
+          }
+          upsert: {
+            args: Prisma.PaymentPlanUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PaymentPlanPayload>
+          }
+          aggregate: {
+            args: Prisma.PaymentPlanAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregatePaymentPlan>
+          }
+          groupBy: {
+            args: Prisma.PaymentPlanGroupByArgs<ExtArgs>
+            result: $Utils.Optional<PaymentPlanGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.PaymentPlanCountArgs<ExtArgs>
+            result: $Utils.Optional<PaymentPlanCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -3560,6 +4091,11 @@ export namespace Prisma {
     dataShareRequest?: DataShareRequestOmit
     dataShareDocument?: DataShareDocumentOmit
     dataShareAccessToken?: DataShareAccessTokenOmit
+    billingTransaction?: BillingTransactionOmit
+    billingLineItem?: BillingLineItemOmit
+    insuranceCoverage?: InsuranceCoverageOmit
+    billingPayment?: BillingPaymentOmit
+    paymentPlan?: PaymentPlanOmit
   }
 
   /* Types for Logging */
@@ -3702,6 +4238,7 @@ export namespace Prisma {
     outpatientEncounters: number
     insuranceClaims: number
     dataShareRequests: number
+    billingTransactions: number
   }
 
   export type PatientCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3709,6 +4246,7 @@ export namespace Prisma {
     outpatientEncounters?: boolean | PatientCountOutputTypeCountOutpatientEncountersArgs
     insuranceClaims?: boolean | PatientCountOutputTypeCountInsuranceClaimsArgs
     dataShareRequests?: boolean | PatientCountOutputTypeCountDataShareRequestsArgs
+    billingTransactions?: boolean | PatientCountOutputTypeCountBillingTransactionsArgs
   }
 
   // Custom InputTypes
@@ -3748,6 +4286,13 @@ export namespace Prisma {
    */
   export type PatientCountOutputTypeCountDataShareRequestsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: DataShareRequestWhereInput
+  }
+
+  /**
+   * PatientCountOutputType without action
+   */
+  export type PatientCountOutputTypeCountBillingTransactionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: BillingTransactionWhereInput
   }
 
 
@@ -3956,6 +4501,37 @@ export namespace Prisma {
 
 
   /**
+   * Count Type InpatientEncounterOrderCountOutputType
+   */
+
+  export type InpatientEncounterOrderCountOutputType = {
+    billingLineItems: number
+  }
+
+  export type InpatientEncounterOrderCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    billingLineItems?: boolean | InpatientEncounterOrderCountOutputTypeCountBillingLineItemsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * InpatientEncounterOrderCountOutputType without action
+   */
+  export type InpatientEncounterOrderCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InpatientEncounterOrderCountOutputType
+     */
+    select?: InpatientEncounterOrderCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * InpatientEncounterOrderCountOutputType without action
+   */
+  export type InpatientEncounterOrderCountOutputTypeCountBillingLineItemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: BillingLineItemWhereInput
+  }
+
+
+  /**
    * Count Type ParticularCatalogueCountOutputType
    */
 
@@ -4063,6 +4639,108 @@ export namespace Prisma {
    */
   export type DataShareRequestCountOutputTypeCountAccessTokensArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: DataShareAccessTokenWhereInput
+  }
+
+
+  /**
+   * Count Type BillingTransactionCountOutputType
+   */
+
+  export type BillingTransactionCountOutputType = {
+    lineItems: number
+    payments: number
+  }
+
+  export type BillingTransactionCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    lineItems?: boolean | BillingTransactionCountOutputTypeCountLineItemsArgs
+    payments?: boolean | BillingTransactionCountOutputTypeCountPaymentsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * BillingTransactionCountOutputType without action
+   */
+  export type BillingTransactionCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BillingTransactionCountOutputType
+     */
+    select?: BillingTransactionCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * BillingTransactionCountOutputType without action
+   */
+  export type BillingTransactionCountOutputTypeCountLineItemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: BillingLineItemWhereInput
+  }
+
+  /**
+   * BillingTransactionCountOutputType without action
+   */
+  export type BillingTransactionCountOutputTypeCountPaymentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: BillingPaymentWhereInput
+  }
+
+
+  /**
+   * Count Type BillingPaymentCountOutputType
+   */
+
+  export type BillingPaymentCountOutputType = {
+    preAuthItems: number
+  }
+
+  export type BillingPaymentCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    preAuthItems?: boolean | BillingPaymentCountOutputTypeCountPreAuthItemsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * BillingPaymentCountOutputType without action
+   */
+  export type BillingPaymentCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BillingPaymentCountOutputType
+     */
+    select?: BillingPaymentCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * BillingPaymentCountOutputType without action
+   */
+  export type BillingPaymentCountOutputTypeCountPreAuthItemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: BillingLineItemWhereInput
+  }
+
+
+  /**
+   * Count Type PaymentPlanCountOutputType
+   */
+
+  export type PaymentPlanCountOutputType = {
+    payments: number
+  }
+
+  export type PaymentPlanCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    payments?: boolean | PaymentPlanCountOutputTypeCountPaymentsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * PaymentPlanCountOutputType without action
+   */
+  export type PaymentPlanCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PaymentPlanCountOutputType
+     */
+    select?: PaymentPlanCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * PaymentPlanCountOutputType without action
+   */
+  export type PaymentPlanCountOutputTypeCountPaymentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: BillingPaymentWhereInput
   }
 
 
@@ -7095,6 +7773,7 @@ export namespace Prisma {
     outpatientEncounters?: boolean | Patient$outpatientEncountersArgs<ExtArgs>
     insuranceClaims?: boolean | Patient$insuranceClaimsArgs<ExtArgs>
     dataShareRequests?: boolean | Patient$dataShareRequestsArgs<ExtArgs>
+    billingTransactions?: boolean | Patient$billingTransactionsArgs<ExtArgs>
     _count?: boolean | PatientCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["patient"]>
 
@@ -7152,6 +7831,7 @@ export namespace Prisma {
     outpatientEncounters?: boolean | Patient$outpatientEncountersArgs<ExtArgs>
     insuranceClaims?: boolean | Patient$insuranceClaimsArgs<ExtArgs>
     dataShareRequests?: boolean | Patient$dataShareRequestsArgs<ExtArgs>
+    billingTransactions?: boolean | Patient$billingTransactionsArgs<ExtArgs>
     _count?: boolean | PatientCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type PatientIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -7169,6 +7849,7 @@ export namespace Prisma {
       outpatientEncounters: Prisma.$OutpatientEncounterPayload<ExtArgs>[]
       insuranceClaims: Prisma.$InsuranceClaimPayload<ExtArgs>[]
       dataShareRequests: Prisma.$DataShareRequestPayload<ExtArgs>[]
+      billingTransactions: Prisma.$BillingTransactionPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -7582,6 +8263,7 @@ export namespace Prisma {
     outpatientEncounters<T extends Patient$outpatientEncountersArgs<ExtArgs> = {}>(args?: Subset<T, Patient$outpatientEncountersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OutpatientEncounterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     insuranceClaims<T extends Patient$insuranceClaimsArgs<ExtArgs> = {}>(args?: Subset<T, Patient$insuranceClaimsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InsuranceClaimPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     dataShareRequests<T extends Patient$dataShareRequestsArgs<ExtArgs> = {}>(args?: Subset<T, Patient$dataShareRequestsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DataShareRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    billingTransactions<T extends Patient$billingTransactionsArgs<ExtArgs> = {}>(args?: Subset<T, Patient$billingTransactionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BillingTransactionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -8112,6 +8794,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: DataShareRequestScalarFieldEnum | DataShareRequestScalarFieldEnum[]
+  }
+
+  /**
+   * Patient.billingTransactions
+   */
+  export type Patient$billingTransactionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BillingTransaction
+     */
+    select?: BillingTransactionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BillingTransaction
+     */
+    omit?: BillingTransactionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BillingTransactionInclude<ExtArgs> | null
+    where?: BillingTransactionWhereInput
+    orderBy?: BillingTransactionOrderByWithRelationInput | BillingTransactionOrderByWithRelationInput[]
+    cursor?: BillingTransactionWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: BillingTransactionScalarFieldEnum | BillingTransactionScalarFieldEnum[]
   }
 
   /**
@@ -24335,6 +25041,7 @@ export namespace Prisma {
     orders?: boolean | InpatientEncounter$ordersArgs<ExtArgs>
     insuranceClaim?: boolean | InpatientEncounter$insuranceClaimArgs<ExtArgs>
     dataShareRequest?: boolean | InpatientEncounter$dataShareRequestArgs<ExtArgs>
+    billingTransaction?: boolean | InpatientEncounter$billingTransactionArgs<ExtArgs>
     _count?: boolean | InpatientEncounterCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["inpatientEncounter"]>
 
@@ -24401,6 +25108,7 @@ export namespace Prisma {
     orders?: boolean | InpatientEncounter$ordersArgs<ExtArgs>
     insuranceClaim?: boolean | InpatientEncounter$insuranceClaimArgs<ExtArgs>
     dataShareRequest?: boolean | InpatientEncounter$dataShareRequestArgs<ExtArgs>
+    billingTransaction?: boolean | InpatientEncounter$billingTransactionArgs<ExtArgs>
     _count?: boolean | InpatientEncounterCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type InpatientEncounterIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -24418,6 +25126,7 @@ export namespace Prisma {
       orders: Prisma.$InpatientEncounterOrderPayload<ExtArgs>[]
       insuranceClaim: Prisma.$InsuranceClaimPayload<ExtArgs> | null
       dataShareRequest: Prisma.$DataShareRequestPayload<ExtArgs> | null
+      billingTransaction: Prisma.$BillingTransactionPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -24834,6 +25543,7 @@ export namespace Prisma {
     orders<T extends InpatientEncounter$ordersArgs<ExtArgs> = {}>(args?: Subset<T, InpatientEncounter$ordersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InpatientEncounterOrderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     insuranceClaim<T extends InpatientEncounter$insuranceClaimArgs<ExtArgs> = {}>(args?: Subset<T, InpatientEncounter$insuranceClaimArgs<ExtArgs>>): Prisma__InsuranceClaimClient<$Result.GetResult<Prisma.$InsuranceClaimPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     dataShareRequest<T extends InpatientEncounter$dataShareRequestArgs<ExtArgs> = {}>(args?: Subset<T, InpatientEncounter$dataShareRequestArgs<ExtArgs>>): Prisma__DataShareRequestClient<$Result.GetResult<Prisma.$DataShareRequestPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    billingTransaction<T extends InpatientEncounter$billingTransactionArgs<ExtArgs> = {}>(args?: Subset<T, InpatientEncounter$billingTransactionArgs<ExtArgs>>): Prisma__BillingTransactionClient<$Result.GetResult<Prisma.$BillingTransactionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -25357,6 +26067,25 @@ export namespace Prisma {
      */
     include?: DataShareRequestInclude<ExtArgs> | null
     where?: DataShareRequestWhereInput
+  }
+
+  /**
+   * InpatientEncounter.billingTransaction
+   */
+  export type InpatientEncounter$billingTransactionArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BillingTransaction
+     */
+    select?: BillingTransactionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BillingTransaction
+     */
+    omit?: BillingTransactionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BillingTransactionInclude<ExtArgs> | null
+    where?: BillingTransactionWhereInput
   }
 
   /**
@@ -26697,6 +27426,8 @@ export namespace Prisma {
     updatedAt?: boolean
     encounter?: boolean | InpatientEncounterDefaultArgs<ExtArgs>
     catalogueItem?: boolean | InpatientEncounterOrder$catalogueItemArgs<ExtArgs>
+    billingLineItems?: boolean | InpatientEncounterOrder$billingLineItemsArgs<ExtArgs>
+    _count?: boolean | InpatientEncounterOrderCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["inpatientEncounterOrder"]>
 
   export type InpatientEncounterOrderSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -26749,6 +27480,8 @@ export namespace Prisma {
   export type InpatientEncounterOrderInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     encounter?: boolean | InpatientEncounterDefaultArgs<ExtArgs>
     catalogueItem?: boolean | InpatientEncounterOrder$catalogueItemArgs<ExtArgs>
+    billingLineItems?: boolean | InpatientEncounterOrder$billingLineItemsArgs<ExtArgs>
+    _count?: boolean | InpatientEncounterOrderCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type InpatientEncounterOrderIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     encounter?: boolean | InpatientEncounterDefaultArgs<ExtArgs>
@@ -26764,6 +27497,7 @@ export namespace Prisma {
     objects: {
       encounter: Prisma.$InpatientEncounterPayload<ExtArgs>
       catalogueItem: Prisma.$ParticularCataloguePayload<ExtArgs> | null
+      billingLineItems: Prisma.$BillingLineItemPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -27173,6 +27907,7 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     encounter<T extends InpatientEncounterDefaultArgs<ExtArgs> = {}>(args?: Subset<T, InpatientEncounterDefaultArgs<ExtArgs>>): Prisma__InpatientEncounterClient<$Result.GetResult<Prisma.$InpatientEncounterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     catalogueItem<T extends InpatientEncounterOrder$catalogueItemArgs<ExtArgs> = {}>(args?: Subset<T, InpatientEncounterOrder$catalogueItemArgs<ExtArgs>>): Prisma__ParticularCatalogueClient<$Result.GetResult<Prisma.$ParticularCataloguePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    billingLineItems<T extends InpatientEncounterOrder$billingLineItemsArgs<ExtArgs> = {}>(args?: Subset<T, InpatientEncounterOrder$billingLineItemsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BillingLineItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -27625,6 +28360,30 @@ export namespace Prisma {
      */
     include?: ParticularCatalogueInclude<ExtArgs> | null
     where?: ParticularCatalogueWhereInput
+  }
+
+  /**
+   * InpatientEncounterOrder.billingLineItems
+   */
+  export type InpatientEncounterOrder$billingLineItemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BillingLineItem
+     */
+    select?: BillingLineItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BillingLineItem
+     */
+    omit?: BillingLineItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BillingLineItemInclude<ExtArgs> | null
+    where?: BillingLineItemWhereInput
+    orderBy?: BillingLineItemOrderByWithRelationInput | BillingLineItemOrderByWithRelationInput[]
+    cursor?: BillingLineItemWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: BillingLineItemScalarFieldEnum | BillingLineItemScalarFieldEnum[]
   }
 
   /**
@@ -36088,6 +36847,6483 @@ export namespace Prisma {
 
 
   /**
+   * Model BillingTransaction
+   */
+
+  export type AggregateBillingTransaction = {
+    _count: BillingTransactionCountAggregateOutputType | null
+    _avg: BillingTransactionAvgAggregateOutputType | null
+    _sum: BillingTransactionSumAggregateOutputType | null
+    _min: BillingTransactionMinAggregateOutputType | null
+    _max: BillingTransactionMaxAggregateOutputType | null
+  }
+
+  export type BillingTransactionAvgAggregateOutputType = {
+    totalAmount: Decimal | null
+    insuranceDiscount: Decimal | null
+    finalAmount: Decimal | null
+    paidAmount: Decimal | null
+    balanceAmount: Decimal | null
+  }
+
+  export type BillingTransactionSumAggregateOutputType = {
+    totalAmount: Decimal | null
+    insuranceDiscount: Decimal | null
+    finalAmount: Decimal | null
+    paidAmount: Decimal | null
+    balanceAmount: Decimal | null
+  }
+
+  export type BillingTransactionMinAggregateOutputType = {
+    id: string | null
+    transactionNumber: string | null
+    patientId: string | null
+    encounterId: string | null
+    status: $Enums.BillingStatus | null
+    totalAmount: Decimal | null
+    insuranceDiscount: Decimal | null
+    finalAmount: Decimal | null
+    paidAmount: Decimal | null
+    balanceAmount: Decimal | null
+    hasPreAuth: boolean | null
+    preAuthSettled: boolean | null
+    hasPaymentPlan: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    createdBy: string | null
+  }
+
+  export type BillingTransactionMaxAggregateOutputType = {
+    id: string | null
+    transactionNumber: string | null
+    patientId: string | null
+    encounterId: string | null
+    status: $Enums.BillingStatus | null
+    totalAmount: Decimal | null
+    insuranceDiscount: Decimal | null
+    finalAmount: Decimal | null
+    paidAmount: Decimal | null
+    balanceAmount: Decimal | null
+    hasPreAuth: boolean | null
+    preAuthSettled: boolean | null
+    hasPaymentPlan: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    createdBy: string | null
+  }
+
+  export type BillingTransactionCountAggregateOutputType = {
+    id: number
+    transactionNumber: number
+    patientId: number
+    encounterId: number
+    status: number
+    totalAmount: number
+    insuranceDiscount: number
+    finalAmount: number
+    paidAmount: number
+    balanceAmount: number
+    hasPreAuth: number
+    preAuthSettled: number
+    hasPaymentPlan: number
+    createdAt: number
+    updatedAt: number
+    createdBy: number
+    _all: number
+  }
+
+
+  export type BillingTransactionAvgAggregateInputType = {
+    totalAmount?: true
+    insuranceDiscount?: true
+    finalAmount?: true
+    paidAmount?: true
+    balanceAmount?: true
+  }
+
+  export type BillingTransactionSumAggregateInputType = {
+    totalAmount?: true
+    insuranceDiscount?: true
+    finalAmount?: true
+    paidAmount?: true
+    balanceAmount?: true
+  }
+
+  export type BillingTransactionMinAggregateInputType = {
+    id?: true
+    transactionNumber?: true
+    patientId?: true
+    encounterId?: true
+    status?: true
+    totalAmount?: true
+    insuranceDiscount?: true
+    finalAmount?: true
+    paidAmount?: true
+    balanceAmount?: true
+    hasPreAuth?: true
+    preAuthSettled?: true
+    hasPaymentPlan?: true
+    createdAt?: true
+    updatedAt?: true
+    createdBy?: true
+  }
+
+  export type BillingTransactionMaxAggregateInputType = {
+    id?: true
+    transactionNumber?: true
+    patientId?: true
+    encounterId?: true
+    status?: true
+    totalAmount?: true
+    insuranceDiscount?: true
+    finalAmount?: true
+    paidAmount?: true
+    balanceAmount?: true
+    hasPreAuth?: true
+    preAuthSettled?: true
+    hasPaymentPlan?: true
+    createdAt?: true
+    updatedAt?: true
+    createdBy?: true
+  }
+
+  export type BillingTransactionCountAggregateInputType = {
+    id?: true
+    transactionNumber?: true
+    patientId?: true
+    encounterId?: true
+    status?: true
+    totalAmount?: true
+    insuranceDiscount?: true
+    finalAmount?: true
+    paidAmount?: true
+    balanceAmount?: true
+    hasPreAuth?: true
+    preAuthSettled?: true
+    hasPaymentPlan?: true
+    createdAt?: true
+    updatedAt?: true
+    createdBy?: true
+    _all?: true
+  }
+
+  export type BillingTransactionAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which BillingTransaction to aggregate.
+     */
+    where?: BillingTransactionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of BillingTransactions to fetch.
+     */
+    orderBy?: BillingTransactionOrderByWithRelationInput | BillingTransactionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: BillingTransactionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` BillingTransactions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` BillingTransactions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned BillingTransactions
+    **/
+    _count?: true | BillingTransactionCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: BillingTransactionAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: BillingTransactionSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: BillingTransactionMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: BillingTransactionMaxAggregateInputType
+  }
+
+  export type GetBillingTransactionAggregateType<T extends BillingTransactionAggregateArgs> = {
+        [P in keyof T & keyof AggregateBillingTransaction]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateBillingTransaction[P]>
+      : GetScalarType<T[P], AggregateBillingTransaction[P]>
+  }
+
+
+
+
+  export type BillingTransactionGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: BillingTransactionWhereInput
+    orderBy?: BillingTransactionOrderByWithAggregationInput | BillingTransactionOrderByWithAggregationInput[]
+    by: BillingTransactionScalarFieldEnum[] | BillingTransactionScalarFieldEnum
+    having?: BillingTransactionScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: BillingTransactionCountAggregateInputType | true
+    _avg?: BillingTransactionAvgAggregateInputType
+    _sum?: BillingTransactionSumAggregateInputType
+    _min?: BillingTransactionMinAggregateInputType
+    _max?: BillingTransactionMaxAggregateInputType
+  }
+
+  export type BillingTransactionGroupByOutputType = {
+    id: string
+    transactionNumber: string
+    patientId: string
+    encounterId: string | null
+    status: $Enums.BillingStatus
+    totalAmount: Decimal
+    insuranceDiscount: Decimal
+    finalAmount: Decimal
+    paidAmount: Decimal
+    balanceAmount: Decimal
+    hasPreAuth: boolean
+    preAuthSettled: boolean
+    hasPaymentPlan: boolean
+    createdAt: Date
+    updatedAt: Date
+    createdBy: string | null
+    _count: BillingTransactionCountAggregateOutputType | null
+    _avg: BillingTransactionAvgAggregateOutputType | null
+    _sum: BillingTransactionSumAggregateOutputType | null
+    _min: BillingTransactionMinAggregateOutputType | null
+    _max: BillingTransactionMaxAggregateOutputType | null
+  }
+
+  type GetBillingTransactionGroupByPayload<T extends BillingTransactionGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<BillingTransactionGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof BillingTransactionGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], BillingTransactionGroupByOutputType[P]>
+            : GetScalarType<T[P], BillingTransactionGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type BillingTransactionSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    transactionNumber?: boolean
+    patientId?: boolean
+    encounterId?: boolean
+    status?: boolean
+    totalAmount?: boolean
+    insuranceDiscount?: boolean
+    finalAmount?: boolean
+    paidAmount?: boolean
+    balanceAmount?: boolean
+    hasPreAuth?: boolean
+    preAuthSettled?: boolean
+    hasPaymentPlan?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    createdBy?: boolean
+    patient?: boolean | PatientDefaultArgs<ExtArgs>
+    encounter?: boolean | BillingTransaction$encounterArgs<ExtArgs>
+    paymentPlan?: boolean | BillingTransaction$paymentPlanArgs<ExtArgs>
+    lineItems?: boolean | BillingTransaction$lineItemsArgs<ExtArgs>
+    payments?: boolean | BillingTransaction$paymentsArgs<ExtArgs>
+    _count?: boolean | BillingTransactionCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["billingTransaction"]>
+
+  export type BillingTransactionSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    transactionNumber?: boolean
+    patientId?: boolean
+    encounterId?: boolean
+    status?: boolean
+    totalAmount?: boolean
+    insuranceDiscount?: boolean
+    finalAmount?: boolean
+    paidAmount?: boolean
+    balanceAmount?: boolean
+    hasPreAuth?: boolean
+    preAuthSettled?: boolean
+    hasPaymentPlan?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    createdBy?: boolean
+    patient?: boolean | PatientDefaultArgs<ExtArgs>
+    encounter?: boolean | BillingTransaction$encounterArgs<ExtArgs>
+  }, ExtArgs["result"]["billingTransaction"]>
+
+  export type BillingTransactionSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    transactionNumber?: boolean
+    patientId?: boolean
+    encounterId?: boolean
+    status?: boolean
+    totalAmount?: boolean
+    insuranceDiscount?: boolean
+    finalAmount?: boolean
+    paidAmount?: boolean
+    balanceAmount?: boolean
+    hasPreAuth?: boolean
+    preAuthSettled?: boolean
+    hasPaymentPlan?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    createdBy?: boolean
+    patient?: boolean | PatientDefaultArgs<ExtArgs>
+    encounter?: boolean | BillingTransaction$encounterArgs<ExtArgs>
+  }, ExtArgs["result"]["billingTransaction"]>
+
+  export type BillingTransactionSelectScalar = {
+    id?: boolean
+    transactionNumber?: boolean
+    patientId?: boolean
+    encounterId?: boolean
+    status?: boolean
+    totalAmount?: boolean
+    insuranceDiscount?: boolean
+    finalAmount?: boolean
+    paidAmount?: boolean
+    balanceAmount?: boolean
+    hasPreAuth?: boolean
+    preAuthSettled?: boolean
+    hasPaymentPlan?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    createdBy?: boolean
+  }
+
+  export type BillingTransactionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "transactionNumber" | "patientId" | "encounterId" | "status" | "totalAmount" | "insuranceDiscount" | "finalAmount" | "paidAmount" | "balanceAmount" | "hasPreAuth" | "preAuthSettled" | "hasPaymentPlan" | "createdAt" | "updatedAt" | "createdBy", ExtArgs["result"]["billingTransaction"]>
+  export type BillingTransactionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    patient?: boolean | PatientDefaultArgs<ExtArgs>
+    encounter?: boolean | BillingTransaction$encounterArgs<ExtArgs>
+    paymentPlan?: boolean | BillingTransaction$paymentPlanArgs<ExtArgs>
+    lineItems?: boolean | BillingTransaction$lineItemsArgs<ExtArgs>
+    payments?: boolean | BillingTransaction$paymentsArgs<ExtArgs>
+    _count?: boolean | BillingTransactionCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type BillingTransactionIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    patient?: boolean | PatientDefaultArgs<ExtArgs>
+    encounter?: boolean | BillingTransaction$encounterArgs<ExtArgs>
+  }
+  export type BillingTransactionIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    patient?: boolean | PatientDefaultArgs<ExtArgs>
+    encounter?: boolean | BillingTransaction$encounterArgs<ExtArgs>
+  }
+
+  export type $BillingTransactionPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "BillingTransaction"
+    objects: {
+      patient: Prisma.$PatientPayload<ExtArgs>
+      encounter: Prisma.$InpatientEncounterPayload<ExtArgs> | null
+      paymentPlan: Prisma.$PaymentPlanPayload<ExtArgs> | null
+      lineItems: Prisma.$BillingLineItemPayload<ExtArgs>[]
+      payments: Prisma.$BillingPaymentPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      transactionNumber: string
+      patientId: string
+      encounterId: string | null
+      status: $Enums.BillingStatus
+      totalAmount: Prisma.Decimal
+      insuranceDiscount: Prisma.Decimal
+      finalAmount: Prisma.Decimal
+      paidAmount: Prisma.Decimal
+      balanceAmount: Prisma.Decimal
+      hasPreAuth: boolean
+      preAuthSettled: boolean
+      hasPaymentPlan: boolean
+      createdAt: Date
+      updatedAt: Date
+      createdBy: string | null
+    }, ExtArgs["result"]["billingTransaction"]>
+    composites: {}
+  }
+
+  type BillingTransactionGetPayload<S extends boolean | null | undefined | BillingTransactionDefaultArgs> = $Result.GetResult<Prisma.$BillingTransactionPayload, S>
+
+  type BillingTransactionCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<BillingTransactionFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: BillingTransactionCountAggregateInputType | true
+    }
+
+  export interface BillingTransactionDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['BillingTransaction'], meta: { name: 'BillingTransaction' } }
+    /**
+     * Find zero or one BillingTransaction that matches the filter.
+     * @param {BillingTransactionFindUniqueArgs} args - Arguments to find a BillingTransaction
+     * @example
+     * // Get one BillingTransaction
+     * const billingTransaction = await prisma.billingTransaction.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends BillingTransactionFindUniqueArgs>(args: SelectSubset<T, BillingTransactionFindUniqueArgs<ExtArgs>>): Prisma__BillingTransactionClient<$Result.GetResult<Prisma.$BillingTransactionPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one BillingTransaction that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {BillingTransactionFindUniqueOrThrowArgs} args - Arguments to find a BillingTransaction
+     * @example
+     * // Get one BillingTransaction
+     * const billingTransaction = await prisma.billingTransaction.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends BillingTransactionFindUniqueOrThrowArgs>(args: SelectSubset<T, BillingTransactionFindUniqueOrThrowArgs<ExtArgs>>): Prisma__BillingTransactionClient<$Result.GetResult<Prisma.$BillingTransactionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first BillingTransaction that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BillingTransactionFindFirstArgs} args - Arguments to find a BillingTransaction
+     * @example
+     * // Get one BillingTransaction
+     * const billingTransaction = await prisma.billingTransaction.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends BillingTransactionFindFirstArgs>(args?: SelectSubset<T, BillingTransactionFindFirstArgs<ExtArgs>>): Prisma__BillingTransactionClient<$Result.GetResult<Prisma.$BillingTransactionPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first BillingTransaction that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BillingTransactionFindFirstOrThrowArgs} args - Arguments to find a BillingTransaction
+     * @example
+     * // Get one BillingTransaction
+     * const billingTransaction = await prisma.billingTransaction.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends BillingTransactionFindFirstOrThrowArgs>(args?: SelectSubset<T, BillingTransactionFindFirstOrThrowArgs<ExtArgs>>): Prisma__BillingTransactionClient<$Result.GetResult<Prisma.$BillingTransactionPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more BillingTransactions that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BillingTransactionFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all BillingTransactions
+     * const billingTransactions = await prisma.billingTransaction.findMany()
+     * 
+     * // Get first 10 BillingTransactions
+     * const billingTransactions = await prisma.billingTransaction.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const billingTransactionWithIdOnly = await prisma.billingTransaction.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends BillingTransactionFindManyArgs>(args?: SelectSubset<T, BillingTransactionFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BillingTransactionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a BillingTransaction.
+     * @param {BillingTransactionCreateArgs} args - Arguments to create a BillingTransaction.
+     * @example
+     * // Create one BillingTransaction
+     * const BillingTransaction = await prisma.billingTransaction.create({
+     *   data: {
+     *     // ... data to create a BillingTransaction
+     *   }
+     * })
+     * 
+     */
+    create<T extends BillingTransactionCreateArgs>(args: SelectSubset<T, BillingTransactionCreateArgs<ExtArgs>>): Prisma__BillingTransactionClient<$Result.GetResult<Prisma.$BillingTransactionPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many BillingTransactions.
+     * @param {BillingTransactionCreateManyArgs} args - Arguments to create many BillingTransactions.
+     * @example
+     * // Create many BillingTransactions
+     * const billingTransaction = await prisma.billingTransaction.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends BillingTransactionCreateManyArgs>(args?: SelectSubset<T, BillingTransactionCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many BillingTransactions and returns the data saved in the database.
+     * @param {BillingTransactionCreateManyAndReturnArgs} args - Arguments to create many BillingTransactions.
+     * @example
+     * // Create many BillingTransactions
+     * const billingTransaction = await prisma.billingTransaction.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many BillingTransactions and only return the `id`
+     * const billingTransactionWithIdOnly = await prisma.billingTransaction.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends BillingTransactionCreateManyAndReturnArgs>(args?: SelectSubset<T, BillingTransactionCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BillingTransactionPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a BillingTransaction.
+     * @param {BillingTransactionDeleteArgs} args - Arguments to delete one BillingTransaction.
+     * @example
+     * // Delete one BillingTransaction
+     * const BillingTransaction = await prisma.billingTransaction.delete({
+     *   where: {
+     *     // ... filter to delete one BillingTransaction
+     *   }
+     * })
+     * 
+     */
+    delete<T extends BillingTransactionDeleteArgs>(args: SelectSubset<T, BillingTransactionDeleteArgs<ExtArgs>>): Prisma__BillingTransactionClient<$Result.GetResult<Prisma.$BillingTransactionPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one BillingTransaction.
+     * @param {BillingTransactionUpdateArgs} args - Arguments to update one BillingTransaction.
+     * @example
+     * // Update one BillingTransaction
+     * const billingTransaction = await prisma.billingTransaction.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends BillingTransactionUpdateArgs>(args: SelectSubset<T, BillingTransactionUpdateArgs<ExtArgs>>): Prisma__BillingTransactionClient<$Result.GetResult<Prisma.$BillingTransactionPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more BillingTransactions.
+     * @param {BillingTransactionDeleteManyArgs} args - Arguments to filter BillingTransactions to delete.
+     * @example
+     * // Delete a few BillingTransactions
+     * const { count } = await prisma.billingTransaction.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends BillingTransactionDeleteManyArgs>(args?: SelectSubset<T, BillingTransactionDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more BillingTransactions.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BillingTransactionUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many BillingTransactions
+     * const billingTransaction = await prisma.billingTransaction.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends BillingTransactionUpdateManyArgs>(args: SelectSubset<T, BillingTransactionUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more BillingTransactions and returns the data updated in the database.
+     * @param {BillingTransactionUpdateManyAndReturnArgs} args - Arguments to update many BillingTransactions.
+     * @example
+     * // Update many BillingTransactions
+     * const billingTransaction = await prisma.billingTransaction.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more BillingTransactions and only return the `id`
+     * const billingTransactionWithIdOnly = await prisma.billingTransaction.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends BillingTransactionUpdateManyAndReturnArgs>(args: SelectSubset<T, BillingTransactionUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BillingTransactionPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one BillingTransaction.
+     * @param {BillingTransactionUpsertArgs} args - Arguments to update or create a BillingTransaction.
+     * @example
+     * // Update or create a BillingTransaction
+     * const billingTransaction = await prisma.billingTransaction.upsert({
+     *   create: {
+     *     // ... data to create a BillingTransaction
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the BillingTransaction we want to update
+     *   }
+     * })
+     */
+    upsert<T extends BillingTransactionUpsertArgs>(args: SelectSubset<T, BillingTransactionUpsertArgs<ExtArgs>>): Prisma__BillingTransactionClient<$Result.GetResult<Prisma.$BillingTransactionPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of BillingTransactions.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BillingTransactionCountArgs} args - Arguments to filter BillingTransactions to count.
+     * @example
+     * // Count the number of BillingTransactions
+     * const count = await prisma.billingTransaction.count({
+     *   where: {
+     *     // ... the filter for the BillingTransactions we want to count
+     *   }
+     * })
+    **/
+    count<T extends BillingTransactionCountArgs>(
+      args?: Subset<T, BillingTransactionCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], BillingTransactionCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a BillingTransaction.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BillingTransactionAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends BillingTransactionAggregateArgs>(args: Subset<T, BillingTransactionAggregateArgs>): Prisma.PrismaPromise<GetBillingTransactionAggregateType<T>>
+
+    /**
+     * Group by BillingTransaction.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BillingTransactionGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends BillingTransactionGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: BillingTransactionGroupByArgs['orderBy'] }
+        : { orderBy?: BillingTransactionGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, BillingTransactionGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetBillingTransactionGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the BillingTransaction model
+   */
+  readonly fields: BillingTransactionFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for BillingTransaction.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__BillingTransactionClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    patient<T extends PatientDefaultArgs<ExtArgs> = {}>(args?: Subset<T, PatientDefaultArgs<ExtArgs>>): Prisma__PatientClient<$Result.GetResult<Prisma.$PatientPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    encounter<T extends BillingTransaction$encounterArgs<ExtArgs> = {}>(args?: Subset<T, BillingTransaction$encounterArgs<ExtArgs>>): Prisma__InpatientEncounterClient<$Result.GetResult<Prisma.$InpatientEncounterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    paymentPlan<T extends BillingTransaction$paymentPlanArgs<ExtArgs> = {}>(args?: Subset<T, BillingTransaction$paymentPlanArgs<ExtArgs>>): Prisma__PaymentPlanClient<$Result.GetResult<Prisma.$PaymentPlanPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    lineItems<T extends BillingTransaction$lineItemsArgs<ExtArgs> = {}>(args?: Subset<T, BillingTransaction$lineItemsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BillingLineItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    payments<T extends BillingTransaction$paymentsArgs<ExtArgs> = {}>(args?: Subset<T, BillingTransaction$paymentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BillingPaymentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the BillingTransaction model
+   */
+  interface BillingTransactionFieldRefs {
+    readonly id: FieldRef<"BillingTransaction", 'String'>
+    readonly transactionNumber: FieldRef<"BillingTransaction", 'String'>
+    readonly patientId: FieldRef<"BillingTransaction", 'String'>
+    readonly encounterId: FieldRef<"BillingTransaction", 'String'>
+    readonly status: FieldRef<"BillingTransaction", 'BillingStatus'>
+    readonly totalAmount: FieldRef<"BillingTransaction", 'Decimal'>
+    readonly insuranceDiscount: FieldRef<"BillingTransaction", 'Decimal'>
+    readonly finalAmount: FieldRef<"BillingTransaction", 'Decimal'>
+    readonly paidAmount: FieldRef<"BillingTransaction", 'Decimal'>
+    readonly balanceAmount: FieldRef<"BillingTransaction", 'Decimal'>
+    readonly hasPreAuth: FieldRef<"BillingTransaction", 'Boolean'>
+    readonly preAuthSettled: FieldRef<"BillingTransaction", 'Boolean'>
+    readonly hasPaymentPlan: FieldRef<"BillingTransaction", 'Boolean'>
+    readonly createdAt: FieldRef<"BillingTransaction", 'DateTime'>
+    readonly updatedAt: FieldRef<"BillingTransaction", 'DateTime'>
+    readonly createdBy: FieldRef<"BillingTransaction", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * BillingTransaction findUnique
+   */
+  export type BillingTransactionFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BillingTransaction
+     */
+    select?: BillingTransactionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BillingTransaction
+     */
+    omit?: BillingTransactionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BillingTransactionInclude<ExtArgs> | null
+    /**
+     * Filter, which BillingTransaction to fetch.
+     */
+    where: BillingTransactionWhereUniqueInput
+  }
+
+  /**
+   * BillingTransaction findUniqueOrThrow
+   */
+  export type BillingTransactionFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BillingTransaction
+     */
+    select?: BillingTransactionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BillingTransaction
+     */
+    omit?: BillingTransactionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BillingTransactionInclude<ExtArgs> | null
+    /**
+     * Filter, which BillingTransaction to fetch.
+     */
+    where: BillingTransactionWhereUniqueInput
+  }
+
+  /**
+   * BillingTransaction findFirst
+   */
+  export type BillingTransactionFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BillingTransaction
+     */
+    select?: BillingTransactionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BillingTransaction
+     */
+    omit?: BillingTransactionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BillingTransactionInclude<ExtArgs> | null
+    /**
+     * Filter, which BillingTransaction to fetch.
+     */
+    where?: BillingTransactionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of BillingTransactions to fetch.
+     */
+    orderBy?: BillingTransactionOrderByWithRelationInput | BillingTransactionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for BillingTransactions.
+     */
+    cursor?: BillingTransactionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` BillingTransactions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` BillingTransactions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of BillingTransactions.
+     */
+    distinct?: BillingTransactionScalarFieldEnum | BillingTransactionScalarFieldEnum[]
+  }
+
+  /**
+   * BillingTransaction findFirstOrThrow
+   */
+  export type BillingTransactionFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BillingTransaction
+     */
+    select?: BillingTransactionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BillingTransaction
+     */
+    omit?: BillingTransactionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BillingTransactionInclude<ExtArgs> | null
+    /**
+     * Filter, which BillingTransaction to fetch.
+     */
+    where?: BillingTransactionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of BillingTransactions to fetch.
+     */
+    orderBy?: BillingTransactionOrderByWithRelationInput | BillingTransactionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for BillingTransactions.
+     */
+    cursor?: BillingTransactionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` BillingTransactions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` BillingTransactions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of BillingTransactions.
+     */
+    distinct?: BillingTransactionScalarFieldEnum | BillingTransactionScalarFieldEnum[]
+  }
+
+  /**
+   * BillingTransaction findMany
+   */
+  export type BillingTransactionFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BillingTransaction
+     */
+    select?: BillingTransactionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BillingTransaction
+     */
+    omit?: BillingTransactionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BillingTransactionInclude<ExtArgs> | null
+    /**
+     * Filter, which BillingTransactions to fetch.
+     */
+    where?: BillingTransactionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of BillingTransactions to fetch.
+     */
+    orderBy?: BillingTransactionOrderByWithRelationInput | BillingTransactionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing BillingTransactions.
+     */
+    cursor?: BillingTransactionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` BillingTransactions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` BillingTransactions.
+     */
+    skip?: number
+    distinct?: BillingTransactionScalarFieldEnum | BillingTransactionScalarFieldEnum[]
+  }
+
+  /**
+   * BillingTransaction create
+   */
+  export type BillingTransactionCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BillingTransaction
+     */
+    select?: BillingTransactionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BillingTransaction
+     */
+    omit?: BillingTransactionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BillingTransactionInclude<ExtArgs> | null
+    /**
+     * The data needed to create a BillingTransaction.
+     */
+    data: XOR<BillingTransactionCreateInput, BillingTransactionUncheckedCreateInput>
+  }
+
+  /**
+   * BillingTransaction createMany
+   */
+  export type BillingTransactionCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many BillingTransactions.
+     */
+    data: BillingTransactionCreateManyInput | BillingTransactionCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * BillingTransaction createManyAndReturn
+   */
+  export type BillingTransactionCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BillingTransaction
+     */
+    select?: BillingTransactionSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the BillingTransaction
+     */
+    omit?: BillingTransactionOmit<ExtArgs> | null
+    /**
+     * The data used to create many BillingTransactions.
+     */
+    data: BillingTransactionCreateManyInput | BillingTransactionCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BillingTransactionIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * BillingTransaction update
+   */
+  export type BillingTransactionUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BillingTransaction
+     */
+    select?: BillingTransactionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BillingTransaction
+     */
+    omit?: BillingTransactionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BillingTransactionInclude<ExtArgs> | null
+    /**
+     * The data needed to update a BillingTransaction.
+     */
+    data: XOR<BillingTransactionUpdateInput, BillingTransactionUncheckedUpdateInput>
+    /**
+     * Choose, which BillingTransaction to update.
+     */
+    where: BillingTransactionWhereUniqueInput
+  }
+
+  /**
+   * BillingTransaction updateMany
+   */
+  export type BillingTransactionUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update BillingTransactions.
+     */
+    data: XOR<BillingTransactionUpdateManyMutationInput, BillingTransactionUncheckedUpdateManyInput>
+    /**
+     * Filter which BillingTransactions to update
+     */
+    where?: BillingTransactionWhereInput
+    /**
+     * Limit how many BillingTransactions to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * BillingTransaction updateManyAndReturn
+   */
+  export type BillingTransactionUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BillingTransaction
+     */
+    select?: BillingTransactionSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the BillingTransaction
+     */
+    omit?: BillingTransactionOmit<ExtArgs> | null
+    /**
+     * The data used to update BillingTransactions.
+     */
+    data: XOR<BillingTransactionUpdateManyMutationInput, BillingTransactionUncheckedUpdateManyInput>
+    /**
+     * Filter which BillingTransactions to update
+     */
+    where?: BillingTransactionWhereInput
+    /**
+     * Limit how many BillingTransactions to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BillingTransactionIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * BillingTransaction upsert
+   */
+  export type BillingTransactionUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BillingTransaction
+     */
+    select?: BillingTransactionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BillingTransaction
+     */
+    omit?: BillingTransactionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BillingTransactionInclude<ExtArgs> | null
+    /**
+     * The filter to search for the BillingTransaction to update in case it exists.
+     */
+    where: BillingTransactionWhereUniqueInput
+    /**
+     * In case the BillingTransaction found by the `where` argument doesn't exist, create a new BillingTransaction with this data.
+     */
+    create: XOR<BillingTransactionCreateInput, BillingTransactionUncheckedCreateInput>
+    /**
+     * In case the BillingTransaction was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<BillingTransactionUpdateInput, BillingTransactionUncheckedUpdateInput>
+  }
+
+  /**
+   * BillingTransaction delete
+   */
+  export type BillingTransactionDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BillingTransaction
+     */
+    select?: BillingTransactionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BillingTransaction
+     */
+    omit?: BillingTransactionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BillingTransactionInclude<ExtArgs> | null
+    /**
+     * Filter which BillingTransaction to delete.
+     */
+    where: BillingTransactionWhereUniqueInput
+  }
+
+  /**
+   * BillingTransaction deleteMany
+   */
+  export type BillingTransactionDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which BillingTransactions to delete
+     */
+    where?: BillingTransactionWhereInput
+    /**
+     * Limit how many BillingTransactions to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * BillingTransaction.encounter
+   */
+  export type BillingTransaction$encounterArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InpatientEncounter
+     */
+    select?: InpatientEncounterSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InpatientEncounter
+     */
+    omit?: InpatientEncounterOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InpatientEncounterInclude<ExtArgs> | null
+    where?: InpatientEncounterWhereInput
+  }
+
+  /**
+   * BillingTransaction.paymentPlan
+   */
+  export type BillingTransaction$paymentPlanArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PaymentPlan
+     */
+    select?: PaymentPlanSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PaymentPlan
+     */
+    omit?: PaymentPlanOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PaymentPlanInclude<ExtArgs> | null
+    where?: PaymentPlanWhereInput
+  }
+
+  /**
+   * BillingTransaction.lineItems
+   */
+  export type BillingTransaction$lineItemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BillingLineItem
+     */
+    select?: BillingLineItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BillingLineItem
+     */
+    omit?: BillingLineItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BillingLineItemInclude<ExtArgs> | null
+    where?: BillingLineItemWhereInput
+    orderBy?: BillingLineItemOrderByWithRelationInput | BillingLineItemOrderByWithRelationInput[]
+    cursor?: BillingLineItemWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: BillingLineItemScalarFieldEnum | BillingLineItemScalarFieldEnum[]
+  }
+
+  /**
+   * BillingTransaction.payments
+   */
+  export type BillingTransaction$paymentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BillingPayment
+     */
+    select?: BillingPaymentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BillingPayment
+     */
+    omit?: BillingPaymentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BillingPaymentInclude<ExtArgs> | null
+    where?: BillingPaymentWhereInput
+    orderBy?: BillingPaymentOrderByWithRelationInput | BillingPaymentOrderByWithRelationInput[]
+    cursor?: BillingPaymentWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: BillingPaymentScalarFieldEnum | BillingPaymentScalarFieldEnum[]
+  }
+
+  /**
+   * BillingTransaction without action
+   */
+  export type BillingTransactionDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BillingTransaction
+     */
+    select?: BillingTransactionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BillingTransaction
+     */
+    omit?: BillingTransactionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BillingTransactionInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model BillingLineItem
+   */
+
+  export type AggregateBillingLineItem = {
+    _count: BillingLineItemCountAggregateOutputType | null
+    _avg: BillingLineItemAvgAggregateOutputType | null
+    _sum: BillingLineItemSumAggregateOutputType | null
+    _min: BillingLineItemMinAggregateOutputType | null
+    _max: BillingLineItemMaxAggregateOutputType | null
+  }
+
+  export type BillingLineItemAvgAggregateOutputType = {
+    quantity: number | null
+    unitPrice: Decimal | null
+    totalPrice: Decimal | null
+    insuranceDiscount: Decimal | null
+    finalPrice: Decimal | null
+  }
+
+  export type BillingLineItemSumAggregateOutputType = {
+    quantity: number | null
+    unitPrice: Decimal | null
+    totalPrice: Decimal | null
+    insuranceDiscount: Decimal | null
+    finalPrice: Decimal | null
+  }
+
+  export type BillingLineItemMinAggregateOutputType = {
+    id: string | null
+    transactionId: string | null
+    itemType: $Enums.BillingItemType | null
+    description: string | null
+    quantity: number | null
+    unitPrice: Decimal | null
+    totalPrice: Decimal | null
+    requiresPreAuth: boolean | null
+    preAuthPaid: boolean | null
+    preAuthPaymentId: string | null
+    insuranceCoverable: boolean | null
+    insuranceDiscount: Decimal | null
+    finalPrice: Decimal | null
+    encounterOrderId: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    addedBy: string | null
+  }
+
+  export type BillingLineItemMaxAggregateOutputType = {
+    id: string | null
+    transactionId: string | null
+    itemType: $Enums.BillingItemType | null
+    description: string | null
+    quantity: number | null
+    unitPrice: Decimal | null
+    totalPrice: Decimal | null
+    requiresPreAuth: boolean | null
+    preAuthPaid: boolean | null
+    preAuthPaymentId: string | null
+    insuranceCoverable: boolean | null
+    insuranceDiscount: Decimal | null
+    finalPrice: Decimal | null
+    encounterOrderId: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    addedBy: string | null
+  }
+
+  export type BillingLineItemCountAggregateOutputType = {
+    id: number
+    transactionId: number
+    itemType: number
+    description: number
+    quantity: number
+    unitPrice: number
+    totalPrice: number
+    requiresPreAuth: number
+    preAuthPaid: number
+    preAuthPaymentId: number
+    insuranceCoverable: number
+    insuranceDiscount: number
+    finalPrice: number
+    encounterOrderId: number
+    createdAt: number
+    updatedAt: number
+    addedBy: number
+    _all: number
+  }
+
+
+  export type BillingLineItemAvgAggregateInputType = {
+    quantity?: true
+    unitPrice?: true
+    totalPrice?: true
+    insuranceDiscount?: true
+    finalPrice?: true
+  }
+
+  export type BillingLineItemSumAggregateInputType = {
+    quantity?: true
+    unitPrice?: true
+    totalPrice?: true
+    insuranceDiscount?: true
+    finalPrice?: true
+  }
+
+  export type BillingLineItemMinAggregateInputType = {
+    id?: true
+    transactionId?: true
+    itemType?: true
+    description?: true
+    quantity?: true
+    unitPrice?: true
+    totalPrice?: true
+    requiresPreAuth?: true
+    preAuthPaid?: true
+    preAuthPaymentId?: true
+    insuranceCoverable?: true
+    insuranceDiscount?: true
+    finalPrice?: true
+    encounterOrderId?: true
+    createdAt?: true
+    updatedAt?: true
+    addedBy?: true
+  }
+
+  export type BillingLineItemMaxAggregateInputType = {
+    id?: true
+    transactionId?: true
+    itemType?: true
+    description?: true
+    quantity?: true
+    unitPrice?: true
+    totalPrice?: true
+    requiresPreAuth?: true
+    preAuthPaid?: true
+    preAuthPaymentId?: true
+    insuranceCoverable?: true
+    insuranceDiscount?: true
+    finalPrice?: true
+    encounterOrderId?: true
+    createdAt?: true
+    updatedAt?: true
+    addedBy?: true
+  }
+
+  export type BillingLineItemCountAggregateInputType = {
+    id?: true
+    transactionId?: true
+    itemType?: true
+    description?: true
+    quantity?: true
+    unitPrice?: true
+    totalPrice?: true
+    requiresPreAuth?: true
+    preAuthPaid?: true
+    preAuthPaymentId?: true
+    insuranceCoverable?: true
+    insuranceDiscount?: true
+    finalPrice?: true
+    encounterOrderId?: true
+    createdAt?: true
+    updatedAt?: true
+    addedBy?: true
+    _all?: true
+  }
+
+  export type BillingLineItemAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which BillingLineItem to aggregate.
+     */
+    where?: BillingLineItemWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of BillingLineItems to fetch.
+     */
+    orderBy?: BillingLineItemOrderByWithRelationInput | BillingLineItemOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: BillingLineItemWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` BillingLineItems from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` BillingLineItems.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned BillingLineItems
+    **/
+    _count?: true | BillingLineItemCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: BillingLineItemAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: BillingLineItemSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: BillingLineItemMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: BillingLineItemMaxAggregateInputType
+  }
+
+  export type GetBillingLineItemAggregateType<T extends BillingLineItemAggregateArgs> = {
+        [P in keyof T & keyof AggregateBillingLineItem]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateBillingLineItem[P]>
+      : GetScalarType<T[P], AggregateBillingLineItem[P]>
+  }
+
+
+
+
+  export type BillingLineItemGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: BillingLineItemWhereInput
+    orderBy?: BillingLineItemOrderByWithAggregationInput | BillingLineItemOrderByWithAggregationInput[]
+    by: BillingLineItemScalarFieldEnum[] | BillingLineItemScalarFieldEnum
+    having?: BillingLineItemScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: BillingLineItemCountAggregateInputType | true
+    _avg?: BillingLineItemAvgAggregateInputType
+    _sum?: BillingLineItemSumAggregateInputType
+    _min?: BillingLineItemMinAggregateInputType
+    _max?: BillingLineItemMaxAggregateInputType
+  }
+
+  export type BillingLineItemGroupByOutputType = {
+    id: string
+    transactionId: string
+    itemType: $Enums.BillingItemType
+    description: string
+    quantity: number
+    unitPrice: Decimal
+    totalPrice: Decimal
+    requiresPreAuth: boolean
+    preAuthPaid: boolean
+    preAuthPaymentId: string | null
+    insuranceCoverable: boolean
+    insuranceDiscount: Decimal
+    finalPrice: Decimal
+    encounterOrderId: string | null
+    createdAt: Date
+    updatedAt: Date
+    addedBy: string | null
+    _count: BillingLineItemCountAggregateOutputType | null
+    _avg: BillingLineItemAvgAggregateOutputType | null
+    _sum: BillingLineItemSumAggregateOutputType | null
+    _min: BillingLineItemMinAggregateOutputType | null
+    _max: BillingLineItemMaxAggregateOutputType | null
+  }
+
+  type GetBillingLineItemGroupByPayload<T extends BillingLineItemGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<BillingLineItemGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof BillingLineItemGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], BillingLineItemGroupByOutputType[P]>
+            : GetScalarType<T[P], BillingLineItemGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type BillingLineItemSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    transactionId?: boolean
+    itemType?: boolean
+    description?: boolean
+    quantity?: boolean
+    unitPrice?: boolean
+    totalPrice?: boolean
+    requiresPreAuth?: boolean
+    preAuthPaid?: boolean
+    preAuthPaymentId?: boolean
+    insuranceCoverable?: boolean
+    insuranceDiscount?: boolean
+    finalPrice?: boolean
+    encounterOrderId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    addedBy?: boolean
+    transaction?: boolean | BillingTransactionDefaultArgs<ExtArgs>
+    preAuthPayment?: boolean | BillingLineItem$preAuthPaymentArgs<ExtArgs>
+    insuranceCoverage?: boolean | BillingLineItem$insuranceCoverageArgs<ExtArgs>
+    encounterOrder?: boolean | BillingLineItem$encounterOrderArgs<ExtArgs>
+  }, ExtArgs["result"]["billingLineItem"]>
+
+  export type BillingLineItemSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    transactionId?: boolean
+    itemType?: boolean
+    description?: boolean
+    quantity?: boolean
+    unitPrice?: boolean
+    totalPrice?: boolean
+    requiresPreAuth?: boolean
+    preAuthPaid?: boolean
+    preAuthPaymentId?: boolean
+    insuranceCoverable?: boolean
+    insuranceDiscount?: boolean
+    finalPrice?: boolean
+    encounterOrderId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    addedBy?: boolean
+    transaction?: boolean | BillingTransactionDefaultArgs<ExtArgs>
+    preAuthPayment?: boolean | BillingLineItem$preAuthPaymentArgs<ExtArgs>
+    encounterOrder?: boolean | BillingLineItem$encounterOrderArgs<ExtArgs>
+  }, ExtArgs["result"]["billingLineItem"]>
+
+  export type BillingLineItemSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    transactionId?: boolean
+    itemType?: boolean
+    description?: boolean
+    quantity?: boolean
+    unitPrice?: boolean
+    totalPrice?: boolean
+    requiresPreAuth?: boolean
+    preAuthPaid?: boolean
+    preAuthPaymentId?: boolean
+    insuranceCoverable?: boolean
+    insuranceDiscount?: boolean
+    finalPrice?: boolean
+    encounterOrderId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    addedBy?: boolean
+    transaction?: boolean | BillingTransactionDefaultArgs<ExtArgs>
+    preAuthPayment?: boolean | BillingLineItem$preAuthPaymentArgs<ExtArgs>
+    encounterOrder?: boolean | BillingLineItem$encounterOrderArgs<ExtArgs>
+  }, ExtArgs["result"]["billingLineItem"]>
+
+  export type BillingLineItemSelectScalar = {
+    id?: boolean
+    transactionId?: boolean
+    itemType?: boolean
+    description?: boolean
+    quantity?: boolean
+    unitPrice?: boolean
+    totalPrice?: boolean
+    requiresPreAuth?: boolean
+    preAuthPaid?: boolean
+    preAuthPaymentId?: boolean
+    insuranceCoverable?: boolean
+    insuranceDiscount?: boolean
+    finalPrice?: boolean
+    encounterOrderId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    addedBy?: boolean
+  }
+
+  export type BillingLineItemOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "transactionId" | "itemType" | "description" | "quantity" | "unitPrice" | "totalPrice" | "requiresPreAuth" | "preAuthPaid" | "preAuthPaymentId" | "insuranceCoverable" | "insuranceDiscount" | "finalPrice" | "encounterOrderId" | "createdAt" | "updatedAt" | "addedBy", ExtArgs["result"]["billingLineItem"]>
+  export type BillingLineItemInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    transaction?: boolean | BillingTransactionDefaultArgs<ExtArgs>
+    preAuthPayment?: boolean | BillingLineItem$preAuthPaymentArgs<ExtArgs>
+    insuranceCoverage?: boolean | BillingLineItem$insuranceCoverageArgs<ExtArgs>
+    encounterOrder?: boolean | BillingLineItem$encounterOrderArgs<ExtArgs>
+  }
+  export type BillingLineItemIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    transaction?: boolean | BillingTransactionDefaultArgs<ExtArgs>
+    preAuthPayment?: boolean | BillingLineItem$preAuthPaymentArgs<ExtArgs>
+    encounterOrder?: boolean | BillingLineItem$encounterOrderArgs<ExtArgs>
+  }
+  export type BillingLineItemIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    transaction?: boolean | BillingTransactionDefaultArgs<ExtArgs>
+    preAuthPayment?: boolean | BillingLineItem$preAuthPaymentArgs<ExtArgs>
+    encounterOrder?: boolean | BillingLineItem$encounterOrderArgs<ExtArgs>
+  }
+
+  export type $BillingLineItemPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "BillingLineItem"
+    objects: {
+      transaction: Prisma.$BillingTransactionPayload<ExtArgs>
+      preAuthPayment: Prisma.$BillingPaymentPayload<ExtArgs> | null
+      insuranceCoverage: Prisma.$InsuranceCoveragePayload<ExtArgs> | null
+      encounterOrder: Prisma.$InpatientEncounterOrderPayload<ExtArgs> | null
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      transactionId: string
+      itemType: $Enums.BillingItemType
+      description: string
+      quantity: number
+      unitPrice: Prisma.Decimal
+      totalPrice: Prisma.Decimal
+      requiresPreAuth: boolean
+      preAuthPaid: boolean
+      preAuthPaymentId: string | null
+      insuranceCoverable: boolean
+      insuranceDiscount: Prisma.Decimal
+      finalPrice: Prisma.Decimal
+      encounterOrderId: string | null
+      createdAt: Date
+      updatedAt: Date
+      addedBy: string | null
+    }, ExtArgs["result"]["billingLineItem"]>
+    composites: {}
+  }
+
+  type BillingLineItemGetPayload<S extends boolean | null | undefined | BillingLineItemDefaultArgs> = $Result.GetResult<Prisma.$BillingLineItemPayload, S>
+
+  type BillingLineItemCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<BillingLineItemFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: BillingLineItemCountAggregateInputType | true
+    }
+
+  export interface BillingLineItemDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['BillingLineItem'], meta: { name: 'BillingLineItem' } }
+    /**
+     * Find zero or one BillingLineItem that matches the filter.
+     * @param {BillingLineItemFindUniqueArgs} args - Arguments to find a BillingLineItem
+     * @example
+     * // Get one BillingLineItem
+     * const billingLineItem = await prisma.billingLineItem.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends BillingLineItemFindUniqueArgs>(args: SelectSubset<T, BillingLineItemFindUniqueArgs<ExtArgs>>): Prisma__BillingLineItemClient<$Result.GetResult<Prisma.$BillingLineItemPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one BillingLineItem that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {BillingLineItemFindUniqueOrThrowArgs} args - Arguments to find a BillingLineItem
+     * @example
+     * // Get one BillingLineItem
+     * const billingLineItem = await prisma.billingLineItem.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends BillingLineItemFindUniqueOrThrowArgs>(args: SelectSubset<T, BillingLineItemFindUniqueOrThrowArgs<ExtArgs>>): Prisma__BillingLineItemClient<$Result.GetResult<Prisma.$BillingLineItemPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first BillingLineItem that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BillingLineItemFindFirstArgs} args - Arguments to find a BillingLineItem
+     * @example
+     * // Get one BillingLineItem
+     * const billingLineItem = await prisma.billingLineItem.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends BillingLineItemFindFirstArgs>(args?: SelectSubset<T, BillingLineItemFindFirstArgs<ExtArgs>>): Prisma__BillingLineItemClient<$Result.GetResult<Prisma.$BillingLineItemPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first BillingLineItem that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BillingLineItemFindFirstOrThrowArgs} args - Arguments to find a BillingLineItem
+     * @example
+     * // Get one BillingLineItem
+     * const billingLineItem = await prisma.billingLineItem.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends BillingLineItemFindFirstOrThrowArgs>(args?: SelectSubset<T, BillingLineItemFindFirstOrThrowArgs<ExtArgs>>): Prisma__BillingLineItemClient<$Result.GetResult<Prisma.$BillingLineItemPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more BillingLineItems that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BillingLineItemFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all BillingLineItems
+     * const billingLineItems = await prisma.billingLineItem.findMany()
+     * 
+     * // Get first 10 BillingLineItems
+     * const billingLineItems = await prisma.billingLineItem.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const billingLineItemWithIdOnly = await prisma.billingLineItem.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends BillingLineItemFindManyArgs>(args?: SelectSubset<T, BillingLineItemFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BillingLineItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a BillingLineItem.
+     * @param {BillingLineItemCreateArgs} args - Arguments to create a BillingLineItem.
+     * @example
+     * // Create one BillingLineItem
+     * const BillingLineItem = await prisma.billingLineItem.create({
+     *   data: {
+     *     // ... data to create a BillingLineItem
+     *   }
+     * })
+     * 
+     */
+    create<T extends BillingLineItemCreateArgs>(args: SelectSubset<T, BillingLineItemCreateArgs<ExtArgs>>): Prisma__BillingLineItemClient<$Result.GetResult<Prisma.$BillingLineItemPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many BillingLineItems.
+     * @param {BillingLineItemCreateManyArgs} args - Arguments to create many BillingLineItems.
+     * @example
+     * // Create many BillingLineItems
+     * const billingLineItem = await prisma.billingLineItem.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends BillingLineItemCreateManyArgs>(args?: SelectSubset<T, BillingLineItemCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many BillingLineItems and returns the data saved in the database.
+     * @param {BillingLineItemCreateManyAndReturnArgs} args - Arguments to create many BillingLineItems.
+     * @example
+     * // Create many BillingLineItems
+     * const billingLineItem = await prisma.billingLineItem.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many BillingLineItems and only return the `id`
+     * const billingLineItemWithIdOnly = await prisma.billingLineItem.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends BillingLineItemCreateManyAndReturnArgs>(args?: SelectSubset<T, BillingLineItemCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BillingLineItemPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a BillingLineItem.
+     * @param {BillingLineItemDeleteArgs} args - Arguments to delete one BillingLineItem.
+     * @example
+     * // Delete one BillingLineItem
+     * const BillingLineItem = await prisma.billingLineItem.delete({
+     *   where: {
+     *     // ... filter to delete one BillingLineItem
+     *   }
+     * })
+     * 
+     */
+    delete<T extends BillingLineItemDeleteArgs>(args: SelectSubset<T, BillingLineItemDeleteArgs<ExtArgs>>): Prisma__BillingLineItemClient<$Result.GetResult<Prisma.$BillingLineItemPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one BillingLineItem.
+     * @param {BillingLineItemUpdateArgs} args - Arguments to update one BillingLineItem.
+     * @example
+     * // Update one BillingLineItem
+     * const billingLineItem = await prisma.billingLineItem.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends BillingLineItemUpdateArgs>(args: SelectSubset<T, BillingLineItemUpdateArgs<ExtArgs>>): Prisma__BillingLineItemClient<$Result.GetResult<Prisma.$BillingLineItemPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more BillingLineItems.
+     * @param {BillingLineItemDeleteManyArgs} args - Arguments to filter BillingLineItems to delete.
+     * @example
+     * // Delete a few BillingLineItems
+     * const { count } = await prisma.billingLineItem.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends BillingLineItemDeleteManyArgs>(args?: SelectSubset<T, BillingLineItemDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more BillingLineItems.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BillingLineItemUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many BillingLineItems
+     * const billingLineItem = await prisma.billingLineItem.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends BillingLineItemUpdateManyArgs>(args: SelectSubset<T, BillingLineItemUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more BillingLineItems and returns the data updated in the database.
+     * @param {BillingLineItemUpdateManyAndReturnArgs} args - Arguments to update many BillingLineItems.
+     * @example
+     * // Update many BillingLineItems
+     * const billingLineItem = await prisma.billingLineItem.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more BillingLineItems and only return the `id`
+     * const billingLineItemWithIdOnly = await prisma.billingLineItem.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends BillingLineItemUpdateManyAndReturnArgs>(args: SelectSubset<T, BillingLineItemUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BillingLineItemPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one BillingLineItem.
+     * @param {BillingLineItemUpsertArgs} args - Arguments to update or create a BillingLineItem.
+     * @example
+     * // Update or create a BillingLineItem
+     * const billingLineItem = await prisma.billingLineItem.upsert({
+     *   create: {
+     *     // ... data to create a BillingLineItem
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the BillingLineItem we want to update
+     *   }
+     * })
+     */
+    upsert<T extends BillingLineItemUpsertArgs>(args: SelectSubset<T, BillingLineItemUpsertArgs<ExtArgs>>): Prisma__BillingLineItemClient<$Result.GetResult<Prisma.$BillingLineItemPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of BillingLineItems.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BillingLineItemCountArgs} args - Arguments to filter BillingLineItems to count.
+     * @example
+     * // Count the number of BillingLineItems
+     * const count = await prisma.billingLineItem.count({
+     *   where: {
+     *     // ... the filter for the BillingLineItems we want to count
+     *   }
+     * })
+    **/
+    count<T extends BillingLineItemCountArgs>(
+      args?: Subset<T, BillingLineItemCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], BillingLineItemCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a BillingLineItem.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BillingLineItemAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends BillingLineItemAggregateArgs>(args: Subset<T, BillingLineItemAggregateArgs>): Prisma.PrismaPromise<GetBillingLineItemAggregateType<T>>
+
+    /**
+     * Group by BillingLineItem.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BillingLineItemGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends BillingLineItemGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: BillingLineItemGroupByArgs['orderBy'] }
+        : { orderBy?: BillingLineItemGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, BillingLineItemGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetBillingLineItemGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the BillingLineItem model
+   */
+  readonly fields: BillingLineItemFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for BillingLineItem.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__BillingLineItemClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    transaction<T extends BillingTransactionDefaultArgs<ExtArgs> = {}>(args?: Subset<T, BillingTransactionDefaultArgs<ExtArgs>>): Prisma__BillingTransactionClient<$Result.GetResult<Prisma.$BillingTransactionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    preAuthPayment<T extends BillingLineItem$preAuthPaymentArgs<ExtArgs> = {}>(args?: Subset<T, BillingLineItem$preAuthPaymentArgs<ExtArgs>>): Prisma__BillingPaymentClient<$Result.GetResult<Prisma.$BillingPaymentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    insuranceCoverage<T extends BillingLineItem$insuranceCoverageArgs<ExtArgs> = {}>(args?: Subset<T, BillingLineItem$insuranceCoverageArgs<ExtArgs>>): Prisma__InsuranceCoverageClient<$Result.GetResult<Prisma.$InsuranceCoveragePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    encounterOrder<T extends BillingLineItem$encounterOrderArgs<ExtArgs> = {}>(args?: Subset<T, BillingLineItem$encounterOrderArgs<ExtArgs>>): Prisma__InpatientEncounterOrderClient<$Result.GetResult<Prisma.$InpatientEncounterOrderPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the BillingLineItem model
+   */
+  interface BillingLineItemFieldRefs {
+    readonly id: FieldRef<"BillingLineItem", 'String'>
+    readonly transactionId: FieldRef<"BillingLineItem", 'String'>
+    readonly itemType: FieldRef<"BillingLineItem", 'BillingItemType'>
+    readonly description: FieldRef<"BillingLineItem", 'String'>
+    readonly quantity: FieldRef<"BillingLineItem", 'Int'>
+    readonly unitPrice: FieldRef<"BillingLineItem", 'Decimal'>
+    readonly totalPrice: FieldRef<"BillingLineItem", 'Decimal'>
+    readonly requiresPreAuth: FieldRef<"BillingLineItem", 'Boolean'>
+    readonly preAuthPaid: FieldRef<"BillingLineItem", 'Boolean'>
+    readonly preAuthPaymentId: FieldRef<"BillingLineItem", 'String'>
+    readonly insuranceCoverable: FieldRef<"BillingLineItem", 'Boolean'>
+    readonly insuranceDiscount: FieldRef<"BillingLineItem", 'Decimal'>
+    readonly finalPrice: FieldRef<"BillingLineItem", 'Decimal'>
+    readonly encounterOrderId: FieldRef<"BillingLineItem", 'String'>
+    readonly createdAt: FieldRef<"BillingLineItem", 'DateTime'>
+    readonly updatedAt: FieldRef<"BillingLineItem", 'DateTime'>
+    readonly addedBy: FieldRef<"BillingLineItem", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * BillingLineItem findUnique
+   */
+  export type BillingLineItemFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BillingLineItem
+     */
+    select?: BillingLineItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BillingLineItem
+     */
+    omit?: BillingLineItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BillingLineItemInclude<ExtArgs> | null
+    /**
+     * Filter, which BillingLineItem to fetch.
+     */
+    where: BillingLineItemWhereUniqueInput
+  }
+
+  /**
+   * BillingLineItem findUniqueOrThrow
+   */
+  export type BillingLineItemFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BillingLineItem
+     */
+    select?: BillingLineItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BillingLineItem
+     */
+    omit?: BillingLineItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BillingLineItemInclude<ExtArgs> | null
+    /**
+     * Filter, which BillingLineItem to fetch.
+     */
+    where: BillingLineItemWhereUniqueInput
+  }
+
+  /**
+   * BillingLineItem findFirst
+   */
+  export type BillingLineItemFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BillingLineItem
+     */
+    select?: BillingLineItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BillingLineItem
+     */
+    omit?: BillingLineItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BillingLineItemInclude<ExtArgs> | null
+    /**
+     * Filter, which BillingLineItem to fetch.
+     */
+    where?: BillingLineItemWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of BillingLineItems to fetch.
+     */
+    orderBy?: BillingLineItemOrderByWithRelationInput | BillingLineItemOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for BillingLineItems.
+     */
+    cursor?: BillingLineItemWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` BillingLineItems from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` BillingLineItems.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of BillingLineItems.
+     */
+    distinct?: BillingLineItemScalarFieldEnum | BillingLineItemScalarFieldEnum[]
+  }
+
+  /**
+   * BillingLineItem findFirstOrThrow
+   */
+  export type BillingLineItemFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BillingLineItem
+     */
+    select?: BillingLineItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BillingLineItem
+     */
+    omit?: BillingLineItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BillingLineItemInclude<ExtArgs> | null
+    /**
+     * Filter, which BillingLineItem to fetch.
+     */
+    where?: BillingLineItemWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of BillingLineItems to fetch.
+     */
+    orderBy?: BillingLineItemOrderByWithRelationInput | BillingLineItemOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for BillingLineItems.
+     */
+    cursor?: BillingLineItemWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` BillingLineItems from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` BillingLineItems.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of BillingLineItems.
+     */
+    distinct?: BillingLineItemScalarFieldEnum | BillingLineItemScalarFieldEnum[]
+  }
+
+  /**
+   * BillingLineItem findMany
+   */
+  export type BillingLineItemFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BillingLineItem
+     */
+    select?: BillingLineItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BillingLineItem
+     */
+    omit?: BillingLineItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BillingLineItemInclude<ExtArgs> | null
+    /**
+     * Filter, which BillingLineItems to fetch.
+     */
+    where?: BillingLineItemWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of BillingLineItems to fetch.
+     */
+    orderBy?: BillingLineItemOrderByWithRelationInput | BillingLineItemOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing BillingLineItems.
+     */
+    cursor?: BillingLineItemWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` BillingLineItems from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` BillingLineItems.
+     */
+    skip?: number
+    distinct?: BillingLineItemScalarFieldEnum | BillingLineItemScalarFieldEnum[]
+  }
+
+  /**
+   * BillingLineItem create
+   */
+  export type BillingLineItemCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BillingLineItem
+     */
+    select?: BillingLineItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BillingLineItem
+     */
+    omit?: BillingLineItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BillingLineItemInclude<ExtArgs> | null
+    /**
+     * The data needed to create a BillingLineItem.
+     */
+    data: XOR<BillingLineItemCreateInput, BillingLineItemUncheckedCreateInput>
+  }
+
+  /**
+   * BillingLineItem createMany
+   */
+  export type BillingLineItemCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many BillingLineItems.
+     */
+    data: BillingLineItemCreateManyInput | BillingLineItemCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * BillingLineItem createManyAndReturn
+   */
+  export type BillingLineItemCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BillingLineItem
+     */
+    select?: BillingLineItemSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the BillingLineItem
+     */
+    omit?: BillingLineItemOmit<ExtArgs> | null
+    /**
+     * The data used to create many BillingLineItems.
+     */
+    data: BillingLineItemCreateManyInput | BillingLineItemCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BillingLineItemIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * BillingLineItem update
+   */
+  export type BillingLineItemUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BillingLineItem
+     */
+    select?: BillingLineItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BillingLineItem
+     */
+    omit?: BillingLineItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BillingLineItemInclude<ExtArgs> | null
+    /**
+     * The data needed to update a BillingLineItem.
+     */
+    data: XOR<BillingLineItemUpdateInput, BillingLineItemUncheckedUpdateInput>
+    /**
+     * Choose, which BillingLineItem to update.
+     */
+    where: BillingLineItemWhereUniqueInput
+  }
+
+  /**
+   * BillingLineItem updateMany
+   */
+  export type BillingLineItemUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update BillingLineItems.
+     */
+    data: XOR<BillingLineItemUpdateManyMutationInput, BillingLineItemUncheckedUpdateManyInput>
+    /**
+     * Filter which BillingLineItems to update
+     */
+    where?: BillingLineItemWhereInput
+    /**
+     * Limit how many BillingLineItems to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * BillingLineItem updateManyAndReturn
+   */
+  export type BillingLineItemUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BillingLineItem
+     */
+    select?: BillingLineItemSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the BillingLineItem
+     */
+    omit?: BillingLineItemOmit<ExtArgs> | null
+    /**
+     * The data used to update BillingLineItems.
+     */
+    data: XOR<BillingLineItemUpdateManyMutationInput, BillingLineItemUncheckedUpdateManyInput>
+    /**
+     * Filter which BillingLineItems to update
+     */
+    where?: BillingLineItemWhereInput
+    /**
+     * Limit how many BillingLineItems to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BillingLineItemIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * BillingLineItem upsert
+   */
+  export type BillingLineItemUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BillingLineItem
+     */
+    select?: BillingLineItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BillingLineItem
+     */
+    omit?: BillingLineItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BillingLineItemInclude<ExtArgs> | null
+    /**
+     * The filter to search for the BillingLineItem to update in case it exists.
+     */
+    where: BillingLineItemWhereUniqueInput
+    /**
+     * In case the BillingLineItem found by the `where` argument doesn't exist, create a new BillingLineItem with this data.
+     */
+    create: XOR<BillingLineItemCreateInput, BillingLineItemUncheckedCreateInput>
+    /**
+     * In case the BillingLineItem was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<BillingLineItemUpdateInput, BillingLineItemUncheckedUpdateInput>
+  }
+
+  /**
+   * BillingLineItem delete
+   */
+  export type BillingLineItemDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BillingLineItem
+     */
+    select?: BillingLineItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BillingLineItem
+     */
+    omit?: BillingLineItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BillingLineItemInclude<ExtArgs> | null
+    /**
+     * Filter which BillingLineItem to delete.
+     */
+    where: BillingLineItemWhereUniqueInput
+  }
+
+  /**
+   * BillingLineItem deleteMany
+   */
+  export type BillingLineItemDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which BillingLineItems to delete
+     */
+    where?: BillingLineItemWhereInput
+    /**
+     * Limit how many BillingLineItems to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * BillingLineItem.preAuthPayment
+   */
+  export type BillingLineItem$preAuthPaymentArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BillingPayment
+     */
+    select?: BillingPaymentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BillingPayment
+     */
+    omit?: BillingPaymentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BillingPaymentInclude<ExtArgs> | null
+    where?: BillingPaymentWhereInput
+  }
+
+  /**
+   * BillingLineItem.insuranceCoverage
+   */
+  export type BillingLineItem$insuranceCoverageArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InsuranceCoverage
+     */
+    select?: InsuranceCoverageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InsuranceCoverage
+     */
+    omit?: InsuranceCoverageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InsuranceCoverageInclude<ExtArgs> | null
+    where?: InsuranceCoverageWhereInput
+  }
+
+  /**
+   * BillingLineItem.encounterOrder
+   */
+  export type BillingLineItem$encounterOrderArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InpatientEncounterOrder
+     */
+    select?: InpatientEncounterOrderSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InpatientEncounterOrder
+     */
+    omit?: InpatientEncounterOrderOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InpatientEncounterOrderInclude<ExtArgs> | null
+    where?: InpatientEncounterOrderWhereInput
+  }
+
+  /**
+   * BillingLineItem without action
+   */
+  export type BillingLineItemDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BillingLineItem
+     */
+    select?: BillingLineItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BillingLineItem
+     */
+    omit?: BillingLineItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BillingLineItemInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model InsuranceCoverage
+   */
+
+  export type AggregateInsuranceCoverage = {
+    _count: InsuranceCoverageCountAggregateOutputType | null
+    _avg: InsuranceCoverageAvgAggregateOutputType | null
+    _sum: InsuranceCoverageSumAggregateOutputType | null
+    _min: InsuranceCoverageMinAggregateOutputType | null
+    _max: InsuranceCoverageMaxAggregateOutputType | null
+  }
+
+  export type InsuranceCoverageAvgAggregateOutputType = {
+    coveragePercentage: Decimal | null
+    coverageAmount: Decimal | null
+  }
+
+  export type InsuranceCoverageSumAggregateOutputType = {
+    coveragePercentage: Decimal | null
+    coverageAmount: Decimal | null
+  }
+
+  export type InsuranceCoverageMinAggregateOutputType = {
+    id: string | null
+    lineItemId: string | null
+    insuranceProvider: string | null
+    insuranceNumber: string | null
+    coveragePercentage: Decimal | null
+    coverageAmount: Decimal | null
+    claimStatus: $Enums.InsuranceClaimStatus | null
+    claimNumber: string | null
+    claimNotes: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    verifiedBy: string | null
+  }
+
+  export type InsuranceCoverageMaxAggregateOutputType = {
+    id: string | null
+    lineItemId: string | null
+    insuranceProvider: string | null
+    insuranceNumber: string | null
+    coveragePercentage: Decimal | null
+    coverageAmount: Decimal | null
+    claimStatus: $Enums.InsuranceClaimStatus | null
+    claimNumber: string | null
+    claimNotes: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    verifiedBy: string | null
+  }
+
+  export type InsuranceCoverageCountAggregateOutputType = {
+    id: number
+    lineItemId: number
+    insuranceProvider: number
+    insuranceNumber: number
+    coveragePercentage: number
+    coverageAmount: number
+    claimStatus: number
+    claimNumber: number
+    claimNotes: number
+    createdAt: number
+    updatedAt: number
+    verifiedBy: number
+    _all: number
+  }
+
+
+  export type InsuranceCoverageAvgAggregateInputType = {
+    coveragePercentage?: true
+    coverageAmount?: true
+  }
+
+  export type InsuranceCoverageSumAggregateInputType = {
+    coveragePercentage?: true
+    coverageAmount?: true
+  }
+
+  export type InsuranceCoverageMinAggregateInputType = {
+    id?: true
+    lineItemId?: true
+    insuranceProvider?: true
+    insuranceNumber?: true
+    coveragePercentage?: true
+    coverageAmount?: true
+    claimStatus?: true
+    claimNumber?: true
+    claimNotes?: true
+    createdAt?: true
+    updatedAt?: true
+    verifiedBy?: true
+  }
+
+  export type InsuranceCoverageMaxAggregateInputType = {
+    id?: true
+    lineItemId?: true
+    insuranceProvider?: true
+    insuranceNumber?: true
+    coveragePercentage?: true
+    coverageAmount?: true
+    claimStatus?: true
+    claimNumber?: true
+    claimNotes?: true
+    createdAt?: true
+    updatedAt?: true
+    verifiedBy?: true
+  }
+
+  export type InsuranceCoverageCountAggregateInputType = {
+    id?: true
+    lineItemId?: true
+    insuranceProvider?: true
+    insuranceNumber?: true
+    coveragePercentage?: true
+    coverageAmount?: true
+    claimStatus?: true
+    claimNumber?: true
+    claimNotes?: true
+    createdAt?: true
+    updatedAt?: true
+    verifiedBy?: true
+    _all?: true
+  }
+
+  export type InsuranceCoverageAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which InsuranceCoverage to aggregate.
+     */
+    where?: InsuranceCoverageWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of InsuranceCoverages to fetch.
+     */
+    orderBy?: InsuranceCoverageOrderByWithRelationInput | InsuranceCoverageOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: InsuranceCoverageWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` InsuranceCoverages from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` InsuranceCoverages.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned InsuranceCoverages
+    **/
+    _count?: true | InsuranceCoverageCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: InsuranceCoverageAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: InsuranceCoverageSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: InsuranceCoverageMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: InsuranceCoverageMaxAggregateInputType
+  }
+
+  export type GetInsuranceCoverageAggregateType<T extends InsuranceCoverageAggregateArgs> = {
+        [P in keyof T & keyof AggregateInsuranceCoverage]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateInsuranceCoverage[P]>
+      : GetScalarType<T[P], AggregateInsuranceCoverage[P]>
+  }
+
+
+
+
+  export type InsuranceCoverageGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: InsuranceCoverageWhereInput
+    orderBy?: InsuranceCoverageOrderByWithAggregationInput | InsuranceCoverageOrderByWithAggregationInput[]
+    by: InsuranceCoverageScalarFieldEnum[] | InsuranceCoverageScalarFieldEnum
+    having?: InsuranceCoverageScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: InsuranceCoverageCountAggregateInputType | true
+    _avg?: InsuranceCoverageAvgAggregateInputType
+    _sum?: InsuranceCoverageSumAggregateInputType
+    _min?: InsuranceCoverageMinAggregateInputType
+    _max?: InsuranceCoverageMaxAggregateInputType
+  }
+
+  export type InsuranceCoverageGroupByOutputType = {
+    id: string
+    lineItemId: string
+    insuranceProvider: string
+    insuranceNumber: string
+    coveragePercentage: Decimal
+    coverageAmount: Decimal
+    claimStatus: $Enums.InsuranceClaimStatus
+    claimNumber: string | null
+    claimNotes: string | null
+    createdAt: Date
+    updatedAt: Date
+    verifiedBy: string | null
+    _count: InsuranceCoverageCountAggregateOutputType | null
+    _avg: InsuranceCoverageAvgAggregateOutputType | null
+    _sum: InsuranceCoverageSumAggregateOutputType | null
+    _min: InsuranceCoverageMinAggregateOutputType | null
+    _max: InsuranceCoverageMaxAggregateOutputType | null
+  }
+
+  type GetInsuranceCoverageGroupByPayload<T extends InsuranceCoverageGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<InsuranceCoverageGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof InsuranceCoverageGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], InsuranceCoverageGroupByOutputType[P]>
+            : GetScalarType<T[P], InsuranceCoverageGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type InsuranceCoverageSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    lineItemId?: boolean
+    insuranceProvider?: boolean
+    insuranceNumber?: boolean
+    coveragePercentage?: boolean
+    coverageAmount?: boolean
+    claimStatus?: boolean
+    claimNumber?: boolean
+    claimNotes?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    verifiedBy?: boolean
+    lineItem?: boolean | BillingLineItemDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["insuranceCoverage"]>
+
+  export type InsuranceCoverageSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    lineItemId?: boolean
+    insuranceProvider?: boolean
+    insuranceNumber?: boolean
+    coveragePercentage?: boolean
+    coverageAmount?: boolean
+    claimStatus?: boolean
+    claimNumber?: boolean
+    claimNotes?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    verifiedBy?: boolean
+    lineItem?: boolean | BillingLineItemDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["insuranceCoverage"]>
+
+  export type InsuranceCoverageSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    lineItemId?: boolean
+    insuranceProvider?: boolean
+    insuranceNumber?: boolean
+    coveragePercentage?: boolean
+    coverageAmount?: boolean
+    claimStatus?: boolean
+    claimNumber?: boolean
+    claimNotes?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    verifiedBy?: boolean
+    lineItem?: boolean | BillingLineItemDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["insuranceCoverage"]>
+
+  export type InsuranceCoverageSelectScalar = {
+    id?: boolean
+    lineItemId?: boolean
+    insuranceProvider?: boolean
+    insuranceNumber?: boolean
+    coveragePercentage?: boolean
+    coverageAmount?: boolean
+    claimStatus?: boolean
+    claimNumber?: boolean
+    claimNotes?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    verifiedBy?: boolean
+  }
+
+  export type InsuranceCoverageOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "lineItemId" | "insuranceProvider" | "insuranceNumber" | "coveragePercentage" | "coverageAmount" | "claimStatus" | "claimNumber" | "claimNotes" | "createdAt" | "updatedAt" | "verifiedBy", ExtArgs["result"]["insuranceCoverage"]>
+  export type InsuranceCoverageInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    lineItem?: boolean | BillingLineItemDefaultArgs<ExtArgs>
+  }
+  export type InsuranceCoverageIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    lineItem?: boolean | BillingLineItemDefaultArgs<ExtArgs>
+  }
+  export type InsuranceCoverageIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    lineItem?: boolean | BillingLineItemDefaultArgs<ExtArgs>
+  }
+
+  export type $InsuranceCoveragePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "InsuranceCoverage"
+    objects: {
+      lineItem: Prisma.$BillingLineItemPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      lineItemId: string
+      insuranceProvider: string
+      insuranceNumber: string
+      coveragePercentage: Prisma.Decimal
+      coverageAmount: Prisma.Decimal
+      claimStatus: $Enums.InsuranceClaimStatus
+      claimNumber: string | null
+      claimNotes: string | null
+      createdAt: Date
+      updatedAt: Date
+      verifiedBy: string | null
+    }, ExtArgs["result"]["insuranceCoverage"]>
+    composites: {}
+  }
+
+  type InsuranceCoverageGetPayload<S extends boolean | null | undefined | InsuranceCoverageDefaultArgs> = $Result.GetResult<Prisma.$InsuranceCoveragePayload, S>
+
+  type InsuranceCoverageCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<InsuranceCoverageFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: InsuranceCoverageCountAggregateInputType | true
+    }
+
+  export interface InsuranceCoverageDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['InsuranceCoverage'], meta: { name: 'InsuranceCoverage' } }
+    /**
+     * Find zero or one InsuranceCoverage that matches the filter.
+     * @param {InsuranceCoverageFindUniqueArgs} args - Arguments to find a InsuranceCoverage
+     * @example
+     * // Get one InsuranceCoverage
+     * const insuranceCoverage = await prisma.insuranceCoverage.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends InsuranceCoverageFindUniqueArgs>(args: SelectSubset<T, InsuranceCoverageFindUniqueArgs<ExtArgs>>): Prisma__InsuranceCoverageClient<$Result.GetResult<Prisma.$InsuranceCoveragePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one InsuranceCoverage that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {InsuranceCoverageFindUniqueOrThrowArgs} args - Arguments to find a InsuranceCoverage
+     * @example
+     * // Get one InsuranceCoverage
+     * const insuranceCoverage = await prisma.insuranceCoverage.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends InsuranceCoverageFindUniqueOrThrowArgs>(args: SelectSubset<T, InsuranceCoverageFindUniqueOrThrowArgs<ExtArgs>>): Prisma__InsuranceCoverageClient<$Result.GetResult<Prisma.$InsuranceCoveragePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first InsuranceCoverage that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InsuranceCoverageFindFirstArgs} args - Arguments to find a InsuranceCoverage
+     * @example
+     * // Get one InsuranceCoverage
+     * const insuranceCoverage = await prisma.insuranceCoverage.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends InsuranceCoverageFindFirstArgs>(args?: SelectSubset<T, InsuranceCoverageFindFirstArgs<ExtArgs>>): Prisma__InsuranceCoverageClient<$Result.GetResult<Prisma.$InsuranceCoveragePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first InsuranceCoverage that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InsuranceCoverageFindFirstOrThrowArgs} args - Arguments to find a InsuranceCoverage
+     * @example
+     * // Get one InsuranceCoverage
+     * const insuranceCoverage = await prisma.insuranceCoverage.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends InsuranceCoverageFindFirstOrThrowArgs>(args?: SelectSubset<T, InsuranceCoverageFindFirstOrThrowArgs<ExtArgs>>): Prisma__InsuranceCoverageClient<$Result.GetResult<Prisma.$InsuranceCoveragePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more InsuranceCoverages that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InsuranceCoverageFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all InsuranceCoverages
+     * const insuranceCoverages = await prisma.insuranceCoverage.findMany()
+     * 
+     * // Get first 10 InsuranceCoverages
+     * const insuranceCoverages = await prisma.insuranceCoverage.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const insuranceCoverageWithIdOnly = await prisma.insuranceCoverage.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends InsuranceCoverageFindManyArgs>(args?: SelectSubset<T, InsuranceCoverageFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InsuranceCoveragePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a InsuranceCoverage.
+     * @param {InsuranceCoverageCreateArgs} args - Arguments to create a InsuranceCoverage.
+     * @example
+     * // Create one InsuranceCoverage
+     * const InsuranceCoverage = await prisma.insuranceCoverage.create({
+     *   data: {
+     *     // ... data to create a InsuranceCoverage
+     *   }
+     * })
+     * 
+     */
+    create<T extends InsuranceCoverageCreateArgs>(args: SelectSubset<T, InsuranceCoverageCreateArgs<ExtArgs>>): Prisma__InsuranceCoverageClient<$Result.GetResult<Prisma.$InsuranceCoveragePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many InsuranceCoverages.
+     * @param {InsuranceCoverageCreateManyArgs} args - Arguments to create many InsuranceCoverages.
+     * @example
+     * // Create many InsuranceCoverages
+     * const insuranceCoverage = await prisma.insuranceCoverage.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends InsuranceCoverageCreateManyArgs>(args?: SelectSubset<T, InsuranceCoverageCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many InsuranceCoverages and returns the data saved in the database.
+     * @param {InsuranceCoverageCreateManyAndReturnArgs} args - Arguments to create many InsuranceCoverages.
+     * @example
+     * // Create many InsuranceCoverages
+     * const insuranceCoverage = await prisma.insuranceCoverage.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many InsuranceCoverages and only return the `id`
+     * const insuranceCoverageWithIdOnly = await prisma.insuranceCoverage.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends InsuranceCoverageCreateManyAndReturnArgs>(args?: SelectSubset<T, InsuranceCoverageCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InsuranceCoveragePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a InsuranceCoverage.
+     * @param {InsuranceCoverageDeleteArgs} args - Arguments to delete one InsuranceCoverage.
+     * @example
+     * // Delete one InsuranceCoverage
+     * const InsuranceCoverage = await prisma.insuranceCoverage.delete({
+     *   where: {
+     *     // ... filter to delete one InsuranceCoverage
+     *   }
+     * })
+     * 
+     */
+    delete<T extends InsuranceCoverageDeleteArgs>(args: SelectSubset<T, InsuranceCoverageDeleteArgs<ExtArgs>>): Prisma__InsuranceCoverageClient<$Result.GetResult<Prisma.$InsuranceCoveragePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one InsuranceCoverage.
+     * @param {InsuranceCoverageUpdateArgs} args - Arguments to update one InsuranceCoverage.
+     * @example
+     * // Update one InsuranceCoverage
+     * const insuranceCoverage = await prisma.insuranceCoverage.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends InsuranceCoverageUpdateArgs>(args: SelectSubset<T, InsuranceCoverageUpdateArgs<ExtArgs>>): Prisma__InsuranceCoverageClient<$Result.GetResult<Prisma.$InsuranceCoveragePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more InsuranceCoverages.
+     * @param {InsuranceCoverageDeleteManyArgs} args - Arguments to filter InsuranceCoverages to delete.
+     * @example
+     * // Delete a few InsuranceCoverages
+     * const { count } = await prisma.insuranceCoverage.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends InsuranceCoverageDeleteManyArgs>(args?: SelectSubset<T, InsuranceCoverageDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more InsuranceCoverages.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InsuranceCoverageUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many InsuranceCoverages
+     * const insuranceCoverage = await prisma.insuranceCoverage.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends InsuranceCoverageUpdateManyArgs>(args: SelectSubset<T, InsuranceCoverageUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more InsuranceCoverages and returns the data updated in the database.
+     * @param {InsuranceCoverageUpdateManyAndReturnArgs} args - Arguments to update many InsuranceCoverages.
+     * @example
+     * // Update many InsuranceCoverages
+     * const insuranceCoverage = await prisma.insuranceCoverage.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more InsuranceCoverages and only return the `id`
+     * const insuranceCoverageWithIdOnly = await prisma.insuranceCoverage.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends InsuranceCoverageUpdateManyAndReturnArgs>(args: SelectSubset<T, InsuranceCoverageUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InsuranceCoveragePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one InsuranceCoverage.
+     * @param {InsuranceCoverageUpsertArgs} args - Arguments to update or create a InsuranceCoverage.
+     * @example
+     * // Update or create a InsuranceCoverage
+     * const insuranceCoverage = await prisma.insuranceCoverage.upsert({
+     *   create: {
+     *     // ... data to create a InsuranceCoverage
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the InsuranceCoverage we want to update
+     *   }
+     * })
+     */
+    upsert<T extends InsuranceCoverageUpsertArgs>(args: SelectSubset<T, InsuranceCoverageUpsertArgs<ExtArgs>>): Prisma__InsuranceCoverageClient<$Result.GetResult<Prisma.$InsuranceCoveragePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of InsuranceCoverages.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InsuranceCoverageCountArgs} args - Arguments to filter InsuranceCoverages to count.
+     * @example
+     * // Count the number of InsuranceCoverages
+     * const count = await prisma.insuranceCoverage.count({
+     *   where: {
+     *     // ... the filter for the InsuranceCoverages we want to count
+     *   }
+     * })
+    **/
+    count<T extends InsuranceCoverageCountArgs>(
+      args?: Subset<T, InsuranceCoverageCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], InsuranceCoverageCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a InsuranceCoverage.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InsuranceCoverageAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends InsuranceCoverageAggregateArgs>(args: Subset<T, InsuranceCoverageAggregateArgs>): Prisma.PrismaPromise<GetInsuranceCoverageAggregateType<T>>
+
+    /**
+     * Group by InsuranceCoverage.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InsuranceCoverageGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends InsuranceCoverageGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: InsuranceCoverageGroupByArgs['orderBy'] }
+        : { orderBy?: InsuranceCoverageGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, InsuranceCoverageGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetInsuranceCoverageGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the InsuranceCoverage model
+   */
+  readonly fields: InsuranceCoverageFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for InsuranceCoverage.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__InsuranceCoverageClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    lineItem<T extends BillingLineItemDefaultArgs<ExtArgs> = {}>(args?: Subset<T, BillingLineItemDefaultArgs<ExtArgs>>): Prisma__BillingLineItemClient<$Result.GetResult<Prisma.$BillingLineItemPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the InsuranceCoverage model
+   */
+  interface InsuranceCoverageFieldRefs {
+    readonly id: FieldRef<"InsuranceCoverage", 'String'>
+    readonly lineItemId: FieldRef<"InsuranceCoverage", 'String'>
+    readonly insuranceProvider: FieldRef<"InsuranceCoverage", 'String'>
+    readonly insuranceNumber: FieldRef<"InsuranceCoverage", 'String'>
+    readonly coveragePercentage: FieldRef<"InsuranceCoverage", 'Decimal'>
+    readonly coverageAmount: FieldRef<"InsuranceCoverage", 'Decimal'>
+    readonly claimStatus: FieldRef<"InsuranceCoverage", 'InsuranceClaimStatus'>
+    readonly claimNumber: FieldRef<"InsuranceCoverage", 'String'>
+    readonly claimNotes: FieldRef<"InsuranceCoverage", 'String'>
+    readonly createdAt: FieldRef<"InsuranceCoverage", 'DateTime'>
+    readonly updatedAt: FieldRef<"InsuranceCoverage", 'DateTime'>
+    readonly verifiedBy: FieldRef<"InsuranceCoverage", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * InsuranceCoverage findUnique
+   */
+  export type InsuranceCoverageFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InsuranceCoverage
+     */
+    select?: InsuranceCoverageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InsuranceCoverage
+     */
+    omit?: InsuranceCoverageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InsuranceCoverageInclude<ExtArgs> | null
+    /**
+     * Filter, which InsuranceCoverage to fetch.
+     */
+    where: InsuranceCoverageWhereUniqueInput
+  }
+
+  /**
+   * InsuranceCoverage findUniqueOrThrow
+   */
+  export type InsuranceCoverageFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InsuranceCoverage
+     */
+    select?: InsuranceCoverageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InsuranceCoverage
+     */
+    omit?: InsuranceCoverageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InsuranceCoverageInclude<ExtArgs> | null
+    /**
+     * Filter, which InsuranceCoverage to fetch.
+     */
+    where: InsuranceCoverageWhereUniqueInput
+  }
+
+  /**
+   * InsuranceCoverage findFirst
+   */
+  export type InsuranceCoverageFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InsuranceCoverage
+     */
+    select?: InsuranceCoverageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InsuranceCoverage
+     */
+    omit?: InsuranceCoverageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InsuranceCoverageInclude<ExtArgs> | null
+    /**
+     * Filter, which InsuranceCoverage to fetch.
+     */
+    where?: InsuranceCoverageWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of InsuranceCoverages to fetch.
+     */
+    orderBy?: InsuranceCoverageOrderByWithRelationInput | InsuranceCoverageOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for InsuranceCoverages.
+     */
+    cursor?: InsuranceCoverageWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` InsuranceCoverages from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` InsuranceCoverages.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of InsuranceCoverages.
+     */
+    distinct?: InsuranceCoverageScalarFieldEnum | InsuranceCoverageScalarFieldEnum[]
+  }
+
+  /**
+   * InsuranceCoverage findFirstOrThrow
+   */
+  export type InsuranceCoverageFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InsuranceCoverage
+     */
+    select?: InsuranceCoverageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InsuranceCoverage
+     */
+    omit?: InsuranceCoverageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InsuranceCoverageInclude<ExtArgs> | null
+    /**
+     * Filter, which InsuranceCoverage to fetch.
+     */
+    where?: InsuranceCoverageWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of InsuranceCoverages to fetch.
+     */
+    orderBy?: InsuranceCoverageOrderByWithRelationInput | InsuranceCoverageOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for InsuranceCoverages.
+     */
+    cursor?: InsuranceCoverageWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` InsuranceCoverages from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` InsuranceCoverages.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of InsuranceCoverages.
+     */
+    distinct?: InsuranceCoverageScalarFieldEnum | InsuranceCoverageScalarFieldEnum[]
+  }
+
+  /**
+   * InsuranceCoverage findMany
+   */
+  export type InsuranceCoverageFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InsuranceCoverage
+     */
+    select?: InsuranceCoverageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InsuranceCoverage
+     */
+    omit?: InsuranceCoverageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InsuranceCoverageInclude<ExtArgs> | null
+    /**
+     * Filter, which InsuranceCoverages to fetch.
+     */
+    where?: InsuranceCoverageWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of InsuranceCoverages to fetch.
+     */
+    orderBy?: InsuranceCoverageOrderByWithRelationInput | InsuranceCoverageOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing InsuranceCoverages.
+     */
+    cursor?: InsuranceCoverageWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` InsuranceCoverages from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` InsuranceCoverages.
+     */
+    skip?: number
+    distinct?: InsuranceCoverageScalarFieldEnum | InsuranceCoverageScalarFieldEnum[]
+  }
+
+  /**
+   * InsuranceCoverage create
+   */
+  export type InsuranceCoverageCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InsuranceCoverage
+     */
+    select?: InsuranceCoverageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InsuranceCoverage
+     */
+    omit?: InsuranceCoverageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InsuranceCoverageInclude<ExtArgs> | null
+    /**
+     * The data needed to create a InsuranceCoverage.
+     */
+    data: XOR<InsuranceCoverageCreateInput, InsuranceCoverageUncheckedCreateInput>
+  }
+
+  /**
+   * InsuranceCoverage createMany
+   */
+  export type InsuranceCoverageCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many InsuranceCoverages.
+     */
+    data: InsuranceCoverageCreateManyInput | InsuranceCoverageCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * InsuranceCoverage createManyAndReturn
+   */
+  export type InsuranceCoverageCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InsuranceCoverage
+     */
+    select?: InsuranceCoverageSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the InsuranceCoverage
+     */
+    omit?: InsuranceCoverageOmit<ExtArgs> | null
+    /**
+     * The data used to create many InsuranceCoverages.
+     */
+    data: InsuranceCoverageCreateManyInput | InsuranceCoverageCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InsuranceCoverageIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * InsuranceCoverage update
+   */
+  export type InsuranceCoverageUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InsuranceCoverage
+     */
+    select?: InsuranceCoverageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InsuranceCoverage
+     */
+    omit?: InsuranceCoverageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InsuranceCoverageInclude<ExtArgs> | null
+    /**
+     * The data needed to update a InsuranceCoverage.
+     */
+    data: XOR<InsuranceCoverageUpdateInput, InsuranceCoverageUncheckedUpdateInput>
+    /**
+     * Choose, which InsuranceCoverage to update.
+     */
+    where: InsuranceCoverageWhereUniqueInput
+  }
+
+  /**
+   * InsuranceCoverage updateMany
+   */
+  export type InsuranceCoverageUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update InsuranceCoverages.
+     */
+    data: XOR<InsuranceCoverageUpdateManyMutationInput, InsuranceCoverageUncheckedUpdateManyInput>
+    /**
+     * Filter which InsuranceCoverages to update
+     */
+    where?: InsuranceCoverageWhereInput
+    /**
+     * Limit how many InsuranceCoverages to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * InsuranceCoverage updateManyAndReturn
+   */
+  export type InsuranceCoverageUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InsuranceCoverage
+     */
+    select?: InsuranceCoverageSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the InsuranceCoverage
+     */
+    omit?: InsuranceCoverageOmit<ExtArgs> | null
+    /**
+     * The data used to update InsuranceCoverages.
+     */
+    data: XOR<InsuranceCoverageUpdateManyMutationInput, InsuranceCoverageUncheckedUpdateManyInput>
+    /**
+     * Filter which InsuranceCoverages to update
+     */
+    where?: InsuranceCoverageWhereInput
+    /**
+     * Limit how many InsuranceCoverages to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InsuranceCoverageIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * InsuranceCoverage upsert
+   */
+  export type InsuranceCoverageUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InsuranceCoverage
+     */
+    select?: InsuranceCoverageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InsuranceCoverage
+     */
+    omit?: InsuranceCoverageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InsuranceCoverageInclude<ExtArgs> | null
+    /**
+     * The filter to search for the InsuranceCoverage to update in case it exists.
+     */
+    where: InsuranceCoverageWhereUniqueInput
+    /**
+     * In case the InsuranceCoverage found by the `where` argument doesn't exist, create a new InsuranceCoverage with this data.
+     */
+    create: XOR<InsuranceCoverageCreateInput, InsuranceCoverageUncheckedCreateInput>
+    /**
+     * In case the InsuranceCoverage was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<InsuranceCoverageUpdateInput, InsuranceCoverageUncheckedUpdateInput>
+  }
+
+  /**
+   * InsuranceCoverage delete
+   */
+  export type InsuranceCoverageDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InsuranceCoverage
+     */
+    select?: InsuranceCoverageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InsuranceCoverage
+     */
+    omit?: InsuranceCoverageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InsuranceCoverageInclude<ExtArgs> | null
+    /**
+     * Filter which InsuranceCoverage to delete.
+     */
+    where: InsuranceCoverageWhereUniqueInput
+  }
+
+  /**
+   * InsuranceCoverage deleteMany
+   */
+  export type InsuranceCoverageDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which InsuranceCoverages to delete
+     */
+    where?: InsuranceCoverageWhereInput
+    /**
+     * Limit how many InsuranceCoverages to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * InsuranceCoverage without action
+   */
+  export type InsuranceCoverageDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InsuranceCoverage
+     */
+    select?: InsuranceCoverageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InsuranceCoverage
+     */
+    omit?: InsuranceCoverageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InsuranceCoverageInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model BillingPayment
+   */
+
+  export type AggregateBillingPayment = {
+    _count: BillingPaymentCountAggregateOutputType | null
+    _avg: BillingPaymentAvgAggregateOutputType | null
+    _sum: BillingPaymentSumAggregateOutputType | null
+    _min: BillingPaymentMinAggregateOutputType | null
+    _max: BillingPaymentMaxAggregateOutputType | null
+  }
+
+  export type BillingPaymentAvgAggregateOutputType = {
+    amount: Decimal | null
+    installmentNumber: number | null
+  }
+
+  export type BillingPaymentSumAggregateOutputType = {
+    amount: Decimal | null
+    installmentNumber: number | null
+  }
+
+  export type BillingPaymentMinAggregateOutputType = {
+    id: string | null
+    paymentNumber: string | null
+    transactionId: string | null
+    amount: Decimal | null
+    paymentMethod: $Enums.PaymentMethod | null
+    paymentType: $Enums.PaymentType | null
+    isPreAuthPayment: boolean | null
+    paymentPlanId: string | null
+    installmentNumber: number | null
+    mayaPaymentId: string | null
+    mayaPaymentStatus: string | null
+    mayaReceiptUrl: string | null
+    status: $Enums.PaymentStatus | null
+    paidAt: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    processedBy: string | null
+  }
+
+  export type BillingPaymentMaxAggregateOutputType = {
+    id: string | null
+    paymentNumber: string | null
+    transactionId: string | null
+    amount: Decimal | null
+    paymentMethod: $Enums.PaymentMethod | null
+    paymentType: $Enums.PaymentType | null
+    isPreAuthPayment: boolean | null
+    paymentPlanId: string | null
+    installmentNumber: number | null
+    mayaPaymentId: string | null
+    mayaPaymentStatus: string | null
+    mayaReceiptUrl: string | null
+    status: $Enums.PaymentStatus | null
+    paidAt: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    processedBy: string | null
+  }
+
+  export type BillingPaymentCountAggregateOutputType = {
+    id: number
+    paymentNumber: number
+    transactionId: number
+    amount: number
+    paymentMethod: number
+    paymentType: number
+    isPreAuthPayment: number
+    paymentPlanId: number
+    installmentNumber: number
+    mayaPaymentId: number
+    mayaPaymentStatus: number
+    mayaReceiptUrl: number
+    status: number
+    paidAt: number
+    createdAt: number
+    updatedAt: number
+    processedBy: number
+    _all: number
+  }
+
+
+  export type BillingPaymentAvgAggregateInputType = {
+    amount?: true
+    installmentNumber?: true
+  }
+
+  export type BillingPaymentSumAggregateInputType = {
+    amount?: true
+    installmentNumber?: true
+  }
+
+  export type BillingPaymentMinAggregateInputType = {
+    id?: true
+    paymentNumber?: true
+    transactionId?: true
+    amount?: true
+    paymentMethod?: true
+    paymentType?: true
+    isPreAuthPayment?: true
+    paymentPlanId?: true
+    installmentNumber?: true
+    mayaPaymentId?: true
+    mayaPaymentStatus?: true
+    mayaReceiptUrl?: true
+    status?: true
+    paidAt?: true
+    createdAt?: true
+    updatedAt?: true
+    processedBy?: true
+  }
+
+  export type BillingPaymentMaxAggregateInputType = {
+    id?: true
+    paymentNumber?: true
+    transactionId?: true
+    amount?: true
+    paymentMethod?: true
+    paymentType?: true
+    isPreAuthPayment?: true
+    paymentPlanId?: true
+    installmentNumber?: true
+    mayaPaymentId?: true
+    mayaPaymentStatus?: true
+    mayaReceiptUrl?: true
+    status?: true
+    paidAt?: true
+    createdAt?: true
+    updatedAt?: true
+    processedBy?: true
+  }
+
+  export type BillingPaymentCountAggregateInputType = {
+    id?: true
+    paymentNumber?: true
+    transactionId?: true
+    amount?: true
+    paymentMethod?: true
+    paymentType?: true
+    isPreAuthPayment?: true
+    paymentPlanId?: true
+    installmentNumber?: true
+    mayaPaymentId?: true
+    mayaPaymentStatus?: true
+    mayaReceiptUrl?: true
+    status?: true
+    paidAt?: true
+    createdAt?: true
+    updatedAt?: true
+    processedBy?: true
+    _all?: true
+  }
+
+  export type BillingPaymentAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which BillingPayment to aggregate.
+     */
+    where?: BillingPaymentWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of BillingPayments to fetch.
+     */
+    orderBy?: BillingPaymentOrderByWithRelationInput | BillingPaymentOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: BillingPaymentWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` BillingPayments from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` BillingPayments.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned BillingPayments
+    **/
+    _count?: true | BillingPaymentCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: BillingPaymentAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: BillingPaymentSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: BillingPaymentMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: BillingPaymentMaxAggregateInputType
+  }
+
+  export type GetBillingPaymentAggregateType<T extends BillingPaymentAggregateArgs> = {
+        [P in keyof T & keyof AggregateBillingPayment]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateBillingPayment[P]>
+      : GetScalarType<T[P], AggregateBillingPayment[P]>
+  }
+
+
+
+
+  export type BillingPaymentGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: BillingPaymentWhereInput
+    orderBy?: BillingPaymentOrderByWithAggregationInput | BillingPaymentOrderByWithAggregationInput[]
+    by: BillingPaymentScalarFieldEnum[] | BillingPaymentScalarFieldEnum
+    having?: BillingPaymentScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: BillingPaymentCountAggregateInputType | true
+    _avg?: BillingPaymentAvgAggregateInputType
+    _sum?: BillingPaymentSumAggregateInputType
+    _min?: BillingPaymentMinAggregateInputType
+    _max?: BillingPaymentMaxAggregateInputType
+  }
+
+  export type BillingPaymentGroupByOutputType = {
+    id: string
+    paymentNumber: string
+    transactionId: string
+    amount: Decimal
+    paymentMethod: $Enums.PaymentMethod
+    paymentType: $Enums.PaymentType
+    isPreAuthPayment: boolean
+    paymentPlanId: string | null
+    installmentNumber: number | null
+    mayaPaymentId: string | null
+    mayaPaymentStatus: string | null
+    mayaReceiptUrl: string | null
+    status: $Enums.PaymentStatus
+    paidAt: Date | null
+    createdAt: Date
+    updatedAt: Date
+    processedBy: string | null
+    _count: BillingPaymentCountAggregateOutputType | null
+    _avg: BillingPaymentAvgAggregateOutputType | null
+    _sum: BillingPaymentSumAggregateOutputType | null
+    _min: BillingPaymentMinAggregateOutputType | null
+    _max: BillingPaymentMaxAggregateOutputType | null
+  }
+
+  type GetBillingPaymentGroupByPayload<T extends BillingPaymentGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<BillingPaymentGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof BillingPaymentGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], BillingPaymentGroupByOutputType[P]>
+            : GetScalarType<T[P], BillingPaymentGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type BillingPaymentSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    paymentNumber?: boolean
+    transactionId?: boolean
+    amount?: boolean
+    paymentMethod?: boolean
+    paymentType?: boolean
+    isPreAuthPayment?: boolean
+    paymentPlanId?: boolean
+    installmentNumber?: boolean
+    mayaPaymentId?: boolean
+    mayaPaymentStatus?: boolean
+    mayaReceiptUrl?: boolean
+    status?: boolean
+    paidAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    processedBy?: boolean
+    transaction?: boolean | BillingTransactionDefaultArgs<ExtArgs>
+    preAuthItems?: boolean | BillingPayment$preAuthItemsArgs<ExtArgs>
+    paymentPlan?: boolean | BillingPayment$paymentPlanArgs<ExtArgs>
+    _count?: boolean | BillingPaymentCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["billingPayment"]>
+
+  export type BillingPaymentSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    paymentNumber?: boolean
+    transactionId?: boolean
+    amount?: boolean
+    paymentMethod?: boolean
+    paymentType?: boolean
+    isPreAuthPayment?: boolean
+    paymentPlanId?: boolean
+    installmentNumber?: boolean
+    mayaPaymentId?: boolean
+    mayaPaymentStatus?: boolean
+    mayaReceiptUrl?: boolean
+    status?: boolean
+    paidAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    processedBy?: boolean
+    transaction?: boolean | BillingTransactionDefaultArgs<ExtArgs>
+    paymentPlan?: boolean | BillingPayment$paymentPlanArgs<ExtArgs>
+  }, ExtArgs["result"]["billingPayment"]>
+
+  export type BillingPaymentSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    paymentNumber?: boolean
+    transactionId?: boolean
+    amount?: boolean
+    paymentMethod?: boolean
+    paymentType?: boolean
+    isPreAuthPayment?: boolean
+    paymentPlanId?: boolean
+    installmentNumber?: boolean
+    mayaPaymentId?: boolean
+    mayaPaymentStatus?: boolean
+    mayaReceiptUrl?: boolean
+    status?: boolean
+    paidAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    processedBy?: boolean
+    transaction?: boolean | BillingTransactionDefaultArgs<ExtArgs>
+    paymentPlan?: boolean | BillingPayment$paymentPlanArgs<ExtArgs>
+  }, ExtArgs["result"]["billingPayment"]>
+
+  export type BillingPaymentSelectScalar = {
+    id?: boolean
+    paymentNumber?: boolean
+    transactionId?: boolean
+    amount?: boolean
+    paymentMethod?: boolean
+    paymentType?: boolean
+    isPreAuthPayment?: boolean
+    paymentPlanId?: boolean
+    installmentNumber?: boolean
+    mayaPaymentId?: boolean
+    mayaPaymentStatus?: boolean
+    mayaReceiptUrl?: boolean
+    status?: boolean
+    paidAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    processedBy?: boolean
+  }
+
+  export type BillingPaymentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "paymentNumber" | "transactionId" | "amount" | "paymentMethod" | "paymentType" | "isPreAuthPayment" | "paymentPlanId" | "installmentNumber" | "mayaPaymentId" | "mayaPaymentStatus" | "mayaReceiptUrl" | "status" | "paidAt" | "createdAt" | "updatedAt" | "processedBy", ExtArgs["result"]["billingPayment"]>
+  export type BillingPaymentInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    transaction?: boolean | BillingTransactionDefaultArgs<ExtArgs>
+    preAuthItems?: boolean | BillingPayment$preAuthItemsArgs<ExtArgs>
+    paymentPlan?: boolean | BillingPayment$paymentPlanArgs<ExtArgs>
+    _count?: boolean | BillingPaymentCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type BillingPaymentIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    transaction?: boolean | BillingTransactionDefaultArgs<ExtArgs>
+    paymentPlan?: boolean | BillingPayment$paymentPlanArgs<ExtArgs>
+  }
+  export type BillingPaymentIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    transaction?: boolean | BillingTransactionDefaultArgs<ExtArgs>
+    paymentPlan?: boolean | BillingPayment$paymentPlanArgs<ExtArgs>
+  }
+
+  export type $BillingPaymentPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "BillingPayment"
+    objects: {
+      transaction: Prisma.$BillingTransactionPayload<ExtArgs>
+      preAuthItems: Prisma.$BillingLineItemPayload<ExtArgs>[]
+      paymentPlan: Prisma.$PaymentPlanPayload<ExtArgs> | null
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      paymentNumber: string
+      transactionId: string
+      amount: Prisma.Decimal
+      paymentMethod: $Enums.PaymentMethod
+      paymentType: $Enums.PaymentType
+      isPreAuthPayment: boolean
+      paymentPlanId: string | null
+      installmentNumber: number | null
+      mayaPaymentId: string | null
+      mayaPaymentStatus: string | null
+      mayaReceiptUrl: string | null
+      status: $Enums.PaymentStatus
+      paidAt: Date | null
+      createdAt: Date
+      updatedAt: Date
+      processedBy: string | null
+    }, ExtArgs["result"]["billingPayment"]>
+    composites: {}
+  }
+
+  type BillingPaymentGetPayload<S extends boolean | null | undefined | BillingPaymentDefaultArgs> = $Result.GetResult<Prisma.$BillingPaymentPayload, S>
+
+  type BillingPaymentCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<BillingPaymentFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: BillingPaymentCountAggregateInputType | true
+    }
+
+  export interface BillingPaymentDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['BillingPayment'], meta: { name: 'BillingPayment' } }
+    /**
+     * Find zero or one BillingPayment that matches the filter.
+     * @param {BillingPaymentFindUniqueArgs} args - Arguments to find a BillingPayment
+     * @example
+     * // Get one BillingPayment
+     * const billingPayment = await prisma.billingPayment.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends BillingPaymentFindUniqueArgs>(args: SelectSubset<T, BillingPaymentFindUniqueArgs<ExtArgs>>): Prisma__BillingPaymentClient<$Result.GetResult<Prisma.$BillingPaymentPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one BillingPayment that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {BillingPaymentFindUniqueOrThrowArgs} args - Arguments to find a BillingPayment
+     * @example
+     * // Get one BillingPayment
+     * const billingPayment = await prisma.billingPayment.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends BillingPaymentFindUniqueOrThrowArgs>(args: SelectSubset<T, BillingPaymentFindUniqueOrThrowArgs<ExtArgs>>): Prisma__BillingPaymentClient<$Result.GetResult<Prisma.$BillingPaymentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first BillingPayment that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BillingPaymentFindFirstArgs} args - Arguments to find a BillingPayment
+     * @example
+     * // Get one BillingPayment
+     * const billingPayment = await prisma.billingPayment.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends BillingPaymentFindFirstArgs>(args?: SelectSubset<T, BillingPaymentFindFirstArgs<ExtArgs>>): Prisma__BillingPaymentClient<$Result.GetResult<Prisma.$BillingPaymentPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first BillingPayment that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BillingPaymentFindFirstOrThrowArgs} args - Arguments to find a BillingPayment
+     * @example
+     * // Get one BillingPayment
+     * const billingPayment = await prisma.billingPayment.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends BillingPaymentFindFirstOrThrowArgs>(args?: SelectSubset<T, BillingPaymentFindFirstOrThrowArgs<ExtArgs>>): Prisma__BillingPaymentClient<$Result.GetResult<Prisma.$BillingPaymentPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more BillingPayments that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BillingPaymentFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all BillingPayments
+     * const billingPayments = await prisma.billingPayment.findMany()
+     * 
+     * // Get first 10 BillingPayments
+     * const billingPayments = await prisma.billingPayment.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const billingPaymentWithIdOnly = await prisma.billingPayment.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends BillingPaymentFindManyArgs>(args?: SelectSubset<T, BillingPaymentFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BillingPaymentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a BillingPayment.
+     * @param {BillingPaymentCreateArgs} args - Arguments to create a BillingPayment.
+     * @example
+     * // Create one BillingPayment
+     * const BillingPayment = await prisma.billingPayment.create({
+     *   data: {
+     *     // ... data to create a BillingPayment
+     *   }
+     * })
+     * 
+     */
+    create<T extends BillingPaymentCreateArgs>(args: SelectSubset<T, BillingPaymentCreateArgs<ExtArgs>>): Prisma__BillingPaymentClient<$Result.GetResult<Prisma.$BillingPaymentPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many BillingPayments.
+     * @param {BillingPaymentCreateManyArgs} args - Arguments to create many BillingPayments.
+     * @example
+     * // Create many BillingPayments
+     * const billingPayment = await prisma.billingPayment.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends BillingPaymentCreateManyArgs>(args?: SelectSubset<T, BillingPaymentCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many BillingPayments and returns the data saved in the database.
+     * @param {BillingPaymentCreateManyAndReturnArgs} args - Arguments to create many BillingPayments.
+     * @example
+     * // Create many BillingPayments
+     * const billingPayment = await prisma.billingPayment.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many BillingPayments and only return the `id`
+     * const billingPaymentWithIdOnly = await prisma.billingPayment.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends BillingPaymentCreateManyAndReturnArgs>(args?: SelectSubset<T, BillingPaymentCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BillingPaymentPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a BillingPayment.
+     * @param {BillingPaymentDeleteArgs} args - Arguments to delete one BillingPayment.
+     * @example
+     * // Delete one BillingPayment
+     * const BillingPayment = await prisma.billingPayment.delete({
+     *   where: {
+     *     // ... filter to delete one BillingPayment
+     *   }
+     * })
+     * 
+     */
+    delete<T extends BillingPaymentDeleteArgs>(args: SelectSubset<T, BillingPaymentDeleteArgs<ExtArgs>>): Prisma__BillingPaymentClient<$Result.GetResult<Prisma.$BillingPaymentPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one BillingPayment.
+     * @param {BillingPaymentUpdateArgs} args - Arguments to update one BillingPayment.
+     * @example
+     * // Update one BillingPayment
+     * const billingPayment = await prisma.billingPayment.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends BillingPaymentUpdateArgs>(args: SelectSubset<T, BillingPaymentUpdateArgs<ExtArgs>>): Prisma__BillingPaymentClient<$Result.GetResult<Prisma.$BillingPaymentPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more BillingPayments.
+     * @param {BillingPaymentDeleteManyArgs} args - Arguments to filter BillingPayments to delete.
+     * @example
+     * // Delete a few BillingPayments
+     * const { count } = await prisma.billingPayment.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends BillingPaymentDeleteManyArgs>(args?: SelectSubset<T, BillingPaymentDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more BillingPayments.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BillingPaymentUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many BillingPayments
+     * const billingPayment = await prisma.billingPayment.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends BillingPaymentUpdateManyArgs>(args: SelectSubset<T, BillingPaymentUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more BillingPayments and returns the data updated in the database.
+     * @param {BillingPaymentUpdateManyAndReturnArgs} args - Arguments to update many BillingPayments.
+     * @example
+     * // Update many BillingPayments
+     * const billingPayment = await prisma.billingPayment.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more BillingPayments and only return the `id`
+     * const billingPaymentWithIdOnly = await prisma.billingPayment.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends BillingPaymentUpdateManyAndReturnArgs>(args: SelectSubset<T, BillingPaymentUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BillingPaymentPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one BillingPayment.
+     * @param {BillingPaymentUpsertArgs} args - Arguments to update or create a BillingPayment.
+     * @example
+     * // Update or create a BillingPayment
+     * const billingPayment = await prisma.billingPayment.upsert({
+     *   create: {
+     *     // ... data to create a BillingPayment
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the BillingPayment we want to update
+     *   }
+     * })
+     */
+    upsert<T extends BillingPaymentUpsertArgs>(args: SelectSubset<T, BillingPaymentUpsertArgs<ExtArgs>>): Prisma__BillingPaymentClient<$Result.GetResult<Prisma.$BillingPaymentPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of BillingPayments.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BillingPaymentCountArgs} args - Arguments to filter BillingPayments to count.
+     * @example
+     * // Count the number of BillingPayments
+     * const count = await prisma.billingPayment.count({
+     *   where: {
+     *     // ... the filter for the BillingPayments we want to count
+     *   }
+     * })
+    **/
+    count<T extends BillingPaymentCountArgs>(
+      args?: Subset<T, BillingPaymentCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], BillingPaymentCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a BillingPayment.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BillingPaymentAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends BillingPaymentAggregateArgs>(args: Subset<T, BillingPaymentAggregateArgs>): Prisma.PrismaPromise<GetBillingPaymentAggregateType<T>>
+
+    /**
+     * Group by BillingPayment.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BillingPaymentGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends BillingPaymentGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: BillingPaymentGroupByArgs['orderBy'] }
+        : { orderBy?: BillingPaymentGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, BillingPaymentGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetBillingPaymentGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the BillingPayment model
+   */
+  readonly fields: BillingPaymentFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for BillingPayment.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__BillingPaymentClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    transaction<T extends BillingTransactionDefaultArgs<ExtArgs> = {}>(args?: Subset<T, BillingTransactionDefaultArgs<ExtArgs>>): Prisma__BillingTransactionClient<$Result.GetResult<Prisma.$BillingTransactionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    preAuthItems<T extends BillingPayment$preAuthItemsArgs<ExtArgs> = {}>(args?: Subset<T, BillingPayment$preAuthItemsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BillingLineItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    paymentPlan<T extends BillingPayment$paymentPlanArgs<ExtArgs> = {}>(args?: Subset<T, BillingPayment$paymentPlanArgs<ExtArgs>>): Prisma__PaymentPlanClient<$Result.GetResult<Prisma.$PaymentPlanPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the BillingPayment model
+   */
+  interface BillingPaymentFieldRefs {
+    readonly id: FieldRef<"BillingPayment", 'String'>
+    readonly paymentNumber: FieldRef<"BillingPayment", 'String'>
+    readonly transactionId: FieldRef<"BillingPayment", 'String'>
+    readonly amount: FieldRef<"BillingPayment", 'Decimal'>
+    readonly paymentMethod: FieldRef<"BillingPayment", 'PaymentMethod'>
+    readonly paymentType: FieldRef<"BillingPayment", 'PaymentType'>
+    readonly isPreAuthPayment: FieldRef<"BillingPayment", 'Boolean'>
+    readonly paymentPlanId: FieldRef<"BillingPayment", 'String'>
+    readonly installmentNumber: FieldRef<"BillingPayment", 'Int'>
+    readonly mayaPaymentId: FieldRef<"BillingPayment", 'String'>
+    readonly mayaPaymentStatus: FieldRef<"BillingPayment", 'String'>
+    readonly mayaReceiptUrl: FieldRef<"BillingPayment", 'String'>
+    readonly status: FieldRef<"BillingPayment", 'PaymentStatus'>
+    readonly paidAt: FieldRef<"BillingPayment", 'DateTime'>
+    readonly createdAt: FieldRef<"BillingPayment", 'DateTime'>
+    readonly updatedAt: FieldRef<"BillingPayment", 'DateTime'>
+    readonly processedBy: FieldRef<"BillingPayment", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * BillingPayment findUnique
+   */
+  export type BillingPaymentFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BillingPayment
+     */
+    select?: BillingPaymentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BillingPayment
+     */
+    omit?: BillingPaymentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BillingPaymentInclude<ExtArgs> | null
+    /**
+     * Filter, which BillingPayment to fetch.
+     */
+    where: BillingPaymentWhereUniqueInput
+  }
+
+  /**
+   * BillingPayment findUniqueOrThrow
+   */
+  export type BillingPaymentFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BillingPayment
+     */
+    select?: BillingPaymentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BillingPayment
+     */
+    omit?: BillingPaymentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BillingPaymentInclude<ExtArgs> | null
+    /**
+     * Filter, which BillingPayment to fetch.
+     */
+    where: BillingPaymentWhereUniqueInput
+  }
+
+  /**
+   * BillingPayment findFirst
+   */
+  export type BillingPaymentFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BillingPayment
+     */
+    select?: BillingPaymentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BillingPayment
+     */
+    omit?: BillingPaymentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BillingPaymentInclude<ExtArgs> | null
+    /**
+     * Filter, which BillingPayment to fetch.
+     */
+    where?: BillingPaymentWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of BillingPayments to fetch.
+     */
+    orderBy?: BillingPaymentOrderByWithRelationInput | BillingPaymentOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for BillingPayments.
+     */
+    cursor?: BillingPaymentWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` BillingPayments from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` BillingPayments.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of BillingPayments.
+     */
+    distinct?: BillingPaymentScalarFieldEnum | BillingPaymentScalarFieldEnum[]
+  }
+
+  /**
+   * BillingPayment findFirstOrThrow
+   */
+  export type BillingPaymentFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BillingPayment
+     */
+    select?: BillingPaymentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BillingPayment
+     */
+    omit?: BillingPaymentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BillingPaymentInclude<ExtArgs> | null
+    /**
+     * Filter, which BillingPayment to fetch.
+     */
+    where?: BillingPaymentWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of BillingPayments to fetch.
+     */
+    orderBy?: BillingPaymentOrderByWithRelationInput | BillingPaymentOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for BillingPayments.
+     */
+    cursor?: BillingPaymentWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` BillingPayments from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` BillingPayments.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of BillingPayments.
+     */
+    distinct?: BillingPaymentScalarFieldEnum | BillingPaymentScalarFieldEnum[]
+  }
+
+  /**
+   * BillingPayment findMany
+   */
+  export type BillingPaymentFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BillingPayment
+     */
+    select?: BillingPaymentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BillingPayment
+     */
+    omit?: BillingPaymentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BillingPaymentInclude<ExtArgs> | null
+    /**
+     * Filter, which BillingPayments to fetch.
+     */
+    where?: BillingPaymentWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of BillingPayments to fetch.
+     */
+    orderBy?: BillingPaymentOrderByWithRelationInput | BillingPaymentOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing BillingPayments.
+     */
+    cursor?: BillingPaymentWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` BillingPayments from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` BillingPayments.
+     */
+    skip?: number
+    distinct?: BillingPaymentScalarFieldEnum | BillingPaymentScalarFieldEnum[]
+  }
+
+  /**
+   * BillingPayment create
+   */
+  export type BillingPaymentCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BillingPayment
+     */
+    select?: BillingPaymentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BillingPayment
+     */
+    omit?: BillingPaymentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BillingPaymentInclude<ExtArgs> | null
+    /**
+     * The data needed to create a BillingPayment.
+     */
+    data: XOR<BillingPaymentCreateInput, BillingPaymentUncheckedCreateInput>
+  }
+
+  /**
+   * BillingPayment createMany
+   */
+  export type BillingPaymentCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many BillingPayments.
+     */
+    data: BillingPaymentCreateManyInput | BillingPaymentCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * BillingPayment createManyAndReturn
+   */
+  export type BillingPaymentCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BillingPayment
+     */
+    select?: BillingPaymentSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the BillingPayment
+     */
+    omit?: BillingPaymentOmit<ExtArgs> | null
+    /**
+     * The data used to create many BillingPayments.
+     */
+    data: BillingPaymentCreateManyInput | BillingPaymentCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BillingPaymentIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * BillingPayment update
+   */
+  export type BillingPaymentUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BillingPayment
+     */
+    select?: BillingPaymentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BillingPayment
+     */
+    omit?: BillingPaymentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BillingPaymentInclude<ExtArgs> | null
+    /**
+     * The data needed to update a BillingPayment.
+     */
+    data: XOR<BillingPaymentUpdateInput, BillingPaymentUncheckedUpdateInput>
+    /**
+     * Choose, which BillingPayment to update.
+     */
+    where: BillingPaymentWhereUniqueInput
+  }
+
+  /**
+   * BillingPayment updateMany
+   */
+  export type BillingPaymentUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update BillingPayments.
+     */
+    data: XOR<BillingPaymentUpdateManyMutationInput, BillingPaymentUncheckedUpdateManyInput>
+    /**
+     * Filter which BillingPayments to update
+     */
+    where?: BillingPaymentWhereInput
+    /**
+     * Limit how many BillingPayments to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * BillingPayment updateManyAndReturn
+   */
+  export type BillingPaymentUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BillingPayment
+     */
+    select?: BillingPaymentSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the BillingPayment
+     */
+    omit?: BillingPaymentOmit<ExtArgs> | null
+    /**
+     * The data used to update BillingPayments.
+     */
+    data: XOR<BillingPaymentUpdateManyMutationInput, BillingPaymentUncheckedUpdateManyInput>
+    /**
+     * Filter which BillingPayments to update
+     */
+    where?: BillingPaymentWhereInput
+    /**
+     * Limit how many BillingPayments to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BillingPaymentIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * BillingPayment upsert
+   */
+  export type BillingPaymentUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BillingPayment
+     */
+    select?: BillingPaymentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BillingPayment
+     */
+    omit?: BillingPaymentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BillingPaymentInclude<ExtArgs> | null
+    /**
+     * The filter to search for the BillingPayment to update in case it exists.
+     */
+    where: BillingPaymentWhereUniqueInput
+    /**
+     * In case the BillingPayment found by the `where` argument doesn't exist, create a new BillingPayment with this data.
+     */
+    create: XOR<BillingPaymentCreateInput, BillingPaymentUncheckedCreateInput>
+    /**
+     * In case the BillingPayment was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<BillingPaymentUpdateInput, BillingPaymentUncheckedUpdateInput>
+  }
+
+  /**
+   * BillingPayment delete
+   */
+  export type BillingPaymentDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BillingPayment
+     */
+    select?: BillingPaymentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BillingPayment
+     */
+    omit?: BillingPaymentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BillingPaymentInclude<ExtArgs> | null
+    /**
+     * Filter which BillingPayment to delete.
+     */
+    where: BillingPaymentWhereUniqueInput
+  }
+
+  /**
+   * BillingPayment deleteMany
+   */
+  export type BillingPaymentDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which BillingPayments to delete
+     */
+    where?: BillingPaymentWhereInput
+    /**
+     * Limit how many BillingPayments to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * BillingPayment.preAuthItems
+   */
+  export type BillingPayment$preAuthItemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BillingLineItem
+     */
+    select?: BillingLineItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BillingLineItem
+     */
+    omit?: BillingLineItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BillingLineItemInclude<ExtArgs> | null
+    where?: BillingLineItemWhereInput
+    orderBy?: BillingLineItemOrderByWithRelationInput | BillingLineItemOrderByWithRelationInput[]
+    cursor?: BillingLineItemWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: BillingLineItemScalarFieldEnum | BillingLineItemScalarFieldEnum[]
+  }
+
+  /**
+   * BillingPayment.paymentPlan
+   */
+  export type BillingPayment$paymentPlanArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PaymentPlan
+     */
+    select?: PaymentPlanSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PaymentPlan
+     */
+    omit?: PaymentPlanOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PaymentPlanInclude<ExtArgs> | null
+    where?: PaymentPlanWhereInput
+  }
+
+  /**
+   * BillingPayment without action
+   */
+  export type BillingPaymentDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BillingPayment
+     */
+    select?: BillingPaymentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BillingPayment
+     */
+    omit?: BillingPaymentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BillingPaymentInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model PaymentPlan
+   */
+
+  export type AggregatePaymentPlan = {
+    _count: PaymentPlanCountAggregateOutputType | null
+    _avg: PaymentPlanAvgAggregateOutputType | null
+    _sum: PaymentPlanSumAggregateOutputType | null
+    _min: PaymentPlanMinAggregateOutputType | null
+    _max: PaymentPlanMaxAggregateOutputType | null
+  }
+
+  export type PaymentPlanAvgAggregateOutputType = {
+    totalAmount: Decimal | null
+    installmentCount: number | null
+    installmentAmount: Decimal | null
+    paidInstallments: number | null
+    remainingAmount: Decimal | null
+  }
+
+  export type PaymentPlanSumAggregateOutputType = {
+    totalAmount: Decimal | null
+    installmentCount: number | null
+    installmentAmount: Decimal | null
+    paidInstallments: number | null
+    remainingAmount: Decimal | null
+  }
+
+  export type PaymentPlanMinAggregateOutputType = {
+    id: string | null
+    transactionId: string | null
+    totalAmount: Decimal | null
+    installmentCount: number | null
+    installmentAmount: Decimal | null
+    frequency: $Enums.PaymentFrequency | null
+    paidInstallments: number | null
+    remainingAmount: Decimal | null
+    mayaSubscriptionId: string | null
+    mayaNextChargeDate: Date | null
+    status: $Enums.PaymentPlanStatus | null
+    startDate: Date | null
+    nextDueDate: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    setupBy: string | null
+  }
+
+  export type PaymentPlanMaxAggregateOutputType = {
+    id: string | null
+    transactionId: string | null
+    totalAmount: Decimal | null
+    installmentCount: number | null
+    installmentAmount: Decimal | null
+    frequency: $Enums.PaymentFrequency | null
+    paidInstallments: number | null
+    remainingAmount: Decimal | null
+    mayaSubscriptionId: string | null
+    mayaNextChargeDate: Date | null
+    status: $Enums.PaymentPlanStatus | null
+    startDate: Date | null
+    nextDueDate: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    setupBy: string | null
+  }
+
+  export type PaymentPlanCountAggregateOutputType = {
+    id: number
+    transactionId: number
+    totalAmount: number
+    installmentCount: number
+    installmentAmount: number
+    frequency: number
+    paidInstallments: number
+    remainingAmount: number
+    mayaSubscriptionId: number
+    mayaNextChargeDate: number
+    status: number
+    startDate: number
+    nextDueDate: number
+    createdAt: number
+    updatedAt: number
+    setupBy: number
+    _all: number
+  }
+
+
+  export type PaymentPlanAvgAggregateInputType = {
+    totalAmount?: true
+    installmentCount?: true
+    installmentAmount?: true
+    paidInstallments?: true
+    remainingAmount?: true
+  }
+
+  export type PaymentPlanSumAggregateInputType = {
+    totalAmount?: true
+    installmentCount?: true
+    installmentAmount?: true
+    paidInstallments?: true
+    remainingAmount?: true
+  }
+
+  export type PaymentPlanMinAggregateInputType = {
+    id?: true
+    transactionId?: true
+    totalAmount?: true
+    installmentCount?: true
+    installmentAmount?: true
+    frequency?: true
+    paidInstallments?: true
+    remainingAmount?: true
+    mayaSubscriptionId?: true
+    mayaNextChargeDate?: true
+    status?: true
+    startDate?: true
+    nextDueDate?: true
+    createdAt?: true
+    updatedAt?: true
+    setupBy?: true
+  }
+
+  export type PaymentPlanMaxAggregateInputType = {
+    id?: true
+    transactionId?: true
+    totalAmount?: true
+    installmentCount?: true
+    installmentAmount?: true
+    frequency?: true
+    paidInstallments?: true
+    remainingAmount?: true
+    mayaSubscriptionId?: true
+    mayaNextChargeDate?: true
+    status?: true
+    startDate?: true
+    nextDueDate?: true
+    createdAt?: true
+    updatedAt?: true
+    setupBy?: true
+  }
+
+  export type PaymentPlanCountAggregateInputType = {
+    id?: true
+    transactionId?: true
+    totalAmount?: true
+    installmentCount?: true
+    installmentAmount?: true
+    frequency?: true
+    paidInstallments?: true
+    remainingAmount?: true
+    mayaSubscriptionId?: true
+    mayaNextChargeDate?: true
+    status?: true
+    startDate?: true
+    nextDueDate?: true
+    createdAt?: true
+    updatedAt?: true
+    setupBy?: true
+    _all?: true
+  }
+
+  export type PaymentPlanAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which PaymentPlan to aggregate.
+     */
+    where?: PaymentPlanWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PaymentPlans to fetch.
+     */
+    orderBy?: PaymentPlanOrderByWithRelationInput | PaymentPlanOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: PaymentPlanWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PaymentPlans from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PaymentPlans.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned PaymentPlans
+    **/
+    _count?: true | PaymentPlanCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: PaymentPlanAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: PaymentPlanSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: PaymentPlanMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: PaymentPlanMaxAggregateInputType
+  }
+
+  export type GetPaymentPlanAggregateType<T extends PaymentPlanAggregateArgs> = {
+        [P in keyof T & keyof AggregatePaymentPlan]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregatePaymentPlan[P]>
+      : GetScalarType<T[P], AggregatePaymentPlan[P]>
+  }
+
+
+
+
+  export type PaymentPlanGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PaymentPlanWhereInput
+    orderBy?: PaymentPlanOrderByWithAggregationInput | PaymentPlanOrderByWithAggregationInput[]
+    by: PaymentPlanScalarFieldEnum[] | PaymentPlanScalarFieldEnum
+    having?: PaymentPlanScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: PaymentPlanCountAggregateInputType | true
+    _avg?: PaymentPlanAvgAggregateInputType
+    _sum?: PaymentPlanSumAggregateInputType
+    _min?: PaymentPlanMinAggregateInputType
+    _max?: PaymentPlanMaxAggregateInputType
+  }
+
+  export type PaymentPlanGroupByOutputType = {
+    id: string
+    transactionId: string
+    totalAmount: Decimal
+    installmentCount: number
+    installmentAmount: Decimal
+    frequency: $Enums.PaymentFrequency
+    paidInstallments: number
+    remainingAmount: Decimal
+    mayaSubscriptionId: string | null
+    mayaNextChargeDate: Date | null
+    status: $Enums.PaymentPlanStatus
+    startDate: Date
+    nextDueDate: Date
+    createdAt: Date
+    updatedAt: Date
+    setupBy: string | null
+    _count: PaymentPlanCountAggregateOutputType | null
+    _avg: PaymentPlanAvgAggregateOutputType | null
+    _sum: PaymentPlanSumAggregateOutputType | null
+    _min: PaymentPlanMinAggregateOutputType | null
+    _max: PaymentPlanMaxAggregateOutputType | null
+  }
+
+  type GetPaymentPlanGroupByPayload<T extends PaymentPlanGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<PaymentPlanGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof PaymentPlanGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], PaymentPlanGroupByOutputType[P]>
+            : GetScalarType<T[P], PaymentPlanGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type PaymentPlanSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    transactionId?: boolean
+    totalAmount?: boolean
+    installmentCount?: boolean
+    installmentAmount?: boolean
+    frequency?: boolean
+    paidInstallments?: boolean
+    remainingAmount?: boolean
+    mayaSubscriptionId?: boolean
+    mayaNextChargeDate?: boolean
+    status?: boolean
+    startDate?: boolean
+    nextDueDate?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    setupBy?: boolean
+    transaction?: boolean | BillingTransactionDefaultArgs<ExtArgs>
+    payments?: boolean | PaymentPlan$paymentsArgs<ExtArgs>
+    _count?: boolean | PaymentPlanCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["paymentPlan"]>
+
+  export type PaymentPlanSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    transactionId?: boolean
+    totalAmount?: boolean
+    installmentCount?: boolean
+    installmentAmount?: boolean
+    frequency?: boolean
+    paidInstallments?: boolean
+    remainingAmount?: boolean
+    mayaSubscriptionId?: boolean
+    mayaNextChargeDate?: boolean
+    status?: boolean
+    startDate?: boolean
+    nextDueDate?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    setupBy?: boolean
+    transaction?: boolean | BillingTransactionDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["paymentPlan"]>
+
+  export type PaymentPlanSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    transactionId?: boolean
+    totalAmount?: boolean
+    installmentCount?: boolean
+    installmentAmount?: boolean
+    frequency?: boolean
+    paidInstallments?: boolean
+    remainingAmount?: boolean
+    mayaSubscriptionId?: boolean
+    mayaNextChargeDate?: boolean
+    status?: boolean
+    startDate?: boolean
+    nextDueDate?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    setupBy?: boolean
+    transaction?: boolean | BillingTransactionDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["paymentPlan"]>
+
+  export type PaymentPlanSelectScalar = {
+    id?: boolean
+    transactionId?: boolean
+    totalAmount?: boolean
+    installmentCount?: boolean
+    installmentAmount?: boolean
+    frequency?: boolean
+    paidInstallments?: boolean
+    remainingAmount?: boolean
+    mayaSubscriptionId?: boolean
+    mayaNextChargeDate?: boolean
+    status?: boolean
+    startDate?: boolean
+    nextDueDate?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    setupBy?: boolean
+  }
+
+  export type PaymentPlanOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "transactionId" | "totalAmount" | "installmentCount" | "installmentAmount" | "frequency" | "paidInstallments" | "remainingAmount" | "mayaSubscriptionId" | "mayaNextChargeDate" | "status" | "startDate" | "nextDueDate" | "createdAt" | "updatedAt" | "setupBy", ExtArgs["result"]["paymentPlan"]>
+  export type PaymentPlanInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    transaction?: boolean | BillingTransactionDefaultArgs<ExtArgs>
+    payments?: boolean | PaymentPlan$paymentsArgs<ExtArgs>
+    _count?: boolean | PaymentPlanCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type PaymentPlanIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    transaction?: boolean | BillingTransactionDefaultArgs<ExtArgs>
+  }
+  export type PaymentPlanIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    transaction?: boolean | BillingTransactionDefaultArgs<ExtArgs>
+  }
+
+  export type $PaymentPlanPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "PaymentPlan"
+    objects: {
+      transaction: Prisma.$BillingTransactionPayload<ExtArgs>
+      payments: Prisma.$BillingPaymentPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      transactionId: string
+      totalAmount: Prisma.Decimal
+      installmentCount: number
+      installmentAmount: Prisma.Decimal
+      frequency: $Enums.PaymentFrequency
+      paidInstallments: number
+      remainingAmount: Prisma.Decimal
+      mayaSubscriptionId: string | null
+      mayaNextChargeDate: Date | null
+      status: $Enums.PaymentPlanStatus
+      startDate: Date
+      nextDueDate: Date
+      createdAt: Date
+      updatedAt: Date
+      setupBy: string | null
+    }, ExtArgs["result"]["paymentPlan"]>
+    composites: {}
+  }
+
+  type PaymentPlanGetPayload<S extends boolean | null | undefined | PaymentPlanDefaultArgs> = $Result.GetResult<Prisma.$PaymentPlanPayload, S>
+
+  type PaymentPlanCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<PaymentPlanFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: PaymentPlanCountAggregateInputType | true
+    }
+
+  export interface PaymentPlanDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['PaymentPlan'], meta: { name: 'PaymentPlan' } }
+    /**
+     * Find zero or one PaymentPlan that matches the filter.
+     * @param {PaymentPlanFindUniqueArgs} args - Arguments to find a PaymentPlan
+     * @example
+     * // Get one PaymentPlan
+     * const paymentPlan = await prisma.paymentPlan.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends PaymentPlanFindUniqueArgs>(args: SelectSubset<T, PaymentPlanFindUniqueArgs<ExtArgs>>): Prisma__PaymentPlanClient<$Result.GetResult<Prisma.$PaymentPlanPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one PaymentPlan that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {PaymentPlanFindUniqueOrThrowArgs} args - Arguments to find a PaymentPlan
+     * @example
+     * // Get one PaymentPlan
+     * const paymentPlan = await prisma.paymentPlan.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends PaymentPlanFindUniqueOrThrowArgs>(args: SelectSubset<T, PaymentPlanFindUniqueOrThrowArgs<ExtArgs>>): Prisma__PaymentPlanClient<$Result.GetResult<Prisma.$PaymentPlanPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first PaymentPlan that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PaymentPlanFindFirstArgs} args - Arguments to find a PaymentPlan
+     * @example
+     * // Get one PaymentPlan
+     * const paymentPlan = await prisma.paymentPlan.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends PaymentPlanFindFirstArgs>(args?: SelectSubset<T, PaymentPlanFindFirstArgs<ExtArgs>>): Prisma__PaymentPlanClient<$Result.GetResult<Prisma.$PaymentPlanPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first PaymentPlan that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PaymentPlanFindFirstOrThrowArgs} args - Arguments to find a PaymentPlan
+     * @example
+     * // Get one PaymentPlan
+     * const paymentPlan = await prisma.paymentPlan.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends PaymentPlanFindFirstOrThrowArgs>(args?: SelectSubset<T, PaymentPlanFindFirstOrThrowArgs<ExtArgs>>): Prisma__PaymentPlanClient<$Result.GetResult<Prisma.$PaymentPlanPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more PaymentPlans that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PaymentPlanFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all PaymentPlans
+     * const paymentPlans = await prisma.paymentPlan.findMany()
+     * 
+     * // Get first 10 PaymentPlans
+     * const paymentPlans = await prisma.paymentPlan.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const paymentPlanWithIdOnly = await prisma.paymentPlan.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends PaymentPlanFindManyArgs>(args?: SelectSubset<T, PaymentPlanFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PaymentPlanPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a PaymentPlan.
+     * @param {PaymentPlanCreateArgs} args - Arguments to create a PaymentPlan.
+     * @example
+     * // Create one PaymentPlan
+     * const PaymentPlan = await prisma.paymentPlan.create({
+     *   data: {
+     *     // ... data to create a PaymentPlan
+     *   }
+     * })
+     * 
+     */
+    create<T extends PaymentPlanCreateArgs>(args: SelectSubset<T, PaymentPlanCreateArgs<ExtArgs>>): Prisma__PaymentPlanClient<$Result.GetResult<Prisma.$PaymentPlanPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many PaymentPlans.
+     * @param {PaymentPlanCreateManyArgs} args - Arguments to create many PaymentPlans.
+     * @example
+     * // Create many PaymentPlans
+     * const paymentPlan = await prisma.paymentPlan.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends PaymentPlanCreateManyArgs>(args?: SelectSubset<T, PaymentPlanCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many PaymentPlans and returns the data saved in the database.
+     * @param {PaymentPlanCreateManyAndReturnArgs} args - Arguments to create many PaymentPlans.
+     * @example
+     * // Create many PaymentPlans
+     * const paymentPlan = await prisma.paymentPlan.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many PaymentPlans and only return the `id`
+     * const paymentPlanWithIdOnly = await prisma.paymentPlan.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends PaymentPlanCreateManyAndReturnArgs>(args?: SelectSubset<T, PaymentPlanCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PaymentPlanPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a PaymentPlan.
+     * @param {PaymentPlanDeleteArgs} args - Arguments to delete one PaymentPlan.
+     * @example
+     * // Delete one PaymentPlan
+     * const PaymentPlan = await prisma.paymentPlan.delete({
+     *   where: {
+     *     // ... filter to delete one PaymentPlan
+     *   }
+     * })
+     * 
+     */
+    delete<T extends PaymentPlanDeleteArgs>(args: SelectSubset<T, PaymentPlanDeleteArgs<ExtArgs>>): Prisma__PaymentPlanClient<$Result.GetResult<Prisma.$PaymentPlanPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one PaymentPlan.
+     * @param {PaymentPlanUpdateArgs} args - Arguments to update one PaymentPlan.
+     * @example
+     * // Update one PaymentPlan
+     * const paymentPlan = await prisma.paymentPlan.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends PaymentPlanUpdateArgs>(args: SelectSubset<T, PaymentPlanUpdateArgs<ExtArgs>>): Prisma__PaymentPlanClient<$Result.GetResult<Prisma.$PaymentPlanPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more PaymentPlans.
+     * @param {PaymentPlanDeleteManyArgs} args - Arguments to filter PaymentPlans to delete.
+     * @example
+     * // Delete a few PaymentPlans
+     * const { count } = await prisma.paymentPlan.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends PaymentPlanDeleteManyArgs>(args?: SelectSubset<T, PaymentPlanDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more PaymentPlans.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PaymentPlanUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many PaymentPlans
+     * const paymentPlan = await prisma.paymentPlan.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends PaymentPlanUpdateManyArgs>(args: SelectSubset<T, PaymentPlanUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more PaymentPlans and returns the data updated in the database.
+     * @param {PaymentPlanUpdateManyAndReturnArgs} args - Arguments to update many PaymentPlans.
+     * @example
+     * // Update many PaymentPlans
+     * const paymentPlan = await prisma.paymentPlan.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more PaymentPlans and only return the `id`
+     * const paymentPlanWithIdOnly = await prisma.paymentPlan.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends PaymentPlanUpdateManyAndReturnArgs>(args: SelectSubset<T, PaymentPlanUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PaymentPlanPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one PaymentPlan.
+     * @param {PaymentPlanUpsertArgs} args - Arguments to update or create a PaymentPlan.
+     * @example
+     * // Update or create a PaymentPlan
+     * const paymentPlan = await prisma.paymentPlan.upsert({
+     *   create: {
+     *     // ... data to create a PaymentPlan
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the PaymentPlan we want to update
+     *   }
+     * })
+     */
+    upsert<T extends PaymentPlanUpsertArgs>(args: SelectSubset<T, PaymentPlanUpsertArgs<ExtArgs>>): Prisma__PaymentPlanClient<$Result.GetResult<Prisma.$PaymentPlanPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of PaymentPlans.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PaymentPlanCountArgs} args - Arguments to filter PaymentPlans to count.
+     * @example
+     * // Count the number of PaymentPlans
+     * const count = await prisma.paymentPlan.count({
+     *   where: {
+     *     // ... the filter for the PaymentPlans we want to count
+     *   }
+     * })
+    **/
+    count<T extends PaymentPlanCountArgs>(
+      args?: Subset<T, PaymentPlanCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], PaymentPlanCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a PaymentPlan.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PaymentPlanAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends PaymentPlanAggregateArgs>(args: Subset<T, PaymentPlanAggregateArgs>): Prisma.PrismaPromise<GetPaymentPlanAggregateType<T>>
+
+    /**
+     * Group by PaymentPlan.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PaymentPlanGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends PaymentPlanGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: PaymentPlanGroupByArgs['orderBy'] }
+        : { orderBy?: PaymentPlanGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, PaymentPlanGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetPaymentPlanGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the PaymentPlan model
+   */
+  readonly fields: PaymentPlanFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for PaymentPlan.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__PaymentPlanClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    transaction<T extends BillingTransactionDefaultArgs<ExtArgs> = {}>(args?: Subset<T, BillingTransactionDefaultArgs<ExtArgs>>): Prisma__BillingTransactionClient<$Result.GetResult<Prisma.$BillingTransactionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    payments<T extends PaymentPlan$paymentsArgs<ExtArgs> = {}>(args?: Subset<T, PaymentPlan$paymentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BillingPaymentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the PaymentPlan model
+   */
+  interface PaymentPlanFieldRefs {
+    readonly id: FieldRef<"PaymentPlan", 'String'>
+    readonly transactionId: FieldRef<"PaymentPlan", 'String'>
+    readonly totalAmount: FieldRef<"PaymentPlan", 'Decimal'>
+    readonly installmentCount: FieldRef<"PaymentPlan", 'Int'>
+    readonly installmentAmount: FieldRef<"PaymentPlan", 'Decimal'>
+    readonly frequency: FieldRef<"PaymentPlan", 'PaymentFrequency'>
+    readonly paidInstallments: FieldRef<"PaymentPlan", 'Int'>
+    readonly remainingAmount: FieldRef<"PaymentPlan", 'Decimal'>
+    readonly mayaSubscriptionId: FieldRef<"PaymentPlan", 'String'>
+    readonly mayaNextChargeDate: FieldRef<"PaymentPlan", 'DateTime'>
+    readonly status: FieldRef<"PaymentPlan", 'PaymentPlanStatus'>
+    readonly startDate: FieldRef<"PaymentPlan", 'DateTime'>
+    readonly nextDueDate: FieldRef<"PaymentPlan", 'DateTime'>
+    readonly createdAt: FieldRef<"PaymentPlan", 'DateTime'>
+    readonly updatedAt: FieldRef<"PaymentPlan", 'DateTime'>
+    readonly setupBy: FieldRef<"PaymentPlan", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * PaymentPlan findUnique
+   */
+  export type PaymentPlanFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PaymentPlan
+     */
+    select?: PaymentPlanSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PaymentPlan
+     */
+    omit?: PaymentPlanOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PaymentPlanInclude<ExtArgs> | null
+    /**
+     * Filter, which PaymentPlan to fetch.
+     */
+    where: PaymentPlanWhereUniqueInput
+  }
+
+  /**
+   * PaymentPlan findUniqueOrThrow
+   */
+  export type PaymentPlanFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PaymentPlan
+     */
+    select?: PaymentPlanSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PaymentPlan
+     */
+    omit?: PaymentPlanOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PaymentPlanInclude<ExtArgs> | null
+    /**
+     * Filter, which PaymentPlan to fetch.
+     */
+    where: PaymentPlanWhereUniqueInput
+  }
+
+  /**
+   * PaymentPlan findFirst
+   */
+  export type PaymentPlanFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PaymentPlan
+     */
+    select?: PaymentPlanSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PaymentPlan
+     */
+    omit?: PaymentPlanOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PaymentPlanInclude<ExtArgs> | null
+    /**
+     * Filter, which PaymentPlan to fetch.
+     */
+    where?: PaymentPlanWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PaymentPlans to fetch.
+     */
+    orderBy?: PaymentPlanOrderByWithRelationInput | PaymentPlanOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for PaymentPlans.
+     */
+    cursor?: PaymentPlanWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PaymentPlans from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PaymentPlans.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of PaymentPlans.
+     */
+    distinct?: PaymentPlanScalarFieldEnum | PaymentPlanScalarFieldEnum[]
+  }
+
+  /**
+   * PaymentPlan findFirstOrThrow
+   */
+  export type PaymentPlanFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PaymentPlan
+     */
+    select?: PaymentPlanSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PaymentPlan
+     */
+    omit?: PaymentPlanOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PaymentPlanInclude<ExtArgs> | null
+    /**
+     * Filter, which PaymentPlan to fetch.
+     */
+    where?: PaymentPlanWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PaymentPlans to fetch.
+     */
+    orderBy?: PaymentPlanOrderByWithRelationInput | PaymentPlanOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for PaymentPlans.
+     */
+    cursor?: PaymentPlanWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PaymentPlans from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PaymentPlans.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of PaymentPlans.
+     */
+    distinct?: PaymentPlanScalarFieldEnum | PaymentPlanScalarFieldEnum[]
+  }
+
+  /**
+   * PaymentPlan findMany
+   */
+  export type PaymentPlanFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PaymentPlan
+     */
+    select?: PaymentPlanSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PaymentPlan
+     */
+    omit?: PaymentPlanOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PaymentPlanInclude<ExtArgs> | null
+    /**
+     * Filter, which PaymentPlans to fetch.
+     */
+    where?: PaymentPlanWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PaymentPlans to fetch.
+     */
+    orderBy?: PaymentPlanOrderByWithRelationInput | PaymentPlanOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing PaymentPlans.
+     */
+    cursor?: PaymentPlanWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PaymentPlans from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PaymentPlans.
+     */
+    skip?: number
+    distinct?: PaymentPlanScalarFieldEnum | PaymentPlanScalarFieldEnum[]
+  }
+
+  /**
+   * PaymentPlan create
+   */
+  export type PaymentPlanCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PaymentPlan
+     */
+    select?: PaymentPlanSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PaymentPlan
+     */
+    omit?: PaymentPlanOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PaymentPlanInclude<ExtArgs> | null
+    /**
+     * The data needed to create a PaymentPlan.
+     */
+    data: XOR<PaymentPlanCreateInput, PaymentPlanUncheckedCreateInput>
+  }
+
+  /**
+   * PaymentPlan createMany
+   */
+  export type PaymentPlanCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many PaymentPlans.
+     */
+    data: PaymentPlanCreateManyInput | PaymentPlanCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * PaymentPlan createManyAndReturn
+   */
+  export type PaymentPlanCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PaymentPlan
+     */
+    select?: PaymentPlanSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the PaymentPlan
+     */
+    omit?: PaymentPlanOmit<ExtArgs> | null
+    /**
+     * The data used to create many PaymentPlans.
+     */
+    data: PaymentPlanCreateManyInput | PaymentPlanCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PaymentPlanIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * PaymentPlan update
+   */
+  export type PaymentPlanUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PaymentPlan
+     */
+    select?: PaymentPlanSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PaymentPlan
+     */
+    omit?: PaymentPlanOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PaymentPlanInclude<ExtArgs> | null
+    /**
+     * The data needed to update a PaymentPlan.
+     */
+    data: XOR<PaymentPlanUpdateInput, PaymentPlanUncheckedUpdateInput>
+    /**
+     * Choose, which PaymentPlan to update.
+     */
+    where: PaymentPlanWhereUniqueInput
+  }
+
+  /**
+   * PaymentPlan updateMany
+   */
+  export type PaymentPlanUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update PaymentPlans.
+     */
+    data: XOR<PaymentPlanUpdateManyMutationInput, PaymentPlanUncheckedUpdateManyInput>
+    /**
+     * Filter which PaymentPlans to update
+     */
+    where?: PaymentPlanWhereInput
+    /**
+     * Limit how many PaymentPlans to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * PaymentPlan updateManyAndReturn
+   */
+  export type PaymentPlanUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PaymentPlan
+     */
+    select?: PaymentPlanSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the PaymentPlan
+     */
+    omit?: PaymentPlanOmit<ExtArgs> | null
+    /**
+     * The data used to update PaymentPlans.
+     */
+    data: XOR<PaymentPlanUpdateManyMutationInput, PaymentPlanUncheckedUpdateManyInput>
+    /**
+     * Filter which PaymentPlans to update
+     */
+    where?: PaymentPlanWhereInput
+    /**
+     * Limit how many PaymentPlans to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PaymentPlanIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * PaymentPlan upsert
+   */
+  export type PaymentPlanUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PaymentPlan
+     */
+    select?: PaymentPlanSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PaymentPlan
+     */
+    omit?: PaymentPlanOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PaymentPlanInclude<ExtArgs> | null
+    /**
+     * The filter to search for the PaymentPlan to update in case it exists.
+     */
+    where: PaymentPlanWhereUniqueInput
+    /**
+     * In case the PaymentPlan found by the `where` argument doesn't exist, create a new PaymentPlan with this data.
+     */
+    create: XOR<PaymentPlanCreateInput, PaymentPlanUncheckedCreateInput>
+    /**
+     * In case the PaymentPlan was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<PaymentPlanUpdateInput, PaymentPlanUncheckedUpdateInput>
+  }
+
+  /**
+   * PaymentPlan delete
+   */
+  export type PaymentPlanDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PaymentPlan
+     */
+    select?: PaymentPlanSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PaymentPlan
+     */
+    omit?: PaymentPlanOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PaymentPlanInclude<ExtArgs> | null
+    /**
+     * Filter which PaymentPlan to delete.
+     */
+    where: PaymentPlanWhereUniqueInput
+  }
+
+  /**
+   * PaymentPlan deleteMany
+   */
+  export type PaymentPlanDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which PaymentPlans to delete
+     */
+    where?: PaymentPlanWhereInput
+    /**
+     * Limit how many PaymentPlans to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * PaymentPlan.payments
+   */
+  export type PaymentPlan$paymentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BillingPayment
+     */
+    select?: BillingPaymentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BillingPayment
+     */
+    omit?: BillingPaymentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BillingPaymentInclude<ExtArgs> | null
+    where?: BillingPaymentWhereInput
+    orderBy?: BillingPaymentOrderByWithRelationInput | BillingPaymentOrderByWithRelationInput[]
+    cursor?: BillingPaymentWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: BillingPaymentScalarFieldEnum | BillingPaymentScalarFieldEnum[]
+  }
+
+  /**
+   * PaymentPlan without action
+   */
+  export type PaymentPlanDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PaymentPlan
+     */
+    select?: PaymentPlanSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PaymentPlan
+     */
+    omit?: PaymentPlanOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PaymentPlanInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -36568,6 +43804,114 @@ export namespace Prisma {
   export type DataShareAccessTokenScalarFieldEnum = (typeof DataShareAccessTokenScalarFieldEnum)[keyof typeof DataShareAccessTokenScalarFieldEnum]
 
 
+  export const BillingTransactionScalarFieldEnum: {
+    id: 'id',
+    transactionNumber: 'transactionNumber',
+    patientId: 'patientId',
+    encounterId: 'encounterId',
+    status: 'status',
+    totalAmount: 'totalAmount',
+    insuranceDiscount: 'insuranceDiscount',
+    finalAmount: 'finalAmount',
+    paidAmount: 'paidAmount',
+    balanceAmount: 'balanceAmount',
+    hasPreAuth: 'hasPreAuth',
+    preAuthSettled: 'preAuthSettled',
+    hasPaymentPlan: 'hasPaymentPlan',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt',
+    createdBy: 'createdBy'
+  };
+
+  export type BillingTransactionScalarFieldEnum = (typeof BillingTransactionScalarFieldEnum)[keyof typeof BillingTransactionScalarFieldEnum]
+
+
+  export const BillingLineItemScalarFieldEnum: {
+    id: 'id',
+    transactionId: 'transactionId',
+    itemType: 'itemType',
+    description: 'description',
+    quantity: 'quantity',
+    unitPrice: 'unitPrice',
+    totalPrice: 'totalPrice',
+    requiresPreAuth: 'requiresPreAuth',
+    preAuthPaid: 'preAuthPaid',
+    preAuthPaymentId: 'preAuthPaymentId',
+    insuranceCoverable: 'insuranceCoverable',
+    insuranceDiscount: 'insuranceDiscount',
+    finalPrice: 'finalPrice',
+    encounterOrderId: 'encounterOrderId',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt',
+    addedBy: 'addedBy'
+  };
+
+  export type BillingLineItemScalarFieldEnum = (typeof BillingLineItemScalarFieldEnum)[keyof typeof BillingLineItemScalarFieldEnum]
+
+
+  export const InsuranceCoverageScalarFieldEnum: {
+    id: 'id',
+    lineItemId: 'lineItemId',
+    insuranceProvider: 'insuranceProvider',
+    insuranceNumber: 'insuranceNumber',
+    coveragePercentage: 'coveragePercentage',
+    coverageAmount: 'coverageAmount',
+    claimStatus: 'claimStatus',
+    claimNumber: 'claimNumber',
+    claimNotes: 'claimNotes',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt',
+    verifiedBy: 'verifiedBy'
+  };
+
+  export type InsuranceCoverageScalarFieldEnum = (typeof InsuranceCoverageScalarFieldEnum)[keyof typeof InsuranceCoverageScalarFieldEnum]
+
+
+  export const BillingPaymentScalarFieldEnum: {
+    id: 'id',
+    paymentNumber: 'paymentNumber',
+    transactionId: 'transactionId',
+    amount: 'amount',
+    paymentMethod: 'paymentMethod',
+    paymentType: 'paymentType',
+    isPreAuthPayment: 'isPreAuthPayment',
+    paymentPlanId: 'paymentPlanId',
+    installmentNumber: 'installmentNumber',
+    mayaPaymentId: 'mayaPaymentId',
+    mayaPaymentStatus: 'mayaPaymentStatus',
+    mayaReceiptUrl: 'mayaReceiptUrl',
+    status: 'status',
+    paidAt: 'paidAt',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt',
+    processedBy: 'processedBy'
+  };
+
+  export type BillingPaymentScalarFieldEnum = (typeof BillingPaymentScalarFieldEnum)[keyof typeof BillingPaymentScalarFieldEnum]
+
+
+  export const PaymentPlanScalarFieldEnum: {
+    id: 'id',
+    transactionId: 'transactionId',
+    totalAmount: 'totalAmount',
+    installmentCount: 'installmentCount',
+    installmentAmount: 'installmentAmount',
+    frequency: 'frequency',
+    paidInstallments: 'paidInstallments',
+    remainingAmount: 'remainingAmount',
+    mayaSubscriptionId: 'mayaSubscriptionId',
+    mayaNextChargeDate: 'mayaNextChargeDate',
+    status: 'status',
+    startDate: 'startDate',
+    nextDueDate: 'nextDueDate',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt',
+    setupBy: 'setupBy'
+  };
+
+  export type PaymentPlanScalarFieldEnum = (typeof PaymentPlanScalarFieldEnum)[keyof typeof PaymentPlanScalarFieldEnum]
+
+
   export const SortOrder: {
     asc: 'asc',
     desc: 'desc'
@@ -37042,6 +44386,76 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'BillingStatus'
+   */
+  export type EnumBillingStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BillingStatus'>
+    
+
+
+  /**
+   * Reference to a field of type 'BillingStatus[]'
+   */
+  export type ListEnumBillingStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BillingStatus[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'BillingItemType'
+   */
+  export type EnumBillingItemTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BillingItemType'>
+    
+
+
+  /**
+   * Reference to a field of type 'BillingItemType[]'
+   */
+  export type ListEnumBillingItemTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BillingItemType[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'PaymentType'
+   */
+  export type EnumPaymentTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PaymentType'>
+    
+
+
+  /**
+   * Reference to a field of type 'PaymentType[]'
+   */
+  export type ListEnumPaymentTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PaymentType[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'PaymentFrequency'
+   */
+  export type EnumPaymentFrequencyFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PaymentFrequency'>
+    
+
+
+  /**
+   * Reference to a field of type 'PaymentFrequency[]'
+   */
+  export type ListEnumPaymentFrequencyFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PaymentFrequency[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'PaymentPlanStatus'
+   */
+  export type EnumPaymentPlanStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PaymentPlanStatus'>
+    
+
+
+  /**
+   * Reference to a field of type 'PaymentPlanStatus[]'
+   */
+  export type ListEnumPaymentPlanStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PaymentPlanStatus[]'>
+    
+
+
+  /**
    * Reference to a field of type 'Float'
    */
   export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
@@ -37386,6 +44800,7 @@ export namespace Prisma {
     outpatientEncounters?: OutpatientEncounterListRelationFilter
     insuranceClaims?: InsuranceClaimListRelationFilter
     dataShareRequests?: DataShareRequestListRelationFilter
+    billingTransactions?: BillingTransactionListRelationFilter
   }
 
   export type PatientOrderByWithRelationInput = {
@@ -37406,6 +44821,7 @@ export namespace Prisma {
     outpatientEncounters?: OutpatientEncounterOrderByRelationAggregateInput
     insuranceClaims?: InsuranceClaimOrderByRelationAggregateInput
     dataShareRequests?: DataShareRequestOrderByRelationAggregateInput
+    billingTransactions?: BillingTransactionOrderByRelationAggregateInput
   }
 
   export type PatientWhereUniqueInput = Prisma.AtLeast<{
@@ -37429,6 +44845,7 @@ export namespace Prisma {
     outpatientEncounters?: OutpatientEncounterListRelationFilter
     insuranceClaims?: InsuranceClaimListRelationFilter
     dataShareRequests?: DataShareRequestListRelationFilter
+    billingTransactions?: BillingTransactionListRelationFilter
   }, "id" | "userId" | "patientNumber">
 
   export type PatientOrderByWithAggregationInput = {
@@ -38594,6 +46011,7 @@ export namespace Prisma {
     orders?: InpatientEncounterOrderListRelationFilter
     insuranceClaim?: XOR<InsuranceClaimNullableScalarRelationFilter, InsuranceClaimWhereInput> | null
     dataShareRequest?: XOR<DataShareRequestNullableScalarRelationFilter, DataShareRequestWhereInput> | null
+    billingTransaction?: XOR<BillingTransactionNullableScalarRelationFilter, BillingTransactionWhereInput> | null
   }
 
   export type InpatientEncounterOrderByWithRelationInput = {
@@ -38617,6 +46035,7 @@ export namespace Prisma {
     orders?: InpatientEncounterOrderOrderByRelationAggregateInput
     insuranceClaim?: InsuranceClaimOrderByWithRelationInput
     dataShareRequest?: DataShareRequestOrderByWithRelationInput
+    billingTransaction?: BillingTransactionOrderByWithRelationInput
   }
 
   export type InpatientEncounterWhereUniqueInput = Prisma.AtLeast<{
@@ -38643,6 +46062,7 @@ export namespace Prisma {
     orders?: InpatientEncounterOrderListRelationFilter
     insuranceClaim?: XOR<InsuranceClaimNullableScalarRelationFilter, InsuranceClaimWhereInput> | null
     dataShareRequest?: XOR<DataShareRequestNullableScalarRelationFilter, DataShareRequestWhereInput> | null
+    billingTransaction?: XOR<BillingTransactionNullableScalarRelationFilter, BillingTransactionWhereInput> | null
   }, "id">
 
   export type InpatientEncounterOrderByWithAggregationInput = {
@@ -38764,6 +46184,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"InpatientEncounterOrder"> | Date | string
     encounter?: XOR<InpatientEncounterScalarRelationFilter, InpatientEncounterWhereInput>
     catalogueItem?: XOR<ParticularCatalogueNullableScalarRelationFilter, ParticularCatalogueWhereInput> | null
+    billingLineItems?: BillingLineItemListRelationFilter
   }
 
   export type InpatientEncounterOrderOrderByWithRelationInput = {
@@ -38780,6 +46201,7 @@ export namespace Prisma {
     updatedAt?: SortOrder
     encounter?: InpatientEncounterOrderByWithRelationInput
     catalogueItem?: ParticularCatalogueOrderByWithRelationInput
+    billingLineItems?: BillingLineItemOrderByRelationAggregateInput
   }
 
   export type InpatientEncounterOrderWhereUniqueInput = Prisma.AtLeast<{
@@ -38799,6 +46221,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"InpatientEncounterOrder"> | Date | string
     encounter?: XOR<InpatientEncounterScalarRelationFilter, InpatientEncounterWhereInput>
     catalogueItem?: XOR<ParticularCatalogueNullableScalarRelationFilter, ParticularCatalogueWhereInput> | null
+    billingLineItems?: BillingLineItemListRelationFilter
   }, "id">
 
   export type InpatientEncounterOrderOrderByWithAggregationInput = {
@@ -39509,6 +46932,586 @@ export namespace Prisma {
     createdAt?: DateTimeWithAggregatesFilter<"DataShareAccessToken"> | Date | string
   }
 
+  export type BillingTransactionWhereInput = {
+    AND?: BillingTransactionWhereInput | BillingTransactionWhereInput[]
+    OR?: BillingTransactionWhereInput[]
+    NOT?: BillingTransactionWhereInput | BillingTransactionWhereInput[]
+    id?: UuidFilter<"BillingTransaction"> | string
+    transactionNumber?: StringFilter<"BillingTransaction"> | string
+    patientId?: StringFilter<"BillingTransaction"> | string
+    encounterId?: UuidNullableFilter<"BillingTransaction"> | string | null
+    status?: EnumBillingStatusFilter<"BillingTransaction"> | $Enums.BillingStatus
+    totalAmount?: DecimalFilter<"BillingTransaction"> | Decimal | DecimalJsLike | number | string
+    insuranceDiscount?: DecimalFilter<"BillingTransaction"> | Decimal | DecimalJsLike | number | string
+    finalAmount?: DecimalFilter<"BillingTransaction"> | Decimal | DecimalJsLike | number | string
+    paidAmount?: DecimalFilter<"BillingTransaction"> | Decimal | DecimalJsLike | number | string
+    balanceAmount?: DecimalFilter<"BillingTransaction"> | Decimal | DecimalJsLike | number | string
+    hasPreAuth?: BoolFilter<"BillingTransaction"> | boolean
+    preAuthSettled?: BoolFilter<"BillingTransaction"> | boolean
+    hasPaymentPlan?: BoolFilter<"BillingTransaction"> | boolean
+    createdAt?: DateTimeFilter<"BillingTransaction"> | Date | string
+    updatedAt?: DateTimeFilter<"BillingTransaction"> | Date | string
+    createdBy?: StringNullableFilter<"BillingTransaction"> | string | null
+    patient?: XOR<PatientScalarRelationFilter, PatientWhereInput>
+    encounter?: XOR<InpatientEncounterNullableScalarRelationFilter, InpatientEncounterWhereInput> | null
+    paymentPlan?: XOR<PaymentPlanNullableScalarRelationFilter, PaymentPlanWhereInput> | null
+    lineItems?: BillingLineItemListRelationFilter
+    payments?: BillingPaymentListRelationFilter
+  }
+
+  export type BillingTransactionOrderByWithRelationInput = {
+    id?: SortOrder
+    transactionNumber?: SortOrder
+    patientId?: SortOrder
+    encounterId?: SortOrderInput | SortOrder
+    status?: SortOrder
+    totalAmount?: SortOrder
+    insuranceDiscount?: SortOrder
+    finalAmount?: SortOrder
+    paidAmount?: SortOrder
+    balanceAmount?: SortOrder
+    hasPreAuth?: SortOrder
+    preAuthSettled?: SortOrder
+    hasPaymentPlan?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    createdBy?: SortOrderInput | SortOrder
+    patient?: PatientOrderByWithRelationInput
+    encounter?: InpatientEncounterOrderByWithRelationInput
+    paymentPlan?: PaymentPlanOrderByWithRelationInput
+    lineItems?: BillingLineItemOrderByRelationAggregateInput
+    payments?: BillingPaymentOrderByRelationAggregateInput
+  }
+
+  export type BillingTransactionWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    transactionNumber?: string
+    encounterId?: string
+    AND?: BillingTransactionWhereInput | BillingTransactionWhereInput[]
+    OR?: BillingTransactionWhereInput[]
+    NOT?: BillingTransactionWhereInput | BillingTransactionWhereInput[]
+    patientId?: StringFilter<"BillingTransaction"> | string
+    status?: EnumBillingStatusFilter<"BillingTransaction"> | $Enums.BillingStatus
+    totalAmount?: DecimalFilter<"BillingTransaction"> | Decimal | DecimalJsLike | number | string
+    insuranceDiscount?: DecimalFilter<"BillingTransaction"> | Decimal | DecimalJsLike | number | string
+    finalAmount?: DecimalFilter<"BillingTransaction"> | Decimal | DecimalJsLike | number | string
+    paidAmount?: DecimalFilter<"BillingTransaction"> | Decimal | DecimalJsLike | number | string
+    balanceAmount?: DecimalFilter<"BillingTransaction"> | Decimal | DecimalJsLike | number | string
+    hasPreAuth?: BoolFilter<"BillingTransaction"> | boolean
+    preAuthSettled?: BoolFilter<"BillingTransaction"> | boolean
+    hasPaymentPlan?: BoolFilter<"BillingTransaction"> | boolean
+    createdAt?: DateTimeFilter<"BillingTransaction"> | Date | string
+    updatedAt?: DateTimeFilter<"BillingTransaction"> | Date | string
+    createdBy?: StringNullableFilter<"BillingTransaction"> | string | null
+    patient?: XOR<PatientScalarRelationFilter, PatientWhereInput>
+    encounter?: XOR<InpatientEncounterNullableScalarRelationFilter, InpatientEncounterWhereInput> | null
+    paymentPlan?: XOR<PaymentPlanNullableScalarRelationFilter, PaymentPlanWhereInput> | null
+    lineItems?: BillingLineItemListRelationFilter
+    payments?: BillingPaymentListRelationFilter
+  }, "id" | "transactionNumber" | "encounterId">
+
+  export type BillingTransactionOrderByWithAggregationInput = {
+    id?: SortOrder
+    transactionNumber?: SortOrder
+    patientId?: SortOrder
+    encounterId?: SortOrderInput | SortOrder
+    status?: SortOrder
+    totalAmount?: SortOrder
+    insuranceDiscount?: SortOrder
+    finalAmount?: SortOrder
+    paidAmount?: SortOrder
+    balanceAmount?: SortOrder
+    hasPreAuth?: SortOrder
+    preAuthSettled?: SortOrder
+    hasPaymentPlan?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    createdBy?: SortOrderInput | SortOrder
+    _count?: BillingTransactionCountOrderByAggregateInput
+    _avg?: BillingTransactionAvgOrderByAggregateInput
+    _max?: BillingTransactionMaxOrderByAggregateInput
+    _min?: BillingTransactionMinOrderByAggregateInput
+    _sum?: BillingTransactionSumOrderByAggregateInput
+  }
+
+  export type BillingTransactionScalarWhereWithAggregatesInput = {
+    AND?: BillingTransactionScalarWhereWithAggregatesInput | BillingTransactionScalarWhereWithAggregatesInput[]
+    OR?: BillingTransactionScalarWhereWithAggregatesInput[]
+    NOT?: BillingTransactionScalarWhereWithAggregatesInput | BillingTransactionScalarWhereWithAggregatesInput[]
+    id?: UuidWithAggregatesFilter<"BillingTransaction"> | string
+    transactionNumber?: StringWithAggregatesFilter<"BillingTransaction"> | string
+    patientId?: StringWithAggregatesFilter<"BillingTransaction"> | string
+    encounterId?: UuidNullableWithAggregatesFilter<"BillingTransaction"> | string | null
+    status?: EnumBillingStatusWithAggregatesFilter<"BillingTransaction"> | $Enums.BillingStatus
+    totalAmount?: DecimalWithAggregatesFilter<"BillingTransaction"> | Decimal | DecimalJsLike | number | string
+    insuranceDiscount?: DecimalWithAggregatesFilter<"BillingTransaction"> | Decimal | DecimalJsLike | number | string
+    finalAmount?: DecimalWithAggregatesFilter<"BillingTransaction"> | Decimal | DecimalJsLike | number | string
+    paidAmount?: DecimalWithAggregatesFilter<"BillingTransaction"> | Decimal | DecimalJsLike | number | string
+    balanceAmount?: DecimalWithAggregatesFilter<"BillingTransaction"> | Decimal | DecimalJsLike | number | string
+    hasPreAuth?: BoolWithAggregatesFilter<"BillingTransaction"> | boolean
+    preAuthSettled?: BoolWithAggregatesFilter<"BillingTransaction"> | boolean
+    hasPaymentPlan?: BoolWithAggregatesFilter<"BillingTransaction"> | boolean
+    createdAt?: DateTimeWithAggregatesFilter<"BillingTransaction"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"BillingTransaction"> | Date | string
+    createdBy?: StringNullableWithAggregatesFilter<"BillingTransaction"> | string | null
+  }
+
+  export type BillingLineItemWhereInput = {
+    AND?: BillingLineItemWhereInput | BillingLineItemWhereInput[]
+    OR?: BillingLineItemWhereInput[]
+    NOT?: BillingLineItemWhereInput | BillingLineItemWhereInput[]
+    id?: UuidFilter<"BillingLineItem"> | string
+    transactionId?: UuidFilter<"BillingLineItem"> | string
+    itemType?: EnumBillingItemTypeFilter<"BillingLineItem"> | $Enums.BillingItemType
+    description?: StringFilter<"BillingLineItem"> | string
+    quantity?: IntFilter<"BillingLineItem"> | number
+    unitPrice?: DecimalFilter<"BillingLineItem"> | Decimal | DecimalJsLike | number | string
+    totalPrice?: DecimalFilter<"BillingLineItem"> | Decimal | DecimalJsLike | number | string
+    requiresPreAuth?: BoolFilter<"BillingLineItem"> | boolean
+    preAuthPaid?: BoolFilter<"BillingLineItem"> | boolean
+    preAuthPaymentId?: UuidNullableFilter<"BillingLineItem"> | string | null
+    insuranceCoverable?: BoolFilter<"BillingLineItem"> | boolean
+    insuranceDiscount?: DecimalFilter<"BillingLineItem"> | Decimal | DecimalJsLike | number | string
+    finalPrice?: DecimalFilter<"BillingLineItem"> | Decimal | DecimalJsLike | number | string
+    encounterOrderId?: UuidNullableFilter<"BillingLineItem"> | string | null
+    createdAt?: DateTimeFilter<"BillingLineItem"> | Date | string
+    updatedAt?: DateTimeFilter<"BillingLineItem"> | Date | string
+    addedBy?: StringNullableFilter<"BillingLineItem"> | string | null
+    transaction?: XOR<BillingTransactionScalarRelationFilter, BillingTransactionWhereInput>
+    preAuthPayment?: XOR<BillingPaymentNullableScalarRelationFilter, BillingPaymentWhereInput> | null
+    insuranceCoverage?: XOR<InsuranceCoverageNullableScalarRelationFilter, InsuranceCoverageWhereInput> | null
+    encounterOrder?: XOR<InpatientEncounterOrderNullableScalarRelationFilter, InpatientEncounterOrderWhereInput> | null
+  }
+
+  export type BillingLineItemOrderByWithRelationInput = {
+    id?: SortOrder
+    transactionId?: SortOrder
+    itemType?: SortOrder
+    description?: SortOrder
+    quantity?: SortOrder
+    unitPrice?: SortOrder
+    totalPrice?: SortOrder
+    requiresPreAuth?: SortOrder
+    preAuthPaid?: SortOrder
+    preAuthPaymentId?: SortOrderInput | SortOrder
+    insuranceCoverable?: SortOrder
+    insuranceDiscount?: SortOrder
+    finalPrice?: SortOrder
+    encounterOrderId?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    addedBy?: SortOrderInput | SortOrder
+    transaction?: BillingTransactionOrderByWithRelationInput
+    preAuthPayment?: BillingPaymentOrderByWithRelationInput
+    insuranceCoverage?: InsuranceCoverageOrderByWithRelationInput
+    encounterOrder?: InpatientEncounterOrderOrderByWithRelationInput
+  }
+
+  export type BillingLineItemWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: BillingLineItemWhereInput | BillingLineItemWhereInput[]
+    OR?: BillingLineItemWhereInput[]
+    NOT?: BillingLineItemWhereInput | BillingLineItemWhereInput[]
+    transactionId?: UuidFilter<"BillingLineItem"> | string
+    itemType?: EnumBillingItemTypeFilter<"BillingLineItem"> | $Enums.BillingItemType
+    description?: StringFilter<"BillingLineItem"> | string
+    quantity?: IntFilter<"BillingLineItem"> | number
+    unitPrice?: DecimalFilter<"BillingLineItem"> | Decimal | DecimalJsLike | number | string
+    totalPrice?: DecimalFilter<"BillingLineItem"> | Decimal | DecimalJsLike | number | string
+    requiresPreAuth?: BoolFilter<"BillingLineItem"> | boolean
+    preAuthPaid?: BoolFilter<"BillingLineItem"> | boolean
+    preAuthPaymentId?: UuidNullableFilter<"BillingLineItem"> | string | null
+    insuranceCoverable?: BoolFilter<"BillingLineItem"> | boolean
+    insuranceDiscount?: DecimalFilter<"BillingLineItem"> | Decimal | DecimalJsLike | number | string
+    finalPrice?: DecimalFilter<"BillingLineItem"> | Decimal | DecimalJsLike | number | string
+    encounterOrderId?: UuidNullableFilter<"BillingLineItem"> | string | null
+    createdAt?: DateTimeFilter<"BillingLineItem"> | Date | string
+    updatedAt?: DateTimeFilter<"BillingLineItem"> | Date | string
+    addedBy?: StringNullableFilter<"BillingLineItem"> | string | null
+    transaction?: XOR<BillingTransactionScalarRelationFilter, BillingTransactionWhereInput>
+    preAuthPayment?: XOR<BillingPaymentNullableScalarRelationFilter, BillingPaymentWhereInput> | null
+    insuranceCoverage?: XOR<InsuranceCoverageNullableScalarRelationFilter, InsuranceCoverageWhereInput> | null
+    encounterOrder?: XOR<InpatientEncounterOrderNullableScalarRelationFilter, InpatientEncounterOrderWhereInput> | null
+  }, "id">
+
+  export type BillingLineItemOrderByWithAggregationInput = {
+    id?: SortOrder
+    transactionId?: SortOrder
+    itemType?: SortOrder
+    description?: SortOrder
+    quantity?: SortOrder
+    unitPrice?: SortOrder
+    totalPrice?: SortOrder
+    requiresPreAuth?: SortOrder
+    preAuthPaid?: SortOrder
+    preAuthPaymentId?: SortOrderInput | SortOrder
+    insuranceCoverable?: SortOrder
+    insuranceDiscount?: SortOrder
+    finalPrice?: SortOrder
+    encounterOrderId?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    addedBy?: SortOrderInput | SortOrder
+    _count?: BillingLineItemCountOrderByAggregateInput
+    _avg?: BillingLineItemAvgOrderByAggregateInput
+    _max?: BillingLineItemMaxOrderByAggregateInput
+    _min?: BillingLineItemMinOrderByAggregateInput
+    _sum?: BillingLineItemSumOrderByAggregateInput
+  }
+
+  export type BillingLineItemScalarWhereWithAggregatesInput = {
+    AND?: BillingLineItemScalarWhereWithAggregatesInput | BillingLineItemScalarWhereWithAggregatesInput[]
+    OR?: BillingLineItemScalarWhereWithAggregatesInput[]
+    NOT?: BillingLineItemScalarWhereWithAggregatesInput | BillingLineItemScalarWhereWithAggregatesInput[]
+    id?: UuidWithAggregatesFilter<"BillingLineItem"> | string
+    transactionId?: UuidWithAggregatesFilter<"BillingLineItem"> | string
+    itemType?: EnumBillingItemTypeWithAggregatesFilter<"BillingLineItem"> | $Enums.BillingItemType
+    description?: StringWithAggregatesFilter<"BillingLineItem"> | string
+    quantity?: IntWithAggregatesFilter<"BillingLineItem"> | number
+    unitPrice?: DecimalWithAggregatesFilter<"BillingLineItem"> | Decimal | DecimalJsLike | number | string
+    totalPrice?: DecimalWithAggregatesFilter<"BillingLineItem"> | Decimal | DecimalJsLike | number | string
+    requiresPreAuth?: BoolWithAggregatesFilter<"BillingLineItem"> | boolean
+    preAuthPaid?: BoolWithAggregatesFilter<"BillingLineItem"> | boolean
+    preAuthPaymentId?: UuidNullableWithAggregatesFilter<"BillingLineItem"> | string | null
+    insuranceCoverable?: BoolWithAggregatesFilter<"BillingLineItem"> | boolean
+    insuranceDiscount?: DecimalWithAggregatesFilter<"BillingLineItem"> | Decimal | DecimalJsLike | number | string
+    finalPrice?: DecimalWithAggregatesFilter<"BillingLineItem"> | Decimal | DecimalJsLike | number | string
+    encounterOrderId?: UuidNullableWithAggregatesFilter<"BillingLineItem"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"BillingLineItem"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"BillingLineItem"> | Date | string
+    addedBy?: StringNullableWithAggregatesFilter<"BillingLineItem"> | string | null
+  }
+
+  export type InsuranceCoverageWhereInput = {
+    AND?: InsuranceCoverageWhereInput | InsuranceCoverageWhereInput[]
+    OR?: InsuranceCoverageWhereInput[]
+    NOT?: InsuranceCoverageWhereInput | InsuranceCoverageWhereInput[]
+    id?: UuidFilter<"InsuranceCoverage"> | string
+    lineItemId?: UuidFilter<"InsuranceCoverage"> | string
+    insuranceProvider?: StringFilter<"InsuranceCoverage"> | string
+    insuranceNumber?: StringFilter<"InsuranceCoverage"> | string
+    coveragePercentage?: DecimalFilter<"InsuranceCoverage"> | Decimal | DecimalJsLike | number | string
+    coverageAmount?: DecimalFilter<"InsuranceCoverage"> | Decimal | DecimalJsLike | number | string
+    claimStatus?: EnumInsuranceClaimStatusFilter<"InsuranceCoverage"> | $Enums.InsuranceClaimStatus
+    claimNumber?: StringNullableFilter<"InsuranceCoverage"> | string | null
+    claimNotes?: StringNullableFilter<"InsuranceCoverage"> | string | null
+    createdAt?: DateTimeFilter<"InsuranceCoverage"> | Date | string
+    updatedAt?: DateTimeFilter<"InsuranceCoverage"> | Date | string
+    verifiedBy?: StringNullableFilter<"InsuranceCoverage"> | string | null
+    lineItem?: XOR<BillingLineItemScalarRelationFilter, BillingLineItemWhereInput>
+  }
+
+  export type InsuranceCoverageOrderByWithRelationInput = {
+    id?: SortOrder
+    lineItemId?: SortOrder
+    insuranceProvider?: SortOrder
+    insuranceNumber?: SortOrder
+    coveragePercentage?: SortOrder
+    coverageAmount?: SortOrder
+    claimStatus?: SortOrder
+    claimNumber?: SortOrderInput | SortOrder
+    claimNotes?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    verifiedBy?: SortOrderInput | SortOrder
+    lineItem?: BillingLineItemOrderByWithRelationInput
+  }
+
+  export type InsuranceCoverageWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    lineItemId?: string
+    AND?: InsuranceCoverageWhereInput | InsuranceCoverageWhereInput[]
+    OR?: InsuranceCoverageWhereInput[]
+    NOT?: InsuranceCoverageWhereInput | InsuranceCoverageWhereInput[]
+    insuranceProvider?: StringFilter<"InsuranceCoverage"> | string
+    insuranceNumber?: StringFilter<"InsuranceCoverage"> | string
+    coveragePercentage?: DecimalFilter<"InsuranceCoverage"> | Decimal | DecimalJsLike | number | string
+    coverageAmount?: DecimalFilter<"InsuranceCoverage"> | Decimal | DecimalJsLike | number | string
+    claimStatus?: EnumInsuranceClaimStatusFilter<"InsuranceCoverage"> | $Enums.InsuranceClaimStatus
+    claimNumber?: StringNullableFilter<"InsuranceCoverage"> | string | null
+    claimNotes?: StringNullableFilter<"InsuranceCoverage"> | string | null
+    createdAt?: DateTimeFilter<"InsuranceCoverage"> | Date | string
+    updatedAt?: DateTimeFilter<"InsuranceCoverage"> | Date | string
+    verifiedBy?: StringNullableFilter<"InsuranceCoverage"> | string | null
+    lineItem?: XOR<BillingLineItemScalarRelationFilter, BillingLineItemWhereInput>
+  }, "id" | "lineItemId">
+
+  export type InsuranceCoverageOrderByWithAggregationInput = {
+    id?: SortOrder
+    lineItemId?: SortOrder
+    insuranceProvider?: SortOrder
+    insuranceNumber?: SortOrder
+    coveragePercentage?: SortOrder
+    coverageAmount?: SortOrder
+    claimStatus?: SortOrder
+    claimNumber?: SortOrderInput | SortOrder
+    claimNotes?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    verifiedBy?: SortOrderInput | SortOrder
+    _count?: InsuranceCoverageCountOrderByAggregateInput
+    _avg?: InsuranceCoverageAvgOrderByAggregateInput
+    _max?: InsuranceCoverageMaxOrderByAggregateInput
+    _min?: InsuranceCoverageMinOrderByAggregateInput
+    _sum?: InsuranceCoverageSumOrderByAggregateInput
+  }
+
+  export type InsuranceCoverageScalarWhereWithAggregatesInput = {
+    AND?: InsuranceCoverageScalarWhereWithAggregatesInput | InsuranceCoverageScalarWhereWithAggregatesInput[]
+    OR?: InsuranceCoverageScalarWhereWithAggregatesInput[]
+    NOT?: InsuranceCoverageScalarWhereWithAggregatesInput | InsuranceCoverageScalarWhereWithAggregatesInput[]
+    id?: UuidWithAggregatesFilter<"InsuranceCoverage"> | string
+    lineItemId?: UuidWithAggregatesFilter<"InsuranceCoverage"> | string
+    insuranceProvider?: StringWithAggregatesFilter<"InsuranceCoverage"> | string
+    insuranceNumber?: StringWithAggregatesFilter<"InsuranceCoverage"> | string
+    coveragePercentage?: DecimalWithAggregatesFilter<"InsuranceCoverage"> | Decimal | DecimalJsLike | number | string
+    coverageAmount?: DecimalWithAggregatesFilter<"InsuranceCoverage"> | Decimal | DecimalJsLike | number | string
+    claimStatus?: EnumInsuranceClaimStatusWithAggregatesFilter<"InsuranceCoverage"> | $Enums.InsuranceClaimStatus
+    claimNumber?: StringNullableWithAggregatesFilter<"InsuranceCoverage"> | string | null
+    claimNotes?: StringNullableWithAggregatesFilter<"InsuranceCoverage"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"InsuranceCoverage"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"InsuranceCoverage"> | Date | string
+    verifiedBy?: StringNullableWithAggregatesFilter<"InsuranceCoverage"> | string | null
+  }
+
+  export type BillingPaymentWhereInput = {
+    AND?: BillingPaymentWhereInput | BillingPaymentWhereInput[]
+    OR?: BillingPaymentWhereInput[]
+    NOT?: BillingPaymentWhereInput | BillingPaymentWhereInput[]
+    id?: UuidFilter<"BillingPayment"> | string
+    paymentNumber?: StringFilter<"BillingPayment"> | string
+    transactionId?: UuidFilter<"BillingPayment"> | string
+    amount?: DecimalFilter<"BillingPayment"> | Decimal | DecimalJsLike | number | string
+    paymentMethod?: EnumPaymentMethodFilter<"BillingPayment"> | $Enums.PaymentMethod
+    paymentType?: EnumPaymentTypeFilter<"BillingPayment"> | $Enums.PaymentType
+    isPreAuthPayment?: BoolFilter<"BillingPayment"> | boolean
+    paymentPlanId?: UuidNullableFilter<"BillingPayment"> | string | null
+    installmentNumber?: IntNullableFilter<"BillingPayment"> | number | null
+    mayaPaymentId?: StringNullableFilter<"BillingPayment"> | string | null
+    mayaPaymentStatus?: StringNullableFilter<"BillingPayment"> | string | null
+    mayaReceiptUrl?: StringNullableFilter<"BillingPayment"> | string | null
+    status?: EnumPaymentStatusFilter<"BillingPayment"> | $Enums.PaymentStatus
+    paidAt?: DateTimeNullableFilter<"BillingPayment"> | Date | string | null
+    createdAt?: DateTimeFilter<"BillingPayment"> | Date | string
+    updatedAt?: DateTimeFilter<"BillingPayment"> | Date | string
+    processedBy?: StringNullableFilter<"BillingPayment"> | string | null
+    transaction?: XOR<BillingTransactionScalarRelationFilter, BillingTransactionWhereInput>
+    preAuthItems?: BillingLineItemListRelationFilter
+    paymentPlan?: XOR<PaymentPlanNullableScalarRelationFilter, PaymentPlanWhereInput> | null
+  }
+
+  export type BillingPaymentOrderByWithRelationInput = {
+    id?: SortOrder
+    paymentNumber?: SortOrder
+    transactionId?: SortOrder
+    amount?: SortOrder
+    paymentMethod?: SortOrder
+    paymentType?: SortOrder
+    isPreAuthPayment?: SortOrder
+    paymentPlanId?: SortOrderInput | SortOrder
+    installmentNumber?: SortOrderInput | SortOrder
+    mayaPaymentId?: SortOrderInput | SortOrder
+    mayaPaymentStatus?: SortOrderInput | SortOrder
+    mayaReceiptUrl?: SortOrderInput | SortOrder
+    status?: SortOrder
+    paidAt?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    processedBy?: SortOrderInput | SortOrder
+    transaction?: BillingTransactionOrderByWithRelationInput
+    preAuthItems?: BillingLineItemOrderByRelationAggregateInput
+    paymentPlan?: PaymentPlanOrderByWithRelationInput
+  }
+
+  export type BillingPaymentWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    paymentNumber?: string
+    mayaPaymentId?: string
+    AND?: BillingPaymentWhereInput | BillingPaymentWhereInput[]
+    OR?: BillingPaymentWhereInput[]
+    NOT?: BillingPaymentWhereInput | BillingPaymentWhereInput[]
+    transactionId?: UuidFilter<"BillingPayment"> | string
+    amount?: DecimalFilter<"BillingPayment"> | Decimal | DecimalJsLike | number | string
+    paymentMethod?: EnumPaymentMethodFilter<"BillingPayment"> | $Enums.PaymentMethod
+    paymentType?: EnumPaymentTypeFilter<"BillingPayment"> | $Enums.PaymentType
+    isPreAuthPayment?: BoolFilter<"BillingPayment"> | boolean
+    paymentPlanId?: UuidNullableFilter<"BillingPayment"> | string | null
+    installmentNumber?: IntNullableFilter<"BillingPayment"> | number | null
+    mayaPaymentStatus?: StringNullableFilter<"BillingPayment"> | string | null
+    mayaReceiptUrl?: StringNullableFilter<"BillingPayment"> | string | null
+    status?: EnumPaymentStatusFilter<"BillingPayment"> | $Enums.PaymentStatus
+    paidAt?: DateTimeNullableFilter<"BillingPayment"> | Date | string | null
+    createdAt?: DateTimeFilter<"BillingPayment"> | Date | string
+    updatedAt?: DateTimeFilter<"BillingPayment"> | Date | string
+    processedBy?: StringNullableFilter<"BillingPayment"> | string | null
+    transaction?: XOR<BillingTransactionScalarRelationFilter, BillingTransactionWhereInput>
+    preAuthItems?: BillingLineItemListRelationFilter
+    paymentPlan?: XOR<PaymentPlanNullableScalarRelationFilter, PaymentPlanWhereInput> | null
+  }, "id" | "paymentNumber" | "mayaPaymentId">
+
+  export type BillingPaymentOrderByWithAggregationInput = {
+    id?: SortOrder
+    paymentNumber?: SortOrder
+    transactionId?: SortOrder
+    amount?: SortOrder
+    paymentMethod?: SortOrder
+    paymentType?: SortOrder
+    isPreAuthPayment?: SortOrder
+    paymentPlanId?: SortOrderInput | SortOrder
+    installmentNumber?: SortOrderInput | SortOrder
+    mayaPaymentId?: SortOrderInput | SortOrder
+    mayaPaymentStatus?: SortOrderInput | SortOrder
+    mayaReceiptUrl?: SortOrderInput | SortOrder
+    status?: SortOrder
+    paidAt?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    processedBy?: SortOrderInput | SortOrder
+    _count?: BillingPaymentCountOrderByAggregateInput
+    _avg?: BillingPaymentAvgOrderByAggregateInput
+    _max?: BillingPaymentMaxOrderByAggregateInput
+    _min?: BillingPaymentMinOrderByAggregateInput
+    _sum?: BillingPaymentSumOrderByAggregateInput
+  }
+
+  export type BillingPaymentScalarWhereWithAggregatesInput = {
+    AND?: BillingPaymentScalarWhereWithAggregatesInput | BillingPaymentScalarWhereWithAggregatesInput[]
+    OR?: BillingPaymentScalarWhereWithAggregatesInput[]
+    NOT?: BillingPaymentScalarWhereWithAggregatesInput | BillingPaymentScalarWhereWithAggregatesInput[]
+    id?: UuidWithAggregatesFilter<"BillingPayment"> | string
+    paymentNumber?: StringWithAggregatesFilter<"BillingPayment"> | string
+    transactionId?: UuidWithAggregatesFilter<"BillingPayment"> | string
+    amount?: DecimalWithAggregatesFilter<"BillingPayment"> | Decimal | DecimalJsLike | number | string
+    paymentMethod?: EnumPaymentMethodWithAggregatesFilter<"BillingPayment"> | $Enums.PaymentMethod
+    paymentType?: EnumPaymentTypeWithAggregatesFilter<"BillingPayment"> | $Enums.PaymentType
+    isPreAuthPayment?: BoolWithAggregatesFilter<"BillingPayment"> | boolean
+    paymentPlanId?: UuidNullableWithAggregatesFilter<"BillingPayment"> | string | null
+    installmentNumber?: IntNullableWithAggregatesFilter<"BillingPayment"> | number | null
+    mayaPaymentId?: StringNullableWithAggregatesFilter<"BillingPayment"> | string | null
+    mayaPaymentStatus?: StringNullableWithAggregatesFilter<"BillingPayment"> | string | null
+    mayaReceiptUrl?: StringNullableWithAggregatesFilter<"BillingPayment"> | string | null
+    status?: EnumPaymentStatusWithAggregatesFilter<"BillingPayment"> | $Enums.PaymentStatus
+    paidAt?: DateTimeNullableWithAggregatesFilter<"BillingPayment"> | Date | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"BillingPayment"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"BillingPayment"> | Date | string
+    processedBy?: StringNullableWithAggregatesFilter<"BillingPayment"> | string | null
+  }
+
+  export type PaymentPlanWhereInput = {
+    AND?: PaymentPlanWhereInput | PaymentPlanWhereInput[]
+    OR?: PaymentPlanWhereInput[]
+    NOT?: PaymentPlanWhereInput | PaymentPlanWhereInput[]
+    id?: UuidFilter<"PaymentPlan"> | string
+    transactionId?: UuidFilter<"PaymentPlan"> | string
+    totalAmount?: DecimalFilter<"PaymentPlan"> | Decimal | DecimalJsLike | number | string
+    installmentCount?: IntFilter<"PaymentPlan"> | number
+    installmentAmount?: DecimalFilter<"PaymentPlan"> | Decimal | DecimalJsLike | number | string
+    frequency?: EnumPaymentFrequencyFilter<"PaymentPlan"> | $Enums.PaymentFrequency
+    paidInstallments?: IntFilter<"PaymentPlan"> | number
+    remainingAmount?: DecimalFilter<"PaymentPlan"> | Decimal | DecimalJsLike | number | string
+    mayaSubscriptionId?: StringNullableFilter<"PaymentPlan"> | string | null
+    mayaNextChargeDate?: DateTimeNullableFilter<"PaymentPlan"> | Date | string | null
+    status?: EnumPaymentPlanStatusFilter<"PaymentPlan"> | $Enums.PaymentPlanStatus
+    startDate?: DateTimeFilter<"PaymentPlan"> | Date | string
+    nextDueDate?: DateTimeFilter<"PaymentPlan"> | Date | string
+    createdAt?: DateTimeFilter<"PaymentPlan"> | Date | string
+    updatedAt?: DateTimeFilter<"PaymentPlan"> | Date | string
+    setupBy?: StringNullableFilter<"PaymentPlan"> | string | null
+    transaction?: XOR<BillingTransactionScalarRelationFilter, BillingTransactionWhereInput>
+    payments?: BillingPaymentListRelationFilter
+  }
+
+  export type PaymentPlanOrderByWithRelationInput = {
+    id?: SortOrder
+    transactionId?: SortOrder
+    totalAmount?: SortOrder
+    installmentCount?: SortOrder
+    installmentAmount?: SortOrder
+    frequency?: SortOrder
+    paidInstallments?: SortOrder
+    remainingAmount?: SortOrder
+    mayaSubscriptionId?: SortOrderInput | SortOrder
+    mayaNextChargeDate?: SortOrderInput | SortOrder
+    status?: SortOrder
+    startDate?: SortOrder
+    nextDueDate?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    setupBy?: SortOrderInput | SortOrder
+    transaction?: BillingTransactionOrderByWithRelationInput
+    payments?: BillingPaymentOrderByRelationAggregateInput
+  }
+
+  export type PaymentPlanWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    transactionId?: string
+    mayaSubscriptionId?: string
+    AND?: PaymentPlanWhereInput | PaymentPlanWhereInput[]
+    OR?: PaymentPlanWhereInput[]
+    NOT?: PaymentPlanWhereInput | PaymentPlanWhereInput[]
+    totalAmount?: DecimalFilter<"PaymentPlan"> | Decimal | DecimalJsLike | number | string
+    installmentCount?: IntFilter<"PaymentPlan"> | number
+    installmentAmount?: DecimalFilter<"PaymentPlan"> | Decimal | DecimalJsLike | number | string
+    frequency?: EnumPaymentFrequencyFilter<"PaymentPlan"> | $Enums.PaymentFrequency
+    paidInstallments?: IntFilter<"PaymentPlan"> | number
+    remainingAmount?: DecimalFilter<"PaymentPlan"> | Decimal | DecimalJsLike | number | string
+    mayaNextChargeDate?: DateTimeNullableFilter<"PaymentPlan"> | Date | string | null
+    status?: EnumPaymentPlanStatusFilter<"PaymentPlan"> | $Enums.PaymentPlanStatus
+    startDate?: DateTimeFilter<"PaymentPlan"> | Date | string
+    nextDueDate?: DateTimeFilter<"PaymentPlan"> | Date | string
+    createdAt?: DateTimeFilter<"PaymentPlan"> | Date | string
+    updatedAt?: DateTimeFilter<"PaymentPlan"> | Date | string
+    setupBy?: StringNullableFilter<"PaymentPlan"> | string | null
+    transaction?: XOR<BillingTransactionScalarRelationFilter, BillingTransactionWhereInput>
+    payments?: BillingPaymentListRelationFilter
+  }, "id" | "transactionId" | "mayaSubscriptionId">
+
+  export type PaymentPlanOrderByWithAggregationInput = {
+    id?: SortOrder
+    transactionId?: SortOrder
+    totalAmount?: SortOrder
+    installmentCount?: SortOrder
+    installmentAmount?: SortOrder
+    frequency?: SortOrder
+    paidInstallments?: SortOrder
+    remainingAmount?: SortOrder
+    mayaSubscriptionId?: SortOrderInput | SortOrder
+    mayaNextChargeDate?: SortOrderInput | SortOrder
+    status?: SortOrder
+    startDate?: SortOrder
+    nextDueDate?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    setupBy?: SortOrderInput | SortOrder
+    _count?: PaymentPlanCountOrderByAggregateInput
+    _avg?: PaymentPlanAvgOrderByAggregateInput
+    _max?: PaymentPlanMaxOrderByAggregateInput
+    _min?: PaymentPlanMinOrderByAggregateInput
+    _sum?: PaymentPlanSumOrderByAggregateInput
+  }
+
+  export type PaymentPlanScalarWhereWithAggregatesInput = {
+    AND?: PaymentPlanScalarWhereWithAggregatesInput | PaymentPlanScalarWhereWithAggregatesInput[]
+    OR?: PaymentPlanScalarWhereWithAggregatesInput[]
+    NOT?: PaymentPlanScalarWhereWithAggregatesInput | PaymentPlanScalarWhereWithAggregatesInput[]
+    id?: UuidWithAggregatesFilter<"PaymentPlan"> | string
+    transactionId?: UuidWithAggregatesFilter<"PaymentPlan"> | string
+    totalAmount?: DecimalWithAggregatesFilter<"PaymentPlan"> | Decimal | DecimalJsLike | number | string
+    installmentCount?: IntWithAggregatesFilter<"PaymentPlan"> | number
+    installmentAmount?: DecimalWithAggregatesFilter<"PaymentPlan"> | Decimal | DecimalJsLike | number | string
+    frequency?: EnumPaymentFrequencyWithAggregatesFilter<"PaymentPlan"> | $Enums.PaymentFrequency
+    paidInstallments?: IntWithAggregatesFilter<"PaymentPlan"> | number
+    remainingAmount?: DecimalWithAggregatesFilter<"PaymentPlan"> | Decimal | DecimalJsLike | number | string
+    mayaSubscriptionId?: StringNullableWithAggregatesFilter<"PaymentPlan"> | string | null
+    mayaNextChargeDate?: DateTimeNullableWithAggregatesFilter<"PaymentPlan"> | Date | string | null
+    status?: EnumPaymentPlanStatusWithAggregatesFilter<"PaymentPlan"> | $Enums.PaymentPlanStatus
+    startDate?: DateTimeWithAggregatesFilter<"PaymentPlan"> | Date | string
+    nextDueDate?: DateTimeWithAggregatesFilter<"PaymentPlan"> | Date | string
+    createdAt?: DateTimeWithAggregatesFilter<"PaymentPlan"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"PaymentPlan"> | Date | string
+    setupBy?: StringNullableWithAggregatesFilter<"PaymentPlan"> | string | null
+  }
+
   export type UserCreateInput = {
     id?: string
     email: string
@@ -39910,6 +47913,7 @@ export namespace Prisma {
     outpatientEncounters?: OutpatientEncounterCreateNestedManyWithoutPatientInput
     insuranceClaims?: InsuranceClaimCreateNestedManyWithoutPatientInput
     dataShareRequests?: DataShareRequestCreateNestedManyWithoutPatientInput
+    billingTransactions?: BillingTransactionCreateNestedManyWithoutPatientInput
   }
 
   export type PatientUncheckedCreateInput = {
@@ -39929,6 +47933,7 @@ export namespace Prisma {
     outpatientEncounters?: OutpatientEncounterUncheckedCreateNestedManyWithoutPatientInput
     insuranceClaims?: InsuranceClaimUncheckedCreateNestedManyWithoutPatientInput
     dataShareRequests?: DataShareRequestUncheckedCreateNestedManyWithoutPatientInput
+    billingTransactions?: BillingTransactionUncheckedCreateNestedManyWithoutPatientInput
   }
 
   export type PatientUpdateInput = {
@@ -39948,6 +47953,7 @@ export namespace Prisma {
     outpatientEncounters?: OutpatientEncounterUpdateManyWithoutPatientNestedInput
     insuranceClaims?: InsuranceClaimUpdateManyWithoutPatientNestedInput
     dataShareRequests?: DataShareRequestUpdateManyWithoutPatientNestedInput
+    billingTransactions?: BillingTransactionUpdateManyWithoutPatientNestedInput
   }
 
   export type PatientUncheckedUpdateInput = {
@@ -39967,6 +47973,7 @@ export namespace Prisma {
     outpatientEncounters?: OutpatientEncounterUncheckedUpdateManyWithoutPatientNestedInput
     insuranceClaims?: InsuranceClaimUncheckedUpdateManyWithoutPatientNestedInput
     dataShareRequests?: DataShareRequestUncheckedUpdateManyWithoutPatientNestedInput
+    billingTransactions?: BillingTransactionUncheckedUpdateManyWithoutPatientNestedInput
   }
 
   export type PatientCreateManyInput = {
@@ -41257,6 +49264,7 @@ export namespace Prisma {
     orders?: InpatientEncounterOrderCreateNestedManyWithoutEncounterInput
     insuranceClaim?: InsuranceClaimCreateNestedOneWithoutInpatientEncounterInput
     dataShareRequest?: DataShareRequestCreateNestedOneWithoutInpatientEncounterInput
+    billingTransaction?: BillingTransactionCreateNestedOneWithoutEncounterInput
   }
 
   export type InpatientEncounterUncheckedCreateInput = {
@@ -41279,6 +49287,7 @@ export namespace Prisma {
     orders?: InpatientEncounterOrderUncheckedCreateNestedManyWithoutEncounterInput
     insuranceClaim?: InsuranceClaimUncheckedCreateNestedOneWithoutInpatientEncounterInput
     dataShareRequest?: DataShareRequestUncheckedCreateNestedOneWithoutInpatientEncounterInput
+    billingTransaction?: BillingTransactionUncheckedCreateNestedOneWithoutEncounterInput
   }
 
   export type InpatientEncounterUpdateInput = {
@@ -41301,6 +49310,7 @@ export namespace Prisma {
     orders?: InpatientEncounterOrderUpdateManyWithoutEncounterNestedInput
     insuranceClaim?: InsuranceClaimUpdateOneWithoutInpatientEncounterNestedInput
     dataShareRequest?: DataShareRequestUpdateOneWithoutInpatientEncounterNestedInput
+    billingTransaction?: BillingTransactionUpdateOneWithoutEncounterNestedInput
   }
 
   export type InpatientEncounterUncheckedUpdateInput = {
@@ -41323,6 +49333,7 @@ export namespace Prisma {
     orders?: InpatientEncounterOrderUncheckedUpdateManyWithoutEncounterNestedInput
     insuranceClaim?: InsuranceClaimUncheckedUpdateOneWithoutInpatientEncounterNestedInput
     dataShareRequest?: DataShareRequestUncheckedUpdateOneWithoutInpatientEncounterNestedInput
+    billingTransaction?: BillingTransactionUncheckedUpdateOneWithoutEncounterNestedInput
   }
 
   export type InpatientEncounterCreateManyInput = {
@@ -41452,6 +49463,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     encounter: InpatientEncounterCreateNestedOneWithoutOrdersInput
     catalogueItem?: ParticularCatalogueCreateNestedOneWithoutOrdersInput
+    billingLineItems?: BillingLineItemCreateNestedManyWithoutEncounterOrderInput
   }
 
   export type InpatientEncounterOrderUncheckedCreateInput = {
@@ -41466,6 +49478,7 @@ export namespace Prisma {
     notes?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    billingLineItems?: BillingLineItemUncheckedCreateNestedManyWithoutEncounterOrderInput
   }
 
   export type InpatientEncounterOrderUpdateInput = {
@@ -41480,6 +49493,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     encounter?: InpatientEncounterUpdateOneRequiredWithoutOrdersNestedInput
     catalogueItem?: ParticularCatalogueUpdateOneWithoutOrdersNestedInput
+    billingLineItems?: BillingLineItemUpdateManyWithoutEncounterOrderNestedInput
   }
 
   export type InpatientEncounterOrderUncheckedUpdateInput = {
@@ -41494,6 +49508,7 @@ export namespace Prisma {
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    billingLineItems?: BillingLineItemUncheckedUpdateManyWithoutEncounterOrderNestedInput
   }
 
   export type InpatientEncounterOrderCreateManyInput = {
@@ -42295,6 +50310,672 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type BillingTransactionCreateInput = {
+    id?: string
+    transactionNumber: string
+    status?: $Enums.BillingStatus
+    totalAmount: Decimal | DecimalJsLike | number | string
+    insuranceDiscount?: Decimal | DecimalJsLike | number | string
+    finalAmount: Decimal | DecimalJsLike | number | string
+    paidAmount?: Decimal | DecimalJsLike | number | string
+    balanceAmount: Decimal | DecimalJsLike | number | string
+    hasPreAuth?: boolean
+    preAuthSettled?: boolean
+    hasPaymentPlan?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    createdBy?: string | null
+    patient: PatientCreateNestedOneWithoutBillingTransactionsInput
+    encounter?: InpatientEncounterCreateNestedOneWithoutBillingTransactionInput
+    paymentPlan?: PaymentPlanCreateNestedOneWithoutTransactionInput
+    lineItems?: BillingLineItemCreateNestedManyWithoutTransactionInput
+    payments?: BillingPaymentCreateNestedManyWithoutTransactionInput
+  }
+
+  export type BillingTransactionUncheckedCreateInput = {
+    id?: string
+    transactionNumber: string
+    patientId: string
+    encounterId?: string | null
+    status?: $Enums.BillingStatus
+    totalAmount: Decimal | DecimalJsLike | number | string
+    insuranceDiscount?: Decimal | DecimalJsLike | number | string
+    finalAmount: Decimal | DecimalJsLike | number | string
+    paidAmount?: Decimal | DecimalJsLike | number | string
+    balanceAmount: Decimal | DecimalJsLike | number | string
+    hasPreAuth?: boolean
+    preAuthSettled?: boolean
+    hasPaymentPlan?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    createdBy?: string | null
+    paymentPlan?: PaymentPlanUncheckedCreateNestedOneWithoutTransactionInput
+    lineItems?: BillingLineItemUncheckedCreateNestedManyWithoutTransactionInput
+    payments?: BillingPaymentUncheckedCreateNestedManyWithoutTransactionInput
+  }
+
+  export type BillingTransactionUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    transactionNumber?: StringFieldUpdateOperationsInput | string
+    status?: EnumBillingStatusFieldUpdateOperationsInput | $Enums.BillingStatus
+    totalAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    insuranceDiscount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    finalAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    paidAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    balanceAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    hasPreAuth?: BoolFieldUpdateOperationsInput | boolean
+    preAuthSettled?: BoolFieldUpdateOperationsInput | boolean
+    hasPaymentPlan?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableStringFieldUpdateOperationsInput | string | null
+    patient?: PatientUpdateOneRequiredWithoutBillingTransactionsNestedInput
+    encounter?: InpatientEncounterUpdateOneWithoutBillingTransactionNestedInput
+    paymentPlan?: PaymentPlanUpdateOneWithoutTransactionNestedInput
+    lineItems?: BillingLineItemUpdateManyWithoutTransactionNestedInput
+    payments?: BillingPaymentUpdateManyWithoutTransactionNestedInput
+  }
+
+  export type BillingTransactionUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    transactionNumber?: StringFieldUpdateOperationsInput | string
+    patientId?: StringFieldUpdateOperationsInput | string
+    encounterId?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumBillingStatusFieldUpdateOperationsInput | $Enums.BillingStatus
+    totalAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    insuranceDiscount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    finalAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    paidAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    balanceAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    hasPreAuth?: BoolFieldUpdateOperationsInput | boolean
+    preAuthSettled?: BoolFieldUpdateOperationsInput | boolean
+    hasPaymentPlan?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableStringFieldUpdateOperationsInput | string | null
+    paymentPlan?: PaymentPlanUncheckedUpdateOneWithoutTransactionNestedInput
+    lineItems?: BillingLineItemUncheckedUpdateManyWithoutTransactionNestedInput
+    payments?: BillingPaymentUncheckedUpdateManyWithoutTransactionNestedInput
+  }
+
+  export type BillingTransactionCreateManyInput = {
+    id?: string
+    transactionNumber: string
+    patientId: string
+    encounterId?: string | null
+    status?: $Enums.BillingStatus
+    totalAmount: Decimal | DecimalJsLike | number | string
+    insuranceDiscount?: Decimal | DecimalJsLike | number | string
+    finalAmount: Decimal | DecimalJsLike | number | string
+    paidAmount?: Decimal | DecimalJsLike | number | string
+    balanceAmount: Decimal | DecimalJsLike | number | string
+    hasPreAuth?: boolean
+    preAuthSettled?: boolean
+    hasPaymentPlan?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    createdBy?: string | null
+  }
+
+  export type BillingTransactionUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    transactionNumber?: StringFieldUpdateOperationsInput | string
+    status?: EnumBillingStatusFieldUpdateOperationsInput | $Enums.BillingStatus
+    totalAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    insuranceDiscount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    finalAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    paidAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    balanceAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    hasPreAuth?: BoolFieldUpdateOperationsInput | boolean
+    preAuthSettled?: BoolFieldUpdateOperationsInput | boolean
+    hasPaymentPlan?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type BillingTransactionUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    transactionNumber?: StringFieldUpdateOperationsInput | string
+    patientId?: StringFieldUpdateOperationsInput | string
+    encounterId?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumBillingStatusFieldUpdateOperationsInput | $Enums.BillingStatus
+    totalAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    insuranceDiscount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    finalAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    paidAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    balanceAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    hasPreAuth?: BoolFieldUpdateOperationsInput | boolean
+    preAuthSettled?: BoolFieldUpdateOperationsInput | boolean
+    hasPaymentPlan?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type BillingLineItemCreateInput = {
+    id?: string
+    itemType: $Enums.BillingItemType
+    description: string
+    quantity?: number
+    unitPrice: Decimal | DecimalJsLike | number | string
+    totalPrice: Decimal | DecimalJsLike | number | string
+    requiresPreAuth?: boolean
+    preAuthPaid?: boolean
+    insuranceCoverable?: boolean
+    insuranceDiscount?: Decimal | DecimalJsLike | number | string
+    finalPrice: Decimal | DecimalJsLike | number | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    addedBy?: string | null
+    transaction: BillingTransactionCreateNestedOneWithoutLineItemsInput
+    preAuthPayment?: BillingPaymentCreateNestedOneWithoutPreAuthItemsInput
+    insuranceCoverage?: InsuranceCoverageCreateNestedOneWithoutLineItemInput
+    encounterOrder?: InpatientEncounterOrderCreateNestedOneWithoutBillingLineItemsInput
+  }
+
+  export type BillingLineItemUncheckedCreateInput = {
+    id?: string
+    transactionId: string
+    itemType: $Enums.BillingItemType
+    description: string
+    quantity?: number
+    unitPrice: Decimal | DecimalJsLike | number | string
+    totalPrice: Decimal | DecimalJsLike | number | string
+    requiresPreAuth?: boolean
+    preAuthPaid?: boolean
+    preAuthPaymentId?: string | null
+    insuranceCoverable?: boolean
+    insuranceDiscount?: Decimal | DecimalJsLike | number | string
+    finalPrice: Decimal | DecimalJsLike | number | string
+    encounterOrderId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    addedBy?: string | null
+    insuranceCoverage?: InsuranceCoverageUncheckedCreateNestedOneWithoutLineItemInput
+  }
+
+  export type BillingLineItemUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    itemType?: EnumBillingItemTypeFieldUpdateOperationsInput | $Enums.BillingItemType
+    description?: StringFieldUpdateOperationsInput | string
+    quantity?: IntFieldUpdateOperationsInput | number
+    unitPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    totalPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    requiresPreAuth?: BoolFieldUpdateOperationsInput | boolean
+    preAuthPaid?: BoolFieldUpdateOperationsInput | boolean
+    insuranceCoverable?: BoolFieldUpdateOperationsInput | boolean
+    insuranceDiscount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    finalPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    addedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    transaction?: BillingTransactionUpdateOneRequiredWithoutLineItemsNestedInput
+    preAuthPayment?: BillingPaymentUpdateOneWithoutPreAuthItemsNestedInput
+    insuranceCoverage?: InsuranceCoverageUpdateOneWithoutLineItemNestedInput
+    encounterOrder?: InpatientEncounterOrderUpdateOneWithoutBillingLineItemsNestedInput
+  }
+
+  export type BillingLineItemUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    transactionId?: StringFieldUpdateOperationsInput | string
+    itemType?: EnumBillingItemTypeFieldUpdateOperationsInput | $Enums.BillingItemType
+    description?: StringFieldUpdateOperationsInput | string
+    quantity?: IntFieldUpdateOperationsInput | number
+    unitPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    totalPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    requiresPreAuth?: BoolFieldUpdateOperationsInput | boolean
+    preAuthPaid?: BoolFieldUpdateOperationsInput | boolean
+    preAuthPaymentId?: NullableStringFieldUpdateOperationsInput | string | null
+    insuranceCoverable?: BoolFieldUpdateOperationsInput | boolean
+    insuranceDiscount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    finalPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    encounterOrderId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    addedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    insuranceCoverage?: InsuranceCoverageUncheckedUpdateOneWithoutLineItemNestedInput
+  }
+
+  export type BillingLineItemCreateManyInput = {
+    id?: string
+    transactionId: string
+    itemType: $Enums.BillingItemType
+    description: string
+    quantity?: number
+    unitPrice: Decimal | DecimalJsLike | number | string
+    totalPrice: Decimal | DecimalJsLike | number | string
+    requiresPreAuth?: boolean
+    preAuthPaid?: boolean
+    preAuthPaymentId?: string | null
+    insuranceCoverable?: boolean
+    insuranceDiscount?: Decimal | DecimalJsLike | number | string
+    finalPrice: Decimal | DecimalJsLike | number | string
+    encounterOrderId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    addedBy?: string | null
+  }
+
+  export type BillingLineItemUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    itemType?: EnumBillingItemTypeFieldUpdateOperationsInput | $Enums.BillingItemType
+    description?: StringFieldUpdateOperationsInput | string
+    quantity?: IntFieldUpdateOperationsInput | number
+    unitPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    totalPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    requiresPreAuth?: BoolFieldUpdateOperationsInput | boolean
+    preAuthPaid?: BoolFieldUpdateOperationsInput | boolean
+    insuranceCoverable?: BoolFieldUpdateOperationsInput | boolean
+    insuranceDiscount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    finalPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    addedBy?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type BillingLineItemUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    transactionId?: StringFieldUpdateOperationsInput | string
+    itemType?: EnumBillingItemTypeFieldUpdateOperationsInput | $Enums.BillingItemType
+    description?: StringFieldUpdateOperationsInput | string
+    quantity?: IntFieldUpdateOperationsInput | number
+    unitPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    totalPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    requiresPreAuth?: BoolFieldUpdateOperationsInput | boolean
+    preAuthPaid?: BoolFieldUpdateOperationsInput | boolean
+    preAuthPaymentId?: NullableStringFieldUpdateOperationsInput | string | null
+    insuranceCoverable?: BoolFieldUpdateOperationsInput | boolean
+    insuranceDiscount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    finalPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    encounterOrderId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    addedBy?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type InsuranceCoverageCreateInput = {
+    id?: string
+    insuranceProvider: string
+    insuranceNumber: string
+    coveragePercentage: Decimal | DecimalJsLike | number | string
+    coverageAmount: Decimal | DecimalJsLike | number | string
+    claimStatus?: $Enums.InsuranceClaimStatus
+    claimNumber?: string | null
+    claimNotes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    verifiedBy?: string | null
+    lineItem: BillingLineItemCreateNestedOneWithoutInsuranceCoverageInput
+  }
+
+  export type InsuranceCoverageUncheckedCreateInput = {
+    id?: string
+    lineItemId: string
+    insuranceProvider: string
+    insuranceNumber: string
+    coveragePercentage: Decimal | DecimalJsLike | number | string
+    coverageAmount: Decimal | DecimalJsLike | number | string
+    claimStatus?: $Enums.InsuranceClaimStatus
+    claimNumber?: string | null
+    claimNotes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    verifiedBy?: string | null
+  }
+
+  export type InsuranceCoverageUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    insuranceProvider?: StringFieldUpdateOperationsInput | string
+    insuranceNumber?: StringFieldUpdateOperationsInput | string
+    coveragePercentage?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    coverageAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    claimStatus?: EnumInsuranceClaimStatusFieldUpdateOperationsInput | $Enums.InsuranceClaimStatus
+    claimNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    claimNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    verifiedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    lineItem?: BillingLineItemUpdateOneRequiredWithoutInsuranceCoverageNestedInput
+  }
+
+  export type InsuranceCoverageUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    lineItemId?: StringFieldUpdateOperationsInput | string
+    insuranceProvider?: StringFieldUpdateOperationsInput | string
+    insuranceNumber?: StringFieldUpdateOperationsInput | string
+    coveragePercentage?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    coverageAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    claimStatus?: EnumInsuranceClaimStatusFieldUpdateOperationsInput | $Enums.InsuranceClaimStatus
+    claimNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    claimNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    verifiedBy?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type InsuranceCoverageCreateManyInput = {
+    id?: string
+    lineItemId: string
+    insuranceProvider: string
+    insuranceNumber: string
+    coveragePercentage: Decimal | DecimalJsLike | number | string
+    coverageAmount: Decimal | DecimalJsLike | number | string
+    claimStatus?: $Enums.InsuranceClaimStatus
+    claimNumber?: string | null
+    claimNotes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    verifiedBy?: string | null
+  }
+
+  export type InsuranceCoverageUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    insuranceProvider?: StringFieldUpdateOperationsInput | string
+    insuranceNumber?: StringFieldUpdateOperationsInput | string
+    coveragePercentage?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    coverageAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    claimStatus?: EnumInsuranceClaimStatusFieldUpdateOperationsInput | $Enums.InsuranceClaimStatus
+    claimNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    claimNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    verifiedBy?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type InsuranceCoverageUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    lineItemId?: StringFieldUpdateOperationsInput | string
+    insuranceProvider?: StringFieldUpdateOperationsInput | string
+    insuranceNumber?: StringFieldUpdateOperationsInput | string
+    coveragePercentage?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    coverageAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    claimStatus?: EnumInsuranceClaimStatusFieldUpdateOperationsInput | $Enums.InsuranceClaimStatus
+    claimNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    claimNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    verifiedBy?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type BillingPaymentCreateInput = {
+    id?: string
+    paymentNumber: string
+    amount: Decimal | DecimalJsLike | number | string
+    paymentMethod: $Enums.PaymentMethod
+    paymentType: $Enums.PaymentType
+    isPreAuthPayment?: boolean
+    installmentNumber?: number | null
+    mayaPaymentId?: string | null
+    mayaPaymentStatus?: string | null
+    mayaReceiptUrl?: string | null
+    status?: $Enums.PaymentStatus
+    paidAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    processedBy?: string | null
+    transaction: BillingTransactionCreateNestedOneWithoutPaymentsInput
+    preAuthItems?: BillingLineItemCreateNestedManyWithoutPreAuthPaymentInput
+    paymentPlan?: PaymentPlanCreateNestedOneWithoutPaymentsInput
+  }
+
+  export type BillingPaymentUncheckedCreateInput = {
+    id?: string
+    paymentNumber: string
+    transactionId: string
+    amount: Decimal | DecimalJsLike | number | string
+    paymentMethod: $Enums.PaymentMethod
+    paymentType: $Enums.PaymentType
+    isPreAuthPayment?: boolean
+    paymentPlanId?: string | null
+    installmentNumber?: number | null
+    mayaPaymentId?: string | null
+    mayaPaymentStatus?: string | null
+    mayaReceiptUrl?: string | null
+    status?: $Enums.PaymentStatus
+    paidAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    processedBy?: string | null
+    preAuthItems?: BillingLineItemUncheckedCreateNestedManyWithoutPreAuthPaymentInput
+  }
+
+  export type BillingPaymentUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    paymentNumber?: StringFieldUpdateOperationsInput | string
+    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    paymentMethod?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
+    paymentType?: EnumPaymentTypeFieldUpdateOperationsInput | $Enums.PaymentType
+    isPreAuthPayment?: BoolFieldUpdateOperationsInput | boolean
+    installmentNumber?: NullableIntFieldUpdateOperationsInput | number | null
+    mayaPaymentId?: NullableStringFieldUpdateOperationsInput | string | null
+    mayaPaymentStatus?: NullableStringFieldUpdateOperationsInput | string | null
+    mayaReceiptUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
+    paidAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    processedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    transaction?: BillingTransactionUpdateOneRequiredWithoutPaymentsNestedInput
+    preAuthItems?: BillingLineItemUpdateManyWithoutPreAuthPaymentNestedInput
+    paymentPlan?: PaymentPlanUpdateOneWithoutPaymentsNestedInput
+  }
+
+  export type BillingPaymentUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    paymentNumber?: StringFieldUpdateOperationsInput | string
+    transactionId?: StringFieldUpdateOperationsInput | string
+    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    paymentMethod?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
+    paymentType?: EnumPaymentTypeFieldUpdateOperationsInput | $Enums.PaymentType
+    isPreAuthPayment?: BoolFieldUpdateOperationsInput | boolean
+    paymentPlanId?: NullableStringFieldUpdateOperationsInput | string | null
+    installmentNumber?: NullableIntFieldUpdateOperationsInput | number | null
+    mayaPaymentId?: NullableStringFieldUpdateOperationsInput | string | null
+    mayaPaymentStatus?: NullableStringFieldUpdateOperationsInput | string | null
+    mayaReceiptUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
+    paidAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    processedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    preAuthItems?: BillingLineItemUncheckedUpdateManyWithoutPreAuthPaymentNestedInput
+  }
+
+  export type BillingPaymentCreateManyInput = {
+    id?: string
+    paymentNumber: string
+    transactionId: string
+    amount: Decimal | DecimalJsLike | number | string
+    paymentMethod: $Enums.PaymentMethod
+    paymentType: $Enums.PaymentType
+    isPreAuthPayment?: boolean
+    paymentPlanId?: string | null
+    installmentNumber?: number | null
+    mayaPaymentId?: string | null
+    mayaPaymentStatus?: string | null
+    mayaReceiptUrl?: string | null
+    status?: $Enums.PaymentStatus
+    paidAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    processedBy?: string | null
+  }
+
+  export type BillingPaymentUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    paymentNumber?: StringFieldUpdateOperationsInput | string
+    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    paymentMethod?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
+    paymentType?: EnumPaymentTypeFieldUpdateOperationsInput | $Enums.PaymentType
+    isPreAuthPayment?: BoolFieldUpdateOperationsInput | boolean
+    installmentNumber?: NullableIntFieldUpdateOperationsInput | number | null
+    mayaPaymentId?: NullableStringFieldUpdateOperationsInput | string | null
+    mayaPaymentStatus?: NullableStringFieldUpdateOperationsInput | string | null
+    mayaReceiptUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
+    paidAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    processedBy?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type BillingPaymentUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    paymentNumber?: StringFieldUpdateOperationsInput | string
+    transactionId?: StringFieldUpdateOperationsInput | string
+    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    paymentMethod?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
+    paymentType?: EnumPaymentTypeFieldUpdateOperationsInput | $Enums.PaymentType
+    isPreAuthPayment?: BoolFieldUpdateOperationsInput | boolean
+    paymentPlanId?: NullableStringFieldUpdateOperationsInput | string | null
+    installmentNumber?: NullableIntFieldUpdateOperationsInput | number | null
+    mayaPaymentId?: NullableStringFieldUpdateOperationsInput | string | null
+    mayaPaymentStatus?: NullableStringFieldUpdateOperationsInput | string | null
+    mayaReceiptUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
+    paidAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    processedBy?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type PaymentPlanCreateInput = {
+    id?: string
+    totalAmount: Decimal | DecimalJsLike | number | string
+    installmentCount: number
+    installmentAmount: Decimal | DecimalJsLike | number | string
+    frequency: $Enums.PaymentFrequency
+    paidInstallments?: number
+    remainingAmount: Decimal | DecimalJsLike | number | string
+    mayaSubscriptionId?: string | null
+    mayaNextChargeDate?: Date | string | null
+    status?: $Enums.PaymentPlanStatus
+    startDate: Date | string
+    nextDueDate: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    setupBy?: string | null
+    transaction: BillingTransactionCreateNestedOneWithoutPaymentPlanInput
+    payments?: BillingPaymentCreateNestedManyWithoutPaymentPlanInput
+  }
+
+  export type PaymentPlanUncheckedCreateInput = {
+    id?: string
+    transactionId: string
+    totalAmount: Decimal | DecimalJsLike | number | string
+    installmentCount: number
+    installmentAmount: Decimal | DecimalJsLike | number | string
+    frequency: $Enums.PaymentFrequency
+    paidInstallments?: number
+    remainingAmount: Decimal | DecimalJsLike | number | string
+    mayaSubscriptionId?: string | null
+    mayaNextChargeDate?: Date | string | null
+    status?: $Enums.PaymentPlanStatus
+    startDate: Date | string
+    nextDueDate: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    setupBy?: string | null
+    payments?: BillingPaymentUncheckedCreateNestedManyWithoutPaymentPlanInput
+  }
+
+  export type PaymentPlanUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    totalAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    installmentCount?: IntFieldUpdateOperationsInput | number
+    installmentAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    frequency?: EnumPaymentFrequencyFieldUpdateOperationsInput | $Enums.PaymentFrequency
+    paidInstallments?: IntFieldUpdateOperationsInput | number
+    remainingAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    mayaSubscriptionId?: NullableStringFieldUpdateOperationsInput | string | null
+    mayaNextChargeDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: EnumPaymentPlanStatusFieldUpdateOperationsInput | $Enums.PaymentPlanStatus
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    nextDueDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    setupBy?: NullableStringFieldUpdateOperationsInput | string | null
+    transaction?: BillingTransactionUpdateOneRequiredWithoutPaymentPlanNestedInput
+    payments?: BillingPaymentUpdateManyWithoutPaymentPlanNestedInput
+  }
+
+  export type PaymentPlanUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    transactionId?: StringFieldUpdateOperationsInput | string
+    totalAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    installmentCount?: IntFieldUpdateOperationsInput | number
+    installmentAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    frequency?: EnumPaymentFrequencyFieldUpdateOperationsInput | $Enums.PaymentFrequency
+    paidInstallments?: IntFieldUpdateOperationsInput | number
+    remainingAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    mayaSubscriptionId?: NullableStringFieldUpdateOperationsInput | string | null
+    mayaNextChargeDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: EnumPaymentPlanStatusFieldUpdateOperationsInput | $Enums.PaymentPlanStatus
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    nextDueDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    setupBy?: NullableStringFieldUpdateOperationsInput | string | null
+    payments?: BillingPaymentUncheckedUpdateManyWithoutPaymentPlanNestedInput
+  }
+
+  export type PaymentPlanCreateManyInput = {
+    id?: string
+    transactionId: string
+    totalAmount: Decimal | DecimalJsLike | number | string
+    installmentCount: number
+    installmentAmount: Decimal | DecimalJsLike | number | string
+    frequency: $Enums.PaymentFrequency
+    paidInstallments?: number
+    remainingAmount: Decimal | DecimalJsLike | number | string
+    mayaSubscriptionId?: string | null
+    mayaNextChargeDate?: Date | string | null
+    status?: $Enums.PaymentPlanStatus
+    startDate: Date | string
+    nextDueDate: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    setupBy?: string | null
+  }
+
+  export type PaymentPlanUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    totalAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    installmentCount?: IntFieldUpdateOperationsInput | number
+    installmentAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    frequency?: EnumPaymentFrequencyFieldUpdateOperationsInput | $Enums.PaymentFrequency
+    paidInstallments?: IntFieldUpdateOperationsInput | number
+    remainingAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    mayaSubscriptionId?: NullableStringFieldUpdateOperationsInput | string | null
+    mayaNextChargeDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: EnumPaymentPlanStatusFieldUpdateOperationsInput | $Enums.PaymentPlanStatus
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    nextDueDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    setupBy?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type PaymentPlanUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    transactionId?: StringFieldUpdateOperationsInput | string
+    totalAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    installmentCount?: IntFieldUpdateOperationsInput | number
+    installmentAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    frequency?: EnumPaymentFrequencyFieldUpdateOperationsInput | $Enums.PaymentFrequency
+    paidInstallments?: IntFieldUpdateOperationsInput | number
+    remainingAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    mayaSubscriptionId?: NullableStringFieldUpdateOperationsInput | string | null
+    mayaNextChargeDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: EnumPaymentPlanStatusFieldUpdateOperationsInput | $Enums.PaymentPlanStatus
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    nextDueDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    setupBy?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -42883,6 +51564,12 @@ export namespace Prisma {
     none?: DataShareRequestWhereInput
   }
 
+  export type BillingTransactionListRelationFilter = {
+    every?: BillingTransactionWhereInput
+    some?: BillingTransactionWhereInput
+    none?: BillingTransactionWhereInput
+  }
+
   export type InpatientEncounterOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
@@ -42896,6 +51583,10 @@ export namespace Prisma {
   }
 
   export type DataShareRequestOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type BillingTransactionOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -43930,6 +52621,11 @@ export namespace Prisma {
     none?: InpatientEncounterOrderWhereInput
   }
 
+  export type BillingTransactionNullableScalarRelationFilter = {
+    is?: BillingTransactionWhereInput | null
+    isNot?: BillingTransactionWhereInput | null
+  }
+
   export type InpatientEncounterChartOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
@@ -44073,6 +52769,16 @@ export namespace Prisma {
   export type ParticularCatalogueNullableScalarRelationFilter = {
     is?: ParticularCatalogueWhereInput | null
     isNot?: ParticularCatalogueWhereInput | null
+  }
+
+  export type BillingLineItemListRelationFilter = {
+    every?: BillingLineItemWhereInput
+    some?: BillingLineItemWhereInput
+    none?: BillingLineItemWhereInput
+  }
+
+  export type BillingLineItemOrderByRelationAggregateInput = {
+    _count?: SortOrder
   }
 
   export type InpatientEncounterOrderCountOrderByAggregateInput = {
@@ -44624,6 +53330,478 @@ export namespace Prisma {
     createdAt?: SortOrder
   }
 
+  export type EnumBillingStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.BillingStatus | EnumBillingStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.BillingStatus[] | ListEnumBillingStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.BillingStatus[] | ListEnumBillingStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumBillingStatusFilter<$PrismaModel> | $Enums.BillingStatus
+  }
+
+  export type PaymentPlanNullableScalarRelationFilter = {
+    is?: PaymentPlanWhereInput | null
+    isNot?: PaymentPlanWhereInput | null
+  }
+
+  export type BillingPaymentListRelationFilter = {
+    every?: BillingPaymentWhereInput
+    some?: BillingPaymentWhereInput
+    none?: BillingPaymentWhereInput
+  }
+
+  export type BillingPaymentOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type BillingTransactionCountOrderByAggregateInput = {
+    id?: SortOrder
+    transactionNumber?: SortOrder
+    patientId?: SortOrder
+    encounterId?: SortOrder
+    status?: SortOrder
+    totalAmount?: SortOrder
+    insuranceDiscount?: SortOrder
+    finalAmount?: SortOrder
+    paidAmount?: SortOrder
+    balanceAmount?: SortOrder
+    hasPreAuth?: SortOrder
+    preAuthSettled?: SortOrder
+    hasPaymentPlan?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    createdBy?: SortOrder
+  }
+
+  export type BillingTransactionAvgOrderByAggregateInput = {
+    totalAmount?: SortOrder
+    insuranceDiscount?: SortOrder
+    finalAmount?: SortOrder
+    paidAmount?: SortOrder
+    balanceAmount?: SortOrder
+  }
+
+  export type BillingTransactionMaxOrderByAggregateInput = {
+    id?: SortOrder
+    transactionNumber?: SortOrder
+    patientId?: SortOrder
+    encounterId?: SortOrder
+    status?: SortOrder
+    totalAmount?: SortOrder
+    insuranceDiscount?: SortOrder
+    finalAmount?: SortOrder
+    paidAmount?: SortOrder
+    balanceAmount?: SortOrder
+    hasPreAuth?: SortOrder
+    preAuthSettled?: SortOrder
+    hasPaymentPlan?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    createdBy?: SortOrder
+  }
+
+  export type BillingTransactionMinOrderByAggregateInput = {
+    id?: SortOrder
+    transactionNumber?: SortOrder
+    patientId?: SortOrder
+    encounterId?: SortOrder
+    status?: SortOrder
+    totalAmount?: SortOrder
+    insuranceDiscount?: SortOrder
+    finalAmount?: SortOrder
+    paidAmount?: SortOrder
+    balanceAmount?: SortOrder
+    hasPreAuth?: SortOrder
+    preAuthSettled?: SortOrder
+    hasPaymentPlan?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    createdBy?: SortOrder
+  }
+
+  export type BillingTransactionSumOrderByAggregateInput = {
+    totalAmount?: SortOrder
+    insuranceDiscount?: SortOrder
+    finalAmount?: SortOrder
+    paidAmount?: SortOrder
+    balanceAmount?: SortOrder
+  }
+
+  export type EnumBillingStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.BillingStatus | EnumBillingStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.BillingStatus[] | ListEnumBillingStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.BillingStatus[] | ListEnumBillingStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumBillingStatusWithAggregatesFilter<$PrismaModel> | $Enums.BillingStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumBillingStatusFilter<$PrismaModel>
+    _max?: NestedEnumBillingStatusFilter<$PrismaModel>
+  }
+
+  export type EnumBillingItemTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.BillingItemType | EnumBillingItemTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.BillingItemType[] | ListEnumBillingItemTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.BillingItemType[] | ListEnumBillingItemTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumBillingItemTypeFilter<$PrismaModel> | $Enums.BillingItemType
+  }
+
+  export type BillingTransactionScalarRelationFilter = {
+    is?: BillingTransactionWhereInput
+    isNot?: BillingTransactionWhereInput
+  }
+
+  export type BillingPaymentNullableScalarRelationFilter = {
+    is?: BillingPaymentWhereInput | null
+    isNot?: BillingPaymentWhereInput | null
+  }
+
+  export type InsuranceCoverageNullableScalarRelationFilter = {
+    is?: InsuranceCoverageWhereInput | null
+    isNot?: InsuranceCoverageWhereInput | null
+  }
+
+  export type InpatientEncounterOrderNullableScalarRelationFilter = {
+    is?: InpatientEncounterOrderWhereInput | null
+    isNot?: InpatientEncounterOrderWhereInput | null
+  }
+
+  export type BillingLineItemCountOrderByAggregateInput = {
+    id?: SortOrder
+    transactionId?: SortOrder
+    itemType?: SortOrder
+    description?: SortOrder
+    quantity?: SortOrder
+    unitPrice?: SortOrder
+    totalPrice?: SortOrder
+    requiresPreAuth?: SortOrder
+    preAuthPaid?: SortOrder
+    preAuthPaymentId?: SortOrder
+    insuranceCoverable?: SortOrder
+    insuranceDiscount?: SortOrder
+    finalPrice?: SortOrder
+    encounterOrderId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    addedBy?: SortOrder
+  }
+
+  export type BillingLineItemAvgOrderByAggregateInput = {
+    quantity?: SortOrder
+    unitPrice?: SortOrder
+    totalPrice?: SortOrder
+    insuranceDiscount?: SortOrder
+    finalPrice?: SortOrder
+  }
+
+  export type BillingLineItemMaxOrderByAggregateInput = {
+    id?: SortOrder
+    transactionId?: SortOrder
+    itemType?: SortOrder
+    description?: SortOrder
+    quantity?: SortOrder
+    unitPrice?: SortOrder
+    totalPrice?: SortOrder
+    requiresPreAuth?: SortOrder
+    preAuthPaid?: SortOrder
+    preAuthPaymentId?: SortOrder
+    insuranceCoverable?: SortOrder
+    insuranceDiscount?: SortOrder
+    finalPrice?: SortOrder
+    encounterOrderId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    addedBy?: SortOrder
+  }
+
+  export type BillingLineItemMinOrderByAggregateInput = {
+    id?: SortOrder
+    transactionId?: SortOrder
+    itemType?: SortOrder
+    description?: SortOrder
+    quantity?: SortOrder
+    unitPrice?: SortOrder
+    totalPrice?: SortOrder
+    requiresPreAuth?: SortOrder
+    preAuthPaid?: SortOrder
+    preAuthPaymentId?: SortOrder
+    insuranceCoverable?: SortOrder
+    insuranceDiscount?: SortOrder
+    finalPrice?: SortOrder
+    encounterOrderId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    addedBy?: SortOrder
+  }
+
+  export type BillingLineItemSumOrderByAggregateInput = {
+    quantity?: SortOrder
+    unitPrice?: SortOrder
+    totalPrice?: SortOrder
+    insuranceDiscount?: SortOrder
+    finalPrice?: SortOrder
+  }
+
+  export type EnumBillingItemTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.BillingItemType | EnumBillingItemTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.BillingItemType[] | ListEnumBillingItemTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.BillingItemType[] | ListEnumBillingItemTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumBillingItemTypeWithAggregatesFilter<$PrismaModel> | $Enums.BillingItemType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumBillingItemTypeFilter<$PrismaModel>
+    _max?: NestedEnumBillingItemTypeFilter<$PrismaModel>
+  }
+
+  export type BillingLineItemScalarRelationFilter = {
+    is?: BillingLineItemWhereInput
+    isNot?: BillingLineItemWhereInput
+  }
+
+  export type InsuranceCoverageCountOrderByAggregateInput = {
+    id?: SortOrder
+    lineItemId?: SortOrder
+    insuranceProvider?: SortOrder
+    insuranceNumber?: SortOrder
+    coveragePercentage?: SortOrder
+    coverageAmount?: SortOrder
+    claimStatus?: SortOrder
+    claimNumber?: SortOrder
+    claimNotes?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    verifiedBy?: SortOrder
+  }
+
+  export type InsuranceCoverageAvgOrderByAggregateInput = {
+    coveragePercentage?: SortOrder
+    coverageAmount?: SortOrder
+  }
+
+  export type InsuranceCoverageMaxOrderByAggregateInput = {
+    id?: SortOrder
+    lineItemId?: SortOrder
+    insuranceProvider?: SortOrder
+    insuranceNumber?: SortOrder
+    coveragePercentage?: SortOrder
+    coverageAmount?: SortOrder
+    claimStatus?: SortOrder
+    claimNumber?: SortOrder
+    claimNotes?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    verifiedBy?: SortOrder
+  }
+
+  export type InsuranceCoverageMinOrderByAggregateInput = {
+    id?: SortOrder
+    lineItemId?: SortOrder
+    insuranceProvider?: SortOrder
+    insuranceNumber?: SortOrder
+    coveragePercentage?: SortOrder
+    coverageAmount?: SortOrder
+    claimStatus?: SortOrder
+    claimNumber?: SortOrder
+    claimNotes?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    verifiedBy?: SortOrder
+  }
+
+  export type InsuranceCoverageSumOrderByAggregateInput = {
+    coveragePercentage?: SortOrder
+    coverageAmount?: SortOrder
+  }
+
+  export type EnumPaymentTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.PaymentType | EnumPaymentTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.PaymentType[] | ListEnumPaymentTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.PaymentType[] | ListEnumPaymentTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumPaymentTypeFilter<$PrismaModel> | $Enums.PaymentType
+  }
+
+  export type BillingPaymentCountOrderByAggregateInput = {
+    id?: SortOrder
+    paymentNumber?: SortOrder
+    transactionId?: SortOrder
+    amount?: SortOrder
+    paymentMethod?: SortOrder
+    paymentType?: SortOrder
+    isPreAuthPayment?: SortOrder
+    paymentPlanId?: SortOrder
+    installmentNumber?: SortOrder
+    mayaPaymentId?: SortOrder
+    mayaPaymentStatus?: SortOrder
+    mayaReceiptUrl?: SortOrder
+    status?: SortOrder
+    paidAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    processedBy?: SortOrder
+  }
+
+  export type BillingPaymentAvgOrderByAggregateInput = {
+    amount?: SortOrder
+    installmentNumber?: SortOrder
+  }
+
+  export type BillingPaymentMaxOrderByAggregateInput = {
+    id?: SortOrder
+    paymentNumber?: SortOrder
+    transactionId?: SortOrder
+    amount?: SortOrder
+    paymentMethod?: SortOrder
+    paymentType?: SortOrder
+    isPreAuthPayment?: SortOrder
+    paymentPlanId?: SortOrder
+    installmentNumber?: SortOrder
+    mayaPaymentId?: SortOrder
+    mayaPaymentStatus?: SortOrder
+    mayaReceiptUrl?: SortOrder
+    status?: SortOrder
+    paidAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    processedBy?: SortOrder
+  }
+
+  export type BillingPaymentMinOrderByAggregateInput = {
+    id?: SortOrder
+    paymentNumber?: SortOrder
+    transactionId?: SortOrder
+    amount?: SortOrder
+    paymentMethod?: SortOrder
+    paymentType?: SortOrder
+    isPreAuthPayment?: SortOrder
+    paymentPlanId?: SortOrder
+    installmentNumber?: SortOrder
+    mayaPaymentId?: SortOrder
+    mayaPaymentStatus?: SortOrder
+    mayaReceiptUrl?: SortOrder
+    status?: SortOrder
+    paidAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    processedBy?: SortOrder
+  }
+
+  export type BillingPaymentSumOrderByAggregateInput = {
+    amount?: SortOrder
+    installmentNumber?: SortOrder
+  }
+
+  export type EnumPaymentTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.PaymentType | EnumPaymentTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.PaymentType[] | ListEnumPaymentTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.PaymentType[] | ListEnumPaymentTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumPaymentTypeWithAggregatesFilter<$PrismaModel> | $Enums.PaymentType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumPaymentTypeFilter<$PrismaModel>
+    _max?: NestedEnumPaymentTypeFilter<$PrismaModel>
+  }
+
+  export type EnumPaymentFrequencyFilter<$PrismaModel = never> = {
+    equals?: $Enums.PaymentFrequency | EnumPaymentFrequencyFieldRefInput<$PrismaModel>
+    in?: $Enums.PaymentFrequency[] | ListEnumPaymentFrequencyFieldRefInput<$PrismaModel>
+    notIn?: $Enums.PaymentFrequency[] | ListEnumPaymentFrequencyFieldRefInput<$PrismaModel>
+    not?: NestedEnumPaymentFrequencyFilter<$PrismaModel> | $Enums.PaymentFrequency
+  }
+
+  export type EnumPaymentPlanStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.PaymentPlanStatus | EnumPaymentPlanStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.PaymentPlanStatus[] | ListEnumPaymentPlanStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.PaymentPlanStatus[] | ListEnumPaymentPlanStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumPaymentPlanStatusFilter<$PrismaModel> | $Enums.PaymentPlanStatus
+  }
+
+  export type PaymentPlanCountOrderByAggregateInput = {
+    id?: SortOrder
+    transactionId?: SortOrder
+    totalAmount?: SortOrder
+    installmentCount?: SortOrder
+    installmentAmount?: SortOrder
+    frequency?: SortOrder
+    paidInstallments?: SortOrder
+    remainingAmount?: SortOrder
+    mayaSubscriptionId?: SortOrder
+    mayaNextChargeDate?: SortOrder
+    status?: SortOrder
+    startDate?: SortOrder
+    nextDueDate?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    setupBy?: SortOrder
+  }
+
+  export type PaymentPlanAvgOrderByAggregateInput = {
+    totalAmount?: SortOrder
+    installmentCount?: SortOrder
+    installmentAmount?: SortOrder
+    paidInstallments?: SortOrder
+    remainingAmount?: SortOrder
+  }
+
+  export type PaymentPlanMaxOrderByAggregateInput = {
+    id?: SortOrder
+    transactionId?: SortOrder
+    totalAmount?: SortOrder
+    installmentCount?: SortOrder
+    installmentAmount?: SortOrder
+    frequency?: SortOrder
+    paidInstallments?: SortOrder
+    remainingAmount?: SortOrder
+    mayaSubscriptionId?: SortOrder
+    mayaNextChargeDate?: SortOrder
+    status?: SortOrder
+    startDate?: SortOrder
+    nextDueDate?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    setupBy?: SortOrder
+  }
+
+  export type PaymentPlanMinOrderByAggregateInput = {
+    id?: SortOrder
+    transactionId?: SortOrder
+    totalAmount?: SortOrder
+    installmentCount?: SortOrder
+    installmentAmount?: SortOrder
+    frequency?: SortOrder
+    paidInstallments?: SortOrder
+    remainingAmount?: SortOrder
+    mayaSubscriptionId?: SortOrder
+    mayaNextChargeDate?: SortOrder
+    status?: SortOrder
+    startDate?: SortOrder
+    nextDueDate?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    setupBy?: SortOrder
+  }
+
+  export type PaymentPlanSumOrderByAggregateInput = {
+    totalAmount?: SortOrder
+    installmentCount?: SortOrder
+    installmentAmount?: SortOrder
+    paidInstallments?: SortOrder
+    remainingAmount?: SortOrder
+  }
+
+  export type EnumPaymentFrequencyWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.PaymentFrequency | EnumPaymentFrequencyFieldRefInput<$PrismaModel>
+    in?: $Enums.PaymentFrequency[] | ListEnumPaymentFrequencyFieldRefInput<$PrismaModel>
+    notIn?: $Enums.PaymentFrequency[] | ListEnumPaymentFrequencyFieldRefInput<$PrismaModel>
+    not?: NestedEnumPaymentFrequencyWithAggregatesFilter<$PrismaModel> | $Enums.PaymentFrequency
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumPaymentFrequencyFilter<$PrismaModel>
+    _max?: NestedEnumPaymentFrequencyFilter<$PrismaModel>
+  }
+
+  export type EnumPaymentPlanStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.PaymentPlanStatus | EnumPaymentPlanStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.PaymentPlanStatus[] | ListEnumPaymentPlanStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.PaymentPlanStatus[] | ListEnumPaymentPlanStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumPaymentPlanStatusWithAggregatesFilter<$PrismaModel> | $Enums.PaymentPlanStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumPaymentPlanStatusFilter<$PrismaModel>
+    _max?: NestedEnumPaymentPlanStatusFilter<$PrismaModel>
+  }
+
   export type RefreshTokenCreateNestedManyWithoutUserInput = {
     create?: XOR<RefreshTokenCreateWithoutUserInput, RefreshTokenUncheckedCreateWithoutUserInput> | RefreshTokenCreateWithoutUserInput[] | RefreshTokenUncheckedCreateWithoutUserInput[]
     connectOrCreate?: RefreshTokenCreateOrConnectWithoutUserInput | RefreshTokenCreateOrConnectWithoutUserInput[]
@@ -45001,6 +54179,13 @@ export namespace Prisma {
     connect?: DataShareRequestWhereUniqueInput | DataShareRequestWhereUniqueInput[]
   }
 
+  export type BillingTransactionCreateNestedManyWithoutPatientInput = {
+    create?: XOR<BillingTransactionCreateWithoutPatientInput, BillingTransactionUncheckedCreateWithoutPatientInput> | BillingTransactionCreateWithoutPatientInput[] | BillingTransactionUncheckedCreateWithoutPatientInput[]
+    connectOrCreate?: BillingTransactionCreateOrConnectWithoutPatientInput | BillingTransactionCreateOrConnectWithoutPatientInput[]
+    createMany?: BillingTransactionCreateManyPatientInputEnvelope
+    connect?: BillingTransactionWhereUniqueInput | BillingTransactionWhereUniqueInput[]
+  }
+
   export type InpatientEncounterUncheckedCreateNestedManyWithoutPatientInput = {
     create?: XOR<InpatientEncounterCreateWithoutPatientInput, InpatientEncounterUncheckedCreateWithoutPatientInput> | InpatientEncounterCreateWithoutPatientInput[] | InpatientEncounterUncheckedCreateWithoutPatientInput[]
     connectOrCreate?: InpatientEncounterCreateOrConnectWithoutPatientInput | InpatientEncounterCreateOrConnectWithoutPatientInput[]
@@ -45027,6 +54212,13 @@ export namespace Prisma {
     connectOrCreate?: DataShareRequestCreateOrConnectWithoutPatientInput | DataShareRequestCreateOrConnectWithoutPatientInput[]
     createMany?: DataShareRequestCreateManyPatientInputEnvelope
     connect?: DataShareRequestWhereUniqueInput | DataShareRequestWhereUniqueInput[]
+  }
+
+  export type BillingTransactionUncheckedCreateNestedManyWithoutPatientInput = {
+    create?: XOR<BillingTransactionCreateWithoutPatientInput, BillingTransactionUncheckedCreateWithoutPatientInput> | BillingTransactionCreateWithoutPatientInput[] | BillingTransactionUncheckedCreateWithoutPatientInput[]
+    connectOrCreate?: BillingTransactionCreateOrConnectWithoutPatientInput | BillingTransactionCreateOrConnectWithoutPatientInput[]
+    createMany?: BillingTransactionCreateManyPatientInputEnvelope
+    connect?: BillingTransactionWhereUniqueInput | BillingTransactionWhereUniqueInput[]
   }
 
   export type NullableEnumBloodTypeFieldUpdateOperationsInput = {
@@ -45097,6 +54289,20 @@ export namespace Prisma {
     deleteMany?: DataShareRequestScalarWhereInput | DataShareRequestScalarWhereInput[]
   }
 
+  export type BillingTransactionUpdateManyWithoutPatientNestedInput = {
+    create?: XOR<BillingTransactionCreateWithoutPatientInput, BillingTransactionUncheckedCreateWithoutPatientInput> | BillingTransactionCreateWithoutPatientInput[] | BillingTransactionUncheckedCreateWithoutPatientInput[]
+    connectOrCreate?: BillingTransactionCreateOrConnectWithoutPatientInput | BillingTransactionCreateOrConnectWithoutPatientInput[]
+    upsert?: BillingTransactionUpsertWithWhereUniqueWithoutPatientInput | BillingTransactionUpsertWithWhereUniqueWithoutPatientInput[]
+    createMany?: BillingTransactionCreateManyPatientInputEnvelope
+    set?: BillingTransactionWhereUniqueInput | BillingTransactionWhereUniqueInput[]
+    disconnect?: BillingTransactionWhereUniqueInput | BillingTransactionWhereUniqueInput[]
+    delete?: BillingTransactionWhereUniqueInput | BillingTransactionWhereUniqueInput[]
+    connect?: BillingTransactionWhereUniqueInput | BillingTransactionWhereUniqueInput[]
+    update?: BillingTransactionUpdateWithWhereUniqueWithoutPatientInput | BillingTransactionUpdateWithWhereUniqueWithoutPatientInput[]
+    updateMany?: BillingTransactionUpdateManyWithWhereWithoutPatientInput | BillingTransactionUpdateManyWithWhereWithoutPatientInput[]
+    deleteMany?: BillingTransactionScalarWhereInput | BillingTransactionScalarWhereInput[]
+  }
+
   export type InpatientEncounterUncheckedUpdateManyWithoutPatientNestedInput = {
     create?: XOR<InpatientEncounterCreateWithoutPatientInput, InpatientEncounterUncheckedCreateWithoutPatientInput> | InpatientEncounterCreateWithoutPatientInput[] | InpatientEncounterUncheckedCreateWithoutPatientInput[]
     connectOrCreate?: InpatientEncounterCreateOrConnectWithoutPatientInput | InpatientEncounterCreateOrConnectWithoutPatientInput[]
@@ -45151,6 +54357,20 @@ export namespace Prisma {
     update?: DataShareRequestUpdateWithWhereUniqueWithoutPatientInput | DataShareRequestUpdateWithWhereUniqueWithoutPatientInput[]
     updateMany?: DataShareRequestUpdateManyWithWhereWithoutPatientInput | DataShareRequestUpdateManyWithWhereWithoutPatientInput[]
     deleteMany?: DataShareRequestScalarWhereInput | DataShareRequestScalarWhereInput[]
+  }
+
+  export type BillingTransactionUncheckedUpdateManyWithoutPatientNestedInput = {
+    create?: XOR<BillingTransactionCreateWithoutPatientInput, BillingTransactionUncheckedCreateWithoutPatientInput> | BillingTransactionCreateWithoutPatientInput[] | BillingTransactionUncheckedCreateWithoutPatientInput[]
+    connectOrCreate?: BillingTransactionCreateOrConnectWithoutPatientInput | BillingTransactionCreateOrConnectWithoutPatientInput[]
+    upsert?: BillingTransactionUpsertWithWhereUniqueWithoutPatientInput | BillingTransactionUpsertWithWhereUniqueWithoutPatientInput[]
+    createMany?: BillingTransactionCreateManyPatientInputEnvelope
+    set?: BillingTransactionWhereUniqueInput | BillingTransactionWhereUniqueInput[]
+    disconnect?: BillingTransactionWhereUniqueInput | BillingTransactionWhereUniqueInput[]
+    delete?: BillingTransactionWhereUniqueInput | BillingTransactionWhereUniqueInput[]
+    connect?: BillingTransactionWhereUniqueInput | BillingTransactionWhereUniqueInput[]
+    update?: BillingTransactionUpdateWithWhereUniqueWithoutPatientInput | BillingTransactionUpdateWithWhereUniqueWithoutPatientInput[]
+    updateMany?: BillingTransactionUpdateManyWithWhereWithoutPatientInput | BillingTransactionUpdateManyWithWhereWithoutPatientInput[]
+    deleteMany?: BillingTransactionScalarWhereInput | BillingTransactionScalarWhereInput[]
   }
 
   export type UserCreateNestedOneWithoutPartnerProfileInput = {
@@ -45735,6 +54955,12 @@ export namespace Prisma {
     connect?: DataShareRequestWhereUniqueInput
   }
 
+  export type BillingTransactionCreateNestedOneWithoutEncounterInput = {
+    create?: XOR<BillingTransactionCreateWithoutEncounterInput, BillingTransactionUncheckedCreateWithoutEncounterInput>
+    connectOrCreate?: BillingTransactionCreateOrConnectWithoutEncounterInput
+    connect?: BillingTransactionWhereUniqueInput
+  }
+
   export type InpatientEncounterChartUncheckedCreateNestedManyWithoutEncounterInput = {
     create?: XOR<InpatientEncounterChartCreateWithoutEncounterInput, InpatientEncounterChartUncheckedCreateWithoutEncounterInput> | InpatientEncounterChartCreateWithoutEncounterInput[] | InpatientEncounterChartUncheckedCreateWithoutEncounterInput[]
     connectOrCreate?: InpatientEncounterChartCreateOrConnectWithoutEncounterInput | InpatientEncounterChartCreateOrConnectWithoutEncounterInput[]
@@ -45759,6 +54985,12 @@ export namespace Prisma {
     create?: XOR<DataShareRequestCreateWithoutInpatientEncounterInput, DataShareRequestUncheckedCreateWithoutInpatientEncounterInput>
     connectOrCreate?: DataShareRequestCreateOrConnectWithoutInpatientEncounterInput
     connect?: DataShareRequestWhereUniqueInput
+  }
+
+  export type BillingTransactionUncheckedCreateNestedOneWithoutEncounterInput = {
+    create?: XOR<BillingTransactionCreateWithoutEncounterInput, BillingTransactionUncheckedCreateWithoutEncounterInput>
+    connectOrCreate?: BillingTransactionCreateOrConnectWithoutEncounterInput
+    connect?: BillingTransactionWhereUniqueInput
   }
 
   export type EnumInpatientTriageFieldUpdateOperationsInput = {
@@ -45825,6 +55057,16 @@ export namespace Prisma {
     update?: XOR<XOR<DataShareRequestUpdateToOneWithWhereWithoutInpatientEncounterInput, DataShareRequestUpdateWithoutInpatientEncounterInput>, DataShareRequestUncheckedUpdateWithoutInpatientEncounterInput>
   }
 
+  export type BillingTransactionUpdateOneWithoutEncounterNestedInput = {
+    create?: XOR<BillingTransactionCreateWithoutEncounterInput, BillingTransactionUncheckedCreateWithoutEncounterInput>
+    connectOrCreate?: BillingTransactionCreateOrConnectWithoutEncounterInput
+    upsert?: BillingTransactionUpsertWithoutEncounterInput
+    disconnect?: BillingTransactionWhereInput | boolean
+    delete?: BillingTransactionWhereInput | boolean
+    connect?: BillingTransactionWhereUniqueInput
+    update?: XOR<XOR<BillingTransactionUpdateToOneWithWhereWithoutEncounterInput, BillingTransactionUpdateWithoutEncounterInput>, BillingTransactionUncheckedUpdateWithoutEncounterInput>
+  }
+
   export type InpatientEncounterChartUncheckedUpdateManyWithoutEncounterNestedInput = {
     create?: XOR<InpatientEncounterChartCreateWithoutEncounterInput, InpatientEncounterChartUncheckedCreateWithoutEncounterInput> | InpatientEncounterChartCreateWithoutEncounterInput[] | InpatientEncounterChartUncheckedCreateWithoutEncounterInput[]
     connectOrCreate?: InpatientEncounterChartCreateOrConnectWithoutEncounterInput | InpatientEncounterChartCreateOrConnectWithoutEncounterInput[]
@@ -45873,6 +55115,16 @@ export namespace Prisma {
     update?: XOR<XOR<DataShareRequestUpdateToOneWithWhereWithoutInpatientEncounterInput, DataShareRequestUpdateWithoutInpatientEncounterInput>, DataShareRequestUncheckedUpdateWithoutInpatientEncounterInput>
   }
 
+  export type BillingTransactionUncheckedUpdateOneWithoutEncounterNestedInput = {
+    create?: XOR<BillingTransactionCreateWithoutEncounterInput, BillingTransactionUncheckedCreateWithoutEncounterInput>
+    connectOrCreate?: BillingTransactionCreateOrConnectWithoutEncounterInput
+    upsert?: BillingTransactionUpsertWithoutEncounterInput
+    disconnect?: BillingTransactionWhereInput | boolean
+    delete?: BillingTransactionWhereInput | boolean
+    connect?: BillingTransactionWhereUniqueInput
+    update?: XOR<XOR<BillingTransactionUpdateToOneWithWhereWithoutEncounterInput, BillingTransactionUpdateWithoutEncounterInput>, BillingTransactionUncheckedUpdateWithoutEncounterInput>
+  }
+
   export type InpatientEncounterCreateNestedOneWithoutChartsInput = {
     create?: XOR<InpatientEncounterCreateWithoutChartsInput, InpatientEncounterUncheckedCreateWithoutChartsInput>
     connectOrCreate?: InpatientEncounterCreateOrConnectWithoutChartsInput
@@ -45899,6 +55151,20 @@ export namespace Prisma {
     connect?: ParticularCatalogueWhereUniqueInput
   }
 
+  export type BillingLineItemCreateNestedManyWithoutEncounterOrderInput = {
+    create?: XOR<BillingLineItemCreateWithoutEncounterOrderInput, BillingLineItemUncheckedCreateWithoutEncounterOrderInput> | BillingLineItemCreateWithoutEncounterOrderInput[] | BillingLineItemUncheckedCreateWithoutEncounterOrderInput[]
+    connectOrCreate?: BillingLineItemCreateOrConnectWithoutEncounterOrderInput | BillingLineItemCreateOrConnectWithoutEncounterOrderInput[]
+    createMany?: BillingLineItemCreateManyEncounterOrderInputEnvelope
+    connect?: BillingLineItemWhereUniqueInput | BillingLineItemWhereUniqueInput[]
+  }
+
+  export type BillingLineItemUncheckedCreateNestedManyWithoutEncounterOrderInput = {
+    create?: XOR<BillingLineItemCreateWithoutEncounterOrderInput, BillingLineItemUncheckedCreateWithoutEncounterOrderInput> | BillingLineItemCreateWithoutEncounterOrderInput[] | BillingLineItemUncheckedCreateWithoutEncounterOrderInput[]
+    connectOrCreate?: BillingLineItemCreateOrConnectWithoutEncounterOrderInput | BillingLineItemCreateOrConnectWithoutEncounterOrderInput[]
+    createMany?: BillingLineItemCreateManyEncounterOrderInputEnvelope
+    connect?: BillingLineItemWhereUniqueInput | BillingLineItemWhereUniqueInput[]
+  }
+
   export type EnumInpatientEncounterOrderTypeFieldUpdateOperationsInput = {
     set?: $Enums.InpatientEncounterOrderType
   }
@@ -45923,6 +55189,34 @@ export namespace Prisma {
     delete?: ParticularCatalogueWhereInput | boolean
     connect?: ParticularCatalogueWhereUniqueInput
     update?: XOR<XOR<ParticularCatalogueUpdateToOneWithWhereWithoutOrdersInput, ParticularCatalogueUpdateWithoutOrdersInput>, ParticularCatalogueUncheckedUpdateWithoutOrdersInput>
+  }
+
+  export type BillingLineItemUpdateManyWithoutEncounterOrderNestedInput = {
+    create?: XOR<BillingLineItemCreateWithoutEncounterOrderInput, BillingLineItemUncheckedCreateWithoutEncounterOrderInput> | BillingLineItemCreateWithoutEncounterOrderInput[] | BillingLineItemUncheckedCreateWithoutEncounterOrderInput[]
+    connectOrCreate?: BillingLineItemCreateOrConnectWithoutEncounterOrderInput | BillingLineItemCreateOrConnectWithoutEncounterOrderInput[]
+    upsert?: BillingLineItemUpsertWithWhereUniqueWithoutEncounterOrderInput | BillingLineItemUpsertWithWhereUniqueWithoutEncounterOrderInput[]
+    createMany?: BillingLineItemCreateManyEncounterOrderInputEnvelope
+    set?: BillingLineItemWhereUniqueInput | BillingLineItemWhereUniqueInput[]
+    disconnect?: BillingLineItemWhereUniqueInput | BillingLineItemWhereUniqueInput[]
+    delete?: BillingLineItemWhereUniqueInput | BillingLineItemWhereUniqueInput[]
+    connect?: BillingLineItemWhereUniqueInput | BillingLineItemWhereUniqueInput[]
+    update?: BillingLineItemUpdateWithWhereUniqueWithoutEncounterOrderInput | BillingLineItemUpdateWithWhereUniqueWithoutEncounterOrderInput[]
+    updateMany?: BillingLineItemUpdateManyWithWhereWithoutEncounterOrderInput | BillingLineItemUpdateManyWithWhereWithoutEncounterOrderInput[]
+    deleteMany?: BillingLineItemScalarWhereInput | BillingLineItemScalarWhereInput[]
+  }
+
+  export type BillingLineItemUncheckedUpdateManyWithoutEncounterOrderNestedInput = {
+    create?: XOR<BillingLineItemCreateWithoutEncounterOrderInput, BillingLineItemUncheckedCreateWithoutEncounterOrderInput> | BillingLineItemCreateWithoutEncounterOrderInput[] | BillingLineItemUncheckedCreateWithoutEncounterOrderInput[]
+    connectOrCreate?: BillingLineItemCreateOrConnectWithoutEncounterOrderInput | BillingLineItemCreateOrConnectWithoutEncounterOrderInput[]
+    upsert?: BillingLineItemUpsertWithWhereUniqueWithoutEncounterOrderInput | BillingLineItemUpsertWithWhereUniqueWithoutEncounterOrderInput[]
+    createMany?: BillingLineItemCreateManyEncounterOrderInputEnvelope
+    set?: BillingLineItemWhereUniqueInput | BillingLineItemWhereUniqueInput[]
+    disconnect?: BillingLineItemWhereUniqueInput | BillingLineItemWhereUniqueInput[]
+    delete?: BillingLineItemWhereUniqueInput | BillingLineItemWhereUniqueInput[]
+    connect?: BillingLineItemWhereUniqueInput | BillingLineItemWhereUniqueInput[]
+    update?: BillingLineItemUpdateWithWhereUniqueWithoutEncounterOrderInput | BillingLineItemUpdateWithWhereUniqueWithoutEncounterOrderInput[]
+    updateMany?: BillingLineItemUpdateManyWithWhereWithoutEncounterOrderInput | BillingLineItemUpdateManyWithWhereWithoutEncounterOrderInput[]
+    deleteMany?: BillingLineItemScalarWhereInput | BillingLineItemScalarWhereInput[]
   }
 
   export type InpatientEncounterOrderCreateNestedManyWithoutCatalogueItemInput = {
@@ -46293,6 +55587,392 @@ export namespace Prisma {
     upsert?: DataShareRequestUpsertWithoutAccessTokensInput
     connect?: DataShareRequestWhereUniqueInput
     update?: XOR<XOR<DataShareRequestUpdateToOneWithWhereWithoutAccessTokensInput, DataShareRequestUpdateWithoutAccessTokensInput>, DataShareRequestUncheckedUpdateWithoutAccessTokensInput>
+  }
+
+  export type PatientCreateNestedOneWithoutBillingTransactionsInput = {
+    create?: XOR<PatientCreateWithoutBillingTransactionsInput, PatientUncheckedCreateWithoutBillingTransactionsInput>
+    connectOrCreate?: PatientCreateOrConnectWithoutBillingTransactionsInput
+    connect?: PatientWhereUniqueInput
+  }
+
+  export type InpatientEncounterCreateNestedOneWithoutBillingTransactionInput = {
+    create?: XOR<InpatientEncounterCreateWithoutBillingTransactionInput, InpatientEncounterUncheckedCreateWithoutBillingTransactionInput>
+    connectOrCreate?: InpatientEncounterCreateOrConnectWithoutBillingTransactionInput
+    connect?: InpatientEncounterWhereUniqueInput
+  }
+
+  export type PaymentPlanCreateNestedOneWithoutTransactionInput = {
+    create?: XOR<PaymentPlanCreateWithoutTransactionInput, PaymentPlanUncheckedCreateWithoutTransactionInput>
+    connectOrCreate?: PaymentPlanCreateOrConnectWithoutTransactionInput
+    connect?: PaymentPlanWhereUniqueInput
+  }
+
+  export type BillingLineItemCreateNestedManyWithoutTransactionInput = {
+    create?: XOR<BillingLineItemCreateWithoutTransactionInput, BillingLineItemUncheckedCreateWithoutTransactionInput> | BillingLineItemCreateWithoutTransactionInput[] | BillingLineItemUncheckedCreateWithoutTransactionInput[]
+    connectOrCreate?: BillingLineItemCreateOrConnectWithoutTransactionInput | BillingLineItemCreateOrConnectWithoutTransactionInput[]
+    createMany?: BillingLineItemCreateManyTransactionInputEnvelope
+    connect?: BillingLineItemWhereUniqueInput | BillingLineItemWhereUniqueInput[]
+  }
+
+  export type BillingPaymentCreateNestedManyWithoutTransactionInput = {
+    create?: XOR<BillingPaymentCreateWithoutTransactionInput, BillingPaymentUncheckedCreateWithoutTransactionInput> | BillingPaymentCreateWithoutTransactionInput[] | BillingPaymentUncheckedCreateWithoutTransactionInput[]
+    connectOrCreate?: BillingPaymentCreateOrConnectWithoutTransactionInput | BillingPaymentCreateOrConnectWithoutTransactionInput[]
+    createMany?: BillingPaymentCreateManyTransactionInputEnvelope
+    connect?: BillingPaymentWhereUniqueInput | BillingPaymentWhereUniqueInput[]
+  }
+
+  export type PaymentPlanUncheckedCreateNestedOneWithoutTransactionInput = {
+    create?: XOR<PaymentPlanCreateWithoutTransactionInput, PaymentPlanUncheckedCreateWithoutTransactionInput>
+    connectOrCreate?: PaymentPlanCreateOrConnectWithoutTransactionInput
+    connect?: PaymentPlanWhereUniqueInput
+  }
+
+  export type BillingLineItemUncheckedCreateNestedManyWithoutTransactionInput = {
+    create?: XOR<BillingLineItemCreateWithoutTransactionInput, BillingLineItemUncheckedCreateWithoutTransactionInput> | BillingLineItemCreateWithoutTransactionInput[] | BillingLineItemUncheckedCreateWithoutTransactionInput[]
+    connectOrCreate?: BillingLineItemCreateOrConnectWithoutTransactionInput | BillingLineItemCreateOrConnectWithoutTransactionInput[]
+    createMany?: BillingLineItemCreateManyTransactionInputEnvelope
+    connect?: BillingLineItemWhereUniqueInput | BillingLineItemWhereUniqueInput[]
+  }
+
+  export type BillingPaymentUncheckedCreateNestedManyWithoutTransactionInput = {
+    create?: XOR<BillingPaymentCreateWithoutTransactionInput, BillingPaymentUncheckedCreateWithoutTransactionInput> | BillingPaymentCreateWithoutTransactionInput[] | BillingPaymentUncheckedCreateWithoutTransactionInput[]
+    connectOrCreate?: BillingPaymentCreateOrConnectWithoutTransactionInput | BillingPaymentCreateOrConnectWithoutTransactionInput[]
+    createMany?: BillingPaymentCreateManyTransactionInputEnvelope
+    connect?: BillingPaymentWhereUniqueInput | BillingPaymentWhereUniqueInput[]
+  }
+
+  export type EnumBillingStatusFieldUpdateOperationsInput = {
+    set?: $Enums.BillingStatus
+  }
+
+  export type PatientUpdateOneRequiredWithoutBillingTransactionsNestedInput = {
+    create?: XOR<PatientCreateWithoutBillingTransactionsInput, PatientUncheckedCreateWithoutBillingTransactionsInput>
+    connectOrCreate?: PatientCreateOrConnectWithoutBillingTransactionsInput
+    upsert?: PatientUpsertWithoutBillingTransactionsInput
+    connect?: PatientWhereUniqueInput
+    update?: XOR<XOR<PatientUpdateToOneWithWhereWithoutBillingTransactionsInput, PatientUpdateWithoutBillingTransactionsInput>, PatientUncheckedUpdateWithoutBillingTransactionsInput>
+  }
+
+  export type InpatientEncounterUpdateOneWithoutBillingTransactionNestedInput = {
+    create?: XOR<InpatientEncounterCreateWithoutBillingTransactionInput, InpatientEncounterUncheckedCreateWithoutBillingTransactionInput>
+    connectOrCreate?: InpatientEncounterCreateOrConnectWithoutBillingTransactionInput
+    upsert?: InpatientEncounterUpsertWithoutBillingTransactionInput
+    disconnect?: InpatientEncounterWhereInput | boolean
+    delete?: InpatientEncounterWhereInput | boolean
+    connect?: InpatientEncounterWhereUniqueInput
+    update?: XOR<XOR<InpatientEncounterUpdateToOneWithWhereWithoutBillingTransactionInput, InpatientEncounterUpdateWithoutBillingTransactionInput>, InpatientEncounterUncheckedUpdateWithoutBillingTransactionInput>
+  }
+
+  export type PaymentPlanUpdateOneWithoutTransactionNestedInput = {
+    create?: XOR<PaymentPlanCreateWithoutTransactionInput, PaymentPlanUncheckedCreateWithoutTransactionInput>
+    connectOrCreate?: PaymentPlanCreateOrConnectWithoutTransactionInput
+    upsert?: PaymentPlanUpsertWithoutTransactionInput
+    disconnect?: PaymentPlanWhereInput | boolean
+    delete?: PaymentPlanWhereInput | boolean
+    connect?: PaymentPlanWhereUniqueInput
+    update?: XOR<XOR<PaymentPlanUpdateToOneWithWhereWithoutTransactionInput, PaymentPlanUpdateWithoutTransactionInput>, PaymentPlanUncheckedUpdateWithoutTransactionInput>
+  }
+
+  export type BillingLineItemUpdateManyWithoutTransactionNestedInput = {
+    create?: XOR<BillingLineItemCreateWithoutTransactionInput, BillingLineItemUncheckedCreateWithoutTransactionInput> | BillingLineItemCreateWithoutTransactionInput[] | BillingLineItemUncheckedCreateWithoutTransactionInput[]
+    connectOrCreate?: BillingLineItemCreateOrConnectWithoutTransactionInput | BillingLineItemCreateOrConnectWithoutTransactionInput[]
+    upsert?: BillingLineItemUpsertWithWhereUniqueWithoutTransactionInput | BillingLineItemUpsertWithWhereUniqueWithoutTransactionInput[]
+    createMany?: BillingLineItemCreateManyTransactionInputEnvelope
+    set?: BillingLineItemWhereUniqueInput | BillingLineItemWhereUniqueInput[]
+    disconnect?: BillingLineItemWhereUniqueInput | BillingLineItemWhereUniqueInput[]
+    delete?: BillingLineItemWhereUniqueInput | BillingLineItemWhereUniqueInput[]
+    connect?: BillingLineItemWhereUniqueInput | BillingLineItemWhereUniqueInput[]
+    update?: BillingLineItemUpdateWithWhereUniqueWithoutTransactionInput | BillingLineItemUpdateWithWhereUniqueWithoutTransactionInput[]
+    updateMany?: BillingLineItemUpdateManyWithWhereWithoutTransactionInput | BillingLineItemUpdateManyWithWhereWithoutTransactionInput[]
+    deleteMany?: BillingLineItemScalarWhereInput | BillingLineItemScalarWhereInput[]
+  }
+
+  export type BillingPaymentUpdateManyWithoutTransactionNestedInput = {
+    create?: XOR<BillingPaymentCreateWithoutTransactionInput, BillingPaymentUncheckedCreateWithoutTransactionInput> | BillingPaymentCreateWithoutTransactionInput[] | BillingPaymentUncheckedCreateWithoutTransactionInput[]
+    connectOrCreate?: BillingPaymentCreateOrConnectWithoutTransactionInput | BillingPaymentCreateOrConnectWithoutTransactionInput[]
+    upsert?: BillingPaymentUpsertWithWhereUniqueWithoutTransactionInput | BillingPaymentUpsertWithWhereUniqueWithoutTransactionInput[]
+    createMany?: BillingPaymentCreateManyTransactionInputEnvelope
+    set?: BillingPaymentWhereUniqueInput | BillingPaymentWhereUniqueInput[]
+    disconnect?: BillingPaymentWhereUniqueInput | BillingPaymentWhereUniqueInput[]
+    delete?: BillingPaymentWhereUniqueInput | BillingPaymentWhereUniqueInput[]
+    connect?: BillingPaymentWhereUniqueInput | BillingPaymentWhereUniqueInput[]
+    update?: BillingPaymentUpdateWithWhereUniqueWithoutTransactionInput | BillingPaymentUpdateWithWhereUniqueWithoutTransactionInput[]
+    updateMany?: BillingPaymentUpdateManyWithWhereWithoutTransactionInput | BillingPaymentUpdateManyWithWhereWithoutTransactionInput[]
+    deleteMany?: BillingPaymentScalarWhereInput | BillingPaymentScalarWhereInput[]
+  }
+
+  export type PaymentPlanUncheckedUpdateOneWithoutTransactionNestedInput = {
+    create?: XOR<PaymentPlanCreateWithoutTransactionInput, PaymentPlanUncheckedCreateWithoutTransactionInput>
+    connectOrCreate?: PaymentPlanCreateOrConnectWithoutTransactionInput
+    upsert?: PaymentPlanUpsertWithoutTransactionInput
+    disconnect?: PaymentPlanWhereInput | boolean
+    delete?: PaymentPlanWhereInput | boolean
+    connect?: PaymentPlanWhereUniqueInput
+    update?: XOR<XOR<PaymentPlanUpdateToOneWithWhereWithoutTransactionInput, PaymentPlanUpdateWithoutTransactionInput>, PaymentPlanUncheckedUpdateWithoutTransactionInput>
+  }
+
+  export type BillingLineItemUncheckedUpdateManyWithoutTransactionNestedInput = {
+    create?: XOR<BillingLineItemCreateWithoutTransactionInput, BillingLineItemUncheckedCreateWithoutTransactionInput> | BillingLineItemCreateWithoutTransactionInput[] | BillingLineItemUncheckedCreateWithoutTransactionInput[]
+    connectOrCreate?: BillingLineItemCreateOrConnectWithoutTransactionInput | BillingLineItemCreateOrConnectWithoutTransactionInput[]
+    upsert?: BillingLineItemUpsertWithWhereUniqueWithoutTransactionInput | BillingLineItemUpsertWithWhereUniqueWithoutTransactionInput[]
+    createMany?: BillingLineItemCreateManyTransactionInputEnvelope
+    set?: BillingLineItemWhereUniqueInput | BillingLineItemWhereUniqueInput[]
+    disconnect?: BillingLineItemWhereUniqueInput | BillingLineItemWhereUniqueInput[]
+    delete?: BillingLineItemWhereUniqueInput | BillingLineItemWhereUniqueInput[]
+    connect?: BillingLineItemWhereUniqueInput | BillingLineItemWhereUniqueInput[]
+    update?: BillingLineItemUpdateWithWhereUniqueWithoutTransactionInput | BillingLineItemUpdateWithWhereUniqueWithoutTransactionInput[]
+    updateMany?: BillingLineItemUpdateManyWithWhereWithoutTransactionInput | BillingLineItemUpdateManyWithWhereWithoutTransactionInput[]
+    deleteMany?: BillingLineItemScalarWhereInput | BillingLineItemScalarWhereInput[]
+  }
+
+  export type BillingPaymentUncheckedUpdateManyWithoutTransactionNestedInput = {
+    create?: XOR<BillingPaymentCreateWithoutTransactionInput, BillingPaymentUncheckedCreateWithoutTransactionInput> | BillingPaymentCreateWithoutTransactionInput[] | BillingPaymentUncheckedCreateWithoutTransactionInput[]
+    connectOrCreate?: BillingPaymentCreateOrConnectWithoutTransactionInput | BillingPaymentCreateOrConnectWithoutTransactionInput[]
+    upsert?: BillingPaymentUpsertWithWhereUniqueWithoutTransactionInput | BillingPaymentUpsertWithWhereUniqueWithoutTransactionInput[]
+    createMany?: BillingPaymentCreateManyTransactionInputEnvelope
+    set?: BillingPaymentWhereUniqueInput | BillingPaymentWhereUniqueInput[]
+    disconnect?: BillingPaymentWhereUniqueInput | BillingPaymentWhereUniqueInput[]
+    delete?: BillingPaymentWhereUniqueInput | BillingPaymentWhereUniqueInput[]
+    connect?: BillingPaymentWhereUniqueInput | BillingPaymentWhereUniqueInput[]
+    update?: BillingPaymentUpdateWithWhereUniqueWithoutTransactionInput | BillingPaymentUpdateWithWhereUniqueWithoutTransactionInput[]
+    updateMany?: BillingPaymentUpdateManyWithWhereWithoutTransactionInput | BillingPaymentUpdateManyWithWhereWithoutTransactionInput[]
+    deleteMany?: BillingPaymentScalarWhereInput | BillingPaymentScalarWhereInput[]
+  }
+
+  export type BillingTransactionCreateNestedOneWithoutLineItemsInput = {
+    create?: XOR<BillingTransactionCreateWithoutLineItemsInput, BillingTransactionUncheckedCreateWithoutLineItemsInput>
+    connectOrCreate?: BillingTransactionCreateOrConnectWithoutLineItemsInput
+    connect?: BillingTransactionWhereUniqueInput
+  }
+
+  export type BillingPaymentCreateNestedOneWithoutPreAuthItemsInput = {
+    create?: XOR<BillingPaymentCreateWithoutPreAuthItemsInput, BillingPaymentUncheckedCreateWithoutPreAuthItemsInput>
+    connectOrCreate?: BillingPaymentCreateOrConnectWithoutPreAuthItemsInput
+    connect?: BillingPaymentWhereUniqueInput
+  }
+
+  export type InsuranceCoverageCreateNestedOneWithoutLineItemInput = {
+    create?: XOR<InsuranceCoverageCreateWithoutLineItemInput, InsuranceCoverageUncheckedCreateWithoutLineItemInput>
+    connectOrCreate?: InsuranceCoverageCreateOrConnectWithoutLineItemInput
+    connect?: InsuranceCoverageWhereUniqueInput
+  }
+
+  export type InpatientEncounterOrderCreateNestedOneWithoutBillingLineItemsInput = {
+    create?: XOR<InpatientEncounterOrderCreateWithoutBillingLineItemsInput, InpatientEncounterOrderUncheckedCreateWithoutBillingLineItemsInput>
+    connectOrCreate?: InpatientEncounterOrderCreateOrConnectWithoutBillingLineItemsInput
+    connect?: InpatientEncounterOrderWhereUniqueInput
+  }
+
+  export type InsuranceCoverageUncheckedCreateNestedOneWithoutLineItemInput = {
+    create?: XOR<InsuranceCoverageCreateWithoutLineItemInput, InsuranceCoverageUncheckedCreateWithoutLineItemInput>
+    connectOrCreate?: InsuranceCoverageCreateOrConnectWithoutLineItemInput
+    connect?: InsuranceCoverageWhereUniqueInput
+  }
+
+  export type EnumBillingItemTypeFieldUpdateOperationsInput = {
+    set?: $Enums.BillingItemType
+  }
+
+  export type BillingTransactionUpdateOneRequiredWithoutLineItemsNestedInput = {
+    create?: XOR<BillingTransactionCreateWithoutLineItemsInput, BillingTransactionUncheckedCreateWithoutLineItemsInput>
+    connectOrCreate?: BillingTransactionCreateOrConnectWithoutLineItemsInput
+    upsert?: BillingTransactionUpsertWithoutLineItemsInput
+    connect?: BillingTransactionWhereUniqueInput
+    update?: XOR<XOR<BillingTransactionUpdateToOneWithWhereWithoutLineItemsInput, BillingTransactionUpdateWithoutLineItemsInput>, BillingTransactionUncheckedUpdateWithoutLineItemsInput>
+  }
+
+  export type BillingPaymentUpdateOneWithoutPreAuthItemsNestedInput = {
+    create?: XOR<BillingPaymentCreateWithoutPreAuthItemsInput, BillingPaymentUncheckedCreateWithoutPreAuthItemsInput>
+    connectOrCreate?: BillingPaymentCreateOrConnectWithoutPreAuthItemsInput
+    upsert?: BillingPaymentUpsertWithoutPreAuthItemsInput
+    disconnect?: BillingPaymentWhereInput | boolean
+    delete?: BillingPaymentWhereInput | boolean
+    connect?: BillingPaymentWhereUniqueInput
+    update?: XOR<XOR<BillingPaymentUpdateToOneWithWhereWithoutPreAuthItemsInput, BillingPaymentUpdateWithoutPreAuthItemsInput>, BillingPaymentUncheckedUpdateWithoutPreAuthItemsInput>
+  }
+
+  export type InsuranceCoverageUpdateOneWithoutLineItemNestedInput = {
+    create?: XOR<InsuranceCoverageCreateWithoutLineItemInput, InsuranceCoverageUncheckedCreateWithoutLineItemInput>
+    connectOrCreate?: InsuranceCoverageCreateOrConnectWithoutLineItemInput
+    upsert?: InsuranceCoverageUpsertWithoutLineItemInput
+    disconnect?: InsuranceCoverageWhereInput | boolean
+    delete?: InsuranceCoverageWhereInput | boolean
+    connect?: InsuranceCoverageWhereUniqueInput
+    update?: XOR<XOR<InsuranceCoverageUpdateToOneWithWhereWithoutLineItemInput, InsuranceCoverageUpdateWithoutLineItemInput>, InsuranceCoverageUncheckedUpdateWithoutLineItemInput>
+  }
+
+  export type InpatientEncounterOrderUpdateOneWithoutBillingLineItemsNestedInput = {
+    create?: XOR<InpatientEncounterOrderCreateWithoutBillingLineItemsInput, InpatientEncounterOrderUncheckedCreateWithoutBillingLineItemsInput>
+    connectOrCreate?: InpatientEncounterOrderCreateOrConnectWithoutBillingLineItemsInput
+    upsert?: InpatientEncounterOrderUpsertWithoutBillingLineItemsInput
+    disconnect?: InpatientEncounterOrderWhereInput | boolean
+    delete?: InpatientEncounterOrderWhereInput | boolean
+    connect?: InpatientEncounterOrderWhereUniqueInput
+    update?: XOR<XOR<InpatientEncounterOrderUpdateToOneWithWhereWithoutBillingLineItemsInput, InpatientEncounterOrderUpdateWithoutBillingLineItemsInput>, InpatientEncounterOrderUncheckedUpdateWithoutBillingLineItemsInput>
+  }
+
+  export type InsuranceCoverageUncheckedUpdateOneWithoutLineItemNestedInput = {
+    create?: XOR<InsuranceCoverageCreateWithoutLineItemInput, InsuranceCoverageUncheckedCreateWithoutLineItemInput>
+    connectOrCreate?: InsuranceCoverageCreateOrConnectWithoutLineItemInput
+    upsert?: InsuranceCoverageUpsertWithoutLineItemInput
+    disconnect?: InsuranceCoverageWhereInput | boolean
+    delete?: InsuranceCoverageWhereInput | boolean
+    connect?: InsuranceCoverageWhereUniqueInput
+    update?: XOR<XOR<InsuranceCoverageUpdateToOneWithWhereWithoutLineItemInput, InsuranceCoverageUpdateWithoutLineItemInput>, InsuranceCoverageUncheckedUpdateWithoutLineItemInput>
+  }
+
+  export type BillingLineItemCreateNestedOneWithoutInsuranceCoverageInput = {
+    create?: XOR<BillingLineItemCreateWithoutInsuranceCoverageInput, BillingLineItemUncheckedCreateWithoutInsuranceCoverageInput>
+    connectOrCreate?: BillingLineItemCreateOrConnectWithoutInsuranceCoverageInput
+    connect?: BillingLineItemWhereUniqueInput
+  }
+
+  export type BillingLineItemUpdateOneRequiredWithoutInsuranceCoverageNestedInput = {
+    create?: XOR<BillingLineItemCreateWithoutInsuranceCoverageInput, BillingLineItemUncheckedCreateWithoutInsuranceCoverageInput>
+    connectOrCreate?: BillingLineItemCreateOrConnectWithoutInsuranceCoverageInput
+    upsert?: BillingLineItemUpsertWithoutInsuranceCoverageInput
+    connect?: BillingLineItemWhereUniqueInput
+    update?: XOR<XOR<BillingLineItemUpdateToOneWithWhereWithoutInsuranceCoverageInput, BillingLineItemUpdateWithoutInsuranceCoverageInput>, BillingLineItemUncheckedUpdateWithoutInsuranceCoverageInput>
+  }
+
+  export type BillingTransactionCreateNestedOneWithoutPaymentsInput = {
+    create?: XOR<BillingTransactionCreateWithoutPaymentsInput, BillingTransactionUncheckedCreateWithoutPaymentsInput>
+    connectOrCreate?: BillingTransactionCreateOrConnectWithoutPaymentsInput
+    connect?: BillingTransactionWhereUniqueInput
+  }
+
+  export type BillingLineItemCreateNestedManyWithoutPreAuthPaymentInput = {
+    create?: XOR<BillingLineItemCreateWithoutPreAuthPaymentInput, BillingLineItemUncheckedCreateWithoutPreAuthPaymentInput> | BillingLineItemCreateWithoutPreAuthPaymentInput[] | BillingLineItemUncheckedCreateWithoutPreAuthPaymentInput[]
+    connectOrCreate?: BillingLineItemCreateOrConnectWithoutPreAuthPaymentInput | BillingLineItemCreateOrConnectWithoutPreAuthPaymentInput[]
+    createMany?: BillingLineItemCreateManyPreAuthPaymentInputEnvelope
+    connect?: BillingLineItemWhereUniqueInput | BillingLineItemWhereUniqueInput[]
+  }
+
+  export type PaymentPlanCreateNestedOneWithoutPaymentsInput = {
+    create?: XOR<PaymentPlanCreateWithoutPaymentsInput, PaymentPlanUncheckedCreateWithoutPaymentsInput>
+    connectOrCreate?: PaymentPlanCreateOrConnectWithoutPaymentsInput
+    connect?: PaymentPlanWhereUniqueInput
+  }
+
+  export type BillingLineItemUncheckedCreateNestedManyWithoutPreAuthPaymentInput = {
+    create?: XOR<BillingLineItemCreateWithoutPreAuthPaymentInput, BillingLineItemUncheckedCreateWithoutPreAuthPaymentInput> | BillingLineItemCreateWithoutPreAuthPaymentInput[] | BillingLineItemUncheckedCreateWithoutPreAuthPaymentInput[]
+    connectOrCreate?: BillingLineItemCreateOrConnectWithoutPreAuthPaymentInput | BillingLineItemCreateOrConnectWithoutPreAuthPaymentInput[]
+    createMany?: BillingLineItemCreateManyPreAuthPaymentInputEnvelope
+    connect?: BillingLineItemWhereUniqueInput | BillingLineItemWhereUniqueInput[]
+  }
+
+  export type EnumPaymentTypeFieldUpdateOperationsInput = {
+    set?: $Enums.PaymentType
+  }
+
+  export type BillingTransactionUpdateOneRequiredWithoutPaymentsNestedInput = {
+    create?: XOR<BillingTransactionCreateWithoutPaymentsInput, BillingTransactionUncheckedCreateWithoutPaymentsInput>
+    connectOrCreate?: BillingTransactionCreateOrConnectWithoutPaymentsInput
+    upsert?: BillingTransactionUpsertWithoutPaymentsInput
+    connect?: BillingTransactionWhereUniqueInput
+    update?: XOR<XOR<BillingTransactionUpdateToOneWithWhereWithoutPaymentsInput, BillingTransactionUpdateWithoutPaymentsInput>, BillingTransactionUncheckedUpdateWithoutPaymentsInput>
+  }
+
+  export type BillingLineItemUpdateManyWithoutPreAuthPaymentNestedInput = {
+    create?: XOR<BillingLineItemCreateWithoutPreAuthPaymentInput, BillingLineItemUncheckedCreateWithoutPreAuthPaymentInput> | BillingLineItemCreateWithoutPreAuthPaymentInput[] | BillingLineItemUncheckedCreateWithoutPreAuthPaymentInput[]
+    connectOrCreate?: BillingLineItemCreateOrConnectWithoutPreAuthPaymentInput | BillingLineItemCreateOrConnectWithoutPreAuthPaymentInput[]
+    upsert?: BillingLineItemUpsertWithWhereUniqueWithoutPreAuthPaymentInput | BillingLineItemUpsertWithWhereUniqueWithoutPreAuthPaymentInput[]
+    createMany?: BillingLineItemCreateManyPreAuthPaymentInputEnvelope
+    set?: BillingLineItemWhereUniqueInput | BillingLineItemWhereUniqueInput[]
+    disconnect?: BillingLineItemWhereUniqueInput | BillingLineItemWhereUniqueInput[]
+    delete?: BillingLineItemWhereUniqueInput | BillingLineItemWhereUniqueInput[]
+    connect?: BillingLineItemWhereUniqueInput | BillingLineItemWhereUniqueInput[]
+    update?: BillingLineItemUpdateWithWhereUniqueWithoutPreAuthPaymentInput | BillingLineItemUpdateWithWhereUniqueWithoutPreAuthPaymentInput[]
+    updateMany?: BillingLineItemUpdateManyWithWhereWithoutPreAuthPaymentInput | BillingLineItemUpdateManyWithWhereWithoutPreAuthPaymentInput[]
+    deleteMany?: BillingLineItemScalarWhereInput | BillingLineItemScalarWhereInput[]
+  }
+
+  export type PaymentPlanUpdateOneWithoutPaymentsNestedInput = {
+    create?: XOR<PaymentPlanCreateWithoutPaymentsInput, PaymentPlanUncheckedCreateWithoutPaymentsInput>
+    connectOrCreate?: PaymentPlanCreateOrConnectWithoutPaymentsInput
+    upsert?: PaymentPlanUpsertWithoutPaymentsInput
+    disconnect?: PaymentPlanWhereInput | boolean
+    delete?: PaymentPlanWhereInput | boolean
+    connect?: PaymentPlanWhereUniqueInput
+    update?: XOR<XOR<PaymentPlanUpdateToOneWithWhereWithoutPaymentsInput, PaymentPlanUpdateWithoutPaymentsInput>, PaymentPlanUncheckedUpdateWithoutPaymentsInput>
+  }
+
+  export type BillingLineItemUncheckedUpdateManyWithoutPreAuthPaymentNestedInput = {
+    create?: XOR<BillingLineItemCreateWithoutPreAuthPaymentInput, BillingLineItemUncheckedCreateWithoutPreAuthPaymentInput> | BillingLineItemCreateWithoutPreAuthPaymentInput[] | BillingLineItemUncheckedCreateWithoutPreAuthPaymentInput[]
+    connectOrCreate?: BillingLineItemCreateOrConnectWithoutPreAuthPaymentInput | BillingLineItemCreateOrConnectWithoutPreAuthPaymentInput[]
+    upsert?: BillingLineItemUpsertWithWhereUniqueWithoutPreAuthPaymentInput | BillingLineItemUpsertWithWhereUniqueWithoutPreAuthPaymentInput[]
+    createMany?: BillingLineItemCreateManyPreAuthPaymentInputEnvelope
+    set?: BillingLineItemWhereUniqueInput | BillingLineItemWhereUniqueInput[]
+    disconnect?: BillingLineItemWhereUniqueInput | BillingLineItemWhereUniqueInput[]
+    delete?: BillingLineItemWhereUniqueInput | BillingLineItemWhereUniqueInput[]
+    connect?: BillingLineItemWhereUniqueInput | BillingLineItemWhereUniqueInput[]
+    update?: BillingLineItemUpdateWithWhereUniqueWithoutPreAuthPaymentInput | BillingLineItemUpdateWithWhereUniqueWithoutPreAuthPaymentInput[]
+    updateMany?: BillingLineItemUpdateManyWithWhereWithoutPreAuthPaymentInput | BillingLineItemUpdateManyWithWhereWithoutPreAuthPaymentInput[]
+    deleteMany?: BillingLineItemScalarWhereInput | BillingLineItemScalarWhereInput[]
+  }
+
+  export type BillingTransactionCreateNestedOneWithoutPaymentPlanInput = {
+    create?: XOR<BillingTransactionCreateWithoutPaymentPlanInput, BillingTransactionUncheckedCreateWithoutPaymentPlanInput>
+    connectOrCreate?: BillingTransactionCreateOrConnectWithoutPaymentPlanInput
+    connect?: BillingTransactionWhereUniqueInput
+  }
+
+  export type BillingPaymentCreateNestedManyWithoutPaymentPlanInput = {
+    create?: XOR<BillingPaymentCreateWithoutPaymentPlanInput, BillingPaymentUncheckedCreateWithoutPaymentPlanInput> | BillingPaymentCreateWithoutPaymentPlanInput[] | BillingPaymentUncheckedCreateWithoutPaymentPlanInput[]
+    connectOrCreate?: BillingPaymentCreateOrConnectWithoutPaymentPlanInput | BillingPaymentCreateOrConnectWithoutPaymentPlanInput[]
+    createMany?: BillingPaymentCreateManyPaymentPlanInputEnvelope
+    connect?: BillingPaymentWhereUniqueInput | BillingPaymentWhereUniqueInput[]
+  }
+
+  export type BillingPaymentUncheckedCreateNestedManyWithoutPaymentPlanInput = {
+    create?: XOR<BillingPaymentCreateWithoutPaymentPlanInput, BillingPaymentUncheckedCreateWithoutPaymentPlanInput> | BillingPaymentCreateWithoutPaymentPlanInput[] | BillingPaymentUncheckedCreateWithoutPaymentPlanInput[]
+    connectOrCreate?: BillingPaymentCreateOrConnectWithoutPaymentPlanInput | BillingPaymentCreateOrConnectWithoutPaymentPlanInput[]
+    createMany?: BillingPaymentCreateManyPaymentPlanInputEnvelope
+    connect?: BillingPaymentWhereUniqueInput | BillingPaymentWhereUniqueInput[]
+  }
+
+  export type EnumPaymentFrequencyFieldUpdateOperationsInput = {
+    set?: $Enums.PaymentFrequency
+  }
+
+  export type EnumPaymentPlanStatusFieldUpdateOperationsInput = {
+    set?: $Enums.PaymentPlanStatus
+  }
+
+  export type BillingTransactionUpdateOneRequiredWithoutPaymentPlanNestedInput = {
+    create?: XOR<BillingTransactionCreateWithoutPaymentPlanInput, BillingTransactionUncheckedCreateWithoutPaymentPlanInput>
+    connectOrCreate?: BillingTransactionCreateOrConnectWithoutPaymentPlanInput
+    upsert?: BillingTransactionUpsertWithoutPaymentPlanInput
+    connect?: BillingTransactionWhereUniqueInput
+    update?: XOR<XOR<BillingTransactionUpdateToOneWithWhereWithoutPaymentPlanInput, BillingTransactionUpdateWithoutPaymentPlanInput>, BillingTransactionUncheckedUpdateWithoutPaymentPlanInput>
+  }
+
+  export type BillingPaymentUpdateManyWithoutPaymentPlanNestedInput = {
+    create?: XOR<BillingPaymentCreateWithoutPaymentPlanInput, BillingPaymentUncheckedCreateWithoutPaymentPlanInput> | BillingPaymentCreateWithoutPaymentPlanInput[] | BillingPaymentUncheckedCreateWithoutPaymentPlanInput[]
+    connectOrCreate?: BillingPaymentCreateOrConnectWithoutPaymentPlanInput | BillingPaymentCreateOrConnectWithoutPaymentPlanInput[]
+    upsert?: BillingPaymentUpsertWithWhereUniqueWithoutPaymentPlanInput | BillingPaymentUpsertWithWhereUniqueWithoutPaymentPlanInput[]
+    createMany?: BillingPaymentCreateManyPaymentPlanInputEnvelope
+    set?: BillingPaymentWhereUniqueInput | BillingPaymentWhereUniqueInput[]
+    disconnect?: BillingPaymentWhereUniqueInput | BillingPaymentWhereUniqueInput[]
+    delete?: BillingPaymentWhereUniqueInput | BillingPaymentWhereUniqueInput[]
+    connect?: BillingPaymentWhereUniqueInput | BillingPaymentWhereUniqueInput[]
+    update?: BillingPaymentUpdateWithWhereUniqueWithoutPaymentPlanInput | BillingPaymentUpdateWithWhereUniqueWithoutPaymentPlanInput[]
+    updateMany?: BillingPaymentUpdateManyWithWhereWithoutPaymentPlanInput | BillingPaymentUpdateManyWithWhereWithoutPaymentPlanInput[]
+    deleteMany?: BillingPaymentScalarWhereInput | BillingPaymentScalarWhereInput[]
+  }
+
+  export type BillingPaymentUncheckedUpdateManyWithoutPaymentPlanNestedInput = {
+    create?: XOR<BillingPaymentCreateWithoutPaymentPlanInput, BillingPaymentUncheckedCreateWithoutPaymentPlanInput> | BillingPaymentCreateWithoutPaymentPlanInput[] | BillingPaymentUncheckedCreateWithoutPaymentPlanInput[]
+    connectOrCreate?: BillingPaymentCreateOrConnectWithoutPaymentPlanInput | BillingPaymentCreateOrConnectWithoutPaymentPlanInput[]
+    upsert?: BillingPaymentUpsertWithWhereUniqueWithoutPaymentPlanInput | BillingPaymentUpsertWithWhereUniqueWithoutPaymentPlanInput[]
+    createMany?: BillingPaymentCreateManyPaymentPlanInputEnvelope
+    set?: BillingPaymentWhereUniqueInput | BillingPaymentWhereUniqueInput[]
+    disconnect?: BillingPaymentWhereUniqueInput | BillingPaymentWhereUniqueInput[]
+    delete?: BillingPaymentWhereUniqueInput | BillingPaymentWhereUniqueInput[]
+    connect?: BillingPaymentWhereUniqueInput | BillingPaymentWhereUniqueInput[]
+    update?: BillingPaymentUpdateWithWhereUniqueWithoutPaymentPlanInput | BillingPaymentUpdateWithWhereUniqueWithoutPaymentPlanInput[]
+    updateMany?: BillingPaymentUpdateManyWithWhereWithoutPaymentPlanInput | BillingPaymentUpdateManyWithWhereWithoutPaymentPlanInput[]
+    deleteMany?: BillingPaymentScalarWhereInput | BillingPaymentScalarWhereInput[]
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -47048,6 +56728,91 @@ export namespace Prisma {
     _max?: NestedEnumDataShareStatusFilter<$PrismaModel>
   }
 
+  export type NestedEnumBillingStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.BillingStatus | EnumBillingStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.BillingStatus[] | ListEnumBillingStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.BillingStatus[] | ListEnumBillingStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumBillingStatusFilter<$PrismaModel> | $Enums.BillingStatus
+  }
+
+  export type NestedEnumBillingStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.BillingStatus | EnumBillingStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.BillingStatus[] | ListEnumBillingStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.BillingStatus[] | ListEnumBillingStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumBillingStatusWithAggregatesFilter<$PrismaModel> | $Enums.BillingStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumBillingStatusFilter<$PrismaModel>
+    _max?: NestedEnumBillingStatusFilter<$PrismaModel>
+  }
+
+  export type NestedEnumBillingItemTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.BillingItemType | EnumBillingItemTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.BillingItemType[] | ListEnumBillingItemTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.BillingItemType[] | ListEnumBillingItemTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumBillingItemTypeFilter<$PrismaModel> | $Enums.BillingItemType
+  }
+
+  export type NestedEnumBillingItemTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.BillingItemType | EnumBillingItemTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.BillingItemType[] | ListEnumBillingItemTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.BillingItemType[] | ListEnumBillingItemTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumBillingItemTypeWithAggregatesFilter<$PrismaModel> | $Enums.BillingItemType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumBillingItemTypeFilter<$PrismaModel>
+    _max?: NestedEnumBillingItemTypeFilter<$PrismaModel>
+  }
+
+  export type NestedEnumPaymentTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.PaymentType | EnumPaymentTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.PaymentType[] | ListEnumPaymentTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.PaymentType[] | ListEnumPaymentTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumPaymentTypeFilter<$PrismaModel> | $Enums.PaymentType
+  }
+
+  export type NestedEnumPaymentTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.PaymentType | EnumPaymentTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.PaymentType[] | ListEnumPaymentTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.PaymentType[] | ListEnumPaymentTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumPaymentTypeWithAggregatesFilter<$PrismaModel> | $Enums.PaymentType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumPaymentTypeFilter<$PrismaModel>
+    _max?: NestedEnumPaymentTypeFilter<$PrismaModel>
+  }
+
+  export type NestedEnumPaymentFrequencyFilter<$PrismaModel = never> = {
+    equals?: $Enums.PaymentFrequency | EnumPaymentFrequencyFieldRefInput<$PrismaModel>
+    in?: $Enums.PaymentFrequency[] | ListEnumPaymentFrequencyFieldRefInput<$PrismaModel>
+    notIn?: $Enums.PaymentFrequency[] | ListEnumPaymentFrequencyFieldRefInput<$PrismaModel>
+    not?: NestedEnumPaymentFrequencyFilter<$PrismaModel> | $Enums.PaymentFrequency
+  }
+
+  export type NestedEnumPaymentPlanStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.PaymentPlanStatus | EnumPaymentPlanStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.PaymentPlanStatus[] | ListEnumPaymentPlanStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.PaymentPlanStatus[] | ListEnumPaymentPlanStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumPaymentPlanStatusFilter<$PrismaModel> | $Enums.PaymentPlanStatus
+  }
+
+  export type NestedEnumPaymentFrequencyWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.PaymentFrequency | EnumPaymentFrequencyFieldRefInput<$PrismaModel>
+    in?: $Enums.PaymentFrequency[] | ListEnumPaymentFrequencyFieldRefInput<$PrismaModel>
+    notIn?: $Enums.PaymentFrequency[] | ListEnumPaymentFrequencyFieldRefInput<$PrismaModel>
+    not?: NestedEnumPaymentFrequencyWithAggregatesFilter<$PrismaModel> | $Enums.PaymentFrequency
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumPaymentFrequencyFilter<$PrismaModel>
+    _max?: NestedEnumPaymentFrequencyFilter<$PrismaModel>
+  }
+
+  export type NestedEnumPaymentPlanStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.PaymentPlanStatus | EnumPaymentPlanStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.PaymentPlanStatus[] | ListEnumPaymentPlanStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.PaymentPlanStatus[] | ListEnumPaymentPlanStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumPaymentPlanStatusWithAggregatesFilter<$PrismaModel> | $Enums.PaymentPlanStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumPaymentPlanStatusFilter<$PrismaModel>
+    _max?: NestedEnumPaymentPlanStatusFilter<$PrismaModel>
+  }
+
   export type RefreshTokenCreateWithoutUserInput = {
     id?: string
     token: string
@@ -47116,6 +56881,7 @@ export namespace Prisma {
     outpatientEncounters?: OutpatientEncounterCreateNestedManyWithoutPatientInput
     insuranceClaims?: InsuranceClaimCreateNestedManyWithoutPatientInput
     dataShareRequests?: DataShareRequestCreateNestedManyWithoutPatientInput
+    billingTransactions?: BillingTransactionCreateNestedManyWithoutPatientInput
   }
 
   export type PatientUncheckedCreateWithoutUserInput = {
@@ -47134,6 +56900,7 @@ export namespace Prisma {
     outpatientEncounters?: OutpatientEncounterUncheckedCreateNestedManyWithoutPatientInput
     insuranceClaims?: InsuranceClaimUncheckedCreateNestedManyWithoutPatientInput
     dataShareRequests?: DataShareRequestUncheckedCreateNestedManyWithoutPatientInput
+    billingTransactions?: BillingTransactionUncheckedCreateNestedManyWithoutPatientInput
   }
 
   export type PatientCreateOrConnectWithoutUserInput = {
@@ -47376,6 +57143,7 @@ export namespace Prisma {
     outpatientEncounters?: OutpatientEncounterUpdateManyWithoutPatientNestedInput
     insuranceClaims?: InsuranceClaimUpdateManyWithoutPatientNestedInput
     dataShareRequests?: DataShareRequestUpdateManyWithoutPatientNestedInput
+    billingTransactions?: BillingTransactionUpdateManyWithoutPatientNestedInput
   }
 
   export type PatientUncheckedUpdateWithoutUserInput = {
@@ -47394,6 +57162,7 @@ export namespace Prisma {
     outpatientEncounters?: OutpatientEncounterUncheckedUpdateManyWithoutPatientNestedInput
     insuranceClaims?: InsuranceClaimUncheckedUpdateManyWithoutPatientNestedInput
     dataShareRequests?: DataShareRequestUncheckedUpdateManyWithoutPatientNestedInput
+    billingTransactions?: BillingTransactionUncheckedUpdateManyWithoutPatientNestedInput
   }
 
   export type PartnerUpsertWithoutUserInput = {
@@ -47815,6 +57584,7 @@ export namespace Prisma {
     orders?: InpatientEncounterOrderCreateNestedManyWithoutEncounterInput
     insuranceClaim?: InsuranceClaimCreateNestedOneWithoutInpatientEncounterInput
     dataShareRequest?: DataShareRequestCreateNestedOneWithoutInpatientEncounterInput
+    billingTransaction?: BillingTransactionCreateNestedOneWithoutEncounterInput
   }
 
   export type InpatientEncounterUncheckedCreateWithoutPatientInput = {
@@ -47836,6 +57606,7 @@ export namespace Prisma {
     orders?: InpatientEncounterOrderUncheckedCreateNestedManyWithoutEncounterInput
     insuranceClaim?: InsuranceClaimUncheckedCreateNestedOneWithoutInpatientEncounterInput
     dataShareRequest?: DataShareRequestUncheckedCreateNestedOneWithoutInpatientEncounterInput
+    billingTransaction?: BillingTransactionUncheckedCreateNestedOneWithoutEncounterInput
   }
 
   export type InpatientEncounterCreateOrConnectWithoutPatientInput = {
@@ -48009,6 +57780,58 @@ export namespace Prisma {
 
   export type DataShareRequestCreateManyPatientInputEnvelope = {
     data: DataShareRequestCreateManyPatientInput | DataShareRequestCreateManyPatientInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type BillingTransactionCreateWithoutPatientInput = {
+    id?: string
+    transactionNumber: string
+    status?: $Enums.BillingStatus
+    totalAmount: Decimal | DecimalJsLike | number | string
+    insuranceDiscount?: Decimal | DecimalJsLike | number | string
+    finalAmount: Decimal | DecimalJsLike | number | string
+    paidAmount?: Decimal | DecimalJsLike | number | string
+    balanceAmount: Decimal | DecimalJsLike | number | string
+    hasPreAuth?: boolean
+    preAuthSettled?: boolean
+    hasPaymentPlan?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    createdBy?: string | null
+    encounter?: InpatientEncounterCreateNestedOneWithoutBillingTransactionInput
+    paymentPlan?: PaymentPlanCreateNestedOneWithoutTransactionInput
+    lineItems?: BillingLineItemCreateNestedManyWithoutTransactionInput
+    payments?: BillingPaymentCreateNestedManyWithoutTransactionInput
+  }
+
+  export type BillingTransactionUncheckedCreateWithoutPatientInput = {
+    id?: string
+    transactionNumber: string
+    encounterId?: string | null
+    status?: $Enums.BillingStatus
+    totalAmount: Decimal | DecimalJsLike | number | string
+    insuranceDiscount?: Decimal | DecimalJsLike | number | string
+    finalAmount: Decimal | DecimalJsLike | number | string
+    paidAmount?: Decimal | DecimalJsLike | number | string
+    balanceAmount: Decimal | DecimalJsLike | number | string
+    hasPreAuth?: boolean
+    preAuthSettled?: boolean
+    hasPaymentPlan?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    createdBy?: string | null
+    paymentPlan?: PaymentPlanUncheckedCreateNestedOneWithoutTransactionInput
+    lineItems?: BillingLineItemUncheckedCreateNestedManyWithoutTransactionInput
+    payments?: BillingPaymentUncheckedCreateNestedManyWithoutTransactionInput
+  }
+
+  export type BillingTransactionCreateOrConnectWithoutPatientInput = {
+    where: BillingTransactionWhereUniqueInput
+    create: XOR<BillingTransactionCreateWithoutPatientInput, BillingTransactionUncheckedCreateWithoutPatientInput>
+  }
+
+  export type BillingTransactionCreateManyPatientInputEnvelope = {
+    data: BillingTransactionCreateManyPatientInput | BillingTransactionCreateManyPatientInput[]
     skipDuplicates?: boolean
   }
 
@@ -48255,6 +58078,44 @@ export namespace Prisma {
     patientConsent?: BoolFilter<"DataShareRequest"> | boolean
     createdAt?: DateTimeFilter<"DataShareRequest"> | Date | string
     updatedAt?: DateTimeFilter<"DataShareRequest"> | Date | string
+  }
+
+  export type BillingTransactionUpsertWithWhereUniqueWithoutPatientInput = {
+    where: BillingTransactionWhereUniqueInput
+    update: XOR<BillingTransactionUpdateWithoutPatientInput, BillingTransactionUncheckedUpdateWithoutPatientInput>
+    create: XOR<BillingTransactionCreateWithoutPatientInput, BillingTransactionUncheckedCreateWithoutPatientInput>
+  }
+
+  export type BillingTransactionUpdateWithWhereUniqueWithoutPatientInput = {
+    where: BillingTransactionWhereUniqueInput
+    data: XOR<BillingTransactionUpdateWithoutPatientInput, BillingTransactionUncheckedUpdateWithoutPatientInput>
+  }
+
+  export type BillingTransactionUpdateManyWithWhereWithoutPatientInput = {
+    where: BillingTransactionScalarWhereInput
+    data: XOR<BillingTransactionUpdateManyMutationInput, BillingTransactionUncheckedUpdateManyWithoutPatientInput>
+  }
+
+  export type BillingTransactionScalarWhereInput = {
+    AND?: BillingTransactionScalarWhereInput | BillingTransactionScalarWhereInput[]
+    OR?: BillingTransactionScalarWhereInput[]
+    NOT?: BillingTransactionScalarWhereInput | BillingTransactionScalarWhereInput[]
+    id?: UuidFilter<"BillingTransaction"> | string
+    transactionNumber?: StringFilter<"BillingTransaction"> | string
+    patientId?: StringFilter<"BillingTransaction"> | string
+    encounterId?: UuidNullableFilter<"BillingTransaction"> | string | null
+    status?: EnumBillingStatusFilter<"BillingTransaction"> | $Enums.BillingStatus
+    totalAmount?: DecimalFilter<"BillingTransaction"> | Decimal | DecimalJsLike | number | string
+    insuranceDiscount?: DecimalFilter<"BillingTransaction"> | Decimal | DecimalJsLike | number | string
+    finalAmount?: DecimalFilter<"BillingTransaction"> | Decimal | DecimalJsLike | number | string
+    paidAmount?: DecimalFilter<"BillingTransaction"> | Decimal | DecimalJsLike | number | string
+    balanceAmount?: DecimalFilter<"BillingTransaction"> | Decimal | DecimalJsLike | number | string
+    hasPreAuth?: BoolFilter<"BillingTransaction"> | boolean
+    preAuthSettled?: BoolFilter<"BillingTransaction"> | boolean
+    hasPaymentPlan?: BoolFilter<"BillingTransaction"> | boolean
+    createdAt?: DateTimeFilter<"BillingTransaction"> | Date | string
+    updatedAt?: DateTimeFilter<"BillingTransaction"> | Date | string
+    createdBy?: StringNullableFilter<"BillingTransaction"> | string | null
   }
 
   export type UserCreateWithoutPartnerProfileInput = {
@@ -49912,6 +59773,7 @@ export namespace Prisma {
     inpatientEncounters?: InpatientEncounterCreateNestedManyWithoutPatientInput
     insuranceClaims?: InsuranceClaimCreateNestedManyWithoutPatientInput
     dataShareRequests?: DataShareRequestCreateNestedManyWithoutPatientInput
+    billingTransactions?: BillingTransactionCreateNestedManyWithoutPatientInput
   }
 
   export type PatientUncheckedCreateWithoutOutpatientEncountersInput = {
@@ -49930,6 +59792,7 @@ export namespace Prisma {
     inpatientEncounters?: InpatientEncounterUncheckedCreateNestedManyWithoutPatientInput
     insuranceClaims?: InsuranceClaimUncheckedCreateNestedManyWithoutPatientInput
     dataShareRequests?: DataShareRequestUncheckedCreateNestedManyWithoutPatientInput
+    billingTransactions?: BillingTransactionUncheckedCreateNestedManyWithoutPatientInput
   }
 
   export type PatientCreateOrConnectWithoutOutpatientEncountersInput = {
@@ -50074,6 +59937,7 @@ export namespace Prisma {
     inpatientEncounters?: InpatientEncounterUpdateManyWithoutPatientNestedInput
     insuranceClaims?: InsuranceClaimUpdateManyWithoutPatientNestedInput
     dataShareRequests?: DataShareRequestUpdateManyWithoutPatientNestedInput
+    billingTransactions?: BillingTransactionUpdateManyWithoutPatientNestedInput
   }
 
   export type PatientUncheckedUpdateWithoutOutpatientEncountersInput = {
@@ -50092,6 +59956,7 @@ export namespace Prisma {
     inpatientEncounters?: InpatientEncounterUncheckedUpdateManyWithoutPatientNestedInput
     insuranceClaims?: InsuranceClaimUncheckedUpdateManyWithoutPatientNestedInput
     dataShareRequests?: DataShareRequestUncheckedUpdateManyWithoutPatientNestedInput
+    billingTransactions?: BillingTransactionUncheckedUpdateManyWithoutPatientNestedInput
   }
 
   export type InsuranceClaimUpsertWithoutOutpatientEncounterInput = {
@@ -50232,6 +60097,7 @@ export namespace Prisma {
     outpatientEncounters?: OutpatientEncounterCreateNestedManyWithoutPatientInput
     insuranceClaims?: InsuranceClaimCreateNestedManyWithoutPatientInput
     dataShareRequests?: DataShareRequestCreateNestedManyWithoutPatientInput
+    billingTransactions?: BillingTransactionCreateNestedManyWithoutPatientInput
   }
 
   export type PatientUncheckedCreateWithoutInpatientEncountersInput = {
@@ -50250,6 +60116,7 @@ export namespace Prisma {
     outpatientEncounters?: OutpatientEncounterUncheckedCreateNestedManyWithoutPatientInput
     insuranceClaims?: InsuranceClaimUncheckedCreateNestedManyWithoutPatientInput
     dataShareRequests?: DataShareRequestUncheckedCreateNestedManyWithoutPatientInput
+    billingTransactions?: BillingTransactionUncheckedCreateNestedManyWithoutPatientInput
   }
 
   export type PatientCreateOrConnectWithoutInpatientEncountersInput = {
@@ -50294,6 +60161,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     catalogueItem?: ParticularCatalogueCreateNestedOneWithoutOrdersInput
+    billingLineItems?: BillingLineItemCreateNestedManyWithoutEncounterOrderInput
   }
 
   export type InpatientEncounterOrderUncheckedCreateWithoutEncounterInput = {
@@ -50307,6 +60175,7 @@ export namespace Prisma {
     notes?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    billingLineItems?: BillingLineItemUncheckedCreateNestedManyWithoutEncounterOrderInput
   }
 
   export type InpatientEncounterOrderCreateOrConnectWithoutEncounterInput = {
@@ -50429,6 +60298,53 @@ export namespace Prisma {
     create: XOR<DataShareRequestCreateWithoutInpatientEncounterInput, DataShareRequestUncheckedCreateWithoutInpatientEncounterInput>
   }
 
+  export type BillingTransactionCreateWithoutEncounterInput = {
+    id?: string
+    transactionNumber: string
+    status?: $Enums.BillingStatus
+    totalAmount: Decimal | DecimalJsLike | number | string
+    insuranceDiscount?: Decimal | DecimalJsLike | number | string
+    finalAmount: Decimal | DecimalJsLike | number | string
+    paidAmount?: Decimal | DecimalJsLike | number | string
+    balanceAmount: Decimal | DecimalJsLike | number | string
+    hasPreAuth?: boolean
+    preAuthSettled?: boolean
+    hasPaymentPlan?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    createdBy?: string | null
+    patient: PatientCreateNestedOneWithoutBillingTransactionsInput
+    paymentPlan?: PaymentPlanCreateNestedOneWithoutTransactionInput
+    lineItems?: BillingLineItemCreateNestedManyWithoutTransactionInput
+    payments?: BillingPaymentCreateNestedManyWithoutTransactionInput
+  }
+
+  export type BillingTransactionUncheckedCreateWithoutEncounterInput = {
+    id?: string
+    transactionNumber: string
+    patientId: string
+    status?: $Enums.BillingStatus
+    totalAmount: Decimal | DecimalJsLike | number | string
+    insuranceDiscount?: Decimal | DecimalJsLike | number | string
+    finalAmount: Decimal | DecimalJsLike | number | string
+    paidAmount?: Decimal | DecimalJsLike | number | string
+    balanceAmount: Decimal | DecimalJsLike | number | string
+    hasPreAuth?: boolean
+    preAuthSettled?: boolean
+    hasPaymentPlan?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    createdBy?: string | null
+    paymentPlan?: PaymentPlanUncheckedCreateNestedOneWithoutTransactionInput
+    lineItems?: BillingLineItemUncheckedCreateNestedManyWithoutTransactionInput
+    payments?: BillingPaymentUncheckedCreateNestedManyWithoutTransactionInput
+  }
+
+  export type BillingTransactionCreateOrConnectWithoutEncounterInput = {
+    where: BillingTransactionWhereUniqueInput
+    create: XOR<BillingTransactionCreateWithoutEncounterInput, BillingTransactionUncheckedCreateWithoutEncounterInput>
+  }
+
   export type PatientUpsertWithoutInpatientEncountersInput = {
     update: XOR<PatientUpdateWithoutInpatientEncountersInput, PatientUncheckedUpdateWithoutInpatientEncountersInput>
     create: XOR<PatientCreateWithoutInpatientEncountersInput, PatientUncheckedCreateWithoutInpatientEncountersInput>
@@ -50456,6 +60372,7 @@ export namespace Prisma {
     outpatientEncounters?: OutpatientEncounterUpdateManyWithoutPatientNestedInput
     insuranceClaims?: InsuranceClaimUpdateManyWithoutPatientNestedInput
     dataShareRequests?: DataShareRequestUpdateManyWithoutPatientNestedInput
+    billingTransactions?: BillingTransactionUpdateManyWithoutPatientNestedInput
   }
 
   export type PatientUncheckedUpdateWithoutInpatientEncountersInput = {
@@ -50474,6 +60391,7 @@ export namespace Prisma {
     outpatientEncounters?: OutpatientEncounterUncheckedUpdateManyWithoutPatientNestedInput
     insuranceClaims?: InsuranceClaimUncheckedUpdateManyWithoutPatientNestedInput
     dataShareRequests?: DataShareRequestUncheckedUpdateManyWithoutPatientNestedInput
+    billingTransactions?: BillingTransactionUncheckedUpdateManyWithoutPatientNestedInput
   }
 
   export type InpatientEncounterChartUpsertWithWhereUniqueWithoutEncounterInput = {
@@ -50659,6 +60577,59 @@ export namespace Prisma {
     accessTokens?: DataShareAccessTokenUncheckedUpdateManyWithoutRequestNestedInput
   }
 
+  export type BillingTransactionUpsertWithoutEncounterInput = {
+    update: XOR<BillingTransactionUpdateWithoutEncounterInput, BillingTransactionUncheckedUpdateWithoutEncounterInput>
+    create: XOR<BillingTransactionCreateWithoutEncounterInput, BillingTransactionUncheckedCreateWithoutEncounterInput>
+    where?: BillingTransactionWhereInput
+  }
+
+  export type BillingTransactionUpdateToOneWithWhereWithoutEncounterInput = {
+    where?: BillingTransactionWhereInput
+    data: XOR<BillingTransactionUpdateWithoutEncounterInput, BillingTransactionUncheckedUpdateWithoutEncounterInput>
+  }
+
+  export type BillingTransactionUpdateWithoutEncounterInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    transactionNumber?: StringFieldUpdateOperationsInput | string
+    status?: EnumBillingStatusFieldUpdateOperationsInput | $Enums.BillingStatus
+    totalAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    insuranceDiscount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    finalAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    paidAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    balanceAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    hasPreAuth?: BoolFieldUpdateOperationsInput | boolean
+    preAuthSettled?: BoolFieldUpdateOperationsInput | boolean
+    hasPaymentPlan?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableStringFieldUpdateOperationsInput | string | null
+    patient?: PatientUpdateOneRequiredWithoutBillingTransactionsNestedInput
+    paymentPlan?: PaymentPlanUpdateOneWithoutTransactionNestedInput
+    lineItems?: BillingLineItemUpdateManyWithoutTransactionNestedInput
+    payments?: BillingPaymentUpdateManyWithoutTransactionNestedInput
+  }
+
+  export type BillingTransactionUncheckedUpdateWithoutEncounterInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    transactionNumber?: StringFieldUpdateOperationsInput | string
+    patientId?: StringFieldUpdateOperationsInput | string
+    status?: EnumBillingStatusFieldUpdateOperationsInput | $Enums.BillingStatus
+    totalAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    insuranceDiscount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    finalAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    paidAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    balanceAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    hasPreAuth?: BoolFieldUpdateOperationsInput | boolean
+    preAuthSettled?: BoolFieldUpdateOperationsInput | boolean
+    hasPaymentPlan?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableStringFieldUpdateOperationsInput | string | null
+    paymentPlan?: PaymentPlanUncheckedUpdateOneWithoutTransactionNestedInput
+    lineItems?: BillingLineItemUncheckedUpdateManyWithoutTransactionNestedInput
+    payments?: BillingPaymentUncheckedUpdateManyWithoutTransactionNestedInput
+  }
+
   export type InpatientEncounterCreateWithoutChartsInput = {
     id?: string
     doctorId: string
@@ -50678,6 +60649,7 @@ export namespace Prisma {
     orders?: InpatientEncounterOrderCreateNestedManyWithoutEncounterInput
     insuranceClaim?: InsuranceClaimCreateNestedOneWithoutInpatientEncounterInput
     dataShareRequest?: DataShareRequestCreateNestedOneWithoutInpatientEncounterInput
+    billingTransaction?: BillingTransactionCreateNestedOneWithoutEncounterInput
   }
 
   export type InpatientEncounterUncheckedCreateWithoutChartsInput = {
@@ -50699,6 +60671,7 @@ export namespace Prisma {
     orders?: InpatientEncounterOrderUncheckedCreateNestedManyWithoutEncounterInput
     insuranceClaim?: InsuranceClaimUncheckedCreateNestedOneWithoutInpatientEncounterInput
     dataShareRequest?: DataShareRequestUncheckedCreateNestedOneWithoutInpatientEncounterInput
+    billingTransaction?: BillingTransactionUncheckedCreateNestedOneWithoutEncounterInput
   }
 
   export type InpatientEncounterCreateOrConnectWithoutChartsInput = {
@@ -50736,6 +60709,7 @@ export namespace Prisma {
     orders?: InpatientEncounterOrderUpdateManyWithoutEncounterNestedInput
     insuranceClaim?: InsuranceClaimUpdateOneWithoutInpatientEncounterNestedInput
     dataShareRequest?: DataShareRequestUpdateOneWithoutInpatientEncounterNestedInput
+    billingTransaction?: BillingTransactionUpdateOneWithoutEncounterNestedInput
   }
 
   export type InpatientEncounterUncheckedUpdateWithoutChartsInput = {
@@ -50757,6 +60731,7 @@ export namespace Prisma {
     orders?: InpatientEncounterOrderUncheckedUpdateManyWithoutEncounterNestedInput
     insuranceClaim?: InsuranceClaimUncheckedUpdateOneWithoutInpatientEncounterNestedInput
     dataShareRequest?: DataShareRequestUncheckedUpdateOneWithoutInpatientEncounterNestedInput
+    billingTransaction?: BillingTransactionUncheckedUpdateOneWithoutEncounterNestedInput
   }
 
   export type InpatientEncounterCreateWithoutOrdersInput = {
@@ -50778,6 +60753,7 @@ export namespace Prisma {
     charts?: InpatientEncounterChartCreateNestedManyWithoutEncounterInput
     insuranceClaim?: InsuranceClaimCreateNestedOneWithoutInpatientEncounterInput
     dataShareRequest?: DataShareRequestCreateNestedOneWithoutInpatientEncounterInput
+    billingTransaction?: BillingTransactionCreateNestedOneWithoutEncounterInput
   }
 
   export type InpatientEncounterUncheckedCreateWithoutOrdersInput = {
@@ -50799,6 +60775,7 @@ export namespace Prisma {
     charts?: InpatientEncounterChartUncheckedCreateNestedManyWithoutEncounterInput
     insuranceClaim?: InsuranceClaimUncheckedCreateNestedOneWithoutInpatientEncounterInput
     dataShareRequest?: DataShareRequestUncheckedCreateNestedOneWithoutInpatientEncounterInput
+    billingTransaction?: BillingTransactionUncheckedCreateNestedOneWithoutEncounterInput
   }
 
   export type InpatientEncounterCreateOrConnectWithoutOrdersInput = {
@@ -50833,6 +60810,56 @@ export namespace Prisma {
     create: XOR<ParticularCatalogueCreateWithoutOrdersInput, ParticularCatalogueUncheckedCreateWithoutOrdersInput>
   }
 
+  export type BillingLineItemCreateWithoutEncounterOrderInput = {
+    id?: string
+    itemType: $Enums.BillingItemType
+    description: string
+    quantity?: number
+    unitPrice: Decimal | DecimalJsLike | number | string
+    totalPrice: Decimal | DecimalJsLike | number | string
+    requiresPreAuth?: boolean
+    preAuthPaid?: boolean
+    insuranceCoverable?: boolean
+    insuranceDiscount?: Decimal | DecimalJsLike | number | string
+    finalPrice: Decimal | DecimalJsLike | number | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    addedBy?: string | null
+    transaction: BillingTransactionCreateNestedOneWithoutLineItemsInput
+    preAuthPayment?: BillingPaymentCreateNestedOneWithoutPreAuthItemsInput
+    insuranceCoverage?: InsuranceCoverageCreateNestedOneWithoutLineItemInput
+  }
+
+  export type BillingLineItemUncheckedCreateWithoutEncounterOrderInput = {
+    id?: string
+    transactionId: string
+    itemType: $Enums.BillingItemType
+    description: string
+    quantity?: number
+    unitPrice: Decimal | DecimalJsLike | number | string
+    totalPrice: Decimal | DecimalJsLike | number | string
+    requiresPreAuth?: boolean
+    preAuthPaid?: boolean
+    preAuthPaymentId?: string | null
+    insuranceCoverable?: boolean
+    insuranceDiscount?: Decimal | DecimalJsLike | number | string
+    finalPrice: Decimal | DecimalJsLike | number | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    addedBy?: string | null
+    insuranceCoverage?: InsuranceCoverageUncheckedCreateNestedOneWithoutLineItemInput
+  }
+
+  export type BillingLineItemCreateOrConnectWithoutEncounterOrderInput = {
+    where: BillingLineItemWhereUniqueInput
+    create: XOR<BillingLineItemCreateWithoutEncounterOrderInput, BillingLineItemUncheckedCreateWithoutEncounterOrderInput>
+  }
+
+  export type BillingLineItemCreateManyEncounterOrderInputEnvelope = {
+    data: BillingLineItemCreateManyEncounterOrderInput | BillingLineItemCreateManyEncounterOrderInput[]
+    skipDuplicates?: boolean
+  }
+
   export type InpatientEncounterUpsertWithoutOrdersInput = {
     update: XOR<InpatientEncounterUpdateWithoutOrdersInput, InpatientEncounterUncheckedUpdateWithoutOrdersInput>
     create: XOR<InpatientEncounterCreateWithoutOrdersInput, InpatientEncounterUncheckedCreateWithoutOrdersInput>
@@ -50863,6 +60890,7 @@ export namespace Prisma {
     charts?: InpatientEncounterChartUpdateManyWithoutEncounterNestedInput
     insuranceClaim?: InsuranceClaimUpdateOneWithoutInpatientEncounterNestedInput
     dataShareRequest?: DataShareRequestUpdateOneWithoutInpatientEncounterNestedInput
+    billingTransaction?: BillingTransactionUpdateOneWithoutEncounterNestedInput
   }
 
   export type InpatientEncounterUncheckedUpdateWithoutOrdersInput = {
@@ -50884,6 +60912,7 @@ export namespace Prisma {
     charts?: InpatientEncounterChartUncheckedUpdateManyWithoutEncounterNestedInput
     insuranceClaim?: InsuranceClaimUncheckedUpdateOneWithoutInpatientEncounterNestedInput
     dataShareRequest?: DataShareRequestUncheckedUpdateOneWithoutInpatientEncounterNestedInput
+    billingTransaction?: BillingTransactionUncheckedUpdateOneWithoutEncounterNestedInput
   }
 
   export type ParticularCatalogueUpsertWithoutOrdersInput = {
@@ -50919,6 +60948,45 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type BillingLineItemUpsertWithWhereUniqueWithoutEncounterOrderInput = {
+    where: BillingLineItemWhereUniqueInput
+    update: XOR<BillingLineItemUpdateWithoutEncounterOrderInput, BillingLineItemUncheckedUpdateWithoutEncounterOrderInput>
+    create: XOR<BillingLineItemCreateWithoutEncounterOrderInput, BillingLineItemUncheckedCreateWithoutEncounterOrderInput>
+  }
+
+  export type BillingLineItemUpdateWithWhereUniqueWithoutEncounterOrderInput = {
+    where: BillingLineItemWhereUniqueInput
+    data: XOR<BillingLineItemUpdateWithoutEncounterOrderInput, BillingLineItemUncheckedUpdateWithoutEncounterOrderInput>
+  }
+
+  export type BillingLineItemUpdateManyWithWhereWithoutEncounterOrderInput = {
+    where: BillingLineItemScalarWhereInput
+    data: XOR<BillingLineItemUpdateManyMutationInput, BillingLineItemUncheckedUpdateManyWithoutEncounterOrderInput>
+  }
+
+  export type BillingLineItemScalarWhereInput = {
+    AND?: BillingLineItemScalarWhereInput | BillingLineItemScalarWhereInput[]
+    OR?: BillingLineItemScalarWhereInput[]
+    NOT?: BillingLineItemScalarWhereInput | BillingLineItemScalarWhereInput[]
+    id?: UuidFilter<"BillingLineItem"> | string
+    transactionId?: UuidFilter<"BillingLineItem"> | string
+    itemType?: EnumBillingItemTypeFilter<"BillingLineItem"> | $Enums.BillingItemType
+    description?: StringFilter<"BillingLineItem"> | string
+    quantity?: IntFilter<"BillingLineItem"> | number
+    unitPrice?: DecimalFilter<"BillingLineItem"> | Decimal | DecimalJsLike | number | string
+    totalPrice?: DecimalFilter<"BillingLineItem"> | Decimal | DecimalJsLike | number | string
+    requiresPreAuth?: BoolFilter<"BillingLineItem"> | boolean
+    preAuthPaid?: BoolFilter<"BillingLineItem"> | boolean
+    preAuthPaymentId?: UuidNullableFilter<"BillingLineItem"> | string | null
+    insuranceCoverable?: BoolFilter<"BillingLineItem"> | boolean
+    insuranceDiscount?: DecimalFilter<"BillingLineItem"> | Decimal | DecimalJsLike | number | string
+    finalPrice?: DecimalFilter<"BillingLineItem"> | Decimal | DecimalJsLike | number | string
+    encounterOrderId?: UuidNullableFilter<"BillingLineItem"> | string | null
+    createdAt?: DateTimeFilter<"BillingLineItem"> | Date | string
+    updatedAt?: DateTimeFilter<"BillingLineItem"> | Date | string
+    addedBy?: StringNullableFilter<"BillingLineItem"> | string | null
+  }
+
   export type InpatientEncounterOrderCreateWithoutCatalogueItemInput = {
     id?: string
     type: $Enums.InpatientEncounterOrderType
@@ -50930,6 +60998,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     encounter: InpatientEncounterCreateNestedOneWithoutOrdersInput
+    billingLineItems?: BillingLineItemCreateNestedManyWithoutEncounterOrderInput
   }
 
   export type InpatientEncounterOrderUncheckedCreateWithoutCatalogueItemInput = {
@@ -50943,6 +61012,7 @@ export namespace Prisma {
     notes?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    billingLineItems?: BillingLineItemUncheckedCreateNestedManyWithoutEncounterOrderInput
   }
 
   export type InpatientEncounterOrderCreateOrConnectWithoutCatalogueItemInput = {
@@ -50987,6 +61057,7 @@ export namespace Prisma {
     inpatientEncounters?: InpatientEncounterCreateNestedManyWithoutPatientInput
     outpatientEncounters?: OutpatientEncounterCreateNestedManyWithoutPatientInput
     dataShareRequests?: DataShareRequestCreateNestedManyWithoutPatientInput
+    billingTransactions?: BillingTransactionCreateNestedManyWithoutPatientInput
   }
 
   export type PatientUncheckedCreateWithoutInsuranceClaimsInput = {
@@ -51005,6 +61076,7 @@ export namespace Prisma {
     inpatientEncounters?: InpatientEncounterUncheckedCreateNestedManyWithoutPatientInput
     outpatientEncounters?: OutpatientEncounterUncheckedCreateNestedManyWithoutPatientInput
     dataShareRequests?: DataShareRequestUncheckedCreateNestedManyWithoutPatientInput
+    billingTransactions?: BillingTransactionUncheckedCreateNestedManyWithoutPatientInput
   }
 
   export type PatientCreateOrConnectWithoutInsuranceClaimsInput = {
@@ -51031,6 +61103,7 @@ export namespace Prisma {
     charts?: InpatientEncounterChartCreateNestedManyWithoutEncounterInput
     orders?: InpatientEncounterOrderCreateNestedManyWithoutEncounterInput
     dataShareRequest?: DataShareRequestCreateNestedOneWithoutInpatientEncounterInput
+    billingTransaction?: BillingTransactionCreateNestedOneWithoutEncounterInput
   }
 
   export type InpatientEncounterUncheckedCreateWithoutInsuranceClaimInput = {
@@ -51052,6 +61125,7 @@ export namespace Prisma {
     charts?: InpatientEncounterChartUncheckedCreateNestedManyWithoutEncounterInput
     orders?: InpatientEncounterOrderUncheckedCreateNestedManyWithoutEncounterInput
     dataShareRequest?: DataShareRequestUncheckedCreateNestedOneWithoutInpatientEncounterInput
+    billingTransaction?: BillingTransactionUncheckedCreateNestedOneWithoutEncounterInput
   }
 
   export type InpatientEncounterCreateOrConnectWithoutInsuranceClaimInput = {
@@ -51189,6 +61263,7 @@ export namespace Prisma {
     inpatientEncounters?: InpatientEncounterUpdateManyWithoutPatientNestedInput
     outpatientEncounters?: OutpatientEncounterUpdateManyWithoutPatientNestedInput
     dataShareRequests?: DataShareRequestUpdateManyWithoutPatientNestedInput
+    billingTransactions?: BillingTransactionUpdateManyWithoutPatientNestedInput
   }
 
   export type PatientUncheckedUpdateWithoutInsuranceClaimsInput = {
@@ -51207,6 +61282,7 @@ export namespace Prisma {
     inpatientEncounters?: InpatientEncounterUncheckedUpdateManyWithoutPatientNestedInput
     outpatientEncounters?: OutpatientEncounterUncheckedUpdateManyWithoutPatientNestedInput
     dataShareRequests?: DataShareRequestUncheckedUpdateManyWithoutPatientNestedInput
+    billingTransactions?: BillingTransactionUncheckedUpdateManyWithoutPatientNestedInput
   }
 
   export type InpatientEncounterUpsertWithoutInsuranceClaimInput = {
@@ -51239,6 +61315,7 @@ export namespace Prisma {
     charts?: InpatientEncounterChartUpdateManyWithoutEncounterNestedInput
     orders?: InpatientEncounterOrderUpdateManyWithoutEncounterNestedInput
     dataShareRequest?: DataShareRequestUpdateOneWithoutInpatientEncounterNestedInput
+    billingTransaction?: BillingTransactionUpdateOneWithoutEncounterNestedInput
   }
 
   export type InpatientEncounterUncheckedUpdateWithoutInsuranceClaimInput = {
@@ -51260,6 +61337,7 @@ export namespace Prisma {
     charts?: InpatientEncounterChartUncheckedUpdateManyWithoutEncounterNestedInput
     orders?: InpatientEncounterOrderUncheckedUpdateManyWithoutEncounterNestedInput
     dataShareRequest?: DataShareRequestUncheckedUpdateOneWithoutInpatientEncounterNestedInput
+    billingTransaction?: BillingTransactionUncheckedUpdateOneWithoutEncounterNestedInput
   }
 
   export type OutpatientEncounterUpsertWithoutInsuranceClaimInput = {
@@ -51609,6 +61687,7 @@ export namespace Prisma {
     inpatientEncounters?: InpatientEncounterCreateNestedManyWithoutPatientInput
     outpatientEncounters?: OutpatientEncounterCreateNestedManyWithoutPatientInput
     insuranceClaims?: InsuranceClaimCreateNestedManyWithoutPatientInput
+    billingTransactions?: BillingTransactionCreateNestedManyWithoutPatientInput
   }
 
   export type PatientUncheckedCreateWithoutDataShareRequestsInput = {
@@ -51627,6 +61706,7 @@ export namespace Prisma {
     inpatientEncounters?: InpatientEncounterUncheckedCreateNestedManyWithoutPatientInput
     outpatientEncounters?: OutpatientEncounterUncheckedCreateNestedManyWithoutPatientInput
     insuranceClaims?: InsuranceClaimUncheckedCreateNestedManyWithoutPatientInput
+    billingTransactions?: BillingTransactionUncheckedCreateNestedManyWithoutPatientInput
   }
 
   export type PatientCreateOrConnectWithoutDataShareRequestsInput = {
@@ -51653,6 +61733,7 @@ export namespace Prisma {
     charts?: InpatientEncounterChartCreateNestedManyWithoutEncounterInput
     orders?: InpatientEncounterOrderCreateNestedManyWithoutEncounterInput
     insuranceClaim?: InsuranceClaimCreateNestedOneWithoutInpatientEncounterInput
+    billingTransaction?: BillingTransactionCreateNestedOneWithoutEncounterInput
   }
 
   export type InpatientEncounterUncheckedCreateWithoutDataShareRequestInput = {
@@ -51674,6 +61755,7 @@ export namespace Prisma {
     charts?: InpatientEncounterChartUncheckedCreateNestedManyWithoutEncounterInput
     orders?: InpatientEncounterOrderUncheckedCreateNestedManyWithoutEncounterInput
     insuranceClaim?: InsuranceClaimUncheckedCreateNestedOneWithoutInpatientEncounterInput
+    billingTransaction?: BillingTransactionUncheckedCreateNestedOneWithoutEncounterInput
   }
 
   export type InpatientEncounterCreateOrConnectWithoutDataShareRequestInput = {
@@ -51811,6 +61893,7 @@ export namespace Prisma {
     inpatientEncounters?: InpatientEncounterUpdateManyWithoutPatientNestedInput
     outpatientEncounters?: OutpatientEncounterUpdateManyWithoutPatientNestedInput
     insuranceClaims?: InsuranceClaimUpdateManyWithoutPatientNestedInput
+    billingTransactions?: BillingTransactionUpdateManyWithoutPatientNestedInput
   }
 
   export type PatientUncheckedUpdateWithoutDataShareRequestsInput = {
@@ -51829,6 +61912,7 @@ export namespace Prisma {
     inpatientEncounters?: InpatientEncounterUncheckedUpdateManyWithoutPatientNestedInput
     outpatientEncounters?: OutpatientEncounterUncheckedUpdateManyWithoutPatientNestedInput
     insuranceClaims?: InsuranceClaimUncheckedUpdateManyWithoutPatientNestedInput
+    billingTransactions?: BillingTransactionUncheckedUpdateManyWithoutPatientNestedInput
   }
 
   export type InpatientEncounterUpsertWithoutDataShareRequestInput = {
@@ -51861,6 +61945,7 @@ export namespace Prisma {
     charts?: InpatientEncounterChartUpdateManyWithoutEncounterNestedInput
     orders?: InpatientEncounterOrderUpdateManyWithoutEncounterNestedInput
     insuranceClaim?: InsuranceClaimUpdateOneWithoutInpatientEncounterNestedInput
+    billingTransaction?: BillingTransactionUpdateOneWithoutEncounterNestedInput
   }
 
   export type InpatientEncounterUncheckedUpdateWithoutDataShareRequestInput = {
@@ -51882,6 +61967,7 @@ export namespace Prisma {
     charts?: InpatientEncounterChartUncheckedUpdateManyWithoutEncounterNestedInput
     orders?: InpatientEncounterOrderUncheckedUpdateManyWithoutEncounterNestedInput
     insuranceClaim?: InsuranceClaimUncheckedUpdateOneWithoutInpatientEncounterNestedInput
+    billingTransaction?: BillingTransactionUncheckedUpdateOneWithoutEncounterNestedInput
   }
 
   export type OutpatientEncounterUpsertWithoutDataShareRequestInput = {
@@ -52231,6 +62317,1309 @@ export namespace Prisma {
     documents?: DataShareDocumentUncheckedUpdateManyWithoutRequestNestedInput
   }
 
+  export type PatientCreateWithoutBillingTransactionsInput = {
+    id?: string
+    patientNumber: string
+    bloodType?: $Enums.BloodType | null
+    allergies?: string | null
+    medicalHistory?: string | null
+    emergencyContact?: string | null
+    emergencyPhone?: string | null
+    insuranceProvider?: string | null
+    insuranceNumber?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutPatientProfileInput
+    inpatientEncounters?: InpatientEncounterCreateNestedManyWithoutPatientInput
+    outpatientEncounters?: OutpatientEncounterCreateNestedManyWithoutPatientInput
+    insuranceClaims?: InsuranceClaimCreateNestedManyWithoutPatientInput
+    dataShareRequests?: DataShareRequestCreateNestedManyWithoutPatientInput
+  }
+
+  export type PatientUncheckedCreateWithoutBillingTransactionsInput = {
+    id?: string
+    userId: string
+    patientNumber: string
+    bloodType?: $Enums.BloodType | null
+    allergies?: string | null
+    medicalHistory?: string | null
+    emergencyContact?: string | null
+    emergencyPhone?: string | null
+    insuranceProvider?: string | null
+    insuranceNumber?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    inpatientEncounters?: InpatientEncounterUncheckedCreateNestedManyWithoutPatientInput
+    outpatientEncounters?: OutpatientEncounterUncheckedCreateNestedManyWithoutPatientInput
+    insuranceClaims?: InsuranceClaimUncheckedCreateNestedManyWithoutPatientInput
+    dataShareRequests?: DataShareRequestUncheckedCreateNestedManyWithoutPatientInput
+  }
+
+  export type PatientCreateOrConnectWithoutBillingTransactionsInput = {
+    where: PatientWhereUniqueInput
+    create: XOR<PatientCreateWithoutBillingTransactionsInput, PatientUncheckedCreateWithoutBillingTransactionsInput>
+  }
+
+  export type InpatientEncounterCreateWithoutBillingTransactionInput = {
+    id?: string
+    doctorId: string
+    admittedBy?: string | null
+    date: string
+    time: string
+    chiefComplaint: string
+    doctorDiagnosis?: string | null
+    triage: $Enums.InpatientTriage
+    disposition?: $Enums.InpatientDisposition
+    dispositionDate?: string | null
+    dispositionTime?: string | null
+    dispositionNote?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    patient: PatientCreateNestedOneWithoutInpatientEncountersInput
+    charts?: InpatientEncounterChartCreateNestedManyWithoutEncounterInput
+    orders?: InpatientEncounterOrderCreateNestedManyWithoutEncounterInput
+    insuranceClaim?: InsuranceClaimCreateNestedOneWithoutInpatientEncounterInput
+    dataShareRequest?: DataShareRequestCreateNestedOneWithoutInpatientEncounterInput
+  }
+
+  export type InpatientEncounterUncheckedCreateWithoutBillingTransactionInput = {
+    id?: string
+    patientId: string
+    doctorId: string
+    admittedBy?: string | null
+    date: string
+    time: string
+    chiefComplaint: string
+    doctorDiagnosis?: string | null
+    triage: $Enums.InpatientTriage
+    disposition?: $Enums.InpatientDisposition
+    dispositionDate?: string | null
+    dispositionTime?: string | null
+    dispositionNote?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    charts?: InpatientEncounterChartUncheckedCreateNestedManyWithoutEncounterInput
+    orders?: InpatientEncounterOrderUncheckedCreateNestedManyWithoutEncounterInput
+    insuranceClaim?: InsuranceClaimUncheckedCreateNestedOneWithoutInpatientEncounterInput
+    dataShareRequest?: DataShareRequestUncheckedCreateNestedOneWithoutInpatientEncounterInput
+  }
+
+  export type InpatientEncounterCreateOrConnectWithoutBillingTransactionInput = {
+    where: InpatientEncounterWhereUniqueInput
+    create: XOR<InpatientEncounterCreateWithoutBillingTransactionInput, InpatientEncounterUncheckedCreateWithoutBillingTransactionInput>
+  }
+
+  export type PaymentPlanCreateWithoutTransactionInput = {
+    id?: string
+    totalAmount: Decimal | DecimalJsLike | number | string
+    installmentCount: number
+    installmentAmount: Decimal | DecimalJsLike | number | string
+    frequency: $Enums.PaymentFrequency
+    paidInstallments?: number
+    remainingAmount: Decimal | DecimalJsLike | number | string
+    mayaSubscriptionId?: string | null
+    mayaNextChargeDate?: Date | string | null
+    status?: $Enums.PaymentPlanStatus
+    startDate: Date | string
+    nextDueDate: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    setupBy?: string | null
+    payments?: BillingPaymentCreateNestedManyWithoutPaymentPlanInput
+  }
+
+  export type PaymentPlanUncheckedCreateWithoutTransactionInput = {
+    id?: string
+    totalAmount: Decimal | DecimalJsLike | number | string
+    installmentCount: number
+    installmentAmount: Decimal | DecimalJsLike | number | string
+    frequency: $Enums.PaymentFrequency
+    paidInstallments?: number
+    remainingAmount: Decimal | DecimalJsLike | number | string
+    mayaSubscriptionId?: string | null
+    mayaNextChargeDate?: Date | string | null
+    status?: $Enums.PaymentPlanStatus
+    startDate: Date | string
+    nextDueDate: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    setupBy?: string | null
+    payments?: BillingPaymentUncheckedCreateNestedManyWithoutPaymentPlanInput
+  }
+
+  export type PaymentPlanCreateOrConnectWithoutTransactionInput = {
+    where: PaymentPlanWhereUniqueInput
+    create: XOR<PaymentPlanCreateWithoutTransactionInput, PaymentPlanUncheckedCreateWithoutTransactionInput>
+  }
+
+  export type BillingLineItemCreateWithoutTransactionInput = {
+    id?: string
+    itemType: $Enums.BillingItemType
+    description: string
+    quantity?: number
+    unitPrice: Decimal | DecimalJsLike | number | string
+    totalPrice: Decimal | DecimalJsLike | number | string
+    requiresPreAuth?: boolean
+    preAuthPaid?: boolean
+    insuranceCoverable?: boolean
+    insuranceDiscount?: Decimal | DecimalJsLike | number | string
+    finalPrice: Decimal | DecimalJsLike | number | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    addedBy?: string | null
+    preAuthPayment?: BillingPaymentCreateNestedOneWithoutPreAuthItemsInput
+    insuranceCoverage?: InsuranceCoverageCreateNestedOneWithoutLineItemInput
+    encounterOrder?: InpatientEncounterOrderCreateNestedOneWithoutBillingLineItemsInput
+  }
+
+  export type BillingLineItemUncheckedCreateWithoutTransactionInput = {
+    id?: string
+    itemType: $Enums.BillingItemType
+    description: string
+    quantity?: number
+    unitPrice: Decimal | DecimalJsLike | number | string
+    totalPrice: Decimal | DecimalJsLike | number | string
+    requiresPreAuth?: boolean
+    preAuthPaid?: boolean
+    preAuthPaymentId?: string | null
+    insuranceCoverable?: boolean
+    insuranceDiscount?: Decimal | DecimalJsLike | number | string
+    finalPrice: Decimal | DecimalJsLike | number | string
+    encounterOrderId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    addedBy?: string | null
+    insuranceCoverage?: InsuranceCoverageUncheckedCreateNestedOneWithoutLineItemInput
+  }
+
+  export type BillingLineItemCreateOrConnectWithoutTransactionInput = {
+    where: BillingLineItemWhereUniqueInput
+    create: XOR<BillingLineItemCreateWithoutTransactionInput, BillingLineItemUncheckedCreateWithoutTransactionInput>
+  }
+
+  export type BillingLineItemCreateManyTransactionInputEnvelope = {
+    data: BillingLineItemCreateManyTransactionInput | BillingLineItemCreateManyTransactionInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type BillingPaymentCreateWithoutTransactionInput = {
+    id?: string
+    paymentNumber: string
+    amount: Decimal | DecimalJsLike | number | string
+    paymentMethod: $Enums.PaymentMethod
+    paymentType: $Enums.PaymentType
+    isPreAuthPayment?: boolean
+    installmentNumber?: number | null
+    mayaPaymentId?: string | null
+    mayaPaymentStatus?: string | null
+    mayaReceiptUrl?: string | null
+    status?: $Enums.PaymentStatus
+    paidAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    processedBy?: string | null
+    preAuthItems?: BillingLineItemCreateNestedManyWithoutPreAuthPaymentInput
+    paymentPlan?: PaymentPlanCreateNestedOneWithoutPaymentsInput
+  }
+
+  export type BillingPaymentUncheckedCreateWithoutTransactionInput = {
+    id?: string
+    paymentNumber: string
+    amount: Decimal | DecimalJsLike | number | string
+    paymentMethod: $Enums.PaymentMethod
+    paymentType: $Enums.PaymentType
+    isPreAuthPayment?: boolean
+    paymentPlanId?: string | null
+    installmentNumber?: number | null
+    mayaPaymentId?: string | null
+    mayaPaymentStatus?: string | null
+    mayaReceiptUrl?: string | null
+    status?: $Enums.PaymentStatus
+    paidAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    processedBy?: string | null
+    preAuthItems?: BillingLineItemUncheckedCreateNestedManyWithoutPreAuthPaymentInput
+  }
+
+  export type BillingPaymentCreateOrConnectWithoutTransactionInput = {
+    where: BillingPaymentWhereUniqueInput
+    create: XOR<BillingPaymentCreateWithoutTransactionInput, BillingPaymentUncheckedCreateWithoutTransactionInput>
+  }
+
+  export type BillingPaymentCreateManyTransactionInputEnvelope = {
+    data: BillingPaymentCreateManyTransactionInput | BillingPaymentCreateManyTransactionInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type PatientUpsertWithoutBillingTransactionsInput = {
+    update: XOR<PatientUpdateWithoutBillingTransactionsInput, PatientUncheckedUpdateWithoutBillingTransactionsInput>
+    create: XOR<PatientCreateWithoutBillingTransactionsInput, PatientUncheckedCreateWithoutBillingTransactionsInput>
+    where?: PatientWhereInput
+  }
+
+  export type PatientUpdateToOneWithWhereWithoutBillingTransactionsInput = {
+    where?: PatientWhereInput
+    data: XOR<PatientUpdateWithoutBillingTransactionsInput, PatientUncheckedUpdateWithoutBillingTransactionsInput>
+  }
+
+  export type PatientUpdateWithoutBillingTransactionsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    patientNumber?: StringFieldUpdateOperationsInput | string
+    bloodType?: NullableEnumBloodTypeFieldUpdateOperationsInput | $Enums.BloodType | null
+    allergies?: NullableStringFieldUpdateOperationsInput | string | null
+    medicalHistory?: NullableStringFieldUpdateOperationsInput | string | null
+    emergencyContact?: NullableStringFieldUpdateOperationsInput | string | null
+    emergencyPhone?: NullableStringFieldUpdateOperationsInput | string | null
+    insuranceProvider?: NullableStringFieldUpdateOperationsInput | string | null
+    insuranceNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutPatientProfileNestedInput
+    inpatientEncounters?: InpatientEncounterUpdateManyWithoutPatientNestedInput
+    outpatientEncounters?: OutpatientEncounterUpdateManyWithoutPatientNestedInput
+    insuranceClaims?: InsuranceClaimUpdateManyWithoutPatientNestedInput
+    dataShareRequests?: DataShareRequestUpdateManyWithoutPatientNestedInput
+  }
+
+  export type PatientUncheckedUpdateWithoutBillingTransactionsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    patientNumber?: StringFieldUpdateOperationsInput | string
+    bloodType?: NullableEnumBloodTypeFieldUpdateOperationsInput | $Enums.BloodType | null
+    allergies?: NullableStringFieldUpdateOperationsInput | string | null
+    medicalHistory?: NullableStringFieldUpdateOperationsInput | string | null
+    emergencyContact?: NullableStringFieldUpdateOperationsInput | string | null
+    emergencyPhone?: NullableStringFieldUpdateOperationsInput | string | null
+    insuranceProvider?: NullableStringFieldUpdateOperationsInput | string | null
+    insuranceNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    inpatientEncounters?: InpatientEncounterUncheckedUpdateManyWithoutPatientNestedInput
+    outpatientEncounters?: OutpatientEncounterUncheckedUpdateManyWithoutPatientNestedInput
+    insuranceClaims?: InsuranceClaimUncheckedUpdateManyWithoutPatientNestedInput
+    dataShareRequests?: DataShareRequestUncheckedUpdateManyWithoutPatientNestedInput
+  }
+
+  export type InpatientEncounterUpsertWithoutBillingTransactionInput = {
+    update: XOR<InpatientEncounterUpdateWithoutBillingTransactionInput, InpatientEncounterUncheckedUpdateWithoutBillingTransactionInput>
+    create: XOR<InpatientEncounterCreateWithoutBillingTransactionInput, InpatientEncounterUncheckedCreateWithoutBillingTransactionInput>
+    where?: InpatientEncounterWhereInput
+  }
+
+  export type InpatientEncounterUpdateToOneWithWhereWithoutBillingTransactionInput = {
+    where?: InpatientEncounterWhereInput
+    data: XOR<InpatientEncounterUpdateWithoutBillingTransactionInput, InpatientEncounterUncheckedUpdateWithoutBillingTransactionInput>
+  }
+
+  export type InpatientEncounterUpdateWithoutBillingTransactionInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    doctorId?: StringFieldUpdateOperationsInput | string
+    admittedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    date?: StringFieldUpdateOperationsInput | string
+    time?: StringFieldUpdateOperationsInput | string
+    chiefComplaint?: StringFieldUpdateOperationsInput | string
+    doctorDiagnosis?: NullableStringFieldUpdateOperationsInput | string | null
+    triage?: EnumInpatientTriageFieldUpdateOperationsInput | $Enums.InpatientTriage
+    disposition?: EnumInpatientDispositionFieldUpdateOperationsInput | $Enums.InpatientDisposition
+    dispositionDate?: NullableStringFieldUpdateOperationsInput | string | null
+    dispositionTime?: NullableStringFieldUpdateOperationsInput | string | null
+    dispositionNote?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    patient?: PatientUpdateOneRequiredWithoutInpatientEncountersNestedInput
+    charts?: InpatientEncounterChartUpdateManyWithoutEncounterNestedInput
+    orders?: InpatientEncounterOrderUpdateManyWithoutEncounterNestedInput
+    insuranceClaim?: InsuranceClaimUpdateOneWithoutInpatientEncounterNestedInput
+    dataShareRequest?: DataShareRequestUpdateOneWithoutInpatientEncounterNestedInput
+  }
+
+  export type InpatientEncounterUncheckedUpdateWithoutBillingTransactionInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    patientId?: StringFieldUpdateOperationsInput | string
+    doctorId?: StringFieldUpdateOperationsInput | string
+    admittedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    date?: StringFieldUpdateOperationsInput | string
+    time?: StringFieldUpdateOperationsInput | string
+    chiefComplaint?: StringFieldUpdateOperationsInput | string
+    doctorDiagnosis?: NullableStringFieldUpdateOperationsInput | string | null
+    triage?: EnumInpatientTriageFieldUpdateOperationsInput | $Enums.InpatientTriage
+    disposition?: EnumInpatientDispositionFieldUpdateOperationsInput | $Enums.InpatientDisposition
+    dispositionDate?: NullableStringFieldUpdateOperationsInput | string | null
+    dispositionTime?: NullableStringFieldUpdateOperationsInput | string | null
+    dispositionNote?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    charts?: InpatientEncounterChartUncheckedUpdateManyWithoutEncounterNestedInput
+    orders?: InpatientEncounterOrderUncheckedUpdateManyWithoutEncounterNestedInput
+    insuranceClaim?: InsuranceClaimUncheckedUpdateOneWithoutInpatientEncounterNestedInput
+    dataShareRequest?: DataShareRequestUncheckedUpdateOneWithoutInpatientEncounterNestedInput
+  }
+
+  export type PaymentPlanUpsertWithoutTransactionInput = {
+    update: XOR<PaymentPlanUpdateWithoutTransactionInput, PaymentPlanUncheckedUpdateWithoutTransactionInput>
+    create: XOR<PaymentPlanCreateWithoutTransactionInput, PaymentPlanUncheckedCreateWithoutTransactionInput>
+    where?: PaymentPlanWhereInput
+  }
+
+  export type PaymentPlanUpdateToOneWithWhereWithoutTransactionInput = {
+    where?: PaymentPlanWhereInput
+    data: XOR<PaymentPlanUpdateWithoutTransactionInput, PaymentPlanUncheckedUpdateWithoutTransactionInput>
+  }
+
+  export type PaymentPlanUpdateWithoutTransactionInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    totalAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    installmentCount?: IntFieldUpdateOperationsInput | number
+    installmentAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    frequency?: EnumPaymentFrequencyFieldUpdateOperationsInput | $Enums.PaymentFrequency
+    paidInstallments?: IntFieldUpdateOperationsInput | number
+    remainingAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    mayaSubscriptionId?: NullableStringFieldUpdateOperationsInput | string | null
+    mayaNextChargeDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: EnumPaymentPlanStatusFieldUpdateOperationsInput | $Enums.PaymentPlanStatus
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    nextDueDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    setupBy?: NullableStringFieldUpdateOperationsInput | string | null
+    payments?: BillingPaymentUpdateManyWithoutPaymentPlanNestedInput
+  }
+
+  export type PaymentPlanUncheckedUpdateWithoutTransactionInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    totalAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    installmentCount?: IntFieldUpdateOperationsInput | number
+    installmentAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    frequency?: EnumPaymentFrequencyFieldUpdateOperationsInput | $Enums.PaymentFrequency
+    paidInstallments?: IntFieldUpdateOperationsInput | number
+    remainingAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    mayaSubscriptionId?: NullableStringFieldUpdateOperationsInput | string | null
+    mayaNextChargeDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: EnumPaymentPlanStatusFieldUpdateOperationsInput | $Enums.PaymentPlanStatus
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    nextDueDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    setupBy?: NullableStringFieldUpdateOperationsInput | string | null
+    payments?: BillingPaymentUncheckedUpdateManyWithoutPaymentPlanNestedInput
+  }
+
+  export type BillingLineItemUpsertWithWhereUniqueWithoutTransactionInput = {
+    where: BillingLineItemWhereUniqueInput
+    update: XOR<BillingLineItemUpdateWithoutTransactionInput, BillingLineItemUncheckedUpdateWithoutTransactionInput>
+    create: XOR<BillingLineItemCreateWithoutTransactionInput, BillingLineItemUncheckedCreateWithoutTransactionInput>
+  }
+
+  export type BillingLineItemUpdateWithWhereUniqueWithoutTransactionInput = {
+    where: BillingLineItemWhereUniqueInput
+    data: XOR<BillingLineItemUpdateWithoutTransactionInput, BillingLineItemUncheckedUpdateWithoutTransactionInput>
+  }
+
+  export type BillingLineItemUpdateManyWithWhereWithoutTransactionInput = {
+    where: BillingLineItemScalarWhereInput
+    data: XOR<BillingLineItemUpdateManyMutationInput, BillingLineItemUncheckedUpdateManyWithoutTransactionInput>
+  }
+
+  export type BillingPaymentUpsertWithWhereUniqueWithoutTransactionInput = {
+    where: BillingPaymentWhereUniqueInput
+    update: XOR<BillingPaymentUpdateWithoutTransactionInput, BillingPaymentUncheckedUpdateWithoutTransactionInput>
+    create: XOR<BillingPaymentCreateWithoutTransactionInput, BillingPaymentUncheckedCreateWithoutTransactionInput>
+  }
+
+  export type BillingPaymentUpdateWithWhereUniqueWithoutTransactionInput = {
+    where: BillingPaymentWhereUniqueInput
+    data: XOR<BillingPaymentUpdateWithoutTransactionInput, BillingPaymentUncheckedUpdateWithoutTransactionInput>
+  }
+
+  export type BillingPaymentUpdateManyWithWhereWithoutTransactionInput = {
+    where: BillingPaymentScalarWhereInput
+    data: XOR<BillingPaymentUpdateManyMutationInput, BillingPaymentUncheckedUpdateManyWithoutTransactionInput>
+  }
+
+  export type BillingPaymentScalarWhereInput = {
+    AND?: BillingPaymentScalarWhereInput | BillingPaymentScalarWhereInput[]
+    OR?: BillingPaymentScalarWhereInput[]
+    NOT?: BillingPaymentScalarWhereInput | BillingPaymentScalarWhereInput[]
+    id?: UuidFilter<"BillingPayment"> | string
+    paymentNumber?: StringFilter<"BillingPayment"> | string
+    transactionId?: UuidFilter<"BillingPayment"> | string
+    amount?: DecimalFilter<"BillingPayment"> | Decimal | DecimalJsLike | number | string
+    paymentMethod?: EnumPaymentMethodFilter<"BillingPayment"> | $Enums.PaymentMethod
+    paymentType?: EnumPaymentTypeFilter<"BillingPayment"> | $Enums.PaymentType
+    isPreAuthPayment?: BoolFilter<"BillingPayment"> | boolean
+    paymentPlanId?: UuidNullableFilter<"BillingPayment"> | string | null
+    installmentNumber?: IntNullableFilter<"BillingPayment"> | number | null
+    mayaPaymentId?: StringNullableFilter<"BillingPayment"> | string | null
+    mayaPaymentStatus?: StringNullableFilter<"BillingPayment"> | string | null
+    mayaReceiptUrl?: StringNullableFilter<"BillingPayment"> | string | null
+    status?: EnumPaymentStatusFilter<"BillingPayment"> | $Enums.PaymentStatus
+    paidAt?: DateTimeNullableFilter<"BillingPayment"> | Date | string | null
+    createdAt?: DateTimeFilter<"BillingPayment"> | Date | string
+    updatedAt?: DateTimeFilter<"BillingPayment"> | Date | string
+    processedBy?: StringNullableFilter<"BillingPayment"> | string | null
+  }
+
+  export type BillingTransactionCreateWithoutLineItemsInput = {
+    id?: string
+    transactionNumber: string
+    status?: $Enums.BillingStatus
+    totalAmount: Decimal | DecimalJsLike | number | string
+    insuranceDiscount?: Decimal | DecimalJsLike | number | string
+    finalAmount: Decimal | DecimalJsLike | number | string
+    paidAmount?: Decimal | DecimalJsLike | number | string
+    balanceAmount: Decimal | DecimalJsLike | number | string
+    hasPreAuth?: boolean
+    preAuthSettled?: boolean
+    hasPaymentPlan?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    createdBy?: string | null
+    patient: PatientCreateNestedOneWithoutBillingTransactionsInput
+    encounter?: InpatientEncounterCreateNestedOneWithoutBillingTransactionInput
+    paymentPlan?: PaymentPlanCreateNestedOneWithoutTransactionInput
+    payments?: BillingPaymentCreateNestedManyWithoutTransactionInput
+  }
+
+  export type BillingTransactionUncheckedCreateWithoutLineItemsInput = {
+    id?: string
+    transactionNumber: string
+    patientId: string
+    encounterId?: string | null
+    status?: $Enums.BillingStatus
+    totalAmount: Decimal | DecimalJsLike | number | string
+    insuranceDiscount?: Decimal | DecimalJsLike | number | string
+    finalAmount: Decimal | DecimalJsLike | number | string
+    paidAmount?: Decimal | DecimalJsLike | number | string
+    balanceAmount: Decimal | DecimalJsLike | number | string
+    hasPreAuth?: boolean
+    preAuthSettled?: boolean
+    hasPaymentPlan?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    createdBy?: string | null
+    paymentPlan?: PaymentPlanUncheckedCreateNestedOneWithoutTransactionInput
+    payments?: BillingPaymentUncheckedCreateNestedManyWithoutTransactionInput
+  }
+
+  export type BillingTransactionCreateOrConnectWithoutLineItemsInput = {
+    where: BillingTransactionWhereUniqueInput
+    create: XOR<BillingTransactionCreateWithoutLineItemsInput, BillingTransactionUncheckedCreateWithoutLineItemsInput>
+  }
+
+  export type BillingPaymentCreateWithoutPreAuthItemsInput = {
+    id?: string
+    paymentNumber: string
+    amount: Decimal | DecimalJsLike | number | string
+    paymentMethod: $Enums.PaymentMethod
+    paymentType: $Enums.PaymentType
+    isPreAuthPayment?: boolean
+    installmentNumber?: number | null
+    mayaPaymentId?: string | null
+    mayaPaymentStatus?: string | null
+    mayaReceiptUrl?: string | null
+    status?: $Enums.PaymentStatus
+    paidAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    processedBy?: string | null
+    transaction: BillingTransactionCreateNestedOneWithoutPaymentsInput
+    paymentPlan?: PaymentPlanCreateNestedOneWithoutPaymentsInput
+  }
+
+  export type BillingPaymentUncheckedCreateWithoutPreAuthItemsInput = {
+    id?: string
+    paymentNumber: string
+    transactionId: string
+    amount: Decimal | DecimalJsLike | number | string
+    paymentMethod: $Enums.PaymentMethod
+    paymentType: $Enums.PaymentType
+    isPreAuthPayment?: boolean
+    paymentPlanId?: string | null
+    installmentNumber?: number | null
+    mayaPaymentId?: string | null
+    mayaPaymentStatus?: string | null
+    mayaReceiptUrl?: string | null
+    status?: $Enums.PaymentStatus
+    paidAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    processedBy?: string | null
+  }
+
+  export type BillingPaymentCreateOrConnectWithoutPreAuthItemsInput = {
+    where: BillingPaymentWhereUniqueInput
+    create: XOR<BillingPaymentCreateWithoutPreAuthItemsInput, BillingPaymentUncheckedCreateWithoutPreAuthItemsInput>
+  }
+
+  export type InsuranceCoverageCreateWithoutLineItemInput = {
+    id?: string
+    insuranceProvider: string
+    insuranceNumber: string
+    coveragePercentage: Decimal | DecimalJsLike | number | string
+    coverageAmount: Decimal | DecimalJsLike | number | string
+    claimStatus?: $Enums.InsuranceClaimStatus
+    claimNumber?: string | null
+    claimNotes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    verifiedBy?: string | null
+  }
+
+  export type InsuranceCoverageUncheckedCreateWithoutLineItemInput = {
+    id?: string
+    insuranceProvider: string
+    insuranceNumber: string
+    coveragePercentage: Decimal | DecimalJsLike | number | string
+    coverageAmount: Decimal | DecimalJsLike | number | string
+    claimStatus?: $Enums.InsuranceClaimStatus
+    claimNumber?: string | null
+    claimNotes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    verifiedBy?: string | null
+  }
+
+  export type InsuranceCoverageCreateOrConnectWithoutLineItemInput = {
+    where: InsuranceCoverageWhereUniqueInput
+    create: XOR<InsuranceCoverageCreateWithoutLineItemInput, InsuranceCoverageUncheckedCreateWithoutLineItemInput>
+  }
+
+  export type InpatientEncounterOrderCreateWithoutBillingLineItemsInput = {
+    id?: string
+    type: $Enums.InpatientEncounterOrderType
+    description: string
+    cost: Decimal | DecimalJsLike | number | string
+    status?: $Enums.InpatientEncounterOrderStatus
+    orderedBy: string
+    notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    encounter: InpatientEncounterCreateNestedOneWithoutOrdersInput
+    catalogueItem?: ParticularCatalogueCreateNestedOneWithoutOrdersInput
+  }
+
+  export type InpatientEncounterOrderUncheckedCreateWithoutBillingLineItemsInput = {
+    id?: string
+    encounterId: string
+    catalogueItemId?: string | null
+    type: $Enums.InpatientEncounterOrderType
+    description: string
+    cost: Decimal | DecimalJsLike | number | string
+    status?: $Enums.InpatientEncounterOrderStatus
+    orderedBy: string
+    notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type InpatientEncounterOrderCreateOrConnectWithoutBillingLineItemsInput = {
+    where: InpatientEncounterOrderWhereUniqueInput
+    create: XOR<InpatientEncounterOrderCreateWithoutBillingLineItemsInput, InpatientEncounterOrderUncheckedCreateWithoutBillingLineItemsInput>
+  }
+
+  export type BillingTransactionUpsertWithoutLineItemsInput = {
+    update: XOR<BillingTransactionUpdateWithoutLineItemsInput, BillingTransactionUncheckedUpdateWithoutLineItemsInput>
+    create: XOR<BillingTransactionCreateWithoutLineItemsInput, BillingTransactionUncheckedCreateWithoutLineItemsInput>
+    where?: BillingTransactionWhereInput
+  }
+
+  export type BillingTransactionUpdateToOneWithWhereWithoutLineItemsInput = {
+    where?: BillingTransactionWhereInput
+    data: XOR<BillingTransactionUpdateWithoutLineItemsInput, BillingTransactionUncheckedUpdateWithoutLineItemsInput>
+  }
+
+  export type BillingTransactionUpdateWithoutLineItemsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    transactionNumber?: StringFieldUpdateOperationsInput | string
+    status?: EnumBillingStatusFieldUpdateOperationsInput | $Enums.BillingStatus
+    totalAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    insuranceDiscount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    finalAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    paidAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    balanceAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    hasPreAuth?: BoolFieldUpdateOperationsInput | boolean
+    preAuthSettled?: BoolFieldUpdateOperationsInput | boolean
+    hasPaymentPlan?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableStringFieldUpdateOperationsInput | string | null
+    patient?: PatientUpdateOneRequiredWithoutBillingTransactionsNestedInput
+    encounter?: InpatientEncounterUpdateOneWithoutBillingTransactionNestedInput
+    paymentPlan?: PaymentPlanUpdateOneWithoutTransactionNestedInput
+    payments?: BillingPaymentUpdateManyWithoutTransactionNestedInput
+  }
+
+  export type BillingTransactionUncheckedUpdateWithoutLineItemsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    transactionNumber?: StringFieldUpdateOperationsInput | string
+    patientId?: StringFieldUpdateOperationsInput | string
+    encounterId?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumBillingStatusFieldUpdateOperationsInput | $Enums.BillingStatus
+    totalAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    insuranceDiscount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    finalAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    paidAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    balanceAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    hasPreAuth?: BoolFieldUpdateOperationsInput | boolean
+    preAuthSettled?: BoolFieldUpdateOperationsInput | boolean
+    hasPaymentPlan?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableStringFieldUpdateOperationsInput | string | null
+    paymentPlan?: PaymentPlanUncheckedUpdateOneWithoutTransactionNestedInput
+    payments?: BillingPaymentUncheckedUpdateManyWithoutTransactionNestedInput
+  }
+
+  export type BillingPaymentUpsertWithoutPreAuthItemsInput = {
+    update: XOR<BillingPaymentUpdateWithoutPreAuthItemsInput, BillingPaymentUncheckedUpdateWithoutPreAuthItemsInput>
+    create: XOR<BillingPaymentCreateWithoutPreAuthItemsInput, BillingPaymentUncheckedCreateWithoutPreAuthItemsInput>
+    where?: BillingPaymentWhereInput
+  }
+
+  export type BillingPaymentUpdateToOneWithWhereWithoutPreAuthItemsInput = {
+    where?: BillingPaymentWhereInput
+    data: XOR<BillingPaymentUpdateWithoutPreAuthItemsInput, BillingPaymentUncheckedUpdateWithoutPreAuthItemsInput>
+  }
+
+  export type BillingPaymentUpdateWithoutPreAuthItemsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    paymentNumber?: StringFieldUpdateOperationsInput | string
+    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    paymentMethod?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
+    paymentType?: EnumPaymentTypeFieldUpdateOperationsInput | $Enums.PaymentType
+    isPreAuthPayment?: BoolFieldUpdateOperationsInput | boolean
+    installmentNumber?: NullableIntFieldUpdateOperationsInput | number | null
+    mayaPaymentId?: NullableStringFieldUpdateOperationsInput | string | null
+    mayaPaymentStatus?: NullableStringFieldUpdateOperationsInput | string | null
+    mayaReceiptUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
+    paidAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    processedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    transaction?: BillingTransactionUpdateOneRequiredWithoutPaymentsNestedInput
+    paymentPlan?: PaymentPlanUpdateOneWithoutPaymentsNestedInput
+  }
+
+  export type BillingPaymentUncheckedUpdateWithoutPreAuthItemsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    paymentNumber?: StringFieldUpdateOperationsInput | string
+    transactionId?: StringFieldUpdateOperationsInput | string
+    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    paymentMethod?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
+    paymentType?: EnumPaymentTypeFieldUpdateOperationsInput | $Enums.PaymentType
+    isPreAuthPayment?: BoolFieldUpdateOperationsInput | boolean
+    paymentPlanId?: NullableStringFieldUpdateOperationsInput | string | null
+    installmentNumber?: NullableIntFieldUpdateOperationsInput | number | null
+    mayaPaymentId?: NullableStringFieldUpdateOperationsInput | string | null
+    mayaPaymentStatus?: NullableStringFieldUpdateOperationsInput | string | null
+    mayaReceiptUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
+    paidAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    processedBy?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type InsuranceCoverageUpsertWithoutLineItemInput = {
+    update: XOR<InsuranceCoverageUpdateWithoutLineItemInput, InsuranceCoverageUncheckedUpdateWithoutLineItemInput>
+    create: XOR<InsuranceCoverageCreateWithoutLineItemInput, InsuranceCoverageUncheckedCreateWithoutLineItemInput>
+    where?: InsuranceCoverageWhereInput
+  }
+
+  export type InsuranceCoverageUpdateToOneWithWhereWithoutLineItemInput = {
+    where?: InsuranceCoverageWhereInput
+    data: XOR<InsuranceCoverageUpdateWithoutLineItemInput, InsuranceCoverageUncheckedUpdateWithoutLineItemInput>
+  }
+
+  export type InsuranceCoverageUpdateWithoutLineItemInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    insuranceProvider?: StringFieldUpdateOperationsInput | string
+    insuranceNumber?: StringFieldUpdateOperationsInput | string
+    coveragePercentage?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    coverageAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    claimStatus?: EnumInsuranceClaimStatusFieldUpdateOperationsInput | $Enums.InsuranceClaimStatus
+    claimNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    claimNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    verifiedBy?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type InsuranceCoverageUncheckedUpdateWithoutLineItemInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    insuranceProvider?: StringFieldUpdateOperationsInput | string
+    insuranceNumber?: StringFieldUpdateOperationsInput | string
+    coveragePercentage?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    coverageAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    claimStatus?: EnumInsuranceClaimStatusFieldUpdateOperationsInput | $Enums.InsuranceClaimStatus
+    claimNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    claimNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    verifiedBy?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type InpatientEncounterOrderUpsertWithoutBillingLineItemsInput = {
+    update: XOR<InpatientEncounterOrderUpdateWithoutBillingLineItemsInput, InpatientEncounterOrderUncheckedUpdateWithoutBillingLineItemsInput>
+    create: XOR<InpatientEncounterOrderCreateWithoutBillingLineItemsInput, InpatientEncounterOrderUncheckedCreateWithoutBillingLineItemsInput>
+    where?: InpatientEncounterOrderWhereInput
+  }
+
+  export type InpatientEncounterOrderUpdateToOneWithWhereWithoutBillingLineItemsInput = {
+    where?: InpatientEncounterOrderWhereInput
+    data: XOR<InpatientEncounterOrderUpdateWithoutBillingLineItemsInput, InpatientEncounterOrderUncheckedUpdateWithoutBillingLineItemsInput>
+  }
+
+  export type InpatientEncounterOrderUpdateWithoutBillingLineItemsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: EnumInpatientEncounterOrderTypeFieldUpdateOperationsInput | $Enums.InpatientEncounterOrderType
+    description?: StringFieldUpdateOperationsInput | string
+    cost?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    status?: EnumInpatientEncounterOrderStatusFieldUpdateOperationsInput | $Enums.InpatientEncounterOrderStatus
+    orderedBy?: StringFieldUpdateOperationsInput | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    encounter?: InpatientEncounterUpdateOneRequiredWithoutOrdersNestedInput
+    catalogueItem?: ParticularCatalogueUpdateOneWithoutOrdersNestedInput
+  }
+
+  export type InpatientEncounterOrderUncheckedUpdateWithoutBillingLineItemsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    encounterId?: StringFieldUpdateOperationsInput | string
+    catalogueItemId?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: EnumInpatientEncounterOrderTypeFieldUpdateOperationsInput | $Enums.InpatientEncounterOrderType
+    description?: StringFieldUpdateOperationsInput | string
+    cost?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    status?: EnumInpatientEncounterOrderStatusFieldUpdateOperationsInput | $Enums.InpatientEncounterOrderStatus
+    orderedBy?: StringFieldUpdateOperationsInput | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BillingLineItemCreateWithoutInsuranceCoverageInput = {
+    id?: string
+    itemType: $Enums.BillingItemType
+    description: string
+    quantity?: number
+    unitPrice: Decimal | DecimalJsLike | number | string
+    totalPrice: Decimal | DecimalJsLike | number | string
+    requiresPreAuth?: boolean
+    preAuthPaid?: boolean
+    insuranceCoverable?: boolean
+    insuranceDiscount?: Decimal | DecimalJsLike | number | string
+    finalPrice: Decimal | DecimalJsLike | number | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    addedBy?: string | null
+    transaction: BillingTransactionCreateNestedOneWithoutLineItemsInput
+    preAuthPayment?: BillingPaymentCreateNestedOneWithoutPreAuthItemsInput
+    encounterOrder?: InpatientEncounterOrderCreateNestedOneWithoutBillingLineItemsInput
+  }
+
+  export type BillingLineItemUncheckedCreateWithoutInsuranceCoverageInput = {
+    id?: string
+    transactionId: string
+    itemType: $Enums.BillingItemType
+    description: string
+    quantity?: number
+    unitPrice: Decimal | DecimalJsLike | number | string
+    totalPrice: Decimal | DecimalJsLike | number | string
+    requiresPreAuth?: boolean
+    preAuthPaid?: boolean
+    preAuthPaymentId?: string | null
+    insuranceCoverable?: boolean
+    insuranceDiscount?: Decimal | DecimalJsLike | number | string
+    finalPrice: Decimal | DecimalJsLike | number | string
+    encounterOrderId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    addedBy?: string | null
+  }
+
+  export type BillingLineItemCreateOrConnectWithoutInsuranceCoverageInput = {
+    where: BillingLineItemWhereUniqueInput
+    create: XOR<BillingLineItemCreateWithoutInsuranceCoverageInput, BillingLineItemUncheckedCreateWithoutInsuranceCoverageInput>
+  }
+
+  export type BillingLineItemUpsertWithoutInsuranceCoverageInput = {
+    update: XOR<BillingLineItemUpdateWithoutInsuranceCoverageInput, BillingLineItemUncheckedUpdateWithoutInsuranceCoverageInput>
+    create: XOR<BillingLineItemCreateWithoutInsuranceCoverageInput, BillingLineItemUncheckedCreateWithoutInsuranceCoverageInput>
+    where?: BillingLineItemWhereInput
+  }
+
+  export type BillingLineItemUpdateToOneWithWhereWithoutInsuranceCoverageInput = {
+    where?: BillingLineItemWhereInput
+    data: XOR<BillingLineItemUpdateWithoutInsuranceCoverageInput, BillingLineItemUncheckedUpdateWithoutInsuranceCoverageInput>
+  }
+
+  export type BillingLineItemUpdateWithoutInsuranceCoverageInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    itemType?: EnumBillingItemTypeFieldUpdateOperationsInput | $Enums.BillingItemType
+    description?: StringFieldUpdateOperationsInput | string
+    quantity?: IntFieldUpdateOperationsInput | number
+    unitPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    totalPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    requiresPreAuth?: BoolFieldUpdateOperationsInput | boolean
+    preAuthPaid?: BoolFieldUpdateOperationsInput | boolean
+    insuranceCoverable?: BoolFieldUpdateOperationsInput | boolean
+    insuranceDiscount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    finalPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    addedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    transaction?: BillingTransactionUpdateOneRequiredWithoutLineItemsNestedInput
+    preAuthPayment?: BillingPaymentUpdateOneWithoutPreAuthItemsNestedInput
+    encounterOrder?: InpatientEncounterOrderUpdateOneWithoutBillingLineItemsNestedInput
+  }
+
+  export type BillingLineItemUncheckedUpdateWithoutInsuranceCoverageInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    transactionId?: StringFieldUpdateOperationsInput | string
+    itemType?: EnumBillingItemTypeFieldUpdateOperationsInput | $Enums.BillingItemType
+    description?: StringFieldUpdateOperationsInput | string
+    quantity?: IntFieldUpdateOperationsInput | number
+    unitPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    totalPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    requiresPreAuth?: BoolFieldUpdateOperationsInput | boolean
+    preAuthPaid?: BoolFieldUpdateOperationsInput | boolean
+    preAuthPaymentId?: NullableStringFieldUpdateOperationsInput | string | null
+    insuranceCoverable?: BoolFieldUpdateOperationsInput | boolean
+    insuranceDiscount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    finalPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    encounterOrderId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    addedBy?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type BillingTransactionCreateWithoutPaymentsInput = {
+    id?: string
+    transactionNumber: string
+    status?: $Enums.BillingStatus
+    totalAmount: Decimal | DecimalJsLike | number | string
+    insuranceDiscount?: Decimal | DecimalJsLike | number | string
+    finalAmount: Decimal | DecimalJsLike | number | string
+    paidAmount?: Decimal | DecimalJsLike | number | string
+    balanceAmount: Decimal | DecimalJsLike | number | string
+    hasPreAuth?: boolean
+    preAuthSettled?: boolean
+    hasPaymentPlan?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    createdBy?: string | null
+    patient: PatientCreateNestedOneWithoutBillingTransactionsInput
+    encounter?: InpatientEncounterCreateNestedOneWithoutBillingTransactionInput
+    paymentPlan?: PaymentPlanCreateNestedOneWithoutTransactionInput
+    lineItems?: BillingLineItemCreateNestedManyWithoutTransactionInput
+  }
+
+  export type BillingTransactionUncheckedCreateWithoutPaymentsInput = {
+    id?: string
+    transactionNumber: string
+    patientId: string
+    encounterId?: string | null
+    status?: $Enums.BillingStatus
+    totalAmount: Decimal | DecimalJsLike | number | string
+    insuranceDiscount?: Decimal | DecimalJsLike | number | string
+    finalAmount: Decimal | DecimalJsLike | number | string
+    paidAmount?: Decimal | DecimalJsLike | number | string
+    balanceAmount: Decimal | DecimalJsLike | number | string
+    hasPreAuth?: boolean
+    preAuthSettled?: boolean
+    hasPaymentPlan?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    createdBy?: string | null
+    paymentPlan?: PaymentPlanUncheckedCreateNestedOneWithoutTransactionInput
+    lineItems?: BillingLineItemUncheckedCreateNestedManyWithoutTransactionInput
+  }
+
+  export type BillingTransactionCreateOrConnectWithoutPaymentsInput = {
+    where: BillingTransactionWhereUniqueInput
+    create: XOR<BillingTransactionCreateWithoutPaymentsInput, BillingTransactionUncheckedCreateWithoutPaymentsInput>
+  }
+
+  export type BillingLineItemCreateWithoutPreAuthPaymentInput = {
+    id?: string
+    itemType: $Enums.BillingItemType
+    description: string
+    quantity?: number
+    unitPrice: Decimal | DecimalJsLike | number | string
+    totalPrice: Decimal | DecimalJsLike | number | string
+    requiresPreAuth?: boolean
+    preAuthPaid?: boolean
+    insuranceCoverable?: boolean
+    insuranceDiscount?: Decimal | DecimalJsLike | number | string
+    finalPrice: Decimal | DecimalJsLike | number | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    addedBy?: string | null
+    transaction: BillingTransactionCreateNestedOneWithoutLineItemsInput
+    insuranceCoverage?: InsuranceCoverageCreateNestedOneWithoutLineItemInput
+    encounterOrder?: InpatientEncounterOrderCreateNestedOneWithoutBillingLineItemsInput
+  }
+
+  export type BillingLineItemUncheckedCreateWithoutPreAuthPaymentInput = {
+    id?: string
+    transactionId: string
+    itemType: $Enums.BillingItemType
+    description: string
+    quantity?: number
+    unitPrice: Decimal | DecimalJsLike | number | string
+    totalPrice: Decimal | DecimalJsLike | number | string
+    requiresPreAuth?: boolean
+    preAuthPaid?: boolean
+    insuranceCoverable?: boolean
+    insuranceDiscount?: Decimal | DecimalJsLike | number | string
+    finalPrice: Decimal | DecimalJsLike | number | string
+    encounterOrderId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    addedBy?: string | null
+    insuranceCoverage?: InsuranceCoverageUncheckedCreateNestedOneWithoutLineItemInput
+  }
+
+  export type BillingLineItemCreateOrConnectWithoutPreAuthPaymentInput = {
+    where: BillingLineItemWhereUniqueInput
+    create: XOR<BillingLineItemCreateWithoutPreAuthPaymentInput, BillingLineItemUncheckedCreateWithoutPreAuthPaymentInput>
+  }
+
+  export type BillingLineItemCreateManyPreAuthPaymentInputEnvelope = {
+    data: BillingLineItemCreateManyPreAuthPaymentInput | BillingLineItemCreateManyPreAuthPaymentInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type PaymentPlanCreateWithoutPaymentsInput = {
+    id?: string
+    totalAmount: Decimal | DecimalJsLike | number | string
+    installmentCount: number
+    installmentAmount: Decimal | DecimalJsLike | number | string
+    frequency: $Enums.PaymentFrequency
+    paidInstallments?: number
+    remainingAmount: Decimal | DecimalJsLike | number | string
+    mayaSubscriptionId?: string | null
+    mayaNextChargeDate?: Date | string | null
+    status?: $Enums.PaymentPlanStatus
+    startDate: Date | string
+    nextDueDate: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    setupBy?: string | null
+    transaction: BillingTransactionCreateNestedOneWithoutPaymentPlanInput
+  }
+
+  export type PaymentPlanUncheckedCreateWithoutPaymentsInput = {
+    id?: string
+    transactionId: string
+    totalAmount: Decimal | DecimalJsLike | number | string
+    installmentCount: number
+    installmentAmount: Decimal | DecimalJsLike | number | string
+    frequency: $Enums.PaymentFrequency
+    paidInstallments?: number
+    remainingAmount: Decimal | DecimalJsLike | number | string
+    mayaSubscriptionId?: string | null
+    mayaNextChargeDate?: Date | string | null
+    status?: $Enums.PaymentPlanStatus
+    startDate: Date | string
+    nextDueDate: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    setupBy?: string | null
+  }
+
+  export type PaymentPlanCreateOrConnectWithoutPaymentsInput = {
+    where: PaymentPlanWhereUniqueInput
+    create: XOR<PaymentPlanCreateWithoutPaymentsInput, PaymentPlanUncheckedCreateWithoutPaymentsInput>
+  }
+
+  export type BillingTransactionUpsertWithoutPaymentsInput = {
+    update: XOR<BillingTransactionUpdateWithoutPaymentsInput, BillingTransactionUncheckedUpdateWithoutPaymentsInput>
+    create: XOR<BillingTransactionCreateWithoutPaymentsInput, BillingTransactionUncheckedCreateWithoutPaymentsInput>
+    where?: BillingTransactionWhereInput
+  }
+
+  export type BillingTransactionUpdateToOneWithWhereWithoutPaymentsInput = {
+    where?: BillingTransactionWhereInput
+    data: XOR<BillingTransactionUpdateWithoutPaymentsInput, BillingTransactionUncheckedUpdateWithoutPaymentsInput>
+  }
+
+  export type BillingTransactionUpdateWithoutPaymentsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    transactionNumber?: StringFieldUpdateOperationsInput | string
+    status?: EnumBillingStatusFieldUpdateOperationsInput | $Enums.BillingStatus
+    totalAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    insuranceDiscount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    finalAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    paidAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    balanceAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    hasPreAuth?: BoolFieldUpdateOperationsInput | boolean
+    preAuthSettled?: BoolFieldUpdateOperationsInput | boolean
+    hasPaymentPlan?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableStringFieldUpdateOperationsInput | string | null
+    patient?: PatientUpdateOneRequiredWithoutBillingTransactionsNestedInput
+    encounter?: InpatientEncounterUpdateOneWithoutBillingTransactionNestedInput
+    paymentPlan?: PaymentPlanUpdateOneWithoutTransactionNestedInput
+    lineItems?: BillingLineItemUpdateManyWithoutTransactionNestedInput
+  }
+
+  export type BillingTransactionUncheckedUpdateWithoutPaymentsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    transactionNumber?: StringFieldUpdateOperationsInput | string
+    patientId?: StringFieldUpdateOperationsInput | string
+    encounterId?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumBillingStatusFieldUpdateOperationsInput | $Enums.BillingStatus
+    totalAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    insuranceDiscount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    finalAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    paidAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    balanceAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    hasPreAuth?: BoolFieldUpdateOperationsInput | boolean
+    preAuthSettled?: BoolFieldUpdateOperationsInput | boolean
+    hasPaymentPlan?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableStringFieldUpdateOperationsInput | string | null
+    paymentPlan?: PaymentPlanUncheckedUpdateOneWithoutTransactionNestedInput
+    lineItems?: BillingLineItemUncheckedUpdateManyWithoutTransactionNestedInput
+  }
+
+  export type BillingLineItemUpsertWithWhereUniqueWithoutPreAuthPaymentInput = {
+    where: BillingLineItemWhereUniqueInput
+    update: XOR<BillingLineItemUpdateWithoutPreAuthPaymentInput, BillingLineItemUncheckedUpdateWithoutPreAuthPaymentInput>
+    create: XOR<BillingLineItemCreateWithoutPreAuthPaymentInput, BillingLineItemUncheckedCreateWithoutPreAuthPaymentInput>
+  }
+
+  export type BillingLineItemUpdateWithWhereUniqueWithoutPreAuthPaymentInput = {
+    where: BillingLineItemWhereUniqueInput
+    data: XOR<BillingLineItemUpdateWithoutPreAuthPaymentInput, BillingLineItemUncheckedUpdateWithoutPreAuthPaymentInput>
+  }
+
+  export type BillingLineItemUpdateManyWithWhereWithoutPreAuthPaymentInput = {
+    where: BillingLineItemScalarWhereInput
+    data: XOR<BillingLineItemUpdateManyMutationInput, BillingLineItemUncheckedUpdateManyWithoutPreAuthPaymentInput>
+  }
+
+  export type PaymentPlanUpsertWithoutPaymentsInput = {
+    update: XOR<PaymentPlanUpdateWithoutPaymentsInput, PaymentPlanUncheckedUpdateWithoutPaymentsInput>
+    create: XOR<PaymentPlanCreateWithoutPaymentsInput, PaymentPlanUncheckedCreateWithoutPaymentsInput>
+    where?: PaymentPlanWhereInput
+  }
+
+  export type PaymentPlanUpdateToOneWithWhereWithoutPaymentsInput = {
+    where?: PaymentPlanWhereInput
+    data: XOR<PaymentPlanUpdateWithoutPaymentsInput, PaymentPlanUncheckedUpdateWithoutPaymentsInput>
+  }
+
+  export type PaymentPlanUpdateWithoutPaymentsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    totalAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    installmentCount?: IntFieldUpdateOperationsInput | number
+    installmentAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    frequency?: EnumPaymentFrequencyFieldUpdateOperationsInput | $Enums.PaymentFrequency
+    paidInstallments?: IntFieldUpdateOperationsInput | number
+    remainingAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    mayaSubscriptionId?: NullableStringFieldUpdateOperationsInput | string | null
+    mayaNextChargeDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: EnumPaymentPlanStatusFieldUpdateOperationsInput | $Enums.PaymentPlanStatus
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    nextDueDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    setupBy?: NullableStringFieldUpdateOperationsInput | string | null
+    transaction?: BillingTransactionUpdateOneRequiredWithoutPaymentPlanNestedInput
+  }
+
+  export type PaymentPlanUncheckedUpdateWithoutPaymentsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    transactionId?: StringFieldUpdateOperationsInput | string
+    totalAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    installmentCount?: IntFieldUpdateOperationsInput | number
+    installmentAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    frequency?: EnumPaymentFrequencyFieldUpdateOperationsInput | $Enums.PaymentFrequency
+    paidInstallments?: IntFieldUpdateOperationsInput | number
+    remainingAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    mayaSubscriptionId?: NullableStringFieldUpdateOperationsInput | string | null
+    mayaNextChargeDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: EnumPaymentPlanStatusFieldUpdateOperationsInput | $Enums.PaymentPlanStatus
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    nextDueDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    setupBy?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type BillingTransactionCreateWithoutPaymentPlanInput = {
+    id?: string
+    transactionNumber: string
+    status?: $Enums.BillingStatus
+    totalAmount: Decimal | DecimalJsLike | number | string
+    insuranceDiscount?: Decimal | DecimalJsLike | number | string
+    finalAmount: Decimal | DecimalJsLike | number | string
+    paidAmount?: Decimal | DecimalJsLike | number | string
+    balanceAmount: Decimal | DecimalJsLike | number | string
+    hasPreAuth?: boolean
+    preAuthSettled?: boolean
+    hasPaymentPlan?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    createdBy?: string | null
+    patient: PatientCreateNestedOneWithoutBillingTransactionsInput
+    encounter?: InpatientEncounterCreateNestedOneWithoutBillingTransactionInput
+    lineItems?: BillingLineItemCreateNestedManyWithoutTransactionInput
+    payments?: BillingPaymentCreateNestedManyWithoutTransactionInput
+  }
+
+  export type BillingTransactionUncheckedCreateWithoutPaymentPlanInput = {
+    id?: string
+    transactionNumber: string
+    patientId: string
+    encounterId?: string | null
+    status?: $Enums.BillingStatus
+    totalAmount: Decimal | DecimalJsLike | number | string
+    insuranceDiscount?: Decimal | DecimalJsLike | number | string
+    finalAmount: Decimal | DecimalJsLike | number | string
+    paidAmount?: Decimal | DecimalJsLike | number | string
+    balanceAmount: Decimal | DecimalJsLike | number | string
+    hasPreAuth?: boolean
+    preAuthSettled?: boolean
+    hasPaymentPlan?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    createdBy?: string | null
+    lineItems?: BillingLineItemUncheckedCreateNestedManyWithoutTransactionInput
+    payments?: BillingPaymentUncheckedCreateNestedManyWithoutTransactionInput
+  }
+
+  export type BillingTransactionCreateOrConnectWithoutPaymentPlanInput = {
+    where: BillingTransactionWhereUniqueInput
+    create: XOR<BillingTransactionCreateWithoutPaymentPlanInput, BillingTransactionUncheckedCreateWithoutPaymentPlanInput>
+  }
+
+  export type BillingPaymentCreateWithoutPaymentPlanInput = {
+    id?: string
+    paymentNumber: string
+    amount: Decimal | DecimalJsLike | number | string
+    paymentMethod: $Enums.PaymentMethod
+    paymentType: $Enums.PaymentType
+    isPreAuthPayment?: boolean
+    installmentNumber?: number | null
+    mayaPaymentId?: string | null
+    mayaPaymentStatus?: string | null
+    mayaReceiptUrl?: string | null
+    status?: $Enums.PaymentStatus
+    paidAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    processedBy?: string | null
+    transaction: BillingTransactionCreateNestedOneWithoutPaymentsInput
+    preAuthItems?: BillingLineItemCreateNestedManyWithoutPreAuthPaymentInput
+  }
+
+  export type BillingPaymentUncheckedCreateWithoutPaymentPlanInput = {
+    id?: string
+    paymentNumber: string
+    transactionId: string
+    amount: Decimal | DecimalJsLike | number | string
+    paymentMethod: $Enums.PaymentMethod
+    paymentType: $Enums.PaymentType
+    isPreAuthPayment?: boolean
+    installmentNumber?: number | null
+    mayaPaymentId?: string | null
+    mayaPaymentStatus?: string | null
+    mayaReceiptUrl?: string | null
+    status?: $Enums.PaymentStatus
+    paidAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    processedBy?: string | null
+    preAuthItems?: BillingLineItemUncheckedCreateNestedManyWithoutPreAuthPaymentInput
+  }
+
+  export type BillingPaymentCreateOrConnectWithoutPaymentPlanInput = {
+    where: BillingPaymentWhereUniqueInput
+    create: XOR<BillingPaymentCreateWithoutPaymentPlanInput, BillingPaymentUncheckedCreateWithoutPaymentPlanInput>
+  }
+
+  export type BillingPaymentCreateManyPaymentPlanInputEnvelope = {
+    data: BillingPaymentCreateManyPaymentPlanInput | BillingPaymentCreateManyPaymentPlanInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type BillingTransactionUpsertWithoutPaymentPlanInput = {
+    update: XOR<BillingTransactionUpdateWithoutPaymentPlanInput, BillingTransactionUncheckedUpdateWithoutPaymentPlanInput>
+    create: XOR<BillingTransactionCreateWithoutPaymentPlanInput, BillingTransactionUncheckedCreateWithoutPaymentPlanInput>
+    where?: BillingTransactionWhereInput
+  }
+
+  export type BillingTransactionUpdateToOneWithWhereWithoutPaymentPlanInput = {
+    where?: BillingTransactionWhereInput
+    data: XOR<BillingTransactionUpdateWithoutPaymentPlanInput, BillingTransactionUncheckedUpdateWithoutPaymentPlanInput>
+  }
+
+  export type BillingTransactionUpdateWithoutPaymentPlanInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    transactionNumber?: StringFieldUpdateOperationsInput | string
+    status?: EnumBillingStatusFieldUpdateOperationsInput | $Enums.BillingStatus
+    totalAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    insuranceDiscount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    finalAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    paidAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    balanceAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    hasPreAuth?: BoolFieldUpdateOperationsInput | boolean
+    preAuthSettled?: BoolFieldUpdateOperationsInput | boolean
+    hasPaymentPlan?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableStringFieldUpdateOperationsInput | string | null
+    patient?: PatientUpdateOneRequiredWithoutBillingTransactionsNestedInput
+    encounter?: InpatientEncounterUpdateOneWithoutBillingTransactionNestedInput
+    lineItems?: BillingLineItemUpdateManyWithoutTransactionNestedInput
+    payments?: BillingPaymentUpdateManyWithoutTransactionNestedInput
+  }
+
+  export type BillingTransactionUncheckedUpdateWithoutPaymentPlanInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    transactionNumber?: StringFieldUpdateOperationsInput | string
+    patientId?: StringFieldUpdateOperationsInput | string
+    encounterId?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumBillingStatusFieldUpdateOperationsInput | $Enums.BillingStatus
+    totalAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    insuranceDiscount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    finalAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    paidAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    balanceAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    hasPreAuth?: BoolFieldUpdateOperationsInput | boolean
+    preAuthSettled?: BoolFieldUpdateOperationsInput | boolean
+    hasPaymentPlan?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableStringFieldUpdateOperationsInput | string | null
+    lineItems?: BillingLineItemUncheckedUpdateManyWithoutTransactionNestedInput
+    payments?: BillingPaymentUncheckedUpdateManyWithoutTransactionNestedInput
+  }
+
+  export type BillingPaymentUpsertWithWhereUniqueWithoutPaymentPlanInput = {
+    where: BillingPaymentWhereUniqueInput
+    update: XOR<BillingPaymentUpdateWithoutPaymentPlanInput, BillingPaymentUncheckedUpdateWithoutPaymentPlanInput>
+    create: XOR<BillingPaymentCreateWithoutPaymentPlanInput, BillingPaymentUncheckedCreateWithoutPaymentPlanInput>
+  }
+
+  export type BillingPaymentUpdateWithWhereUniqueWithoutPaymentPlanInput = {
+    where: BillingPaymentWhereUniqueInput
+    data: XOR<BillingPaymentUpdateWithoutPaymentPlanInput, BillingPaymentUncheckedUpdateWithoutPaymentPlanInput>
+  }
+
+  export type BillingPaymentUpdateManyWithWhereWithoutPaymentPlanInput = {
+    where: BillingPaymentScalarWhereInput
+    data: XOR<BillingPaymentUpdateManyMutationInput, BillingPaymentUncheckedUpdateManyWithoutPaymentPlanInput>
+  }
+
   export type RefreshTokenCreateManyUserInput = {
     id?: string
     token: string
@@ -52499,6 +63888,24 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
+  export type BillingTransactionCreateManyPatientInput = {
+    id?: string
+    transactionNumber: string
+    encounterId?: string | null
+    status?: $Enums.BillingStatus
+    totalAmount: Decimal | DecimalJsLike | number | string
+    insuranceDiscount?: Decimal | DecimalJsLike | number | string
+    finalAmount: Decimal | DecimalJsLike | number | string
+    paidAmount?: Decimal | DecimalJsLike | number | string
+    balanceAmount: Decimal | DecimalJsLike | number | string
+    hasPreAuth?: boolean
+    preAuthSettled?: boolean
+    hasPaymentPlan?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    createdBy?: string | null
+  }
+
   export type InpatientEncounterUpdateWithoutPatientInput = {
     id?: StringFieldUpdateOperationsInput | string
     doctorId?: StringFieldUpdateOperationsInput | string
@@ -52518,6 +63925,7 @@ export namespace Prisma {
     orders?: InpatientEncounterOrderUpdateManyWithoutEncounterNestedInput
     insuranceClaim?: InsuranceClaimUpdateOneWithoutInpatientEncounterNestedInput
     dataShareRequest?: DataShareRequestUpdateOneWithoutInpatientEncounterNestedInput
+    billingTransaction?: BillingTransactionUpdateOneWithoutEncounterNestedInput
   }
 
   export type InpatientEncounterUncheckedUpdateWithoutPatientInput = {
@@ -52539,6 +63947,7 @@ export namespace Prisma {
     orders?: InpatientEncounterOrderUncheckedUpdateManyWithoutEncounterNestedInput
     insuranceClaim?: InsuranceClaimUncheckedUpdateOneWithoutInpatientEncounterNestedInput
     dataShareRequest?: DataShareRequestUncheckedUpdateOneWithoutInpatientEncounterNestedInput
+    billingTransaction?: BillingTransactionUncheckedUpdateOneWithoutEncounterNestedInput
   }
 
   export type InpatientEncounterUncheckedUpdateManyWithoutPatientInput = {
@@ -52751,6 +64160,66 @@ export namespace Prisma {
     patientConsent?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BillingTransactionUpdateWithoutPatientInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    transactionNumber?: StringFieldUpdateOperationsInput | string
+    status?: EnumBillingStatusFieldUpdateOperationsInput | $Enums.BillingStatus
+    totalAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    insuranceDiscount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    finalAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    paidAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    balanceAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    hasPreAuth?: BoolFieldUpdateOperationsInput | boolean
+    preAuthSettled?: BoolFieldUpdateOperationsInput | boolean
+    hasPaymentPlan?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableStringFieldUpdateOperationsInput | string | null
+    encounter?: InpatientEncounterUpdateOneWithoutBillingTransactionNestedInput
+    paymentPlan?: PaymentPlanUpdateOneWithoutTransactionNestedInput
+    lineItems?: BillingLineItemUpdateManyWithoutTransactionNestedInput
+    payments?: BillingPaymentUpdateManyWithoutTransactionNestedInput
+  }
+
+  export type BillingTransactionUncheckedUpdateWithoutPatientInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    transactionNumber?: StringFieldUpdateOperationsInput | string
+    encounterId?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumBillingStatusFieldUpdateOperationsInput | $Enums.BillingStatus
+    totalAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    insuranceDiscount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    finalAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    paidAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    balanceAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    hasPreAuth?: BoolFieldUpdateOperationsInput | boolean
+    preAuthSettled?: BoolFieldUpdateOperationsInput | boolean
+    hasPaymentPlan?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableStringFieldUpdateOperationsInput | string | null
+    paymentPlan?: PaymentPlanUncheckedUpdateOneWithoutTransactionNestedInput
+    lineItems?: BillingLineItemUncheckedUpdateManyWithoutTransactionNestedInput
+    payments?: BillingPaymentUncheckedUpdateManyWithoutTransactionNestedInput
+  }
+
+  export type BillingTransactionUncheckedUpdateManyWithoutPatientInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    transactionNumber?: StringFieldUpdateOperationsInput | string
+    encounterId?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumBillingStatusFieldUpdateOperationsInput | $Enums.BillingStatus
+    totalAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    insuranceDiscount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    finalAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    paidAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    balanceAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    hasPreAuth?: BoolFieldUpdateOperationsInput | boolean
+    preAuthSettled?: BoolFieldUpdateOperationsInput | boolean
+    hasPaymentPlan?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type AppointmentCreateManyMedicalServiceInput = {
@@ -53117,6 +64586,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     catalogueItem?: ParticularCatalogueUpdateOneWithoutOrdersNestedInput
+    billingLineItems?: BillingLineItemUpdateManyWithoutEncounterOrderNestedInput
   }
 
   export type InpatientEncounterOrderUncheckedUpdateWithoutEncounterInput = {
@@ -53130,6 +64600,7 @@ export namespace Prisma {
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    billingLineItems?: BillingLineItemUncheckedUpdateManyWithoutEncounterOrderNestedInput
   }
 
   export type InpatientEncounterOrderUncheckedUpdateManyWithoutEncounterInput = {
@@ -53143,6 +64614,84 @@ export namespace Prisma {
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BillingLineItemCreateManyEncounterOrderInput = {
+    id?: string
+    transactionId: string
+    itemType: $Enums.BillingItemType
+    description: string
+    quantity?: number
+    unitPrice: Decimal | DecimalJsLike | number | string
+    totalPrice: Decimal | DecimalJsLike | number | string
+    requiresPreAuth?: boolean
+    preAuthPaid?: boolean
+    preAuthPaymentId?: string | null
+    insuranceCoverable?: boolean
+    insuranceDiscount?: Decimal | DecimalJsLike | number | string
+    finalPrice: Decimal | DecimalJsLike | number | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    addedBy?: string | null
+  }
+
+  export type BillingLineItemUpdateWithoutEncounterOrderInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    itemType?: EnumBillingItemTypeFieldUpdateOperationsInput | $Enums.BillingItemType
+    description?: StringFieldUpdateOperationsInput | string
+    quantity?: IntFieldUpdateOperationsInput | number
+    unitPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    totalPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    requiresPreAuth?: BoolFieldUpdateOperationsInput | boolean
+    preAuthPaid?: BoolFieldUpdateOperationsInput | boolean
+    insuranceCoverable?: BoolFieldUpdateOperationsInput | boolean
+    insuranceDiscount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    finalPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    addedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    transaction?: BillingTransactionUpdateOneRequiredWithoutLineItemsNestedInput
+    preAuthPayment?: BillingPaymentUpdateOneWithoutPreAuthItemsNestedInput
+    insuranceCoverage?: InsuranceCoverageUpdateOneWithoutLineItemNestedInput
+  }
+
+  export type BillingLineItemUncheckedUpdateWithoutEncounterOrderInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    transactionId?: StringFieldUpdateOperationsInput | string
+    itemType?: EnumBillingItemTypeFieldUpdateOperationsInput | $Enums.BillingItemType
+    description?: StringFieldUpdateOperationsInput | string
+    quantity?: IntFieldUpdateOperationsInput | number
+    unitPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    totalPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    requiresPreAuth?: BoolFieldUpdateOperationsInput | boolean
+    preAuthPaid?: BoolFieldUpdateOperationsInput | boolean
+    preAuthPaymentId?: NullableStringFieldUpdateOperationsInput | string | null
+    insuranceCoverable?: BoolFieldUpdateOperationsInput | boolean
+    insuranceDiscount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    finalPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    addedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    insuranceCoverage?: InsuranceCoverageUncheckedUpdateOneWithoutLineItemNestedInput
+  }
+
+  export type BillingLineItemUncheckedUpdateManyWithoutEncounterOrderInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    transactionId?: StringFieldUpdateOperationsInput | string
+    itemType?: EnumBillingItemTypeFieldUpdateOperationsInput | $Enums.BillingItemType
+    description?: StringFieldUpdateOperationsInput | string
+    quantity?: IntFieldUpdateOperationsInput | number
+    unitPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    totalPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    requiresPreAuth?: BoolFieldUpdateOperationsInput | boolean
+    preAuthPaid?: BoolFieldUpdateOperationsInput | boolean
+    preAuthPaymentId?: NullableStringFieldUpdateOperationsInput | string | null
+    insuranceCoverable?: BoolFieldUpdateOperationsInput | boolean
+    insuranceDiscount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    finalPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    addedBy?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type InpatientEncounterOrderCreateManyCatalogueItemInput = {
@@ -53169,6 +64718,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     encounter?: InpatientEncounterUpdateOneRequiredWithoutOrdersNestedInput
+    billingLineItems?: BillingLineItemUpdateManyWithoutEncounterOrderNestedInput
   }
 
   export type InpatientEncounterOrderUncheckedUpdateWithoutCatalogueItemInput = {
@@ -53182,6 +64732,7 @@ export namespace Prisma {
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    billingLineItems?: BillingLineItemUncheckedUpdateManyWithoutEncounterOrderNestedInput
   }
 
   export type InpatientEncounterOrderUncheckedUpdateManyWithoutCatalogueItemInput = {
@@ -53371,6 +64922,318 @@ export namespace Prisma {
     usedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isRevoked?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BillingLineItemCreateManyTransactionInput = {
+    id?: string
+    itemType: $Enums.BillingItemType
+    description: string
+    quantity?: number
+    unitPrice: Decimal | DecimalJsLike | number | string
+    totalPrice: Decimal | DecimalJsLike | number | string
+    requiresPreAuth?: boolean
+    preAuthPaid?: boolean
+    preAuthPaymentId?: string | null
+    insuranceCoverable?: boolean
+    insuranceDiscount?: Decimal | DecimalJsLike | number | string
+    finalPrice: Decimal | DecimalJsLike | number | string
+    encounterOrderId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    addedBy?: string | null
+  }
+
+  export type BillingPaymentCreateManyTransactionInput = {
+    id?: string
+    paymentNumber: string
+    amount: Decimal | DecimalJsLike | number | string
+    paymentMethod: $Enums.PaymentMethod
+    paymentType: $Enums.PaymentType
+    isPreAuthPayment?: boolean
+    paymentPlanId?: string | null
+    installmentNumber?: number | null
+    mayaPaymentId?: string | null
+    mayaPaymentStatus?: string | null
+    mayaReceiptUrl?: string | null
+    status?: $Enums.PaymentStatus
+    paidAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    processedBy?: string | null
+  }
+
+  export type BillingLineItemUpdateWithoutTransactionInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    itemType?: EnumBillingItemTypeFieldUpdateOperationsInput | $Enums.BillingItemType
+    description?: StringFieldUpdateOperationsInput | string
+    quantity?: IntFieldUpdateOperationsInput | number
+    unitPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    totalPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    requiresPreAuth?: BoolFieldUpdateOperationsInput | boolean
+    preAuthPaid?: BoolFieldUpdateOperationsInput | boolean
+    insuranceCoverable?: BoolFieldUpdateOperationsInput | boolean
+    insuranceDiscount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    finalPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    addedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    preAuthPayment?: BillingPaymentUpdateOneWithoutPreAuthItemsNestedInput
+    insuranceCoverage?: InsuranceCoverageUpdateOneWithoutLineItemNestedInput
+    encounterOrder?: InpatientEncounterOrderUpdateOneWithoutBillingLineItemsNestedInput
+  }
+
+  export type BillingLineItemUncheckedUpdateWithoutTransactionInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    itemType?: EnumBillingItemTypeFieldUpdateOperationsInput | $Enums.BillingItemType
+    description?: StringFieldUpdateOperationsInput | string
+    quantity?: IntFieldUpdateOperationsInput | number
+    unitPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    totalPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    requiresPreAuth?: BoolFieldUpdateOperationsInput | boolean
+    preAuthPaid?: BoolFieldUpdateOperationsInput | boolean
+    preAuthPaymentId?: NullableStringFieldUpdateOperationsInput | string | null
+    insuranceCoverable?: BoolFieldUpdateOperationsInput | boolean
+    insuranceDiscount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    finalPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    encounterOrderId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    addedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    insuranceCoverage?: InsuranceCoverageUncheckedUpdateOneWithoutLineItemNestedInput
+  }
+
+  export type BillingLineItemUncheckedUpdateManyWithoutTransactionInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    itemType?: EnumBillingItemTypeFieldUpdateOperationsInput | $Enums.BillingItemType
+    description?: StringFieldUpdateOperationsInput | string
+    quantity?: IntFieldUpdateOperationsInput | number
+    unitPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    totalPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    requiresPreAuth?: BoolFieldUpdateOperationsInput | boolean
+    preAuthPaid?: BoolFieldUpdateOperationsInput | boolean
+    preAuthPaymentId?: NullableStringFieldUpdateOperationsInput | string | null
+    insuranceCoverable?: BoolFieldUpdateOperationsInput | boolean
+    insuranceDiscount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    finalPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    encounterOrderId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    addedBy?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type BillingPaymentUpdateWithoutTransactionInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    paymentNumber?: StringFieldUpdateOperationsInput | string
+    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    paymentMethod?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
+    paymentType?: EnumPaymentTypeFieldUpdateOperationsInput | $Enums.PaymentType
+    isPreAuthPayment?: BoolFieldUpdateOperationsInput | boolean
+    installmentNumber?: NullableIntFieldUpdateOperationsInput | number | null
+    mayaPaymentId?: NullableStringFieldUpdateOperationsInput | string | null
+    mayaPaymentStatus?: NullableStringFieldUpdateOperationsInput | string | null
+    mayaReceiptUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
+    paidAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    processedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    preAuthItems?: BillingLineItemUpdateManyWithoutPreAuthPaymentNestedInput
+    paymentPlan?: PaymentPlanUpdateOneWithoutPaymentsNestedInput
+  }
+
+  export type BillingPaymentUncheckedUpdateWithoutTransactionInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    paymentNumber?: StringFieldUpdateOperationsInput | string
+    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    paymentMethod?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
+    paymentType?: EnumPaymentTypeFieldUpdateOperationsInput | $Enums.PaymentType
+    isPreAuthPayment?: BoolFieldUpdateOperationsInput | boolean
+    paymentPlanId?: NullableStringFieldUpdateOperationsInput | string | null
+    installmentNumber?: NullableIntFieldUpdateOperationsInput | number | null
+    mayaPaymentId?: NullableStringFieldUpdateOperationsInput | string | null
+    mayaPaymentStatus?: NullableStringFieldUpdateOperationsInput | string | null
+    mayaReceiptUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
+    paidAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    processedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    preAuthItems?: BillingLineItemUncheckedUpdateManyWithoutPreAuthPaymentNestedInput
+  }
+
+  export type BillingPaymentUncheckedUpdateManyWithoutTransactionInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    paymentNumber?: StringFieldUpdateOperationsInput | string
+    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    paymentMethod?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
+    paymentType?: EnumPaymentTypeFieldUpdateOperationsInput | $Enums.PaymentType
+    isPreAuthPayment?: BoolFieldUpdateOperationsInput | boolean
+    paymentPlanId?: NullableStringFieldUpdateOperationsInput | string | null
+    installmentNumber?: NullableIntFieldUpdateOperationsInput | number | null
+    mayaPaymentId?: NullableStringFieldUpdateOperationsInput | string | null
+    mayaPaymentStatus?: NullableStringFieldUpdateOperationsInput | string | null
+    mayaReceiptUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
+    paidAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    processedBy?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type BillingLineItemCreateManyPreAuthPaymentInput = {
+    id?: string
+    transactionId: string
+    itemType: $Enums.BillingItemType
+    description: string
+    quantity?: number
+    unitPrice: Decimal | DecimalJsLike | number | string
+    totalPrice: Decimal | DecimalJsLike | number | string
+    requiresPreAuth?: boolean
+    preAuthPaid?: boolean
+    insuranceCoverable?: boolean
+    insuranceDiscount?: Decimal | DecimalJsLike | number | string
+    finalPrice: Decimal | DecimalJsLike | number | string
+    encounterOrderId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    addedBy?: string | null
+  }
+
+  export type BillingLineItemUpdateWithoutPreAuthPaymentInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    itemType?: EnumBillingItemTypeFieldUpdateOperationsInput | $Enums.BillingItemType
+    description?: StringFieldUpdateOperationsInput | string
+    quantity?: IntFieldUpdateOperationsInput | number
+    unitPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    totalPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    requiresPreAuth?: BoolFieldUpdateOperationsInput | boolean
+    preAuthPaid?: BoolFieldUpdateOperationsInput | boolean
+    insuranceCoverable?: BoolFieldUpdateOperationsInput | boolean
+    insuranceDiscount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    finalPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    addedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    transaction?: BillingTransactionUpdateOneRequiredWithoutLineItemsNestedInput
+    insuranceCoverage?: InsuranceCoverageUpdateOneWithoutLineItemNestedInput
+    encounterOrder?: InpatientEncounterOrderUpdateOneWithoutBillingLineItemsNestedInput
+  }
+
+  export type BillingLineItemUncheckedUpdateWithoutPreAuthPaymentInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    transactionId?: StringFieldUpdateOperationsInput | string
+    itemType?: EnumBillingItemTypeFieldUpdateOperationsInput | $Enums.BillingItemType
+    description?: StringFieldUpdateOperationsInput | string
+    quantity?: IntFieldUpdateOperationsInput | number
+    unitPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    totalPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    requiresPreAuth?: BoolFieldUpdateOperationsInput | boolean
+    preAuthPaid?: BoolFieldUpdateOperationsInput | boolean
+    insuranceCoverable?: BoolFieldUpdateOperationsInput | boolean
+    insuranceDiscount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    finalPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    encounterOrderId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    addedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    insuranceCoverage?: InsuranceCoverageUncheckedUpdateOneWithoutLineItemNestedInput
+  }
+
+  export type BillingLineItemUncheckedUpdateManyWithoutPreAuthPaymentInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    transactionId?: StringFieldUpdateOperationsInput | string
+    itemType?: EnumBillingItemTypeFieldUpdateOperationsInput | $Enums.BillingItemType
+    description?: StringFieldUpdateOperationsInput | string
+    quantity?: IntFieldUpdateOperationsInput | number
+    unitPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    totalPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    requiresPreAuth?: BoolFieldUpdateOperationsInput | boolean
+    preAuthPaid?: BoolFieldUpdateOperationsInput | boolean
+    insuranceCoverable?: BoolFieldUpdateOperationsInput | boolean
+    insuranceDiscount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    finalPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    encounterOrderId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    addedBy?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type BillingPaymentCreateManyPaymentPlanInput = {
+    id?: string
+    paymentNumber: string
+    transactionId: string
+    amount: Decimal | DecimalJsLike | number | string
+    paymentMethod: $Enums.PaymentMethod
+    paymentType: $Enums.PaymentType
+    isPreAuthPayment?: boolean
+    installmentNumber?: number | null
+    mayaPaymentId?: string | null
+    mayaPaymentStatus?: string | null
+    mayaReceiptUrl?: string | null
+    status?: $Enums.PaymentStatus
+    paidAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    processedBy?: string | null
+  }
+
+  export type BillingPaymentUpdateWithoutPaymentPlanInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    paymentNumber?: StringFieldUpdateOperationsInput | string
+    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    paymentMethod?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
+    paymentType?: EnumPaymentTypeFieldUpdateOperationsInput | $Enums.PaymentType
+    isPreAuthPayment?: BoolFieldUpdateOperationsInput | boolean
+    installmentNumber?: NullableIntFieldUpdateOperationsInput | number | null
+    mayaPaymentId?: NullableStringFieldUpdateOperationsInput | string | null
+    mayaPaymentStatus?: NullableStringFieldUpdateOperationsInput | string | null
+    mayaReceiptUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
+    paidAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    processedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    transaction?: BillingTransactionUpdateOneRequiredWithoutPaymentsNestedInput
+    preAuthItems?: BillingLineItemUpdateManyWithoutPreAuthPaymentNestedInput
+  }
+
+  export type BillingPaymentUncheckedUpdateWithoutPaymentPlanInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    paymentNumber?: StringFieldUpdateOperationsInput | string
+    transactionId?: StringFieldUpdateOperationsInput | string
+    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    paymentMethod?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
+    paymentType?: EnumPaymentTypeFieldUpdateOperationsInput | $Enums.PaymentType
+    isPreAuthPayment?: BoolFieldUpdateOperationsInput | boolean
+    installmentNumber?: NullableIntFieldUpdateOperationsInput | number | null
+    mayaPaymentId?: NullableStringFieldUpdateOperationsInput | string | null
+    mayaPaymentStatus?: NullableStringFieldUpdateOperationsInput | string | null
+    mayaReceiptUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
+    paidAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    processedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    preAuthItems?: BillingLineItemUncheckedUpdateManyWithoutPreAuthPaymentNestedInput
+  }
+
+  export type BillingPaymentUncheckedUpdateManyWithoutPaymentPlanInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    paymentNumber?: StringFieldUpdateOperationsInput | string
+    transactionId?: StringFieldUpdateOperationsInput | string
+    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    paymentMethod?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
+    paymentType?: EnumPaymentTypeFieldUpdateOperationsInput | $Enums.PaymentType
+    isPreAuthPayment?: BoolFieldUpdateOperationsInput | boolean
+    installmentNumber?: NullableIntFieldUpdateOperationsInput | number | null
+    mayaPaymentId?: NullableStringFieldUpdateOperationsInput | string | null
+    mayaPaymentStatus?: NullableStringFieldUpdateOperationsInput | string | null
+    mayaReceiptUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
+    paidAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    processedBy?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
 
