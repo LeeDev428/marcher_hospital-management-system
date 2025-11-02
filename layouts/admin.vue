@@ -30,6 +30,21 @@ const navigationItems = [
         to: "/admin/staff"
     },
 	{
+		name: "Billing Management",
+		icon: "lucide:credit-card",
+		to: "/admin/billing"
+	},
+	{
+		name: "Insurance",
+		icon: "lucide:shield",
+		to: "/admin/insurance"
+	},
+	{
+		name: "Data Sharing",
+		icon: "lucide:share-2",
+		to: "/admin/datashare"
+	},
+	{
 		name: "System Settings",
 		icon: "lucide:settings",
 		to: "/admin/settings"
