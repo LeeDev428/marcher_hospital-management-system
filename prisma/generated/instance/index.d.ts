@@ -59,6 +59,21 @@ export type StaffSchedule = $Result.DefaultSelection<Prisma.$StaffSchedulePayloa
  */
 export type MedicalService = $Result.DefaultSelection<Prisma.$MedicalServicePayload>
 /**
+ * Model Building
+ * 
+ */
+export type Building = $Result.DefaultSelection<Prisma.$BuildingPayload>
+/**
+ * Model Room
+ * 
+ */
+export type Room = $Result.DefaultSelection<Prisma.$RoomPayload>
+/**
+ * Model FacilityLog
+ * 
+ */
+export type FacilityLog = $Result.DefaultSelection<Prisma.$FacilityLogPayload>
+/**
  * Model PharmacySupplier
  * 
  */
@@ -334,6 +349,37 @@ export const ServiceCategory: {
 export type ServiceCategory = (typeof ServiceCategory)[keyof typeof ServiceCategory]
 
 
+export const RoomType: {
+  PATIENT_ROOM: 'PATIENT_ROOM',
+  ICU: 'ICU',
+  EMERGENCY_ROOM: 'EMERGENCY_ROOM',
+  OPERATING_ROOM: 'OPERATING_ROOM',
+  CONSULTATION_ROOM: 'CONSULTATION_ROOM',
+  LABORATORY: 'LABORATORY',
+  RADIOLOGY: 'RADIOLOGY',
+  PHARMACY: 'PHARMACY',
+  STORAGE: 'STORAGE',
+  OFFICE: 'OFFICE',
+  WAITING_AREA: 'WAITING_AREA',
+  CAFETERIA: 'CAFETERIA',
+  OTHER: 'OTHER'
+};
+
+export type RoomType = (typeof RoomType)[keyof typeof RoomType]
+
+
+export const RoomStatus: {
+  AVAILABLE: 'AVAILABLE',
+  OCCUPIED: 'OCCUPIED',
+  RESERVED: 'RESERVED',
+  MAINTENANCE: 'MAINTENANCE',
+  CLEANING: 'CLEANING',
+  OUT_OF_SERVICE: 'OUT_OF_SERVICE'
+};
+
+export type RoomStatus = (typeof RoomStatus)[keyof typeof RoomStatus]
+
+
 export const PharmacyItemForm: {
   TABLET: 'TABLET',
   CAPSULE: 'CAPSULE',
@@ -596,6 +642,14 @@ export const ServiceType: typeof $Enums.ServiceType
 export type ServiceCategory = $Enums.ServiceCategory
 
 export const ServiceCategory: typeof $Enums.ServiceCategory
+
+export type RoomType = $Enums.RoomType
+
+export const RoomType: typeof $Enums.RoomType
+
+export type RoomStatus = $Enums.RoomStatus
+
+export const RoomStatus: typeof $Enums.RoomStatus
 
 export type PharmacyItemForm = $Enums.PharmacyItemForm
 
@@ -876,6 +930,36 @@ export class PrismaClient<
     * ```
     */
   get medicalService(): Prisma.MedicalServiceDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.building`: Exposes CRUD operations for the **Building** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Buildings
+    * const buildings = await prisma.building.findMany()
+    * ```
+    */
+  get building(): Prisma.BuildingDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.room`: Exposes CRUD operations for the **Room** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Rooms
+    * const rooms = await prisma.room.findMany()
+    * ```
+    */
+  get room(): Prisma.RoomDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.facilityLog`: Exposes CRUD operations for the **FacilityLog** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more FacilityLogs
+    * const facilityLogs = await prisma.facilityLog.findMany()
+    * ```
+    */
+  get facilityLog(): Prisma.FacilityLogDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.pharmacySupplier`: Exposes CRUD operations for the **PharmacySupplier** model.
@@ -1555,6 +1639,9 @@ export namespace Prisma {
     Appointment: 'Appointment',
     StaffSchedule: 'StaffSchedule',
     MedicalService: 'MedicalService',
+    Building: 'Building',
+    Room: 'Room',
+    FacilityLog: 'FacilityLog',
     PharmacySupplier: 'PharmacySupplier',
     PharmacyBrand: 'PharmacyBrand',
     PharmacyItemCategory: 'PharmacyItemCategory',
@@ -1596,7 +1683,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "staffCredentials" | "patient" | "partner" | "refreshToken" | "passwordResetToken" | "appointment" | "staffSchedule" | "medicalService" | "pharmacySupplier" | "pharmacyBrand" | "pharmacyItemCategory" | "pharmacyItem" | "pharmacySale" | "pharmacySaleItem" | "pharmacyPayment" | "outpatientEncounter" | "inpatientEncounter" | "inpatientEncounterChart" | "inpatientEncounterOrder" | "particularCatalogue" | "insuranceClaim" | "insuranceDocument" | "insuranceAccessToken" | "dataShareRequest" | "dataShareDocument" | "dataShareAccessToken" | "billingTransaction" | "billingLineItem" | "insuranceCoverage" | "billingPayment" | "paymentPlan"
+      modelProps: "user" | "staffCredentials" | "patient" | "partner" | "refreshToken" | "passwordResetToken" | "appointment" | "staffSchedule" | "medicalService" | "building" | "room" | "facilityLog" | "pharmacySupplier" | "pharmacyBrand" | "pharmacyItemCategory" | "pharmacyItem" | "pharmacySale" | "pharmacySaleItem" | "pharmacyPayment" | "outpatientEncounter" | "inpatientEncounter" | "inpatientEncounterChart" | "inpatientEncounterOrder" | "particularCatalogue" | "insuranceClaim" | "insuranceDocument" | "insuranceAccessToken" | "dataShareRequest" | "dataShareDocument" | "dataShareAccessToken" | "billingTransaction" | "billingLineItem" | "insuranceCoverage" | "billingPayment" | "paymentPlan"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -2263,6 +2350,228 @@ export namespace Prisma {
           count: {
             args: Prisma.MedicalServiceCountArgs<ExtArgs>
             result: $Utils.Optional<MedicalServiceCountAggregateOutputType> | number
+          }
+        }
+      }
+      Building: {
+        payload: Prisma.$BuildingPayload<ExtArgs>
+        fields: Prisma.BuildingFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.BuildingFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BuildingPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.BuildingFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BuildingPayload>
+          }
+          findFirst: {
+            args: Prisma.BuildingFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BuildingPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.BuildingFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BuildingPayload>
+          }
+          findMany: {
+            args: Prisma.BuildingFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BuildingPayload>[]
+          }
+          create: {
+            args: Prisma.BuildingCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BuildingPayload>
+          }
+          createMany: {
+            args: Prisma.BuildingCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.BuildingCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BuildingPayload>[]
+          }
+          delete: {
+            args: Prisma.BuildingDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BuildingPayload>
+          }
+          update: {
+            args: Prisma.BuildingUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BuildingPayload>
+          }
+          deleteMany: {
+            args: Prisma.BuildingDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.BuildingUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.BuildingUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BuildingPayload>[]
+          }
+          upsert: {
+            args: Prisma.BuildingUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BuildingPayload>
+          }
+          aggregate: {
+            args: Prisma.BuildingAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateBuilding>
+          }
+          groupBy: {
+            args: Prisma.BuildingGroupByArgs<ExtArgs>
+            result: $Utils.Optional<BuildingGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.BuildingCountArgs<ExtArgs>
+            result: $Utils.Optional<BuildingCountAggregateOutputType> | number
+          }
+        }
+      }
+      Room: {
+        payload: Prisma.$RoomPayload<ExtArgs>
+        fields: Prisma.RoomFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.RoomFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RoomPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.RoomFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RoomPayload>
+          }
+          findFirst: {
+            args: Prisma.RoomFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RoomPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.RoomFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RoomPayload>
+          }
+          findMany: {
+            args: Prisma.RoomFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RoomPayload>[]
+          }
+          create: {
+            args: Prisma.RoomCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RoomPayload>
+          }
+          createMany: {
+            args: Prisma.RoomCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.RoomCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RoomPayload>[]
+          }
+          delete: {
+            args: Prisma.RoomDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RoomPayload>
+          }
+          update: {
+            args: Prisma.RoomUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RoomPayload>
+          }
+          deleteMany: {
+            args: Prisma.RoomDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.RoomUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.RoomUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RoomPayload>[]
+          }
+          upsert: {
+            args: Prisma.RoomUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RoomPayload>
+          }
+          aggregate: {
+            args: Prisma.RoomAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateRoom>
+          }
+          groupBy: {
+            args: Prisma.RoomGroupByArgs<ExtArgs>
+            result: $Utils.Optional<RoomGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.RoomCountArgs<ExtArgs>
+            result: $Utils.Optional<RoomCountAggregateOutputType> | number
+          }
+        }
+      }
+      FacilityLog: {
+        payload: Prisma.$FacilityLogPayload<ExtArgs>
+        fields: Prisma.FacilityLogFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.FacilityLogFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FacilityLogPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.FacilityLogFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FacilityLogPayload>
+          }
+          findFirst: {
+            args: Prisma.FacilityLogFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FacilityLogPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.FacilityLogFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FacilityLogPayload>
+          }
+          findMany: {
+            args: Prisma.FacilityLogFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FacilityLogPayload>[]
+          }
+          create: {
+            args: Prisma.FacilityLogCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FacilityLogPayload>
+          }
+          createMany: {
+            args: Prisma.FacilityLogCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.FacilityLogCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FacilityLogPayload>[]
+          }
+          delete: {
+            args: Prisma.FacilityLogDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FacilityLogPayload>
+          }
+          update: {
+            args: Prisma.FacilityLogUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FacilityLogPayload>
+          }
+          deleteMany: {
+            args: Prisma.FacilityLogDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.FacilityLogUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.FacilityLogUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FacilityLogPayload>[]
+          }
+          upsert: {
+            args: Prisma.FacilityLogUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FacilityLogPayload>
+          }
+          aggregate: {
+            args: Prisma.FacilityLogAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateFacilityLog>
+          }
+          groupBy: {
+            args: Prisma.FacilityLogGroupByArgs<ExtArgs>
+            result: $Utils.Optional<FacilityLogGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.FacilityLogCountArgs<ExtArgs>
+            result: $Utils.Optional<FacilityLogCountAggregateOutputType> | number
           }
         }
       }
@@ -4073,6 +4382,9 @@ export namespace Prisma {
     appointment?: AppointmentOmit
     staffSchedule?: StaffScheduleOmit
     medicalService?: MedicalServiceOmit
+    building?: BuildingOmit
+    room?: RoomOmit
+    facilityLog?: FacilityLogOmit
     pharmacySupplier?: PharmacySupplierOmit
     pharmacyBrand?: PharmacyBrandOmit
     pharmacyItemCategory?: PharmacyItemCategoryOmit
@@ -6345,6 +6657,7 @@ export namespace Prisma {
     staffType: $Enums.StaffType | null
     licenseNumber: string | null
     licenseExpiryDate: Date | null
+    qualification: string | null
     specialization: string | null
     subSpecialization: string | null
     education: string | null
@@ -6362,6 +6675,7 @@ export namespace Prisma {
     staffType: $Enums.StaffType | null
     licenseNumber: string | null
     licenseExpiryDate: Date | null
+    qualification: string | null
     specialization: string | null
     subSpecialization: string | null
     education: string | null
@@ -6379,6 +6693,7 @@ export namespace Prisma {
     staffType: number
     licenseNumber: number
     licenseExpiryDate: number
+    qualification: number
     specialization: number
     subSpecialization: number
     boardCertification: number
@@ -6410,6 +6725,7 @@ export namespace Prisma {
     staffType?: true
     licenseNumber?: true
     licenseExpiryDate?: true
+    qualification?: true
     specialization?: true
     subSpecialization?: true
     education?: true
@@ -6427,6 +6743,7 @@ export namespace Prisma {
     staffType?: true
     licenseNumber?: true
     licenseExpiryDate?: true
+    qualification?: true
     specialization?: true
     subSpecialization?: true
     education?: true
@@ -6444,6 +6761,7 @@ export namespace Prisma {
     staffType?: true
     licenseNumber?: true
     licenseExpiryDate?: true
+    qualification?: true
     specialization?: true
     subSpecialization?: true
     boardCertification?: true
@@ -6550,6 +6868,7 @@ export namespace Prisma {
     staffType: $Enums.StaffType
     licenseNumber: string | null
     licenseExpiryDate: Date | null
+    qualification: string | null
     specialization: string | null
     subSpecialization: string | null
     boardCertification: string[]
@@ -6588,6 +6907,7 @@ export namespace Prisma {
     staffType?: boolean
     licenseNumber?: boolean
     licenseExpiryDate?: boolean
+    qualification?: boolean
     specialization?: boolean
     subSpecialization?: boolean
     boardCertification?: boolean
@@ -6608,6 +6928,7 @@ export namespace Prisma {
     staffType?: boolean
     licenseNumber?: boolean
     licenseExpiryDate?: boolean
+    qualification?: boolean
     specialization?: boolean
     subSpecialization?: boolean
     boardCertification?: boolean
@@ -6628,6 +6949,7 @@ export namespace Prisma {
     staffType?: boolean
     licenseNumber?: boolean
     licenseExpiryDate?: boolean
+    qualification?: boolean
     specialization?: boolean
     subSpecialization?: boolean
     boardCertification?: boolean
@@ -6648,6 +6970,7 @@ export namespace Prisma {
     staffType?: boolean
     licenseNumber?: boolean
     licenseExpiryDate?: boolean
+    qualification?: boolean
     specialization?: boolean
     subSpecialization?: boolean
     boardCertification?: boolean
@@ -6661,7 +6984,7 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type StaffCredentialsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "staffType" | "licenseNumber" | "licenseExpiryDate" | "specialization" | "subSpecialization" | "boardCertification" | "education" | "yearsOfExperience" | "consultationFee" | "isAvailable" | "workingHours" | "hospitalAffiliation" | "createdAt" | "updatedAt", ExtArgs["result"]["staffCredentials"]>
+  export type StaffCredentialsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "staffType" | "licenseNumber" | "licenseExpiryDate" | "qualification" | "specialization" | "subSpecialization" | "boardCertification" | "education" | "yearsOfExperience" | "consultationFee" | "isAvailable" | "workingHours" | "hospitalAffiliation" | "createdAt" | "updatedAt", ExtArgs["result"]["staffCredentials"]>
   export type StaffCredentialsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
   }
@@ -6683,6 +7006,7 @@ export namespace Prisma {
       staffType: $Enums.StaffType
       licenseNumber: string | null
       licenseExpiryDate: Date | null
+      qualification: string | null
       specialization: string | null
       subSpecialization: string | null
       boardCertification: string[]
@@ -7123,6 +7447,7 @@ export namespace Prisma {
     readonly staffType: FieldRef<"StaffCredentials", 'StaffType'>
     readonly licenseNumber: FieldRef<"StaffCredentials", 'String'>
     readonly licenseExpiryDate: FieldRef<"StaffCredentials", 'DateTime'>
+    readonly qualification: FieldRef<"StaffCredentials", 'String'>
     readonly specialization: FieldRef<"StaffCredentials", 'String'>
     readonly subSpecialization: FieldRef<"StaffCredentials", 'String'>
     readonly boardCertification: FieldRef<"StaffCredentials", 'String[]'>
@@ -15588,6 +15913,3271 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: MedicalServiceInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Building
+   */
+
+  export type AggregateBuilding = {
+    _count: BuildingCountAggregateOutputType | null
+    _avg: BuildingAvgAggregateOutputType | null
+    _sum: BuildingSumAggregateOutputType | null
+    _min: BuildingMinAggregateOutputType | null
+    _max: BuildingMaxAggregateOutputType | null
+  }
+
+  export type BuildingAvgAggregateOutputType = {
+    floors: number | null
+  }
+
+  export type BuildingSumAggregateOutputType = {
+    floors: number | null
+  }
+
+  export type BuildingMinAggregateOutputType = {
+    id: string | null
+    name: string | null
+    code: string | null
+    description: string | null
+    address: string | null
+    floors: number | null
+    isActive: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type BuildingMaxAggregateOutputType = {
+    id: string | null
+    name: string | null
+    code: string | null
+    description: string | null
+    address: string | null
+    floors: number | null
+    isActive: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type BuildingCountAggregateOutputType = {
+    id: number
+    name: number
+    code: number
+    description: number
+    address: number
+    floors: number
+    isActive: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type BuildingAvgAggregateInputType = {
+    floors?: true
+  }
+
+  export type BuildingSumAggregateInputType = {
+    floors?: true
+  }
+
+  export type BuildingMinAggregateInputType = {
+    id?: true
+    name?: true
+    code?: true
+    description?: true
+    address?: true
+    floors?: true
+    isActive?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type BuildingMaxAggregateInputType = {
+    id?: true
+    name?: true
+    code?: true
+    description?: true
+    address?: true
+    floors?: true
+    isActive?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type BuildingCountAggregateInputType = {
+    id?: true
+    name?: true
+    code?: true
+    description?: true
+    address?: true
+    floors?: true
+    isActive?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type BuildingAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Building to aggregate.
+     */
+    where?: BuildingWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Buildings to fetch.
+     */
+    orderBy?: BuildingOrderByWithRelationInput | BuildingOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: BuildingWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Buildings from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Buildings.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Buildings
+    **/
+    _count?: true | BuildingCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: BuildingAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: BuildingSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: BuildingMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: BuildingMaxAggregateInputType
+  }
+
+  export type GetBuildingAggregateType<T extends BuildingAggregateArgs> = {
+        [P in keyof T & keyof AggregateBuilding]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateBuilding[P]>
+      : GetScalarType<T[P], AggregateBuilding[P]>
+  }
+
+
+
+
+  export type BuildingGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: BuildingWhereInput
+    orderBy?: BuildingOrderByWithAggregationInput | BuildingOrderByWithAggregationInput[]
+    by: BuildingScalarFieldEnum[] | BuildingScalarFieldEnum
+    having?: BuildingScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: BuildingCountAggregateInputType | true
+    _avg?: BuildingAvgAggregateInputType
+    _sum?: BuildingSumAggregateInputType
+    _min?: BuildingMinAggregateInputType
+    _max?: BuildingMaxAggregateInputType
+  }
+
+  export type BuildingGroupByOutputType = {
+    id: string
+    name: string
+    code: string
+    description: string | null
+    address: string | null
+    floors: number
+    isActive: boolean
+    createdAt: Date
+    updatedAt: Date
+    _count: BuildingCountAggregateOutputType | null
+    _avg: BuildingAvgAggregateOutputType | null
+    _sum: BuildingSumAggregateOutputType | null
+    _min: BuildingMinAggregateOutputType | null
+    _max: BuildingMaxAggregateOutputType | null
+  }
+
+  type GetBuildingGroupByPayload<T extends BuildingGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<BuildingGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof BuildingGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], BuildingGroupByOutputType[P]>
+            : GetScalarType<T[P], BuildingGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type BuildingSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    code?: boolean
+    description?: boolean
+    address?: boolean
+    floors?: boolean
+    isActive?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["building"]>
+
+  export type BuildingSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    code?: boolean
+    description?: boolean
+    address?: boolean
+    floors?: boolean
+    isActive?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["building"]>
+
+  export type BuildingSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    code?: boolean
+    description?: boolean
+    address?: boolean
+    floors?: boolean
+    isActive?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["building"]>
+
+  export type BuildingSelectScalar = {
+    id?: boolean
+    name?: boolean
+    code?: boolean
+    description?: boolean
+    address?: boolean
+    floors?: boolean
+    isActive?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type BuildingOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "code" | "description" | "address" | "floors" | "isActive" | "createdAt" | "updatedAt", ExtArgs["result"]["building"]>
+
+  export type $BuildingPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Building"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      name: string
+      code: string
+      description: string | null
+      address: string | null
+      floors: number
+      isActive: boolean
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["building"]>
+    composites: {}
+  }
+
+  type BuildingGetPayload<S extends boolean | null | undefined | BuildingDefaultArgs> = $Result.GetResult<Prisma.$BuildingPayload, S>
+
+  type BuildingCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<BuildingFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: BuildingCountAggregateInputType | true
+    }
+
+  export interface BuildingDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Building'], meta: { name: 'Building' } }
+    /**
+     * Find zero or one Building that matches the filter.
+     * @param {BuildingFindUniqueArgs} args - Arguments to find a Building
+     * @example
+     * // Get one Building
+     * const building = await prisma.building.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends BuildingFindUniqueArgs>(args: SelectSubset<T, BuildingFindUniqueArgs<ExtArgs>>): Prisma__BuildingClient<$Result.GetResult<Prisma.$BuildingPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Building that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {BuildingFindUniqueOrThrowArgs} args - Arguments to find a Building
+     * @example
+     * // Get one Building
+     * const building = await prisma.building.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends BuildingFindUniqueOrThrowArgs>(args: SelectSubset<T, BuildingFindUniqueOrThrowArgs<ExtArgs>>): Prisma__BuildingClient<$Result.GetResult<Prisma.$BuildingPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Building that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BuildingFindFirstArgs} args - Arguments to find a Building
+     * @example
+     * // Get one Building
+     * const building = await prisma.building.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends BuildingFindFirstArgs>(args?: SelectSubset<T, BuildingFindFirstArgs<ExtArgs>>): Prisma__BuildingClient<$Result.GetResult<Prisma.$BuildingPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Building that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BuildingFindFirstOrThrowArgs} args - Arguments to find a Building
+     * @example
+     * // Get one Building
+     * const building = await prisma.building.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends BuildingFindFirstOrThrowArgs>(args?: SelectSubset<T, BuildingFindFirstOrThrowArgs<ExtArgs>>): Prisma__BuildingClient<$Result.GetResult<Prisma.$BuildingPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Buildings that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BuildingFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Buildings
+     * const buildings = await prisma.building.findMany()
+     * 
+     * // Get first 10 Buildings
+     * const buildings = await prisma.building.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const buildingWithIdOnly = await prisma.building.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends BuildingFindManyArgs>(args?: SelectSubset<T, BuildingFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BuildingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Building.
+     * @param {BuildingCreateArgs} args - Arguments to create a Building.
+     * @example
+     * // Create one Building
+     * const Building = await prisma.building.create({
+     *   data: {
+     *     // ... data to create a Building
+     *   }
+     * })
+     * 
+     */
+    create<T extends BuildingCreateArgs>(args: SelectSubset<T, BuildingCreateArgs<ExtArgs>>): Prisma__BuildingClient<$Result.GetResult<Prisma.$BuildingPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Buildings.
+     * @param {BuildingCreateManyArgs} args - Arguments to create many Buildings.
+     * @example
+     * // Create many Buildings
+     * const building = await prisma.building.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends BuildingCreateManyArgs>(args?: SelectSubset<T, BuildingCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Buildings and returns the data saved in the database.
+     * @param {BuildingCreateManyAndReturnArgs} args - Arguments to create many Buildings.
+     * @example
+     * // Create many Buildings
+     * const building = await prisma.building.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Buildings and only return the `id`
+     * const buildingWithIdOnly = await prisma.building.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends BuildingCreateManyAndReturnArgs>(args?: SelectSubset<T, BuildingCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BuildingPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Building.
+     * @param {BuildingDeleteArgs} args - Arguments to delete one Building.
+     * @example
+     * // Delete one Building
+     * const Building = await prisma.building.delete({
+     *   where: {
+     *     // ... filter to delete one Building
+     *   }
+     * })
+     * 
+     */
+    delete<T extends BuildingDeleteArgs>(args: SelectSubset<T, BuildingDeleteArgs<ExtArgs>>): Prisma__BuildingClient<$Result.GetResult<Prisma.$BuildingPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Building.
+     * @param {BuildingUpdateArgs} args - Arguments to update one Building.
+     * @example
+     * // Update one Building
+     * const building = await prisma.building.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends BuildingUpdateArgs>(args: SelectSubset<T, BuildingUpdateArgs<ExtArgs>>): Prisma__BuildingClient<$Result.GetResult<Prisma.$BuildingPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Buildings.
+     * @param {BuildingDeleteManyArgs} args - Arguments to filter Buildings to delete.
+     * @example
+     * // Delete a few Buildings
+     * const { count } = await prisma.building.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends BuildingDeleteManyArgs>(args?: SelectSubset<T, BuildingDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Buildings.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BuildingUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Buildings
+     * const building = await prisma.building.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends BuildingUpdateManyArgs>(args: SelectSubset<T, BuildingUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Buildings and returns the data updated in the database.
+     * @param {BuildingUpdateManyAndReturnArgs} args - Arguments to update many Buildings.
+     * @example
+     * // Update many Buildings
+     * const building = await prisma.building.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Buildings and only return the `id`
+     * const buildingWithIdOnly = await prisma.building.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends BuildingUpdateManyAndReturnArgs>(args: SelectSubset<T, BuildingUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BuildingPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Building.
+     * @param {BuildingUpsertArgs} args - Arguments to update or create a Building.
+     * @example
+     * // Update or create a Building
+     * const building = await prisma.building.upsert({
+     *   create: {
+     *     // ... data to create a Building
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Building we want to update
+     *   }
+     * })
+     */
+    upsert<T extends BuildingUpsertArgs>(args: SelectSubset<T, BuildingUpsertArgs<ExtArgs>>): Prisma__BuildingClient<$Result.GetResult<Prisma.$BuildingPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Buildings.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BuildingCountArgs} args - Arguments to filter Buildings to count.
+     * @example
+     * // Count the number of Buildings
+     * const count = await prisma.building.count({
+     *   where: {
+     *     // ... the filter for the Buildings we want to count
+     *   }
+     * })
+    **/
+    count<T extends BuildingCountArgs>(
+      args?: Subset<T, BuildingCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], BuildingCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Building.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BuildingAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends BuildingAggregateArgs>(args: Subset<T, BuildingAggregateArgs>): Prisma.PrismaPromise<GetBuildingAggregateType<T>>
+
+    /**
+     * Group by Building.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BuildingGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends BuildingGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: BuildingGroupByArgs['orderBy'] }
+        : { orderBy?: BuildingGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, BuildingGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetBuildingGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Building model
+   */
+  readonly fields: BuildingFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Building.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__BuildingClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Building model
+   */
+  interface BuildingFieldRefs {
+    readonly id: FieldRef<"Building", 'String'>
+    readonly name: FieldRef<"Building", 'String'>
+    readonly code: FieldRef<"Building", 'String'>
+    readonly description: FieldRef<"Building", 'String'>
+    readonly address: FieldRef<"Building", 'String'>
+    readonly floors: FieldRef<"Building", 'Int'>
+    readonly isActive: FieldRef<"Building", 'Boolean'>
+    readonly createdAt: FieldRef<"Building", 'DateTime'>
+    readonly updatedAt: FieldRef<"Building", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Building findUnique
+   */
+  export type BuildingFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Building
+     */
+    select?: BuildingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Building
+     */
+    omit?: BuildingOmit<ExtArgs> | null
+    /**
+     * Filter, which Building to fetch.
+     */
+    where: BuildingWhereUniqueInput
+  }
+
+  /**
+   * Building findUniqueOrThrow
+   */
+  export type BuildingFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Building
+     */
+    select?: BuildingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Building
+     */
+    omit?: BuildingOmit<ExtArgs> | null
+    /**
+     * Filter, which Building to fetch.
+     */
+    where: BuildingWhereUniqueInput
+  }
+
+  /**
+   * Building findFirst
+   */
+  export type BuildingFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Building
+     */
+    select?: BuildingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Building
+     */
+    omit?: BuildingOmit<ExtArgs> | null
+    /**
+     * Filter, which Building to fetch.
+     */
+    where?: BuildingWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Buildings to fetch.
+     */
+    orderBy?: BuildingOrderByWithRelationInput | BuildingOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Buildings.
+     */
+    cursor?: BuildingWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Buildings from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Buildings.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Buildings.
+     */
+    distinct?: BuildingScalarFieldEnum | BuildingScalarFieldEnum[]
+  }
+
+  /**
+   * Building findFirstOrThrow
+   */
+  export type BuildingFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Building
+     */
+    select?: BuildingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Building
+     */
+    omit?: BuildingOmit<ExtArgs> | null
+    /**
+     * Filter, which Building to fetch.
+     */
+    where?: BuildingWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Buildings to fetch.
+     */
+    orderBy?: BuildingOrderByWithRelationInput | BuildingOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Buildings.
+     */
+    cursor?: BuildingWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Buildings from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Buildings.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Buildings.
+     */
+    distinct?: BuildingScalarFieldEnum | BuildingScalarFieldEnum[]
+  }
+
+  /**
+   * Building findMany
+   */
+  export type BuildingFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Building
+     */
+    select?: BuildingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Building
+     */
+    omit?: BuildingOmit<ExtArgs> | null
+    /**
+     * Filter, which Buildings to fetch.
+     */
+    where?: BuildingWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Buildings to fetch.
+     */
+    orderBy?: BuildingOrderByWithRelationInput | BuildingOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Buildings.
+     */
+    cursor?: BuildingWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Buildings from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Buildings.
+     */
+    skip?: number
+    distinct?: BuildingScalarFieldEnum | BuildingScalarFieldEnum[]
+  }
+
+  /**
+   * Building create
+   */
+  export type BuildingCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Building
+     */
+    select?: BuildingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Building
+     */
+    omit?: BuildingOmit<ExtArgs> | null
+    /**
+     * The data needed to create a Building.
+     */
+    data: XOR<BuildingCreateInput, BuildingUncheckedCreateInput>
+  }
+
+  /**
+   * Building createMany
+   */
+  export type BuildingCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Buildings.
+     */
+    data: BuildingCreateManyInput | BuildingCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Building createManyAndReturn
+   */
+  export type BuildingCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Building
+     */
+    select?: BuildingSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Building
+     */
+    omit?: BuildingOmit<ExtArgs> | null
+    /**
+     * The data used to create many Buildings.
+     */
+    data: BuildingCreateManyInput | BuildingCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Building update
+   */
+  export type BuildingUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Building
+     */
+    select?: BuildingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Building
+     */
+    omit?: BuildingOmit<ExtArgs> | null
+    /**
+     * The data needed to update a Building.
+     */
+    data: XOR<BuildingUpdateInput, BuildingUncheckedUpdateInput>
+    /**
+     * Choose, which Building to update.
+     */
+    where: BuildingWhereUniqueInput
+  }
+
+  /**
+   * Building updateMany
+   */
+  export type BuildingUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Buildings.
+     */
+    data: XOR<BuildingUpdateManyMutationInput, BuildingUncheckedUpdateManyInput>
+    /**
+     * Filter which Buildings to update
+     */
+    where?: BuildingWhereInput
+    /**
+     * Limit how many Buildings to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Building updateManyAndReturn
+   */
+  export type BuildingUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Building
+     */
+    select?: BuildingSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Building
+     */
+    omit?: BuildingOmit<ExtArgs> | null
+    /**
+     * The data used to update Buildings.
+     */
+    data: XOR<BuildingUpdateManyMutationInput, BuildingUncheckedUpdateManyInput>
+    /**
+     * Filter which Buildings to update
+     */
+    where?: BuildingWhereInput
+    /**
+     * Limit how many Buildings to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Building upsert
+   */
+  export type BuildingUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Building
+     */
+    select?: BuildingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Building
+     */
+    omit?: BuildingOmit<ExtArgs> | null
+    /**
+     * The filter to search for the Building to update in case it exists.
+     */
+    where: BuildingWhereUniqueInput
+    /**
+     * In case the Building found by the `where` argument doesn't exist, create a new Building with this data.
+     */
+    create: XOR<BuildingCreateInput, BuildingUncheckedCreateInput>
+    /**
+     * In case the Building was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<BuildingUpdateInput, BuildingUncheckedUpdateInput>
+  }
+
+  /**
+   * Building delete
+   */
+  export type BuildingDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Building
+     */
+    select?: BuildingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Building
+     */
+    omit?: BuildingOmit<ExtArgs> | null
+    /**
+     * Filter which Building to delete.
+     */
+    where: BuildingWhereUniqueInput
+  }
+
+  /**
+   * Building deleteMany
+   */
+  export type BuildingDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Buildings to delete
+     */
+    where?: BuildingWhereInput
+    /**
+     * Limit how many Buildings to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Building without action
+   */
+  export type BuildingDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Building
+     */
+    select?: BuildingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Building
+     */
+    omit?: BuildingOmit<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Room
+   */
+
+  export type AggregateRoom = {
+    _count: RoomCountAggregateOutputType | null
+    _avg: RoomAvgAggregateOutputType | null
+    _sum: RoomSumAggregateOutputType | null
+    _min: RoomMinAggregateOutputType | null
+    _max: RoomMaxAggregateOutputType | null
+  }
+
+  export type RoomAvgAggregateOutputType = {
+    capacity: number | null
+    floor: number | null
+  }
+
+  export type RoomSumAggregateOutputType = {
+    capacity: number | null
+    floor: number | null
+  }
+
+  export type RoomMinAggregateOutputType = {
+    id: string | null
+    building: string | null
+    identifier: string | null
+    type: $Enums.RoomType | null
+    description: string | null
+    capacity: number | null
+    status: $Enums.RoomStatus | null
+    floor: number | null
+    wing: string | null
+    amenities: string | null
+    notes: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type RoomMaxAggregateOutputType = {
+    id: string | null
+    building: string | null
+    identifier: string | null
+    type: $Enums.RoomType | null
+    description: string | null
+    capacity: number | null
+    status: $Enums.RoomStatus | null
+    floor: number | null
+    wing: string | null
+    amenities: string | null
+    notes: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type RoomCountAggregateOutputType = {
+    id: number
+    building: number
+    identifier: number
+    type: number
+    description: number
+    capacity: number
+    status: number
+    floor: number
+    wing: number
+    amenities: number
+    notes: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type RoomAvgAggregateInputType = {
+    capacity?: true
+    floor?: true
+  }
+
+  export type RoomSumAggregateInputType = {
+    capacity?: true
+    floor?: true
+  }
+
+  export type RoomMinAggregateInputType = {
+    id?: true
+    building?: true
+    identifier?: true
+    type?: true
+    description?: true
+    capacity?: true
+    status?: true
+    floor?: true
+    wing?: true
+    amenities?: true
+    notes?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type RoomMaxAggregateInputType = {
+    id?: true
+    building?: true
+    identifier?: true
+    type?: true
+    description?: true
+    capacity?: true
+    status?: true
+    floor?: true
+    wing?: true
+    amenities?: true
+    notes?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type RoomCountAggregateInputType = {
+    id?: true
+    building?: true
+    identifier?: true
+    type?: true
+    description?: true
+    capacity?: true
+    status?: true
+    floor?: true
+    wing?: true
+    amenities?: true
+    notes?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type RoomAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Room to aggregate.
+     */
+    where?: RoomWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Rooms to fetch.
+     */
+    orderBy?: RoomOrderByWithRelationInput | RoomOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: RoomWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Rooms from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Rooms.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Rooms
+    **/
+    _count?: true | RoomCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: RoomAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: RoomSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: RoomMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: RoomMaxAggregateInputType
+  }
+
+  export type GetRoomAggregateType<T extends RoomAggregateArgs> = {
+        [P in keyof T & keyof AggregateRoom]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateRoom[P]>
+      : GetScalarType<T[P], AggregateRoom[P]>
+  }
+
+
+
+
+  export type RoomGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: RoomWhereInput
+    orderBy?: RoomOrderByWithAggregationInput | RoomOrderByWithAggregationInput[]
+    by: RoomScalarFieldEnum[] | RoomScalarFieldEnum
+    having?: RoomScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: RoomCountAggregateInputType | true
+    _avg?: RoomAvgAggregateInputType
+    _sum?: RoomSumAggregateInputType
+    _min?: RoomMinAggregateInputType
+    _max?: RoomMaxAggregateInputType
+  }
+
+  export type RoomGroupByOutputType = {
+    id: string
+    building: string | null
+    identifier: string
+    type: $Enums.RoomType
+    description: string | null
+    capacity: number
+    status: $Enums.RoomStatus
+    floor: number | null
+    wing: string | null
+    amenities: string | null
+    notes: string | null
+    createdAt: Date
+    updatedAt: Date
+    _count: RoomCountAggregateOutputType | null
+    _avg: RoomAvgAggregateOutputType | null
+    _sum: RoomSumAggregateOutputType | null
+    _min: RoomMinAggregateOutputType | null
+    _max: RoomMaxAggregateOutputType | null
+  }
+
+  type GetRoomGroupByPayload<T extends RoomGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<RoomGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof RoomGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], RoomGroupByOutputType[P]>
+            : GetScalarType<T[P], RoomGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type RoomSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    building?: boolean
+    identifier?: boolean
+    type?: boolean
+    description?: boolean
+    capacity?: boolean
+    status?: boolean
+    floor?: boolean
+    wing?: boolean
+    amenities?: boolean
+    notes?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["room"]>
+
+  export type RoomSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    building?: boolean
+    identifier?: boolean
+    type?: boolean
+    description?: boolean
+    capacity?: boolean
+    status?: boolean
+    floor?: boolean
+    wing?: boolean
+    amenities?: boolean
+    notes?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["room"]>
+
+  export type RoomSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    building?: boolean
+    identifier?: boolean
+    type?: boolean
+    description?: boolean
+    capacity?: boolean
+    status?: boolean
+    floor?: boolean
+    wing?: boolean
+    amenities?: boolean
+    notes?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["room"]>
+
+  export type RoomSelectScalar = {
+    id?: boolean
+    building?: boolean
+    identifier?: boolean
+    type?: boolean
+    description?: boolean
+    capacity?: boolean
+    status?: boolean
+    floor?: boolean
+    wing?: boolean
+    amenities?: boolean
+    notes?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type RoomOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "building" | "identifier" | "type" | "description" | "capacity" | "status" | "floor" | "wing" | "amenities" | "notes" | "createdAt" | "updatedAt", ExtArgs["result"]["room"]>
+
+  export type $RoomPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Room"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      building: string | null
+      identifier: string
+      type: $Enums.RoomType
+      description: string | null
+      capacity: number
+      status: $Enums.RoomStatus
+      floor: number | null
+      wing: string | null
+      amenities: string | null
+      notes: string | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["room"]>
+    composites: {}
+  }
+
+  type RoomGetPayload<S extends boolean | null | undefined | RoomDefaultArgs> = $Result.GetResult<Prisma.$RoomPayload, S>
+
+  type RoomCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<RoomFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: RoomCountAggregateInputType | true
+    }
+
+  export interface RoomDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Room'], meta: { name: 'Room' } }
+    /**
+     * Find zero or one Room that matches the filter.
+     * @param {RoomFindUniqueArgs} args - Arguments to find a Room
+     * @example
+     * // Get one Room
+     * const room = await prisma.room.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends RoomFindUniqueArgs>(args: SelectSubset<T, RoomFindUniqueArgs<ExtArgs>>): Prisma__RoomClient<$Result.GetResult<Prisma.$RoomPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Room that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {RoomFindUniqueOrThrowArgs} args - Arguments to find a Room
+     * @example
+     * // Get one Room
+     * const room = await prisma.room.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends RoomFindUniqueOrThrowArgs>(args: SelectSubset<T, RoomFindUniqueOrThrowArgs<ExtArgs>>): Prisma__RoomClient<$Result.GetResult<Prisma.$RoomPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Room that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RoomFindFirstArgs} args - Arguments to find a Room
+     * @example
+     * // Get one Room
+     * const room = await prisma.room.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends RoomFindFirstArgs>(args?: SelectSubset<T, RoomFindFirstArgs<ExtArgs>>): Prisma__RoomClient<$Result.GetResult<Prisma.$RoomPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Room that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RoomFindFirstOrThrowArgs} args - Arguments to find a Room
+     * @example
+     * // Get one Room
+     * const room = await prisma.room.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends RoomFindFirstOrThrowArgs>(args?: SelectSubset<T, RoomFindFirstOrThrowArgs<ExtArgs>>): Prisma__RoomClient<$Result.GetResult<Prisma.$RoomPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Rooms that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RoomFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Rooms
+     * const rooms = await prisma.room.findMany()
+     * 
+     * // Get first 10 Rooms
+     * const rooms = await prisma.room.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const roomWithIdOnly = await prisma.room.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends RoomFindManyArgs>(args?: SelectSubset<T, RoomFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RoomPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Room.
+     * @param {RoomCreateArgs} args - Arguments to create a Room.
+     * @example
+     * // Create one Room
+     * const Room = await prisma.room.create({
+     *   data: {
+     *     // ... data to create a Room
+     *   }
+     * })
+     * 
+     */
+    create<T extends RoomCreateArgs>(args: SelectSubset<T, RoomCreateArgs<ExtArgs>>): Prisma__RoomClient<$Result.GetResult<Prisma.$RoomPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Rooms.
+     * @param {RoomCreateManyArgs} args - Arguments to create many Rooms.
+     * @example
+     * // Create many Rooms
+     * const room = await prisma.room.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends RoomCreateManyArgs>(args?: SelectSubset<T, RoomCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Rooms and returns the data saved in the database.
+     * @param {RoomCreateManyAndReturnArgs} args - Arguments to create many Rooms.
+     * @example
+     * // Create many Rooms
+     * const room = await prisma.room.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Rooms and only return the `id`
+     * const roomWithIdOnly = await prisma.room.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends RoomCreateManyAndReturnArgs>(args?: SelectSubset<T, RoomCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RoomPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Room.
+     * @param {RoomDeleteArgs} args - Arguments to delete one Room.
+     * @example
+     * // Delete one Room
+     * const Room = await prisma.room.delete({
+     *   where: {
+     *     // ... filter to delete one Room
+     *   }
+     * })
+     * 
+     */
+    delete<T extends RoomDeleteArgs>(args: SelectSubset<T, RoomDeleteArgs<ExtArgs>>): Prisma__RoomClient<$Result.GetResult<Prisma.$RoomPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Room.
+     * @param {RoomUpdateArgs} args - Arguments to update one Room.
+     * @example
+     * // Update one Room
+     * const room = await prisma.room.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends RoomUpdateArgs>(args: SelectSubset<T, RoomUpdateArgs<ExtArgs>>): Prisma__RoomClient<$Result.GetResult<Prisma.$RoomPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Rooms.
+     * @param {RoomDeleteManyArgs} args - Arguments to filter Rooms to delete.
+     * @example
+     * // Delete a few Rooms
+     * const { count } = await prisma.room.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends RoomDeleteManyArgs>(args?: SelectSubset<T, RoomDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Rooms.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RoomUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Rooms
+     * const room = await prisma.room.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends RoomUpdateManyArgs>(args: SelectSubset<T, RoomUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Rooms and returns the data updated in the database.
+     * @param {RoomUpdateManyAndReturnArgs} args - Arguments to update many Rooms.
+     * @example
+     * // Update many Rooms
+     * const room = await prisma.room.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Rooms and only return the `id`
+     * const roomWithIdOnly = await prisma.room.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends RoomUpdateManyAndReturnArgs>(args: SelectSubset<T, RoomUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RoomPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Room.
+     * @param {RoomUpsertArgs} args - Arguments to update or create a Room.
+     * @example
+     * // Update or create a Room
+     * const room = await prisma.room.upsert({
+     *   create: {
+     *     // ... data to create a Room
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Room we want to update
+     *   }
+     * })
+     */
+    upsert<T extends RoomUpsertArgs>(args: SelectSubset<T, RoomUpsertArgs<ExtArgs>>): Prisma__RoomClient<$Result.GetResult<Prisma.$RoomPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Rooms.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RoomCountArgs} args - Arguments to filter Rooms to count.
+     * @example
+     * // Count the number of Rooms
+     * const count = await prisma.room.count({
+     *   where: {
+     *     // ... the filter for the Rooms we want to count
+     *   }
+     * })
+    **/
+    count<T extends RoomCountArgs>(
+      args?: Subset<T, RoomCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], RoomCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Room.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RoomAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends RoomAggregateArgs>(args: Subset<T, RoomAggregateArgs>): Prisma.PrismaPromise<GetRoomAggregateType<T>>
+
+    /**
+     * Group by Room.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RoomGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends RoomGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: RoomGroupByArgs['orderBy'] }
+        : { orderBy?: RoomGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, RoomGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetRoomGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Room model
+   */
+  readonly fields: RoomFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Room.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__RoomClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Room model
+   */
+  interface RoomFieldRefs {
+    readonly id: FieldRef<"Room", 'String'>
+    readonly building: FieldRef<"Room", 'String'>
+    readonly identifier: FieldRef<"Room", 'String'>
+    readonly type: FieldRef<"Room", 'RoomType'>
+    readonly description: FieldRef<"Room", 'String'>
+    readonly capacity: FieldRef<"Room", 'Int'>
+    readonly status: FieldRef<"Room", 'RoomStatus'>
+    readonly floor: FieldRef<"Room", 'Int'>
+    readonly wing: FieldRef<"Room", 'String'>
+    readonly amenities: FieldRef<"Room", 'String'>
+    readonly notes: FieldRef<"Room", 'String'>
+    readonly createdAt: FieldRef<"Room", 'DateTime'>
+    readonly updatedAt: FieldRef<"Room", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Room findUnique
+   */
+  export type RoomFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Room
+     */
+    select?: RoomSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Room
+     */
+    omit?: RoomOmit<ExtArgs> | null
+    /**
+     * Filter, which Room to fetch.
+     */
+    where: RoomWhereUniqueInput
+  }
+
+  /**
+   * Room findUniqueOrThrow
+   */
+  export type RoomFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Room
+     */
+    select?: RoomSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Room
+     */
+    omit?: RoomOmit<ExtArgs> | null
+    /**
+     * Filter, which Room to fetch.
+     */
+    where: RoomWhereUniqueInput
+  }
+
+  /**
+   * Room findFirst
+   */
+  export type RoomFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Room
+     */
+    select?: RoomSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Room
+     */
+    omit?: RoomOmit<ExtArgs> | null
+    /**
+     * Filter, which Room to fetch.
+     */
+    where?: RoomWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Rooms to fetch.
+     */
+    orderBy?: RoomOrderByWithRelationInput | RoomOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Rooms.
+     */
+    cursor?: RoomWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Rooms from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Rooms.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Rooms.
+     */
+    distinct?: RoomScalarFieldEnum | RoomScalarFieldEnum[]
+  }
+
+  /**
+   * Room findFirstOrThrow
+   */
+  export type RoomFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Room
+     */
+    select?: RoomSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Room
+     */
+    omit?: RoomOmit<ExtArgs> | null
+    /**
+     * Filter, which Room to fetch.
+     */
+    where?: RoomWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Rooms to fetch.
+     */
+    orderBy?: RoomOrderByWithRelationInput | RoomOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Rooms.
+     */
+    cursor?: RoomWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Rooms from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Rooms.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Rooms.
+     */
+    distinct?: RoomScalarFieldEnum | RoomScalarFieldEnum[]
+  }
+
+  /**
+   * Room findMany
+   */
+  export type RoomFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Room
+     */
+    select?: RoomSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Room
+     */
+    omit?: RoomOmit<ExtArgs> | null
+    /**
+     * Filter, which Rooms to fetch.
+     */
+    where?: RoomWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Rooms to fetch.
+     */
+    orderBy?: RoomOrderByWithRelationInput | RoomOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Rooms.
+     */
+    cursor?: RoomWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Rooms from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Rooms.
+     */
+    skip?: number
+    distinct?: RoomScalarFieldEnum | RoomScalarFieldEnum[]
+  }
+
+  /**
+   * Room create
+   */
+  export type RoomCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Room
+     */
+    select?: RoomSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Room
+     */
+    omit?: RoomOmit<ExtArgs> | null
+    /**
+     * The data needed to create a Room.
+     */
+    data: XOR<RoomCreateInput, RoomUncheckedCreateInput>
+  }
+
+  /**
+   * Room createMany
+   */
+  export type RoomCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Rooms.
+     */
+    data: RoomCreateManyInput | RoomCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Room createManyAndReturn
+   */
+  export type RoomCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Room
+     */
+    select?: RoomSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Room
+     */
+    omit?: RoomOmit<ExtArgs> | null
+    /**
+     * The data used to create many Rooms.
+     */
+    data: RoomCreateManyInput | RoomCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Room update
+   */
+  export type RoomUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Room
+     */
+    select?: RoomSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Room
+     */
+    omit?: RoomOmit<ExtArgs> | null
+    /**
+     * The data needed to update a Room.
+     */
+    data: XOR<RoomUpdateInput, RoomUncheckedUpdateInput>
+    /**
+     * Choose, which Room to update.
+     */
+    where: RoomWhereUniqueInput
+  }
+
+  /**
+   * Room updateMany
+   */
+  export type RoomUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Rooms.
+     */
+    data: XOR<RoomUpdateManyMutationInput, RoomUncheckedUpdateManyInput>
+    /**
+     * Filter which Rooms to update
+     */
+    where?: RoomWhereInput
+    /**
+     * Limit how many Rooms to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Room updateManyAndReturn
+   */
+  export type RoomUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Room
+     */
+    select?: RoomSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Room
+     */
+    omit?: RoomOmit<ExtArgs> | null
+    /**
+     * The data used to update Rooms.
+     */
+    data: XOR<RoomUpdateManyMutationInput, RoomUncheckedUpdateManyInput>
+    /**
+     * Filter which Rooms to update
+     */
+    where?: RoomWhereInput
+    /**
+     * Limit how many Rooms to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Room upsert
+   */
+  export type RoomUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Room
+     */
+    select?: RoomSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Room
+     */
+    omit?: RoomOmit<ExtArgs> | null
+    /**
+     * The filter to search for the Room to update in case it exists.
+     */
+    where: RoomWhereUniqueInput
+    /**
+     * In case the Room found by the `where` argument doesn't exist, create a new Room with this data.
+     */
+    create: XOR<RoomCreateInput, RoomUncheckedCreateInput>
+    /**
+     * In case the Room was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<RoomUpdateInput, RoomUncheckedUpdateInput>
+  }
+
+  /**
+   * Room delete
+   */
+  export type RoomDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Room
+     */
+    select?: RoomSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Room
+     */
+    omit?: RoomOmit<ExtArgs> | null
+    /**
+     * Filter which Room to delete.
+     */
+    where: RoomWhereUniqueInput
+  }
+
+  /**
+   * Room deleteMany
+   */
+  export type RoomDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Rooms to delete
+     */
+    where?: RoomWhereInput
+    /**
+     * Limit how many Rooms to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Room without action
+   */
+  export type RoomDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Room
+     */
+    select?: RoomSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Room
+     */
+    omit?: RoomOmit<ExtArgs> | null
+  }
+
+
+  /**
+   * Model FacilityLog
+   */
+
+  export type AggregateFacilityLog = {
+    _count: FacilityLogCountAggregateOutputType | null
+    _min: FacilityLogMinAggregateOutputType | null
+    _max: FacilityLogMaxAggregateOutputType | null
+  }
+
+  export type FacilityLogMinAggregateOutputType = {
+    id: string | null
+    user: string | null
+    role: string | null
+    action: string | null
+    roomIdentifier: string | null
+    type: string | null
+    oldStatus: string | null
+    newStatus: string | null
+    timestamp: Date | null
+  }
+
+  export type FacilityLogMaxAggregateOutputType = {
+    id: string | null
+    user: string | null
+    role: string | null
+    action: string | null
+    roomIdentifier: string | null
+    type: string | null
+    oldStatus: string | null
+    newStatus: string | null
+    timestamp: Date | null
+  }
+
+  export type FacilityLogCountAggregateOutputType = {
+    id: number
+    user: number
+    role: number
+    action: number
+    roomIdentifier: number
+    type: number
+    oldStatus: number
+    newStatus: number
+    timestamp: number
+    _all: number
+  }
+
+
+  export type FacilityLogMinAggregateInputType = {
+    id?: true
+    user?: true
+    role?: true
+    action?: true
+    roomIdentifier?: true
+    type?: true
+    oldStatus?: true
+    newStatus?: true
+    timestamp?: true
+  }
+
+  export type FacilityLogMaxAggregateInputType = {
+    id?: true
+    user?: true
+    role?: true
+    action?: true
+    roomIdentifier?: true
+    type?: true
+    oldStatus?: true
+    newStatus?: true
+    timestamp?: true
+  }
+
+  export type FacilityLogCountAggregateInputType = {
+    id?: true
+    user?: true
+    role?: true
+    action?: true
+    roomIdentifier?: true
+    type?: true
+    oldStatus?: true
+    newStatus?: true
+    timestamp?: true
+    _all?: true
+  }
+
+  export type FacilityLogAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which FacilityLog to aggregate.
+     */
+    where?: FacilityLogWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of FacilityLogs to fetch.
+     */
+    orderBy?: FacilityLogOrderByWithRelationInput | FacilityLogOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: FacilityLogWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` FacilityLogs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` FacilityLogs.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned FacilityLogs
+    **/
+    _count?: true | FacilityLogCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: FacilityLogMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: FacilityLogMaxAggregateInputType
+  }
+
+  export type GetFacilityLogAggregateType<T extends FacilityLogAggregateArgs> = {
+        [P in keyof T & keyof AggregateFacilityLog]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateFacilityLog[P]>
+      : GetScalarType<T[P], AggregateFacilityLog[P]>
+  }
+
+
+
+
+  export type FacilityLogGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: FacilityLogWhereInput
+    orderBy?: FacilityLogOrderByWithAggregationInput | FacilityLogOrderByWithAggregationInput[]
+    by: FacilityLogScalarFieldEnum[] | FacilityLogScalarFieldEnum
+    having?: FacilityLogScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: FacilityLogCountAggregateInputType | true
+    _min?: FacilityLogMinAggregateInputType
+    _max?: FacilityLogMaxAggregateInputType
+  }
+
+  export type FacilityLogGroupByOutputType = {
+    id: string
+    user: string
+    role: string
+    action: string
+    roomIdentifier: string
+    type: string
+    oldStatus: string | null
+    newStatus: string | null
+    timestamp: Date
+    _count: FacilityLogCountAggregateOutputType | null
+    _min: FacilityLogMinAggregateOutputType | null
+    _max: FacilityLogMaxAggregateOutputType | null
+  }
+
+  type GetFacilityLogGroupByPayload<T extends FacilityLogGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<FacilityLogGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof FacilityLogGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], FacilityLogGroupByOutputType[P]>
+            : GetScalarType<T[P], FacilityLogGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type FacilityLogSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    user?: boolean
+    role?: boolean
+    action?: boolean
+    roomIdentifier?: boolean
+    type?: boolean
+    oldStatus?: boolean
+    newStatus?: boolean
+    timestamp?: boolean
+  }, ExtArgs["result"]["facilityLog"]>
+
+  export type FacilityLogSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    user?: boolean
+    role?: boolean
+    action?: boolean
+    roomIdentifier?: boolean
+    type?: boolean
+    oldStatus?: boolean
+    newStatus?: boolean
+    timestamp?: boolean
+  }, ExtArgs["result"]["facilityLog"]>
+
+  export type FacilityLogSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    user?: boolean
+    role?: boolean
+    action?: boolean
+    roomIdentifier?: boolean
+    type?: boolean
+    oldStatus?: boolean
+    newStatus?: boolean
+    timestamp?: boolean
+  }, ExtArgs["result"]["facilityLog"]>
+
+  export type FacilityLogSelectScalar = {
+    id?: boolean
+    user?: boolean
+    role?: boolean
+    action?: boolean
+    roomIdentifier?: boolean
+    type?: boolean
+    oldStatus?: boolean
+    newStatus?: boolean
+    timestamp?: boolean
+  }
+
+  export type FacilityLogOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "user" | "role" | "action" | "roomIdentifier" | "type" | "oldStatus" | "newStatus" | "timestamp", ExtArgs["result"]["facilityLog"]>
+
+  export type $FacilityLogPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "FacilityLog"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      user: string
+      role: string
+      action: string
+      roomIdentifier: string
+      type: string
+      oldStatus: string | null
+      newStatus: string | null
+      timestamp: Date
+    }, ExtArgs["result"]["facilityLog"]>
+    composites: {}
+  }
+
+  type FacilityLogGetPayload<S extends boolean | null | undefined | FacilityLogDefaultArgs> = $Result.GetResult<Prisma.$FacilityLogPayload, S>
+
+  type FacilityLogCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<FacilityLogFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: FacilityLogCountAggregateInputType | true
+    }
+
+  export interface FacilityLogDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['FacilityLog'], meta: { name: 'FacilityLog' } }
+    /**
+     * Find zero or one FacilityLog that matches the filter.
+     * @param {FacilityLogFindUniqueArgs} args - Arguments to find a FacilityLog
+     * @example
+     * // Get one FacilityLog
+     * const facilityLog = await prisma.facilityLog.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends FacilityLogFindUniqueArgs>(args: SelectSubset<T, FacilityLogFindUniqueArgs<ExtArgs>>): Prisma__FacilityLogClient<$Result.GetResult<Prisma.$FacilityLogPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one FacilityLog that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {FacilityLogFindUniqueOrThrowArgs} args - Arguments to find a FacilityLog
+     * @example
+     * // Get one FacilityLog
+     * const facilityLog = await prisma.facilityLog.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends FacilityLogFindUniqueOrThrowArgs>(args: SelectSubset<T, FacilityLogFindUniqueOrThrowArgs<ExtArgs>>): Prisma__FacilityLogClient<$Result.GetResult<Prisma.$FacilityLogPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first FacilityLog that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FacilityLogFindFirstArgs} args - Arguments to find a FacilityLog
+     * @example
+     * // Get one FacilityLog
+     * const facilityLog = await prisma.facilityLog.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends FacilityLogFindFirstArgs>(args?: SelectSubset<T, FacilityLogFindFirstArgs<ExtArgs>>): Prisma__FacilityLogClient<$Result.GetResult<Prisma.$FacilityLogPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first FacilityLog that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FacilityLogFindFirstOrThrowArgs} args - Arguments to find a FacilityLog
+     * @example
+     * // Get one FacilityLog
+     * const facilityLog = await prisma.facilityLog.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends FacilityLogFindFirstOrThrowArgs>(args?: SelectSubset<T, FacilityLogFindFirstOrThrowArgs<ExtArgs>>): Prisma__FacilityLogClient<$Result.GetResult<Prisma.$FacilityLogPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more FacilityLogs that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FacilityLogFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all FacilityLogs
+     * const facilityLogs = await prisma.facilityLog.findMany()
+     * 
+     * // Get first 10 FacilityLogs
+     * const facilityLogs = await prisma.facilityLog.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const facilityLogWithIdOnly = await prisma.facilityLog.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends FacilityLogFindManyArgs>(args?: SelectSubset<T, FacilityLogFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FacilityLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a FacilityLog.
+     * @param {FacilityLogCreateArgs} args - Arguments to create a FacilityLog.
+     * @example
+     * // Create one FacilityLog
+     * const FacilityLog = await prisma.facilityLog.create({
+     *   data: {
+     *     // ... data to create a FacilityLog
+     *   }
+     * })
+     * 
+     */
+    create<T extends FacilityLogCreateArgs>(args: SelectSubset<T, FacilityLogCreateArgs<ExtArgs>>): Prisma__FacilityLogClient<$Result.GetResult<Prisma.$FacilityLogPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many FacilityLogs.
+     * @param {FacilityLogCreateManyArgs} args - Arguments to create many FacilityLogs.
+     * @example
+     * // Create many FacilityLogs
+     * const facilityLog = await prisma.facilityLog.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends FacilityLogCreateManyArgs>(args?: SelectSubset<T, FacilityLogCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many FacilityLogs and returns the data saved in the database.
+     * @param {FacilityLogCreateManyAndReturnArgs} args - Arguments to create many FacilityLogs.
+     * @example
+     * // Create many FacilityLogs
+     * const facilityLog = await prisma.facilityLog.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many FacilityLogs and only return the `id`
+     * const facilityLogWithIdOnly = await prisma.facilityLog.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends FacilityLogCreateManyAndReturnArgs>(args?: SelectSubset<T, FacilityLogCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FacilityLogPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a FacilityLog.
+     * @param {FacilityLogDeleteArgs} args - Arguments to delete one FacilityLog.
+     * @example
+     * // Delete one FacilityLog
+     * const FacilityLog = await prisma.facilityLog.delete({
+     *   where: {
+     *     // ... filter to delete one FacilityLog
+     *   }
+     * })
+     * 
+     */
+    delete<T extends FacilityLogDeleteArgs>(args: SelectSubset<T, FacilityLogDeleteArgs<ExtArgs>>): Prisma__FacilityLogClient<$Result.GetResult<Prisma.$FacilityLogPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one FacilityLog.
+     * @param {FacilityLogUpdateArgs} args - Arguments to update one FacilityLog.
+     * @example
+     * // Update one FacilityLog
+     * const facilityLog = await prisma.facilityLog.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends FacilityLogUpdateArgs>(args: SelectSubset<T, FacilityLogUpdateArgs<ExtArgs>>): Prisma__FacilityLogClient<$Result.GetResult<Prisma.$FacilityLogPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more FacilityLogs.
+     * @param {FacilityLogDeleteManyArgs} args - Arguments to filter FacilityLogs to delete.
+     * @example
+     * // Delete a few FacilityLogs
+     * const { count } = await prisma.facilityLog.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends FacilityLogDeleteManyArgs>(args?: SelectSubset<T, FacilityLogDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more FacilityLogs.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FacilityLogUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many FacilityLogs
+     * const facilityLog = await prisma.facilityLog.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends FacilityLogUpdateManyArgs>(args: SelectSubset<T, FacilityLogUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more FacilityLogs and returns the data updated in the database.
+     * @param {FacilityLogUpdateManyAndReturnArgs} args - Arguments to update many FacilityLogs.
+     * @example
+     * // Update many FacilityLogs
+     * const facilityLog = await prisma.facilityLog.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more FacilityLogs and only return the `id`
+     * const facilityLogWithIdOnly = await prisma.facilityLog.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends FacilityLogUpdateManyAndReturnArgs>(args: SelectSubset<T, FacilityLogUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FacilityLogPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one FacilityLog.
+     * @param {FacilityLogUpsertArgs} args - Arguments to update or create a FacilityLog.
+     * @example
+     * // Update or create a FacilityLog
+     * const facilityLog = await prisma.facilityLog.upsert({
+     *   create: {
+     *     // ... data to create a FacilityLog
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the FacilityLog we want to update
+     *   }
+     * })
+     */
+    upsert<T extends FacilityLogUpsertArgs>(args: SelectSubset<T, FacilityLogUpsertArgs<ExtArgs>>): Prisma__FacilityLogClient<$Result.GetResult<Prisma.$FacilityLogPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of FacilityLogs.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FacilityLogCountArgs} args - Arguments to filter FacilityLogs to count.
+     * @example
+     * // Count the number of FacilityLogs
+     * const count = await prisma.facilityLog.count({
+     *   where: {
+     *     // ... the filter for the FacilityLogs we want to count
+     *   }
+     * })
+    **/
+    count<T extends FacilityLogCountArgs>(
+      args?: Subset<T, FacilityLogCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], FacilityLogCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a FacilityLog.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FacilityLogAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends FacilityLogAggregateArgs>(args: Subset<T, FacilityLogAggregateArgs>): Prisma.PrismaPromise<GetFacilityLogAggregateType<T>>
+
+    /**
+     * Group by FacilityLog.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FacilityLogGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends FacilityLogGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: FacilityLogGroupByArgs['orderBy'] }
+        : { orderBy?: FacilityLogGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, FacilityLogGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetFacilityLogGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the FacilityLog model
+   */
+  readonly fields: FacilityLogFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for FacilityLog.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__FacilityLogClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the FacilityLog model
+   */
+  interface FacilityLogFieldRefs {
+    readonly id: FieldRef<"FacilityLog", 'String'>
+    readonly user: FieldRef<"FacilityLog", 'String'>
+    readonly role: FieldRef<"FacilityLog", 'String'>
+    readonly action: FieldRef<"FacilityLog", 'String'>
+    readonly roomIdentifier: FieldRef<"FacilityLog", 'String'>
+    readonly type: FieldRef<"FacilityLog", 'String'>
+    readonly oldStatus: FieldRef<"FacilityLog", 'String'>
+    readonly newStatus: FieldRef<"FacilityLog", 'String'>
+    readonly timestamp: FieldRef<"FacilityLog", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * FacilityLog findUnique
+   */
+  export type FacilityLogFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FacilityLog
+     */
+    select?: FacilityLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FacilityLog
+     */
+    omit?: FacilityLogOmit<ExtArgs> | null
+    /**
+     * Filter, which FacilityLog to fetch.
+     */
+    where: FacilityLogWhereUniqueInput
+  }
+
+  /**
+   * FacilityLog findUniqueOrThrow
+   */
+  export type FacilityLogFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FacilityLog
+     */
+    select?: FacilityLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FacilityLog
+     */
+    omit?: FacilityLogOmit<ExtArgs> | null
+    /**
+     * Filter, which FacilityLog to fetch.
+     */
+    where: FacilityLogWhereUniqueInput
+  }
+
+  /**
+   * FacilityLog findFirst
+   */
+  export type FacilityLogFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FacilityLog
+     */
+    select?: FacilityLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FacilityLog
+     */
+    omit?: FacilityLogOmit<ExtArgs> | null
+    /**
+     * Filter, which FacilityLog to fetch.
+     */
+    where?: FacilityLogWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of FacilityLogs to fetch.
+     */
+    orderBy?: FacilityLogOrderByWithRelationInput | FacilityLogOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for FacilityLogs.
+     */
+    cursor?: FacilityLogWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` FacilityLogs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` FacilityLogs.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of FacilityLogs.
+     */
+    distinct?: FacilityLogScalarFieldEnum | FacilityLogScalarFieldEnum[]
+  }
+
+  /**
+   * FacilityLog findFirstOrThrow
+   */
+  export type FacilityLogFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FacilityLog
+     */
+    select?: FacilityLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FacilityLog
+     */
+    omit?: FacilityLogOmit<ExtArgs> | null
+    /**
+     * Filter, which FacilityLog to fetch.
+     */
+    where?: FacilityLogWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of FacilityLogs to fetch.
+     */
+    orderBy?: FacilityLogOrderByWithRelationInput | FacilityLogOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for FacilityLogs.
+     */
+    cursor?: FacilityLogWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` FacilityLogs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` FacilityLogs.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of FacilityLogs.
+     */
+    distinct?: FacilityLogScalarFieldEnum | FacilityLogScalarFieldEnum[]
+  }
+
+  /**
+   * FacilityLog findMany
+   */
+  export type FacilityLogFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FacilityLog
+     */
+    select?: FacilityLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FacilityLog
+     */
+    omit?: FacilityLogOmit<ExtArgs> | null
+    /**
+     * Filter, which FacilityLogs to fetch.
+     */
+    where?: FacilityLogWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of FacilityLogs to fetch.
+     */
+    orderBy?: FacilityLogOrderByWithRelationInput | FacilityLogOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing FacilityLogs.
+     */
+    cursor?: FacilityLogWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` FacilityLogs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` FacilityLogs.
+     */
+    skip?: number
+    distinct?: FacilityLogScalarFieldEnum | FacilityLogScalarFieldEnum[]
+  }
+
+  /**
+   * FacilityLog create
+   */
+  export type FacilityLogCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FacilityLog
+     */
+    select?: FacilityLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FacilityLog
+     */
+    omit?: FacilityLogOmit<ExtArgs> | null
+    /**
+     * The data needed to create a FacilityLog.
+     */
+    data: XOR<FacilityLogCreateInput, FacilityLogUncheckedCreateInput>
+  }
+
+  /**
+   * FacilityLog createMany
+   */
+  export type FacilityLogCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many FacilityLogs.
+     */
+    data: FacilityLogCreateManyInput | FacilityLogCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * FacilityLog createManyAndReturn
+   */
+  export type FacilityLogCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FacilityLog
+     */
+    select?: FacilityLogSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the FacilityLog
+     */
+    omit?: FacilityLogOmit<ExtArgs> | null
+    /**
+     * The data used to create many FacilityLogs.
+     */
+    data: FacilityLogCreateManyInput | FacilityLogCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * FacilityLog update
+   */
+  export type FacilityLogUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FacilityLog
+     */
+    select?: FacilityLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FacilityLog
+     */
+    omit?: FacilityLogOmit<ExtArgs> | null
+    /**
+     * The data needed to update a FacilityLog.
+     */
+    data: XOR<FacilityLogUpdateInput, FacilityLogUncheckedUpdateInput>
+    /**
+     * Choose, which FacilityLog to update.
+     */
+    where: FacilityLogWhereUniqueInput
+  }
+
+  /**
+   * FacilityLog updateMany
+   */
+  export type FacilityLogUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update FacilityLogs.
+     */
+    data: XOR<FacilityLogUpdateManyMutationInput, FacilityLogUncheckedUpdateManyInput>
+    /**
+     * Filter which FacilityLogs to update
+     */
+    where?: FacilityLogWhereInput
+    /**
+     * Limit how many FacilityLogs to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * FacilityLog updateManyAndReturn
+   */
+  export type FacilityLogUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FacilityLog
+     */
+    select?: FacilityLogSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the FacilityLog
+     */
+    omit?: FacilityLogOmit<ExtArgs> | null
+    /**
+     * The data used to update FacilityLogs.
+     */
+    data: XOR<FacilityLogUpdateManyMutationInput, FacilityLogUncheckedUpdateManyInput>
+    /**
+     * Filter which FacilityLogs to update
+     */
+    where?: FacilityLogWhereInput
+    /**
+     * Limit how many FacilityLogs to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * FacilityLog upsert
+   */
+  export type FacilityLogUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FacilityLog
+     */
+    select?: FacilityLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FacilityLog
+     */
+    omit?: FacilityLogOmit<ExtArgs> | null
+    /**
+     * The filter to search for the FacilityLog to update in case it exists.
+     */
+    where: FacilityLogWhereUniqueInput
+    /**
+     * In case the FacilityLog found by the `where` argument doesn't exist, create a new FacilityLog with this data.
+     */
+    create: XOR<FacilityLogCreateInput, FacilityLogUncheckedCreateInput>
+    /**
+     * In case the FacilityLog was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<FacilityLogUpdateInput, FacilityLogUncheckedUpdateInput>
+  }
+
+  /**
+   * FacilityLog delete
+   */
+  export type FacilityLogDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FacilityLog
+     */
+    select?: FacilityLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FacilityLog
+     */
+    omit?: FacilityLogOmit<ExtArgs> | null
+    /**
+     * Filter which FacilityLog to delete.
+     */
+    where: FacilityLogWhereUniqueInput
+  }
+
+  /**
+   * FacilityLog deleteMany
+   */
+  export type FacilityLogDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which FacilityLogs to delete
+     */
+    where?: FacilityLogWhereInput
+    /**
+     * Limit how many FacilityLogs to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * FacilityLog without action
+   */
+  export type FacilityLogDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FacilityLog
+     */
+    select?: FacilityLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FacilityLog
+     */
+    omit?: FacilityLogOmit<ExtArgs> | null
   }
 
 
@@ -43378,6 +46968,7 @@ export namespace Prisma {
     staffType: 'staffType',
     licenseNumber: 'licenseNumber',
     licenseExpiryDate: 'licenseExpiryDate',
+    qualification: 'qualification',
     specialization: 'specialization',
     subSpecialization: 'subSpecialization',
     boardCertification: 'boardCertification',
@@ -43502,6 +47093,55 @@ export namespace Prisma {
   };
 
   export type MedicalServiceScalarFieldEnum = (typeof MedicalServiceScalarFieldEnum)[keyof typeof MedicalServiceScalarFieldEnum]
+
+
+  export const BuildingScalarFieldEnum: {
+    id: 'id',
+    name: 'name',
+    code: 'code',
+    description: 'description',
+    address: 'address',
+    floors: 'floors',
+    isActive: 'isActive',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type BuildingScalarFieldEnum = (typeof BuildingScalarFieldEnum)[keyof typeof BuildingScalarFieldEnum]
+
+
+  export const RoomScalarFieldEnum: {
+    id: 'id',
+    building: 'building',
+    identifier: 'identifier',
+    type: 'type',
+    description: 'description',
+    capacity: 'capacity',
+    status: 'status',
+    floor: 'floor',
+    wing: 'wing',
+    amenities: 'amenities',
+    notes: 'notes',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type RoomScalarFieldEnum = (typeof RoomScalarFieldEnum)[keyof typeof RoomScalarFieldEnum]
+
+
+  export const FacilityLogScalarFieldEnum: {
+    id: 'id',
+    user: 'user',
+    role: 'role',
+    action: 'action',
+    roomIdentifier: 'roomIdentifier',
+    type: 'type',
+    oldStatus: 'oldStatus',
+    newStatus: 'newStatus',
+    timestamp: 'timestamp'
+  };
+
+  export type FacilityLogScalarFieldEnum = (typeof FacilityLogScalarFieldEnum)[keyof typeof FacilityLogScalarFieldEnum]
 
 
   export const PharmacySupplierScalarFieldEnum: {
@@ -44204,6 +47844,34 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'RoomType'
+   */
+  export type EnumRoomTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'RoomType'>
+    
+
+
+  /**
+   * Reference to a field of type 'RoomType[]'
+   */
+  export type ListEnumRoomTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'RoomType[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'RoomStatus'
+   */
+  export type EnumRoomStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'RoomStatus'>
+    
+
+
+  /**
+   * Reference to a field of type 'RoomStatus[]'
+   */
+  export type ListEnumRoomStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'RoomStatus[]'>
+    
+
+
+  /**
    * Reference to a field of type 'PharmacyItemForm'
    */
   export type EnumPharmacyItemFormFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PharmacyItemForm'>
@@ -44676,6 +48344,7 @@ export namespace Prisma {
     staffType?: EnumStaffTypeFilter<"StaffCredentials"> | $Enums.StaffType
     licenseNumber?: StringNullableFilter<"StaffCredentials"> | string | null
     licenseExpiryDate?: DateTimeNullableFilter<"StaffCredentials"> | Date | string | null
+    qualification?: StringNullableFilter<"StaffCredentials"> | string | null
     specialization?: StringNullableFilter<"StaffCredentials"> | string | null
     subSpecialization?: StringNullableFilter<"StaffCredentials"> | string | null
     boardCertification?: StringNullableListFilter<"StaffCredentials">
@@ -44696,6 +48365,7 @@ export namespace Prisma {
     staffType?: SortOrder
     licenseNumber?: SortOrderInput | SortOrder
     licenseExpiryDate?: SortOrderInput | SortOrder
+    qualification?: SortOrderInput | SortOrder
     specialization?: SortOrderInput | SortOrder
     subSpecialization?: SortOrderInput | SortOrder
     boardCertification?: SortOrder
@@ -44719,6 +48389,7 @@ export namespace Prisma {
     staffType?: EnumStaffTypeFilter<"StaffCredentials"> | $Enums.StaffType
     licenseNumber?: StringNullableFilter<"StaffCredentials"> | string | null
     licenseExpiryDate?: DateTimeNullableFilter<"StaffCredentials"> | Date | string | null
+    qualification?: StringNullableFilter<"StaffCredentials"> | string | null
     specialization?: StringNullableFilter<"StaffCredentials"> | string | null
     subSpecialization?: StringNullableFilter<"StaffCredentials"> | string | null
     boardCertification?: StringNullableListFilter<"StaffCredentials">
@@ -44739,6 +48410,7 @@ export namespace Prisma {
     staffType?: SortOrder
     licenseNumber?: SortOrderInput | SortOrder
     licenseExpiryDate?: SortOrderInput | SortOrder
+    qualification?: SortOrderInput | SortOrder
     specialization?: SortOrderInput | SortOrder
     subSpecialization?: SortOrderInput | SortOrder
     boardCertification?: SortOrder
@@ -44766,6 +48438,7 @@ export namespace Prisma {
     staffType?: EnumStaffTypeWithAggregatesFilter<"StaffCredentials"> | $Enums.StaffType
     licenseNumber?: StringNullableWithAggregatesFilter<"StaffCredentials"> | string | null
     licenseExpiryDate?: DateTimeNullableWithAggregatesFilter<"StaffCredentials"> | Date | string | null
+    qualification?: StringNullableWithAggregatesFilter<"StaffCredentials"> | string | null
     specialization?: StringNullableWithAggregatesFilter<"StaffCredentials"> | string | null
     subSpecialization?: StringNullableWithAggregatesFilter<"StaffCredentials"> | string | null
     boardCertification?: StringNullableListFilter<"StaffCredentials">
@@ -45350,6 +49023,246 @@ export namespace Prisma {
     notes?: StringNullableWithAggregatesFilter<"MedicalService"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"MedicalService"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"MedicalService"> | Date | string
+  }
+
+  export type BuildingWhereInput = {
+    AND?: BuildingWhereInput | BuildingWhereInput[]
+    OR?: BuildingWhereInput[]
+    NOT?: BuildingWhereInput | BuildingWhereInput[]
+    id?: StringFilter<"Building"> | string
+    name?: StringFilter<"Building"> | string
+    code?: StringFilter<"Building"> | string
+    description?: StringNullableFilter<"Building"> | string | null
+    address?: StringNullableFilter<"Building"> | string | null
+    floors?: IntFilter<"Building"> | number
+    isActive?: BoolFilter<"Building"> | boolean
+    createdAt?: DateTimeFilter<"Building"> | Date | string
+    updatedAt?: DateTimeFilter<"Building"> | Date | string
+  }
+
+  export type BuildingOrderByWithRelationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    code?: SortOrder
+    description?: SortOrderInput | SortOrder
+    address?: SortOrderInput | SortOrder
+    floors?: SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type BuildingWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    code?: string
+    AND?: BuildingWhereInput | BuildingWhereInput[]
+    OR?: BuildingWhereInput[]
+    NOT?: BuildingWhereInput | BuildingWhereInput[]
+    name?: StringFilter<"Building"> | string
+    description?: StringNullableFilter<"Building"> | string | null
+    address?: StringNullableFilter<"Building"> | string | null
+    floors?: IntFilter<"Building"> | number
+    isActive?: BoolFilter<"Building"> | boolean
+    createdAt?: DateTimeFilter<"Building"> | Date | string
+    updatedAt?: DateTimeFilter<"Building"> | Date | string
+  }, "id" | "code">
+
+  export type BuildingOrderByWithAggregationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    code?: SortOrder
+    description?: SortOrderInput | SortOrder
+    address?: SortOrderInput | SortOrder
+    floors?: SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: BuildingCountOrderByAggregateInput
+    _avg?: BuildingAvgOrderByAggregateInput
+    _max?: BuildingMaxOrderByAggregateInput
+    _min?: BuildingMinOrderByAggregateInput
+    _sum?: BuildingSumOrderByAggregateInput
+  }
+
+  export type BuildingScalarWhereWithAggregatesInput = {
+    AND?: BuildingScalarWhereWithAggregatesInput | BuildingScalarWhereWithAggregatesInput[]
+    OR?: BuildingScalarWhereWithAggregatesInput[]
+    NOT?: BuildingScalarWhereWithAggregatesInput | BuildingScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Building"> | string
+    name?: StringWithAggregatesFilter<"Building"> | string
+    code?: StringWithAggregatesFilter<"Building"> | string
+    description?: StringNullableWithAggregatesFilter<"Building"> | string | null
+    address?: StringNullableWithAggregatesFilter<"Building"> | string | null
+    floors?: IntWithAggregatesFilter<"Building"> | number
+    isActive?: BoolWithAggregatesFilter<"Building"> | boolean
+    createdAt?: DateTimeWithAggregatesFilter<"Building"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Building"> | Date | string
+  }
+
+  export type RoomWhereInput = {
+    AND?: RoomWhereInput | RoomWhereInput[]
+    OR?: RoomWhereInput[]
+    NOT?: RoomWhereInput | RoomWhereInput[]
+    id?: StringFilter<"Room"> | string
+    building?: StringNullableFilter<"Room"> | string | null
+    identifier?: StringFilter<"Room"> | string
+    type?: EnumRoomTypeFilter<"Room"> | $Enums.RoomType
+    description?: StringNullableFilter<"Room"> | string | null
+    capacity?: IntFilter<"Room"> | number
+    status?: EnumRoomStatusFilter<"Room"> | $Enums.RoomStatus
+    floor?: IntNullableFilter<"Room"> | number | null
+    wing?: StringNullableFilter<"Room"> | string | null
+    amenities?: StringNullableFilter<"Room"> | string | null
+    notes?: StringNullableFilter<"Room"> | string | null
+    createdAt?: DateTimeFilter<"Room"> | Date | string
+    updatedAt?: DateTimeFilter<"Room"> | Date | string
+  }
+
+  export type RoomOrderByWithRelationInput = {
+    id?: SortOrder
+    building?: SortOrderInput | SortOrder
+    identifier?: SortOrder
+    type?: SortOrder
+    description?: SortOrderInput | SortOrder
+    capacity?: SortOrder
+    status?: SortOrder
+    floor?: SortOrderInput | SortOrder
+    wing?: SortOrderInput | SortOrder
+    amenities?: SortOrderInput | SortOrder
+    notes?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type RoomWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: RoomWhereInput | RoomWhereInput[]
+    OR?: RoomWhereInput[]
+    NOT?: RoomWhereInput | RoomWhereInput[]
+    building?: StringNullableFilter<"Room"> | string | null
+    identifier?: StringFilter<"Room"> | string
+    type?: EnumRoomTypeFilter<"Room"> | $Enums.RoomType
+    description?: StringNullableFilter<"Room"> | string | null
+    capacity?: IntFilter<"Room"> | number
+    status?: EnumRoomStatusFilter<"Room"> | $Enums.RoomStatus
+    floor?: IntNullableFilter<"Room"> | number | null
+    wing?: StringNullableFilter<"Room"> | string | null
+    amenities?: StringNullableFilter<"Room"> | string | null
+    notes?: StringNullableFilter<"Room"> | string | null
+    createdAt?: DateTimeFilter<"Room"> | Date | string
+    updatedAt?: DateTimeFilter<"Room"> | Date | string
+  }, "id">
+
+  export type RoomOrderByWithAggregationInput = {
+    id?: SortOrder
+    building?: SortOrderInput | SortOrder
+    identifier?: SortOrder
+    type?: SortOrder
+    description?: SortOrderInput | SortOrder
+    capacity?: SortOrder
+    status?: SortOrder
+    floor?: SortOrderInput | SortOrder
+    wing?: SortOrderInput | SortOrder
+    amenities?: SortOrderInput | SortOrder
+    notes?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: RoomCountOrderByAggregateInput
+    _avg?: RoomAvgOrderByAggregateInput
+    _max?: RoomMaxOrderByAggregateInput
+    _min?: RoomMinOrderByAggregateInput
+    _sum?: RoomSumOrderByAggregateInput
+  }
+
+  export type RoomScalarWhereWithAggregatesInput = {
+    AND?: RoomScalarWhereWithAggregatesInput | RoomScalarWhereWithAggregatesInput[]
+    OR?: RoomScalarWhereWithAggregatesInput[]
+    NOT?: RoomScalarWhereWithAggregatesInput | RoomScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Room"> | string
+    building?: StringNullableWithAggregatesFilter<"Room"> | string | null
+    identifier?: StringWithAggregatesFilter<"Room"> | string
+    type?: EnumRoomTypeWithAggregatesFilter<"Room"> | $Enums.RoomType
+    description?: StringNullableWithAggregatesFilter<"Room"> | string | null
+    capacity?: IntWithAggregatesFilter<"Room"> | number
+    status?: EnumRoomStatusWithAggregatesFilter<"Room"> | $Enums.RoomStatus
+    floor?: IntNullableWithAggregatesFilter<"Room"> | number | null
+    wing?: StringNullableWithAggregatesFilter<"Room"> | string | null
+    amenities?: StringNullableWithAggregatesFilter<"Room"> | string | null
+    notes?: StringNullableWithAggregatesFilter<"Room"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"Room"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Room"> | Date | string
+  }
+
+  export type FacilityLogWhereInput = {
+    AND?: FacilityLogWhereInput | FacilityLogWhereInput[]
+    OR?: FacilityLogWhereInput[]
+    NOT?: FacilityLogWhereInput | FacilityLogWhereInput[]
+    id?: StringFilter<"FacilityLog"> | string
+    user?: StringFilter<"FacilityLog"> | string
+    role?: StringFilter<"FacilityLog"> | string
+    action?: StringFilter<"FacilityLog"> | string
+    roomIdentifier?: StringFilter<"FacilityLog"> | string
+    type?: StringFilter<"FacilityLog"> | string
+    oldStatus?: StringNullableFilter<"FacilityLog"> | string | null
+    newStatus?: StringNullableFilter<"FacilityLog"> | string | null
+    timestamp?: DateTimeFilter<"FacilityLog"> | Date | string
+  }
+
+  export type FacilityLogOrderByWithRelationInput = {
+    id?: SortOrder
+    user?: SortOrder
+    role?: SortOrder
+    action?: SortOrder
+    roomIdentifier?: SortOrder
+    type?: SortOrder
+    oldStatus?: SortOrderInput | SortOrder
+    newStatus?: SortOrderInput | SortOrder
+    timestamp?: SortOrder
+  }
+
+  export type FacilityLogWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: FacilityLogWhereInput | FacilityLogWhereInput[]
+    OR?: FacilityLogWhereInput[]
+    NOT?: FacilityLogWhereInput | FacilityLogWhereInput[]
+    user?: StringFilter<"FacilityLog"> | string
+    role?: StringFilter<"FacilityLog"> | string
+    action?: StringFilter<"FacilityLog"> | string
+    roomIdentifier?: StringFilter<"FacilityLog"> | string
+    type?: StringFilter<"FacilityLog"> | string
+    oldStatus?: StringNullableFilter<"FacilityLog"> | string | null
+    newStatus?: StringNullableFilter<"FacilityLog"> | string | null
+    timestamp?: DateTimeFilter<"FacilityLog"> | Date | string
+  }, "id">
+
+  export type FacilityLogOrderByWithAggregationInput = {
+    id?: SortOrder
+    user?: SortOrder
+    role?: SortOrder
+    action?: SortOrder
+    roomIdentifier?: SortOrder
+    type?: SortOrder
+    oldStatus?: SortOrderInput | SortOrder
+    newStatus?: SortOrderInput | SortOrder
+    timestamp?: SortOrder
+    _count?: FacilityLogCountOrderByAggregateInput
+    _max?: FacilityLogMaxOrderByAggregateInput
+    _min?: FacilityLogMinOrderByAggregateInput
+  }
+
+  export type FacilityLogScalarWhereWithAggregatesInput = {
+    AND?: FacilityLogScalarWhereWithAggregatesInput | FacilityLogScalarWhereWithAggregatesInput[]
+    OR?: FacilityLogScalarWhereWithAggregatesInput[]
+    NOT?: FacilityLogScalarWhereWithAggregatesInput | FacilityLogScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"FacilityLog"> | string
+    user?: StringWithAggregatesFilter<"FacilityLog"> | string
+    role?: StringWithAggregatesFilter<"FacilityLog"> | string
+    action?: StringWithAggregatesFilter<"FacilityLog"> | string
+    roomIdentifier?: StringWithAggregatesFilter<"FacilityLog"> | string
+    type?: StringWithAggregatesFilter<"FacilityLog"> | string
+    oldStatus?: StringNullableWithAggregatesFilter<"FacilityLog"> | string | null
+    newStatus?: StringNullableWithAggregatesFilter<"FacilityLog"> | string | null
+    timestamp?: DateTimeWithAggregatesFilter<"FacilityLog"> | Date | string
   }
 
   export type PharmacySupplierWhereInput = {
@@ -47769,6 +51682,7 @@ export namespace Prisma {
     staffType: $Enums.StaffType
     licenseNumber?: string | null
     licenseExpiryDate?: Date | string | null
+    qualification?: string | null
     specialization?: string | null
     subSpecialization?: string | null
     boardCertification?: StaffCredentialsCreateboardCertificationInput | string[]
@@ -47789,6 +51703,7 @@ export namespace Prisma {
     staffType: $Enums.StaffType
     licenseNumber?: string | null
     licenseExpiryDate?: Date | string | null
+    qualification?: string | null
     specialization?: string | null
     subSpecialization?: string | null
     boardCertification?: StaffCredentialsCreateboardCertificationInput | string[]
@@ -47807,6 +51722,7 @@ export namespace Prisma {
     staffType?: EnumStaffTypeFieldUpdateOperationsInput | $Enums.StaffType
     licenseNumber?: NullableStringFieldUpdateOperationsInput | string | null
     licenseExpiryDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    qualification?: NullableStringFieldUpdateOperationsInput | string | null
     specialization?: NullableStringFieldUpdateOperationsInput | string | null
     subSpecialization?: NullableStringFieldUpdateOperationsInput | string | null
     boardCertification?: StaffCredentialsUpdateboardCertificationInput | string[]
@@ -47827,6 +51743,7 @@ export namespace Prisma {
     staffType?: EnumStaffTypeFieldUpdateOperationsInput | $Enums.StaffType
     licenseNumber?: NullableStringFieldUpdateOperationsInput | string | null
     licenseExpiryDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    qualification?: NullableStringFieldUpdateOperationsInput | string | null
     specialization?: NullableStringFieldUpdateOperationsInput | string | null
     subSpecialization?: NullableStringFieldUpdateOperationsInput | string | null
     boardCertification?: StaffCredentialsUpdateboardCertificationInput | string[]
@@ -47846,6 +51763,7 @@ export namespace Prisma {
     staffType: $Enums.StaffType
     licenseNumber?: string | null
     licenseExpiryDate?: Date | string | null
+    qualification?: string | null
     specialization?: string | null
     subSpecialization?: string | null
     boardCertification?: StaffCredentialsCreateboardCertificationInput | string[]
@@ -47864,6 +51782,7 @@ export namespace Prisma {
     staffType?: EnumStaffTypeFieldUpdateOperationsInput | $Enums.StaffType
     licenseNumber?: NullableStringFieldUpdateOperationsInput | string | null
     licenseExpiryDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    qualification?: NullableStringFieldUpdateOperationsInput | string | null
     specialization?: NullableStringFieldUpdateOperationsInput | string | null
     subSpecialization?: NullableStringFieldUpdateOperationsInput | string | null
     boardCertification?: StaffCredentialsUpdateboardCertificationInput | string[]
@@ -47883,6 +51802,7 @@ export namespace Prisma {
     staffType?: EnumStaffTypeFieldUpdateOperationsInput | $Enums.StaffType
     licenseNumber?: NullableStringFieldUpdateOperationsInput | string | null
     licenseExpiryDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    qualification?: NullableStringFieldUpdateOperationsInput | string | null
     specialization?: NullableStringFieldUpdateOperationsInput | string | null
     subSpecialization?: NullableStringFieldUpdateOperationsInput | string | null
     boardCertification?: StaffCredentialsUpdateboardCertificationInput | string[]
@@ -48534,6 +52454,286 @@ export namespace Prisma {
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BuildingCreateInput = {
+    id?: string
+    name: string
+    code: string
+    description?: string | null
+    address?: string | null
+    floors?: number
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type BuildingUncheckedCreateInput = {
+    id?: string
+    name: string
+    code: string
+    description?: string | null
+    address?: string | null
+    floors?: number
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type BuildingUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    floors?: IntFieldUpdateOperationsInput | number
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BuildingUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    floors?: IntFieldUpdateOperationsInput | number
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BuildingCreateManyInput = {
+    id?: string
+    name: string
+    code: string
+    description?: string | null
+    address?: string | null
+    floors?: number
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type BuildingUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    floors?: IntFieldUpdateOperationsInput | number
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BuildingUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    floors?: IntFieldUpdateOperationsInput | number
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RoomCreateInput = {
+    id?: string
+    building?: string | null
+    identifier: string
+    type: $Enums.RoomType
+    description?: string | null
+    capacity?: number
+    status?: $Enums.RoomStatus
+    floor?: number | null
+    wing?: string | null
+    amenities?: string | null
+    notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type RoomUncheckedCreateInput = {
+    id?: string
+    building?: string | null
+    identifier: string
+    type: $Enums.RoomType
+    description?: string | null
+    capacity?: number
+    status?: $Enums.RoomStatus
+    floor?: number | null
+    wing?: string | null
+    amenities?: string | null
+    notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type RoomUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    building?: NullableStringFieldUpdateOperationsInput | string | null
+    identifier?: StringFieldUpdateOperationsInput | string
+    type?: EnumRoomTypeFieldUpdateOperationsInput | $Enums.RoomType
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    capacity?: IntFieldUpdateOperationsInput | number
+    status?: EnumRoomStatusFieldUpdateOperationsInput | $Enums.RoomStatus
+    floor?: NullableIntFieldUpdateOperationsInput | number | null
+    wing?: NullableStringFieldUpdateOperationsInput | string | null
+    amenities?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RoomUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    building?: NullableStringFieldUpdateOperationsInput | string | null
+    identifier?: StringFieldUpdateOperationsInput | string
+    type?: EnumRoomTypeFieldUpdateOperationsInput | $Enums.RoomType
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    capacity?: IntFieldUpdateOperationsInput | number
+    status?: EnumRoomStatusFieldUpdateOperationsInput | $Enums.RoomStatus
+    floor?: NullableIntFieldUpdateOperationsInput | number | null
+    wing?: NullableStringFieldUpdateOperationsInput | string | null
+    amenities?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RoomCreateManyInput = {
+    id?: string
+    building?: string | null
+    identifier: string
+    type: $Enums.RoomType
+    description?: string | null
+    capacity?: number
+    status?: $Enums.RoomStatus
+    floor?: number | null
+    wing?: string | null
+    amenities?: string | null
+    notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type RoomUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    building?: NullableStringFieldUpdateOperationsInput | string | null
+    identifier?: StringFieldUpdateOperationsInput | string
+    type?: EnumRoomTypeFieldUpdateOperationsInput | $Enums.RoomType
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    capacity?: IntFieldUpdateOperationsInput | number
+    status?: EnumRoomStatusFieldUpdateOperationsInput | $Enums.RoomStatus
+    floor?: NullableIntFieldUpdateOperationsInput | number | null
+    wing?: NullableStringFieldUpdateOperationsInput | string | null
+    amenities?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RoomUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    building?: NullableStringFieldUpdateOperationsInput | string | null
+    identifier?: StringFieldUpdateOperationsInput | string
+    type?: EnumRoomTypeFieldUpdateOperationsInput | $Enums.RoomType
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    capacity?: IntFieldUpdateOperationsInput | number
+    status?: EnumRoomStatusFieldUpdateOperationsInput | $Enums.RoomStatus
+    floor?: NullableIntFieldUpdateOperationsInput | number | null
+    wing?: NullableStringFieldUpdateOperationsInput | string | null
+    amenities?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type FacilityLogCreateInput = {
+    id?: string
+    user: string
+    role: string
+    action: string
+    roomIdentifier: string
+    type: string
+    oldStatus?: string | null
+    newStatus?: string | null
+    timestamp?: Date | string
+  }
+
+  export type FacilityLogUncheckedCreateInput = {
+    id?: string
+    user: string
+    role: string
+    action: string
+    roomIdentifier: string
+    type: string
+    oldStatus?: string | null
+    newStatus?: string | null
+    timestamp?: Date | string
+  }
+
+  export type FacilityLogUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    user?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
+    action?: StringFieldUpdateOperationsInput | string
+    roomIdentifier?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    oldStatus?: NullableStringFieldUpdateOperationsInput | string | null
+    newStatus?: NullableStringFieldUpdateOperationsInput | string | null
+    timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type FacilityLogUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    user?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
+    action?: StringFieldUpdateOperationsInput | string
+    roomIdentifier?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    oldStatus?: NullableStringFieldUpdateOperationsInput | string | null
+    newStatus?: NullableStringFieldUpdateOperationsInput | string | null
+    timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type FacilityLogCreateManyInput = {
+    id?: string
+    user: string
+    role: string
+    action: string
+    roomIdentifier: string
+    type: string
+    oldStatus?: string | null
+    newStatus?: string | null
+    timestamp?: Date | string
+  }
+
+  export type FacilityLogUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    user?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
+    action?: StringFieldUpdateOperationsInput | string
+    roomIdentifier?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    oldStatus?: NullableStringFieldUpdateOperationsInput | string | null
+    newStatus?: NullableStringFieldUpdateOperationsInput | string | null
+    timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type FacilityLogUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    user?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
+    action?: StringFieldUpdateOperationsInput | string
+    roomIdentifier?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    oldStatus?: NullableStringFieldUpdateOperationsInput | string | null
+    newStatus?: NullableStringFieldUpdateOperationsInput | string | null
+    timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type PharmacySupplierCreateInput = {
@@ -51424,6 +55624,7 @@ export namespace Prisma {
     staffType?: SortOrder
     licenseNumber?: SortOrder
     licenseExpiryDate?: SortOrder
+    qualification?: SortOrder
     specialization?: SortOrder
     subSpecialization?: SortOrder
     boardCertification?: SortOrder
@@ -51448,6 +55649,7 @@ export namespace Prisma {
     staffType?: SortOrder
     licenseNumber?: SortOrder
     licenseExpiryDate?: SortOrder
+    qualification?: SortOrder
     specialization?: SortOrder
     subSpecialization?: SortOrder
     education?: SortOrder
@@ -51465,6 +55667,7 @@ export namespace Prisma {
     staffType?: SortOrder
     licenseNumber?: SortOrder
     licenseExpiryDate?: SortOrder
+    qualification?: SortOrder
     specialization?: SortOrder
     subSpecialization?: SortOrder
     education?: SortOrder
@@ -52049,6 +56252,178 @@ export namespace Prisma {
     _sum?: NestedIntFilter<$PrismaModel>
     _min?: NestedIntFilter<$PrismaModel>
     _max?: NestedIntFilter<$PrismaModel>
+  }
+
+  export type BuildingCountOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    code?: SortOrder
+    description?: SortOrder
+    address?: SortOrder
+    floors?: SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type BuildingAvgOrderByAggregateInput = {
+    floors?: SortOrder
+  }
+
+  export type BuildingMaxOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    code?: SortOrder
+    description?: SortOrder
+    address?: SortOrder
+    floors?: SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type BuildingMinOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    code?: SortOrder
+    description?: SortOrder
+    address?: SortOrder
+    floors?: SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type BuildingSumOrderByAggregateInput = {
+    floors?: SortOrder
+  }
+
+  export type EnumRoomTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.RoomType | EnumRoomTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.RoomType[] | ListEnumRoomTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.RoomType[] | ListEnumRoomTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumRoomTypeFilter<$PrismaModel> | $Enums.RoomType
+  }
+
+  export type EnumRoomStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.RoomStatus | EnumRoomStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.RoomStatus[] | ListEnumRoomStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.RoomStatus[] | ListEnumRoomStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumRoomStatusFilter<$PrismaModel> | $Enums.RoomStatus
+  }
+
+  export type RoomCountOrderByAggregateInput = {
+    id?: SortOrder
+    building?: SortOrder
+    identifier?: SortOrder
+    type?: SortOrder
+    description?: SortOrder
+    capacity?: SortOrder
+    status?: SortOrder
+    floor?: SortOrder
+    wing?: SortOrder
+    amenities?: SortOrder
+    notes?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type RoomAvgOrderByAggregateInput = {
+    capacity?: SortOrder
+    floor?: SortOrder
+  }
+
+  export type RoomMaxOrderByAggregateInput = {
+    id?: SortOrder
+    building?: SortOrder
+    identifier?: SortOrder
+    type?: SortOrder
+    description?: SortOrder
+    capacity?: SortOrder
+    status?: SortOrder
+    floor?: SortOrder
+    wing?: SortOrder
+    amenities?: SortOrder
+    notes?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type RoomMinOrderByAggregateInput = {
+    id?: SortOrder
+    building?: SortOrder
+    identifier?: SortOrder
+    type?: SortOrder
+    description?: SortOrder
+    capacity?: SortOrder
+    status?: SortOrder
+    floor?: SortOrder
+    wing?: SortOrder
+    amenities?: SortOrder
+    notes?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type RoomSumOrderByAggregateInput = {
+    capacity?: SortOrder
+    floor?: SortOrder
+  }
+
+  export type EnumRoomTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.RoomType | EnumRoomTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.RoomType[] | ListEnumRoomTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.RoomType[] | ListEnumRoomTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumRoomTypeWithAggregatesFilter<$PrismaModel> | $Enums.RoomType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumRoomTypeFilter<$PrismaModel>
+    _max?: NestedEnumRoomTypeFilter<$PrismaModel>
+  }
+
+  export type EnumRoomStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.RoomStatus | EnumRoomStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.RoomStatus[] | ListEnumRoomStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.RoomStatus[] | ListEnumRoomStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumRoomStatusWithAggregatesFilter<$PrismaModel> | $Enums.RoomStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumRoomStatusFilter<$PrismaModel>
+    _max?: NestedEnumRoomStatusFilter<$PrismaModel>
+  }
+
+  export type FacilityLogCountOrderByAggregateInput = {
+    id?: SortOrder
+    user?: SortOrder
+    role?: SortOrder
+    action?: SortOrder
+    roomIdentifier?: SortOrder
+    type?: SortOrder
+    oldStatus?: SortOrder
+    newStatus?: SortOrder
+    timestamp?: SortOrder
+  }
+
+  export type FacilityLogMaxOrderByAggregateInput = {
+    id?: SortOrder
+    user?: SortOrder
+    role?: SortOrder
+    action?: SortOrder
+    roomIdentifier?: SortOrder
+    type?: SortOrder
+    oldStatus?: SortOrder
+    newStatus?: SortOrder
+    timestamp?: SortOrder
+  }
+
+  export type FacilityLogMinOrderByAggregateInput = {
+    id?: SortOrder
+    user?: SortOrder
+    role?: SortOrder
+    action?: SortOrder
+    roomIdentifier?: SortOrder
+    type?: SortOrder
+    oldStatus?: SortOrder
+    newStatus?: SortOrder
+    timestamp?: SortOrder
   }
 
   export type UuidFilter<$PrismaModel = never> = {
@@ -54541,6 +58916,14 @@ export namespace Prisma {
     deleteMany?: AppointmentScalarWhereInput | AppointmentScalarWhereInput[]
   }
 
+  export type EnumRoomTypeFieldUpdateOperationsInput = {
+    set?: $Enums.RoomType
+  }
+
+  export type EnumRoomStatusFieldUpdateOperationsInput = {
+    set?: $Enums.RoomStatus
+  }
+
   export type PharmacyItemCreateNestedManyWithoutBrandInput = {
     create?: XOR<PharmacyItemCreateWithoutBrandInput, PharmacyItemUncheckedCreateWithoutBrandInput> | PharmacyItemCreateWithoutBrandInput[] | PharmacyItemUncheckedCreateWithoutBrandInput[]
     connectOrCreate?: PharmacyItemCreateOrConnectWithoutBrandInput | PharmacyItemCreateOrConnectWithoutBrandInput[]
@@ -56457,6 +60840,40 @@ export namespace Prisma {
     not?: NestedFloatFilter<$PrismaModel> | number
   }
 
+  export type NestedEnumRoomTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.RoomType | EnumRoomTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.RoomType[] | ListEnumRoomTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.RoomType[] | ListEnumRoomTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumRoomTypeFilter<$PrismaModel> | $Enums.RoomType
+  }
+
+  export type NestedEnumRoomStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.RoomStatus | EnumRoomStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.RoomStatus[] | ListEnumRoomStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.RoomStatus[] | ListEnumRoomStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumRoomStatusFilter<$PrismaModel> | $Enums.RoomStatus
+  }
+
+  export type NestedEnumRoomTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.RoomType | EnumRoomTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.RoomType[] | ListEnumRoomTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.RoomType[] | ListEnumRoomTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumRoomTypeWithAggregatesFilter<$PrismaModel> | $Enums.RoomType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumRoomTypeFilter<$PrismaModel>
+    _max?: NestedEnumRoomTypeFilter<$PrismaModel>
+  }
+
+  export type NestedEnumRoomStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.RoomStatus | EnumRoomStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.RoomStatus[] | ListEnumRoomStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.RoomStatus[] | ListEnumRoomStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumRoomStatusWithAggregatesFilter<$PrismaModel> | $Enums.RoomStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumRoomStatusFilter<$PrismaModel>
+    _max?: NestedEnumRoomStatusFilter<$PrismaModel>
+  }
+
   export type NestedUuidFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -56940,6 +61357,7 @@ export namespace Prisma {
     staffType: $Enums.StaffType
     licenseNumber?: string | null
     licenseExpiryDate?: Date | string | null
+    qualification?: string | null
     specialization?: string | null
     subSpecialization?: string | null
     boardCertification?: StaffCredentialsCreateboardCertificationInput | string[]
@@ -56958,6 +61376,7 @@ export namespace Prisma {
     staffType: $Enums.StaffType
     licenseNumber?: string | null
     licenseExpiryDate?: Date | string | null
+    qualification?: string | null
     specialization?: string | null
     subSpecialization?: string | null
     boardCertification?: StaffCredentialsCreateboardCertificationInput | string[]
@@ -57214,6 +61633,7 @@ export namespace Prisma {
     staffType?: EnumStaffTypeFieldUpdateOperationsInput | $Enums.StaffType
     licenseNumber?: NullableStringFieldUpdateOperationsInput | string | null
     licenseExpiryDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    qualification?: NullableStringFieldUpdateOperationsInput | string | null
     specialization?: NullableStringFieldUpdateOperationsInput | string | null
     subSpecialization?: NullableStringFieldUpdateOperationsInput | string | null
     boardCertification?: StaffCredentialsUpdateboardCertificationInput | string[]
@@ -57232,6 +61652,7 @@ export namespace Prisma {
     staffType?: EnumStaffTypeFieldUpdateOperationsInput | $Enums.StaffType
     licenseNumber?: NullableStringFieldUpdateOperationsInput | string | null
     licenseExpiryDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    qualification?: NullableStringFieldUpdateOperationsInput | string | null
     specialization?: NullableStringFieldUpdateOperationsInput | string | null
     subSpecialization?: NullableStringFieldUpdateOperationsInput | string | null
     boardCertification?: StaffCredentialsUpdateboardCertificationInput | string[]
