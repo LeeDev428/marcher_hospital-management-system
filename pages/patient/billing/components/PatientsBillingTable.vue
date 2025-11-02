@@ -60,7 +60,7 @@ const fetchBills = async () => {
   
   loading.value = true
   try {
-    const { success, data } = await $trpc.billing.getPatientBills.query({
+    const { success, data } = await $trpc.billing.transactions.getPatientBills.query({
       patientId: authStore.user.id
     })
     
@@ -161,33 +161,34 @@ const handleConfirmPayment = async (billId: string, paymentMethod: string) => {
     if (!bill) return
     
     // Call payment API
-    const { success, message } = await $trpc.billing.processPayment.mutate({
+    const { success, message, checkoutUrl } = await $trpc.billing.transactions.processPayment.mutate({
       billId,
       paymentMethod,
       amount: bill.cost,
     })
     
-    if (success) {
-      // Refresh bills
-      await fetchBills()
-      
+    if (success && checkoutUrl) {
       // Close dialog
       paymentDialogOpen.value = false
       selectedBill.value = null
       
-      // Show success message
-      useToast("success", "Payment Successful", `Your payment via ${paymentMethod === 'paymaya' ? 'PayMaya' : 'Maya'} has been processed successfully.`)
+      // Show info message
+      useToast("info", "Redirecting to Payment", "You will be redirected to Maya payment gateway...")
       
-      // Switch to completed tab
+      // Redirect to Maya checkout
       setTimeout(() => {
-        activeTab.value = "completed"
-      }, 500)
+        window.location.href = checkoutUrl
+      }, 1500)
     } else {
-      useToast("error", "Payment Failed", message || "Failed to process payment")
+      useToast("error", "Payment Failed", message || "Failed to create payment session")
     }
-  } catch (error) {
+  } catch (error: any) {
     console.error("Payment error:", error)
-    useToast("error", "Payment Failed", "An error occurred while processing your payment")
+    useToast("error", "Payment Error", error.message || "An unexpected error occurred")
+    
+    // Close dialog on error
+    paymentDialogOpen.value = false
+    selectedBill.value = null
   }
 }
 
