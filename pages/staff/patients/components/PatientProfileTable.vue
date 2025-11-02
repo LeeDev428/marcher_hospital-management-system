@@ -19,8 +19,15 @@ const patients = ref<any[]>([])
 const isLoading = ref(true)
 const showViewDialog = ref(false)
 const showArchiveDialog = ref(false)
+const showQRDialog = ref(false)
 const selectedPatient = ref<any>(null)
 const isSubmitting = ref(false)
+
+// QR Code Dialog
+const viewQRCode = (patient: any) => {
+	selectedPatient.value = patient
+	showQRDialog.value = true
+}
 
 // Load patients based on active tab
 const loadPatients = async () => {
@@ -162,6 +169,7 @@ onMounted(async () => {
 						<TableHead>Latest Encounter</TableHead>
 						<TableHead>Data Share Status</TableHead>
 						<TableHead>Created At</TableHead>
+						<TableHead class="text-center">QR Code</TableHead>
 						<TableHead>Actions</TableHead>
 					</TableRow>
 				</TableHeader>
@@ -202,6 +210,17 @@ onMounted(async () => {
 							<span v-else class="text-muted-foreground text-xs">None</span>
 						</TableCell>
 						<TableCell>{{ formatDate(patient.createdAt) }}</TableCell>
+						<TableCell class="text-center">
+							<Button 
+								variant="ghost" 
+								size="icon"
+								@click="viewQRCode(patient)"
+								class="hover:bg-blue-50"
+								title="View QR Code"
+							>
+								<Icon name="lucide:qr-code" class="w-5 h-5 text-blue-600" />
+							</Button>
+						</TableCell>
 						<TableCell class="flex gap-2">
 							<Button variant="outline" size="sm" @click="viewPatient(patient)">
 								<Icon name="lucide:eye" class="w-4 h-4 mr-1" />
