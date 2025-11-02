@@ -11,7 +11,7 @@ useHead({
 })
 
 onMounted(async () => {
-	breadcrumbsStore.setBreadcrumbs([{ label: "Patients", link: "/patients" }])
+	breadcrumbsStore.setBreadcrumbs([{ label: "Patients", link: "/staff/patients" }])
 })
 </script>
 
