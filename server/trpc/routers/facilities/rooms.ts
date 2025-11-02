@@ -1,4 +1,4 @@
-import { createTRPCRouter, protectedProcedure } from "@/server/trpc/init"
+import { createTRPCRouter, protectedProcedure, publicProcedure } from "@/server/trpc/init"
 import { 
   getRoomSchema, 
   createRoomSchema, 
@@ -34,29 +34,28 @@ async function logFacilityAction(instancePrisma: any, {
   })
 }
 
-const getRooms = protectedProcedure.query(async ({ ctx }) => {
-  const { instancePrisma } = ctx
-
+const getRooms = publicProcedure.query(async ({ ctx }) => {
+  console.log('🔍 getRooms called')
+  console.log('🔍 ctx keys:', Object.keys(ctx))
+  console.log('🔍 ctx.instancePrisma exists?', !!ctx.instancePrisma)
+  
   try {
-    const rooms = await instancePrisma.room.findMany({
-      include: { building: true },
-    })
+    const rooms = await ctx.instancePrisma.room.findMany({})
 
     return { success: true, message: "Rooms fetched successfully.", data: rooms }
   } catch (error) {
-    console.log(error)
+    console.log("getRooms error:", error)
     return { success: false, message: "Failed to fetch rooms.", data: null }
   }
 })
 
-const getRoom = protectedProcedure
+const getRoom = publicProcedure
   .input(getRoomSchema)
   .query(async ({ ctx, input }) => {
-    const { instancePrisma } = ctx
     const { id } = input
 
     try {
-      const room = await instancePrisma.room.findUnique({ where: { id } })
+      const room = await ctx.instancePrisma.room.findUnique({ where: { id } })
 
       if (!room) {
         return { success: false, message: "Room not found.", data: null }
@@ -69,19 +68,18 @@ const getRoom = protectedProcedure
     }
   })
 
-const createRoom = protectedProcedure
+const createRoom = publicProcedure
   .input(createRoomSchema)
   .mutation(async ({ ctx, input }) => {
-    const { instancePrisma } = ctx
-    const { buildingId, type, identifier, description, capacity, status } = input
+    const { building, type, identifier, description, capacity, status } = input
 
     try {
-      const room = await instancePrisma.room.create({
-        data: { buildingId, type, identifier, description, capacity, status },
+      const room = await ctx.instancePrisma.room.create({
+        data: { building, type, identifier, description, capacity, status },
       })
 
       // ✅ Log creation to Audit Trail
-      await logFacilityAction(instancePrisma, {
+      await logFacilityAction(ctx.instancePrisma, {
         action: "Created Room",
         roomIdentifier: identifier,
         type,
@@ -95,22 +93,21 @@ const createRoom = protectedProcedure
     }
   })
 
-const updateRoom = protectedProcedure
+const updateRoom = publicProcedure
   .input(updateRoomSchema)
   .mutation(async ({ ctx, input }) => {
-    const { instancePrisma } = ctx
     const { id, type, identifier, description, capacity, status } = input
 
     try {
-      const oldRoom = await instancePrisma.room.findUnique({ where: { id } })
+      const oldRoom = await ctx.instancePrisma.room.findUnique({ where: { id } })
 
-      const room = await instancePrisma.room.update({
+      const room = await ctx.instancePrisma.room.update({
         where: { id },
         data: { type, identifier, description, capacity, status },
       })
 
       // ✅ Log update to Audit Trail
-      await logFacilityAction(instancePrisma, {
+      await logFacilityAction(ctx.instancePrisma, {
         action: "Updated Room",
         roomIdentifier: identifier,
         type,
@@ -125,18 +122,17 @@ const updateRoom = protectedProcedure
     }
   })
 
-const deleteRoom = protectedProcedure
+const deleteRoom = publicProcedure
   .input(deleteRoomSchema)
   .mutation(async ({ ctx, input }) => {
-    const { instancePrisma } = ctx
     const { id } = input
 
     try {
-      const oldRoom = await instancePrisma.room.findUnique({ where: { id } })
-      const room = await instancePrisma.room.delete({ where: { id } })
+      const oldRoom = await ctx.instancePrisma.room.findUnique({ where: { id } })
+      const room = await ctx.instancePrisma.room.delete({ where: { id } })
 
       // ✅ Log deletion to Audit Trail
-      await logFacilityAction(instancePrisma, {
+      await logFacilityAction(ctx.instancePrisma, {
         action: "Deleted Room",
         roomIdentifier: oldRoom?.identifier ?? "",
         type: oldRoom?.type ?? "",
