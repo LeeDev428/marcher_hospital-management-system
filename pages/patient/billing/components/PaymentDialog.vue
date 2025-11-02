@@ -34,7 +34,7 @@ const emit = defineEmits<{
   'confirm-payment': [billId: string, paymentMethod: string]
 }>()
 
-const selectedPaymentMethod = ref<string>('paymaya')
+const selectedPaymentMethod = ref<string>('maya')
 const processing = ref(false)
 
 const formatCurrency = (amount: number) => {
@@ -103,20 +103,12 @@ const handleClose = () => {
               <SelectValue placeholder="Choose payment method" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="paymaya">
-                <div class="flex items-center gap-2">
-                  <div class="w-8 h-8 bg-green-500 rounded flex items-center justify-center text-white font-bold text-xs">
-                    PM
-                  </div>
-                  <span>PayMaya</span>
-                </div>
-              </SelectItem>
               <SelectItem value="maya">
                 <div class="flex items-center gap-2">
-                  <div class="w-8 h-8 bg-blue-500 rounded flex items-center justify-center text-white font-bold text-xs">
+                  <div class="w-8 h-8 bg-green-500 rounded flex items-center justify-center text-white font-bold text-xs">
                     M
                   </div>
-                  <span>Maya</span>
+                  <span>Maya Payment Gateway</span>
                 </div>
               </SelectItem>
             </SelectContent>
