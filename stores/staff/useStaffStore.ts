@@ -27,20 +27,18 @@ export const useStaffStore = defineStore("staff", {
 							middleName: user.middleName || null,
 							suffix: null, // Not stored in user table, so default to null
 							email: user.email,
-							phone: user.phone,
-							role: user.staffCredentials?.staffType || 'OTHER',
-							department: user.department || user.staffCredentials?.specialization || '',
-							specialization: user.staffCredentials?.specialization || '',
-							position: user.position || user.staffCredentials?.staffType || '',
-							licenseNumber: user.staffCredentials?.licenseNumber || '',
-							profession: user.staffCredentials?.specialization || '', // Use specialization as profession
-							qualification: user.staffCredentials?.education || user.staffCredentials?.boardCertification?.join(', ') || '',
-							schedules: user.schedules || [],
-							createdAt: user.createdAt,
-							updatedAt: user.updatedAt,
-						}))
-
-					// Filter by specific staff role if provided
+						phone: user.phone,
+						role: user.staffCredentials?.staffType || 'OTHER',
+						department: user.department || user.staffCredentials?.specialization || '',
+						specialization: user.staffCredentials?.specialization || '',
+						position: user.position || user.staffCredentials?.staffType || '',
+						licenseNumber: user.staffCredentials?.licenseNumber || '',
+						profession: user.staffCredentials?.specialization || '', // Use specialization as profession
+						qualification: user.staffCredentials?.qualification || '', // Educational degrees (MD, MBBS, RN, etc.)
+						schedules: user.schedules || [],
+						createdAt: user.createdAt,
+						updatedAt: user.updatedAt,
+					}))					// Filter by specific staff role if provided
 					this.staffProfiles = input ? staffMembers.filter(staff => staff.role === input) : staffMembers
 					this.loading = false
 					return {
