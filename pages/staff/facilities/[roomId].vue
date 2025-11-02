@@ -7,8 +7,8 @@ const { roomId } = useRoute().params as { roomId: string }
 
 onMounted(() => {
 	breadcrumbsStore.setBreadcrumbs([
-		{ label: "Facilities", link: "/facilities" },
-		{ label: "Facility", link: `/facilities/${roomId}` },
+		{ label: "Facilities", link: "/staff/facilities" },
+		{ label: "Facility", link: `/staff/facilities/${roomId}` },
 	])
 })
 </script>
