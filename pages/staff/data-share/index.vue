@@ -108,7 +108,7 @@
 								<div class="flex-1">
 									<div class="flex items-center gap-3">
 										<div class="font-semibold text-lg">
-											{{ request.patient.user.firstName }} {{ request.patient.user.lastName }}
+											{{ request.patientName }}
 										</div>
 										<Badge :variant="getStatusVariant(request.status)">
 											{{ request.status }}
@@ -116,9 +116,6 @@
 									</div>
 									<div class="text-sm text-muted-foreground mt-1">
 										Request #: {{ request.requestNumber }}
-									</div>
-									<div class="text-sm text-muted-foreground">
-										Patient #: {{ request.patient.patientNumber }}
 									</div>
 									<div class="mt-3 space-y-1">
 										<div class="text-sm">
@@ -220,7 +217,7 @@ onMounted(() => {
 async function loadRequests() {
 	loading.value = true
 	try {
-		const response = await $trpc.dataShare.getRequests.query({
+		const response = await $trpc.datashare.getRequests.query({
 			status: filters.status || undefined,
 			page: pagination.page,
 			limit: pagination.limit
