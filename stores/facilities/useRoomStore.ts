@@ -86,7 +86,7 @@ export const useRoomStore = defineStore("room", {
 						"Room",
 						"Room created successfully.",
 					)
-					await navigateTo("/facilities")
+					await navigateTo("/staff/facilities")
 				}
 
 				this.loading = false
@@ -122,7 +122,7 @@ export const useRoomStore = defineStore("room", {
 						"Room",
 						"Room updated successfully.",
 					)
-					await navigateTo("/facilities")
+					await navigateTo("/staff/facilities")
 				}
 
 				this.loading = false
