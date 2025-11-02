@@ -11,9 +11,20 @@ import {
 } from "@/components/ui/table"
 import { Button } from "@/components/ui/button"
 import { Skeleton } from "@/components/ui/skeleton"
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog"
 
 // Reuse Staff store, but fetch only doctors
 const staffStore = useStaffStore()
+
+// Schedule dialog state
+const showScheduleDialog = ref(false)
+const selectedDoctor = ref<any>(null)
 
 /* ===================== 🔎 SEARCH (debounced) + FILTER ===================== */
 const search = ref("")
@@ -106,7 +117,6 @@ const formatSchedule = (schedules: any[]) => {
   
   // Get first available schedule
   const schedule = schedules[0]
-  const days = ['SUNDAY', 'MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY']
   const dayName = schedule.day
   
   // Format time from 24hr to 12hr
@@ -116,7 +126,7 @@ const formatSchedule = (schedules: any[]) => {
     const hour = parseInt(hours)
     const ampm = hour >= 12 ? 'PM' : 'AM'
     const hour12 = hour % 12 || 12
-    return `${hour12}:${minutes} ${ampm}`
+    return `${minutes ? hour12 + ':' + minutes : hour12} ${ampm}`
   }
   
   return {
@@ -124,6 +134,33 @@ const formatSchedule = (schedules: any[]) => {
     time: `${formatTime(schedule.startTime)} - ${formatTime(schedule.endTime)}`
   }
 }
+
+// Show all schedules for a doctor
+const showSchedule = (doctor: any) => {
+  selectedDoctor.value = doctor
+  showScheduleDialog.value = true
+}
+
+// Format all schedules
+const formatAllSchedules = computed(() => {
+  if (!selectedDoctor.value || !selectedDoctor.value.schedules) return []
+  
+  return selectedDoctor.value.schedules.map((schedule: any) => {
+    const formatTime = (time: string) => {
+      if (!time) return ''
+      const [hours, minutes] = time.split(':')
+      const hour = parseInt(hours)
+      const ampm = hour >= 12 ? 'PM' : 'AM'
+      const hour12 = hour % 12 || 12
+      return `${minutes ? hour12 + ':' + minutes : hour12} ${ampm}`
+    }
+    
+    return {
+      day: schedule.day.charAt(0) + schedule.day.slice(1).toLowerCase(),
+      time: `${formatTime(schedule.startTime)} - ${formatTime(schedule.endTime)}`
+    }
+  })
+})
 
 // Expose search for parent component
 defineExpose({ search, clearSearch, searchInputRef })
@@ -212,11 +249,17 @@ defineExpose({ search, clearSearch, searchInputRef })
             <TableCell class="px-6 py-4 whitespace-nowrap">{{ doc.profession || '-' }}</TableCell>
             <TableCell class="px-6 py-4">{{ doc.qualification || '-' }}</TableCell>
             <TableCell class="px-6 py-4">
-              <div v-if="formatSchedule(doc.schedules)" class="text-sm">
-                <div class="font-medium">{{ formatSchedule(doc.schedules).day }}</div>
-                <div class="text-muted-foreground">{{ formatSchedule(doc.schedules).time }}</div>
-              </div>
-              <span v-else class="text-muted-foreground">Not available</span>
+              <Button
+                v-if="doc.schedules && doc.schedules.length > 0"
+                variant="ghost"
+                size="sm"
+                class="text-blue-600 hover:text-blue-800 hover:bg-blue-50"
+                @click="showSchedule(doc)"
+              >
+                <Icon name="lucide:clock" class="mr-1 w-4 h-4" />
+                View Schedule
+              </Button>
+              <span v-else class="text-muted-foreground text-sm">Not available</span>
             </TableCell>
             <TableCell class="px-6 py-4">
               <Button
@@ -273,4 +316,41 @@ defineExpose({ search, clearSearch, searchInputRef })
       </div>
     </div>
   </div>
+
+  <!-- Schedule Dialog -->
+  <Dialog v-model:open="showScheduleDialog">
+    <DialogContent class="max-w-md">
+      <DialogHeader>
+        <DialogTitle>OPD Schedule</DialogTitle>
+        <DialogDescription v-if="selectedDoctor">
+          Schedule for Dr. {{ selectedDoctor.lastName }}, {{ selectedDoctor.firstName }}
+        </DialogDescription>
+      </DialogHeader>
+
+      <div v-if="selectedDoctor" class="space-y-3 py-4">
+        <div
+          v-for="(schedule, index) in formatAllSchedules"
+          :key="index"
+          class="flex items-center justify-between p-3 bg-gray-50 rounded-lg"
+        >
+          <div class="flex items-center gap-2">
+            <Icon name="lucide:calendar" class="w-4 h-4 text-gray-600" />
+            <span class="font-medium">{{ schedule.day }}</span>
+          </div>
+          <div class="flex items-center gap-2 text-sm text-gray-600">
+            <Icon name="lucide:clock" class="w-4 h-4" />
+            {{ schedule.time }}
+          </div>
+        </div>
+
+        <div v-if="formatAllSchedules.length === 0" class="text-center text-gray-500 py-4">
+          No schedule available
+        </div>
+      </div>
+
+      <div class="flex justify-end">
+        <Button variant="outline" @click="showScheduleDialog = false">Close</Button>
+      </div>
+    </DialogContent>
+  </Dialog>
 </template>
