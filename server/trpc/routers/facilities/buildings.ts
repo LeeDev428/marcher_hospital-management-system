@@ -1,14 +1,12 @@
-import { createTRPCRouter, protectedProcedure } from "@/server/trpc/init"
+import { createTRPCRouter, protectedProcedure, publicProcedure } from "@/server/trpc/init"
 import { getBuildingSchema, createBuildingSchema, updateBuildingSchema, deleteBuildingSchema } from "@/types/facilities"
 import { TRPCError } from "@trpc/server"
 import { v4 as uuidv4 } from "uuid"
 import { createLog } from "@/util/logs"
 
-const getBuildings = protectedProcedure.query(async ({ ctx }) => {
-	const { instancePrisma } = ctx
-
+const getBuildings = publicProcedure.query(async ({ ctx }) => {
 	try {
-		const buildings = await instancePrisma.building.findMany()
+		const buildings = await ctx.instancePrisma.building.findMany()
 
 		return {
 			success: true,
@@ -25,14 +23,13 @@ const getBuildings = protectedProcedure.query(async ({ ctx }) => {
 	}
 })
 
-const getBuilding = protectedProcedure
+const getBuilding = publicProcedure
 	.input(getBuildingSchema)
 	.query(async ({ ctx, input }) => {
-		const { instancePrisma } = ctx
 		const { id } = input
 
 		try {
-			const building = await instancePrisma.building.findUnique({
+			const building = await ctx.instancePrisma.building.findUnique({
 				where: { id },
 			})
 
@@ -59,22 +56,21 @@ const getBuilding = protectedProcedure
 		}
 	})
 
-const createBuilding = protectedProcedure
+const createBuilding = publicProcedure
 	.input(createBuildingSchema)
 	.mutation(async ({ ctx, input }) => {
-		const { instancePrisma, event } = ctx
 		const { name } = input
 
 		try {
-			const building = await instancePrisma.building.create({
+			const building = await ctx.instancePrisma.building.create({
 				data: { name },
 			})
 
 			await createLog({
-				user: `${ctx.user.firstName} ${ctx.user.lastName}`,
+				user: "Staff User",
 				action: "Created",
 				entity: "building",
-				ipAddress: event.headers.get("x-forwarded-for") ?? "Unknown",
+				ipAddress: ctx.event.headers.get("x-forwarded-for") ?? "Unknown",
 			})
 
 			return {
@@ -91,23 +87,22 @@ const createBuilding = protectedProcedure
 		}
 	})
 
-const updateBuilding = protectedProcedure
+const updateBuilding = publicProcedure
 	.input(updateBuildingSchema)
 	.mutation(async ({ ctx, input }) => {
-		const { instancePrisma, event } = ctx
 		const { id, name } = input
 
 		try {
-			const building = await instancePrisma.building.update({
+			const building = await ctx.instancePrisma.building.update({
 				where: { id },
 				data: { name },
 			})
 
 			await createLog({
-				user: `${ctx.user.firstName} ${ctx.user.lastName}`,
+				user: "Staff User",
 				action: "Updated",
 				entity: "building",
-				ipAddress: event.headers.get("x-forwarded-for") ?? "Unknown",
+				ipAddress: ctx.event.headers.get("x-forwarded-for") ?? "Unknown",
 			})
 
 			return {
@@ -124,22 +119,21 @@ const updateBuilding = protectedProcedure
 		}
 	})
 
-const deleteBuilding = protectedProcedure
+const deleteBuilding = publicProcedure
 	.input(deleteBuildingSchema)
 	.mutation(async ({ ctx, input }) => {
-		const { instancePrisma, event } = ctx
 		const { id } = input
 
 		try {
-			const building = await instancePrisma.building.delete({
+			const building = await ctx.instancePrisma.building.delete({
 				where: { id },
 			})
 
 			await createLog({
-				user: `${ctx.user.firstName} ${ctx.user.lastName}`,
+				user: "Staff User",
 				action: "Deleted",
 				entity: "building",
-				ipAddress: event.headers.get("x-forwarded-for") ?? "Unknown",
+				ipAddress: ctx.event.headers.get("x-forwarded-for") ?? "Unknown",
 			})
 
 			return {
