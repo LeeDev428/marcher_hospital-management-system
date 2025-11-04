@@ -200,7 +200,7 @@ defineExpose({
 								</span>
 							</button>
 						</TableHead>
-						<TableHead>Actions</TableHead>
+						<!-- <TableHead>Actions</TableHead> -->
 					</TableRow>
 				</TableHeader>
 				<TableBody>
@@ -233,14 +233,14 @@ defineExpose({
 						<TableCell :title="staff.updatedAt ? new Date(staff.updatedAt).toISOString() : ''">
 							{{ staff.updatedAt ? new Date(staff.updatedAt).toLocaleDateString() + ' ' + new Date(staff.updatedAt).toLocaleTimeString() : '-' }}
 						</TableCell>
-						<TableCell class="flex gap-2">
+						<!-- <TableCell class="flex gap-2">
 							<Button variant="outline" size="icon" @click="onEdit(staff.id)">
 								<Icon name="mdi:pencil" />
 							</Button>
 							<Button variant="outline" size="icon" @click="staffStore.deleteStaffProfile({ id: staff.id })">
 								<Icon name="mdi:trash" />
 							</Button>
-						</TableCell>
+						</TableCell> -->
 					</TableRow>
 
 					<TableRow v-if="paginatedStaff.length === 0">
