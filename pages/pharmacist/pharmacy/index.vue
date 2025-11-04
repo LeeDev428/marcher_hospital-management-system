@@ -36,12 +36,12 @@ onMounted(() => {
 						POS
 					</Button>
 				</NuxtLink>
-				<NuxtLink to="/pharmacist/billing/sales">
+				<!-- <NuxtLink to="/pharmacist/billing/sales">
 					<Button variant="outline">
 						<Icon name="mdi:receipt" class="mr-2" />
 						Sales
 					</Button>
-				</NuxtLink>
+				</NuxtLink> -->
 				<NuxtLink to="/pharmacist/pharmacy/suppliers">
 					<Button variant="outline">
 						<Icon name="mdi:package" />
