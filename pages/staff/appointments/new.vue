@@ -7,8 +7,8 @@ const breadcrumbsStore = useBreadcrumbsStore()
 
 onMounted(() => {
 	breadcrumbsStore.setBreadcrumbs([
-		{ label: "Appointments", link: "/appointments" },
-		{ label: "New Appointment", link: "/appointments/new" },
+		{ label: "Appointments", link: "/staff/appointments" },
+		{ label: "New Appointment", link: "/staff/appointments/new" },
 	])
 })
 </script>
