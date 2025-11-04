@@ -37,7 +37,7 @@ onMounted(() => {
       <div class="flex-1 bg-white p-4 rounded-lg gap-2">
         <!-- Header Row -->
         <div class="w-full flex justify-end">
-          <NuxtLink to="/appointments/new">
+          <NuxtLink to="/staff/appointments/new">
             <Button variant="outline">
               <Icon name="mdi:calendar" /> Book Appointment
             </Button>
