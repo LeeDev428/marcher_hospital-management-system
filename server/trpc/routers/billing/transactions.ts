@@ -11,15 +11,25 @@ const getTransactions = publicProcedure.query(async ({ ctx }) => {
   const { instancePrisma } = ctx
 
   try {
-    const transactions = await instancePrisma.transaction.findMany({
+    const transactions = await instancePrisma.billingTransaction.findMany({
       include: {
-        encounter: {
+        patient: {
           include: {
-            patientProfile: true,
-          },
+            user: {
+              select: {
+                firstName: true,
+                lastName: true,
+                email: true,
+              }
+            }
+          }
         },
-        items: true,
+        encounter: true,
+        lineItems: true,
         payments: true,
+      },
+      orderBy: {
+        createdAt: 'desc'
       },
     })
       
@@ -28,6 +38,17 @@ const getTransactions = publicProcedure.query(async ({ ctx }) => {
     const transformedTransactions = transactions.map(transaction => ({
       ...transaction,
       status: transaction.status as "PENDING" | "PROCESSING" | "COMPLETED" | "CANCELLED" | "FAILED",
+      encounter: {
+        id: transaction.encounterId || '',
+        patient: {
+          id: transaction.patient.id,
+          firstName: transaction.patient.user.firstName,
+          lastName: transaction.patient.user.lastName,
+          email: transaction.patient.user.email,
+        }
+      },
+      items: transaction.lineItems,
+      payments: transaction.payments,
       createdAt: transaction.createdAt.toISOString(),
       updatedAt: transaction.updatedAt.toISOString(),
     }))
@@ -54,20 +75,17 @@ const getTransaction = publicProcedure
     const { id } = input
 
     try {
-      const transaction = await instancePrisma.transaction.findUnique({
+      const transaction = await instancePrisma.billingTransaction.findUnique({
         where: { id },
         include: {
-          encounter: true,
-          items: true,
-          payments: {
+          patient: {
             include: {
-              instalments: {
-                include: {
-                  plan: true,
-                },
-              },
-            },
+              user: true
+            }
           },
+          encounter: true,
+          lineItems: true,
+          payments: true,
         },
       })
 
@@ -93,14 +111,58 @@ const createTransaction = publicProcedure
     const { encounterId, status } = input
 
     try {
-      const transaction = await instancePrisma.transaction.create({
+      // Check if transaction already exists for this encounter
+      const existingTransaction = await instancePrisma.billingTransaction.findFirst({
+        where: { encounterId }
+      })
+
+      if (existingTransaction) {
+        return {
+          success: false,
+          message: "A billing transaction already exists for this encounter. Each encounter can only have one transaction.",
+          data: null,
+        }
+      }
+
+      // Get the encounter to find the patientId
+      const encounter = await instancePrisma.inpatientEncounter.findUnique({
+        where: { id: encounterId },
+        select: { patientId: true }
+      })
+
+      if (!encounter) {
+        return {
+          success: false,
+          message: "Encounter not found",
+          data: null,
+        }
+      }
+
+      // Generate transaction number
+      const now = new Date()
+      const year = now.getFullYear()
+      const month = String(now.getMonth() + 1).padStart(2, '0')
+      const count = await instancePrisma.billingTransaction.count()
+      const transactionNumber = `BT-${year}${month}-${String(count + 1).padStart(6, '0')}`
+
+      const transaction = await instancePrisma.billingTransaction.create({
         data: {
+          transactionNumber,
+          patientId: encounter.patientId,
           encounterId,
           status,
+          totalAmount: 0,
+          finalAmount: 0,
+          balanceAmount: 0,
         },
         include: {
+          patient: {
+            include: {
+              user: true
+            }
+          },
           encounter: true,
-          items: true,
+          lineItems: true,
           payments: true,
         },
       })
@@ -110,11 +172,11 @@ const createTransaction = publicProcedure
         message: "Transaction created successfully",
         data: transaction,
       }
-    } catch (error) {
-      console.error(error)
+    } catch (error: any) {
+      console.error("Create transaction error:", error)
       return {
         success: false,
-        message: "Failed to create transaction",
+        message: error?.message || "Failed to create transaction",
         data: null,
       }
     }
@@ -127,15 +189,20 @@ const updateTransaction = publicProcedure
     const { id, encounterId, status } = input
 
     try {
-      const transaction = await instancePrisma.transaction.update({
+      const transaction = await instancePrisma.billingTransaction.update({
         where: { id },
         data: {
           encounterId,
           status,
         },
         include: {
+          patient: {
+            include: {
+              user: true
+            }
+          },
           encounter: true,
-          items: true,
+          lineItems: true,
           payments: true,
         },
       })
@@ -162,7 +229,7 @@ const deleteTransaction = publicProcedure
     const { id } = input
 
     try {
-      const transaction = await instancePrisma.transaction.delete({
+      const transaction = await instancePrisma.billingTransaction.delete({
         where: { id },
       })
 
