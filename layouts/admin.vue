@@ -13,12 +13,12 @@ watchEffect(() => {
 const sidebarCollapsed = ref(false)
 
 const navigationItems = [
-	{
-		name: "Overview",
-		icon: "lucide:layout-dashboard",
-		to: "/admin/dashboard",
-		active: true
-	},
+	// {
+	// 	name: "Overview",
+	// 	icon: "lucide:layout-dashboard",
+	// 	to: "/admin/dashboard",
+	// 	active: true
+	// },
 	{
 		name: "User Management", 
 		icon: "lucide:users",
@@ -54,21 +54,21 @@ const navigationItems = [
 		icon: "lucide:shield-check",
 		to: "/admin/logs"
 	},
-	{
-		name: "Analytics",
-		icon: "lucide:bar-chart-3",
-		to: "/admin/analytics"
-	},
-	{
-		name: "Reports",
-		icon: "lucide:file-text",
-		to: "/admin/reports"
-	},
-	{
-		name: "Database",
-		icon: "lucide:database",
-		to: "/admin/database"
-	}
+	// {
+	// 	name: "Analytics",
+	// 	icon: "lucide:bar-chart-3",
+	// 	to: "/admin/analytics"
+	// },
+	// {
+	// 	name: "Reports",
+	// 	icon: "lucide:file-text",
+	// 	to: "/admin/reports"
+	// },
+	// {
+	// 	name: "Database",
+	// 	icon: "lucide:database",
+	// 	to: "/admin/database"
+	// }
 ]
 
 const logout = async () => {
@@ -141,9 +141,9 @@ const logout = async () => {
 						<Button variant="ghost" size="sm">
 							<Icon name="lucide:bell" class="w-5 h-5" />
 						</Button>
-						<Button variant="ghost" size="sm">
+						<!-- <Button variant="ghost" size="sm">
 							<Icon name="lucide:settings" class="w-5 h-5" />
-						</Button>
+						</Button> -->
 						<div class="flex items-center space-x-2">
 							<div class="w-8 h-8 bg-purple-600 rounded-full flex items-center justify-center">
 								<Icon name="lucide:user" class="w-4 h-4 text-white" />
