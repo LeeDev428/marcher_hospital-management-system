@@ -17,19 +17,8 @@ export const useTransactionStore = defineStore("transaction", {
         const { success, message: _message, data } = await $trpc.billing.transactions.getTransactions.query()
 
         if (success && data) {
-          this.transactions = data.map((transaction: any) => ({
-            ...transaction,
-            encounter: {
-              id: transaction.encounter.id,
-              patient: {
-                id: transaction.encounter.patientProfile.id,
-                firstName: transaction.encounter.patientProfile.firstName,
-                lastName: transaction.encounter.patientProfile.lastName,
-                email: transaction.encounter.patientProfile.email ?? null,
-              },
-            },
-            // Optionally, remove patientProfile if not needed
-          }))
+          // Data is already properly formatted from the router
+          this.transactions = data
           this.loading = false
         }
       } catch (error) {
@@ -73,24 +62,31 @@ export const useTransactionStore = defineStore("transaction", {
 
       try {
         this.loading = true
-        const { success, message: _message, data } = await $trpc.billing.transactions.createTransaction.mutate(transaction)
+        const { success, message, data } = await $trpc.billing.transactions.createTransaction.mutate(transaction)
 
         if (success && data) {
           this.loading = false
           useToast(
             "success",
             "Transaction",
-            "Transaction created successfully."
+            message || "Transaction created successfully."
           )
-          await navigateTo(`/billing/transactions`)
+          await navigateTo(`/billing_staff/invoices`)
+        } else {
+          this.loading = false
+          useToast(
+            "error",
+            "Transaction",
+            message || "Transaction could not be created."
+          )
         }
-      } catch (error) {
+      } catch (error: any) {
         this.loading = false
-        console.error(error)
+        console.error("Create transaction error:", error)
         useToast(
           "error",
           "Transaction",
-          "Transaction could not be created."
+          error?.message || "Transaction could not be created."
         )
       }
     },
