@@ -69,7 +69,7 @@ export const useAuthStore = defineStore("auth", {
 			
 			switch (normalizedRole) {
 				case 'admin':
-					return '/admin/dashboard'
+					return '/admin/users'
 				case 'staff':
 					// Check staff type for specialized roles
 					if (staffType === 'ADMISSIONS_STAFF') {
@@ -79,7 +79,7 @@ export const useAuthStore = defineStore("auth", {
 						return '/billing_staff'
 					}
 					if (staffType === 'PHARMACIST') {
-						return '/pharmacist'
+						return '/pharmacist/billing'
 					}
 					// Default staff dashboard (doctors/nurses)
 					return '/staff/dashboard'
