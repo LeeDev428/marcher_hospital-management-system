@@ -1,4 +1,4 @@
-<script setup lang="ts">
+﻿<script setup lang="ts">
 import { ref, computed, onMounted } from "vue"
 import { usePOSStore } from "@/stores/pharmacy"
 import { useBreadcrumbsStore } from "@/stores/app"
