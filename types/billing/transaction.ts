@@ -2,10 +2,10 @@ import { z } from "zod"
 
 export const transactionStatusSchema = z.enum([
   "PENDING",
-  "PROCESSING",
-  "COMPLETED",
+  "PARTIALLY_PAID",
+  "PAID",
+  "OVERDUE",
   "CANCELLED",
-  "FAILED",
 ])
 
 export const transactionStatusOptions = transactionStatusSchema.options.map((option) => ({
