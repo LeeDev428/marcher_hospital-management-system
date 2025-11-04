@@ -134,7 +134,7 @@ onMounted(async () => {
 			<TypedNumber name="stock" label="Stock" placeholder="Enter stock" />
 			<TypedNumber name="price" label="Price" placeholder="Enter price" />
 			<TypedInput name="unit" label="Unit" placeholder="Enter unit" type="text" />
-			<TypedInput name="sku" label="SKU" placeholder="Enter SKU (optional)" type="text" />
+			<TypedInput name="sku" label="SKU" placeholder="Enter SKU" type="text" />
 			
 			<div class="flex gap-2">
 				<Button type="submit" variant="outline" class="bg-blue-600 text-white hover:bg-blue-700">
