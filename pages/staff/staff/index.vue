@@ -57,11 +57,7 @@ function clearSearch() {
 						>✕</button>
 					</div>
 				</div>
-				<NuxtLink to="/staff/new">
-					<Button variant="outline" size="icon">
-						<Icon name="mdi:plus" />
-					</Button>
-				</NuxtLink>
+				
 			</div>
 			<StaffTable ref="staffTableRef" />
 		</div>
