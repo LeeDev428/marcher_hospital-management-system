@@ -35,14 +35,14 @@ const handleLogout = async () => {
       <!-- Navigation -->
       <nav class="mt-6 px-3">
         <div class="space-y-1">
-          <NuxtLink 
+          <!-- <NuxtLink 
             to="/pharmacist" 
             class="flex items-center px-3 py-2 text-sm font-medium rounded-lg"
             :class="$route.path === '/pharmacist' ? 'bg-blue-50 text-blue-700 border-r-2 border-blue-600' : 'text-gray-600 hover:bg-gray-50'"
           >
             <Icon name="lucide:layout-dashboard" class="w-5 h-5 mr-3" />
             Dashboard
-          </NuxtLink>
+          </NuxtLink> -->
           
           <NuxtLink 
             to="/pharmacist/pharmacy" 
@@ -71,7 +71,7 @@ const handleLogout = async () => {
             Sales History
           </NuxtLink>
           
-          <NuxtLink 
+          <!-- <NuxtLink 
             to="/pharmacist/patients" 
             class="flex items-center px-3 py-2 text-sm font-medium rounded-lg"
             :class="$route.path.startsWith('/pharmacist/patients') ? 'bg-blue-50 text-blue-700 border-r-2 border-blue-600' : 'text-gray-600 hover:bg-gray-50'"
@@ -96,7 +96,7 @@ const handleLogout = async () => {
           >
             <Icon name="lucide:bar-chart" class="w-5 h-5 mr-3" />
             Reports
-          </NuxtLink>
+          </NuxtLink> -->
         </div>
       </nav>
 
