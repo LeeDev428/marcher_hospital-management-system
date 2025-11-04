@@ -2,6 +2,7 @@
 import { useAppointmentStore } from "@/stores/appointments"
 import { usePatientProfileStore } from "@/stores/patients"
 import { useStaffStore } from "@/stores/staff"
+import { useAuthStore } from "@/stores/app/useAuthStore"
 import {
   createAppointmentSchema,
   updateAppointmentSchema,
@@ -10,11 +11,14 @@ import {
 import type { CreateAppointment, UpdateAppointment, GetAvailableTimeSlots } from "@/types/appointments"
 import { TypedForm, TypedSelect, TypedDate, TypedTime } from "@/components/app/form"
 import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
 import { useToast } from "@/composables/useToast"
 
 const patientStore = usePatientProfileStore()
 const staffStore = useStaffStore()
 const appointmentStore = useAppointmentStore()
+const authStore = useAuthStore()
 
 const props = defineProps<{ appointmentId?: string }>()
 
@@ -35,17 +39,28 @@ const availableRooms = ref<Room[]>([])
 const selectedDate = ref("")
 const selectedTime = ref("")
 const selectedDoctorId = ref("")
+const selectedDoctorName = ref("")
 const loadingRooms = ref(false)
 const checkingAvailability = ref(false)
 const availabilityMessage = ref("")
 const isAvailable = ref(true)
 
-const patientOptions = computed(() =>
-  patientStore.patientProfiles.map((p) => ({
-    label: `${p.lastName}, ${p.firstName}${p.middleName ? ` ${p.middleName}` : ""} ${p.suffix ? ` ${p.suffix}` : ""}`,
-    value: p.id,
-  })),
-)
+const patientOptions = computed(() => {
+  console.log('📋 Patient profiles:', patientStore.patientProfiles)
+  return patientStore.patientProfiles.map((p) => {
+    // Access user data from the patient profile
+    const user = p.user || p
+    const firstName = user.firstName || ''
+    const lastName = user.lastName || ''
+    const middleName = user.middleName || ''
+    const suffix = user.suffix || ''
+    
+    return {
+      label: `${lastName}, ${firstName}${middleName ? ` ${middleName}` : ''}${suffix ? ` ${suffix}` : ''}`,
+      value: p.id,
+    }
+  })
+})
 
 const doctorOptions = computed(() =>
   staffStore.staffProfiles.map((s) => ({
@@ -152,10 +167,17 @@ const onSubmit = async (data: CreateAppointment | UpdateAppointment) => {
     useToast("error", "Appointment", availabilityMessage.value || "Selected time slot is not available")
     return
   }
+  
+  // Ensure doctorId is included in the submission data
+  const submitData = {
+    ...data,
+    doctorId: selectedDoctorId.value
+  }
+  
   if (props.appointmentId) {
-    await appointmentStore.updateAppointment({ id: props.appointmentId, ...data })
+    await appointmentStore.updateAppointment({ id: props.appointmentId, ...submitData })
   } else {
-    await appointmentStore.createAppointment(data as CreateAppointment)
+    await appointmentStore.createAppointment(submitData as CreateAppointment)
   }
 }
 
@@ -165,8 +187,39 @@ const handleDateChange = (v: string | number) => { selectedDate.value = v as str
 const handleTimeChange = (v: string | number) => { selectedTime.value = v as string }
 
 onMounted(async () => {
-  await patientStore.getActivePatientProfiles({ page: 1, limit: 20 })
+  // Load patients with larger limit
+  await patientStore.getActivePatientProfiles({ 
+    page: 1, 
+    limit: 1000, // Load all patients
+    search: ''
+  })
+  
+  // Load all doctors
   await staffStore.getStaffProfiles("DOCTOR")
+  
+  // Auto-populate doctor field with logged-in user
+  if (authStore.user && authStore.user.role === 'STAFF') {
+    const staffCredentials = authStore.user.staffCredentials
+    if (staffCredentials && staffCredentials.staffType === 'DOCTOR') {
+      // Use auth user's name directly
+      const firstName = authStore.user.firstName || ''
+      const lastName = authStore.user.lastName || ''
+      const middleName = authStore.user.middleName || ''
+      const suffix = authStore.user.suffix || ''
+      
+      selectedDoctorName.value = `Dr. ${firstName} ${lastName}${middleName ? ` ${middleName}` : ''}${suffix ? ` ${suffix}` : ''}`
+      
+      // Find the staff profile ID from the user ID
+      const doctorProfile = staffStore.staffProfiles.find(s => s.userId === authStore.user?.id)
+      if (doctorProfile) {
+        selectedDoctorId.value = doctorProfile.id
+        console.log('✅ Auto-populated doctor:', selectedDoctorName.value, 'ID:', selectedDoctorId.value)
+      } else {
+        console.log('⚠️ Doctor name set but profile ID not found yet')
+      }
+    }
+  }
+  
   if (props.appointmentId) {
     await appointmentStore.getAppointment(props.appointmentId)
     if (appointmentStore.appointment) {
@@ -185,12 +238,26 @@ onMounted(async () => {
   <div class="space-y-4">
     <TypedForm
       :schema="props.appointmentId ? updateAppointmentSchema : createAppointmentSchema"
-      :initial-values="props.appointmentId ? appointmentStore.appointment || {} : {}"
+      :initial-values="props.appointmentId ? appointmentStore.appointment || {} : { doctorId: selectedDoctorId }"
       @submit="onSubmit"
       class="space-y-4"
     >
       <TypedSelect name="patientId" label="Patient" :options="patientOptions" placeholder="Select Patient" @update:model-value="handlePatientChange" />
-      <TypedSelect name="doctorId" label="Doctor" :options="doctorOptions" placeholder="Select Doctor" @update:model-value="handleDoctorChange" />
+      
+      <!-- Doctor Field (Read-only, Auto-populated) -->
+      <div class="space-y-2">
+        <Label>Doctor</Label>
+        <Input 
+          :value="selectedDoctorName" 
+          readonly 
+          disabled
+          class="bg-gray-50 cursor-not-allowed"
+          placeholder="Doctor will be auto-populated"
+        />
+        <!-- Hidden field to store doctorId for form submission -->
+        <input type="hidden" name="doctorId" :value="selectedDoctorId" />
+      </div>
+      
       <TypedDate name="date" label="Date" placeholder="Select Date" :min="new Date().toISOString().split('T')[0]" @update:model-value="handleDateChange" />
 
       <div class="space-y-2">
@@ -218,7 +285,7 @@ onMounted(async () => {
 
       <div class="flex gap-2">
         <Button type="submit" variant="outline" :disabled="!isAvailable || checkingAvailability"><Icon name="mdi:floppy" /> Save</Button>
-        <Button type="button" variant="outline" @click="navigateTo('/appointments')"><Icon name="mdi:arrow-left" /> Back</Button>
+        <Button type="button" variant="outline" @click="navigateTo('/staff/appointments')"><Icon name="mdi:arrow-left" /> Back</Button>
       </div>
     </TypedForm>
   </div>
