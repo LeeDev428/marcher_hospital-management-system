@@ -1,30 +1,28 @@
 <template>
   <div class="min-h-screen bg-white">
     <!-- Navigation -->
-    <nav class="bg-white shadow-sm sticky top-0 z-50">
+    <nav class="bg-slate-700 shadow-md sticky top-0 z-50">
       <div class="container mx-auto px-4 lg:px-8">
         <div class="flex items-center justify-between h-16">
           <!-- Logo -->
           <div class="flex items-center space-x-3">
-            <img src="/img/logo/marcher-logo.png" alt="Marcher Logo" class="w-10 h-10" />
-            <span class="text-2xl font-bold text-gray-900">Marcher</span>
+            <img src="/img/logo/marcher-logo.png" alt="Marcher Logo" class="w-8 h-8" />
+            <span class="text-xl font-bold text-white">Marcher</span>
           </div>
           
           <!-- Navigation Links -->
-          <div class="hidden md:flex items-center space-x-8">
-            <a href="#features" class="text-gray-600 hover:text-teal-600 font-medium transition-colors">Features</a>
-            <a href="#about" class="text-gray-600 hover:text-teal-600 font-medium transition-colors">About</a>
-            <a href="#contact" class="text-gray-600 hover:text-teal-600 font-medium transition-colors">Contact</a>
-            <a href="#pricing" class="text-gray-600 hover:text-teal-600 font-medium transition-colors">Pricing</a>
+          <div class="hidden md:flex items-center space-x-6">
+            <a href="#home" class="text-gray-200 hover:text-white font-medium transition-colors">Home</a>
+            <a href="#features" class="text-gray-200 hover:text-white font-medium transition-colors">Features</a>
+            <a href="#about" class="text-gray-200 hover:text-white font-medium transition-colors">About</a>
+            <a href="#services" class="text-gray-200 hover:text-white font-medium transition-colors">Services</a>
+            <a href="#contact" class="text-gray-200 hover:text-white font-medium transition-colors">Contact</a>
           </div>
           
           <!-- Auth Buttons -->
-          <div class="flex items-center space-x-4">
-            <Button variant="ghost" @click="navigateTo('/login')" class="text-gray-600 hover:text-teal-600">
-              Sign In
-            </Button>
-            <Button @click="navigateTo('/register')" class="bg-teal-500 hover:bg-teal-600 text-white px-6">
-              Get Started
+          <div class="flex items-center space-x-3">
+            <Button variant="ghost" @click="navigateTo('/login')" class="text-gray-200 hover:text-white hover:bg-slate-600">
+              Login
             </Button>
           </div>
         </div>
@@ -32,116 +30,85 @@
     </nav>
 
     <!-- Hero Section -->
-    <section class="bg-gradient-to-br from-teal-50 to-blue-50 py-20">
+    <section id="home" class="bg-gradient-to-br from-gray-100 to-slate-200 py-20">
       <div class="container mx-auto px-4 lg:px-8">
         <div class="grid lg:grid-cols-2 gap-12 items-center">
           <!-- Left Content -->
-          <div class="space-y-8">
-            <div class="space-y-4">
-              <div class="inline-flex items-center bg-teal-100 text-teal-700 px-4 py-2 rounded-full text-sm font-medium">
-                🏥 Modern Healthcare Management
-              </div>
-              <h1 class="text-5xl lg:text-6xl font-bold text-gray-900 leading-tight">
-                Easily Find Your 
-                <span class="text-teal-600">Ideal Doctor</span>
-              </h1>
-              <p class="text-xl text-gray-600 leading-relaxed">
-                Connect with qualified healthcare professionals, book appointments seamlessly, 
-                and manage your health journey with our comprehensive platform.
-              </p>
-            </div>
-
-            <!-- Search Bar -->
-            <div class="bg-white rounded-2xl p-6 shadow-lg border border-gray-100">
-              <div class="flex flex-col md:flex-row gap-4">
-                <div class="flex-1">
-                  <label class="block text-sm font-medium text-gray-700 mb-2">Specialization</label>
-                  <select class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent">
-                    <option>Choose Specialization</option>
-                    <option>Cardiology</option>
-                    <option>Dermatology</option>
-                    <option>Neurology</option>
-                    <option>Pediatrics</option>
-                    <option>Orthopedics</option>
-                  </select>
-                </div>
-                <div class="flex-1">
-                  <label class="block text-sm font-medium text-gray-700 mb-2">Location</label>
-                  <select class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent">
-                    <option>Choose Location</option>
-                    <option>Manila</option>
-                    <option>Cebu</option>
-                    <option>Davao</option>
-                    <option>Quezon City</option>
-                  </select>
-                </div>
-                <div class="flex items-end">
-                  <Button class="bg-teal-500 hover:bg-teal-600 text-white px-8 py-3 h-12">
-                    <Icon name="lucide:search" class="w-5 h-5 mr-2" />
-                    Search
-                  </Button>
-                </div>
-              </div>
-            </div>
-
-            <!-- Stats -->
-            <div class="flex flex-wrap gap-8">
-              <div class="text-center">
-                <div class="text-3xl font-bold text-gray-900">1000+</div>
-                <div class="text-gray-600">Qualified Doctors</div>
-              </div>
-              <div class="text-center">
-                <div class="text-3xl font-bold text-gray-900">50K+</div>
-                <div class="text-gray-600">Happy Patients</div>
-              </div>
-              <div class="text-center">
-                <div class="text-3xl font-bold text-gray-900">100+</div>
-                <div class="text-gray-600">Hospital Partners</div>
-              </div>
+          <div class="space-y-6">
+            <h1 class="text-5xl lg:text-6xl font-bold text-gray-900 leading-tight">
+              YOUR GATEWAY TO<br/>
+              SMARTER<br/>
+              <span class="text-teal-600">HEALTH MANAGEMENT</span>
+            </h1>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              Marcher is a modern, scalable and user-friendly information management system 
+              that empowers healthcare providers and patients with advanced tools for better health outcomes.
+            </p>
+            
+            <div class="flex flex-wrap gap-4">
+              <Button @click="navigateTo('/register')" class="bg-teal-500 hover:bg-teal-600 text-white px-8 py-3 text-lg">
+                Get Started
+              </Button>
+              <Button variant="outline" @click="scrollTo('about')" class="border-slate-400 text-slate-700 hover:bg-slate-100 px-8 py-3 text-lg">
+                Learn More
+              </Button>
             </div>
           </div>
 
-          <!-- Right Content - Doctor Image -->
+          <!-- Right Content - Illustration -->
           <div class="relative">
-            <div class="bg-teal-100 rounded-3xl p-8 relative overflow-hidden">
-              <!-- Background decoration -->
-              <div class="absolute top-0 right-0 w-32 h-32 bg-teal-200 rounded-full opacity-50 -translate-y-8 translate-x-8"></div>
-              <div class="absolute bottom-0 left-0 w-24 h-24 bg-blue-200 rounded-full opacity-50 translate-y-8 -translate-x-8"></div>
-              
-              <!-- Doctor placeholder -->
-              <div class="relative z-10 text-center">
-                <div class="w-48 h-64 bg-gradient-to-b from-teal-400 to-teal-600 rounded-2xl mx-auto mb-4 flex items-center justify-center">
-                  <div class="text-white text-6xl">👨‍⚕️</div>
-                </div>
-                <h3 class="text-xl font-semibold text-gray-900">Dr. Professional</h3>
-                <p class="text-gray-600">Your trusted healthcare partner</p>
+            <div class="bg-teal-400 bg-opacity-30 rounded-full w-80 h-80 mx-auto flex items-center justify-center">
+              <div class="bg-white rounded-full p-12 shadow-xl">
+                <Icon name="lucide:heart-pulse" class="w-32 h-32 text-teal-600" />
               </div>
             </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-            <!-- Floating Elements -->
-            <div class="absolute -top-4 -left-4 bg-white p-4 rounded-xl shadow-lg">
-              <div class="flex items-center space-x-3">
-                <div class="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center">
-                  <Icon name="lucide:check" class="w-5 h-5 text-green-600" />
-                </div>
-                <div>
-                  <div class="font-semibold text-gray-900">Verified</div>
-                  <div class="text-sm text-gray-600">Licensed Professional</div>
-                </div>
-              </div>
-            </div>
+    <!-- How Marcher Works Section -->
+    <section id="how-it-works" class="py-20 bg-slate-700 text-white">
+      <div class="container mx-auto px-4 lg:px-8">
+        <div class="text-center mb-16">
+          <h2 class="text-4xl font-bold mb-4">HOW MARCHER WORKS?</h2>
+        </div>
 
-            <div class="absolute -bottom-4 -right-4 bg-white p-4 rounded-xl shadow-lg">
-              <div class="flex items-center space-x-3">
-                <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
-                  <Icon name="lucide:calendar" class="w-5 h-5 text-blue-600" />
-                </div>
-                <div>
-                  <div class="font-semibold text-gray-900">Available Today</div>
-                  <div class="text-sm text-gray-600">Book appointment</div>
-                </div>
-              </div>
+        <div class="grid md:grid-cols-3 gap-8">
+          <!-- Step 1 -->
+          <div class="text-center space-y-4">
+            <div class="bg-slate-600 rounded-lg p-12 mb-4 mx-auto w-fit">
+              <Icon name="lucide:search" class="w-16 h-16 text-teal-400 mx-auto" />
             </div>
+            <h3 class="text-xl font-semibold">SEARCH PLATFORM</h3>
+            <p class="text-gray-300">
+              Our intuitive search engine allows you to easily find healthcare providers, 
+              services, and information tailored to your needs.
+            </p>
+          </div>
+
+          <!-- Step 2 -->
+          <div class="text-center space-y-4">
+            <div class="bg-slate-600 rounded-lg p-12 mb-4 mx-auto w-fit">
+              <Icon name="lucide:user-check" class="w-16 h-16 text-teal-400 mx-auto" />
+            </div>
+            <h3 class="text-xl font-semibold">NOTIFY IMMEDIATELY</h3>
+            <p class="text-gray-300">
+              Receive instant notifications and updates about appointments, 
+              prescriptions, and important health information in real-time.
+            </p>
+          </div>
+
+          <!-- Step 3 -->
+          <div class="text-center space-y-4">
+            <div class="bg-slate-600 rounded-lg p-12 mb-4 mx-auto w-fit">
+              <Icon name="lucide:shield-check" class="w-16 h-16 text-teal-400 mx-auto" />
+            </div>
+            <h3 class="text-xl font-semibold">SETUP ACCOUNT</h3>
+            <p class="text-gray-300">
+              Create your secure account in minutes and get immediate access to 
+              all platform features with complete data privacy protection.
+            </p>
           </div>
         </div>
       </div>
