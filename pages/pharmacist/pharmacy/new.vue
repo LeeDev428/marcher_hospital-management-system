@@ -2,6 +2,11 @@
 import { useBreadcrumbsStore } from "@/stores/app"
 import PharmacyItemForm from "./components/PharmacyItemForm.vue"
 
+definePageMeta({
+  layout: 'pharmacist',
+  middleware: ['staff-type']
+})
+
 const breadcrumbsStore = useBreadcrumbsStore()
 
 onMounted(() => {
