@@ -151,7 +151,7 @@ const healthMetrics = ref([
     </div>
 
     <!-- Main Content Grid -->
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
       <!-- Monthly Overview Chart (Left - 2 columns) -->
       <div class="lg:col-span-2">
         <Card>
@@ -223,7 +223,7 @@ const healthMetrics = ref([
       </div>
 
       <!-- Health Metrics (Right sidebar) -->
-      <div class="lg:col-span-1">
+      <!-- <div class="lg:col-span-1">
         <Card>
           <CardHeader>
             <CardTitle>Health Metrics</CardTitle>
@@ -251,7 +251,7 @@ const healthMetrics = ref([
             </div>
           </CardContent>
         </Card>
-      </div>
+      </div> -->
     </div>
 
     <!-- Bottom Section -->
