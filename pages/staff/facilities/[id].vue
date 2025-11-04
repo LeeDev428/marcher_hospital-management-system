@@ -1,152 +1,130 @@
 <script setup lang="ts">
+import { useBreadcrumbsStore } from "@/stores/app"
 import { useRoomStore } from "@/stores/facilities"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { Skeleton } from "@/components/ui/skeleton"
+import { QRCodeDisplay } from "@/components/app/qrcode"
 
-definePageMeta({
-  layout: 'staff',
-})
-
-const route = useRoute()
-const roomId = route.params.id as string
+const breadcrumbsStore = useBreadcrumbsStore()
 const roomStore = useRoomStore()
+const route = useRoute()
+const { id } = route.params as { id: string }
 
 onMounted(async () => {
-  await roomStore.getRoom(roomId)
+	await roomStore.getRoom(id)
+
+	if (!roomStore.room) {
+		return navigateTo("/staff/facilities")
+	}
+
+	breadcrumbsStore.setBreadcrumbs([
+		{ label: "Facilities", link: "/staff/facilities" },
+		{ label: "Room Details", link: `/staff/facilities/${id}` },
+	])
 })
 
-const room = computed(() => roomStore.room)
-const loading = computed(() => roomStore.loading)
-
-const getStatusColor = (status: string) => {
-  switch (status?.toUpperCase()) {
-    case 'AVAILABLE': return 'bg-green-100 text-green-800'
-    case 'OCCUPIED': return 'bg-red-100 text-red-800'
-    case 'PREPARING': return 'bg-yellow-100 text-yellow-800'
-    default: return 'bg-gray-100 text-gray-800'
-  }
+const formatRoomType = (type: string) => {
+	return type.split('_').map(word => 
+		word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
+	).join(' ')
 }
 
-const formatType = (type: string) => {
-  return type?.charAt(0) + type?.slice(1).toLowerCase()
+const formatRoomStatus = (status: string) => {
+	return status.split('_').map(word => 
+		word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
+	).join(' ')
 }
 </script>
 
 <template>
-  <div class="space-y-6">
-    <!-- Header -->
-    <div class="flex items-center justify-between">
-      <div>
-        <h1 class="text-3xl font-bold text-gray-900">Facility Details</h1>
-        <p class="mt-2 text-gray-600">View facility information and QR code</p>
-      </div>
-      <Button variant="outline" @click="navigateTo('/staff/facilities')">
-        <Icon name="lucide:arrow-left" class="w-4 h-4 mr-2" />
-        Back to Facilities
-      </Button>
-    </div>
+	<NuxtLayout name="staff" title="Facility Details">
+		<div class="flex flex-col gap-6 bg-white p-6 rounded-lg">
+			<div
+				v-if="roomStore.room"
+				class="h-full w-full flex flex-col gap-6"
+			>
+				<!-- Header with QR Code -->
+				<div class="flex justify-between items-start border-b pb-4">
+					<div>
+						<h2 class="text-2xl font-bold text-gray-800">
+							{{ roomStore.room.identifier }}
+						</h2>
+						<p class="text-gray-600">{{ formatRoomType(roomStore.room.type) }}</p>
+					</div>
+					<div class="flex flex-col items-center gap-2">
+						<QRCodeDisplay
+							:data="{ entity: 'facility', id: id }"
+						/>
+						<p class="text-sm text-gray-500">Scan to view facility</p>
+					</div>
+				</div>
 
-    <!-- Loading State -->
-    <div v-if="loading" class="space-y-4">
-      <Skeleton class="h-[200px] w-full" />
-      <Skeleton class="h-[300px] w-full" />
-    </div>
+				<!-- Facility Information -->
+				<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+					<div class="space-y-1">
+						<p class="text-sm font-medium text-gray-500">Room Identifier</p>
+						<p class="text-base text-gray-900">{{ roomStore.room.identifier || 'N/A' }}</p>
+					</div>
+					<div class="space-y-1">
+						<p class="text-sm font-medium text-gray-500">Building</p>
+						<p class="text-base text-gray-900">{{ roomStore.room.building || 'N/A' }}</p>
+					</div>
+					<div class="space-y-1">
+						<p class="text-sm font-medium text-gray-500">Room Type</p>
+						<p class="text-base text-gray-900">{{ formatRoomType(roomStore.room.type) }}</p>
+					</div>
+					<div class="space-y-1">
+						<p class="text-sm font-medium text-gray-500">Capacity</p>
+						<p class="text-base text-gray-900">{{ roomStore.room.capacity || 'N/A' }}</p>
+					</div>
+					<div class="space-y-1">
+						<p class="text-sm font-medium text-gray-500">Status</p>
+						<p class="text-base text-gray-900">
+							<span :class="{
+								'text-green-600 font-medium': roomStore.room.status === 'AVAILABLE',
+								'text-red-600 font-medium': roomStore.room.status === 'OCCUPIED',
+								'text-yellow-600 font-medium': roomStore.room.status === 'RESERVED',
+								'text-orange-600 font-medium': roomStore.room.status === 'MAINTENANCE',
+								'text-blue-600 font-medium': roomStore.room.status === 'CLEANING',
+								'text-gray-600 font-medium': roomStore.room.status === 'OUT_OF_SERVICE'
+							}">
+								{{ formatRoomStatus(roomStore.room.status) }}
+							</span>
+						</p>
+					</div>
+				</div>
 
-    <!-- Content -->
-    <div v-else-if="room" class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-      <!-- Left Column: Facility Info -->
-      <div class="lg:col-span-2 space-y-6">
-        <!-- Basic Information Card -->
-        <Card>
-          <CardHeader>
-            <CardTitle>Basic Information</CardTitle>
-          </CardHeader>
-          <CardContent class="space-y-4">
-            <div class="grid grid-cols-2 gap-4">
-              <div>
-                <p class="text-sm text-muted-foreground">Identifier</p>
-                <p class="font-medium text-lg">{{ room.identifier }}</p>
-              </div>
-              <div>
-                <p class="text-sm text-muted-foreground">Type</p>
-                <p class="font-medium">{{ formatType(room.type) }}</p>
-              </div>
-              <div>
-                <p class="text-sm text-muted-foreground">Building</p>
-                <p class="font-medium">{{ room.building?.name || 'N/A' }}</p>
-              </div>
-              <div>
-                <p class="text-sm text-muted-foreground">Capacity</p>
-                <p class="font-medium">{{ room.capacity || 'N/A' }} people</p>
-              </div>
-              <div class="col-span-2">
-                <p class="text-sm text-muted-foreground">Status</p>
-                <Badge :class="getStatusColor(room.status)">
-                  {{ room.status }}
-                </Badge>
-              </div>
-              <div v-if="room.description" class="col-span-2">
-                <p class="text-sm text-muted-foreground">Description</p>
-                <p class="text-sm mt-1">{{ room.description }}</p>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
+				<!-- Description -->
+				<div v-if="roomStore.room.description" class="border-t pt-4">
+					<h3 class="text-lg font-semibold text-gray-800 mb-2">Description</h3>
+					<p class="text-gray-700">{{ roomStore.room.description }}</p>
+				</div>
 
-        <!-- Timestamps Card -->
-        <Card>
-          <CardHeader>
-            <CardTitle>System Information</CardTitle>
-          </CardHeader>
-          <CardContent class="space-y-3">
-            <div>
-              <p class="text-sm text-muted-foreground">Created At</p>
-              <p class="text-sm">{{ new Date(room.createdAt).toLocaleString() }}</p>
-            </div>
-            <div>
-              <p class="text-sm text-muted-foreground">Last Updated</p>
-              <p class="text-sm">{{ new Date(room.updatedAt).toLocaleString() }}</p>
-            </div>
-            <div>
-              <p class="text-sm text-muted-foreground">Facility ID</p>
-              <p class="text-xs font-mono bg-gray-100 p-2 rounded">{{ room.id }}</p>
-            </div>
-          </CardContent>
-        </Card>
-      </div>
+				<!-- Action Buttons -->
+				<div class="flex justify-start gap-2 mt-4 border-t pt-4">
+					<NuxtLink :to="`/staff/facilities/${id}/edit`">
+						<Button type="button">
+							<Icon name="mdi:pencil" class="mr-2" />
+							Edit Facility
+						</Button>
+					</NuxtLink>
+					<NuxtLink to="/staff/facilities">
+						<Button type="button" variant="outline">
+							<Icon name="mdi:arrow-left" class="mr-2" />
+							Back to List
+						</Button>
+					</NuxtLink>
+				</div>
+			</div>
 
-      <!-- Right Column: QR Code -->
-      <div class="lg:col-span-1">
-        <Card>
-          <CardHeader>
-            <CardTitle>QR Code</CardTitle>
-          </CardHeader>
-          <CardContent class="flex flex-col items-center space-y-4">
-            <QRCodeDisplay :data="{ entity: 'facility', id: roomId }" />
-            <p class="text-xs text-center text-muted-foreground">
-              Scan this QR code to quickly access this facility's details
-            </p>
-            <Button variant="outline" size="sm" class="w-full">
-              <Icon name="lucide:download" class="w-4 h-4 mr-2" />
-              Download QR Code
-            </Button>
-          </CardContent>
-        </Card>
-      </div>
-    </div>
+			<!-- Loading State -->
+			<div v-else-if="roomStore.loading" class="flex justify-center items-center h-64">
+				<p class="text-gray-500">Loading facility information...</p>
+			</div>
 
-    <!-- Error State -->
-    <Card v-else>
-      <CardContent class="p-6 text-center">
-        <Icon name="lucide:alert-circle" class="w-12 h-12 mx-auto text-gray-400 mb-4" />
-        <p class="text-gray-600">Facility not found</p>
-        <Button variant="outline" class="mt-4" @click="navigateTo('/staff/facilities')">
-          <Icon name="lucide:arrow-left" class="w-4 h-4 mr-2" />
-          Back to Facilities
-        </Button>
-      </CardContent>
-    </Card>
-  </div>
+			<!-- Error State -->
+			<div v-else class="flex justify-center items-center h-64">
+				<p class="text-red-500">Failed to load facility information.</p>
+			</div>
+		</div>
+	</NuxtLayout>
 </template>
