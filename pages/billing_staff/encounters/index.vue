@@ -36,7 +36,7 @@
 									{{ patient.user.firstName }} {{ patient.user.lastName }}
 								</div>
 								<div class="text-sm text-gray-600">{{ patient.user.email || 'No email' }}</div>
-								<div class="text-xs text-gray-500 mt-1">ID: {{ patient.id }}</div>
+								<!-- <div class="text-xs text-gray-500 mt-1">ID: {{ patient.id }}</div> -->
 							</div>
 						</div>
 						
