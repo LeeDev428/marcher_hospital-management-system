@@ -13,9 +13,33 @@ const appointmentStore = useAppointmentStore()
 
 // Dialog state
 const showViewDialog = ref(false)
+const showDeleteDialog = ref(false)
 const selectedAppointment = ref<any>(null)
+const deletingAppointment = ref(false)
 
-const onEdit = (id: string) => navigateTo(`/appointments/${id}`)
+const onEdit = (appointment: any) => navigateTo(`/staff/appointments/${appointment.id}/edit`)
+
+const confirmDelete = (appointment: any) => {
+  selectedAppointment.value = appointment
+  showDeleteDialog.value = true
+}
+
+const handleDelete = async () => {
+  if (!selectedAppointment.value) return
+  
+  try {
+    deletingAppointment.value = true
+    await appointmentStore.deleteAppointment(selectedAppointment.value.id)
+    useToast('success', 'Appointment', 'Appointment deleted successfully')
+    showDeleteDialog.value = false
+    selectedAppointment.value = null
+    await appointmentStore.getAppointments() // Refresh the list
+  } catch (error) {
+    useToast('error', 'Appointment', 'Failed to delete appointment')
+  } finally {
+    deletingAppointment.value = false
+  }
+}
 
 const handleAccept = async (appointment: any) => {
   await appointmentStore.updateAppointmentStatus({ 
@@ -123,7 +147,7 @@ onMounted(() => { appointmentStore.getAppointments() })
               </span>
             </TableCell>
 
-            <TableCell class="flex gap-2">
+            <TableCell class="flex gap-2 flex-wrap">
               <!-- Accept Button for SCHEDULED appointments -->
               <Button 
                 v-if="appointment.status === 'SCHEDULED'" 
@@ -145,6 +169,16 @@ onMounted(() => { appointmentStore.getAppointments() })
                 <Icon name="mdi:close-circle" class="mr-1" /> Decline
               </Button>
               
+              <!-- Edit Button (for all non-completed appointments) -->
+              <Button 
+                v-if="appointment.status !== 'COMPLETED' && appointment.status !== 'CANCELLED'" 
+                variant="outline" 
+                size="sm"
+                @click="onEdit(appointment)"
+              >
+                <Icon name="mdi:pencil" class="mr-1" /> Edit
+              </Button>
+              
               <!-- View Details Button -->
               <Button 
                 variant="outline" 
@@ -152,6 +186,16 @@ onMounted(() => { appointmentStore.getAppointments() })
                 @click="viewDetails(appointment)"
               >
                 <Icon name="mdi:eye" class="mr-1" /> View
+              </Button>
+
+              <!-- Delete Button (for cancelled or scheduled appointments) -->
+              <Button 
+                v-if="appointment.status === 'SCHEDULED' || appointment.status === 'CANCELLED'" 
+                variant="destructive" 
+                size="sm"
+                @click="confirmDelete(appointment)"
+              >
+                <Icon name="mdi:delete" class="mr-1" /> Delete
               </Button>
             </TableCell>
           </TableRow>
@@ -317,6 +361,67 @@ onMounted(() => { appointmentStore.getAppointments() })
               @click="handleDecline(selectedAppointment); showViewDialog = false"
             >
               <Icon name="mdi:close-circle" class="mr-2" /> Decline Appointment
+            </Button>
+          </div>
+        </div>
+      </DialogContent>
+    </Dialog>
+
+    <!-- Delete Confirmation Dialog -->
+    <Dialog v-model:open="showDeleteDialog">
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>Delete Appointment</DialogTitle>
+          <DialogDescription>
+            Are you sure you want to delete this appointment? This action cannot be undone.
+          </DialogDescription>
+        </DialogHeader>
+
+        <div v-if="selectedAppointment" class="space-y-4 mt-4">
+          <div class="bg-gray-50 p-4 rounded-lg space-y-2">
+            <div>
+              <p class="text-sm text-muted-foreground">Patient</p>
+              <p class="font-medium">
+                {{ selectedAppointment.patient.lastName }}, {{ selectedAppointment.patient.firstName }}
+                <span v-if="selectedAppointment.patient.middleName"> {{ selectedAppointment.patient.middleName }}</span>
+              </p>
+            </div>
+            <div>
+              <p class="text-sm text-muted-foreground">Doctor</p>
+              <p class="font-medium">
+                Dr. {{ selectedAppointment.doctor.firstName }} {{ selectedAppointment.doctor.lastName }}
+              </p>
+            </div>
+            <div class="grid grid-cols-2 gap-4">
+              <div>
+                <p class="text-sm text-muted-foreground">Date</p>
+                <p class="font-medium">{{ selectedAppointment.date.split('T')[0] }}</p>
+              </div>
+              <div>
+                <p class="text-sm text-muted-foreground">Time</p>
+                <p class="font-medium">{{ new Date(`2000-01-01T${selectedAppointment.time}`).toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit',hour12:true}) }}</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="flex gap-2 pt-4 border-t">
+            <Button 
+              variant="outline"
+              class="flex-1"
+              @click="showDeleteDialog = false"
+              :disabled="deletingAppointment"
+            >
+              Cancel
+            </Button>
+            <Button 
+              variant="destructive"
+              class="flex-1"
+              @click="handleDelete"
+              :disabled="deletingAppointment"
+            >
+              <Icon v-if="deletingAppointment" name="mdi:loading" class="mr-2 animate-spin" />
+              <Icon v-else name="mdi:delete" class="mr-2" />
+              {{ deletingAppointment ? 'Deleting...' : 'Delete Appointment' }}
             </Button>
           </div>
         </div>
