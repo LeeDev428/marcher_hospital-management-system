@@ -50,6 +50,11 @@ const navigationItems = [
 		to: "/admin/settings"
 	},
 	{
+		name: "Audit Logs",
+		icon: "lucide:file-text",
+		to: "/admin/audit-logs"
+	},
+	{
 		name: "Security Logs",
 		icon: "lucide:shield-check",
 		to: "/admin/logs"
