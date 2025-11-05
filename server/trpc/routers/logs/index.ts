@@ -1,4 +1,5 @@
 import { createTRPCRouter, protectedProcedure } from "../../init"
+import { facilityLogsRouter } from "./facilityLogs"
 
 const getLogs = protectedProcedure
 	.query(async ({ ctx }) => {
@@ -27,4 +28,5 @@ const getLogs = protectedProcedure
 
 export const logsRouter = createTRPCRouter({
 	getLogs,
+	facility: facilityLogsRouter,
 })
