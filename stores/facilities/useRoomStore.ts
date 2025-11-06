@@ -122,7 +122,12 @@ export const useRoomStore = defineStore("room", {
 						"Room",
 						"Room updated successfully.",
 					)
-					await navigateTo("/staff/facilities")
+					// Don't navigate, let the parent component handle it
+					return {
+						success,
+						message,
+						data,
+					}
 				}
 
 				this.loading = false
