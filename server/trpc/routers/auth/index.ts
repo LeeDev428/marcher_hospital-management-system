@@ -3,7 +3,6 @@ import { publicProcedure, protectedProcedure, createTRPCRouter } from "../../ini
 import { loginSchema } from "@/types/app"
 import { passwordResetRouter } from "./passwordReset"
 import { setCookie, deleteCookie } from "h3"
-import { signRefreshToken, signAccessToken } from "@/util/token"
 
 // Auth router that communicates with Express backend
 export const authRouter = createTRPCRouter({
@@ -34,22 +33,14 @@ export const authRouter = createTRPCRouter({
 				}
 
 				// Generate and set cookies for the authenticated user
-				if (result.success && result.user) {
+				if (result.success && result.user && result.tokens) {
 					console.log('🔐 Setting auth cookies for user:', result.user.email)
-					
-					const tokenPayload = {
-						id: result.user.id,
-						email: result.user.email,
-						role: result.user.role,
-						firstName: result.user.firstName,
-						lastName: result.user.lastName,
-					}
 
 					try {
-						const accessToken = signAccessToken(tokenPayload, result.user.id)
-						const refreshToken = signRefreshToken(tokenPayload, result.user.id)
+						// Use tokens from Express backend (already properly formatted)
+						const { accessToken, refreshToken } = result.tokens
 
-						console.log('✅ Tokens generated successfully')
+						console.log('✅ Using tokens from backend')
 
 						// Set HTTP-only cookies
 						setCookie(ctx.event, 'accessToken', accessToken, {
@@ -70,10 +61,10 @@ export const authRouter = createTRPCRouter({
 
 						console.log('✅ Cookies set successfully')
 					} catch (error) {
-						console.error('❌ Error generating tokens or setting cookies:', error)
+						console.error('❌ Error setting cookies:', error)
 					}
 				} else {
-					console.log('⚠️ Login response missing user data:', result)
+					console.log('⚠️ Login response missing user data or tokens:', result)
 				}
 
 				return {
