@@ -52,18 +52,26 @@ const getRooms = publicProcedure.query(async ({ ctx }) => {
 const getRoom = publicProcedure
   .input(getRoomSchema)
   .query(async ({ ctx, input }) => {
+    console.log('🔍 getRoom called with input:', input)
     const { id } = input
 
     try {
-      const room = await ctx.instancePrisma.room.findUnique({ where: { id } })
+      console.log('🔍 Attempting to find room with id:', id)
+      const room = await ctx.instancePrisma.room.findUnique({ 
+        where: { id }
+      })
+
+      console.log('🔍 Room found:', !!room)
 
       if (!room) {
+        console.log('❌ Room not found')
         return { success: false, message: "Room not found.", data: null }
       }
 
+      console.log('✅ Room fetched successfully:', room.identifier)
       return { success: true, message: "Room fetched successfully.", data: room }
     } catch (error) {
-      console.log(error)
+      console.error('❌ getRoom error:', error)
       return { success: false, message: "Failed to fetch room.", data: null }
     }
   })
@@ -75,7 +83,14 @@ const createRoom = publicProcedure
 
     try {
       const room = await ctx.instancePrisma.room.create({
-        data: { building, type, identifier, description, capacity, status },
+        data: { 
+          building, 
+          type, 
+          identifier, 
+          description, 
+          capacity: capacity ?? undefined, 
+          status 
+        },
       })
 
       // ✅ Log creation to Audit Trail
@@ -103,7 +118,13 @@ const updateRoom = publicProcedure
 
       const room = await ctx.instancePrisma.room.update({
         where: { id },
-        data: { type, identifier, description, capacity, status },
+        data: { 
+          type, 
+          identifier, 
+          description, 
+          capacity: capacity ?? undefined, 
+          status 
+        },
       })
 
       // ✅ Log update to Audit Trail
@@ -125,10 +146,19 @@ const updateRoom = publicProcedure
 const deleteRoom = publicProcedure
   .input(deleteRoomSchema)
   .mutation(async ({ ctx, input }) => {
+    console.log('🗑️ deleteRoom called with input:', input)
     const { id } = input
 
     try {
+      console.log('🔍 Attempting to find room with id:', id)
       const oldRoom = await ctx.instancePrisma.room.findUnique({ where: { id } })
+      
+      if (!oldRoom) {
+        console.log('❌ Room not found for deletion')
+        return { success: false, message: "Room not found.", data: null }
+      }
+
+      console.log('🔍 Deleting room:', oldRoom.identifier)
       const room = await ctx.instancePrisma.room.delete({ where: { id } })
 
       // ✅ Log deletion to Audit Trail
@@ -139,9 +169,10 @@ const deleteRoom = publicProcedure
         oldStatus: oldRoom?.status ?? null,
       })
 
+      console.log('✅ Room deleted successfully')
       return { success: true, message: "Room deleted successfully.", data: room }
     } catch (error) {
-      console.log(error)
+      console.error('❌ deleteRoom error:', error)
       return { success: false, message: "Failed to delete room.", data: null }
     }
   })
