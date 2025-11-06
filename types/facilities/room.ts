@@ -46,12 +46,12 @@ export const roomSchema = z.object({
 })
 
 export const getRoomSchema = z.object({
-	id: z.string().uuid("Invalid room ID."),
+	id: z.string().min(1, "Room ID is required."),
 })
 
 export const tableRoomSchema = roomSchema
 	.extend({
-		id: z.string().uuid("Invalid room ID."),
+		id: z.string().min(1, "Room ID is required."),
 		createdAt: z.string().datetime(),
 		updatedAt: z.string().datetime(),
 	})
@@ -60,11 +60,11 @@ export const createRoomSchema = roomSchema
 
 export const updateRoomSchema = roomSchema
 	.extend({
-		id: z.string().uuid("Invalid room ID."),
+		id: z.string().min(1, "Room ID is required."),
 	})
 
 export const deleteRoomSchema = z.object({
-	id: z.string().uuid("Invalid room ID."),
+	id: z.string().min(1, "Room ID is required."),
 })
 
 export type RoomType = z.infer<typeof roomTypeSchema>
