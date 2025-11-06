@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button'
 
 const authStore = useAuthStore()
 const user = computed(() => authStore.user)
+const { $trpc } = useNuxtApp()
 
 // Add definePageMeta to use staff layout
 definePageMeta({
@@ -16,141 +17,125 @@ useHead({
   title: 'Staff Dashboard'
 })
 
-// Staff dashboard statistics - matching the provided image
-const staffStats = ref([
-  {
-    id: 1,
-    title: 'Total Patients',
-    value: '2,370',
-    change: '+12.5%',
-    trend: 'up',
-    icon: 'lucide:users',
-    color: 'blue'
-  },
-  {
-    id: 2,
-    title: 'Appointments Today',
-    value: '1,204',
-    change: '+8.2%',
-    trend: 'up',
-    icon: 'lucide:calendar',
-    color: 'green'
-  },
-  {
-    id: 3,
-    title: 'Total Revenue',
-    value: '5,200',
-    change: '+15.3%',
-    trend: 'up',
-    icon: 'lucide:dollar-sign',
-    color: 'purple'
-  },
-  {
-    id: 4,
-    title: 'Active Staff',
-    value: '34',
-    change: '+2.1%',
-    trend: 'up',
-    icon: 'lucide:user-check',
-    color: 'orange'
-  }
-])
+// Dynamic data
+const loading = ref(true)
+const dashboardData = ref<any>(null)
 
-// Recent activities for the sidebar
-const recentActivities = ref([
-  {
-    id: 1,
-    type: 'appointment',
-    title: 'New Appointment',
-    description: 'John Doe scheduled for 2:30 PM',
-    time: '5 min ago',
-    status: 'new'
-  },
-  {
-    id: 2,
-    type: 'payment',
-    title: 'Payment Received',
-    description: 'Invoice #INV-001 paid by Sarah Johnson',
-    time: '15 min ago',
-    status: 'completed'
-  },
-  {
-    id: 3,
-    type: 'staff',
-    title: 'Staff Check-in',
-    description: 'Dr. Michael Chen checked in',
-    time: '30 min ago',
-    status: 'active'
-  },
-  {
-    id: 4,
-    type: 'prescription',
-    title: 'Prescription Issued',
-    description: 'Medication prescribed to Lisa Wong',
-    time: '45 min ago',
-    status: 'completed'
-  },
+// Staff dashboard statistics - now dynamic
+const staffStats = computed(() => {
+  if (!dashboardData.value?.stats) return []
+  
+  const stats = dashboardData.value.stats
+  
+  return [
+    {
+      id: 1,
+      title: 'Total Patients',
+      value: stats.totalPatients.toLocaleString(),
+      change: '+12.5%',
+      trend: 'up',
+      icon: 'lucide:users',
+      color: 'blue'
+    },
+    {
+      id: 2,
+      title: 'Appointments Today',
+      value: stats.appointmentsToday.toLocaleString(),
+      change: '+8.2%',
+      trend: 'up',
+      icon: 'lucide:calendar',
+      color: 'green'
+    },
+    {
+      id: 3,
+      title: 'Total Revenue',
+      value: stats.totalRevenue.toLocaleString(),
+      change: '+15.3%',
+      trend: 'up',
+      icon: 'lucide:dollar-sign',
+      color: 'purple'
+    },
+    {
+      id: 4,
+      title: 'Active Staff',
+      value: stats.activeStaff.toString(),
+      change: '+2.1%',
+      trend: 'up',
+      icon: 'lucide:user-check',
+      color: 'orange'
+    }
+  ]
+})
 
-])
+// Recent activities
+const recentActivities = computed(() => {
+  return dashboardData.value?.recentActivities || []
+})
 
 // Today's appointments
-const todayAppointments = ref([
-  {
-    id: 1,
-    time: '09:00 AM',
-    patient: 'Alice Johnson',
-    doctor: 'Dr. Sarah Wilson',
-    type: 'Consultation',
-    status: 'confirmed'
-  },
-  {
-    id: 2,
-    time: '10:30 AM',
-    patient: 'Robert Smith',
-    doctor: 'Dr. Michael Chen',
-    type: 'Check-up',
-    status: 'in-progress'
-  },
-  {
-    id: 3,
-    time: '11:15 AM',
-    patient: 'Emily Davis',
-    doctor: 'Dr. Lisa Brown',
-    type: 'Follow-up',
-    status: 'waiting'
-  },
-  {
-    id: 4,
-    time: '02:30 PM',
-    patient: 'John Miller',
-    doctor: 'Dr. David Lee',
-    type: 'Consultation',
-    status: 'confirmed'
-  },
-  {
-    id: 5,
-    time: '03:45 PM',
-    patient: 'Maria Garcia',
-    doctor: 'Dr. Anna Kim',
-    type: 'Surgery Prep',
-    status: 'confirmed'
-  }
-])
+const todayAppointments = computed(() => {
+  return dashboardData.value?.todayAppointments || []
+})
 
-// Activity chart data - representing weekly statistics
-const weeklyActivity = ref([
-  { day: 'Mon', patients: 45, appointments: 38, revenue: 1200 },
-  { day: 'Tue', patients: 52, appointments: 44, revenue: 1450 },
-  { day: 'Wed', patients: 38, appointments: 35, revenue: 980 },
-  { day: 'Thu', patients: 61, appointments: 52, revenue: 1680 },
-  { day: 'Fri', patients: 48, appointments: 41, revenue: 1320 },
-  { day: 'Sat', patients: 35, appointments: 28, revenue: 890 },
-  { day: 'Sun', patients: 28, appointments: 22, revenue: 720 }
-])
+// Activity chart data - weekly statistics
+const weeklyActivity = computed(() => {
+  return dashboardData.value?.weeklyActivity || []
+})
+
+// Fetch dashboard data
+const fetchDashboardData = async () => {
+  try {
+    loading.value = true
+    
+    // Small delay to ensure cookies are set after login
+    await new Promise(resolve => setTimeout(resolve, 100))
+    
+    const response = await $trpc.dashboard.getStaffDashboardData.query()
+    
+    if (response.success && response.data) {
+      dashboardData.value = response.data
+    }
+  } catch (error: any) {
+    console.error('Failed to fetch dashboard data:', error)
+    
+    // Handle authentication errors
+    if (error?.data?.code === 'UNAUTHORIZED' || error?.message?.includes('session')) {
+      console.log('❌ Authentication error, redirecting to login')
+      await navigateTo('/login', { replace: true })
+    }
+  } finally {
+    loading.value = false
+  }
+}
+
+onMounted(() => {
+  // Wait for auth cookies to be fully available after login redirect
+  setTimeout(() => {
+    fetchDashboardData()
+  }, 500)
+})
 </script>
 
 <template>
   <div class="space-y-6">
+    <!-- Loading State -->
+    <div v-if="loading" class="space-y-6">
+      <Card class="bg-gradient-to-r from-blue-600 to-blue-700 border-0">
+        <CardContent class="p-6">
+          <div class="h-20 animate-pulse bg-blue-800 rounded"></div>
+        </CardContent>
+      </Card>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <Card v-for="i in 4" :key="i">
+          <CardContent class="p-6">
+            <div class="h-24 animate-pulse bg-gray-200 rounded"></div>
+          </CardContent>
+        </Card>
+      </div>
+    </div>
+
+    <!-- Main Content -->
+    <div v-else class="space-y-6">
     <!-- Welcome Header -->
     <Card class="bg-gradient-to-r from-blue-600 to-blue-700 border-0">
       <CardContent class="p-6">
@@ -409,5 +394,6 @@ const weeklyActivity = ref([
         </CardContent>
       </Card>
     </div>
+    </div><!-- End v-else -->
   </div>
 </template>
