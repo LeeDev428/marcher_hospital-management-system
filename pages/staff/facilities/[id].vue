@@ -1,13 +1,16 @@
 <script setup lang="ts">
+import { ref } from 'vue'
 import { useBreadcrumbsStore } from "@/stores/app"
 import { useRoomStore } from "@/stores/facilities"
 import { Button } from "@/components/ui/button"
 import { QRCodeDisplay } from "@/components/app/qrcode"
+import FacilityForm from "./components/FacilityForm.vue"
 
 const breadcrumbsStore = useBreadcrumbsStore()
 const roomStore = useRoomStore()
 const route = useRoute()
 const { id } = route.params as { id: string }
+const isEditing = ref(false)
 
 onMounted(async () => {
 	await roomStore.getRoom(id)
@@ -18,9 +21,17 @@ onMounted(async () => {
 
 	breadcrumbsStore.setBreadcrumbs([
 		{ label: "Facilities", link: "/staff/facilities" },
-		{ label: "Room Details", link: `/staff/facilities/${id}` },
+		{ label: isEditing.value ? "Edit Facility" : "Room Details", link: `/staff/facilities/${id}` },
 	])
 })
+
+const toggleEditMode = () => {
+	isEditing.value = !isEditing.value
+	breadcrumbsStore.setBreadcrumbs([
+		{ label: "Facilities", link: "/staff/facilities" },
+		{ label: isEditing.value ? "Edit Facility" : "Room Details", link: `/staff/facilities/${id}` },
+	])
+}
 
 const formatRoomType = (type: string) => {
 	return type.split('_').map(word => 
@@ -36,10 +47,16 @@ const formatRoomStatus = (status: string) => {
 </script>
 
 <template>
-	<NuxtLayout name="staff" title="Facility Details">
+	<NuxtLayout name="staff" :title="isEditing ? 'Edit Facility' : 'Facility Details'">
 		<div class="flex flex-col gap-6 bg-white p-6 rounded-lg">
+			<!-- Edit Mode: Show Form -->
+			<div v-if="isEditing && roomStore.room">
+				<FacilityForm :room-id="id" @cancel="toggleEditMode" @saved="toggleEditMode" />
+			</div>
+
+			<!-- View Mode: Show Details -->
 			<div
-				v-if="roomStore.room"
+				v-else-if="roomStore.room"
 				class="h-full w-full flex flex-col gap-6"
 			>
 				<!-- Header with QR Code -->
@@ -101,12 +118,10 @@ const formatRoomStatus = (status: string) => {
 
 				<!-- Action Buttons -->
 				<div class="flex justify-start gap-2 mt-4 border-t pt-4">
-					<NuxtLink :to="`/staff/facilities/${id}/edit`">
-						<Button type="button">
-							<Icon name="mdi:pencil" class="mr-2" />
-							Edit Facility
-						</Button>
-					</NuxtLink>
+					<Button type="button" @click="toggleEditMode">
+						<Icon name="mdi:pencil" class="mr-2" />
+						Edit Facility
+					</Button>
 					<NuxtLink to="/staff/facilities">
 						<Button type="button" variant="outline">
 							<Icon name="mdi:arrow-left" class="mr-2" />
