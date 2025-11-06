@@ -50,10 +50,10 @@ export const useAuthStore = defineStore("auth", {
 					// Get redirect path based on role
 					const redirectPath = this.getRedirectPath(response.user.role)
 					
-					// Add a small delay to ensure persistence is complete
+					// Add a delay to ensure cookies and persistence are complete
 					setTimeout(async () => {
 						await navigateTo(redirectPath)
-					}, 100)
+					}, 300)
 					return
 				}
 
