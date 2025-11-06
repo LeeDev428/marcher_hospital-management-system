@@ -35,7 +35,8 @@ export const protectedProcedure = tRPC.procedure.use(
 		console.log('🔍 Protected procedure check:', {
 			hasRefreshToken: !!refreshToken,
 			hasAccessToken: !!accessToken,
-			refreshTokenPreview: refreshToken ? refreshToken.substring(0, 20) + '...' : 'none'
+			refreshTokenPreview: refreshToken ? refreshToken.substring(0, 20) + '...' : 'none',
+			refreshTokenLength: refreshToken ? refreshToken.length : 0
 		})
 
 		if (!refreshToken) {
@@ -46,7 +47,7 @@ export const protectedProcedure = tRPC.procedure.use(
 		const decodedRefreshToken = verifyRefreshToken(refreshToken)
 
 		if (!decodedRefreshToken) {
-			console.log('❌ Invalid refresh token')
+			console.log('❌ Invalid refresh token - verification returned false')
 			throw new TRPCError({ code: "UNAUTHORIZED", message: "Invalid session. Please login again." })
 		}
 
