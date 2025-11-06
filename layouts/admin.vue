@@ -50,14 +50,14 @@ const navigationItems = [
 		to: "/admin/settings"
 	},
 	{
-		name: "Audit Logs",
+		name: "Security Logs",
 		icon: "lucide:file-text",
 		to: "/admin/audit-logs"
 	},
 	{
-		name: "Security Logs",
+		name: "Reports",
 		icon: "lucide:shield-check",
-		to: "/admin/logs"
+		to: "/admin/reports"
 	},
 	// {
 	// 	name: "Analytics",
