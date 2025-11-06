@@ -6,18 +6,37 @@ const prisma = new PrismaClient();
 
 // Generate JWT tokens
 export const generateTokens = (userId, email, role, firstName, lastName) => {
+  console.log('🔐 Generating tokens with secrets:')
+  console.log('   ACCESS_TOKEN_SECRET exists:', !!process.env.ACCESS_TOKEN_SECRET)
+  console.log('   REFRESH_TOKEN_SECRET exists:', !!process.env.REFRESH_TOKEN_SECRET)
+  console.log('   REFRESH_TOKEN_SECRET preview:', process.env.REFRESH_TOKEN_SECRET?.substring(0, 20) + '...')
+  
   const accessToken = jwt.sign(
-    { userId, email, role, firstName, lastName },
+    { id: userId, email, role, firstName, lastName },
     process.env.ACCESS_TOKEN_SECRET,
-    { expiresIn: '15m' }
+    { 
+      expiresIn: '15m',
+      algorithm: 'HS256',
+      issuer: 'marcher.com',
+      audience: 'marcher.com',
+      subject: userId
+    }
   );
 
   const refreshToken = jwt.sign(
-    { id: userId, userId, email, role, firstName, lastName },
+    { id: userId, email, role, firstName, lastName },
     process.env.REFRESH_TOKEN_SECRET,
-    { expiresIn: '7d' }
+    { 
+      expiresIn: '7d',
+      algorithm: 'HS256',
+      issuer: 'marcher.com',
+      audience: 'marcher.com',
+      subject: userId
+    }
   );
 
+  console.log('✅ Tokens generated successfully')
+  
   return { accessToken, refreshToken };
 };
 
