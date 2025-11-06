@@ -51,6 +51,7 @@
 				</CardDescription>
 			</CardHeader>
 			<CardContent>
+				<ClientOnly>
 				<div v-if="loading" class="text-center py-12">
 					<Icon name="lucide:loader-2" class="w-8 h-8 mx-auto animate-spin text-gray-400" />
 					<p class="text-muted-foreground mt-4">Loading audit logs...</p>
@@ -134,6 +135,7 @@
 						</div>
 					</div>
 				</div>
+				</ClientOnly>
 			</CardContent>
 		</Card>
 	</div>
@@ -172,7 +174,8 @@ const pagination = reactive({
 const fetchLogs = async () => {
 	try {
 		loading.value = true
-		const response = await $trpc.logs.facility.getFacilityLogs.query({
+		// Temporarily call the flattened version instead of nested
+		const response = await $trpc.logs.getFacilityLogs.query({
 			page: pagination.page,
 			limit: pagination.limit,
 			user: filters.user || undefined,
@@ -180,7 +183,11 @@ const fetchLogs = async () => {
 		})
 
 		if (response.success && response.data) {
-			logs.value = response.data.logs
+			// Convert timestamp strings to Date objects
+			logs.value = response.data.logs.map(log => ({
+				...log,
+				timestamp: new Date(log.timestamp)
+			}))
 			pagination.total = response.data.total
 			pagination.totalPages = response.data.totalPages
 		}
