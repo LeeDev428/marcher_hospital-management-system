@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button'
 
 const authStore = useAuthStore()
 const user = computed(() => authStore.user)
+const { $trpc } = useNuxtApp()
 
 // Add definePageMeta to use patient layout
 definePageMeta({
@@ -15,93 +16,134 @@ useHead({
   title: 'Patient Dashboard'
 })
 
+// Dynamic data from database
+const loading = ref(true)
+const dashboardData = ref<any>(null)
+
 // Patient dashboard statistics
-const patientStats = ref([
-  {
-    id: 1,
-    title: 'Next Appointment',
-    value: 'Oct 15',
-    subtitle: 'Dr. Smith - Cardiology',
-    icon: 'lucide:calendar',
-    color: 'blue'
-  },
-  {
-    id: 2,
-    title: 'Last Visit',
-    value: 'Sep 28',
-    subtitle: 'General Checkup',
-    icon: 'lucide:stethoscope',
-    color: 'green'
-  },
-  {
-    id: 3,
-    title: 'Prescriptions',
-    value: '3',
-    subtitle: 'Active medications',
-    icon: 'lucide:pill',
-    color: 'purple'
-  },
-  {
-    id: 4,
-    title: 'Test Results',
-    value: '2',
-    subtitle: 'Pending results',
-    icon: 'lucide:activity',
-    color: 'orange'
-  }
-])
+const patientStats = computed(() => {
+  if (!dashboardData.value?.patientStats) return []
+  
+  const stats = dashboardData.value.patientStats
+  
+  return [
+    {
+      id: 1,
+      title: 'Next Appointment',
+      value: stats.nextAppointment?.date || 'None',
+      subtitle: stats.nextAppointment ? `${stats.nextAppointment.doctor} - ${stats.nextAppointment.specialty}` : 'No upcoming appointments',
+      icon: 'lucide:calendar',
+      color: 'blue'
+    },
+    {
+      id: 2,
+      title: 'Last Visit',
+      value: stats.lastVisit?.date || 'None',
+      subtitle: stats.lastVisit?.type || 'No previous visits',
+      icon: 'lucide:stethoscope',
+      color: 'green'
+    },
+    {
+      id: 3,
+      title: 'Prescriptions',
+      value: stats.prescriptionsCount.toString(),
+      subtitle: 'Active medications',
+      icon: 'lucide:pill',
+      color: 'purple'
+    },
+    {
+      id: 4,
+      title: 'Test Results',
+      value: stats.testResultsCount.toString(),
+      subtitle: 'Pending results',
+      icon: 'lucide:activity',
+      color: 'orange'
+    }
+  ]
+})
 
 // Monthly overview data
-const monthlyData = ref({
-  currentMonth: 'October 2025',
-  totalAppointments: 4,
-  completedAppointments: 2,
-  upcomingAppointments: 2,
-  prescriptions: 3
+const monthlyData = computed(() => {
+  if (!dashboardData.value?.monthlyData) {
+    return {
+      currentMonth: new Date().toLocaleDateString('en-US', { month: 'long', year: 'numeric' }),
+      totalAppointments: 0,
+      completedAppointments: 0,
+      upcomingAppointments: 0,
+      prescriptions: 0,
+      weeklyData: [0, 0, 0, 0]
+    }
+  }
+  return dashboardData.value.monthlyData
 })
 
 // Recent appointments
-const recentAppointments = ref([
-  {
-    id: 1,
-    doctor: 'Dr. Sarah Johnson',
-    specialty: 'Cardiology',
-    date: '2025-10-15',
-    time: '10:00 AM',
-    status: 'upcoming',
-    type: 'Consultation'
-  },
-  {
-    id: 2,
-    doctor: 'Dr. Michael Chen',
-    specialty: 'General Medicine',
-    date: '2025-09-28',
-    time: '2:30 PM',
-    status: 'completed',
-    type: 'Check-up'
-  },
-  {
-    id: 3,
-    doctor: 'Dr. Lisa Wong',
-    specialty: 'Dermatology',
-    date: '2025-09-15',
-    time: '11:15 AM',
-    status: 'completed',
-    type: 'Follow-up'
-  }
-])
+const recentAppointments = computed(() => {
+  return dashboardData.value?.recentAppointments || []
+})
 
-// Health metrics
+// Health metrics (keeping for future implementation)
 const healthMetrics = ref([
   { label: 'Blood Pressure', value: '120/80', status: 'normal', color: 'green' },
   { label: 'Heart Rate', value: '72 bpm', status: 'normal', color: 'green' },
   { label: 'Weight', value: '68 kg', status: 'stable', color: 'blue' },
   { label: 'BMI', value: '22.5', status: 'normal', color: 'green' }
 ])
+
+// Fetch dashboard data
+const fetchDashboardData = async () => {
+  try {
+    loading.value = true
+    
+    // Small delay to ensure cookies are set after login
+    await new Promise(resolve => setTimeout(resolve, 100))
+    
+    const response = await $trpc.patients.getDashboardData.query()
+    
+    if (response.success && response.data) {
+      dashboardData.value = response.data
+    }
+  } catch (error: any) {
+    console.error('Failed to fetch dashboard data:', error)
+    
+    // Handle authentication errors
+    if (error?.data?.code === 'UNAUTHORIZED' || error?.message?.includes('session')) {
+      console.log('❌ Authentication error, redirecting to login')
+      await navigateTo('/login', { replace: true })
+    }
+  } finally {
+    loading.value = false
+  }
+}
+
+onMounted(() => {
+  // Wait for auth cookies to be fully available after login redirect
+  setTimeout(() => {
+    fetchDashboardData()
+  }, 500)
+})
 </script>
 
 <template>
   <div class="space-y-6">
+    <!-- Loading State -->
+    <div v-if="loading" class="space-y-6">
+      <Card class="bg-gradient-to-r from-teal-600 to-teal-700 border-0">
+        <CardContent class="p-6">
+          <div class="h-20 animate-pulse bg-teal-800 rounded"></div>
+        </CardContent>
+      </Card>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <Card v-for="i in 4" :key="i">
+          <CardContent class="p-6">
+            <div class="h-24 animate-pulse bg-gray-200 rounded"></div>
+          </CardContent>
+        </Card>
+      </div>
+    </div>
+
+    <!-- Main Content -->
+    <div v-else class="space-y-6">
     <!-- Welcome Header -->
     <Card class="bg-gradient-to-r from-teal-600 to-teal-700 border-0">
       <CardContent class="p-6">
@@ -172,29 +214,14 @@ const healthMetrics = ref([
             <div class="h-64 relative">
               <!-- Chart representation with bars -->
               <div class="flex items-end justify-between h-full space-x-4 px-4">
-                <div class="flex flex-col items-center space-y-2 flex-1">
-                  <div class="w-full bg-teal-500 rounded-t flex items-end justify-center text-white text-sm font-medium" style="height: 60%">
-                    4
+                <div v-for="(count, index) in monthlyData.weeklyData" :key="index" class="flex flex-col items-center space-y-2 flex-1">
+                  <div 
+                    class="w-full bg-teal-500 rounded-t flex items-end justify-center text-white text-sm font-medium" 
+                    :style="{ height: count > 0 ? `${Math.max(20, (count / Math.max(...monthlyData.weeklyData)) * 100)}%` : '10%' }"
+                  >
+                    {{ count }}
                   </div>
-                  <span class="text-xs text-muted-foreground">Week 1</span>
-                </div>
-                <div class="flex flex-col items-center space-y-2 flex-1">
-                  <div class="w-full bg-teal-500 rounded-t flex items-end justify-center text-white text-sm font-medium" style="height: 20%">
-                    2
-                  </div>
-                  <span class="text-xs text-muted-foreground">Week 2</span>
-                </div>
-                <div class="flex flex-col items-center space-y-2 flex-1">
-                  <div class="w-full bg-teal-500 rounded-t flex items-end justify-center text-white text-sm font-medium" style="height: 20%">
-                    2
-                  </div>
-                  <span class="text-xs text-muted-foreground">Week 3</span>
-                </div>
-                <div class="flex flex-col items-center space-y-2 flex-1">
-                  <div class="w-full bg-teal-500 rounded-t flex items-end justify-center text-white text-sm font-medium" style="height: 30%">
-                    3
-                  </div>
-                  <span class="text-xs text-muted-foreground">Week 4</span>
+                  <span class="text-xs text-muted-foreground">Week {{ index + 1 }}</span>
                 </div>
               </div>
             </div>
@@ -337,5 +364,6 @@ const healthMetrics = ref([
         </CardContent>
       </Card>
     </div>
+    </div><!-- End of v-else -->
   </div>
 </template>
