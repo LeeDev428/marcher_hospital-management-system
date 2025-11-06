@@ -13,14 +13,30 @@ const props = defineProps<{
 	roomId?: string
 }>()
 
+const emit = defineEmits<{
+	(e: 'saved'): void
+	(e: 'cancel'): void
+}>()
+
 const onSubmit = async (data: CreateRoom | UpdateRoom) => {
 	if (props.roomId) {
 		await roomStore.updateRoom({
 			id: props.roomId,
 			...data,
 		})
+		emit('saved')
 	} else {
 		await roomStore.createRoom(data)
+		// For new rooms, navigate to list
+		navigateTo('/staff/facilities')
+	}
+}
+
+const onCancel = () => {
+	if (props.roomId) {
+		emit('cancel')
+	} else {
+		navigateTo('/staff/facilities')
 	}
 }
 
@@ -52,12 +68,12 @@ onMounted(async () => {
 		<TypedTextarea name="description" label="Description" placeholder="Room Description" />
 		<div class="flex gap-2">
 			<Button type="submit" variant="outline">
-				<Icon name="mdi:floppy" />
+				<Icon name="mdi:floppy" class="mr-2" />
 				Save
 			</Button>
-			<Button type="button" variant="outline" @click="navigateTo('/staff/facilities')">
-				<Icon name="mdi:arrow-left" />
-				Back
+			<Button type="button" variant="outline" @click="onCancel">
+				<Icon name="mdi:close" class="mr-2" />
+				{{ props.roomId ? 'Cancel' : 'Back' }}
 			</Button>
 		</div>
 	</TypedForm>
