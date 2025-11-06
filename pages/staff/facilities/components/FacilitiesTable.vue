@@ -24,6 +24,10 @@ const roomStore = useRoomStore()
 const showQRDialog = ref(false)
 const selectedRoom = ref<any>(null)
 
+// Delete confirmation dialog
+const showDeleteDialog = ref(false)
+const roomToDelete = ref<any>(null)
+
 const onEdit = (id: string) => {
 	navigateTo(`/staff/facilities/${id}`)
 }
@@ -31,6 +35,30 @@ const onEdit = (id: string) => {
 const viewQRCode = (room: any) => {
 	selectedRoom.value = room
 	showQRDialog.value = true
+}
+
+const confirmDelete = (room: any) => {
+	roomToDelete.value = room
+	showDeleteDialog.value = true
+}
+
+const handleDelete = async () => {
+	if (!roomToDelete.value) return
+	
+	try {
+		await roomStore.deleteRoom(roomToDelete.value.id)
+		showDeleteDialog.value = false
+		roomToDelete.value = null
+		// Refresh the rooms list
+		await roomStore.getRooms()
+	} catch (error) {
+		console.error('Failed to delete room:', error)
+	}
+}
+
+const cancelDelete = () => {
+	showDeleteDialog.value = false
+	roomToDelete.value = null
 }
 
 onMounted(() => {
@@ -229,10 +257,20 @@ defineExpose({
 						</Button>
 					</TableCell>
 					<TableCell class="flex gap-2">
-						<Button variant="outline" size="icon" @click="onEdit(room.id)">
+						<Button 
+							variant="outline" 
+							size="icon" 
+							@click="onEdit(room.id)"
+							title="Edit facility"
+						>
 							<Icon name="mdi:pencil" />
 						</Button>
-						<Button variant="outline" size="icon" @click="roomStore.deleteRoom(room.id)">
+						<Button 
+							variant="destructive" 
+							size="icon" 
+							@click="confirmDelete(room)"
+							title="Delete facility"
+						>
 							<Icon name="mdi:trash" />
 						</Button>
 					</TableCell>
@@ -353,6 +391,49 @@ defineExpose({
 				<div class="text-center text-sm text-muted-foreground">
 					<p>Scan this QR code to view facility details</p>
 					<p class="text-xs mt-1">ID: {{ selectedRoom.id }}</p>
+				</div>
+			</div>
+		</DialogContent>
+	</Dialog>
+
+	<!-- Delete Confirmation Dialog -->
+	<Dialog v-model:open="showDeleteDialog">
+		<DialogContent class="max-w-md">
+			<DialogHeader>
+				<DialogTitle>Delete Facility</DialogTitle>
+			</DialogHeader>
+			
+			<div v-if="roomToDelete" class="space-y-4">
+				<div class="flex items-start gap-4">
+					<div class="flex-shrink-0 w-12 h-12 rounded-full bg-red-100 flex items-center justify-center">
+						<Icon name="mdi:alert" class="w-6 h-6 text-red-600" />
+					</div>
+					<div class="flex-1">
+						<p class="text-sm text-gray-700">
+							Are you sure you want to delete facility <strong>{{ roomToDelete.identifier }}</strong>?
+						</p>
+						<p class="text-sm text-gray-500 mt-2">
+							This action cannot be undone. All associated data will be permanently removed.
+						</p>
+					</div>
+				</div>
+				
+				<div class="flex justify-end gap-3">
+					<Button 
+						variant="outline" 
+						@click="cancelDelete"
+						:disabled="roomStore.loading"
+					>
+						Cancel
+					</Button>
+					<Button 
+						variant="destructive" 
+						@click="handleDelete"
+						:disabled="roomStore.loading"
+					>
+						<Icon v-if="roomStore.loading" name="lucide:loader-2" class="w-4 h-4 mr-2 animate-spin" />
+						{{ roomStore.loading ? 'Deleting...' : 'Delete' }}
+					</Button>
 				</div>
 			</div>
 		</DialogContent>
